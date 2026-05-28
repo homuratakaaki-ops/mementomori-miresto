@@ -253,8 +253,12 @@
 
     function statusClass(status) {
       if (status === "PU中") return "pickup";
-      if (status === "復刻待ち") return "waiting";
+      if (!status || status === "復刻待ち") return "waiting";
       return "";
+    }
+
+    function displayGachaStatus(status) {
+      return status || "復刻待ち";
     }
 
     function hrefFor(character) {
@@ -277,7 +281,7 @@
           <article class="card">
             <div class="badge-row">
               <span class="badge">${character.attribute}</span>
-              <span class="badge ${statusClass(character.gachaStatus)}">${character.gachaStatus || "状態未設定"}</span>
+              <span class="badge ${statusClass(character.gachaStatus)}">${displayGachaStatus(character.gachaStatus)}</span>
             </div>
             <div>
               <h2>${character.name}</h2>
