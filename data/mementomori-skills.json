@@ -7056,7 +7056,7 @@
         "powerType": "使用回数強化",
         "maxStacks": null,
         "realityRank": "中",
-        "rankingTarget": "通常",
+        "rankingTarget": "基本",
         "damageMemo": "自己回復つき"
       }
     },
@@ -7090,7 +7090,7 @@
         "powerType": "範囲火力 / 直接攻撃",
         "maxStacks": null,
         "realityRank": "中",
-        "rankingTarget": "通常",
+        "rankingTarget": "基本",
         "damageMemo": "バフ延長が主目的"
       }
     },
@@ -7162,7 +7162,7 @@
         "powerType": "対象数増加",
         "maxStacks": null,
         "realityRank": "高",
-        "rankingTarget": "通常",
+        "rankingTarget": "基本",
         "damageMemo": "対象数が増える"
       }
     },
@@ -7196,7 +7196,7 @@
         "powerType": "範囲火力 / 弱体条件",
         "maxStacks": null,
         "realityRank": "高",
-        "rankingTarget": "通常",
+        "rankingTarget": "基本",
         "damageMemo": "気絶と浸食も評価対象"
       }
     },
@@ -7287,7 +7287,7 @@
         "powerType": "範囲火力 / シールド",
         "maxStacks": null,
         "realityRank": "中",
-        "rankingTarget": "通常",
+        "rankingTarget": "基本",
         "damageMemo": "支援寄り"
       }
     },
@@ -7359,7 +7359,7 @@
         "powerType": "画像カード準拠",
         "maxStacks": null,
         "realityRank": "中",
-        "rankingTarget": "通常",
+        "rankingTarget": "基本",
         "damageMemo": "詳細条件はconditionを参照"
       }
     },
@@ -7393,7 +7393,7 @@
         "powerType": "画像カード準拠",
         "maxStacks": null,
         "realityRank": "中",
-        "rankingTarget": "通常",
+        "rankingTarget": "基本",
         "damageMemo": "詳細条件はconditionを参照"
       }
     },
@@ -7465,7 +7465,7 @@
         "powerType": "画像カード準拠",
         "maxStacks": null,
         "realityRank": "中",
-        "rankingTarget": "通常",
+        "rankingTarget": "基本",
         "damageMemo": "詳細条件はconditionを参照"
       }
     },
@@ -7499,7 +7499,7 @@
         "powerType": "画像カード準拠",
         "maxStacks": null,
         "realityRank": "中",
-        "rankingTarget": "通常",
+        "rankingTarget": "基本",
         "damageMemo": "詳細条件はconditionを参照"
       }
     },
@@ -7571,7 +7571,7 @@
         "powerType": "画像カード準拠",
         "maxStacks": null,
         "realityRank": "中",
-        "rankingTarget": "通常",
+        "rankingTarget": "基本",
         "damageMemo": "詳細条件はconditionを参照"
       }
     },
@@ -7605,7 +7605,7 @@
         "powerType": "画像カード準拠",
         "maxStacks": null,
         "realityRank": "中",
-        "rankingTarget": "通常",
+        "rankingTarget": "基本",
         "damageMemo": "詳細条件はconditionを参照"
       }
     },
@@ -7696,7 +7696,7 @@
         "powerType": "画像カード準拠",
         "maxStacks": null,
         "realityRank": "中",
-        "rankingTarget": "通常",
+        "rankingTarget": "基本",
         "damageMemo": "詳細条件はconditionを参照"
       }
     },
@@ -7768,7 +7768,7 @@
         "powerType": "画像カード準拠",
         "maxStacks": null,
         "realityRank": "中",
-        "rankingTarget": "通常",
+        "rankingTarget": "基本",
         "damageMemo": "詳細条件はconditionを参照"
       }
     },
@@ -7802,7 +7802,7 @@
         "powerType": "画像カード準拠",
         "maxStacks": null,
         "realityRank": "中",
-        "rankingTarget": "通常",
+        "rankingTarget": "基本",
         "damageMemo": "詳細条件はconditionを参照"
       }
     },
@@ -7874,7 +7874,7 @@
         "powerType": "画像カード準拠",
         "maxStacks": null,
         "realityRank": "中",
-        "rankingTarget": "通常",
+        "rankingTarget": "基本",
         "damageMemo": "詳細条件はconditionを参照"
       }
     },
@@ -7908,7 +7908,7 @@
         "powerType": "画像カード準拠",
         "maxStacks": null,
         "realityRank": "中",
-        "rankingTarget": "通常",
+        "rankingTarget": "基本",
         "damageMemo": "詳細条件はconditionを参照"
       }
     },
@@ -7980,7 +7980,7 @@
         "powerType": "画像カード準拠",
         "maxStacks": null,
         "realityRank": "中",
-        "rankingTarget": "通常",
+        "rankingTarget": "基本",
         "damageMemo": "詳細条件はconditionを参照"
       }
     },
@@ -8014,7 +8014,7 @@
         "powerType": "画像カード準拠",
         "maxStacks": null,
         "realityRank": "中",
-        "rankingTarget": "通常",
+        "rankingTarget": "基本",
         "damageMemo": "詳細条件はconditionを参照"
       }
     },
@@ -8086,7 +8086,7 @@
         "powerType": "画像カード準拠",
         "maxStacks": null,
         "realityRank": "中",
-        "rankingTarget": "通常",
+        "rankingTarget": "基本",
         "damageMemo": "詳細条件はconditionを参照"
       }
     },
@@ -8120,7 +8120,7 @@
         "powerType": "画像カード準拠",
         "maxStacks": null,
         "realityRank": "中",
-        "rankingTarget": "通常",
+        "rankingTarget": "基本",
         "damageMemo": "詳細条件はconditionを参照"
       }
     },
@@ -8192,7 +8192,7 @@
         "powerType": "画像カード準拠",
         "maxStacks": null,
         "realityRank": "中",
-        "rankingTarget": "通常",
+        "rankingTarget": "基本",
         "damageMemo": "詳細条件はconditionを参照"
       }
     },
@@ -8226,7 +8226,7 @@
         "powerType": "画像カード準拠",
         "maxStacks": null,
         "realityRank": "中",
-        "rankingTarget": "通常",
+        "rankingTarget": "基本",
         "damageMemo": "詳細条件はconditionを参照"
       }
     },
@@ -8298,7 +8298,7 @@
         "powerType": "画像カード準拠",
         "maxStacks": null,
         "realityRank": "中",
-        "rankingTarget": "通常",
+        "rankingTarget": "基本",
         "damageMemo": "詳細条件はconditionを参照"
       }
     },
@@ -8332,7 +8332,7 @@
         "powerType": "画像カード準拠",
         "maxStacks": null,
         "realityRank": "中",
-        "rankingTarget": "通常",
+        "rankingTarget": "基本",
         "damageMemo": "詳細条件はconditionを参照"
       }
     },
@@ -8404,7 +8404,7 @@
         "powerType": "画像カード準拠",
         "maxStacks": null,
         "realityRank": "中",
-        "rankingTarget": "通常",
+        "rankingTarget": "基本",
         "damageMemo": "詳細条件はconditionを参照"
       }
     },
@@ -8438,7 +8438,7 @@
         "powerType": "画像カード準拠",
         "maxStacks": null,
         "realityRank": "中",
-        "rankingTarget": "通常",
+        "rankingTarget": "基本",
         "damageMemo": "詳細条件はconditionを参照"
       }
     },
@@ -8510,7 +8510,7 @@
         "powerType": "画像カード準拠",
         "maxStacks": null,
         "realityRank": "中",
-        "rankingTarget": "通常",
+        "rankingTarget": "基本",
         "damageMemo": "詳細条件はconditionを参照"
       }
     },
@@ -8544,7 +8544,7 @@
         "powerType": "画像カード準拠",
         "maxStacks": null,
         "realityRank": "中",
-        "rankingTarget": "通常",
+        "rankingTarget": "基本",
         "damageMemo": "詳細条件はconditionを参照"
       }
     },
@@ -8616,7 +8616,7 @@
         "powerType": "画像カード準拠",
         "maxStacks": null,
         "realityRank": "中",
-        "rankingTarget": "通常",
+        "rankingTarget": "基本",
         "damageMemo": "詳細条件はconditionを参照"
       }
     },
@@ -8650,7 +8650,7 @@
         "powerType": "画像カード準拠",
         "maxStacks": null,
         "realityRank": "中",
-        "rankingTarget": "通常",
+        "rankingTarget": "基本",
         "damageMemo": "詳細条件はconditionを参照"
       }
     },
@@ -8722,7 +8722,7 @@
         "powerType": "画像カード準拠",
         "maxStacks": null,
         "realityRank": "中",
-        "rankingTarget": "通常",
+        "rankingTarget": "基本",
         "damageMemo": "詳細条件はconditionを参照"
       }
     },
@@ -8756,7 +8756,7 @@
         "powerType": "画像カード準拠",
         "maxStacks": null,
         "realityRank": "中",
-        "rankingTarget": "通常",
+        "rankingTarget": "基本",
         "damageMemo": "詳細条件はconditionを参照"
       }
     },
@@ -8828,7 +8828,7 @@
         "powerType": "画像カード準拠",
         "maxStacks": null,
         "realityRank": "中",
-        "rankingTarget": "通常",
+        "rankingTarget": "基本",
         "damageMemo": "詳細条件はconditionを参照"
       }
     },
@@ -8862,7 +8862,7 @@
         "powerType": "画像カード準拠",
         "maxStacks": null,
         "realityRank": "中",
-        "rankingTarget": "通常",
+        "rankingTarget": "基本",
         "damageMemo": "詳細条件はconditionを参照"
       }
     },
@@ -8934,7 +8934,7 @@
         "powerType": "画像カード準拠",
         "maxStacks": null,
         "realityRank": "中",
-        "rankingTarget": "通常",
+        "rankingTarget": "基本",
         "damageMemo": "画像カードからの暫定入力"
       }
     },
@@ -9025,7 +9025,7 @@
         "powerType": "画像カード準拠",
         "maxStacks": null,
         "realityRank": "中",
-        "rankingTarget": "通常",
+        "rankingTarget": "基本",
         "damageMemo": "画像カードからの暫定入力"
       }
     },
@@ -9059,7 +9059,7 @@
         "powerType": "画像カード準拠",
         "maxStacks": null,
         "realityRank": "中",
-        "rankingTarget": "通常",
+        "rankingTarget": "基本",
         "damageMemo": "画像カードからの暫定入力"
       }
     },
@@ -9131,7 +9131,7 @@
         "powerType": "画像カード準拠",
         "maxStacks": null,
         "realityRank": "中",
-        "rankingTarget": "通常",
+        "rankingTarget": "基本",
         "damageMemo": "画像カードからの暫定入力"
       }
     },
@@ -9165,7 +9165,7 @@
         "powerType": "画像カード準拠",
         "maxStacks": null,
         "realityRank": "中",
-        "rankingTarget": "通常",
+        "rankingTarget": "基本",
         "damageMemo": "画像カードからの暫定入力"
       }
     },
@@ -9237,7 +9237,7 @@
         "powerType": "画像カード準拠",
         "maxStacks": null,
         "realityRank": "中",
-        "rankingTarget": "通常",
+        "rankingTarget": "基本",
         "damageMemo": "画像カードからの暫定入力"
       }
     },
@@ -9328,7 +9328,7 @@
         "powerType": "画像カード準拠",
         "maxStacks": null,
         "realityRank": "中",
-        "rankingTarget": "通常",
+        "rankingTarget": "基本",
         "damageMemo": "画像カードからの暫定入力"
       }
     },
@@ -9362,7 +9362,7 @@
         "powerType": "画像カード準拠",
         "maxStacks": null,
         "realityRank": "中",
-        "rankingTarget": "通常",
+        "rankingTarget": "基本",
         "damageMemo": "画像カードからの暫定入力"
       }
     },
@@ -9434,7 +9434,7 @@
         "powerType": "画像カード準拠",
         "maxStacks": null,
         "realityRank": "中",
-        "rankingTarget": "通常",
+        "rankingTarget": "基本",
         "damageMemo": "画像カードからの暫定入力"
       }
     },
@@ -9468,7 +9468,7 @@
         "powerType": "画像カード準拠",
         "maxStacks": null,
         "realityRank": "中",
-        "rankingTarget": "通常",
+        "rankingTarget": "基本",
         "damageMemo": "画像カードからの暫定入力"
       }
     },
@@ -9559,7 +9559,7 @@
         "powerType": "画像カード準拠",
         "maxStacks": null,
         "realityRank": "中",
-        "rankingTarget": "通常",
+        "rankingTarget": "基本",
         "damageMemo": "画像カードからの暫定入力"
       }
     },
@@ -9631,7 +9631,7 @@
         "powerType": "画像カード準拠",
         "maxStacks": null,
         "realityRank": "中",
-        "rankingTarget": "通常",
+        "rankingTarget": "基本",
         "damageMemo": "画像カードからの暫定入力"
       }
     },
@@ -9665,7 +9665,7 @@
         "powerType": "画像カード準拠",
         "maxStacks": null,
         "realityRank": "中",
-        "rankingTarget": "通常",
+        "rankingTarget": "基本",
         "damageMemo": "画像カードからの暫定入力"
       }
     },
@@ -9737,7 +9737,7 @@
         "powerType": "画像カード準拠",
         "maxStacks": null,
         "realityRank": "中",
-        "rankingTarget": "通常",
+        "rankingTarget": "基本",
         "damageMemo": "画像カードからの暫定入力"
       }
     },
@@ -9771,7 +9771,7 @@
         "powerType": "画像カード準拠",
         "maxStacks": null,
         "realityRank": "中",
-        "rankingTarget": "通常",
+        "rankingTarget": "基本",
         "damageMemo": "画像カードからの暫定入力"
       }
     },
@@ -9843,7 +9843,7 @@
         "powerType": "画像カード準拠",
         "maxStacks": null,
         "realityRank": "中",
-        "rankingTarget": "通常",
+        "rankingTarget": "基本",
         "damageMemo": "画像カードからの暫定入力"
       }
     },
@@ -9877,7 +9877,7 @@
         "powerType": "画像カード準拠",
         "maxStacks": null,
         "realityRank": "中",
-        "rankingTarget": "通常",
+        "rankingTarget": "基本",
         "damageMemo": "画像カードからの暫定入力"
       }
     },
@@ -9949,7 +9949,7 @@
         "powerType": "画像カード準拠",
         "maxStacks": null,
         "realityRank": "中",
-        "rankingTarget": "通常",
+        "rankingTarget": "基本",
         "damageMemo": "画像カードからの暫定入力"
       }
     },
@@ -9983,7 +9983,7 @@
         "powerType": "画像カード準拠",
         "maxStacks": null,
         "realityRank": "中",
-        "rankingTarget": "通常",
+        "rankingTarget": "基本",
         "damageMemo": "画像カードからの暫定入力"
       }
     },
@@ -10055,7 +10055,7 @@
         "powerType": "画像カード準拠",
         "maxStacks": null,
         "realityRank": "中",
-        "rankingTarget": "通常",
+        "rankingTarget": "基本",
         "damageMemo": "画像カードからの暫定入力"
       }
     },
@@ -10089,7 +10089,7 @@
         "powerType": "画像カード準拠",
         "maxStacks": null,
         "realityRank": "中",
-        "rankingTarget": "通常",
+        "rankingTarget": "基本",
         "damageMemo": "画像カードからの暫定入力"
       }
     },
@@ -10161,7 +10161,7 @@
         "powerType": "画像カード準拠",
         "maxStacks": null,
         "realityRank": "中",
-        "rankingTarget": "通常",
+        "rankingTarget": "基本",
         "damageMemo": "画像カードからの暫定入力"
       }
     },
@@ -10195,7 +10195,7 @@
         "powerType": "画像カード準拠",
         "maxStacks": null,
         "realityRank": "中",
-        "rankingTarget": "通常",
+        "rankingTarget": "基本",
         "damageMemo": "画像カードからの暫定入力"
       }
     },
@@ -10267,7 +10267,7 @@
         "powerType": "画像カード準拠",
         "maxStacks": null,
         "realityRank": "中",
-        "rankingTarget": "通常",
+        "rankingTarget": "基本",
         "damageMemo": "画像カードからの暫定入力"
       }
     },
@@ -10301,7 +10301,7 @@
         "powerType": "画像カード準拠",
         "maxStacks": null,
         "realityRank": "中",
-        "rankingTarget": "通常",
+        "rankingTarget": "基本",
         "damageMemo": "画像カードからの暫定入力"
       }
     },
@@ -10373,7 +10373,7 @@
         "powerType": "画像カード準拠",
         "maxStacks": null,
         "realityRank": "中",
-        "rankingTarget": "通常",
+        "rankingTarget": "基本",
         "damageMemo": "画像カードからの暫定入力"
       }
     },
@@ -10407,7 +10407,7 @@
         "powerType": "画像カード準拠",
         "maxStacks": null,
         "realityRank": "中",
-        "rankingTarget": "通常",
+        "rankingTarget": "基本",
         "damageMemo": "画像カードからの暫定入力"
       }
     },
@@ -10479,7 +10479,7 @@
         "powerType": "画像カード準拠",
         "maxStacks": null,
         "realityRank": "中",
-        "rankingTarget": "通常",
+        "rankingTarget": "基本",
         "damageMemo": "画像カードからの暫定入力"
       }
     },
@@ -10513,7 +10513,7 @@
         "powerType": "画像カード準拠",
         "maxStacks": null,
         "realityRank": "中",
-        "rankingTarget": "通常",
+        "rankingTarget": "基本",
         "damageMemo": "画像カードからの暫定入力"
       }
     },
@@ -10585,7 +10585,7 @@
         "powerType": "画像カード準拠",
         "maxStacks": null,
         "realityRank": "中",
-        "rankingTarget": "通常",
+        "rankingTarget": "基本",
         "damageMemo": "画像カードからの暫定入力"
       }
     },
@@ -10619,7 +10619,7 @@
         "powerType": "画像カード準拠",
         "maxStacks": null,
         "realityRank": "中",
-        "rankingTarget": "通常",
+        "rankingTarget": "基本",
         "damageMemo": "画像カードからの暫定入力"
       }
     },
@@ -10691,7 +10691,7 @@
         "powerType": "画像カード準拠",
         "maxStacks": null,
         "realityRank": "中",
-        "rankingTarget": "通常",
+        "rankingTarget": "基本",
         "damageMemo": "画像カードからの暫定入力"
       }
     },
@@ -10725,7 +10725,7 @@
         "powerType": "画像カード準拠",
         "maxStacks": null,
         "realityRank": "中",
-        "rankingTarget": "通常",
+        "rankingTarget": "基本",
         "damageMemo": "画像カードからの暫定入力"
       }
     },
@@ -10797,7 +10797,7 @@
         "powerType": "画像カード準拠",
         "maxStacks": null,
         "realityRank": "中",
-        "rankingTarget": "通常",
+        "rankingTarget": "基本",
         "damageMemo": "画像カードからの暫定入力"
       }
     },
@@ -10831,7 +10831,7 @@
         "powerType": "画像カード準拠",
         "maxStacks": null,
         "realityRank": "中",
-        "rankingTarget": "通常",
+        "rankingTarget": "基本",
         "damageMemo": "画像カードからの暫定入力"
       }
     },
@@ -10903,7 +10903,7 @@
         "powerType": "画像カード準拠",
         "maxStacks": null,
         "realityRank": "中",
-        "rankingTarget": "通常",
+        "rankingTarget": "基本",
         "damageMemo": "画像カードからの暫定入力"
       }
     },
@@ -10937,7 +10937,7 @@
         "powerType": "画像カード準拠",
         "maxStacks": null,
         "realityRank": "中",
-        "rankingTarget": "通常",
+        "rankingTarget": "基本",
         "damageMemo": "画像カードからの暫定入力"
       }
     },
