@@ -227,6 +227,18 @@
       flex-wrap: wrap;
     }
 
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 14px;
+    }
+
+    .footer-links a {
+      color: var(--ink);
+      text-decoration: none;
+      font-weight: 700;
+    }
+
     @media (max-width: 900px) {
       .hero {
         min-height: 76vh;
@@ -299,7 +311,13 @@
   <footer>
     <div class="footer-inner">
       <span>ミレストのメメントモリ分析データ室 / 非公式ファンサイト</span>
-      <a href="https://x.com/musoudc">X: @musoudc</a>
+      <nav class="footer-links" aria-label="固定ページ">
+        <a href="./privacy.html">プライバシーポリシー</a>
+        <a href="./disclaimer.html">免責事項</a>
+        <a href="./about.html">このサイトについて</a>
+        <a href="./contact.html">お問い合わせ</a>
+        <a href="https://x.com/musoudc">X: @musoudc</a>
+      </nav>
     </div>
   </footer>
 
