@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://homuratakaaki-ops.github.io/mementomori-miresto/sitemap.xml
