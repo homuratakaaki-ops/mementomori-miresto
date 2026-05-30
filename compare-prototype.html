@@ -12,6 +12,7 @@
       <p class="eyebrow">MEMENTO MORI SKILL COMPARE</p>
       <h1>スキル比較データベース</h1>
       <p class="lead">アクティブスキルとパッシブスキルを分けて、対象・効果・条件・専用武器差分を比較する試作画面です。</p>
+      <a class="top-link" href="./index.html">トップへ戻る</a>
     </div>
     <div class="summary-panel" aria-label="登録データ概要">
       <span><strong id="summaryChars">14</strong>キャラ</span>
@@ -28,12 +29,13 @@
       <aside class="filters" aria-label="絞り込み">
         <div class="filter-block"><label for="searchInput">検索</label><input id="searchInput" type="search" placeholder="キャラ名・スキル名・条件"></div>
         <div class="filter-block"><span class="filter-label">属性</span><div class="segmented" id="attributeFilter"><button class="active" data-value="all" type="button">すべて</button><button data-value="藍" type="button">藍</button><button data-value="紅" type="button">紅</button><button data-value="翠" type="button">翠</button><button data-value="黄" type="button">黄</button><button data-value="天" type="button">天</button><button data-value="冥" type="button">冥</button></div></div>
+        <div class="compare-bin"><div class="compare-bin-head"><h2>比較候補</h2><button id="clearPinnedButton" class="small-button" type="button">解除</button></div><p id="compareBinEmpty">表のチェックを入れると、ここに候補を残せます。</p><div id="compareBinList" class="compare-bin-list"></div></div>
         <div class="filter-block metric-only"><label for="sortSelect">並び替え</label><select id="sortSelect"><option value="base">基本火力順</option><option value="lv1">専用Lv1順</option><option value="lv2">専用Lv2順</option><option value="lv3">専用Lv3順</option><option value="max">条件MAX順</option></select></div>
         <div class="filter-block metric-only"><span class="filter-label">現実性</span><div class="check-list"><label><input type="checkbox" name="reality" value="高" checked>高</label><label><input type="checkbox" name="reality" value="中" checked>中</label><label><input type="checkbox" name="reality" value="低" checked>低</label></div></div>
         <div class="filter-block metric-only"><span class="filter-label">ランキング対象</span><div class="check-list"><label><input type="checkbox" name="rankTarget" value="基本" checked>基本</label><label><input type="checkbox" name="rankTarget" value="条件込み" checked>条件込み</label><label><input type="checkbox" name="rankTarget" value="対象外">対象外</label></div></div>
       </aside>
       <section class="compare-area" aria-label="比較一覧"><div class="table-toolbar"><div><h2 id="tableTitle">アクティブスキル</h2><p id="tableSubtitle">攻撃・回復・追加効果をまとめて確認します。</p></div><button id="resetButton" class="icon-button" type="button" title="絞り込みを初期化">↺</button></div><div class="table-wrap"><table id="compareTable"><thead id="tableHead"></thead><tbody id="tableBody"></tbody></table></div><section class="compare-board" aria-label="比較ボード"><div class="compare-board-head"><div><h2>比較ボード</h2><p>チェックした候補を横並びで確認します。</p></div><span id="boardCount" class="board-count">0件</span></div><div id="compareBoardEmpty" class="board-empty">ランキング表のチェックを入れると、ここに横比較が表示されます。</div><div id="compareBoard" class="board-grid"></div></section></section>
-      <aside class="detail-panel" aria-label="選択中スキル詳細"><div class="compare-bin"><div class="compare-bin-head"><h2>比較候補</h2><button id="clearPinnedButton" class="small-button" type="button">解除</button></div><p id="compareBinEmpty">表のチェックを入れると、ここに候補を残せます。</p><div id="compareBinList" class="compare-bin-list"></div></div><div class="detail-card"><div class="avatar" id="detailAvatar">火</div><p class="detail-kicker" id="detailMode">アクティブスキル</p><h2 id="detailTitle">スキルを選択</h2><p id="detailMeta">行を選ぶと、条件や比較メモを確認できます。</p><dl id="detailList"></dl><a id="detailLink" class="note-link" href="#" target="_blank" rel="noreferrer">キャラ詳細を見る</a></div></aside>
+      <aside class="detail-panel" aria-label="選択中スキル詳細"><div class="detail-card"><div class="avatar" id="detailAvatar">火</div><p class="detail-kicker" id="detailMode">アクティブスキル</p><h2 id="detailTitle">スキルを選択</h2><p id="detailMeta">行を選ぶと、条件や比較メモを確認できます。</p><dl id="detailList"></dl><a id="detailLink" class="note-link" href="#" target="_blank" rel="noreferrer">キャラ詳細を見る</a></div></aside>
     </section>
   </main>
   <script src="./compare-prototype.js"></script>
