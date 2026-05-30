@@ -43,7 +43,7 @@ const el = {
   summaryChars: document.querySelector("#summaryChars"),
   summarySkills: document.querySelector("#summarySkills"),
   summaryRows: document.querySelector("#summaryRows"),
-  reset: document.querySelector("#resetButton"),
+  resetButtons: document.querySelectorAll("[data-reset-filters]"),
   sort: document.querySelector("#sortSelect"),
   realityFilters: document.querySelectorAll("input[name=\"reality\"]"),
   rankTargetFilters: document.querySelectorAll("input[name=\"rankTarget\"]"),
@@ -207,7 +207,7 @@ function renderDefinitionPairs(pairs) {
 function normalizeSkill(rawSkill, character) {
   const weaponPassive = rawSkill.weaponPassive || (isWeaponPassiveMemo(rawSkill.compareMemo) ? rawSkill.compareMemo : "");
   const compareMemo = isWeaponPassiveMemo(rawSkill.compareMemo) ? "" : rawSkill.compareMemo;
-  const damage = rawSkill.damage ? { ...rawSkill.damage } : null;
+  let damage = rawSkill.damage ? { ...rawSkill.damage } : null;
 
   if (rawSkill.id === "stella_holy_dark_star-s1" && damage) {
     damage.exclusiveLv1Total = 3600;
@@ -221,6 +221,24 @@ function normalizeSkill(rawSkill, character) {
     damage.exclusiveLv3Total = 3120;
     damage.conditionMaxTotal = Math.max(damage.conditionMaxTotal || 0, 3120);
     damage.conditionMaxNote = damage.conditionMaxNote || "専用Lv3で魔法780%×4回";
+  }
+
+  if (rawSkill.id === "luke-s2" && !damage) {
+    damage = {
+      singleMultiplier: 520,
+      hitCount: 1,
+      baseTotal: 520,
+      exclusiveLv1Total: 520,
+      exclusiveLv2Total: 520,
+      exclusiveLv3Total: 520,
+      conditionMaxTotal: 780,
+      conditionMaxNote: "対象がシールドなしなら直接攻撃ダメージ1.5倍",
+      powerType: "直接攻撃",
+      maxStacks: null,
+      realityRank: "中",
+      rankingTarget: "条件込み",
+      damageMemo: "腕力参照の直接攻撃。通常の物理/魔法倍率とは別枠"
+    };
   }
 
   if (damage) {
@@ -597,7 +615,7 @@ function bindEvents() {
     render();
   });
 
-  el.reset.addEventListener("click", () => {
+  const resetFilters = () => {
     state.attribute = "all";
     state.search = "";
     state.sort = "base";
@@ -616,6 +634,10 @@ function bindEvents() {
       button.classList.toggle("active", button.dataset.value === "all");
     });
     render();
+  };
+
+  el.resetButtons.forEach((button) => {
+    button.addEventListener("click", resetFilters);
   });
 }
 
