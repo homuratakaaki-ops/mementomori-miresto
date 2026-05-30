@@ -2,6 +2,9 @@ const state = {
   mode: "active",
   attribute: "all",
   search: "",
+  sort: "base",
+  reality: new Set(["高", "中", "低"]),
+  rankTarget: new Set(["基本", "条件込み"]),
   selectedId: null,
   pinnedIds: new Set()
 };
@@ -41,6 +44,9 @@ const el = {
   summarySkills: document.querySelector("#summarySkills"),
   summaryRows: document.querySelector("#summaryRows"),
   reset: document.querySelector("#resetButton"),
+  sort: document.querySelector("#sortSelect"),
+  realityFilters: document.querySelectorAll("input[name=\"reality\"]"),
+  rankTargetFilters: document.querySelectorAll("input[name=\"rankTarget\"]"),
   detailAvatar: document.querySelector("#detailAvatar"),
   detailMode: document.querySelector("#detailMode"),
   detailTitle: document.querySelector("#detailTitle"),
@@ -133,6 +139,28 @@ function displayValue(value) {
   return valueOrDash(normalizeTurnText(value));
 }
 
+function normalizeRankingTarget(value) {
+  return value === "対象" ? "基本" : value;
+}
+
+function getDamageValue(row, key = state.sort) {
+  if (!row.damage) return null;
+  const damageKeyMap = {
+    base: "baseTotal",
+    lv1: "exclusiveLv1Total",
+    lv2: "exclusiveLv2Total",
+    lv3: "exclusiveLv3Total",
+    max: "conditionMaxTotal"
+  };
+  const value = row.damage[damageKeyMap[key] || "baseTotal"];
+  return Number.isFinite(value) ? value : null;
+}
+
+function formatSelectedDamage(row) {
+  const value = getDamageValue(row);
+  return Number.isFinite(value) ? `${value}%` : "-";
+}
+
 function formatDamageStages(row) {
   if (!row.damage || row.mode !== "active") return "";
 
@@ -193,6 +221,11 @@ function normalizeSkill(rawSkill, character) {
     damage.exclusiveLv3Total = 3120;
     damage.conditionMaxTotal = Math.max(damage.conditionMaxTotal || 0, 3120);
     damage.conditionMaxNote = damage.conditionMaxNote || "専用Lv3で魔法780%×4回";
+  }
+
+  if (damage) {
+    damage.realityRank = damage.realityRank || "中";
+    damage.rankingTarget = normalizeRankingTarget(damage.rankingTarget || "条件込み");
   }
 
   return {
@@ -280,6 +313,14 @@ function currentRows() {
 
   rows = rows.filter((row) => state.attribute === "all" || row.attribute === state.attribute);
 
+  if (state.mode === "active") {
+    rows = rows.filter((row) => {
+      const realityRank = row.damage?.realityRank || "中";
+      const rankingTarget = normalizeRankingTarget(row.damage?.rankingTarget || "条件込み");
+      return state.reality.has(realityRank) && state.rankTarget.has(rankingTarget);
+    });
+  }
+
   if (query) {
     rows = rows.filter((row) => [
       row.character,
@@ -299,6 +340,10 @@ function currentRows() {
   }
 
   rows.sort((a, b) => {
+    if (state.mode === "active") {
+      const damageDiff = (getDamageValue(b) ?? -1) - (getDamageValue(a) ?? -1);
+      if (damageDiff !== 0) return damageDiff;
+    }
     if ((a.character || "") !== (b.character || "")) {
       return (a.character || "").localeCompare(b.character || "", "ja");
     }
@@ -309,7 +354,9 @@ function currentRows() {
 }
 
 function renderHeader() {
-  const headers = ["キャラ", "スキル", "種別", "対象", "CT", "効果", "条件・追加効果", "専用武器"];
+  const headers = state.mode === "active"
+    ? ["キャラ", "スキル", "種別", "対象", "CT", "効果", "火力", "条件・追加効果", "専用武器"]
+    : ["キャラ", "スキル", "種別", "対象", "CT", "効果", "条件・追加効果", "専用武器"];
   el.tableHead.innerHTML = `<tr>${headers.map((header) => `<th>${header}</th>`).join("")}</tr>`;
 }
 
@@ -324,9 +371,10 @@ function characterCell(row) {
 
 function renderRows(rows) {
   if (rows.length === 0) {
+    const colspan = state.mode === "active" ? 9 : 8;
     el.tableBody.innerHTML = `
       <tr>
-        <td class="empty-state" colspan="8">
+        <td class="empty-state" colspan="${colspan}">
           <strong>該当するスキルがありません</strong>
           属性や検索条件を少し広げてください。
         </td>
@@ -338,6 +386,7 @@ function renderRows(rows) {
   el.tableBody.innerHTML = rows.map((row) => {
     const selected = row.id === state.selectedId ? " class=\"selected\"" : "";
     const checked = state.pinnedIds.has(row.id) ? " checked" : "";
+    const damageCell = state.mode === "active" ? `<td class="number">${formatSelectedDamage(row)}</td>` : "";
     return `
       <tr data-id="${row.id}"${selected}>
         <td>
@@ -351,6 +400,7 @@ function renderRows(rows) {
         <td class="target-cell">${displayValue(row.target)}</td>
         <td>${displayValue(row.ct)}</td>
         <td>${displayValue(row.multiplierText)}</td>
+        ${damageCell}
         <td class="condition-cell">${displayValue(row.condition || row.duration)}</td>
         <td class="condition-cell">${displayValue(row.exclusiveWeapon)}</td>
       </tr>
@@ -397,7 +447,10 @@ function renderBoard() {
           ["種別", `${displayValue(row.skillType)} / ${displayValue(displaySubtype(row))}`],
           ["対象", row.target],
           ["効果", row.multiplierText],
+          ["表示火力", state.mode === "active" ? formatSelectedDamage(row) : ""],
           ["火力目安", formatDamageStages(row)],
+          ["現実性", row.damage?.realityRank],
+          ["ランキング対象", normalizeRankingTarget(row.damage?.rankingTarget)],
           ["条件・追加効果", row.condition || row.duration],
           ["専用武器", row.exclusiveWeapon],
           ["専用武器パッシブ", row.weaponPassive],
@@ -431,7 +484,10 @@ function renderDetail(row) {
     ["対象", row.target],
     ["CT", valueOrDash(row.ct)],
     ["効果", row.multiplierText],
+    ["表示火力", state.mode === "active" ? formatSelectedDamage(row) : ""],
     ["火力目安", formatDamageStages(row)],
+    ["現実性", row.damage?.realityRank],
+    ["ランキング対象", normalizeRankingTarget(row.damage?.rankingTarget)],
     ["持続", row.duration],
     ["条件・追加効果", row.condition],
     ["専用武器", row.exclusiveWeapon],
@@ -448,7 +504,7 @@ function updateModeUi() {
   el.subtitle.textContent = meta.subtitle;
   el.notice.textContent = meta.notice;
   document.querySelectorAll(".metric-only").forEach((node) => {
-    node.style.display = "none";
+    node.style.display = state.mode === "active" ? "" : "none";
   });
 }
 
@@ -493,6 +549,28 @@ function bindEvents() {
     render();
   });
 
+  el.sort.addEventListener("change", () => {
+    state.sort = el.sort.value;
+    state.selectedId = null;
+    render();
+  });
+
+  el.realityFilters.forEach((checkbox) => {
+    checkbox.addEventListener("change", () => {
+      checkbox.checked ? state.reality.add(checkbox.value) : state.reality.delete(checkbox.value);
+      state.selectedId = null;
+      render();
+    });
+  });
+
+  el.rankTargetFilters.forEach((checkbox) => {
+    checkbox.addEventListener("change", () => {
+      checkbox.checked ? state.rankTarget.add(checkbox.value) : state.rankTarget.delete(checkbox.value);
+      state.selectedId = null;
+      render();
+    });
+  });
+
   el.tableBody.addEventListener("click", (event) => {
     const checkbox = event.target.closest("input[data-pin-id]");
     if (checkbox) {
@@ -522,8 +600,18 @@ function bindEvents() {
   el.reset.addEventListener("click", () => {
     state.attribute = "all";
     state.search = "";
+    state.sort = "base";
+    state.reality = new Set(["高", "中", "低"]);
+    state.rankTarget = new Set(["基本", "条件込み"]);
     state.selectedId = null;
     el.search.value = "";
+    el.sort.value = "base";
+    el.realityFilters.forEach((checkbox) => {
+      checkbox.checked = state.reality.has(checkbox.value);
+    });
+    el.rankTargetFilters.forEach((checkbox) => {
+      checkbox.checked = state.rankTarget.has(checkbox.value);
+    });
     el.attributeFilter.querySelectorAll("button").forEach((button) => {
       button.classList.toggle("active", button.dataset.value === "all");
     });
