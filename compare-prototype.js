@@ -17,7 +17,7 @@ const modeMeta = {
   active: {
     title: "アクティブスキル",
     subtitle: "火力・回復・追加効果を、対象や条件と一緒に比較します。",
-    notice: "アクティブスキルは、ダメージ倍率だけでなく追加効果と対象指定が重要です。",
+    notice: "火力目安はスキルLv最大（240レベル到達時）前提です。倍率だけでなく追加効果と対象指定も確認してください。",
     detail: "アクティブ"
   },
   passive: {
@@ -85,42 +85,45 @@ function summarizeEffectTags(row) {
   ].filter(Boolean).join(" ");
 
   const tagRules = [
-    "HP回復",
-    "再生",
-    "シールド",
-    "ステルス",
-    "被ダメージ増加",
-    "被ダメージ減少",
-    "魔法防御力減少",
-    "物理防御力減少",
-    "防御力減少",
-    "回避率減少",
-    "命中率減少",
-    "攻撃力増加",
-    "攻撃力減少",
-    "クリティカル率増加",
-    "クリティカル率減少",
-    "最大HP増加",
-    "HPドレイン増加",
-    "気絶",
-    "沈黙",
-    "遅延",
-    "脱力",
-    "毒",
-    "浸食",
-    "バフ無効",
-    "解除不可",
-    "必ず命中",
-    "再発動",
-    "スキルCT"
+    ["HP回復", "HP回復"],
+    ["再生", "再生"],
+    ["シールド", "シールド"],
+    ["ステルス", "ステルス"],
+    ["被ダメージ増加", "被ダメ増"],
+    ["被ダメージ減少", "被ダメ減"],
+    ["魔法防御力減少", "魔防減"],
+    ["物理防御力減少", "物防減"],
+    ["防御力減少", "防御減"],
+    ["回避率減少", "回避減"],
+    ["命中率減少", "命中減"],
+    ["攻撃力増加", "攻撃増"],
+    ["攻撃力減少", "攻撃減"],
+    ["クリティカル率増加", "クリ率増"],
+    ["クリティカル率減少", "クリ率減"],
+    ["最大HP増加", "最大HP増"],
+    ["HPドレイン増加", "HPドレイン増"],
+    ["直接攻撃", "直接攻撃"],
+    ["気絶", "気絶"],
+    ["沈黙", "沈黙"],
+    ["遅延", "遅延"],
+    ["脱力", "脱力"],
+    ["毒", "毒"],
+    ["浸食", "浸食"],
+    ["バフ無効", "バフ無効"],
+    ["解除不可", "解除不可"],
+    ["必ず命中", "必中"],
+    ["再発動", "再発動"],
+    ["スキルCT", "CT操作"]
   ];
 
-  const tags = tagRules.filter((tag) => text.includes(tag));
-  return tags.length ? tags.join(" / ") : row.subtype;
+  const tags = tagRules
+    .filter(([keyword]) => text.includes(keyword))
+    .map(([, label]) => label);
+  return tags.length ? tags.join(" / ") : "追加効果";
 }
 
 function displaySubtype(row) {
-  if (row.subtype === "画像記載効果") {
+  if (String(row.subtype || "").includes("画像記載効果")) {
     return summarizeEffectTags(row);
   }
   return row.subtype;
@@ -134,10 +137,10 @@ function formatDamageStages(row) {
   if (!row.damage || row.mode !== "active") return "";
 
   const stages = [
-    { label: "240レベル専用なし", value: row.damage.baseTotal },
-    { label: "専用Lv1", value: row.damage.exclusiveLv1Total },
-    { label: "専用Lv2", value: row.damage.exclusiveLv2Total },
-    { label: "専用Lv3", value: row.damage.exclusiveLv3Total }
+    { label: "専用なし", value: row.damage.baseTotal },
+    { label: "Lv1", value: row.damage.exclusiveLv1Total },
+    { label: "Lv2", value: row.damage.exclusiveLv2Total },
+    { label: "Lv3", value: row.damage.exclusiveLv3Total }
   ].filter((stage) => Number.isFinite(stage.value));
 
   if (!stages.length) return "";
@@ -177,6 +180,14 @@ function normalizeSkill(rawSkill, character) {
   const weaponPassive = rawSkill.weaponPassive || (isWeaponPassiveMemo(rawSkill.compareMemo) ? rawSkill.compareMemo : "");
   const compareMemo = isWeaponPassiveMemo(rawSkill.compareMemo) ? "" : rawSkill.compareMemo;
   const damage = rawSkill.damage ? { ...rawSkill.damage } : null;
+
+  if (rawSkill.id === "stella_holy_dark_star-s1" && damage) {
+    damage.exclusiveLv1Total = 3600;
+    damage.exclusiveLv2Total = 3600;
+    damage.exclusiveLv3Total = 3600;
+    damage.conditionMaxTotal = Math.max(damage.conditionMaxTotal || 0, 3600);
+    damage.conditionMaxNote = damage.conditionMaxNote || "専用Lv1以降で魔法720%×5体";
+  }
 
   if (rawSkill.id === "stella_holy_dark_star-s2" && damage) {
     damage.exclusiveLv3Total = 3120;
