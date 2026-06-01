@@ -14,7 +14,7 @@ const datasets = {
   passive: []
 };
 
-const existingCharacterPages = new Set(["potpourri", "rea"]);
+const existingCharacterPages = new Set(["potpourri", "rea", "sophia"]);
 
 const modeMeta = {
   active: {
@@ -321,8 +321,11 @@ function mergeSkillData(baseData, overlayData) {
 
 async function loadData() {
   const baseData = await fetchJson("./data/mementomori-skills.json");
-  const overlayData = await fetchJson("./data/rea-overlay.json", true);
-  return mergeSkillData(baseData, overlayData);
+  const overlays = await Promise.all([
+    fetchJson("./data/rea-overlay.json", true),
+    fetchJson("./data/sophia-overlay.json", true)
+  ]);
+  return overlays.reduce((data, overlayData) => mergeSkillData(data, overlayData), baseData);
 }
 
 function currentRows() {
