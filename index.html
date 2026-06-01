@@ -18,7 +18,9 @@
       --shadow: 0 12px 30px rgba(28, 40, 68, 0.12);
     }
 
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
 
     body {
       margin: 0;
@@ -28,7 +30,9 @@
       letter-spacing: 0;
     }
 
-    a { color: inherit; }
+    a {
+      color: inherit;
+    }
 
     .hero {
       min-height: 82vh;
@@ -42,7 +46,9 @@
         #f5efe3;
     }
 
-    .hero-inner, main, .footer-inner {
+    .hero-inner,
+    main,
+    .footer-inner {
       max-width: 1180px;
       width: 100%;
       margin: 0 auto;
@@ -55,7 +61,12 @@
       font-weight: 800;
     }
 
-    h1, h2, h3, p { margin-top: 0; }
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
+    }
 
     h1 {
       max-width: 760px;
@@ -72,7 +83,8 @@
       line-height: 1.8;
     }
 
-    .actions, .nav {
+    .actions,
+    .nav {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
@@ -104,9 +116,13 @@
       pointer-events: none;
     }
 
-    main { padding: 42px clamp(14px, 4vw, 32px) 48px; }
+    main {
+      padding: 42px clamp(14px, 4vw, 32px) 48px;
+    }
 
-    section + section { margin-top: 42px; }
+    section + section {
+      margin-top: 42px;
+    }
 
     .section-head {
       display: flex;
@@ -121,13 +137,15 @@
       color: var(--muted);
     }
 
-    .feature-grid, .character-grid {
+    .feature-grid,
+    .character-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 14px;
     }
 
-    .feature, .character-card {
+    .feature,
+    .character-card {
       padding: 18px;
       border: 1px solid var(--line);
       border-radius: 8px;
@@ -140,12 +158,14 @@
       gap: 8px;
     }
 
-    .feature h3, .character-card h3 {
+    .feature h3,
+    .character-card h3 {
       margin-bottom: 6px;
       font-size: 22px;
     }
 
-    .feature p, .character-card p {
+    .feature p,
+    .character-card p {
       color: var(--muted);
       line-height: 1.7;
     }
@@ -228,7 +248,10 @@
           #f5efe3;
       }
 
-      .feature-grid, .character-grid { grid-template-columns: 1fr; }
+      .feature-grid,
+      .character-grid {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
@@ -300,7 +323,7 @@
   </footer>
 
   <script>
-    const existingPages = new Set(["potpourri", "rea"]);
+    const existingPages = new Set(["potpourri", "rea", "sophia"]);
 
     function detailHref(character) {
       return existingPages.has(character.pageSlug)
@@ -308,7 +331,9 @@
         : "#";
     }
 
-    function displayGachaStatus(status) { return status || "復刻待ち"; }
+    function displayGachaStatus(status) {
+      return status || "復刻待ち";
+    }
 
     function renderPickup(characters) {
       const grid = document.querySelector("#pickupGrid");
@@ -354,8 +379,11 @@
 
     async function loadData() {
       const baseData = await fetchJson("./data/mementomori-skills.json");
-      const overlayData = await fetchJson("./data/rea-overlay.json", true);
-      return mergeSkillData(baseData, overlayData);
+      const overlays = await Promise.all([
+        fetchJson("./data/rea-overlay.json", true),
+        fetchJson("./data/sophia-overlay.json", true)
+      ]);
+      return overlays.reduce((data, overlayData) => mergeSkillData(data, overlayData), baseData);
     }
 
     async function init() {
