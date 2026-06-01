@@ -17,7 +17,9 @@
       --shadow: 0 12px 30px rgba(28, 40, 68, 0.12);
     }
 
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
 
     body {
       margin: 0;
@@ -27,7 +29,9 @@
       letter-spacing: 0;
     }
 
-    a { color: inherit; }
+    a {
+      color: inherit;
+    }
 
     header {
       padding: 30px clamp(16px, 4vw, 48px) 22px;
@@ -35,7 +39,8 @@
       background: linear-gradient(180deg, #ffffff 0%, #f6f1e8 100%);
     }
 
-    .inner, main {
+    .inner,
+    main {
       max-width: 1180px;
       margin: 0 auto;
     }
@@ -47,7 +52,11 @@
       font-weight: 800;
     }
 
-    h1, h2, p { margin-top: 0; }
+    h1,
+    h2,
+    p {
+      margin-top: 0;
+    }
 
     h1 {
       margin-bottom: 10px;
@@ -61,13 +70,15 @@
       line-height: 1.7;
     }
 
-    .top-nav, .tabs {
+    .top-nav,
+    .tabs {
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
     }
 
-    .button, .tab {
+    .button,
+    .tab {
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -82,7 +93,8 @@
       cursor: pointer;
     }
 
-    .button.primary, .tab.active {
+    .button.primary,
+    .tab.active {
       border-color: var(--navy);
       background: var(--navy);
       color: #fff;
@@ -94,7 +106,9 @@
       pointer-events: none;
     }
 
-    main { padding: 24px clamp(12px, 3vw, 24px) 44px; }
+    main {
+      padding: 24px clamp(12px, 3vw, 24px) 44px;
+    }
 
     .toolbar {
       display: flex;
@@ -206,12 +220,24 @@
       font-weight: 700;
     }
 
-    @media (max-width: 900px) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (max-width: 900px) {
+      .grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
 
     @media (max-width: 640px) {
-      .toolbar { display: block; }
-      .tabs { margin-top: 14px; }
-      .grid { grid-template-columns: 1fr; }
+      .toolbar {
+        display: block;
+      }
+
+      .tabs {
+        margin-top: 14px;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
@@ -249,7 +275,7 @@
   </main>
 
   <script>
-    const existingPages = new Set(["potpourri", "rea"]);
+    const existingPages = new Set(["potpourri", "rea", "sophia"]);
     let characters = [];
     let activeAttribute = "all";
 
@@ -259,7 +285,9 @@
       return "";
     }
 
-    function displayGachaStatus(status) { return status || "復刻待ち"; }
+    function displayGachaStatus(status) {
+      return status || "復刻待ち";
+    }
 
     function hrefFor(character) {
       return existingPages.has(character.pageSlug) ? `./${character.pageSlug}.html` : "#";
@@ -319,8 +347,11 @@
 
     async function loadData() {
       const baseData = await fetchJson("../../data/mementomori-skills.json");
-      const overlayData = await fetchJson("../../data/rea-overlay.json", true);
-      return mergeSkillData(baseData, overlayData);
+      const overlays = await Promise.all([
+        fetchJson("../../data/rea-overlay.json", true),
+        fetchJson("../../data/sophia-overlay.json", true)
+      ]);
+      return overlays.reduce((data, overlayData) => mergeSkillData(data, overlayData), baseData);
     }
 
     async function init() {
