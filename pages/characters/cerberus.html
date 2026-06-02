@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ケルベロス / ミレスト・メメントモリ分析データ室</title>
+  <style>
+    :root { color-scheme: light; --ink:#172033; --muted:#647086; --line:#d9dfeb; --paper:#fbfaf7; --panel:#fff; --navy:#0b2a57; --gold:#b88932; --shadow:0 12px 30px rgba(28,40,68,.12); }
+    * { box-sizing: border-box; }
+    body { margin:0; background:var(--paper); color:var(--ink); font-family:"Yu Gothic","Hiragino Sans","Meiryo",system-ui,sans-serif; letter-spacing:0; }
+    a { color:inherit; }
+    .page-header { padding:28px clamp(16px,4vw,48px) 24px; background:linear-gradient(180deg,#fff 0%,#f8f1df 100%); border-bottom:1px solid var(--line); }
+    .header-inner, main, .footer-inner { max-width:1180px; margin:0 auto; }
+    .eyebrow { margin:0 0 6px; color:var(--gold); font-size:12px; font-weight:800; }
+    h1,h2,h3,p { margin-top:0; }
+    h1 { margin-bottom:10px; font-size:clamp(34px,5vw,56px); line-height:1.05; }
+    .role { max-width:760px; margin-bottom:18px; color:var(--muted); font-size:17px; line-height:1.7; }
+    .meta-row { display:flex; flex-wrap:wrap; gap:8px; }
+    .badge,.tag { display:inline-flex; align-items:center; min-height:32px; padding:5px 10px; border-radius:999px; background:#edf1f8; color:#3b4b65; font-size:13px; font-weight:800; }
+    .attribute { background:var(--gold); color:#fff; }
+    main { padding:22px clamp(12px,3vw,24px) 44px; }
+    .layout { display:grid; grid-template-columns:minmax(0,1fr) 320px; gap:16px; align-items:start; }
+    .section,.side-panel { background:var(--panel); border:1px solid var(--line); border-radius:8px; box-shadow:var(--shadow); }
+    .section { padding:18px; margin-bottom:16px; }
+    .section h2 { margin-bottom:10px; font-size:24px; }
+    .section-lead,li,dd { line-height:1.7; }
+    .skill-grid,.manual-block,.stat-grid { display:grid; gap:12px; }
+    .skill-grid { grid-template-columns:repeat(2,minmax(0,1fr)); margin-top:14px; }
+    .skill-card,.manual-card,.stat-card { border:1px solid var(--line); border-radius:8px; background:#fffdf8; overflow:hidden; }
+    .skill-card header { display:flex; justify-content:space-between; gap:10px; padding:12px; border-bottom:1px solid var(--line); background:#f8f1df; }
+    .skill-card h3 { margin-bottom:2px; font-size:18px; }
+    .ct { flex:0 0 auto; color:var(--navy); font-weight:800; }
+    .skill-body { display:grid; gap:10px; padding:12px; }
+    .manual-card,.stat-card { padding:14px; }
+    .manual-card h3,.stat-card h3 { margin-bottom:8px; font-size:18px; }
+    .manual-card ul { margin:0; padding-left:1.2em; }
+    .stat-grid { grid-template-columns:repeat(3,minmax(0,1fr)); }
+    dl { margin:0; } dt { color:var(--muted); font-size:12px; font-weight:800; } dd { margin:3px 0 0; }
+    .compare-link,.link-list a { display:inline-flex; justify-content:center; width:100%; padding:11px 12px; border-radius:8px; text-decoration:none; font-weight:800; }
+    .compare-link { margin-top:14px; background:var(--navy); color:#fff; }
+    .side-panel { position:sticky; top:14px; padding:16px; }
+    .side-panel h2 { margin-bottom:10px; font-size:20px; }
+    .status { padding:12px; border-left:4px solid var(--gold); border-radius:6px; background:#fff7e8; color:#6f4a17; line-height:1.6; }
+    .link-list { display:grid; gap:8px; margin:0; padding:0; list-style:none; }
+    .link-list a { border:1px solid var(--line); background:#fff; }
+    footer { padding:24px clamp(14px,4vw,32px); border-top:1px solid var(--line); background:#fff; color:var(--muted); }
+    .footer-inner { display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap; }
+    .footer-links { display:flex; flex-wrap:wrap; gap:8px 14px; }
+    .footer-links a { color:var(--ink); text-decoration:none; font-weight:700; }
+    @media (max-width:920px) { .layout,.skill-grid,.stat-grid { grid-template-columns:1fr; } .side-panel { position:static; } }
+  </style>
+</head>
+<body>
+  <header class="page-header">
+    <div class="header-inner">
+      <p class="eyebrow">CHARACTER DETAIL</p>
+      <h1 id="characterName">ケルベロス</h1>
+      <p class="role" id="roleMemo">高いスピードと11連撃で先手制圧を狙う天属性ウォーリア。</p>
+      <div class="meta-row" id="characterMeta"></div>
+    </div>
+  </header>
+  <main>
+    <div class="layout">
+      <div>
+        <section class="section" aria-labelledby="skillsTitle">
+          <h2 id="skillsTitle">スキル一覧</h2>
+          <p class="section-lead">倍率は比較用の要約です。最大値は条件込みの理論値を含むため、実戦目安とは分けて確認してください。</p>
+          <div class="skill-grid" id="skillGrid"></div>
+          <a class="compare-link" href="../../compare-prototype.html?character=cerberus">スキル比較DBで見る</a>
+        </section>
+        <section class="section" aria-labelledby="reviewTitle">
+          <h2 id="reviewTitle">評価</h2>
+          <div class="manual-block">
+            <article class="manual-card"><h3>役割解説</h3><p>ケルベロスは、スピード強化と合計11回の物理攻撃で先手から圧をかける速攻型です。スキル1の6回攻撃とスキル2の5回攻撃で多重バリアを削りやすく、低HPの敵には即時戦闘不能条件も狙えます。</p><p>ただし、耐久補助を自前でほとんど持たない点は重い弱点です。性能目的で見るなら、速さ・連撃・即時戦闘不能の価値と、守らないと落ちやすい現実を分けて判断してください。</p></article>
+            <article class="manual-card"><h3>強み</h3><ul><li>スピード3363に加え、専用Lv2でバトル開始時にスピード20%増加を得られる</li><li>スキル1とスキル2を合わせて11回攻撃でき、多重バリアを削る役割を持てる</li><li>スキル1は物理520%×6回で、腕力条件を満たせば物理防御力50%減少を付与できる</li><li>スキル2はHP割合が最も低い敵を狙い、条件次第で即時戦闘不能を狙える</li><li>2ターン目開始時に弱体効果を全解除でき、沈黙などから立て直す余地がある</li><li>攻撃力40%増加とクリティカル率20%増加が解除不可で、基礎火力を維持しやすい</li></ul></article>
+            <article class="manual-card"><h3>弱み・注意点</h3><ul><li>耐久力が低く、守りなしでは2ターン目まで生き残れない場面がある</li><li>物理防御力減少は自身の腕力が対象より高いことが条件で、低凸や格上相手では腐りやすい</li><li>スキル2の即時戦闘不能は条件つきで、通常火力そのものとは分けて評価する必要がある</li><li>天属性スピード編成を本格的に組む場合、周辺限定キャラの要求が重い</li></ul></article>
+          </div>
+        </section>
+        <section class="section" aria-labelledby="decisionTitle">
+          <h2 id="decisionTitle">引く判断の補助</h2>
+          <div class="manual-block"><article class="manual-card"><h3>引くべき人</h3><ul><li>ケルベロスが推しで、趣味枠として育成したい人</li><li>アルカナ目的で母体を確保したい人</li><li>天属性スピード編成を組むためのパーツを探している人</li><li>多重バリア剥がしや即時戦闘不能条件を研究したい人</li></ul></article><article class="manual-card"><h3>引かなくていい人</h3><ul><li>無課金・微課金で育成リソースを絞りたい人</li><li>耐久補助なしで自己完結するアタッカーを求めている人</li><li>汎用性の高い火力役を優先したい人</li><li>凸投資や専用武器投資まで進める予定がない人</li></ul></article></div>
+        </section>
+        <section class="section" aria-labelledby="weaponTitle"><h2 id="weaponTitle">専用武器パッシブ</h2><div class="stat-grid"><article class="stat-card"><h3>耐久力</h3><p>+8%</p></article><article class="stat-card"><h3>攻撃力</h3><p>+18%</p></article><article class="stat-card"><h3>命中</h3><p>+10%</p></article></div></section>
+        <section class="section" aria-labelledby="profileTitle"><h2 id="profileTitle">プロフィール・基礎データ</h2><div class="stat-grid"><article class="stat-card"><h3>プロフィール</h3><dl><dt>身長 / 体重</dt><dd>140cm / 35kg</dd><dt>誕生日</dt><dd>11月11日</dd><dt>血液型</dt><dd>O型</dd></dl></article><article class="stat-card"><h3>音楽・声優</h3><dl><dt>ラメント</dt><dd>IV. THE THUNDER</dd><dt>歌唱</dt><dd>ケルベロス（斉藤朱夏）</dd><dt>CV</dt><dd>斉藤朱夏</dd></dl></article><article class="stat-card"><h3>ステータス（LR）</h3><dl><dt>戦闘力</dt><dd>7,146,091</dd><dt>攻撃力 / HP</dt><dd>701,912 / 4,843,190</dd><dt>スピード</dt><dd>3,363</dd></dl></article></div></section>
+      </div>
+      <aside class="side-panel"><h2>関連リンク</h2><p id="gachaUpdated" class="status">ガチャ状態確認日：読み込み中</p><p class="status">直近ピックアップ：2026-06-23予定。現時点ではPU中ではなく、PU予定として扱います。</p><ul class="link-list"><li><a href="../../index.html">トップへ戻る</a></li><li><a href="../../compare-prototype.html">比較DBへ戻る</a></li><li><a href="./index.html">キャラ一覧へ戻る</a></li></ul></aside>
+    </div>
+  </main>
+  <script>
+    const characterId = "cerberus";
+    function valueOrDash(value) { return value === null || value === undefined || value === "" ? "-" : value; }
+    function renderMeta(character) { document.querySelector("#characterMeta").innerHTML = [`<span class="badge attribute">${character.attribute}</span>`,`<span class="badge">${character.weaponType}</span>`,`<span class="badge">スピード ${character.speed}</span>`,`<span class="badge">${character.availability}</span>`,`<span class="badge">${character.gachaStatus || "状態未設定"}</span>`].join(""); }
+    function renderSkills(skills) { const grid = document.querySelector("#skillGrid"); grid.innerHTML = skills.sort((a,b)=>a.number-b.number).map((skill)=>`<article class="skill-card"><header><div><h3>スキル${skill.number}：${skill.name}</h3><span class="tag">${skill.skillType}</span> <span class="tag">${skill.category}</span> <span class="tag">${skill.subCategory}</span></div><span class="ct">CT: ${valueOrDash(skill.ct)}</span></header><div class="skill-body"><dl><dt>対象</dt><dd>${valueOrDash(skill.target)}</dd></dl><dl><dt>倍率・効果</dt><dd>${valueOrDash(skill.multiplierText)}</dd></dl><dl><dt>条件</dt><dd>${valueOrDash(skill.condition)}</dd></dl><dl><dt>専用武器</dt><dd>${valueOrDash(skill.exclusiveWeapon)}</dd></dl><dl><dt>比較メモ</dt><dd>${valueOrDash(skill.compareMemo)}</dd></dl></div></article>`).join(""); }
+    async function fetchJson(path, optional = false) { const response = await fetch(path, { cache:"no-store" }); if (!response.ok) { if (optional && response.status === 404) return { characters:[], skills:[] }; throw new Error(`JSON読み込み失敗: ${response.status}`); } return response.json(); }
+    function mergeSkillData(baseData, overlayData) { const characters = new Map((baseData.characters || []).map((character)=>[character.id, character])); const skills = new Map((baseData.skills || []).map((skill)=>[skill.id, skill])); (overlayData.characters || []).forEach((character)=>characters.set(character.id, character)); (overlayData.skills || []).forEach((skill)=>skills.set(skill.id, skill)); return { ...baseData, characters:[...characters.values()], skills:[...skills.values()] }; }
+    async function init() { try { const baseData = await fetchJson("../../data/mementomori-skills.json"); const overlayData = await fetchJson("../../data/cerberus-overlay.json", true); const data = mergeSkillData(baseData, overlayData); const character = data.characters.find((item)=>item.id === characterId); const skills = data.skills.filter((skill)=>skill.characterId === characterId); if (!character) throw new Error("キャラが見つかりません"); document.title = `${character.name} / ミレスト・メメントモリ分析データ室`; document.querySelector("#characterName").textContent = character.name; document.querySelector("#roleMemo").textContent = character.catchcopy || character.roleMemo; document.querySelector("#gachaUpdated").textContent = `ガチャ状態確認日：${data.gachaStatusUpdatedAt || "未設定"}`; renderMeta(character); renderSkills(skills); } catch (error) { document.querySelector("#roleMemo").textContent = error.message; console.error(error); } }
+    init();
+  </script>
+  <footer><div class="footer-inner"><span>ミレスト・メメントモリ攻略・分析データベース / 非公式ファンサイト</span><nav class="footer-links" aria-label="固定ページ"><a href="../../index.html">トップ</a><a href="../../privacy.html">プライバシーポリシー</a><a href="../../disclaimer.html">免責事項</a><a href="../../about.html">このサイトについて</a><a href="../../contact.html">お問い合わせ</a></nav></div></footer>
+</body>
+</html>
