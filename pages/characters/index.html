@@ -17,7 +17,9 @@
       --shadow: 0 12px 30px rgba(28, 40, 68, 0.12);
     }
 
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
 
     body {
       margin: 0;
@@ -27,7 +29,9 @@
       letter-spacing: 0;
     }
 
-    a { color: inherit; }
+    a {
+      color: inherit;
+    }
 
     header {
       padding: 30px clamp(16px, 4vw, 48px) 22px;
@@ -35,7 +39,11 @@
       background: linear-gradient(180deg, #ffffff 0%, #f6f1e8 100%);
     }
 
-    .inner, main { max-width: 1180px; margin: 0 auto; }
+    .inner,
+    main {
+      max-width: 1180px;
+      margin: 0 auto;
+    }
 
     .eyebrow {
       margin: 0 0 8px;
@@ -44,9 +52,16 @@
       font-weight: 800;
     }
 
-    h1, h2, p { margin-top: 0; }
+    h1,
+    h2,
+    p {
+      margin-top: 0;
+    }
 
-    h1 { margin-bottom: 10px; font-size: clamp(34px, 5vw, 56px); }
+    h1 {
+      margin-bottom: 10px;
+      font-size: clamp(34px, 5vw, 56px);
+    }
 
     .lead {
       max-width: 760px;
@@ -55,9 +70,15 @@
       line-height: 1.7;
     }
 
-    .top-nav, .tabs { display: flex; flex-wrap: wrap; gap: 8px; }
+    .top-nav,
+    .tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
 
-    .button, .tab {
+    .button,
+    .tab {
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -72,10 +93,22 @@
       cursor: pointer;
     }
 
-    .button.primary, .tab.active { border-color: var(--navy); background: var(--navy); color: #fff; }
-    .button.disabled { color: var(--muted); background: #f1f3f7; pointer-events: none; }
+    .button.primary,
+    .tab.active {
+      border-color: var(--navy);
+      background: var(--navy);
+      color: #fff;
+    }
 
-    main { padding: 24px clamp(12px, 3vw, 24px) 44px; }
+    .button.disabled {
+      color: var(--muted);
+      background: #f1f3f7;
+      pointer-events: none;
+    }
+
+    main {
+      padding: 24px clamp(12px, 3vw, 24px) 44px;
+    }
 
     .toolbar {
       display: flex;
@@ -85,7 +118,10 @@
       margin-bottom: 16px;
     }
 
-    .toolbar p { margin-bottom: 0; color: var(--muted); }
+    .toolbar p {
+      margin-bottom: 0;
+      color: var(--muted);
+    }
 
     .grid {
       display: grid;
@@ -104,7 +140,11 @@
       box-shadow: var(--shadow);
     }
 
-    .badge-row { display: flex; flex-wrap: wrap; gap: 6px; }
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
 
     .badge {
       display: inline-flex;
@@ -118,12 +158,30 @@
       font-weight: 800;
     }
 
-    .badge.pickup { background: #fff0cc; color: #805519; }
-    .badge.waiting { background: #edf1f8; color: #566276; }
+    .badge.pickup {
+      background: #fff0cc;
+      color: #805519;
+    }
 
-    .card h2 { margin-bottom: 6px; font-size: 22px; }
-    .card p { color: var(--muted); line-height: 1.7; }
-    .card .button { align-self: end; width: 100%; }
+    .badge.waiting {
+      background: #edf1f8;
+      color: #566276;
+    }
+
+    .card h2 {
+      margin-bottom: 6px;
+      font-size: 22px;
+    }
+
+    .card p {
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .card .button {
+      align-self: end;
+      width: 100%;
+    }
 
     .empty {
       grid-column: 1 / -1;
@@ -150,14 +208,36 @@
       margin: 0 auto;
     }
 
-    .footer-links { display: flex; flex-wrap: wrap; gap: 8px 14px; }
-    .footer-links a { color: var(--ink); text-decoration: none; font-weight: 700; }
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 14px;
+    }
 
-    @media (max-width: 900px) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    .footer-links a {
+      color: var(--ink);
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    @media (max-width: 900px) {
+      .grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
     @media (max-width: 640px) {
-      .toolbar { display: block; }
-      .tabs { margin-top: 14px; }
-      .grid { grid-template-columns: 1fr; }
+      .toolbar {
+        display: block;
+      }
+
+      .tabs {
+        margin-top: 14px;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
@@ -195,7 +275,7 @@
   </main>
 
   <script>
-    const existingPages = new Set(["potpourri", "rea", "sophia", "veela"]);
+    const existingPages = new Set(["potpourri", "rea", "sophia", "veela", "sivi", "cerberus", "aa_dark"]);
     let characters = [];
     let activeAttribute = "all";
 
@@ -205,8 +285,13 @@
       return "";
     }
 
-    function displayGachaStatus(status) { return status || "復刻待ち"; }
-    function hrefFor(character) { return existingPages.has(character.pageSlug) ? `./${character.pageSlug}.html` : "#"; }
+    function displayGachaStatus(status) {
+      return status || "復刻待ち";
+    }
+
+    function hrefFor(character) {
+      return existingPages.has(character.pageSlug) ? `./${character.pageSlug}.html` : "#";
+    }
 
     function render() {
       const grid = document.querySelector("#characterGrid");
@@ -265,7 +350,10 @@
       const overlays = await Promise.all([
         fetchJson("../../data/rea-overlay.json", true),
         fetchJson("../../data/sophia-overlay.json", true),
-        fetchJson("../../data/veela-overlay.json", true)
+        fetchJson("../../data/veela-overlay.json", true),
+        fetchJson("../../data/sivi-overlay.json", true),
+        fetchJson("../../data/cerberus-overlay.json", true),
+        fetchJson("../../data/aa-dark-overlay.json", true)
       ]);
       return overlays.reduce((data, overlayData) => mergeSkillData(data, overlayData), baseData);
     }
