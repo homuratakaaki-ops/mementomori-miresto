@@ -5,39 +5,240 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>キャラ一覧 / ミレストのメメントモリ分析データ室</title>
   <style>
-    :root { color-scheme: light; --ink: #172033; --muted: #647086; --line: #d9dfeb; --paper: #fbfaf7; --panel: #ffffff; --navy: #0b2a57; --gold: #b88932; --shadow: 0 12px 30px rgba(28, 40, 68, 0.12); }
-    * { box-sizing: border-box; }
-    body { margin: 0; background: var(--paper); color: var(--ink); font-family: "Yu Gothic", "Hiragino Sans", "Meiryo", system-ui, sans-serif; letter-spacing: 0; }
-    a { color: inherit; }
-    header { padding: 30px clamp(16px, 4vw, 48px) 22px; border-bottom: 1px solid var(--line); background: linear-gradient(180deg, #ffffff 0%, #f6f1e8 100%); }
-    .inner, main { max-width: 1180px; margin: 0 auto; }
-    .eyebrow { margin: 0 0 8px; color: var(--gold); font-size: 12px; font-weight: 800; }
-    h1, h2, p { margin-top: 0; }
-    h1 { margin-bottom: 10px; font-size: clamp(34px, 5vw, 56px); }
-    .lead { max-width: 760px; margin-bottom: 18px; color: var(--muted); line-height: 1.7; }
-    .top-nav, .tabs { display: flex; flex-wrap: wrap; gap: 8px; }
-    .button, .tab { display: inline-flex; align-items: center; justify-content: center; min-height: 40px; padding: 8px 13px; border: 1px solid var(--line); border-radius: 8px; background: #fff; color: var(--ink); text-decoration: none; font-weight: 800; cursor: pointer; }
-    .button.primary, .tab.active { border-color: var(--navy); background: var(--navy); color: #fff; }
-    .button.disabled { color: var(--muted); background: #f1f3f7; pointer-events: none; }
-    main { padding: 24px clamp(12px, 3vw, 24px) 44px; }
-    .toolbar { display: flex; justify-content: space-between; align-items: end; gap: 16px; margin-bottom: 16px; }
-    .toolbar p { margin-bottom: 0; color: var(--muted); }
-    .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
-    .card { display: grid; gap: 12px; min-height: 100%; padding: 16px; border: 1px solid var(--line); border-radius: 8px; background: var(--panel); box-shadow: var(--shadow); }
-    .badge-row { display: flex; flex-wrap: wrap; gap: 6px; }
-    .badge { display: inline-flex; align-items: center; min-height: 28px; padding: 4px 9px; border-radius: 999px; background: #edf1f8; color: #3b4b65; font-size: 12px; font-weight: 800; }
-    .badge.pickup { background: #fff0cc; color: #805519; }
-    .badge.waiting { background: #edf1f8; color: #566276; }
-    .card h2 { margin-bottom: 6px; font-size: 22px; }
-    .card p { color: var(--muted); line-height: 1.7; }
-    .card .button { align-self: end; width: 100%; }
-    .empty { grid-column: 1 / -1; padding: 22px; border: 1px dashed #c4af82; border-radius: 8px; background: #fffdf7; color: var(--muted); }
-    footer { padding: 24px clamp(14px, 4vw, 32px); border-top: 1px solid var(--line); background: #fff; color: var(--muted); }
-    .footer-inner { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; max-width: 1180px; margin: 0 auto; }
-    .footer-links { display: flex; flex-wrap: wrap; gap: 8px 14px; }
-    .footer-links a { color: var(--ink); text-decoration: none; font-weight: 700; }
-    @media (max-width: 900px) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-    @media (max-width: 640px) { .toolbar { display: block; } .tabs { margin-top: 14px; } .grid { grid-template-columns: 1fr; } }
+    :root {
+      color-scheme: light;
+      --ink: #172033;
+      --muted: #647086;
+      --line: #d9dfeb;
+      --paper: #fbfaf7;
+      --panel: #ffffff;
+      --navy: #0b2a57;
+      --gold: #b88932;
+      --shadow: 0 12px 30px rgba(28, 40, 68, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: "Yu Gothic", "Hiragino Sans", "Meiryo", system-ui, sans-serif;
+      letter-spacing: 0;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    header {
+      padding: 30px clamp(16px, 4vw, 48px) 22px;
+      border-bottom: 1px solid var(--line);
+      background: linear-gradient(180deg, #ffffff 0%, #f6f1e8 100%);
+    }
+
+    .inner,
+    main {
+      max-width: 1180px;
+      margin: 0 auto;
+    }
+
+    .eyebrow {
+      margin: 0 0 8px;
+      color: var(--gold);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    h1,
+    h2,
+    p {
+      margin-top: 0;
+    }
+
+    h1 {
+      margin-bottom: 10px;
+      font-size: clamp(34px, 5vw, 56px);
+    }
+
+    .lead {
+      max-width: 760px;
+      margin-bottom: 18px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .top-nav,
+    .tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .button,
+    .tab {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 40px;
+      padding: 8px 13px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      color: var(--ink);
+      text-decoration: none;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .button.primary,
+    .tab.active {
+      border-color: var(--navy);
+      background: var(--navy);
+      color: #fff;
+    }
+
+    .button.disabled {
+      color: var(--muted);
+      background: #f1f3f7;
+      pointer-events: none;
+    }
+
+    main {
+      padding: 24px clamp(12px, 3vw, 24px) 44px;
+    }
+
+    .toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .toolbar p {
+      margin-bottom: 0;
+      color: var(--muted);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .card {
+      display: grid;
+      gap: 12px;
+      min-height: 100%;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      box-shadow: var(--shadow);
+    }
+
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 4px 9px;
+      border-radius: 999px;
+      background: #edf1f8;
+      color: #3b4b65;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .badge.pickup {
+      background: #fff0cc;
+      color: #805519;
+    }
+
+    .badge.waiting {
+      background: #edf1f8;
+      color: #566276;
+    }
+
+    .card h2 {
+      margin-bottom: 6px;
+      font-size: 22px;
+    }
+
+    .card p {
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .card .button {
+      align-self: end;
+      width: 100%;
+    }
+
+    .empty {
+      grid-column: 1 / -1;
+      padding: 22px;
+      border: 1px dashed #c4af82;
+      border-radius: 8px;
+      background: #fffdf7;
+      color: var(--muted);
+    }
+
+    footer {
+      padding: 24px clamp(14px, 4vw, 32px);
+      border-top: 1px solid var(--line);
+      background: #fff;
+      color: var(--muted);
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      max-width: 1180px;
+      margin: 0 auto;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 14px;
+    }
+
+    .footer-links a {
+      color: var(--ink);
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    @media (max-width: 900px) {
+      .grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 640px) {
+      .toolbar {
+        display: block;
+      }
+
+      .tabs {
+        margin-top: 14px;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
   </style>
 </head>
 <body>
@@ -46,37 +247,77 @@
       <p class="eyebrow">CHARACTER LIST</p>
       <h1>キャラ一覧</h1>
       <p class="lead">属性、ガチャ状況、キャッチコピーからキャラ詳細へ進むための一覧です。詳細ページが未作成のキャラは準備中として表示します。</p>
-      <nav class="top-nav" aria-label="メインナビ"><a class="button" href="../../index.html">トップ</a><a class="button primary" href="../../compare-prototype.html">スキル比較DB</a><span class="button disabled">マイページ 準備中</span></nav>
+      <nav class="top-nav" aria-label="メインナビ">
+        <a class="button" href="../../index.html">トップ</a>
+        <a class="button primary" href="../../compare-prototype.html">スキル比較DB</a>
+        <span class="button disabled">マイページ 準備中</span>
+      </nav>
     </div>
   </header>
 
   <main>
     <section class="toolbar">
-      <div><h2>属性フィルター</h2><p id="countText">読み込み中です。</p></div>
+      <div>
+        <h2>属性フィルター</h2>
+        <p id="countText">読み込み中です。</p>
+      </div>
       <div class="tabs" id="attributeTabs">
-        <button class="tab active" data-attribute="all" type="button">すべて</button><button class="tab" data-attribute="藍" type="button">藍</button><button class="tab" data-attribute="紅" type="button">紅</button><button class="tab" data-attribute="翠" type="button">翠</button><button class="tab" data-attribute="黄" type="button">黄</button><button class="tab" data-attribute="天" type="button">天</button><button class="tab" data-attribute="冥" type="button">冥</button>
+        <button class="tab active" data-attribute="all" type="button">すべて</button>
+        <button class="tab" data-attribute="藍" type="button">藍</button>
+        <button class="tab" data-attribute="紅" type="button">紅</button>
+        <button class="tab" data-attribute="翠" type="button">翠</button>
+        <button class="tab" data-attribute="黄" type="button">黄</button>
+        <button class="tab" data-attribute="天" type="button">天</button>
+        <button class="tab" data-attribute="冥" type="button">冥</button>
       </div>
     </section>
     <section class="grid" id="characterGrid"></section>
   </main>
 
   <script>
-    const existingPages = new Set(["potpourri", "rea", "sophia", "veela", "sivi", "cerberus", "aa_dark", "cattleya"]);
+    const existingPages = new Set(["potpourri", "rea", "sophia", "veela", "sivi", "cerberus", "aa_dark", "cattleya", "soltina"]);
     let characters = [];
     let activeAttribute = "all";
 
-    function statusClass(status) { if (status === "PU中") return "pickup"; if (!status || status === "復刻待ち") return "waiting"; return ""; }
-    function displayGachaStatus(status) { return status || "復刻待ち"; }
-    function hrefFor(character) { return existingPages.has(character.pageSlug) ? `./${character.pageSlug}.html` : "#"; }
+    function statusClass(status) {
+      if (status === "PU中") return "pickup";
+      if (!status || status === "復刻待ち") return "waiting";
+      return "";
+    }
+
+    function displayGachaStatus(status) {
+      return status || "復刻待ち";
+    }
+
+    function hrefFor(character) {
+      return existingPages.has(character.pageSlug) ? `./${character.pageSlug}.html` : "#";
+    }
 
     function render() {
       const grid = document.querySelector("#characterGrid");
       const filtered = characters.filter((character) => activeAttribute === "all" || character.attribute === activeAttribute);
       document.querySelector("#countText").textContent = `${filtered.length}件表示 / 全${characters.length}キャラ`;
-      if (filtered.length === 0) { grid.innerHTML = `<div class="empty">該当するキャラがありません。</div>`; return; }
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `<div class="empty">該当するキャラがありません。</div>`;
+        return;
+      }
+
       grid.innerHTML = filtered.map((character) => {
         const hasPage = existingPages.has(character.pageSlug);
-        return `<article class="card"><div class="badge-row"><span class="badge">${character.attribute}</span><span class="badge ${statusClass(character.gachaStatus)}">${displayGachaStatus(character.gachaStatus)}</span></div><div><h2>${character.name}</h2><p>${character.catchcopy || character.roleMemo}</p></div><a class="button ${hasPage ? "primary" : "disabled"}" href="${hrefFor(character)}">${hasPage ? "詳細を見る" : "準備中"}</a></article>`;
+        return `
+          <article class="card">
+            <div class="badge-row">
+              <span class="badge">${character.attribute}</span>
+              <span class="badge ${statusClass(character.gachaStatus)}">${displayGachaStatus(character.gachaStatus)}</span>
+            </div>
+            <div>
+              <h2>${character.name}</h2>
+              <p>${character.catchcopy || character.roleMemo}</p>
+            </div>
+            <a class="button ${hasPage ? "primary" : "disabled"}" href="${hrefFor(character)}">${hasPage ? "詳細を見る" : "準備中"}</a>
+          </article>
+        `;
       }).join("");
     }
 
@@ -113,18 +354,34 @@
         fetchJson("../../data/sivi-overlay.json", true),
         fetchJson("../../data/cerberus-overlay.json", true),
         fetchJson("../../data/aa-dark-overlay.json", true),
-        fetchJson("../../data/cattleya-overlay.json", true)
+        fetchJson("../../data/cattleya-overlay.json", true),
+        fetchJson("../../data/soltina-overlay.json", true)
       ]);
       return overlays.reduce((data, overlayData) => mergeSkillData(data, overlayData), baseData);
     }
 
     async function init() {
-      try { const data = await loadData(); characters = data.characters || []; render(); }
-      catch (error) { document.querySelector("#characterGrid").innerHTML = `<div class="empty">${error.message}</div>`; }
+      try {
+        const data = await loadData();
+        characters = data.characters || [];
+        render();
+      } catch (error) {
+        document.querySelector("#characterGrid").innerHTML = `<div class="empty">${error.message}</div>`;
+      }
     }
 
     init();
   </script>
-  <footer><div class="footer-inner"><span>ミレストのメメントモリ攻略・分析データベース / 非公式ファンサイト</span><nav class="footer-links" aria-label="固定ページ"><a href="../../privacy.html">プライバシーポリシー</a><a href="../../disclaimer.html">免責事項</a><a href="../../about.html">このサイトについて</a><a href="../../contact.html">お問い合わせ</a></nav></div></footer>
+  <footer>
+    <div class="footer-inner">
+      <span>ミレストのメメントモリ攻略・分析データベース / 非公式ファンサイト</span>
+      <nav class="footer-links" aria-label="固定ページ">
+        <a href="../../privacy.html">プライバシーポリシー</a>
+        <a href="../../disclaimer.html">免責事項</a>
+        <a href="../../about.html">このサイトについて</a>
+        <a href="../../contact.html">お問い合わせ</a>
+      </nav>
+    </div>
+  </footer>
 </body>
 </html>

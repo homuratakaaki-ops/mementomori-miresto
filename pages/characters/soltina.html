@@ -1,0 +1,528 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ソルティーナ / ミレスト・メメントモリ分析データ室</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #172033;
+      --muted: #647086;
+      --line: #d9dfeb;
+      --paper: #fbfaf7;
+      --panel: #ffffff;
+      --navy: #0b2a57;
+      --green: #b88932;
+      --gold: #b88932;
+      --shadow: 0 12px 30px rgba(28, 40, 68, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: "Yu Gothic", "Hiragino Sans", "Meiryo", system-ui, sans-serif;
+      letter-spacing: 0;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .page-header {
+      padding: 28px clamp(16px, 4vw, 48px) 24px;
+      background: linear-gradient(180deg, #ffffff 0%, #eef6f1 100%);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .header-inner,
+    main,
+    .footer-inner {
+      max-width: 1180px;
+      margin: 0 auto;
+    }
+
+    .eyebrow {
+      margin: 0 0 6px;
+      color: var(--green);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
+    }
+
+    h1 {
+      margin-bottom: 10px;
+      font-size: clamp(34px, 5vw, 56px);
+      line-height: 1.05;
+    }
+
+    .role {
+      max-width: 760px;
+      margin-bottom: 18px;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.7;
+    }
+
+    .meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .badge,
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 32px;
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: #edf1f8;
+      color: #3b4b65;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .attribute {
+      background: var(--green);
+      color: #fff;
+    }
+
+    main {
+      padding: 22px clamp(12px, 3vw, 24px) 44px;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 320px;
+      gap: 16px;
+      align-items: start;
+    }
+
+    .section,
+    .side-panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+    }
+
+    .section {
+      padding: 18px;
+      margin-bottom: 16px;
+    }
+
+    .section h2 {
+      margin-bottom: 10px;
+      font-size: 24px;
+    }
+
+    .section-lead,
+    li,
+    dd {
+      line-height: 1.7;
+    }
+
+    .skill-grid,
+    .manual-block,
+    .stat-grid {
+      display: grid;
+      gap: 12px;
+    }
+
+    .skill-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      margin-top: 14px;
+    }
+
+    .skill-card,
+    .manual-card,
+    .stat-card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fffdf8;
+      overflow: hidden;
+    }
+
+    .skill-card header {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 12px;
+      border-bottom: 1px solid var(--line);
+      background: #f2f8f4;
+    }
+
+    .skill-card h3 {
+      margin-bottom: 2px;
+      font-size: 18px;
+    }
+
+    .ct {
+      flex: 0 0 auto;
+      color: var(--navy);
+      font-weight: 800;
+    }
+
+    .skill-body {
+      display: grid;
+      gap: 10px;
+      padding: 12px;
+    }
+
+    .manual-card,
+    .stat-card {
+      padding: 14px;
+    }
+
+    .manual-card h3,
+    .stat-card h3 {
+      margin-bottom: 8px;
+      font-size: 18px;
+    }
+
+    .manual-card ul {
+      margin: 0;
+      padding-left: 1.2em;
+    }
+
+    .stat-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    dl {
+      margin: 0;
+    }
+
+    dt {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    dd {
+      margin: 3px 0 0;
+    }
+
+    .compare-link,
+    .link-list a {
+      display: inline-flex;
+      justify-content: center;
+      width: 100%;
+      padding: 11px 12px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 800;
+    }
+
+    .compare-link {
+      margin-top: 14px;
+      background: var(--navy);
+      color: #fff;
+    }
+
+    .side-panel {
+      position: sticky;
+      top: 14px;
+      padding: 16px;
+    }
+
+    .side-panel h2 {
+      margin-bottom: 10px;
+      font-size: 20px;
+    }
+
+    .status {
+      padding: 12px;
+      border-left: 4px solid var(--green);
+      border-radius: 6px;
+      background: #eef8f2;
+      color: #225c45;
+      line-height: 1.6;
+    }
+
+    .link-list {
+      display: grid;
+      gap: 8px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .link-list a {
+      border: 1px solid var(--line);
+      background: #fff;
+    }
+
+    footer {
+      padding: 24px clamp(14px, 4vw, 32px);
+      border-top: 1px solid var(--line);
+      background: #fff;
+      color: var(--muted);
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 14px;
+    }
+
+    .footer-links a {
+      color: var(--ink);
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    @media (max-width: 920px) {
+      .layout,
+      .skill-grid,
+      .stat-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .side-panel {
+        position: static;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="page-header">
+    <div class="header-inner">
+      <p class="eyebrow">CHARACTER DETAIL</p>
+      <h1 id="characterName">ソルティーナ</h1>
+      <p class="role" id="roleMemo">多重バリアと睡眠・気絶で耐久する藍属性ソーサラー。</p>
+      <div class="meta-row" id="characterMeta"></div>
+    </div>
+  </header>
+
+  <main>
+    <div class="layout">
+      <div>
+        <section class="section" aria-labelledby="skillsTitle">
+          <h2 id="skillsTitle">スキル一覧</h2>
+          <p class="section-lead">倍率は比較用の要約です。最大値は条件込みの理論値を含むため、実戦目安とは分けて確認してください。</p>
+          <div class="skill-grid" id="skillGrid"></div>
+          <a class="compare-link" href="../../compare-prototype.html?character=soltina">スキル比較DBで見る</a>
+        </section>
+
+        <section class="section" aria-labelledby="reviewTitle">
+          <h2 id="reviewTitle">評価</h2>
+          <div class="manual-block">
+            <article class="manual-card">
+              <h3>役割解説</h3>
+              <p>ソルティーナは、多重バリアで大ダメージを受け止めながら、睡眠と気絶で相手の主力を止める恒常の藍属性ソーサラーです。スキル1は複数対象への睡眠、スキル2は攻撃力が最も高い敵への気絶を狙えます。</p>
+              <p>火力役ではありません。恒常キャラとして入手しやすい一方、評価の中心は妨害と耐久です。PU中キャラのように「今すぐ引く」判断ではなく、手持ちに来た後の育成・採用価値として見るのが安全です。</p>
+            </article>
+            <article class="manual-card">
+              <h3>強み</h3>
+              <ul>
+                <li>恒常キャラながらスピード3302で、妨害役として動き出しが速い</li>
+                <li>スノウドリームはランダム敵3体、専用Lv3で4体を対象にできる</li>
+                <li>クリティカル時に睡眠を付与し、睡眠中はクリティカル耐性率80%減少を狙える</li>
+                <li>アイススパインは攻撃力が最も高い敵を狙い、魔力条件を満たすと気絶を付与できる</li>
+                <li>専用Lv2でアイススパインの気絶が2ターンに伸びる</li>
+                <li>ターン開始時に多重バリア4層を得て、最大HP10%以上の被ダメージを無効化できる</li>
+                <li>弱体効果を2個以上受けた場合に全解除し、クリティカル率50%増加で立て直せる</li>
+              </ul>
+            </article>
+            <article class="manual-card">
+              <h3>弱み・注意点</h3>
+              <ul>
+                <li>火力倍率は低く、アタッカーとして採用する性能ではない</li>
+                <li>睡眠は攻撃を受けると解除されるため、多段攻撃や追撃環境では拘束が不安定</li>
+                <li>気絶は対象の魔力が自身未満という条件があり、育成差や相手次第で刺さりにくい</li>
+                <li>多重バリアは強いが、回数制なので多段攻撃で削られやすい</li>
+                <li>弱体解除はアクティブスキルで弱体を受けた後の反応型で、能動的な解除役ではない</li>
+                <li>恒常キャラなので、限定PUと同じ優先度で追う対象ではない</li>
+              </ul>
+            </article>
+          </div>
+        </section>
+
+        <section class="section" aria-labelledby="decisionTitle">
+          <h2 id="decisionTitle">引く判断の補助</h2>
+          <div class="manual-block">
+            <article class="manual-card">
+              <h3>引くべき人</h3>
+              <ul>
+                <li>ソルティーナが推しで、恒常枠として育成したい人</li>
+                <li>藍属性の妨害役や多重バリア役を整理したい人</li>
+                <li>睡眠・気絶による足止めを研究したい人</li>
+                <li>恒常キャラ中心の編成で耐久寄りの選択肢を増やしたい人</li>
+                <li>入手済みで、専用Lv2以上まで育成する余裕がある人</li>
+              </ul>
+            </article>
+
+            <article class="manual-card">
+              <h3>引かなくていい人</h3>
+              <ul>
+                <li>無課金・微課金で育成リソースを絞りたい人</li>
+                <li>火力役を探している人</li>
+                <li>限定PUの優先度を下げてまで恒常キャラを追おうとしている人</li>
+                <li>睡眠や気絶の条件管理をしたくない人</li>
+                <li>多段攻撃環境でバリアを過信したくない人</li>
+              </ul>
+            </article>
+          </div>
+        </section>
+
+        <section class="section" aria-labelledby="weaponTitle">
+          <h2 id="weaponTitle">専用武器パッシブ</h2>
+          <div class="stat-grid">
+            <article class="stat-card"><h3>攻撃力</h3><p>+18%</p></article>
+            <article class="stat-card"><h3>命中</h3><p>+10%</p></article>
+            <article class="stat-card"><h3>弱体効果命中</h3><p>+10%</p></article>
+          </div>
+        </section>
+
+        <section class="section" aria-labelledby="profileTitle">
+          <h2 id="profileTitle">プロフィール・基礎データ</h2>
+          <div class="stat-grid">
+            <article class="stat-card"><h3>プロフィール</h3><dl><dt>身長 / 体重</dt><dd>147cm / 41kg</dd><dt>誕生日</dt><dd>8月21日</dd><dt>血液型</dt><dd>B型</dd></dl></article>
+            <article class="stat-card"><h3>音楽・声優</h3><dl><dt>ラメント</dt><dd>くま</dd><dt>歌唱</dt><dd>コレサワ</dd><dt>CV</dt><dd>南條愛乃</dd></dl></article>
+            <article class="stat-card"><h3>ステータス（LR）</h3><dl><dt>戦闘力</dt><dd>7,132,170</dd><dt>攻撃力 / HP</dt><dd>703,998 / 4,787,159</dd><dt>スピード</dt><dd>3,302</dd></dl></article>
+          </div>
+        </section>
+
+        <section class="section" aria-labelledby="creativeTitle">
+          <h2 id="creativeTitle">創作関連</h2>
+          <div class="manual-card">
+            <p>note記事：<a href="https://note.com/musoudc/n/nc5e94c9db338?app_launch=false">ソルティーナ性能メモ</a></p>
+          </div>
+        </section>
+      </div>
+
+      <aside class="side-panel">
+        <h2>関連リンク</h2>
+        <p id="gachaUpdated" class="status">ガチャ状態確認日：2026-06-03</p>
+        <p class="status">恒常キャラ：直近ピックアップと次回ガチャは未設定。</p>
+        <ul class="link-list">
+          <li><a href="../../index.html">トップへ戻る</a></li>
+          <li><a href="../../compare-prototype.html">比較DBへ戻る</a></li>
+          <li><a href="./index.html">キャラ一覧へ戻る</a></li>
+        </ul>
+      </aside>
+    </div>
+  </main>
+
+  <script>
+    const characterId = "soltina";
+
+    function valueOrDash(value) {
+      return value === null || value === undefined || value === "" ? "-" : value;
+    }
+
+    function renderMeta(character) {
+      document.querySelector("#characterMeta").innerHTML = [
+        `<span class="badge attribute">${character.attribute}</span>`,
+        `<span class="badge">${character.weaponType}</span>`,
+        `<span class="badge">スピード ${character.speed}</span>`,
+        `<span class="badge">${character.availability}</span>`,
+        `<span class="badge">${character.gachaStatus || "状態未設定"}</span>`
+      ].join("");
+    }
+
+    function renderSkills(skills) {
+      const grid = document.querySelector("#skillGrid");
+      grid.innerHTML = skills
+        .sort((a, b) => a.number - b.number)
+        .map((skill) => `
+          <article class="skill-card">
+            <header>
+              <div>
+                <h3>スキル${skill.number}：${skill.name}</h3>
+                <span class="tag">${skill.skillType}</span>
+                <span class="tag">${skill.category}</span>
+                <span class="tag">${skill.subCategory}</span>
+              </div>
+              <span class="ct">CT: ${valueOrDash(skill.ct)}</span>
+            </header>
+            <div class="skill-body">
+              <dl><dt>対象</dt><dd>${valueOrDash(skill.target)}</dd></dl>
+              <dl><dt>倍率・効果</dt><dd>${valueOrDash(skill.multiplierText)}</dd></dl>
+              <dl><dt>条件</dt><dd>${valueOrDash(skill.condition)}</dd></dl>
+              <dl><dt>専用武器</dt><dd>${valueOrDash(skill.exclusiveWeapon)}</dd></dl>
+              <dl><dt>比較メモ</dt><dd>${valueOrDash(skill.compareMemo)}</dd></dl>
+            </div>
+          </article>
+        `)
+        .join("");
+    }
+
+    async function fetchJson(path, optional = false) {
+      const response = await fetch(path, { cache: "no-store" });
+      if (!response.ok) {
+        if (optional && response.status === 404) return { characters: [], skills: [] };
+        throw new Error(`JSON読み込み失敗: ${response.status}`);
+      }
+      return response.json();
+    }
+
+    function mergeSkillData(baseData, overlayData) {
+      const characters = new Map((baseData.characters || []).map((character) => [character.id, character]));
+      const skills = new Map((baseData.skills || []).map((skill) => [skill.id, skill]));
+      (overlayData.characters || []).forEach((character) => characters.set(character.id, character));
+      (overlayData.skills || []).forEach((skill) => skills.set(skill.id, skill));
+      return { ...baseData, characters: [...characters.values()], skills: [...skills.values()] };
+    }
+
+    async function loadData() {
+      const baseData = await fetchJson("../../data/mementomori-skills.json");
+      const overlayData = await fetchJson("../../data/soltina-overlay.json", true);
+      return mergeSkillData(baseData, overlayData);
+    }
+
+    async function init() {
+      try {
+        const data = await loadData();
+        const character = data.characters.find((item) => item.id === characterId);
+        const skills = data.skills.filter((skill) => skill.characterId === characterId);
+        if (!character) throw new Error("キャラが見つかりません");
+
+        document.title = `${character.name} / ミレスト・メメントモリ分析データ室`;
+        document.querySelector("#characterName").textContent = character.name;
+        document.querySelector("#roleMemo").textContent = character.catchcopy || character.roleMemo;
+        document.querySelector("#gachaUpdated").textContent = `ガチャ状態確認日：${data.gachaStatusUpdatedAt || "未設定"}`;
+        renderMeta(character);
+        renderSkills(skills);
+      } catch (error) {
+        document.querySelector("#roleMemo").textContent = error.message;
+        console.error(error);
+      }
+    }
+
+    init();
+  </script>
+  <footer>
+    <div class="footer-inner">
+      <span>ミレスト・メメントモリ攻略・分析データベース / 非公式ファンサイト</span>
+      <nav class="footer-links" aria-label="固定ページ">
+        <a href="../../index.html">トップ</a>
+        <a href="../../privacy.html">プライバシーポリシー</a>
+        <a href="../../disclaimer.html">免責事項</a>
+        <a href="../../about.html">このサイトについて</a>
+        <a href="../../contact.html">お問い合わせ</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>
