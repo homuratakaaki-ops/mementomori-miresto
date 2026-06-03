@@ -323,7 +323,7 @@
   </footer>
 
   <script>
-    const existingPages = new Set(["potpourri", "rea", "sophia"]);
+    const existingPages = new Set(["potpourri", "rea", "sophia", "veela", "sivi", "cerberus", "aa_dark"]);
 
     function detailHref(character) {
       return existingPages.has(character.pageSlug)
@@ -337,7 +337,7 @@
 
     function renderPickup(characters) {
       const grid = document.querySelector("#pickupGrid");
-      const pickups = characters.filter((character) => character.gachaStatus === "PU中");
+      const pickups = characters.filter((character) => ["PU中", "PU予定"].includes(character.gachaStatus));
 
       if (pickups.length === 0) {
         grid.innerHTML = `<div class="empty">現在PU中として登録されているキャラはありません。ガチャ情報の更新日を確認してください。</div>`;
@@ -381,7 +381,11 @@
       const baseData = await fetchJson("./data/mementomori-skills.json");
       const overlays = await Promise.all([
         fetchJson("./data/rea-overlay.json", true),
-        fetchJson("./data/sophia-overlay.json", true)
+        fetchJson("./data/sophia-overlay.json", true),
+        fetchJson("./data/veela-overlay.json", true),
+        fetchJson("./data/sivi-overlay.json", true),
+        fetchJson("./data/cerberus-overlay.json", true),
+        fetchJson("./data/aa-dark-overlay.json", true)
       ]);
       return overlays.reduce((data, overlayData) => mergeSkillData(data, overlayData), baseData);
     }
