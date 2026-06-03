@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>カトレア / ミレスト・メメントモリ分析データ室</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #172033;
+      --muted: #647086;
+      --line: #d9dfeb;
+      --paper: #fbfaf7;
+      --panel: #ffffff;
+      --navy: #0b2a57;
+      --green: #b88932;
+      --gold: #b88932;
+      --shadow: 0 12px 30px rgba(28, 40, 68, 0.12);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: "Yu Gothic", "Hiragino Sans", "Meiryo", system-ui, sans-serif;
+      letter-spacing: 0;
+    }
+
+    a { color: inherit; }
+
+    .page-header {
+      padding: 28px clamp(16px, 4vw, 48px) 24px;
+      background: linear-gradient(180deg, #ffffff 0%, #eef6f1 100%);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .header-inner, main, .footer-inner { max-width: 1180px; margin: 0 auto; }
+
+    .eyebrow { margin: 0 0 6px; color: var(--green); font-size: 12px; font-weight: 800; }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 { margin-bottom: 10px; font-size: clamp(34px, 5vw, 56px); line-height: 1.05; }
+    .role { max-width: 760px; margin-bottom: 18px; color: var(--muted); font-size: 17px; line-height: 1.7; }
+    .meta-row { display: flex; flex-wrap: wrap; gap: 8px; }
+
+    .badge, .tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 32px;
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: #edf1f8;
+      color: #3b4b65;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .attribute { background: var(--green); color: #fff; }
+    main { padding: 22px clamp(12px, 3vw, 24px) 44px; }
+    .layout { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 16px; align-items: start; }
+    .section, .side-panel { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; box-shadow: var(--shadow); }
+    .section { padding: 18px; margin-bottom: 16px; }
+    .section h2 { margin-bottom: 10px; font-size: 24px; }
+    .section-lead, li, dd { line-height: 1.7; }
+    .skill-grid, .manual-block, .stat-grid { display: grid; gap: 12px; }
+    .skill-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: 14px; }
+    .skill-card, .manual-card, .stat-card { border: 1px solid var(--line); border-radius: 8px; background: #fffdf8; overflow: hidden; }
+    .skill-card header { display: flex; justify-content: space-between; gap: 10px; padding: 12px; border-bottom: 1px solid var(--line); background: #f2f8f4; }
+    .skill-card h3 { margin-bottom: 2px; font-size: 18px; }
+    .ct { flex: 0 0 auto; color: var(--navy); font-weight: 800; }
+    .skill-body { display: grid; gap: 10px; padding: 12px; }
+    .manual-card, .stat-card { padding: 14px; }
+    .manual-card h3, .stat-card h3 { margin-bottom: 8px; font-size: 18px; }
+    .manual-card ul { margin: 0; padding-left: 1.2em; }
+    .stat-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    dl { margin: 0; }
+    dt { color: var(--muted); font-size: 12px; font-weight: 800; }
+    dd { margin: 3px 0 0; }
+
+    .compare-link, .link-list a {
+      display: inline-flex;
+      justify-content: center;
+      width: 100%;
+      padding: 11px 12px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 800;
+    }
+
+    .compare-link { margin-top: 14px; background: var(--navy); color: #fff; }
+    .side-panel { position: sticky; top: 14px; padding: 16px; }
+    .side-panel h2 { margin-bottom: 10px; font-size: 20px; }
+    .status { padding: 12px; border-left: 4px solid var(--green); border-radius: 6px; background: #eef8f2; color: #225c45; line-height: 1.6; }
+    .link-list { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
+    .link-list a { border: 1px solid var(--line); background: #fff; }
+    footer { padding: 24px clamp(14px, 4vw, 32px); border-top: 1px solid var(--line); background: #fff; color: var(--muted); }
+    .footer-inner { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+    .footer-links { display: flex; flex-wrap: wrap; gap: 8px 14px; }
+    .footer-links a { color: var(--ink); text-decoration: none; font-weight: 700; }
+
+    @media (max-width: 920px) {
+      .layout, .skill-grid, .stat-grid { grid-template-columns: 1fr; }
+      .side-panel { position: static; }
+    }
+  </style>
+</head>
+<body>
+  <header class="page-header">
+    <div class="header-inner">
+      <p class="eyebrow">CHARACTER DETAIL</p>
+      <h1 id="characterName">カトレア</h1>
+      <p class="role" id="roleMemo">ターン経過で攻撃回数と火力が伸びる黄属性ウォーリア。</p>
+      <div class="meta-row" id="characterMeta"></div>
+    </div>
+  </header>
+
+  <main>
+    <div class="layout">
+      <div>
+        <section class="section" aria-labelledby="skillsTitle">
+          <h2 id="skillsTitle">スキル一覧</h2>
+          <p class="section-lead">倍率は比較用の要約です。最大値は条件込みの理論値を含むため、実戦目安とは分けて確認してください。</p>
+          <div class="skill-grid" id="skillGrid"></div>
+          <a class="compare-link" href="../../compare-prototype.html?character=cattleya">スキル比較DBで見る</a>
+        </section>
+
+        <section class="section" aria-labelledby="reviewTitle">
+          <h2 id="reviewTitle">評価</h2>
+          <div class="manual-block">
+            <article class="manual-card">
+              <h3>役割解説</h3>
+              <p>カトレアは、バトル中の発動回数に応じて攻撃回数と倍率が伸びる黄属性ウォーリアです。スキル1は専用Lv2以降で4回攻撃になり、専用Lv3と3回目以降の条件が重なると条件MAX火力が大きく伸びます。</p>
+              <p>スキル2は物理防御力が最も低い敵を狙う多段攻撃で、3回目以降は12回攻撃になります。自己シールドと防御力増加も持つため、短期決戦よりも黄属性編成の長期戦・対策枠として見た方が安全です。</p>
+            </article>
+            <article class="manual-card">
+              <h3>強み</h3>
+              <ul>
+                <li>スキル1は専用Lv2で4回攻撃になり、専用Lv3で1発590%まで伸びる</li>
+                <li>スキル1の条件MAXは4248%で、長期戦では火力伸びを見込める</li>
+                <li>スキル2は2回目以降9回、3回目以降12回攻撃になり、条件MAXは5640%</li>
+                <li>物理防御力が最も低い敵を狙うため、物防低下サポートと組み合わせると狙い撃ちしやすい</li>
+                <li>最大HP参照の自己シールドを持ち、専用Lv2で最大HP200%まで伸びる</li>
+                <li>専用Lv3でターン開始時に防御力150%増加を得られる</li>
+                <li>黄属性2体以上なら、専用Lv3で弱体解除の発動タイミングが増える</li>
+              </ul>
+            </article>
+            <article class="manual-card">
+              <h3>弱み・注意点</h3>
+              <ul>
+                <li>火力の真価は2回目・3回目以降の発動前提で、短期戦では見た目ほど伸びない</li>
+                <li>スキル2の5640%は3回目以降かつ専用Lv3前提の理論寄り火力</li>
+                <li>弱体解除はターン終了時発動のため、即時対策としてはタイミングが噛み合わない場合がある</li>
+                <li>シールドはHP依存なので、火力と耐久を両立する装備調整が難しい</li>
+                <li>黄属性編成や特定対策を前提にした性能で、単体汎用アタッカーとしては判断しにくい</li>
+                <li>専用武器投資なしでは、火力・耐久ともに評価が落ちやすい</li>
+              </ul>
+            </article>
+          </div>
+        </section>
+
+        <section class="section" aria-labelledby="decisionTitle">
+          <h2 id="decisionTitle">引く判断の補助</h2>
+          <div class="manual-block">
+            <article class="manual-card">
+              <h3>引くべき人</h3>
+              <ul>
+                <li>カトレアが推しで、黄属性編成に組み込みたい人</li>
+                <li>黄属性ウォーリア軸を本格的に育てている人</li>
+                <li>長期戦で伸びる多段火力を研究したい人</li>
+                <li>HP依存シールドを活かせる装備・ルーン調整ができる人</li>
+                <li>ユルディズなど特定の弱体・バフ無効環境への対策札を探している人</li>
+              </ul>
+            </article>
+
+            <article class="manual-card">
+              <h3>引かなくていい人</h3>
+              <ul>
+                <li>無課金・微課金で育成リソースを絞りたい人</li>
+                <li>今すぐ汎用アタッカーを1体だけ補強したい人</li>
+                <li>専用武器やHP装備まで投資する予定がない人</li>
+                <li>短期戦の初動火力を重視している人</li>
+                <li>黄属性編成や対策編成をまだ組めない人</li>
+              </ul>
+            </article>
+          </div>
+        </section>
+
+        <section class="section" aria-labelledby="weaponTitle">
+          <h2 id="weaponTitle">専用武器パッシブ</h2>
+          <div class="stat-grid">
+            <article class="stat-card"><h3>攻撃力</h3><p>+18%</p></article>
+            <article class="stat-card"><h3>弱体効果耐性</h3><p>+10%</p></article>
+            <article class="stat-card"><h3>命中</h3><p>+10%</p></article>
+          </div>
+        </section>
+
+        <section class="section" aria-labelledby="profileTitle">
+          <h2 id="profileTitle">プロフィール・基礎データ</h2>
+          <div class="stat-grid">
+            <article class="stat-card"><h3>プロフィール</h3><dl><dt>身長 / 体重</dt><dd>166cm / 50kg</dd><dt>誕生日</dt><dd>1月13日</dd><dt>血液型</dt><dd>A型</dd></dl></article>
+            <article class="stat-card"><h3>音楽・声優</h3><dl><dt>ラメント</dt><dd>エーテルの夜</dd><dt>歌唱</dt><dd>酔シグレ</dd><dt>CV</dt><dd>内山夕実</dd></dl></article>
+            <article class="stat-card"><h3>ステータス（LR）</h3><dl><dt>戦闘力</dt><dd>7,067,312</dd><dt>攻撃力 / HP</dt><dd>718,722 / 4,744,920</dd><dt>スピード</dt><dd>2,984</dd></dl></article>
+          </div>
+        </section>
+
+        <section class="section" aria-labelledby="creativeTitle">
+          <h2 id="creativeTitle">創作関連</h2>
+          <div class="manual-card">
+            <p>note記事：<a href="https://note.com/musoudc/n/n470275bf0e97">カトレア性能速報</a></p>
+          </div>
+        </section>
+      </div>
+
+      <aside class="side-panel">
+        <h2>関連リンク</h2>
+        <p id="gachaUpdated" class="status">ガチャ状態確認日：2026-05-30</p>
+        <p class="status">運命ガチャ：2026-05-28 16:30 から開催中。</p>
+        <ul class="link-list">
+          <li><a href="../../index.html">トップへ戻る</a></li>
+          <li><a href="../../compare-prototype.html">比較DBへ戻る</a></li>
+          <li><a href="./index.html">キャラ一覧へ戻る</a></li>
+        </ul>
+      </aside>
+    </div>
+  </main>
+
+  <script>
+    const characterId = "cattleya";
+
+    function valueOrDash(value) {
+      return value === null || value === undefined || value === "" ? "-" : value;
+    }
+
+    function renderMeta(character) {
+      document.querySelector("#characterMeta").innerHTML = [
+        `<span class="badge attribute">${character.attribute}</span>`,
+        `<span class="badge">${character.weaponType}</span>`,
+        `<span class="badge">スピード ${character.speed}</span>`,
+        `<span class="badge">${character.availability}</span>`,
+        `<span class="badge">${character.gachaStatus || "状態未設定"}</span>`
+      ].join("");
+    }
+
+    function renderSkills(skills) {
+      const grid = document.querySelector("#skillGrid");
+      grid.innerHTML = skills
+        .sort((a, b) => a.number - b.number)
+        .map((skill) => `
+          <article class="skill-card">
+            <header>
+              <div>
+                <h3>スキル${skill.number}：${skill.name}</h3>
+                <span class="tag">${skill.skillType}</span>
+                <span class="tag">${skill.category}</span>
+                <span class="tag">${skill.subCategory}</span>
+              </div>
+              <span class="ct">CT: ${valueOrDash(skill.ct)}</span>
+            </header>
+            <div class="skill-body">
+              <dl><dt>対象</dt><dd>${valueOrDash(skill.target)}</dd></dl>
+              <dl><dt>倍率・効果</dt><dd>${valueOrDash(skill.multiplierText)}</dd></dl>
+              <dl><dt>条件</dt><dd>${valueOrDash(skill.condition)}</dd></dl>
+              <dl><dt>専用武器</dt><dd>${valueOrDash(skill.exclusiveWeapon)}</dd></dl>
+              <dl><dt>比較メモ</dt><dd>${valueOrDash(skill.compareMemo)}</dd></dl>
+            </div>
+          </article>
+        `)
+        .join("");
+    }
+
+    async function fetchJson(path, optional = false) {
+      const response = await fetch(path, { cache: "no-store" });
+      if (!response.ok) {
+        if (optional && response.status === 404) return { characters: [], skills: [] };
+        throw new Error(`JSON読み込み失敗: ${response.status}`);
+      }
+      return response.json();
+    }
+
+    function mergeSkillData(baseData, overlayData) {
+      const characters = new Map((baseData.characters || []).map((character) => [character.id, character]));
+      const skills = new Map((baseData.skills || []).map((skill) => [skill.id, skill]));
+      (overlayData.characters || []).forEach((character) => characters.set(character.id, character));
+      (overlayData.skills || []).forEach((skill) => skills.set(skill.id, skill));
+      return { ...baseData, characters: [...characters.values()], skills: [...skills.values()] };
+    }
+
+    async function loadData() {
+      const baseData = await fetchJson("../../data/mementomori-skills.json");
+      const overlayData = await fetchJson("../../data/cattleya-overlay.json", true);
+      return mergeSkillData(baseData, overlayData);
+    }
+
+    async function init() {
+      try {
+        const data = await loadData();
+        const character = data.characters.find((item) => item.id === characterId);
+        const skills = data.skills.filter((skill) => skill.characterId === characterId);
+        if (!character) throw new Error("キャラが見つかりません");
+
+        document.title = `${character.name} / ミレスト・メメントモリ分析データ室`;
+        document.querySelector("#characterName").textContent = character.name;
+        document.querySelector("#roleMemo").textContent = character.catchcopy || character.roleMemo;
+        document.querySelector("#gachaUpdated").textContent = `ガチャ状態確認日：${data.gachaStatusUpdatedAt || "未設定"}`;
+        renderMeta(character);
+        renderSkills(skills);
+      } catch (error) {
+        document.querySelector("#roleMemo").textContent = error.message;
+        console.error(error);
+      }
+    }
+
+    init();
+  </script>
+  <footer>
+    <div class="footer-inner">
+      <span>ミレスト・メメントモリ攻略・分析データベース / 非公式ファンサイト</span>
+      <nav class="footer-links" aria-label="固定ページ">
+        <a href="../../index.html">トップ</a>
+        <a href="../../privacy.html">プライバシーポリシー</a>
+        <a href="../../disclaimer.html">免責事項</a>
+        <a href="../../about.html">このサイトについて</a>
+        <a href="../../contact.html">お問い合わせ</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>
