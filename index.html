@@ -323,7 +323,7 @@
   </footer>
 
   <script>
-    const existingPages = new Set(["potpourri", "rea", "sophia", "veela", "sivi", "cerberus", "aa_dark", "cattleya", "soltina", "amleth", "fenrir", "florence", "moddey", "sonya", "stella", "fenny", "tropon_holy_night", "giluial", "liselotte"]);
+    const existingPages = new Set(["potpourri", "rea", "sophia", "veela", "sivi", "cerberus", "aa_dark", "cattleya", "soltina", "amleth", "fenrir", "florence", "moddey", "sonya", "stella", "fenny", "tropon_holy_night", "giluial", "liselotte", "eir"]);
 
     function detailHref(character) {
       return existingPages.has(character.pageSlug)
@@ -397,7 +397,8 @@
         fetchJson("./data/fenny-overlay.json", true),
         fetchJson("./data/tropon-holy-night-overlay.json", true),
         fetchJson("./data/giluial-overlay.json", true),
-        fetchJson("./data/liselotte-overlay.json", true)
+        fetchJson("./data/liselotte-overlay.json", true),
+        fetchJson("./data/eir-overlay.json", true)
       ]);
       return overlays.reduce((data, overlayData) => mergeSkillData(data, overlayData), baseData);
     }
