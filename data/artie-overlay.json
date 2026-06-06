@@ -5,13 +5,13 @@
       "id": "artie",
       "pageSlug": "artie",
       "name": "アーティ",
-      "catchcopy": "魔法防御力減少とクリティカル耐性スタックで攻防を組み立てる紅属性ソーサラー",
+      "catchcopy": "攻撃前デバフと遮断ループで魔法パーティを支える紅属性ソーサラー",
       "attribute": "紅",
       "weaponType": "ソーサラー",
       "speed": 2734,
       "availability": "星の導き",
-      "gachaStatus": "要確認",
-      "roleMemo": "魔法防御力減少、被ダメージ増加、クリティカル耐性スタック、超過ダメージ遮断を扱う紅属性ソーサラー",
+      "gachaStatus": "星の導き予定",
+      "roleMemo": "魔法防御力減少、被ダメージ増加、HP条件火力、HPドレイン、超過ダメージ遮断を扱う育成前提の紅属性ソーサラー",
       "noteUrl": "https://note.com/musoudc/n/n9b7c108aaf30",
       "imageUrl": "",
       "sourceUrl": "./pages/characters/artie.html"
@@ -32,7 +32,7 @@
       "ct": 4,
       "condition": "攻撃前、4ターン対象の魔法防御力20%減少、被ダメージ10%増加。自身にクリティカル耐性率10%を付与し、既に付帯中なら2スタック、未付帯なら3スタック。最大10スタック、解除不可",
       "exclusiveWeapon": "専用Lv1: 魔法防御力減少量40%、被ダメージ増加量20%になる",
-      "compareMemo": "直接倍率は全段階で1750%。攻撃前デバフが主価値で、後続の魔法火力も底上げしやすい",
+      "compareMemo": "直接倍率は全段階で1750%。攻撃前デバフが主価値で、後続の魔法火力も底上げしやすい。noteではデバフ込みの実戦ダメージ増加を重視",
       "noteUrl": "https://note.com/musoudc/n/n9b7c108aaf30",
       "imageUrl": "",
       "sourceUrl": "./pages/characters/artie.html",
@@ -49,7 +49,7 @@
         "maxStacks": 10,
         "realityRank": "高",
         "rankingTarget": "基本",
-        "damageMemo": "魔法防御力減少と被ダメージ増加は倍率欄に含めない"
+        "damageMemo": "魔法防御力減少と被ダメージ増加は倍率欄に含めない。実戦では魔法パーティ全体の火力補助として別評価"
       }
     },
     {
@@ -66,7 +66,7 @@
       "ct": 4,
       "condition": "対象のHP割合が自身より低い場合、ダメージ2倍。対象が弱体効果を付帯している場合、必ずクリティカル。自身のHPをこのスキルの総与ダメージ20%回復",
       "exclusiveWeapon": "専用Lv3: 魔法攻撃のダメージが攻撃力200%になる",
-      "compareMemo": "基本1190%。専用Lv3で1400%。HP条件成立時は最大2800%。弱体対象なら確定クリティカルで安定火力を出しやすい",
+      "compareMemo": "基本1190%。専用Lv3で1400%。HP条件成立時は最大2800%。スキル1で弱体効果を入れた後に撃つ流れと相性がよい",
       "noteUrl": "https://note.com/musoudc/n/n9b7c108aaf30",
       "imageUrl": "",
       "sourceUrl": "./pages/characters/artie.html",
@@ -100,7 +100,7 @@
       "ct": null,
       "condition": "自身の最大HP30%増加、被ダメージ30%減少。どちらも解除不可",
       "exclusiveWeapon": "専用武器効果なし",
-      "compareMemo": "自己耐久の土台。スキル4の遮断と合わせて、単純な紙耐久ではない点を見る",
+      "compareMemo": "自己耐久の土台。スキル4の遮断と合わせて、長く場に残るアタッカーとして評価する",
       "noteUrl": "https://note.com/musoudc/n/n9b7c108aaf30",
       "imageUrl": "",
       "sourceUrl": "./pages/characters/artie.html"
@@ -119,7 +119,7 @@
       "ct": null,
       "condition": "バトル開始時、自身にクリティカル耐性率10%を8スタック付与。最大HP5%を超えるダメージを受けたとき1スタック消費し、5%を超えた分のダメージを70%遮断",
       "exclusiveWeapon": "専用Lv2: 5%を超えた分のダメージを90%遮断",
-      "compareMemo": "大ダメージ対策の自己防衛。スタック消費型なので、連続被弾や多段攻撃では残数管理が重要",
+      "compareMemo": "大ダメージ対策の自己防衛。スキル1でスタック補充できる一方、連続被弾や多段攻撃では残数管理が重要",
       "noteUrl": "https://note.com/musoudc/n/n9b7c108aaf30",
       "imageUrl": "",
       "sourceUrl": "./pages/characters/artie.html"
