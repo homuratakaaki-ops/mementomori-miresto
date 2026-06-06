@@ -1,0 +1,502 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>アイシェ / ミレスト・メメントモリ分析データ室</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #172033;
+      --muted: #647086;
+      --line: #d9dfeb;
+      --paper: #fbfaf7;
+      --panel: #ffffff;
+      --navy: #0b2a57;
+      --green: #b88932;
+      --gold: #b88932;
+      --shadow: 0 12px 30px rgba(28, 40, 68, 0.12);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: "Yu Gothic", "Hiragino Sans", "Meiryo", system-ui, sans-serif;
+      letter-spacing: 0;
+    }
+
+    a { color: inherit; }
+
+    .page-header {
+      padding: 28px clamp(16px, 4vw, 48px) 24px;
+      background: linear-gradient(180deg, #ffffff 0%, #eef1f3 100%);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .header-inner,
+    main,
+    .footer-inner {
+      max-width: 1180px;
+      margin: 0 auto;
+    }
+
+    .eyebrow {
+      margin: 0 0 6px;
+      color: var(--green);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    h1, h2, h3, p { margin-top: 0; }
+
+    h1 {
+      margin-bottom: 10px;
+      font-size: clamp(34px, 5vw, 56px);
+      line-height: 1.05;
+    }
+
+    .role {
+      max-width: 760px;
+      margin-bottom: 18px;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.7;
+    }
+
+    .meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .badge,
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 32px;
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: #edf1f8;
+      color: #3b4b65;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .attribute {
+      background: var(--green);
+      color: #fff;
+    }
+
+    main {
+      padding: 22px clamp(12px, 3vw, 24px) 44px;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 320px;
+      gap: 16px;
+      align-items: start;
+    }
+
+    .section,
+    .side-panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+    }
+
+    .section {
+      padding: 18px;
+      margin-bottom: 16px;
+    }
+
+    .section h2 {
+      margin-bottom: 10px;
+      font-size: 24px;
+    }
+
+    .section-lead, li, dd { line-height: 1.7; }
+
+    .skill-grid,
+    .manual-block,
+    .stat-grid {
+      display: grid;
+      gap: 12px;
+    }
+
+    .skill-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      margin-top: 14px;
+    }
+
+    .skill-card,
+    .manual-card,
+    .stat-card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fffdf8;
+      overflow: hidden;
+    }
+
+    .skill-card header {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 12px;
+      border-bottom: 1px solid var(--line);
+      background: #f1f3f5;
+    }
+
+    .skill-card h3 {
+      margin-bottom: 2px;
+      font-size: 18px;
+    }
+
+    .ct {
+      flex: 0 0 auto;
+      color: var(--navy);
+      font-weight: 800;
+    }
+
+    .skill-body {
+      display: grid;
+      gap: 10px;
+      padding: 12px;
+    }
+
+    .manual-card,
+    .stat-card { padding: 14px; }
+
+    .manual-card h3,
+    .stat-card h3 {
+      margin-bottom: 8px;
+      font-size: 18px;
+    }
+
+    .manual-card ul {
+      margin: 0;
+      padding-left: 1.2em;
+    }
+
+    .stat-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+    dl { margin: 0; }
+
+    dt {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    dd { margin: 3px 0 0; }
+
+    .compare-link,
+    .link-list a {
+      display: inline-flex;
+      justify-content: center;
+      width: 100%;
+      padding: 11px 12px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 800;
+    }
+
+    .compare-link {
+      margin-top: 14px;
+      background: var(--navy);
+      color: #fff;
+    }
+
+    .side-panel {
+      position: sticky;
+      top: 14px;
+      padding: 16px;
+    }
+
+    .side-panel h2 {
+      margin-bottom: 10px;
+      font-size: 20px;
+    }
+
+    .status {
+      padding: 12px;
+      border-left: 4px solid var(--green);
+      border-radius: 6px;
+      background: #f3f6f8;
+      color: #34404c;
+      line-height: 1.6;
+    }
+
+    .link-list {
+      display: grid;
+      gap: 8px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .link-list a {
+      border: 1px solid var(--line);
+      background: #fff;
+    }
+
+    footer {
+      padding: 24px clamp(14px, 4vw, 32px);
+      border-top: 1px solid var(--line);
+      background: #fff;
+      color: var(--muted);
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 14px;
+    }
+
+    .footer-links a {
+      color: var(--ink);
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    @media (max-width: 920px) {
+      .layout, .skill-grid, .stat-grid { grid-template-columns: 1fr; }
+      .side-panel { position: static; }
+    }
+  </style>
+</head>
+<body>
+  <header class="page-header">
+    <div class="header-inner">
+      <p class="eyebrow">CHARACTER DETAIL</p>
+      <h1 id="characterName">アイシェ</h1>
+      <p class="role" id="roleMemo">解析スタックで加速し、高HPの敵へ大火力を狙う紅属性スナイパー。</p>
+      <div class="meta-row" id="characterMeta"></div>
+    </div>
+  </header>
+
+  <main>
+    <div class="layout">
+      <div>
+        <section class="section" aria-labelledby="skillsTitle">
+          <h2 id="skillsTitle">スキル一覧</h2>
+          <p class="section-lead">倍率は比較用の要約です。アイシェは単体出張ではなく、自傷で解析を積める編成を前提に評価します。</p>
+          <div class="skill-grid" id="skillGrid"></div>
+          <a class="compare-link" href="../../compare-prototype.html?character=aishe">スキル比較DBで見る</a>
+        </section>
+
+        <section class="section" aria-labelledby="reviewTitle">
+          <h2 id="reviewTitle">評価</h2>
+          <div class="manual-block">
+            <article class="manual-card">
+              <h3>役割解説</h3>
+              <p>アイシェは、自身や味方の自傷を材料に解析スタックを積み、スキル1の再発動とスピード増加につなげる紅属性スナイパーです。</p>
+              <p>理想形は、自傷パの味方が先に動いて解析を準備し、英知の標を再発動させ、2ターン目以降にスピード+30%を乗せて知識の輪を撃つ流れです。高HPの敵やシールドで残った敵に対して、最大7600%の条件火力を狙えます。</p>
+              <p>ただし、低投資でどの編成にも差し込めるタイプではありません。自傷パの育成、行動順、スピードルーン、解析スタックの準備が揃って初めて真価が出ます。</p>
+            </article>
+            <article class="manual-card">
+              <h3>強み</h3>
+              <ul>
+                <li>スピード3424に加え、解析6スタックでスピード30%増加を得られる</li>
+                <li>スキル1は解析3スタック以上で再発動し、専用Lv3込みで最大5360%まで伸びる</li>
+                <li>スキル2は対象HP割合が高いほど威力が上がり、条件最大7600%を狙える</li>
+                <li>攻撃後に70%で対象のバフターンを減らせるため、バフ依存の相手に圧をかけられる</li>
+                <li>開幕の多重バリアで最大HP20%以上のダメージを1回無効化できる</li>
+                <li>対アムレート、対オフィーリアなど、バフや耐久に寄った相手への対策札になりうる</li>
+              </ul>
+            </article>
+            <article class="manual-card">
+              <h3>弱み・注意点</h3>
+              <ul>
+                <li>自傷パ前提のため、SR1枚だけの出張運用では強みを出しにくい</li>
+                <li>解析スタックが足りないと、スキル1の再発動や2ターン目の爆速化が安定しない</li>
+                <li>スキル2はHP割合が低い敵には最大火力が出にくく、ランダム5連撃のばらつきもある</li>
+                <li>バフターン減少は解除不可バフには機能しない</li>
+                <li>自傷パ全体の育成、LR化、スピード調整まで含めると要求コストが非常に高い</li>
+                <li>無課金・微課金が単独で確保しても、すぐ戦力化できるタイプではない</li>
+              </ul>
+            </article>
+          </div>
+        </section>
+
+        <section class="section" aria-labelledby="decisionTitle">
+          <h2 id="decisionTitle">ガチャ・育成判断</h2>
+          <div class="manual-block">
+            <article class="manual-card">
+              <h3>引きたい人</h3>
+              <ul>
+                <li>ハルシオン、アルトリアなどを含む自傷パを本格的に育てている人</li>
+                <li>自傷パのメインアタッカーを更新したい上位プレイヤー</li>
+                <li>アムレートやオフィーリアなど、バフ依存の相手への対策が欲しい人</li>
+                <li>スピードルーンやLR育成を含めて、編成全体を調整できる人</li>
+                <li>PU・運命ガチャで本格育成まで見据えて確保したい人</li>
+              </ul>
+            </article>
+            <article class="manual-card">
+              <h3>スルー寄りの人</h3>
+              <ul>
+                <li>自傷パを育てていない、または育てる予定がない人</li>
+                <li>無課金・微課金で、低投資の即戦力を探している人</li>
+                <li>SR1枚だけ確保して汎用出張させたい人</li>
+                <li>まず汎用バッファーや通常アタッカーを整える段階の人</li>
+                <li>スピード調整や自傷パ全員の育成コストを負担しにくい人</li>
+              </ul>
+            </article>
+          </div>
+        </section>
+
+        <section class="section" aria-labelledby="weaponTitle">
+          <h2 id="weaponTitle">専用武器パッシブ</h2>
+          <div class="stat-grid">
+            <article class="stat-card"><h3>攻撃力</h3><p>+18%</p></article>
+            <article class="stat-card"><h3>命中</h3><p>+10%</p></article>
+            <article class="stat-card"><h3>物理クリダメ緩和</h3><p>+35%</p></article>
+          </div>
+        </section>
+
+        <section class="section" aria-labelledby="profileTitle">
+          <h2 id="profileTitle">プロフィール・基礎データ</h2>
+          <div class="stat-grid">
+            <article class="stat-card"><h3>プロフィール</h3><dl><dt>タイプ</dt><dd>非恒常キャラ</dd><dt>属性 / 武器種</dt><dd>紅 / スナイパー</dd><dt>特徴</dt><dd>自傷連撃・解析・多重バリア</dd></dl></article>
+            <article class="stat-card"><h3>入手・状態</h3><dl><dt>入手</dt><dd>PU・運命</dd><dt>ガチャ状態</dt><dd>6/8復刻予定</dd><dt>確認日</dt><dd>2026年6月7日</dd></dl></article>
+            <article class="stat-card"><h3>ステータス（LR）</h3><dl><dt>戦闘力</dt><dd>7,240,431</dd><dt>攻撃力 / HP</dt><dd>740,039 / 4,208,038</dd><dt>スピード</dt><dd>3,424</dd></dl></article>
+            <article class="stat-card"><h3>防御・耐久</h3><dl><dt>物理防御力</dt><dd>645,716</dd><dt>魔法防御力</dt><dd>565,908</dd><dt>防御力</dt><dd>7</dd></dl></article>
+            <article class="stat-card"><h3>未確認項目</h3><dl><dt>実装日</dt><dd>未確認</dd><dt>直近ピックアップ</dt><dd>未確認</dd><dt>CV / ラメント</dt><dd>未確認</dd></dl></article>
+            <article class="stat-card"><h3>データ根拠</h3><dl><dt>基礎情報</dt><dd>添付カード画像</dd><dt>評価</dt><dd>貼り付けnote本文</dd><dt>note</dt><dd><a href="https://note.com/musoudc/n/n5f1d0e419833">アイシェ性能メモ</a></dd></dl></article>
+          </div>
+        </section>
+
+        <section class="section" aria-labelledby="creativeTitle">
+          <h2 id="creativeTitle">創作関連</h2>
+          <div class="manual-card">
+            <p>note記事：<a href="https://note.com/musoudc/n/n5f1d0e419833">アイシェ性能メモ</a>。本文はこのチャットに貼り付けられた内容をもとに、サイト向けに要約・再構成しています。</p>
+          </div>
+        </section>
+      </div>
+
+      <aside class="side-panel">
+        <h2>関連リンク</h2>
+        <p id="gachaUpdated" class="status">ガチャ状態確認日：2026-06-07</p>
+        <p class="status">アイシェは完成済み自傷パ向けです。低投資の汎用キャラとして扱うと評価を誤ります。引く判断は、自傷パを育て切る前提があるかで分けてください。</p>
+        <ul class="link-list">
+          <li><a href="../../index.html">トップへ戻る</a></li>
+          <li><a href="../../compare-prototype.html">比較DBへ戻る</a></li>
+          <li><a href="./index.html">キャラ一覧へ戻る</a></li>
+        </ul>
+      </aside>
+    </div>
+  </main>
+
+  <script>
+    const characterId = "aishe";
+
+    function valueOrDash(value) {
+      return value === null || value === undefined || value === "" ? "-" : value;
+    }
+
+    function renderMeta(character) {
+      document.querySelector("#characterMeta").innerHTML = [
+        `<span class="badge attribute">${character.attribute}</span>`,
+        `<span class="badge">${character.weaponType}</span>`,
+        `<span class="badge">スピード ${character.speed}</span>`,
+        `<span class="badge">${character.availability}</span>`,
+        `<span class="badge">${character.gachaStatus || "状態未設定"}</span>`
+      ].join("");
+    }
+
+    function renderSkills(skills) {
+      const grid = document.querySelector("#skillGrid");
+      grid.innerHTML = skills
+        .sort((a, b) => a.number - b.number)
+        .map((skill) => `
+          <article class="skill-card">
+            <header>
+              <div>
+                <h3>スキル${skill.number}：${skill.name}</h3>
+                <span class="tag">${skill.skillType}</span>
+                <span class="tag">${skill.category}</span>
+                <span class="tag">${skill.subCategory}</span>
+              </div>
+              <span class="ct">CT: ${valueOrDash(skill.ct)}</span>
+            </header>
+            <div class="skill-body">
+              <dl><dt>対象</dt><dd>${valueOrDash(skill.target)}</dd></dl>
+              <dl><dt>倍率・効果</dt><dd>${valueOrDash(skill.multiplierText)}</dd></dl>
+              <dl><dt>条件</dt><dd>${valueOrDash(skill.condition)}</dd></dl>
+              <dl><dt>専用武器</dt><dd>${valueOrDash(skill.exclusiveWeapon)}</dd></dl>
+              <dl><dt>比較メモ</dt><dd>${valueOrDash(skill.compareMemo)}</dd></dl>
+            </div>
+          </article>
+        `)
+        .join("");
+    }
+
+    async function fetchJson(path, optional = false) {
+      const response = await fetch(path, { cache: "no-store" });
+      if (!response.ok) {
+        if (optional && response.status === 404) return { characters: [], skills: [] };
+        throw new Error(`JSON読み込み失敗: ${response.status}`);
+      }
+      return response.json();
+    }
+
+    function mergeSkillData(baseData, overlayData) {
+      const characters = new Map((baseData.characters || []).map((character) => [character.id, character]));
+      const skills = new Map((baseData.skills || []).map((skill) => [skill.id, skill]));
+      (overlayData.characters || []).forEach((character) => characters.set(character.id, character));
+      (overlayData.skills || []).forEach((skill) => skills.set(skill.id, skill));
+      return { ...baseData, characters: [...characters.values()], skills: [...skills.values()] };
+    }
+
+    async function loadData() {
+      const baseData = await fetchJson("../../data/mementomori-skills.json");
+      const overlayData = await fetchJson("../../data/aishe-overlay.json", true);
+      return mergeSkillData(baseData, overlayData);
+    }
+
+    async function init() {
+      try {
+        const data = await loadData();
+        const character = data.characters.find((item) => item.id === characterId);
+        const skills = data.skills.filter((skill) => skill.characterId === characterId);
+        if (!character) throw new Error("キャラが見つかりません");
+
+        document.title = `${character.name} / ミレスト・メメントモリ分析データ室`;
+        document.querySelector("#characterName").textContent = character.name;
+        document.querySelector("#roleMemo").textContent = character.catchcopy || character.roleMemo;
+        document.querySelector("#gachaUpdated").textContent = `ガチャ状態確認日：${data.gachaStatusUpdatedAt || "未設定"}`;
+        renderMeta(character);
+        renderSkills(skills);
+      } catch (error) {
+        document.querySelector("#roleMemo").textContent = error.message;
+        console.error(error);
+      }
+    }
+
+    init();
+  </script>
+  <footer>
+    <div class="footer-inner">
+      <span>ミレスト・メメントモリ攻略・分析データベース / 非公式ファンサイト</span>
+      <nav class="footer-links" aria-label="固定ページ">
+        <a href="../../index.html">トップ</a>
+        <a href="../../privacy.html">プライバシーポリシー</a>
+        <a href="../../disclaimer.html">免責事項</a>
+        <a href="../../about.html">このサイトについて</a>
+        <a href="../../contact.html">お問い合わせ</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>
