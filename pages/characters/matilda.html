@@ -1,0 +1,531 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>マチルダ / ミレスト・メメントモリ分析データ室</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #172033;
+      --muted: #647086;
+      --line: #d9dfeb;
+      --paper: #fbfaf7;
+      --panel: #ffffff;
+      --navy: #0b2a57;
+      --green: #b88932;
+      --gold: #b88932;
+      --shadow: 0 12px 30px rgba(28, 40, 68, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: "Yu Gothic", "Hiragino Sans", "Meiryo", system-ui, sans-serif;
+      letter-spacing: 0;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .page-header {
+      padding: 28px clamp(16px, 4vw, 48px) 24px;
+      background: linear-gradient(180deg, #ffffff 0%, #f8f1e6 100%);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .header-inner,
+    main,
+    .footer-inner {
+      max-width: 1180px;
+      margin: 0 auto;
+    }
+
+    .eyebrow {
+      margin: 0 0 6px;
+      color: var(--green);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
+    }
+
+    h1 {
+      margin-bottom: 10px;
+      font-size: clamp(34px, 5vw, 56px);
+      line-height: 1.05;
+    }
+
+    .role {
+      max-width: 760px;
+      margin-bottom: 18px;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.7;
+    }
+
+    .meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .badge,
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 32px;
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: #edf1f8;
+      color: #3b4b65;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .attribute {
+      background: var(--green);
+      color: #fff;
+    }
+
+    main {
+      padding: 22px clamp(12px, 3vw, 24px) 44px;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 320px;
+      gap: 16px;
+      align-items: start;
+    }
+
+    .section,
+    .side-panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+    }
+
+    .section {
+      padding: 18px;
+      margin-bottom: 16px;
+    }
+
+    .section h2 {
+      margin-bottom: 10px;
+      font-size: 24px;
+    }
+
+    .section-lead,
+    li,
+    dd {
+      line-height: 1.7;
+    }
+
+    .skill-grid,
+    .manual-block,
+    .stat-grid {
+      display: grid;
+      gap: 12px;
+    }
+
+    .skill-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      margin-top: 14px;
+    }
+
+    .skill-card,
+    .manual-card,
+    .stat-card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fffdf8;
+      overflow: hidden;
+    }
+
+    .skill-card header {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 12px;
+      border-bottom: 1px solid var(--line);
+      background: #f7f2e9;
+    }
+
+    .skill-card h3 {
+      margin-bottom: 2px;
+      font-size: 18px;
+    }
+
+    .ct {
+      flex: 0 0 auto;
+      color: var(--navy);
+      font-weight: 800;
+    }
+
+    .skill-body {
+      display: grid;
+      gap: 10px;
+      padding: 12px;
+    }
+
+    .manual-card,
+    .stat-card {
+      padding: 14px;
+    }
+
+    .manual-card h3,
+    .stat-card h3 {
+      margin-bottom: 8px;
+      font-size: 18px;
+    }
+
+    .manual-card ul {
+      margin: 0;
+      padding-left: 1.2em;
+    }
+
+    .stat-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    dl {
+      margin: 0;
+    }
+
+    dt {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    dd {
+      margin: 3px 0 0;
+    }
+
+    .compare-link,
+    .link-list a {
+      display: inline-flex;
+      justify-content: center;
+      width: 100%;
+      padding: 11px 12px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 800;
+    }
+
+    .compare-link {
+      margin-top: 14px;
+      background: var(--navy);
+      color: #fff;
+    }
+
+    .side-panel {
+      position: sticky;
+      top: 14px;
+      padding: 16px;
+    }
+
+    .side-panel h2 {
+      margin-bottom: 10px;
+      font-size: 20px;
+    }
+
+    .status {
+      padding: 12px;
+      border-left: 4px solid var(--green);
+      border-radius: 6px;
+      background: #fff8ed;
+      color: #654b24;
+      line-height: 1.6;
+    }
+
+    .link-list {
+      display: grid;
+      gap: 8px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .link-list a {
+      border: 1px solid var(--line);
+      background: #fff;
+    }
+
+    footer {
+      padding: 24px clamp(14px, 4vw, 32px);
+      border-top: 1px solid var(--line);
+      background: #fff;
+      color: var(--muted);
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 14px;
+    }
+
+    .footer-links a {
+      color: var(--ink);
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    @media (max-width: 920px) {
+      .layout,
+      .skill-grid,
+      .stat-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .side-panel {
+        position: static;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="page-header">
+    <div class="header-inner">
+      <p class="eyebrow">CHARACTER DETAIL</p>
+      <h1 id="characterName">マチルダ</h1>
+      <p class="role" id="roleMemo">攻撃力・クリティカル率・命中率をまとめて支える紅属性ソーサラー。</p>
+      <div class="meta-row" id="characterMeta"></div>
+    </div>
+  </header>
+
+  <main>
+    <div class="layout">
+      <div>
+        <section class="section" aria-labelledby="skillsTitle">
+          <h2 id="skillsTitle">スキル一覧</h2>
+          <p class="section-lead">倍率は比較用の要約です。マチルダは直接火力より、バナナバフとスキル1をつないで主力アタッカーを安定強化するサポーターとして見ます。</p>
+          <div class="skill-grid" id="skillGrid"></div>
+          <a class="compare-link" href="../../compare-prototype.html?character=matilda">スキル比較DBで見る</a>
+        </section>
+
+        <section class="section" aria-labelledby="reviewTitle">
+          <h2 id="reviewTitle">評価</h2>
+          <div class="manual-block">
+            <article class="manual-card">
+              <h3>役割解説</h3>
+              <p>マチルダは、攻撃力が最も高い味方へ攻撃力、クリティカル率、命中率をまとめて届ける紅属性ソーサラーです。属性を問わず主力アタッカーへバフを渡せるため、編成の受け皿が広いのが特徴です。</p>
+              <p>核になるのは、パッシブ「マチルダ厳選バナナ」とスキル1「ジョバリの女王」の連鎖です。バナナが付いた味方にスキル1を重ねることで、攻撃力・クリティカル率・命中率バフを4ターン運用しやすくなります。</p>
+              <p>本人の火力で押し切るキャラではありません。無凸からでも役割を持ちやすい一方、専用武器、とくにLv1の有無で支援量の見え方が大きく変わります。</p>
+            </article>
+            <article class="manual-card">
+              <h3>強み</h3>
+              <ul>
+                <li>攻撃力最高の味方を対象にするため、属性を問わず主力アタッカーへ支援を届けやすい</li>
+                <li>専用Lv1でスキル1の攻撃力、クリティカル率、命中率バフがそれぞれ50%まで伸びる</li>
+                <li>バナナとスキル1の連鎖により、主力への重要バフを継続運用しやすい</li>
+                <li>命中率も同時に補えるため、回避率が高い相手への対策札になりうる</li>
+                <li>スキル2はHP50%以上なら攻撃、HP50%未満なら回復へ切り替わる</li>
+                <li>バフ量がマチルダ本人の攻撃力に依存しないため、低凸でも支援役として扱いやすい</li>
+                <li>ギルドバトルなど複数編成を組む場面で、2隊目以降のバッファー候補になる</li>
+              </ul>
+            </article>
+            <article class="manual-card">
+              <h3>弱み・注意点</h3>
+              <ul>
+                <li>本人の直接火力は主目的ではなく、アタッカー不足を単独で解決するキャラではない</li>
+                <li>ソーサラーなので耐久は過信できず、初動で仕事をした後に落ちる展開もありうる</li>
+                <li>バナナやスキル1の連鎖が崩れると、4ターン維持の強みが薄れる</li>
+                <li>バフ解除やバフ奪取を受ける相手には、支援が安定しないことがある</li>
+                <li>冬ソルなど既存の主力バッファーが十分に揃っている場合、優先度は下がる</li>
+                <li>上振れ火力を狙う編成より、安定感を高める編成向けの性能です</li>
+              </ul>
+            </article>
+          </div>
+        </section>
+
+        <section class="section" aria-labelledby="decisionTitle">
+          <h2 id="decisionTitle">ガチャ・育成判断</h2>
+          <div class="manual-block">
+            <article class="manual-card">
+              <h3>引きたい人</h3>
+              <ul>
+                <li>属性を問わず使える汎用バッファーを確保したい人</li>
+                <li>冬ソルを持っておらず、主力アタッカーの攻撃力と命中をまとめて補いたい人</li>
+                <li>天属性・冥属性・紅以外のアタッカーにも支援を届けたい人</li>
+                <li>無凸確保からでも役割を持てるサポーターを探している人</li>
+                <li>ギルドバトルで複数パーティを組み、2隊目以降の支援役が欲しい人</li>
+              </ul>
+            </article>
+            <article class="manual-card">
+              <h3>後回しでいい人</h3>
+              <ul>
+                <li>いま必要なのがバッファーではなく、高倍率アタッカーの補強である人</li>
+                <li>冬ソルなどの支援役で主力編成がすでに十分に回っている人</li>
+                <li>バフ解除の多い相手を主な想定にしており、連鎖維持を安定させにくい人</li>
+                <li>専用武器を用意する余裕がなく、スキル1の50%支援を狙えない人</li>
+                <li>ダイヤをアーティなど別の優先キャラへ集中したい人</li>
+              </ul>
+            </article>
+          </div>
+        </section>
+
+        <section class="section" aria-labelledby="weaponTitle">
+          <h2 id="weaponTitle">専用武器パッシブ</h2>
+          <div class="stat-grid">
+            <article class="stat-card"><h3>魔力</h3><p>+8%</p></article>
+            <article class="stat-card"><h3>HP</h3><p>+22%</p></article>
+            <article class="stat-card"><h3>命中</h3><p>+10%</p></article>
+          </div>
+        </section>
+
+        <section class="section" aria-labelledby="profileTitle">
+          <h2 id="profileTitle">プロフィール・基礎データ</h2>
+          <div class="stat-grid">
+            <article class="stat-card"><h3>プロフィール</h3><dl><dt>タイプ</dt><dd>非恒常キャラ</dd><dt>属性 / 武器種</dt><dd>紅 / ソーサラー</dd><dt>特徴</dt><dd>攻撃支援・回復・遮断</dd></dl></article>
+            <article class="stat-card"><h3>入手・状態</h3><dl><dt>入手</dt><dd>星の導き</dd><dt>ガチャ状態</dt><dd>星の導き予定</dd><dt>実装日</dt><dd>2024年2月22日</dd><dt>直近ピックアップ</dt><dd>2026年3月16日</dd></dl></article>
+            <article class="stat-card"><h3>ステータス（LR）</h3><dl><dt>戦闘力</dt><dd>7,094,725</dd><dt>攻撃力 / HP</dt><dd>703,212 / 4,759,127</dd><dt>スピード</dt><dd>3,181</dd></dl></article>
+            <article class="stat-card"><h3>防御・耐久</h3><dl><dt>物理防御力</dt><dd>596,667</dd><dt>魔法防御力</dt><dd>703,220</dd><dt>防御力</dt><dd>10</dd></dl></article>
+            <article class="stat-card"><h3>未確認項目</h3><dl><dt>身長 / 体重</dt><dd>未確認</dd><dt>誕生日</dt><dd>未確認</dd><dt>CV / ラメント</dt><dd>未確認</dd></dl></article>
+            <article class="stat-card"><h3>データ根拠</h3><dl><dt>基礎情報</dt><dd>添付カード画像</dd><dt>評価</dt><dd>貼り付けnote本文</dd><dt>note</dt><dd><a href="https://note.com/musoudc/n/n5b354302758d">マチルダ性能メモ</a></dd></dl></article>
+          </div>
+        </section>
+
+        <section class="section" aria-labelledby="creativeTitle">
+          <h2 id="creativeTitle">創作関連</h2>
+          <div class="manual-card">
+            <p>note記事：<a href="https://note.com/musoudc/n/n5b354302758d">マチルダ性能メモ</a>。本文はこのチャットに貼り付けられた内容をもとに、サイト向けに要約・再構成しています。</p>
+          </div>
+        </section>
+      </div>
+
+      <aside class="side-panel">
+        <h2>関連リンク</h2>
+        <p id="gachaUpdated" class="status">ガチャ状態確認日：2026-06-06</p>
+        <p class="status">マチルダは火力枠ではなく、主力アタッカーの命中と火力安定を支える補助枠です。専用Lv1の有無で評価が変わるため、確保と専用武器の扱いを分けて判断してください。</p>
+        <ul class="link-list">
+          <li><a href="../../index.html">トップへ戻る</a></li>
+          <li><a href="../../compare-prototype.html">比較DBへ戻る</a></li>
+          <li><a href="./index.html">キャラ一覧へ戻る</a></li>
+        </ul>
+      </aside>
+    </div>
+  </main>
+
+  <script>
+    const characterId = "matilda";
+
+    function valueOrDash(value) {
+      return value === null || value === undefined || value === "" ? "-" : value;
+    }
+
+    function renderMeta(character) {
+      document.querySelector("#characterMeta").innerHTML = [
+        `<span class="badge attribute">${character.attribute}</span>`,
+        `<span class="badge">${character.weaponType}</span>`,
+        `<span class="badge">スピード ${character.speed}</span>`,
+        `<span class="badge">${character.availability}</span>`,
+        `<span class="badge">${character.gachaStatus || "状態未設定"}</span>`
+      ].join("");
+    }
+
+    function renderSkills(skills) {
+      const grid = document.querySelector("#skillGrid");
+      grid.innerHTML = skills
+        .sort((a, b) => a.number - b.number)
+        .map((skill) => `
+          <article class="skill-card">
+            <header>
+              <div>
+                <h3>スキル${skill.number}：${skill.name}</h3>
+                <span class="tag">${skill.skillType}</span>
+                <span class="tag">${skill.category}</span>
+                <span class="tag">${skill.subCategory}</span>
+              </div>
+              <span class="ct">CT: ${valueOrDash(skill.ct)}</span>
+            </header>
+            <div class="skill-body">
+              <dl><dt>対象</dt><dd>${valueOrDash(skill.target)}</dd></dl>
+              <dl><dt>倍率・効果</dt><dd>${valueOrDash(skill.multiplierText)}</dd></dl>
+              <dl><dt>条件</dt><dd>${valueOrDash(skill.condition)}</dd></dl>
+              <dl><dt>専用武器</dt><dd>${valueOrDash(skill.exclusiveWeapon)}</dd></dl>
+              <dl><dt>比較メモ</dt><dd>${valueOrDash(skill.compareMemo)}</dd></dl>
+            </div>
+          </article>
+        `)
+        .join("");
+    }
+
+    async function fetchJson(path, optional = false) {
+      const response = await fetch(path, { cache: "no-store" });
+      if (!response.ok) {
+        if (optional && response.status === 404) return { characters: [], skills: [] };
+        throw new Error(`JSON読み込み失敗: ${response.status}`);
+      }
+      return response.json();
+    }
+
+    function mergeSkillData(baseData, overlayData) {
+      const characters = new Map((baseData.characters || []).map((character) => [character.id, character]));
+      const skills = new Map((baseData.skills || []).map((skill) => [skill.id, skill]));
+      (overlayData.characters || []).forEach((character) => characters.set(character.id, character));
+      (overlayData.skills || []).forEach((skill) => skills.set(skill.id, skill));
+      return { ...baseData, characters: [...characters.values()], skills: [...skills.values()] };
+    }
+
+    async function loadData() {
+      const baseData = await fetchJson("../../data/mementomori-skills.json");
+      const overlayData = await fetchJson("../../data/matilda-overlay.json", true);
+      return mergeSkillData(baseData, overlayData);
+    }
+
+    async function init() {
+      try {
+        const data = await loadData();
+        const character = data.characters.find((item) => item.id === characterId);
+        const skills = data.skills.filter((skill) => skill.characterId === characterId);
+        if (!character) throw new Error("キャラが見つかりません");
+
+        document.title = `${character.name} / ミレスト・メメントモリ分析データ室`;
+        document.querySelector("#characterName").textContent = character.name;
+        document.querySelector("#roleMemo").textContent = character.catchcopy || character.roleMemo;
+        document.querySelector("#gachaUpdated").textContent = `ガチャ状態確認日：${data.gachaStatusUpdatedAt || "未設定"}`;
+        renderMeta(character);
+        renderSkills(skills);
+      } catch (error) {
+        document.querySelector("#roleMemo").textContent = error.message;
+        console.error(error);
+      }
+    }
+
+    init();
+  </script>
+  <footer>
+    <div class="footer-inner">
+      <span>ミレスト・メメントモリ攻略・分析データベース / 非公式ファンサイト</span>
+      <nav class="footer-links" aria-label="固定ページ">
+        <a href="../../index.html">トップ</a>
+        <a href="../../privacy.html">プライバシーポリシー</a>
+        <a href="../../disclaimer.html">免責事項</a>
+        <a href="../../about.html">このサイトについて</a>
+        <a href="../../contact.html">お問い合わせ</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>
