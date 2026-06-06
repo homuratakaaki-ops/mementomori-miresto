@@ -12,7 +12,7 @@
       "availability": "星の導き",
       "gachaStatus": "星の導き予定",
       "roleMemo": "命中率増加、回避率減少、攻撃力バフ、HP回復、防御力・魔法防御力スタックを扱うサポーター兼アタッカー",
-      "noteUrl": "",
+      "noteUrl": "https://note.com/musoudc/n/n78647426f9a6",
       "imageUrl": "",
       "sourceUrl": "./pages/characters/cordie_summer.html"
     }
@@ -33,7 +33,7 @@
       "condition": "攻撃力が高い味方2体に4ターン命中率25%増加、回避率25%減少を付与。その後ランダムな敵に物理攻撃",
       "exclusiveWeapon": "専用Lv1: 命中率増加量50%、回避率減少量50%になる。専用Lv3: 物理攻撃の回数が5回になる",
       "compareMemo": "通常最大1320%。専用Lv3で1650%。命中支援が主価値で、アタッカーより先に動くためのスピード調整負担を減らしやすい",
-      "noteUrl": "",
+      "noteUrl": "https://note.com/musoudc/n/n78647426f9a6",
       "imageUrl": "",
       "sourceUrl": "./pages/characters/cordie_summer.html",
       "damage": {
@@ -67,7 +67,7 @@
       "condition": "ランダムな敵5体に物理攻撃。自身のバフ数が1以上の場合、ダメージ1.5倍。HP割合が最も低い味方のHPを、このスキルの総与ダメージ30%回復",
       "exclusiveWeapon": "専用武器による直接倍率強化なし",
       "compareMemo": "基本1500%。自身にバフが1つあれば2250%。回復量は総与ダメージ依存で、倍率欄には含めない",
-      "noteUrl": "",
+      "noteUrl": "https://note.com/musoudc/n/n78647426f9a6",
       "imageUrl": "",
       "sourceUrl": "./pages/characters/cordie_summer.html",
       "damage": {
@@ -101,7 +101,7 @@
       "condition": "ターン開始時、1ターン攻撃力が最も高い味方の攻撃力を自身の攻撃力60%分増加。発動後、4回行動終了まで再発動不可",
       "exclusiveWeapon": "専用Lv2: 対象が攻撃力が高い味方2体になる",
       "compareMemo": "バフ量は夏コルディ本人の攻撃力依存。本人の凸・ルーン育成が進むほど価値が上がる",
-      "noteUrl": "",
+      "noteUrl": "https://note.com/musoudc/n/n78647426f9a6",
       "imageUrl": "",
       "sourceUrl": "./pages/characters/cordie_summer.html"
     },
@@ -120,7 +120,7 @@
       "condition": "自身が攻撃するたび、1ターン自身の防御力と魔法防御力を10%増加。攻撃した回数1回ごとに増加量+10%。自身が攻撃を受けるたびにも発動し、攻撃を受けた回数1回ごとに増加量+10%。最大10スタック、100%まで、解除不可",
       "exclusiveWeapon": "専用武器効果なし",
       "compareMemo": "攻撃・被攻撃で防御面を積むが、紅属性編成の耐久課題を単独で解決する効果ではない",
-      "noteUrl": "",
+      "noteUrl": "https://note.com/musoudc/n/n78647426f9a6",
       "imageUrl": "",
       "sourceUrl": "./pages/characters/cordie_summer.html"
     }

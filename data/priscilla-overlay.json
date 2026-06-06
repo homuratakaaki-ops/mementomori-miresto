@@ -12,7 +12,7 @@
       "availability": "星の導き",
       "gachaStatus": "星の導き予定",
       "roleMemo": "弱体解除、弱体効果耐性、HP回復、再生、弱体を受けた時の自動立て直しを扱う紅属性サポーター",
-      "noteUrl": "",
+      "noteUrl": "https://note.com/musoudc/n/n7ea100e0ddc0",
       "imageUrl": "",
       "sourceUrl": "./pages/characters/priscilla.html"
     }
@@ -33,7 +33,7 @@
       "condition": "ランダムな敵3体へ魔法攻撃し、攻撃力が高い味方2体のHPを自身の攻撃力50%分回復。対象の弱体効果を2つ解除し、最初の魔法攻撃でクリティカルが1回以上発生した場合は解除数が3つになる。さらに対象へ弱体効果耐性40%増加を付与",
       "exclusiveWeapon": "専用Lv1: HP回復と弱体解除の対象が攻撃力の高い味方3体になる。専用Lv2: 弱体効果耐性の増加量が80%になる",
       "compareMemo": "直接倍率は全段階で600%。主価値は弱体解除、HP回復、弱体効果耐性で、倍率欄には含めない",
-      "noteUrl": "",
+      "noteUrl": "https://note.com/musoudc/n/n7ea100e0ddc0",
       "imageUrl": "",
       "sourceUrl": "./pages/characters/priscilla.html",
       "damage": {
@@ -67,7 +67,7 @@
       "condition": "ランダムな敵3体へ魔法攻撃し、HP割合が低い味方3体のHPを自身の攻撃力50%分回復。対象に1ターン再生を付与し、付帯者は毎ターン行動開始時に最大HP5%を回復する。最初の魔法攻撃でクリティカルが発生した場合、クリティカル回数に応じて再生のターン数が増える",
       "exclusiveWeapon": "専用Lv3: HP回復量が自身の攻撃力100%になる",
       "compareMemo": "直接倍率は全段階で600%。回復量と再生ターン増加は耐久支援として別評価",
-      "noteUrl": "",
+      "noteUrl": "https://note.com/musoudc/n/n7ea100e0ddc0",
       "imageUrl": "",
       "sourceUrl": "./pages/characters/priscilla.html",
       "damage": {
@@ -101,7 +101,7 @@
       "condition": "自身の最大HPを50%、魔法防御力を100%、クリティカル率を40%増加させる。いずれも解除不可",
       "exclusiveWeapon": "専用武器効果なし",
       "compareMemo": "クリティカル率40%増加により、スキル1の弱体解除強化とスキル2の再生延長を狙いやすくなる",
-      "noteUrl": "",
+      "noteUrl": "https://note.com/musoudc/n/n7ea100e0ddc0",
       "imageUrl": "",
       "sourceUrl": "./pages/characters/priscilla.html"
     },
@@ -120,7 +120,7 @@
       "condition": "バトル開始時、自身に5ターン防御力50%増加を付与。敵のアクティブスキルで自身が弱体効果を受けた時、防御力増加のターン数を1消費し、自身の全ての弱体効果ターン数を2ターン減らす。さらにHP割合が最も低い味方のHPを自身の攻撃力50%分回復",
       "exclusiveWeapon": "専用武器効果なし",
       "compareMemo": "弱体を受けた時に自動で立て直す受け身の支援。発動には防御力増加の残りターンが関わるため、長期戦では過信しない",
-      "noteUrl": "",
+      "noteUrl": "https://note.com/musoudc/n/n7ea100e0ddc0",
       "imageUrl": "",
       "sourceUrl": "./pages/characters/priscilla.html"
     }
