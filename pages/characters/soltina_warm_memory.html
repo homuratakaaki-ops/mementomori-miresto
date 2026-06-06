@@ -1,0 +1,406 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>[温かな記憶]ソルティーナ / ミレスト・メメントモリ分析データ室</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #172033;
+      --muted: #647086;
+      --line: #d9dfeb;
+      --paper: #fbfaf7;
+      --panel: #ffffff;
+      --navy: #0b2a57;
+      --green: #b88932;
+      --shadow: 0 12px 30px rgba(28, 40, 68, 0.12);
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: "Yu Gothic", "Hiragino Sans", "Meiryo", system-ui, sans-serif;
+      letter-spacing: 0;
+    }
+    a { color: inherit; }
+    .page-header {
+      padding: 28px clamp(16px, 4vw, 48px) 24px;
+      background: linear-gradient(180deg, #ffffff 0%, #eef5fb 100%);
+      border-bottom: 1px solid var(--line);
+    }
+    .header-inner, main, .footer-inner {
+      max-width: 1180px;
+      margin: 0 auto;
+    }
+    .eyebrow {
+      margin: 0 0 6px;
+      color: var(--green);
+      font-size: 12px;
+      font-weight: 800;
+    }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 {
+      margin-bottom: 10px;
+      font-size: clamp(34px, 5vw, 56px);
+      line-height: 1.05;
+    }
+    .role {
+      max-width: 760px;
+      margin-bottom: 18px;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.7;
+    }
+    .meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .badge, .tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 32px;
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: #edf1f8;
+      color: #3b4b65;
+      font-size: 13px;
+      font-weight: 800;
+    }
+    .attribute { background: var(--green); color: #fff; }
+    main { padding: 22px clamp(12px, 3vw, 24px) 44px; }
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 320px;
+      gap: 16px;
+      align-items: start;
+    }
+    .section, .side-panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+    }
+    .section { padding: 18px; margin-bottom: 16px; }
+    .section h2 { margin-bottom: 10px; font-size: 24px; }
+    .section-lead, li, dd { line-height: 1.7; }
+    .skill-grid, .manual-block, .stat-grid {
+      display: grid;
+      gap: 12px;
+    }
+    .skill-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      margin-top: 14px;
+    }
+    .skill-card, .manual-card, .stat-card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fffdf8;
+      overflow: hidden;
+    }
+    .skill-card header {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 12px;
+      border-bottom: 1px solid var(--line);
+      background: #eef5fb;
+    }
+    .skill-card h3 { margin-bottom: 2px; font-size: 18px; }
+    .ct { flex: 0 0 auto; color: var(--navy); font-weight: 800; }
+    .skill-body {
+      display: grid;
+      gap: 10px;
+      padding: 12px;
+    }
+    .manual-card, .stat-card { padding: 14px; }
+    .manual-card h3, .stat-card h3 { margin-bottom: 8px; font-size: 18px; }
+    .manual-card ul { margin: 0; padding-left: 1.2em; }
+    .stat-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    dl { margin: 0; }
+    dt {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 800;
+    }
+    dd { margin: 3px 0 0; }
+    .compare-link, .link-list a {
+      display: inline-flex;
+      justify-content: center;
+      width: 100%;
+      padding: 11px 12px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 800;
+    }
+    .compare-link { margin-top: 14px; background: var(--navy); color: #fff; }
+    .side-panel {
+      position: sticky;
+      top: 14px;
+      padding: 16px;
+    }
+    .side-panel h2 { margin-bottom: 10px; font-size: 20px; }
+    .status {
+      padding: 12px;
+      border-left: 4px solid var(--green);
+      border-radius: 6px;
+      background: #eef6fb;
+      color: #2f4d63;
+      line-height: 1.6;
+    }
+    .link-list {
+      display: grid;
+      gap: 8px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    .link-list a { border: 1px solid var(--line); background: #fff; }
+    footer {
+      padding: 24px clamp(14px, 4vw, 32px);
+      border-top: 1px solid var(--line);
+      background: #fff;
+      color: var(--muted);
+    }
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .footer-links { display: flex; flex-wrap: wrap; gap: 8px 14px; }
+    .footer-links a { color: var(--ink); text-decoration: none; font-weight: 700; }
+    @media (max-width: 920px) {
+      .layout, .skill-grid, .stat-grid { grid-template-columns: 1fr; }
+      .side-panel { position: static; }
+    }
+  </style>
+</head>
+<body>
+  <header class="page-header">
+    <div class="header-inner">
+      <p class="eyebrow">CHARACTER DETAIL</p>
+      <h1 id="characterName">[温かな記憶]ソルティーナ</h1>
+      <p class="role" id="roleMemo">紅・翠属性の主力へ攻撃力と命中率を長時間届ける紅属性ウォーリア。</p>
+      <div class="meta-row" id="characterMeta"></div>
+    </div>
+  </header>
+
+  <main>
+    <div class="layout">
+      <div>
+        <section class="section" aria-labelledby="skillsTitle">
+          <h2 id="skillsTitle">スキル一覧</h2>
+          <p class="section-lead">倍率は比較用の直接ダメージです。雪の妖精の本命は攻撃力・命中率支援で、バフ量は倍率欄に含めません。</p>
+          <div class="skill-grid" id="skillGrid"></div>
+          <a class="compare-link" href="../../compare-prototype.html?character=soltina_warm_memory">スキル比較DBで見る</a>
+        </section>
+
+        <section class="section" aria-labelledby="reviewTitle">
+          <h2 id="reviewTitle">評価</h2>
+          <div class="manual-block">
+            <article class="manual-card">
+              <h3>役割解説</h3>
+              <p>[温かな記憶]ソルティーナは、攻撃力が最も高い味方へ攻撃力と命中率を付与するサポーターです。対象が紅属性または翠属性なら、攻撃力支援が大きく伸び、ターン数も32ターンになります。</p>
+              <p>開幕2ターンのスピード30%増加により、初動で雪の妖精を撃ちやすいのが強みです。命中率支援を必要とする主力や、紅・翠属性のアタッカーを使う編成では採用理由が明確です。</p>
+              <p>一方で、クリティカル率支援は持たず、守りも厚くありません。マチルダのような汎用バッファーとは役割が近いものの、こちらは速度と長期の攻撃力・命中率支援に寄った性能です。</p>
+            </article>
+            <article class="manual-card">
+              <h3>強み</h3>
+              <ul>
+                <li>攻撃力最高の味方へ攻撃力と命中率をまとめて付与できる</li>
+                <li>紅・翠属性の主力なら、専用Lv1で攻撃力60%支援まで伸びる</li>
+                <li>対象が紅・翠属性ならバフが32ターンになり、長期戦でも維持しやすい</li>
+                <li>専用Lv2で命中率支援が50%になり、回避型への対策札になる</li>
+                <li>開幕2ターンのスピード30%増加で、先に支援を届けやすい</li>
+                <li>アイシクルは攻撃力最高の敵を狙う5連撃で、気絶による妨害も狙える</li>
+                <li>バッファー運用なら、低凸でも役割を持ちやすい</li>
+              </ul>
+            </article>
+            <article class="manual-card">
+              <h3>弱み・注意点</h3>
+              <ul>
+                <li>最大支援は紅・翠属性が前提で、他属性ではバフ量とターン数の価値が落ちる</li>
+                <li>クリティカル率やクリティカルダメージ支援は持たない</li>
+                <li>本人の耐久補助は弱体解除と初動速度が中心で、受け性能は高くない</li>
+                <li>気絶は40%判定なので、必ず止められる効果ではない</li>
+                <li>命中率支援が不要な相手や編成では、採用優先度が下がる</li>
+                <li>専用Lv1からLv2の価値は高いが、専用Lv3は主に直接火力強化です</li>
+              </ul>
+            </article>
+          </div>
+        </section>
+
+        <section class="section" aria-labelledby="decisionTitle">
+          <h2 id="decisionTitle">ガチャ・育成判断</h2>
+          <div class="manual-block">
+            <article class="manual-card">
+              <h3>引きたい人</h3>
+              <ul>
+                <li>紅属性または翠属性の主力アタッカーを使っている人</li>
+                <li>攻撃力支援に加えて命中率支援も欲しい人</li>
+                <li>回避型キャラへの命中対策を編成に入れたい人</li>
+                <li>初動の速いバッファーを低投資で確保したい人</li>
+                <li>PU・運命ガチャで次回復刻を狙う予定がある人</li>
+              </ul>
+            </article>
+            <article class="manual-card">
+              <h3>後回しでいい人</h3>
+              <ul>
+                <li>主力が紅・翠属性ではなく、長時間バフの恩恵が小さい人</li>
+                <li>命中率支援よりクリティカル率支援を優先したい人</li>
+                <li>すでにマチルダなどのバッファーで主力支援が足りている人</li>
+                <li>サポーターより高倍率アタッカーを優先したい人</li>
+                <li>気絶役として確定妨害を期待している人</li>
+              </ul>
+            </article>
+          </div>
+        </section>
+
+        <section class="section" aria-labelledby="weaponTitle">
+          <h2 id="weaponTitle">専用武器パッシブ</h2>
+          <div class="stat-grid">
+            <article class="stat-card"><h3>腕力</h3><p>+8%</p></article>
+            <article class="stat-card"><h3>攻撃力</h3><p>+18%</p></article>
+            <article class="stat-card"><h3>弱体効果命中</h3><p>+10%</p></article>
+          </div>
+        </section>
+
+        <section class="section" aria-labelledby="profileTitle">
+          <h2 id="profileTitle">プロフィール・基礎データ</h2>
+          <div class="stat-grid">
+            <article class="stat-card"><h3>プロフィール</h3><dl><dt>タイプ</dt><dd>非恒常キャラ</dd><dt>属性 / 武器種</dt><dd>紅 / ウォーリア</dd><dt>特徴</dt><dd>命中支援・気絶・弱体解除</dd></dl></article>
+            <article class="stat-card"><h3>入手・状態</h3><dl><dt>入手</dt><dd>星の導き</dd><dt>ガチャ状態</dt><dd>PU・運命予定</dd><dt>実装日</dt><dd>2024年11月29日</dd><dt>直近ピックアップ</dt><dd>2025年12月18日</dd></dl></article>
+            <article class="stat-card"><h3>ステータス（LR）</h3><dl><dt>戦闘力</dt><dd>7,030,172</dd><dt>攻撃力 / HP</dt><dd>686,952 / 4,957,380</dd><dt>スピード</dt><dd>3,073</dd></dl></article>
+            <article class="stat-card"><h3>防御・耐久</h3><dl><dt>物理防御力</dt><dd>686,952</dd><dt>魔法防御力</dt><dd>594,886</dd><dt>防御力</dt><dd>10</dd></dl></article>
+            <article class="stat-card"><h3>未確認項目</h3><dl><dt>身長 / 体重</dt><dd>未確認</dd><dt>誕生日</dt><dd>未確認</dd><dt>CV / ラメント</dt><dd>未確認</dd></dl></article>
+            <article class="stat-card"><h3>データ根拠</h3><dl><dt>基礎情報</dt><dd>添付カード画像</dd><dt>評価</dt><dd>添付画像・既存DB・指定note</dd><dt>note</dt><dd><a href="https://note.com/musoudc/n/n25025c0ae52c">[温かな記憶]ソルティーナ性能メモ</a></dd></dl></article>
+          </div>
+        </section>
+
+        <section class="section" aria-labelledby="creativeTitle">
+          <h2 id="creativeTitle">創作関連</h2>
+          <div class="manual-card">
+            <p>note記事：<a href="https://note.com/musoudc/n/n25025c0ae52c">[温かな記憶]ソルティーナ性能メモ</a>。今回の貼り付け本文は別キャラ内容だったため、添付画像・既存DB・指定URLをもとにサイト向けへ要約しています。</p>
+          </div>
+        </section>
+      </div>
+
+      <aside class="side-panel">
+        <h2>関連リンク</h2>
+        <p id="gachaUpdated" class="status">ガチャ状態確認日：2026-06-07</p>
+        <p class="status">紅・翠属性主力への攻撃力と命中率支援が本体です。クリティカル支援が必要な場合は、マチルダなど他バッファーとの役割差を確認してください。</p>
+        <ul class="link-list">
+          <li><a href="../../index.html">トップへ戻る</a></li>
+          <li><a href="../../compare-prototype.html">比較DBへ戻る</a></li>
+          <li><a href="./index.html">キャラ一覧へ戻る</a></li>
+        </ul>
+      </aside>
+    </div>
+  </main>
+
+  <script>
+    const characterId = "soltina_warm_memory";
+
+    function valueOrDash(value) {
+      return value === null || value === undefined || value === "" ? "-" : value;
+    }
+
+    function renderMeta(character) {
+      document.querySelector("#characterMeta").innerHTML = [
+        `<span class="badge attribute">${character.attribute}</span>`,
+        `<span class="badge">${character.weaponType}</span>`,
+        `<span class="badge">スピード ${character.speed}</span>`,
+        `<span class="badge">${character.availability}</span>`,
+        `<span class="badge">${character.gachaStatus || "状態未設定"}</span>`
+      ].join("");
+    }
+
+    function renderSkills(skills) {
+      const grid = document.querySelector("#skillGrid");
+      grid.innerHTML = skills
+        .sort((a, b) => a.number - b.number)
+        .map((skill) => `
+          <article class="skill-card">
+            <header>
+              <div>
+                <h3>スキル${skill.number}：${skill.name}</h3>
+                <span class="tag">${skill.skillType}</span>
+                <span class="tag">${skill.category}</span>
+                <span class="tag">${skill.subCategory}</span>
+              </div>
+              <span class="ct">CT: ${valueOrDash(skill.ct)}</span>
+            </header>
+            <div class="skill-body">
+              <dl><dt>対象</dt><dd>${valueOrDash(skill.target)}</dd></dl>
+              <dl><dt>倍率・効果</dt><dd>${valueOrDash(skill.multiplierText)}</dd></dl>
+              <dl><dt>条件</dt><dd>${valueOrDash(skill.condition)}</dd></dl>
+              <dl><dt>専用武器</dt><dd>${valueOrDash(skill.exclusiveWeapon)}</dd></dl>
+              <dl><dt>比較メモ</dt><dd>${valueOrDash(skill.compareMemo)}</dd></dl>
+            </div>
+          </article>
+        `)
+        .join("");
+    }
+
+    async function fetchJson(path, optional = false) {
+      const response = await fetch(path, { cache: "no-store" });
+      if (!response.ok) {
+        if (optional && response.status === 404) return { characters: [], skills: [] };
+        throw new Error(`JSON読み込み失敗: ${response.status}`);
+      }
+      return response.json();
+    }
+
+    function mergeSkillData(baseData, overlayData) {
+      const characters = new Map((baseData.characters || []).map((character) => [character.id, character]));
+      const skills = new Map((baseData.skills || []).map((skill) => [skill.id, skill]));
+      (overlayData.characters || []).forEach((character) => characters.set(character.id, character));
+      (overlayData.skills || []).forEach((skill) => skills.set(skill.id, skill));
+      return { ...baseData, characters: [...characters.values()], skills: [...skills.values()] };
+    }
+
+    async function loadData() {
+      const baseData = await fetchJson("../../data/mementomori-skills.json");
+      const overlayData = await fetchJson("../../data/soltina-warm-memory-overlay.json", true);
+      return mergeSkillData(baseData, overlayData);
+    }
+
+    async function init() {
+      try {
+        const data = await loadData();
+        const character = data.characters.find((item) => item.id === characterId);
+        const skills = data.skills.filter((skill) => skill.characterId === characterId);
+        if (!character) throw new Error("キャラが見つかりません");
+
+        document.title = `${character.name} / ミレスト・メメントモリ分析データ室`;
+        document.querySelector("#characterName").textContent = character.name;
+        document.querySelector("#roleMemo").textContent = character.catchcopy || character.roleMemo;
+        document.querySelector("#gachaUpdated").textContent = `ガチャ状態確認日：${data.gachaStatusUpdatedAt || "未設定"}`;
+        renderMeta(character);
+        renderSkills(skills);
+      } catch (error) {
+        document.querySelector("#roleMemo").textContent = error.message;
+        console.error(error);
+      }
+    }
+
+    init();
+  </script>
+  <footer>
+    <div class="footer-inner">
+      <span>ミレスト・メメントモリ攻略・分析データベース / 非公式ファンサイト</span>
+      <nav class="footer-links" aria-label="固定ページ">
+        <a href="../../index.html">トップ</a>
+        <a href="../../privacy.html">プライバシーポリシー</a>
+        <a href="../../disclaimer.html">免責事項</a>
+        <a href="../../about.html">このサイトについて</a>
+        <a href="../../contact.html">お問い合わせ</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>
