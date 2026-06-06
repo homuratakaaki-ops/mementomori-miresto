@@ -14,7 +14,7 @@ const datasets = {
   passive: []
 };
 
-const existingCharacterPages = new Set(["potpourri", "rea", "sophia", "veela", "sivi", "cerberus", "aa_dark", "cattleya", "soltina", "amleth", "fenrir", "florence", "moddey", "sonya", "stella", "fenny", "tropon_holy_night", "giluial", "liselotte", "eir", "minasumari", "nina_summer", "serruria", "eureka", "cordie_ringmaster", "merlyn_winter", "evelyn", "fia_trace", "sabrina", "freycia", "amour", "lean"]);
+const existingCharacterPages = new Set(["potpourri", "rea", "sophia", "veela", "sivi", "cerberus", "aa_dark", "cattleya", "soltina", "amleth", "fenrir", "florence", "moddey", "sonya", "stella", "fenny", "tropon_holy_night", "giluial", "liselotte", "eir", "minasumari", "nina_summer", "serruria", "eureka", "cordie_ringmaster", "merlyn_winter", "evelyn", "fia_trace", "sabrina", "freycia", "amour", "lean", "chiffon"]);
 
 const modeMeta = {
   active: {
@@ -352,7 +352,8 @@ async function loadData() {
     fetchJson("./data/sabrina-overlay.json", true),
     fetchJson("./data/freycia-overlay.json", true),
     fetchJson("./data/amour-overlay.json", true),
-    fetchJson("./data/lean-overlay.json", true)
+    fetchJson("./data/lean-overlay.json", true),
+    fetchJson("./data/chiffon-overlay.json", true)
   ]);
   return overlays.reduce((data, overlayData) => mergeSkillData(data, overlayData), baseData);
 }
