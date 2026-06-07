@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>スピード・行動順計算ツール｜メメントモリ攻略</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&family=Noto+Sans+JP:wght@400;500&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --gold: #c8aa64;
+    --gold-dim: rgba(200,170,100,0.2);
+    --gold-bg: rgba(200,170,100,0.1);
+    --bg: #0d0a14;
+    --bg2: #1a1025;
+    --card: rgba(255,255,255,0.04);
+    --text: #e8d9c0;
+    --text-dim: #a08060;
+    --text-dark: #604030;
+    --green: #6ec97a;
+    --blue: #7090e0;
+    --blue-bg: rgba(100,130,220,0.1);
+    --blue-dim: rgba(100,130,220,0.25);
+    --red: #e07070;
+    --red-bg: rgba(220,100,100,0.1);
+    --border: rgba(200,170,100,0.25);
+  }
+
+  body {
+    background: linear-gradient(135deg, var(--bg) 0%, var(--bg2) 50%, var(--bg) 100%);
+    color: var(--text);
+    font-family: 'Noto Sans JP', sans-serif;
+    min-height: 100vh;
+    padding: 24px 16px 40px;
+  }
+
+  .container { max-width: 520px; margin: 0 auto; }
+
+  .site-nav {
+    margin-bottom: 18px;
+  }
+
+  .site-nav.bottom {
+    margin: 18px 0 0;
+    text-align: center;
+  }
+
+  .site-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--gold);
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .site-back:hover {
+    text-decoration: underline;
+  }
+
+  .header { text-align: center; margin-bottom: 28px; }
+  .header-sub { font-size: 11px; letter-spacing: 4px; color: var(--gold); margin-bottom: 6px; text-transform: uppercase; font-family: 'Noto Serif JP', serif; }
+  .header h1 { font-size: 20px; font-weight: 700; color: #f0e0c0; font-family: 'Noto Serif JP', serif; line-height: 1.4; }
+  .header-line { width: 48px; height: 2px; background: linear-gradient(90deg, transparent, var(--gold), transparent); margin: 10px auto 0; }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 20px 16px;
+    margin-bottom: 14px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+  }
+
+  .section-title {
+    font-size: 11px; letter-spacing: 2px; color: var(--gold);
+    margin-bottom: 14px; display: flex; align-items: center; gap: 8px;
+  }
+  .section-title::after { content: ''; flex: 1; height: 1px; background: var(--gold-dim); }
+
+  label.field-label { font-size: 12px; color: var(--text-dim); letter-spacing: 1px; display: block; margin-bottom: 4px; }
+  .field-note { font-size: 10px; color: var(--text-dark); margin-bottom: 6px; }
+  .field-group { margin-bottom: 14px; }
+
+  /* キャラカード */
+  .chara-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--gold-dim);
+    border-radius: 10px;
+    padding: 14px 12px;
+    margin-bottom: 10px;
+    position: relative;
+  }
+  .chara-card-header { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
+  .chara-num { font-size: 11px; color: var(--gold); min-width: 20px; }
+  .chara-card select {
+    flex: 1; background: rgba(255,255,255,0.05); border: 1px solid var(--gold-dim);
+    border-radius: 8px; color: #f0e0c0; font-size: 13px; padding: 8px 10px;
+    font-family: inherit; outline: none; cursor: pointer; appearance: none; -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23c8aa64'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: right 10px center;
+  }
+  .chara-card select option { background: #1a1025; }
+  .btn-remove {
+    width: 28px; height: 28px; border-radius: 6px; border: 1px solid rgba(200,100,100,0.3);
+    background: rgba(200,100,100,0.08); color: var(--red); font-size: 16px; cursor: pointer;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-family: inherit;
+  }
+
+  /* ルーン選択 */
+  .rune-row { display: flex; gap: 6px; align-items: center; margin-bottom: 8px; }
+  .rune-label { font-size: 11px; color: var(--text-dim); min-width: 40px; }
+  .rune-select {
+    flex: 1; background: rgba(255,255,255,0.05); border: 1px solid var(--gold-dim);
+    border-radius: 6px; color: #f0e0c0; font-size: 12px; padding: 6px 8px;
+    font-family: inherit; outline: none; cursor: pointer; appearance: none; -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='5'%3E%3Cpath d='M0 0l4 5 4-5z' fill='%23c8aa64'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: right 6px center;
+  }
+  .rune-select option { background: #1a1025; }
+  .rune-total { font-size: 12px; color: var(--gold); min-width: 50px; text-align: right; }
+
+  /* 最終スピード表示 */
+  .chara-speed-display {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 8px 10px; background: var(--gold-bg); border-radius: 8px;
+    border: 1px solid var(--gold-dim); margin-top: 8px;
+  }
+  .speed-label { font-size: 11px; color: var(--text-dim); }
+  .speed-value { font-size: 20px; font-weight: 700; color: var(--gold); }
+
+  /* ボタン */
+  .btn-add {
+    width: 100%; padding: 12px; border-radius: 10px; border: 1px dashed var(--gold-dim);
+    background: transparent; color: var(--text-dim); font-size: 13px; cursor: pointer;
+    font-family: inherit; transition: all 0.2s; margin-bottom: 14px;
+  }
+  .btn-add:hover { background: var(--gold-bg); border-color: var(--gold); color: #f0e0c0; }
+
+  .btn-calc {
+    width: 100%; padding: 14px; border-radius: 10px; border: 1px solid var(--gold);
+    background: var(--gold-bg); color: #f0e0c0; font-size: 15px; font-weight: 700;
+    cursor: pointer; font-family: inherit; transition: all 0.2s; margin-bottom: 16px;
+    font-family: 'Noto Serif JP', serif;
+  }
+  .btn-calc:hover { background: rgba(200,170,100,0.2); }
+
+  /* 結果テーブル */
+  .turn-section { margin-bottom: 14px; }
+  .turn-title {
+    font-size: 12px; letter-spacing: 2px; color: var(--gold);
+    margin-bottom: 8px; display: flex; align-items: center; gap: 8px;
+  }
+  .turn-title::after { content: ''; flex: 1; height: 1px; background: var(--gold-dim); }
+
+  .result-row {
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px 12px; border-radius: 8px; margin-bottom: 6px;
+    border: 1px solid var(--gold-dim); background: rgba(255,255,255,0.02);
+  }
+  .result-rank { font-size: 18px; font-weight: 700; color: var(--gold); min-width: 28px; text-align: center; }
+  .result-rank.rank1 { color: #ffd700; }
+  .result-rank.rank2 { color: #c0c0c0; }
+  .result-rank.rank3 { color: #cd7f32; }
+  .result-info { flex: 1; }
+  .result-name { font-size: 14px; color: #f0e0c0; margin-bottom: 2px; }
+  .result-skill { font-size: 11px; color: var(--blue); }
+  .result-speeds { text-align: right; }
+  .result-speed { font-size: 16px; font-weight: 700; color: var(--gold); }
+  .result-diff { font-size: 10px; color: var(--text-dark); margin-top: 2px; }
+  .result-diff.minus { color: var(--red); }
+
+  /* 注意書き */
+  .caution {
+    background: rgba(200,150,50,0.08); border: 1px solid rgba(200,150,50,0.25);
+    border-radius: 8px; padding: 10px 12px; font-size: 11px; color: #b09050; line-height: 1.7;
+    margin-bottom: 14px;
+  }
+
+  .footer-note { font-size: 10px; color: var(--text-dark); line-height: 1.8; text-align: center; margin-top: 8px; }
+
+  /* ローディング */
+  .loading { text-align: center; padding: 20px; color: var(--text-dim); font-size: 13px; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <nav class="site-nav" aria-label="サイト内ナビゲーション">
+    <a class="site-back" href="./index.html">← サイトトップへ戻る</a>
+  </nav>
+
+  <div class="header">
+    <div class="header-sub">MementoMori</div>
+    <h1>スピード・行動順計算ツール</h1>
+    <div class="header-line"></div>
+  </div>
+
+  <div id="loadingMsg" class="card loading">キャラデータ読み込み中...</div>
+
+  <div id="mainContent" style="display:none">
+    <div class="card">
+      <div class="section-title">キャラ設定（最大10体）</div>
+      <div id="charaList"></div>
+      <button class="btn-add" onclick="addChara()">＋ キャラを追加</button>
+    </div>
+
+    <button class="btn-calc" onclick="calcOrder()">⚡ 行動順を計算する</button>
+
+    <div id="resultArea"></div>
+
+    <nav class="site-nav bottom" aria-label="サイト内ナビゲーション">
+      <a class="site-back" href="./index.html">← サイトトップへ戻る</a>
+    </nav>
+
+    <div class="footer-note">
+      ※ 実際の行動順にはゲーム内の乱数処理が含まれます<br>
+      ※ 表示順と実際の行動順が異なる場合があります<br>
+      ※ バフ・デバフは第2段階で対応予定
+    </div>
+  </div>
+
+</div>
+
+<script>
+// ===== ルーンデータ =====
+const RUNE_TABLE = [
+  { lv: 0, speed: 0, label: 'なし' },
+  { lv: 1, speed: 10, label: 'Lv1 (+10)' },
+  { lv: 2, speed: 18, label: 'Lv2 (+18)' },
+  { lv: 3, speed: 33, label: 'Lv3 (+33)' },
+  { lv: 4, speed: 53, label: 'Lv4 (+53)' },
+  { lv: 5, speed: 80, label: 'Lv5 (+80)' },
+  { lv: 6, speed: 110, label: 'Lv6 (+110)' },
+  { lv: 7, speed: 150, label: 'Lv7 (+150)' },
+  { lv: 8, speed: 195, label: 'Lv8 (+195)' },
+  { lv: 9, speed: 240, label: 'Lv9 (+240)' },
+  { lv: 10, speed: 300, label: 'Lv10 (+300)' },
+  { lv: 11, speed: 360, label: 'Lv11 (+360)' },
+  { lv: 12, speed: 425, label: 'Lv12 (+425)' },
+  { lv: 13, speed: 500, label: 'Lv13 (+500)' },
+  { lv: 14, speed: 575, label: 'Lv14 (+575)' },
+  { lv: 15, speed: 660, label: 'Lv15 (+660)' },
+];
+
+// ===== グローバルデータ =====
+let characters = [];
+let skills = [];
+let charaEntries = []; // { id, rune1, rune2, rune3 }
+let entryCounter = 0;
+
+// ===== JSONロード =====
+async function loadData() {
+  try {
+    const res = await fetch('./data/mementomori-skills.json');
+    const json = await res.json();
+    characters = json.characters || [];
+    skills = json.skills || [];
+    document.getElementById('loadingMsg').style.display = 'none';
+    document.getElementById('mainContent').style.display = 'block';
+    // 最初の1体を追加
+    addChara();
+  } catch(e) {
+    document.getElementById('loadingMsg').textContent = 'データ読み込みに失敗しました。サーバー上で動作させてください。';
+  }
+}
+
+// ===== キャラ追加 =====
+function addChara() {
+  if (charaEntries.length >= 10) return;
+  const id = ++entryCounter;
+  charaEntries.push({ eid: id, charaId: '', rune: [0, 0, 0] });
+  renderCharaList();
+}
+
+function removeChara(eid) {
+  charaEntries = charaEntries.filter(e => e.eid !== eid);
+  renderCharaList();
+}
+
+function onCharaSelect(eid, val) {
+  const e = charaEntries.find(x => x.eid === eid);
+  if (e) { e.charaId = val; updateSpeedDisplay(eid); }
+}
+
+function onRuneChange(eid, idx, val) {
+  const e = charaEntries.find(x => x.eid === eid);
+  if (e) { e.rune[idx] = parseInt(val, 10); updateSpeedDisplay(eid); }
+}
+
+function updateSpeedDisplay(eid) {
+  const e = charaEntries.find(x => x.eid === eid);
+  if (!e) return;
+  const chara = characters.find(c => c.id === e.charaId);
+  const base = chara ? (chara.speed || 0) : 0;
+  const runeSum = e.rune.reduce((a, b) => a + b, 0);
+  const final = base + runeSum;
+  const el = document.getElementById(`speed-${eid}`);
+  if (el) el.textContent = chara ? final.toLocaleString() : '—';
+  const baseEl = document.getElementById(`base-${eid}`);
+  if (baseEl) baseEl.textContent = chara ? `基礎: ${base.toLocaleString()}　ルーン: +${runeSum.toLocaleString()}` : '';
+}
+
+// ===== キャラリスト描画 =====
+function renderCharaList() {
+  const container = document.getElementById('charaList');
+  container.innerHTML = '';
+  charaEntries.forEach((entry, idx) => {
+    const div = document.createElement('div');
+    div.className = 'chara-card';
+    div.id = `entry-${entry.eid}`;
+
+    // キャラ選択オプション
+    const options = characters
+      .slice()
+      .sort((a, b) => (b.speed || 0) - (a.speed || 0))
+      .map(c => `<option value="${c.id}" ${c.id === entry.charaId ? 'selected' : ''}>${c.name}（${c.speed?.toLocaleString() ?? '?'}）</option>`)
+      .join('');
+
+    // ルーン選択オプション
+    const runeOptions = RUNE_TABLE.map(r =>
+      `<option value="${r.speed}">${r.label}</option>`
+    ).join('');
+
+    div.innerHTML = `
+      <div class="chara-card-header">
+        <span class="chara-num">${idx + 1}</span>
+        <select onchange="onCharaSelect(${entry.eid}, this.value)">
+          <option value="">── キャラを選択 ──</option>
+          ${options}
+        </select>
+        <button class="btn-remove" onclick="removeChara(${entry.eid})">×</button>
+      </div>
+      <div class="rune-row">
+        <span class="rune-label">ルーン①</span>
+        <select class="rune-select" onchange="onRuneChange(${entry.eid}, 0, this.value)">${runeOptions}</select>
+      </div>
+      <div class="rune-row">
+        <span class="rune-label">ルーン②</span>
+        <select class="rune-select" onchange="onRuneChange(${entry.eid}, 1, this.value)">${runeOptions}</select>
+      </div>
+      <div class="rune-row">
+        <span class="rune-label">ルーン③</span>
+        <select class="rune-select" onchange="onRuneChange(${entry.eid}, 2, this.value)">${runeOptions}</select>
+      </div>
+      <div class="chara-speed-display">
+        <span class="speed-label"><span id="base-${entry.eid}" style="font-size:10px;color:var(--text-dark)"></span></span>
+        <span>最終スピード：<span class="speed-value" id="speed-${entry.eid}">—</span></span>
+      </div>
+    `;
+    container.appendChild(div);
+  });
+}
+
+// ===== 行動順計算 =====
+function calcOrder() {
+  const valid = charaEntries.filter(e => e.charaId);
+  if (valid.length === 0) {
+    alert('キャラを1体以上選択してください。');
+    return;
+  }
+
+  // 各キャラのデータ組み立て
+  const results = valid.map(e => {
+    const chara = characters.find(c => c.id === e.charaId);
+    const base = chara?.speed || 0;
+    const runeSum = e.rune.reduce((a, b) => a + b, 0);
+    const finalSpeed = base + runeSum;
+    const s1 = skills.find(s => s.characterId === e.charaId && s.number === 1 && s.skillType === 'アクティブ');
+    const s2 = skills.find(s => s.characterId === e.charaId && s.number === 2 && s.skillType === 'アクティブ');
+    return {
+      name: chara?.name || '不明',
+      base,
+      runeSum,
+      finalSpeed,
+      skill1: s1?.name || 'スキル1',
+      skill2: s2?.name || 'スキル2',
+    };
+  });
+
+  // スピード降順ソート
+  results.sort((a, b) => b.finalSpeed - a.finalSpeed);
+
+  // 結果HTML生成
+  let html = '';
+
+  // 注意書き
+  html += `<div class="caution">⚠️ 実際の行動順にはゲーム内の乱数が含まれます。スピード差が小さい場合は逆転することがあります。</div>`;
+
+  // ターン1
+  html += `<div class="turn-section"><div class="turn-title">1ターン目　スキル1使用</div>`;
+  results.forEach((r, i) => {
+    const diff = i < results.length - 1 ? results[i].finalSpeed - results[i + 1].finalSpeed : null;
+    html += `
+      <div class="result-row">
+        <div class="result-rank ${i===0?'rank1':i===1?'rank2':i===2?'rank3':''}">${i + 1}</div>
+        <div class="result-info">
+          <div class="result-name">${r.name}</div>
+          <div class="result-skill">🗡 ${r.skill1}</div>
+        </div>
+        <div class="result-speeds">
+          <div class="result-speed">${r.finalSpeed.toLocaleString()}</div>
+          ${diff !== null ? `<div class="result-diff">↓ 差 ${diff.toLocaleString()}</div>` : ''}
+        </div>
+      </div>`;
+  });
+  html += `</div>`;
+
+  // ターン2
+  html += `<div class="turn-section"><div class="turn-title">2ターン目　スキル2使用</div>`;
+  results.forEach((r, i) => {
+    const diff = i < results.length - 1 ? results[i].finalSpeed - results[i + 1].finalSpeed : null;
+    html += `
+      <div class="result-row">
+        <div class="result-rank ${i===0?'rank1':i===1?'rank2':i===2?'rank3':''}">${i + 1}</div>
+        <div class="result-info">
+          <div class="result-name">${r.name}</div>
+          <div class="result-skill">✨ ${r.skill2}</div>
+        </div>
+        <div class="result-speeds">
+          <div class="result-speed">${r.finalSpeed.toLocaleString()}</div>
+          ${diff !== null ? `<div class="result-diff">↓ 差 ${diff.toLocaleString()}</div>` : ''}
+        </div>
+      </div>`;
+  });
+  html += `</div>`;
+
+  document.getElementById('resultArea').innerHTML = html;
+  document.getElementById('resultArea').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+// ===== 起動 =====
+loadData();
+</script>
+</body>
+</html>
