@@ -271,6 +271,21 @@
     gap: 10px;
     margin-bottom: 12px;
   }
+  .preset-panel {
+    margin: 14px 0;
+  }
+  .preset-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto auto auto;
+    gap: 8px;
+    align-items: end;
+  }
+  .preset-status {
+    margin-top: 8px;
+    color: var(--text-dark);
+    font-size: 11px;
+    line-height: 1.6;
+  }
   .memo-box {
     background: rgba(255,255,255,0.03);
     border: 1px solid var(--gold-dim);
@@ -337,7 +352,8 @@
     .target-grid,
     .draft-actions,
     .team-grid,
-    .result-tools {
+    .result-tools,
+    .preset-grid {
       grid-template-columns: 1fr;
     }
     .rune-buttons { grid-template-columns: repeat(4, minmax(0, 1fr)); }
@@ -439,6 +455,20 @@
 
     <button class="btn primary full" onclick="calcOrder()">⚡ 行動順を計算する</button>
 
+    <section class="card preset-panel" aria-label="編成プリセット">
+      <div class="section-title">編成プリセット</div>
+      <div class="preset-grid">
+        <div>
+          <label for="presetSelect">保存済みプリセット</label>
+          <select id="presetSelect"></select>
+        </div>
+        <button class="btn primary" type="button" onclick="savePreset()">この編成を保存</button>
+        <button class="btn" type="button" onclick="loadPreset()">読み込み</button>
+        <button class="btn danger" type="button" onclick="deletePreset()">削除</button>
+      </div>
+      <div class="preset-status" id="presetStatus">保存先はこのブラウザ内のみです。サーバーには送信しません。</div>
+    </section>
+
     <div id="resultArea"></div>
 
     <nav class="site-nav bottom" aria-label="サイト内ナビゲーション">
@@ -477,6 +507,7 @@ const SIDES = [
   { id: 'ally', label: '自軍', target: 'allyList' },
   { id: 'enemy', label: '敵軍', target: 'enemyList' },
 ];
+const PRESET_STORAGE_KEY = 'speed-calc-presets';
 
 let characters = [];
 let skills = [];
@@ -490,6 +521,68 @@ function createDraft(side = 'ally') {
 
 function createEmptyEntry(side, slot) {
   return { side, slot, charaId: '', rune: [0, 0, 0], memo: '' };
+}
+
+function normalizeEntry(entry, side, slot) {
+  const rune = Array.isArray(entry?.rune) ? entry.rune.slice(0, 3) : [];
+  while (rune.length < 3) rune.push(0);
+  return {
+    side,
+    slot,
+    charaId: typeof entry?.charaId === 'string' ? entry.charaId : '',
+    rune: rune.map((level) => Number.isFinite(Number(level)) ? Number(level) : 0),
+    memo: typeof entry?.memo === 'string' ? entry.memo : '',
+  };
+}
+
+function normalizeEntries(sourceEntries) {
+  return SIDES.flatMap((side) =>
+    Array.from({ length: 5 }, (_, slot) => {
+      const found = Array.isArray(sourceEntries)
+        ? sourceEntries.find((entry) => entry?.side === side.id && Number(entry?.slot) === slot)
+        : null;
+      return found ? normalizeEntry(found, side.id, slot) : createEmptyEntry(side.id, slot);
+    })
+  );
+}
+
+function presetSnapshot() {
+  return entries.map((entry) => ({
+    side: entry.side,
+    slot: entry.slot,
+    charaId: entry.charaId,
+    rune: [...entry.rune],
+    memo: entry.memo,
+  }));
+}
+
+function readPresets() {
+  try {
+    const raw = localStorage.getItem(PRESET_STORAGE_KEY);
+    if (!raw) return [];
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed) ? parsed : [];
+  } catch (error) {
+    return [];
+  }
+}
+
+function writePresets(presets) {
+  localStorage.setItem(PRESET_STORAGE_KEY, JSON.stringify(presets));
+}
+
+function presetLabel(preset) {
+  const count = normalizeEntries(preset.entries).filter((entry) => entry.charaId).length;
+  const date = preset.updatedAt ? new Date(preset.updatedAt) : null;
+  const dateText = date && !Number.isNaN(date.getTime())
+    ? date.toLocaleString('ja-JP', { month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' })
+    : '日時なし';
+  return `${preset.name || '無題'}（${count}体 / ${dateText}）`;
+}
+
+function setPresetStatus(message) {
+  const target = document.getElementById('presetStatus');
+  if (target) target.textContent = message;
 }
 
 async function loadData() {
@@ -833,6 +926,89 @@ function renderLineup() {
 function renderAll() {
   renderBuilder();
   renderLineup();
+  renderPresetList();
+}
+
+function renderPresetList(selectedId = '') {
+  const select = document.getElementById('presetSelect');
+  if (!select) return;
+  const presets = readPresets().sort((a, b) => String(b.updatedAt || '').localeCompare(String(a.updatedAt || '')));
+  select.innerHTML = presets.length
+    ? presets.map((preset) => `
+      <option value="${escapeHtml(preset.id)}" ${preset.id === selectedId ? 'selected' : ''}>${escapeHtml(presetLabel(preset))}</option>
+    `).join('')
+    : '<option value="">保存済みプリセットなし</option>';
+}
+
+function savePreset() {
+  if (!entries.some((entry) => entry.charaId)) {
+    alert('保存するキャラがありません。');
+    return;
+  }
+
+  const name = prompt('プリセット名を入力してください。', '');
+  if (name === null) return;
+  const trimmedName = name.trim();
+  if (!trimmedName) {
+    alert('プリセット名を入力してください。');
+    return;
+  }
+
+  const now = new Date().toISOString();
+  const preset = {
+    id: `preset-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
+    name: trimmedName,
+    createdAt: now,
+    updatedAt: now,
+    entries: presetSnapshot(),
+  };
+
+  try {
+    const presets = readPresets();
+    presets.push(preset);
+    writePresets(presets);
+    renderPresetList(preset.id);
+    setPresetStatus(`保存しました：${trimmedName}`);
+  } catch (error) {
+    alert('保存に失敗しました。ブラウザの保存容量が足りない可能性があります。');
+  }
+}
+
+function selectedPreset() {
+  const select = document.getElementById('presetSelect');
+  const id = select?.value || '';
+  if (!id) return null;
+  return readPresets().find((preset) => preset.id === id) || null;
+}
+
+function loadPreset() {
+  const preset = selectedPreset();
+  if (!preset) {
+    alert('読み込むプリセットを選択してください。');
+    return;
+  }
+  if (!confirm(`現在の編成を「${preset.name || '無題'}」で上書きします。よろしいですか？`)) return;
+
+  entries = normalizeEntries(preset.entries);
+  draft = createDraft();
+  document.getElementById('resultArea').innerHTML = '';
+  renderAll();
+  renderPresetList(preset.id);
+  setPresetStatus(`読み込みました：${preset.name || '無題'}`);
+}
+
+function deletePreset() {
+  const preset = selectedPreset();
+  if (!preset) {
+    alert('削除するプリセットを選択してください。');
+    return;
+  }
+  if (!confirm(`プリセット「${preset.name || '無題'}」を削除します。よろしいですか？`)) return;
+
+  const presets = readPresets().filter((item) => item.id !== preset.id);
+  writePresets(presets);
+  renderPresetList();
+  setPresetStatus(`削除しました：${preset.name || '無題'}`);
 }
 
 function validEntries() {
