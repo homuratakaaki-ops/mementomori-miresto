@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>[雪花の誓い]シズ / ミレスト・メメントモリ分析データ室</title>
+  <title>ルシール / ミレスト・メメントモリ分析データ室</title>
   <style>
     :root {
       color-scheme: light;
@@ -14,11 +14,10 @@
       --panel: #ffffff;
       --navy: #0b2a57;
       --red: #a83a32;
-      --ice: #dff1fb;
+      --violet: #efeafb;
       --gold: #b88932;
       --shadow: 0 12px 30px rgba(28, 40, 68, 0.12);
     }
-
     * { box-sizing: border-box; }
     body {
       margin: 0;
@@ -30,7 +29,7 @@
     a { color: inherit; }
     .page-header {
       padding: 28px clamp(16px, 4vw, 48px) 24px;
-      background: linear-gradient(180deg, #ffffff 0%, var(--ice) 100%);
+      background: linear-gradient(180deg, #ffffff 0%, var(--violet) 100%);
       border-bottom: 1px solid var(--line);
     }
     .header-inner, main, .footer-inner {
@@ -120,7 +119,7 @@
       gap: 10px;
       padding: 12px;
       border-bottom: 1px solid var(--line);
-      background: #f0f8fd;
+      background: #f7f1ff;
     }
     .skill-card h3 {
       margin-bottom: 2px;
@@ -220,8 +219,8 @@
   <header class="page-header">
     <div class="header-inner">
       <p class="eyebrow">CHARACTER DETAIL</p>
-      <h1 id="characterName">[雪花の誓い]シズ</h1>
-      <p class="role" id="roleMemo">防御力依存の攻撃力増加と高速自傷連撃で速攻紅パを支える紅属性ウォーリア。</p>
+      <h1 id="characterName">ルシール</h1>
+      <p class="role" id="roleMemo">紅属性全体へ解除不可のスピード支援を届ける速攻自傷紅パの中核ウォーリア。</p>
       <div class="meta-row" id="characterMeta"></div>
     </div>
   </header>
@@ -231,9 +230,9 @@
       <div>
         <section class="section" aria-labelledby="skillsTitle">
           <h2 id="skillsTitle">スキル一覧</h2>
-          <p class="section-lead">倍率は比較用の直接ダメージです。月照の構えによる防御力参照の攻撃力増加、多重バリア、カウンタ減少は倍率欄に含めません。</p>
+          <p class="section-lead">倍率は比較用の直接ダメージです。魔女解放軍リーダーのスピード支援、置き去りの愛の被ダメージ増加、革命の彩剣のCT短縮は倍率欄に含めません。</p>
           <div class="skill-grid" id="skillGrid"></div>
-          <a class="compare-link" href="../../compare-prototype.html?character=shizu_snow">スキル比較DBで見る</a>
+          <a class="compare-link" href="../../compare-prototype.html?character=lucile">スキル比較DBで見る</a>
         </section>
 
         <section class="section" aria-labelledby="reviewTitle">
@@ -241,31 +240,31 @@
           <div class="manual-block">
             <article class="manual-card">
               <h3>役割解説</h3>
-              <p>[雪花の誓い]シズは、スピード3582の高速初動から自傷連撃を撃ち、防御力200%分の攻撃力増加で火力を底上げする紅属性ウォーリアです。速攻紅パでは、ルシールやアイシェと組み合わせて主力アタッカーを担う想定になります。</p>
-              <p>一閃・白羽衣は専用Lv1で8連撃になり、バリア剥がしとスピード減少を同時に狙えます。玉水割りはHP条件が成立したとき、専用Lv2で2280%×3体、条件MAX6840%まで伸びる主砲です。</p>
-              <p>ただし、強さの根は防御力参照の攻撃力増加です。手足防具の育成が足りないと火力が出にくく、SR1枚や中途半端な育成では役割を持ちにくい上位向けキャラです。</p>
+              <p>ルシールは、紅属性の味方へ解除不可のスピード支援を配り、速攻自傷紅パの行動順を押し上げる中核サポーターです。専用Lv2で紅属性のスピード増加が20%になり、ここが採用理由の中心です。</p>
+              <p>スキル1は弱体効果数に応じて最大3650%まで伸び、スキル2は専用Lv3で2900%の連撃に加えて、彩光5スタック条件で攻撃力最高の味方のCTを2短縮します。火力役というより、速度・被ダメ増加・CT短縮で主力を動かす設計です。</p>
+              <p>一方で、紅属性自傷パを組まないなら価値は大きく落ちます。スピード支援だけならSR1枚でも機能しますが、攻撃力支援や本人火力まで期待するなら本人の育成も必要です。</p>
             </article>
             <article class="manual-card">
               <h3>強み</h3>
               <ul>
-                <li>スピード3582で先手を取りやすい</li>
-                <li>月照の構えで防御力200%分の攻撃力増加を得られる</li>
-                <li>専用Lv1の8連撃で多重バリアを剥がしやすい</li>
-                <li>一閃・白羽衣は70%でスピード30%減少を狙える</li>
-                <li>玉水割りはHP条件成立時に最大6840%まで伸びる</li>
-                <li>自傷後は自身HPが下がるため、玉水割りのHP条件を満たしやすい</li>
-                <li>開幕多重バリアで初動の行動保証を持ちやすい</li>
+                <li>専用Lv2で紅属性味方へ解除不可のスピード+20%を配れる</li>
+                <li>スピード支援目的なら低凸でも役割を持ちやすい</li>
+                <li>味方全体へ自身の攻撃力25%分の攻撃力支援を付与できる</li>
+                <li>自傷をトリガーに彩光を積み、被ダメージ増加を広げられる</li>
+                <li>レス・ノウェは弱体2個以上で3650%まで伸びる副砲になる</li>
+                <li>革命の彩剣は条件成立時に主力アタッカーのCTを2短縮できる</li>
+                <li>春シズ、アイシェ、リーベ、フラッグなど紅自傷パーツと噛み合う</li>
               </ul>
             </article>
             <article class="manual-card">
               <h3>弱み・注意点</h3>
               <ul>
-                <li>LR級の育成と防具強化が前提で、低凸運用には向かない</li>
-                <li>防御力参照の攻撃力増加を活かすには手足防具の育成が重要</li>
-                <li>8連撃が高カウンタ相手に吸われると自傷と反撃で崩れやすい</li>
-                <li>カウンタ減少は防御力条件付きで、上位対人では過信できない</li>
-                <li>玉水割りの条件MAXは対象3体のHP条件が必要で、常時保証ではない</li>
-                <li>速攻紅パの土台がない場合、投資効率はかなり落ちる</li>
+                <li>紅属性以外への出張性能は低い</li>
+                <li>多重バリアや自己防衛を持たず、自傷もあるため耐久は薄い</li>
+                <li>CT短縮はバトル中1回のみで、2ターン目以降まで生き残る必要がある</li>
+                <li>攻撃力支援はルシール本人の攻撃力に依存する</li>
+                <li>レス・ノウェの最大火力は弱体2個以上が前提</li>
+                <li>速攻紅パを組まない場合、引いても倉庫番になりやすい</li>
               </ul>
             </article>
           </div>
@@ -277,21 +276,21 @@
             <article class="manual-card">
               <h3>引きたい人</h3>
               <ul>
-                <li>ルシールやアイシェを含む速攻紅パを本格運用している人</li>
-                <li>手足防具のメタトロン化など、防御力を火力へ変える投資ができる人</li>
-                <li>高速アタッカーでバリア剥がしとスピード減少を同時に狙いたい人</li>
-                <li>HP条件付きの高倍率3体攻撃を主砲として使いたい人</li>
-                <li>PU・運命ガチャで上位向け紅アタッカーを確保したい人</li>
+                <li>速攻型の紅自傷パを組む予定がある人</li>
+                <li>春シズ、アイシェ、リーベ、フラッグなどの紅パーツを使う人</li>
+                <li>紅属性アタッカーの行動順をスピード+20%で押し上げたい人</li>
+                <li>SR1枚からでも速度支援役を確保したい人</li>
+                <li>PU・運命ガチャで紅速攻の中核サポーターを押さえたい人</li>
               </ul>
             </article>
             <article class="manual-card">
               <h3>後回しでいい人</h3>
               <ul>
-                <li>無課金・微課金で、LR級育成や防具投資が難しい人</li>
-                <li>SR1枚だけで即戦力や置き物運用を期待している人</li>
-                <li>速攻紅パの土台がまだ揃っていない人</li>
-                <li>カウンタ対策を確実な主目的として引こうとしている人</li>
-                <li>防具育成よりキャラ数の確保を優先したい段階の人</li>
+                <li>紅属性の速攻・自傷パを組む予定がない人</li>
+                <li>他属性メインで紅属性へリソースを寄せる予定がない人</li>
+                <li>CT短縮を安定発動する耐久補助まで用意できない人</li>
+                <li>速度支援より単体で完結するアタッカーを優先したい人</li>
+                <li>攻撃力支援目的なのにルシール本人を育てる余裕がない人</li>
               </ul>
             </article>
           </div>
@@ -301,27 +300,27 @@
           <h2 id="weaponTitle">専用武器パッシブ</h2>
           <div class="stat-grid">
             <article class="stat-card"><h3>攻撃力</h3><p>+18%</p></article>
-            <article class="stat-card"><h3>防御力</h3><p>+5%</p></article>
             <article class="stat-card"><h3>クリティカル</h3><p>+10%</p></article>
+            <article class="stat-card"><h3>HP</h3><p>+22%</p></article>
           </div>
         </section>
 
         <section class="section" aria-labelledby="profileTitle">
           <h2 id="profileTitle">プロフィール・基礎データ</h2>
           <div class="stat-grid">
-            <article class="stat-card"><h3>プロフィール</h3><dl><dt>タイプ</dt><dd>非恒常キャラ</dd><dt>属性 / 武器種</dt><dd>紅 / ウォーリア</dd><dt>特徴</dt><dd>高倍率物理・自傷・防御力参照火力</dd></dl></article>
-            <article class="stat-card"><h3>入手・状態</h3><dl><dt>入手</dt><dd>星の導き</dd><dt>ガチャ状態</dt><dd>PU・運命予定</dd><dt>実装日</dt><dd>2025年2月14日</dd><dt>直近ピックアップ</dt><dd>2026年1月15日</dd></dl></article>
-            <article class="stat-card"><h3>ステータス（LR）</h3><dl><dt>戦闘力</dt><dd>7,300,990</dd><dt>攻撃力 / HP</dt><dd>746,891 / 4,027,330</dd><dt>スピード</dt><dd>3,582</dd></dl></article>
-            <article class="stat-card"><h3>防御・耐久</h3><dl><dt>物理防御力</dt><dd>746,886</dd><dt>魔法防御力</dt><dd>615,080</dd><dt>防御力</dt><dd>10</dd></dl></article>
+            <article class="stat-card"><h3>プロフィール</h3><dl><dt>タイプ</dt><dd>非恒常キャラ</dd><dt>属性 / 武器種</dt><dd>紅 / ウォーリア</dd><dt>特徴</dt><dd>自傷・攻撃支援・被ダメ増加</dd></dl></article>
+            <article class="stat-card"><h3>入手・状態</h3><dl><dt>入手</dt><dd>星の導き</dd><dt>ガチャ状態</dt><dd>PU・運命予定</dd><dt>実装日</dt><dd>2025年5月14日</dd><dt>直近ピックアップ</dt><dd>2025年12月25日</dd></dl></article>
+            <article class="stat-card"><h3>ステータス（LR）</h3><dl><dt>戦闘力</dt><dd>7,191,890</dd><dt>攻撃力 / HP</dt><dd>700,786 / 4,525,927</dd><dt>スピード</dt><dd>3,525</dd></dl></article>
+            <article class="stat-card"><h3>防御・耐久</h3><dl><dt>物理防御力</dt><dd>700,792</dd><dt>魔法防御力</dt><dd>613,190</dd><dt>防御力</dt><dd>10</dd></dl></article>
             <article class="stat-card"><h3>未確認項目</h3><dl><dt>身長 / 体重</dt><dd>未確認</dd><dt>誕生日</dt><dd>未確認</dd><dt>CV / ラメント</dt><dd>未確認</dd></dl></article>
-            <article class="stat-card"><h3>データ根拠</h3><dl><dt>基礎情報</dt><dd>添付カード画像・指定note・既存DB</dd><dt>評価</dt><dd>指定note・既存DB</dd><dt>note</dt><dd><a href="https://note.com/musoudc/n/n23691a6537e3">[雪花の誓い]シズ性能メモ</a></dd></dl></article>
+            <article class="stat-card"><h3>データ根拠</h3><dl><dt>基礎情報</dt><dd>添付カード画像・指定note・既存DB</dd><dt>評価</dt><dd>指定note・既存DB</dd><dt>note</dt><dd><a href="https://note.com/musoudc/n/n1c4ea8007658">ルシール性能メモ</a></dd></dl></article>
           </div>
         </section>
 
         <section class="section" aria-labelledby="creativeTitle">
           <h2 id="creativeTitle">創作関連</h2>
           <div class="manual-card">
-            <p>note記事：<a href="https://note.com/musoudc/n/n23691a6537e3">[雪花の誓い]シズの評価まとめ</a>。速攻紅パ、防御力参照火力、HP条件付き高倍率攻撃を中心に、サイト向けへ要約しています。</p>
+            <p>note記事：<a href="https://note.com/musoudc/n/n1c4ea8007658">ルシールの評価まとめ</a>。紅属性スピード支援、彩光、CT短縮、速攻自傷紅パでの役割を中心に、サイト向けへ要約しています。</p>
           </div>
         </section>
       </div>
@@ -329,7 +328,7 @@
       <aside class="side-panel">
         <h2>関連リンク</h2>
         <p id="gachaUpdated" class="status">ガチャ状態確認日：2026-06-07</p>
-        <p class="status">火力は非常に高い一方、低投資では機能しにくいキャラです。防具育成と速攻紅パの土台があるかを先に確認してください。</p>
+        <p class="status">ルシールは紅速攻を組むなら中核です。ただし、紅自傷パを組まない場合は汎用サポーターとして見ない方が安全です。</p>
         <ul class="link-list">
           <li><a href="../../index.html">トップへ戻る</a></li>
           <li><a href="../../compare-prototype.html">比較DBへ戻る</a></li>
@@ -340,7 +339,7 @@
   </main>
 
   <script>
-    const characterId = "shizu_snow";
+    const characterId = "lucile";
 
     function valueOrDash(value) {
       return value === null || value === undefined || value === "" ? "-" : value;
@@ -402,7 +401,7 @@
 
     async function loadData() {
       const baseData = await fetchJson("../../data/mementomori-skills.json");
-      const overlayData = await fetchJson("../../data/shizu-snow-overlay.json", true);
+      const overlayData = await fetchJson("../../data/lucile-overlay.json", true);
       return mergeSkillData(baseData, overlayData);
     }
 
