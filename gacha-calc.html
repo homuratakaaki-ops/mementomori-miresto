@@ -36,6 +36,29 @@
 
   .container { max-width: 460px; margin: 0 auto; }
 
+  .site-nav {
+    margin-bottom: 18px;
+  }
+
+  .site-nav.bottom {
+    margin: 18px 0 0;
+    text-align: center;
+  }
+
+  .site-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--gold);
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .site-back:hover {
+    text-decoration: underline;
+  }
+
   /* ヘッダー */
   .header { text-align: center; margin-bottom: 28px; }
   .header-sub { font-size: 11px; letter-spacing: 4px; color: var(--gold); margin-bottom: 6px; text-transform: uppercase; font-family: 'Noto Serif JP', serif; }
@@ -251,6 +274,10 @@
 <body>
 <div class="container">
 
+  <nav class="site-nav" aria-label="サイト内ナビゲーション">
+    <a class="site-back" href="./index.html">← サイトトップへ戻る</a>
+  </nav>
+
   <!-- ヘッダー -->
   <div class="header">
     <div class="header-sub">MementoMori</div>
@@ -347,6 +374,10 @@
 
   <!-- ダイヤ結果 -->
   <div id="diamondResult"></div>
+
+  <nav class="site-nav bottom" aria-label="サイト内ナビゲーション">
+    <a class="site-back" href="./index.html">← サイトトップへ戻る</a>
+  </nav>
 
   <div class="footer-note">
     ※ 期待値は通常確率による概算です<br>
