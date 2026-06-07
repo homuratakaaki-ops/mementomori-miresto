@@ -11,7 +11,7 @@
 
   :root {
     --gold: #c8aa64;
-    --gold-dim: rgba(200,170,100,0.22);
+    --gold-dim: rgba(200,170,100,0.24);
     --gold-bg: rgba(200,170,100,0.1);
     --bg: #0d0a14;
     --bg2: #1a1025;
@@ -51,7 +51,8 @@
     font-family: 'Noto Serif JP', serif; line-height: 1.4;
   }
   .header-line {
-    width: 48px; height: 2px; background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    width: 48px; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
     margin: 10px auto 0;
   }
 
@@ -71,12 +72,6 @@
   }
   .section-title::after { content: ''; flex: 1; height: 1px; background: var(--gold-dim); }
 
-  .toolbar {
-    display: grid;
-    grid-template-columns: minmax(170px, 1fr) minmax(220px, 1.4fr) auto;
-    gap: 10px;
-    align-items: end;
-  }
   label { display: block; font-size: 11px; color: var(--text-dim); margin-bottom: 5px; }
   select,
   input[type="search"],
@@ -92,7 +87,7 @@
     outline: none;
   }
   select option { background: #1a1025; }
-  textarea { min-height: 44px; resize: vertical; line-height: 1.5; }
+  textarea { min-height: 48px; resize: vertical; line-height: 1.5; }
 
   .btn {
     min-height: 38px;
@@ -107,56 +102,73 @@
   }
   .btn:hover { background: var(--gold-bg); border-color: var(--gold); }
   .btn.primary {
-    width: 100%;
-    min-height: 48px;
     border-color: var(--gold);
     color: #f0e0c0;
     background: var(--gold-bg);
-    font-size: 15px;
-    font-family: 'Noto Serif JP', serif;
   }
   .btn.danger { border-color: rgba(224,112,112,0.45); color: #f2a0a0; }
+  .btn.full { width: 100%; min-height: 48px; font-size: 15px; font-family: 'Noto Serif JP', serif; }
 
-  .team-grid {
+  .builder-grid {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
     gap: 14px;
   }
-  .team-title {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 10px;
-    color: var(--gold);
-    font-weight: 700;
+  .filter-grid,
+  .target-grid,
+  .draft-actions {
+    display: grid;
+    gap: 10px;
   }
-  .team-note { color: var(--text-dark); font-size: 11px; font-weight: 400; }
+  .filter-grid { grid-template-columns: minmax(130px, 0.8fr) minmax(180px, 1.2fr); }
+  .target-grid { grid-template-columns: 150px minmax(0, 1fr); align-items: end; }
+  .draft-actions { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 
-  .slot-card {
-    background: rgba(255,255,255,0.03);
+  .draft-summary {
+    display: grid;
+    gap: 6px;
+    margin-top: 10px;
+    padding: 10px 12px;
     border: 1px solid var(--gold-dim);
     border-radius: 10px;
-    padding: 12px;
-    margin-bottom: 10px;
+    background: rgba(255,255,255,0.03);
   }
-  .slot-head {
-    display: grid;
-    grid-template-columns: 28px minmax(0, 1fr);
-    gap: 8px;
-    align-items: center;
-    margin-bottom: 9px;
-  }
-  .slot-num { color: var(--gold); font-size: 12px; text-align: center; }
+  .draft-name { color: #f0e0c0; font-weight: 800; font-size: 15px; }
+  .draft-meta { color: var(--text-dark); font-size: 11px; }
+  .draft-speed { color: var(--gold); font-weight: 800; }
 
-  .rune-panel {
+  .side-tabs,
+  .slot-tabs {
     display: grid;
-    gap: 8px;
-    margin-top: 8px;
+    gap: 6px;
   }
+  .side-tabs { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .slot-tabs { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+  .pick-btn {
+    min-height: 34px;
+    padding: 6px 8px;
+    border-radius: 8px;
+    border: 1px solid var(--gold-dim);
+    background: rgba(255,255,255,0.03);
+    color: var(--text-dim);
+    font-family: inherit;
+    cursor: pointer;
+  }
+  .pick-btn.active {
+    border-color: var(--gold);
+    background: var(--gold-bg);
+    color: #f0e0c0;
+    font-weight: 800;
+  }
+  .pick-btn.occupied:not(.active) {
+    color: #d7b184;
+    border-style: dashed;
+  }
+
+  .rune-panel { display: grid; gap: 8px; }
   .rune-row {
     display: grid;
-    grid-template-columns: 52px minmax(0, 1fr);
+    grid-template-columns: 58px minmax(0, 1fr);
     gap: 7px;
     align-items: center;
   }
@@ -183,30 +195,40 @@
     color: #f0e0c0;
     font-weight: 700;
   }
-  .slot-actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    margin-top: 8px;
+
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
   }
-  .slot-actions .btn {
-    min-height: 30px;
-    padding: 5px 8px;
-    font-size: 11px;
-  }
-  .speed-line {
+  .team-title {
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 8px;
-    margin-top: 8px;
-    padding: 9px 10px;
-    background: var(--gold-bg);
-    border: 1px solid var(--gold-dim);
-    border-radius: 8px;
+    margin-bottom: 10px;
+    color: var(--gold);
+    font-weight: 700;
   }
-  .speed-breakdown { color: var(--text-dark); font-size: 11px; }
-  .speed-value { color: var(--gold); font-size: 18px; font-weight: 700; }
+  .team-note { color: var(--text-dark); font-size: 11px; font-weight: 400; }
+  .lineup-slot {
+    display: grid;
+    grid-template-columns: 30px minmax(0, 1fr) auto;
+    gap: 8px;
+    align-items: center;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--gold-dim);
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 8px;
+  }
+  .lineup-num { color: var(--gold); font-size: 12px; text-align: center; }
+  .lineup-empty { color: var(--text-dark); font-size: 13px; }
+  .lineup-name { color: #f0e0c0; font-weight: 800; font-size: 14px; }
+  .lineup-meta { color: var(--text-dark); font-size: 11px; margin-top: 3px; line-height: 1.5; }
+  .lineup-speed { color: var(--gold); font-weight: 800; }
+  .lineup-actions { display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
+  .lineup-actions .btn { min-height: 30px; padding: 5px 8px; font-size: 11px; }
 
   .result-tools {
     display: grid;
@@ -224,7 +246,6 @@
     line-height: 1.7;
   }
   .memo-box strong { color: var(--gold); }
-
   .turn-section { margin-bottom: 14px; }
   .turn-title {
     font-size: 12px; letter-spacing: 2px; color: var(--gold);
@@ -276,21 +297,17 @@
   .loading { text-align: center; padding: 20px; color: var(--text-dim); font-size: 13px; }
 
   @media (max-width: 900px) {
-    .toolbar,
+    .builder-grid,
+    .filter-grid,
+    .target-grid,
+    .draft-actions,
     .team-grid,
     .result-tools {
       grid-template-columns: 1fr;
     }
-    .rune-buttons {
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-    }
-    .result-row {
-      grid-template-columns: 30px 60px minmax(0, 1fr);
-    }
-    .result-speeds {
-      grid-column: 3;
-      text-align: left;
-    }
+    .rune-buttons { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .result-row { grid-template-columns: 30px 60px minmax(0, 1fr); }
+    .result-speeds { grid-column: 3; text-align: left; }
   }
 </style>
 </head>
@@ -309,28 +326,65 @@
   <div id="loadingMsg" class="card loading">キャラデータ読み込み中...</div>
 
   <div id="mainContent" style="display:none">
-    <div class="card">
-      <div class="section-title">絞り込み</div>
-      <div class="toolbar">
+    <section class="card">
+      <div class="section-title">キャラ作成</div>
+      <div class="builder-grid">
         <div>
-          <label for="attributeFilter">属性</label>
-          <select id="attributeFilter" onchange="setFilters()">
-            <option value="">全属性</option>
-            <option value="藍">藍</option>
-            <option value="紅">紅</option>
-            <option value="翠">翠</option>
-            <option value="黄">黄</option>
-            <option value="天">天</option>
-            <option value="冥">冥</option>
-          </select>
+          <div class="filter-grid">
+            <div>
+              <label for="attributeFilter">属性で絞り込み</label>
+              <select id="attributeFilter" onchange="setFilters()">
+                <option value="">全属性</option>
+                <option value="藍">藍</option>
+                <option value="紅">紅</option>
+                <option value="翠">翠</option>
+                <option value="黄">黄</option>
+                <option value="天">天</option>
+                <option value="冥">冥</option>
+              </select>
+            </div>
+            <div>
+              <label for="nameFilter">名前で絞り込み</label>
+              <input id="nameFilter" type="search" placeholder="キャラ名で絞り込み" oninput="setFilters()">
+            </div>
+          </div>
+
+          <label for="characterSelect" style="margin-top:10px">STEP 1 キャラを選ぶ</label>
+          <select id="characterSelect" onchange="selectDraftCharacter(this.value)"></select>
+
+          <div class="draft-summary" id="draftSummary"></div>
         </div>
+
         <div>
-          <label for="nameFilter">名前</label>
-          <input id="nameFilter" type="search" placeholder="キャラ名で絞り込み" oninput="setFilters()">
+          <label>STEP 2 ルーンを選ぶ</label>
+          <div class="rune-panel" id="draftRunes"></div>
+          <div class="lineup-actions" style="margin:8px 0 10px">
+            <button class="btn" type="button" onclick="setDraftAllRunes(10)">全ルーンLv10</button>
+            <button class="btn" type="button" onclick="setDraftAllRunes(0)">ルーンなし</button>
+          </div>
+
+          <label for="draftMemo">メモ</label>
+          <textarea id="draftMemo" placeholder="役割、注意点、調整メモ" oninput="updateDraftMemo(this.value)"></textarea>
+
+          <div class="target-grid" style="margin-top:10px">
+            <div>
+              <label>投入先</label>
+              <div class="side-tabs" id="sideTabs"></div>
+            </div>
+            <div>
+              <label>指定枠</label>
+              <div class="slot-tabs" id="slotTabs"></div>
+            </div>
+          </div>
+
+          <div class="draft-actions" style="margin-top:10px">
+            <button class="btn primary" type="button" onclick="placeDraft(false)">指定枠へ入れる</button>
+            <button class="btn primary" type="button" onclick="placeDraft(true)">残り枠へ入れる</button>
+            <button class="btn danger" type="button" onclick="resetDraft()">作成中クリア</button>
+          </div>
         </div>
-        <button class="btn danger" onclick="clearAll()">全クリア</button>
       </div>
-    </div>
+    </section>
 
     <div class="team-grid">
       <section class="card">
@@ -350,7 +404,7 @@
       </section>
     </div>
 
-    <button class="btn primary" onclick="calcOrder()">⚡ 行動順を計算する</button>
+    <button class="btn primary full" onclick="calcOrder()">⚡ 行動順を計算する</button>
 
     <div id="resultArea"></div>
 
@@ -361,7 +415,7 @@
     <div class="footer-note">
       ※ 実際の行動順にはゲーム内の乱数処理が含まれます<br>
       ※ 表示順と実際の行動順が異なる場合があります<br>
-      ※ バフ・デバフは第2段階で対応予定
+      ※ 基礎倍率やバフ・デバフは今後対応予定
     </div>
   </div>
 </div>
@@ -395,6 +449,11 @@ let characters = [];
 let skills = [];
 let filters = { attribute: '', name: '' };
 let entries = [];
+let draft = createDraft();
+
+function createDraft() {
+  return { charaId: '', rune: [0, 0, 0], memo: '', side: 'ally', slot: 0, editingKey: null };
+}
 
 function createEmptyEntry(side, slot) {
   return { side, slot, charaId: '', rune: [0, 0, 0], memo: '' };
@@ -417,57 +476,16 @@ async function loadData() {
   }
 }
 
-function setFilters() {
-  filters.attribute = document.getElementById('attributeFilter').value;
-  filters.name = document.getElementById('nameFilter').value.trim().toLowerCase();
-  renderAll();
+function entryKey(entry) {
+  return `${entry.side}:${entry.slot}`;
 }
 
-function selectedIds(exceptEntry) {
-  return new Set(
-    entries
-      .filter((entry) => entry !== exceptEntry && entry.charaId)
-      .map((entry) => entry.charaId)
-  );
-}
-
-function filteredCharacters(entry) {
-  const used = selectedIds(entry);
-  return characters
-    .filter((character) => !filters.attribute || character.attribute === filters.attribute)
-    .filter((character) => !filters.name || character.name.toLowerCase().includes(filters.name))
-    .filter((character) => character.id === entry.charaId || !used.has(character.id))
-    .sort((a, b) => (a.name || '').localeCompare(b.name || '', 'ja'));
+function keyOf(side, slot) {
+  return `${side}:${slot}`;
 }
 
 function getCharacter(id) {
   return characters.find((character) => character.id === id);
-}
-
-function getSkillName(characterId, number) {
-  const skill = skills.find((item) =>
-    item.characterId === characterId &&
-    item.number === number &&
-    item.skillType === 'アクティブ'
-  );
-  return skill?.name || `スキル${number}`;
-}
-
-function runeSpeed(level) {
-  return RUNE_TABLE.find((rune) => rune.lv === level)?.speed || 0;
-}
-
-function runeSum(entry) {
-  return entry.rune.reduce((sum, level) => sum + runeSpeed(level), 0);
-}
-
-function finalSpeed(entry) {
-  const character = getCharacter(entry.charaId);
-  return character ? (character.speed || 0) + runeSum(entry) : null;
-}
-
-function formatSpeed(value) {
-  return value === null ? '-' : value.toLocaleString();
 }
 
 function escapeHtml(value) {
@@ -479,36 +497,155 @@ function escapeHtml(value) {
     .replaceAll("'", '&#39;');
 }
 
-function changeCharacter(side, slot, value) {
-  const entry = entries.find((item) => item.side === side && item.slot === slot);
-  if (!entry) return;
-  entry.charaId = value;
+function runeSpeed(level) {
+  return RUNE_TABLE.find((rune) => rune.lv === level)?.speed || 0;
+}
+
+function runeSum(data) {
+  return data.rune.reduce((sum, level) => sum + runeSpeed(level), 0);
+}
+
+function finalSpeed(data) {
+  const character = getCharacter(data.charaId);
+  return character ? (character.speed || 0) + runeSum(data) : null;
+}
+
+function formatSpeed(value) {
+  return value === null ? '-' : value.toLocaleString();
+}
+
+function getSkillName(characterId, number) {
+  const skill = skills.find((item) =>
+    item.characterId === characterId &&
+    item.number === number &&
+    item.skillType === 'アクティブ'
+  );
+  return skill?.name || `スキル${number}`;
+}
+
+function setFilters() {
+  filters.attribute = document.getElementById('attributeFilter').value;
+  filters.name = document.getElementById('nameFilter').value.trim().toLowerCase();
+  renderBuilder();
+}
+
+function selectedIds(exceptKey = draft.editingKey) {
+  return new Set(
+    entries
+      .filter((entry) => entry.charaId && entryKey(entry) !== exceptKey)
+      .map((entry) => entry.charaId)
+  );
+}
+
+function filteredCharacters() {
+  const used = selectedIds();
+  return characters
+    .filter((character) => !filters.attribute || character.attribute === filters.attribute)
+    .filter((character) => !filters.name || character.name.toLowerCase().includes(filters.name))
+    .filter((character) => character.id === draft.charaId || !used.has(character.id))
+    .sort((a, b) => (a.name || '').localeCompare(b.name || '', 'ja'));
+}
+
+function selectDraftCharacter(value) {
+  draft.charaId = value;
+  renderBuilder();
+}
+
+function setDraftRune(index, level) {
+  draft.rune[index] = level;
+  renderBuilder();
+}
+
+function setDraftAllRunes(level) {
+  draft.rune = [level, level, level];
+  renderBuilder();
+}
+
+function updateDraftMemo(value) {
+  draft.memo = value;
+}
+
+function setDraftSide(side) {
+  draft.side = side;
+  const slotStillVisible = entries.some((entry) => entry.side === side && entry.slot === draft.slot);
+  if (!slotStillVisible) draft.slot = 0;
+  renderBuilder();
+}
+
+function setDraftSlot(slot) {
+  draft.slot = slot;
+  renderBuilder();
+}
+
+function findEntry(side, slot) {
+  return entries.find((entry) => entry.side === side && entry.slot === slot);
+}
+
+function firstEmptySlot(side) {
+  const open = entries.find((entry) => entry.side === side && !entry.charaId);
+  return open ? open.slot : -1;
+}
+
+function placeDraft(useFirstEmpty) {
+  if (!draft.charaId) {
+    alert('先にキャラを選択してください。');
+    return;
+  }
+
+  const targetSlot = useFirstEmpty ? firstEmptySlot(draft.side) : draft.slot;
+  if (targetSlot < 0) {
+    alert(`${sideLabel(draft.side)}に空き枠がありません。指定枠を選んで上書きしてください。`);
+    return;
+  }
+
+  const target = findEntry(draft.side, targetSlot);
+  if (!target) return;
+
+  const targetKey = keyOf(draft.side, targetSlot);
+  const duplicate = entries.find((entry) =>
+    entry.charaId === draft.charaId &&
+    entryKey(entry) !== draft.editingKey &&
+    entryKey(entry) !== targetKey
+  );
+  if (duplicate) {
+    alert('同じキャラは自軍・敵軍内で重複登録できません。');
+    return;
+  }
+
+  if (draft.editingKey && draft.editingKey !== targetKey) {
+    const source = entries.find((entry) => entryKey(entry) === draft.editingKey);
+    if (source) Object.assign(source, createEmptyEntry(source.side, source.slot));
+  }
+
+  target.charaId = draft.charaId;
+  target.rune = [...draft.rune];
+  target.memo = draft.memo;
+  draft = createDraft();
+  document.getElementById('resultArea').innerHTML = '';
   renderAll();
 }
 
-function setRune(side, slot, index, level) {
-  const entry = entries.find((item) => item.side === side && item.slot === slot);
-  if (!entry) return;
-  entry.rune[index] = level;
+function editEntry(side, slot) {
+  const entry = findEntry(side, slot);
+  if (!entry || !entry.charaId) return;
+  draft = {
+    charaId: entry.charaId,
+    rune: [...entry.rune],
+    memo: entry.memo,
+    side,
+    slot,
+    editingKey: keyOf(side, slot),
+  };
   renderAll();
-}
-
-function setAllRunes(side, slot, level) {
-  const entry = entries.find((item) => item.side === side && item.slot === slot);
-  if (!entry) return;
-  entry.rune = [level, level, level];
-  renderAll();
-}
-
-function updateMemo(side, slot, value) {
-  const entry = entries.find((item) => item.side === side && item.slot === slot);
-  if (entry) entry.memo = value;
+  document.getElementById('characterSelect').scrollIntoView({ behavior: 'smooth', block: 'center' });
 }
 
 function clearSlot(side, slot) {
-  const index = entries.findIndex((item) => item.side === side && item.slot === slot);
-  if (index === -1) return;
-  entries[index] = createEmptyEntry(side, slot);
+  const entry = findEntry(side, slot);
+  if (!entry) return;
+  Object.assign(entry, createEmptyEntry(side, slot));
+  if (draft.editingKey === keyOf(side, slot)) draft = createDraft();
+  document.getElementById('resultArea').innerHTML = '';
   renderAll();
 }
 
@@ -516,83 +653,133 @@ function clearAll() {
   entries = SIDES.flatMap((side) =>
     Array.from({ length: 5 }, (_, index) => createEmptyEntry(side.id, index))
   );
+  draft = createDraft();
   document.getElementById('resultArea').innerHTML = '';
   renderAll();
 }
 
-function characterOptions(entry) {
-  const options = filteredCharacters(entry)
-    .map((character) => `
-      <option value="${character.id}" ${character.id === entry.charaId ? 'selected' : ''}>
-        ${escapeHtml(character.name)}（${(character.speed || 0).toLocaleString()} / ${escapeHtml(character.attribute || '-')}）
-      </option>
-    `)
-    .join('');
-  const hiddenCurrent = entry.charaId && !filteredCharacters(entry).some((character) => character.id === entry.charaId)
-    ? `<option value="${entry.charaId}" selected>${escapeHtml(getCharacter(entry.charaId)?.name || '選択中のキャラ')}</option>`
+function resetDraft() {
+  draft = createDraft();
+  renderBuilder();
+}
+
+function sideLabel(side) {
+  return SIDES.find((item) => item.id === side)?.label || '';
+}
+
+function renderCharacterOptions() {
+  const candidates = filteredCharacters();
+  const current = draft.charaId && !candidates.some((character) => character.id === draft.charaId)
+    ? `<option value="${draft.charaId}" selected>${escapeHtml(getCharacter(draft.charaId)?.name || '選択中のキャラ')}</option>`
     : '';
-  return `<option value="">-- キャラを選択 --</option>${hiddenCurrent}${options}`;
-}
-
-function runeButtons(entry, index) {
-  return RUNE_TABLE.map((rune) => `
-    <button
-      type="button"
-      class="rune-btn ${entry.rune[index] === rune.lv ? 'active' : ''}"
-      onclick="setRune('${entry.side}', ${entry.slot}, ${index}, ${rune.lv})"
-      title="${rune.label} (+${rune.speed})"
-    >${rune.label}</button>
+  const options = candidates.map((character) => `
+    <option value="${character.id}" ${character.id === draft.charaId ? 'selected' : ''}>
+      ${escapeHtml(character.name)}（${(character.speed || 0).toLocaleString()} / ${escapeHtml(character.attribute || '-')})
+    </option>
   `).join('');
+  document.getElementById('characterSelect').innerHTML = `<option value="">-- キャラを選択 --</option>${current}${options}`;
 }
 
-function renderEntry(entry) {
-  const character = getCharacter(entry.charaId);
-  const speed = finalSpeed(entry);
-  const base = character?.speed || 0;
-  const sum = runeSum(entry);
-  return `
-    <div class="slot-card">
-      <div class="slot-head">
-        <span class="slot-num">${entry.slot + 1}</span>
-        <select onchange="changeCharacter('${entry.side}', ${entry.slot}, this.value)">
-          ${characterOptions(entry)}
-        </select>
-      </div>
-
-      <div class="rune-panel">
-        ${[0, 1, 2].map((index) => `
-          <div class="rune-row">
-            <span class="rune-label">ルーン${index + 1}</span>
-            <div class="rune-buttons">${runeButtons(entry, index)}</div>
-          </div>
-        `).join('')}
-      </div>
-
-      <div class="slot-actions">
-        <button class="btn" type="button" onclick="setAllRunes('${entry.side}', ${entry.slot}, 10)">全ルーンLv10</button>
-        <button class="btn" type="button" onclick="setAllRunes('${entry.side}', ${entry.slot}, 0)">ルーンなし</button>
-        <button class="btn danger" type="button" onclick="clearSlot('${entry.side}', ${entry.slot})">枠クリア</button>
-      </div>
-
-      <div class="speed-line">
-        <span class="speed-breakdown">${character ? `基礎 ${base.toLocaleString()} / ルーン +${sum.toLocaleString()}` : '未選択'}</span>
-        <span>最終スピード：<span class="speed-value">${formatSpeed(speed)}</span></span>
-      </div>
-
-      <label for="memo-${entry.side}-${entry.slot}" style="margin-top:8px">メモ</label>
-      <textarea id="memo-${entry.side}-${entry.slot}" placeholder="役割、注意点、調整メモ" oninput="updateMemo('${entry.side}', ${entry.slot}, this.value)">${escapeHtml(entry.memo)}</textarea>
-    </div>
+function renderDraftSummary() {
+  const character = getCharacter(draft.charaId);
+  const speed = finalSpeed(draft);
+  document.getElementById('draftSummary').innerHTML = character ? `
+    <div class="draft-name">${escapeHtml(character.name)}</div>
+    <div class="draft-meta">${escapeHtml(character.attribute || '-')} / 基礎 ${(character.speed || 0).toLocaleString()} / ルーン +${runeSum(draft).toLocaleString()}</div>
+    <div>最終スピード：<span class="draft-speed">${formatSpeed(speed)}</span></div>
+  ` : `
+    <div class="draft-name">未選択</div>
+    <div class="draft-meta">絞り込み後、キャラを選んでからルーンを調整してください。</div>
   `;
 }
 
-function renderAll() {
+function renderDraftRunes() {
+  document.getElementById('draftRunes').innerHTML = [0, 1, 2].map((index) => `
+    <div class="rune-row">
+      <span class="rune-label">ルーン${index + 1}</span>
+      <div class="rune-buttons">
+        ${RUNE_TABLE.map((rune) => `
+          <button
+            type="button"
+            class="rune-btn ${draft.rune[index] === rune.lv ? 'active' : ''}"
+            onclick="setDraftRune(${index}, ${rune.lv})"
+            title="${rune.label} (+${rune.speed})"
+          >${rune.label}</button>
+        `).join('')}
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderTargetControls() {
+  document.getElementById('sideTabs').innerHTML = SIDES.map((side) => `
+    <button type="button" class="pick-btn ${draft.side === side.id ? 'active' : ''}" onclick="setDraftSide('${side.id}')">${side.label}</button>
+  `).join('');
+
+  document.getElementById('slotTabs').innerHTML = Array.from({ length: 5 }, (_, index) => {
+    const entry = findEntry(draft.side, index);
+    const occupied = entry?.charaId ? getCharacter(entry.charaId)?.name || '登録済み' : '空き';
+    return `
+      <button
+        type="button"
+        class="pick-btn ${draft.slot === index ? 'active' : ''} ${entry?.charaId ? 'occupied' : ''}"
+        onclick="setDraftSlot(${index})"
+        title="${escapeHtml(occupied)}"
+      >${index + 1}</button>
+    `;
+  }).join('');
+}
+
+function renderBuilder() {
+  renderCharacterOptions();
+  renderDraftSummary();
+  renderDraftRunes();
+  renderTargetControls();
+  const memo = document.getElementById('draftMemo');
+  if (memo && memo.value !== draft.memo) memo.value = draft.memo;
+}
+
+function renderLineup() {
   SIDES.forEach((side) => {
-    const target = document.getElementById(side.target);
-    target.innerHTML = entries
+    document.getElementById(side.target).innerHTML = entries
       .filter((entry) => entry.side === side.id)
-      .map(renderEntry)
+      .map((entry) => {
+        const character = getCharacter(entry.charaId);
+        if (!character) {
+          return `
+            <div class="lineup-slot">
+              <span class="lineup-num">${entry.slot + 1}</span>
+              <span class="lineup-empty">空き枠</span>
+              <span></span>
+            </div>
+          `;
+        }
+        return `
+          <div class="lineup-slot">
+            <span class="lineup-num">${entry.slot + 1}</span>
+            <div>
+              <div class="lineup-name">${escapeHtml(character.name)}</div>
+              <div class="lineup-meta">
+                最終 <span class="lineup-speed">${formatSpeed(finalSpeed(entry))}</span>
+                / 基礎 ${(character.speed || 0).toLocaleString()}
+                / ルーン +${runeSum(entry).toLocaleString()}
+                ${entry.memo ? `<br>${escapeHtml(entry.memo)}` : ''}
+              </div>
+            </div>
+            <div class="lineup-actions">
+              <button class="btn" type="button" onclick="editEntry('${entry.side}', ${entry.slot})">編集</button>
+              <button class="btn danger" type="button" onclick="clearSlot('${entry.side}', ${entry.slot})">クリア</button>
+            </div>
+          </div>
+        `;
+      })
       .join('');
   });
+}
+
+function renderAll() {
+  renderBuilder();
+  renderLineup();
 }
 
 function validEntries() {
@@ -602,7 +789,7 @@ function validEntries() {
       const character = getCharacter(entry.charaId);
       return {
         side: entry.side,
-        sideLabel: SIDES.find((item) => item.id === entry.side)?.label || '',
+        sideLabel: sideLabel(entry.side),
         name: character?.name || '不明',
         base: character?.speed || 0,
         runeSum: runeSum(entry),
@@ -621,8 +808,8 @@ function resultRow(row, index, rows, skillName) {
       <div class="result-rank ${index === 0 ? 'rank1' : index === 1 ? 'rank2' : index === 2 ? 'rank3' : ''}">${index + 1}</div>
       <div class="side-chip ${row.side}">${row.sideLabel}</div>
       <div>
-        <div class="result-name">${row.name}</div>
-        <div class="result-skill">${skillName}</div>
+        <div class="result-name">${escapeHtml(row.name)}</div>
+        <div class="result-skill">${escapeHtml(skillName)}</div>
         ${row.memo ? `<div class="result-memo">${escapeHtml(row.memo)}</div>` : ''}
       </div>
       <div class="result-speeds">
@@ -645,7 +832,7 @@ function calcOrder() {
     ? `<div class="memo-box"><strong>メモ</strong><br>${memoRows.map((row) => `${escapeHtml(row.sideLabel)} ${escapeHtml(row.name)}: ${escapeHtml(row.memo)}`).join('<br>')}</div>`
     : '<div class="memo-box">メモなし</div>';
 
-  const html = `
+  document.getElementById('resultArea').innerHTML = `
     <div class="result-tools">
       ${memoHtml}
       <button class="btn danger" type="button" onclick="clearAll()">全クリア</button>
@@ -660,8 +847,6 @@ function calcOrder() {
       ${rows.map((row, index) => resultRow(row, index, rows, row.skill2)).join('')}
     </div>
   `;
-
-  document.getElementById('resultArea').innerHTML = html;
   document.getElementById('resultArea').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
 
