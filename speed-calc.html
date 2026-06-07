@@ -225,6 +225,12 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 14px;
   }
+  .team-clear-actions {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+    margin: 10px 0 14px;
+  }
   .team-title {
     display: flex;
     justify-content: space-between;
@@ -352,6 +358,7 @@
     .target-grid,
     .draft-actions,
     .team-grid,
+    .team-clear-actions,
     .result-tools,
     .preset-grid {
       grid-template-columns: 1fr;
@@ -453,6 +460,12 @@
       </section>
     </div>
 
+    <div class="team-clear-actions" aria-label="編成一斉クリア">
+      <button class="btn danger" type="button" onclick="clearTeam('ally')">自軍クリア</button>
+      <button class="btn danger" type="button" onclick="clearTeam('enemy')">敵軍クリア</button>
+      <button class="btn danger" type="button" onclick="clearAll()">全クリア</button>
+    </div>
+
     <button class="btn primary full" onclick="calcOrder()">⚡ 行動順を計算する</button>
 
     <section class="card preset-panel" aria-label="編成プリセット">
@@ -462,10 +475,10 @@
           <label for="presetSelect">保存済みプリセット</label>
           <select id="presetSelect"></select>
         </div>
+        <button class="btn primary" type="button" onclick="loadPreset()">読み込み</button>
         <button class="btn primary" type="button" onclick="savePreset('all')">全体保存</button>
         <button class="btn" type="button" onclick="savePreset('ally')">自軍保存</button>
         <button class="btn" type="button" onclick="savePreset('enemy')">敵軍保存</button>
-        <button class="btn" type="button" onclick="loadPreset()">読み込み</button>
         <button class="btn danger" type="button" onclick="deletePreset()">削除</button>
       </div>
       <div class="preset-status" id="presetStatus">保存先はこのブラウザ内のみです。サーバーには送信しません。</div>
@@ -800,7 +813,19 @@ function clearSlot(side, slot) {
   renderAll();
 }
 
+function clearTeam(side) {
+  const label = sideLabel(side);
+  if (!confirm(`${label}をすべてクリアします。よろしいですか？`)) return;
+  entries = entries.map((entry) =>
+    entry.side === side ? createEmptyEntry(entry.side, entry.slot) : entry
+  );
+  if (draft.side === side || draft.editingKey?.startsWith(`${side}:`)) draft = createDraft(side);
+  document.getElementById('resultArea').innerHTML = '';
+  renderAll();
+}
+
 function clearAll() {
+  if (!confirm('自軍/敵軍をすべてクリアします。よろしいですか？')) return;
   entries = SIDES.flatMap((side) =>
     Array.from({ length: 5 }, (_, index) => createEmptyEntry(side.id, index))
   );
