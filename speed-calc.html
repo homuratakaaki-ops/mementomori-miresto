@@ -106,6 +106,11 @@
     color: #f0e0c0;
     background: var(--gold-bg);
   }
+  .btn.primary.editing {
+    border-color: var(--blue);
+    color: #dbe5ff;
+    background: rgba(131,162,255,0.16);
+  }
   .btn.danger { border-color: rgba(224,112,112,0.45); color: #f2a0a0; }
   .btn.full { width: 100%; min-height: 48px; font-size: 15px; font-family: 'Noto Serif JP', serif; }
 
@@ -136,6 +141,15 @@
   .draft-name { color: #f0e0c0; font-weight: 800; font-size: 15px; }
   .draft-meta { color: var(--text-dark); font-size: 11px; }
   .draft-speed { color: var(--gold); font-weight: 800; }
+  .editing-banner {
+    padding: 7px 9px;
+    border: 1px solid rgba(131,162,255,0.35);
+    border-radius: 8px;
+    color: #dbe5ff;
+    background: rgba(131,162,255,0.1);
+    font-size: 12px;
+    font-weight: 700;
+  }
   .next-target {
     margin-top: 8px;
     padding: 9px 10px;
@@ -239,6 +253,17 @@
   .lineup-speed { color: var(--gold); font-weight: 800; }
   .lineup-actions { display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
   .lineup-actions .btn { min-height: 30px; padding: 5px 8px; font-size: 11px; }
+  .quick-rune-actions {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 6px;
+    margin: 8px 0 10px;
+  }
+  .quick-rune-actions .btn {
+    min-height: 32px;
+    padding: 5px 8px;
+    font-size: 11px;
+  }
 
   .result-tools {
     display: grid;
@@ -368,9 +393,14 @@
         <div>
           <label>STEP 2 ルーンを選ぶ</label>
           <div class="rune-panel" id="draftRunes"></div>
-          <div class="lineup-actions" style="margin:8px 0 10px">
-            <button class="btn" type="button" onclick="setDraftAllRunes(10)">全ルーンLv10</button>
-            <button class="btn" type="button" onclick="setDraftAllRunes(0)">ルーンなし</button>
+          <div class="quick-rune-actions">
+            <button class="btn" type="button" onclick="setDraftAllRunes(10)">全Lv10</button>
+            <button class="btn" type="button" onclick="setDraftAllRunes(11)">全Lv11</button>
+            <button class="btn" type="button" onclick="setDraftAllRunes(12)">全Lv12</button>
+            <button class="btn" type="button" onclick="setDraftAllRunes(13)">全Lv13</button>
+            <button class="btn" type="button" onclick="setDraftAllRunes(14)">全Lv14</button>
+            <button class="btn" type="button" onclick="setDraftAllRunes(15)">全Lv15</button>
+            <button class="btn" type="button" onclick="setDraftAllRunes(0)">なし</button>
           </div>
 
           <label for="draftMemo">メモ</label>
@@ -384,10 +414,7 @@
             </div>
           </div>
 
-          <div class="draft-actions" style="margin-top:10px">
-            <button class="btn primary" type="button" onclick="placeDraft()">次の空き枠へ入れる</button>
-            <button class="btn danger" type="button" onclick="resetDraft()">作成中クリア</button>
-          </div>
+          <div class="draft-actions" id="draftActions" style="margin-top:10px"></div>
         </div>
       </div>
     </section>
@@ -695,11 +722,17 @@ function renderCharacterOptions() {
 function renderDraftSummary() {
   const character = getCharacter(draft.charaId);
   const speed = finalSpeed(draft);
+  const source = draft.editingKey ? entries.find((entry) => entryKey(entry) === draft.editingKey) : null;
+  const editNotice = source
+    ? `<div class="editing-banner">編集中：${escapeHtml(sideLabel(source.side))} ${source.slot + 1} を修正中</div>`
+    : '';
   document.getElementById('draftSummary').innerHTML = character ? `
+    ${editNotice}
     <div class="draft-name">${escapeHtml(character.name)}</div>
     <div class="draft-meta">${escapeHtml(character.attribute || '-')} / 基礎 ${(character.speed || 0).toLocaleString()} / ルーン +${runeSum(draft).toLocaleString()}</div>
     <div>最終スピード：<span class="draft-speed">${formatSpeed(speed)}</span></div>
   ` : `
+    ${editNotice}
     <div class="draft-name">未選択</div>
     <div class="draft-meta">絞り込み後、キャラを選んでからルーンを調整してください。</div>
   `;
@@ -733,7 +766,20 @@ function renderTargetControls() {
   const targetText = targetSlot >= 0
     ? `${sideLabel(draft.side)} ${targetSlot + 1}`
     : `${sideLabel(draft.side)}に空き枠なし`;
-  document.getElementById('nextTarget').innerHTML = `次に入る枠：<strong>${escapeHtml(targetText)}</strong>`;
+  const label = draft.editingKey ? '更新対象' : '次に入る枠';
+  document.getElementById('nextTarget').innerHTML = `${label}：<strong>${escapeHtml(targetText)}</strong>`;
+}
+
+function renderDraftActions() {
+  const isEditing = Boolean(draft.editingKey);
+  document.getElementById('draftActions').innerHTML = `
+    <button class="btn primary ${isEditing ? 'editing' : ''}" type="button" onclick="placeDraft()">
+      ${isEditing ? '編集を完了する' : '次の空き枠へ入れる'}
+    </button>
+    <button class="btn danger" type="button" onclick="resetDraft()">
+      ${isEditing ? '編集をやめる' : '作成中クリア'}
+    </button>
+  `;
 }
 
 function renderBuilder() {
@@ -741,6 +787,7 @@ function renderBuilder() {
   renderDraftSummary();
   renderDraftRunes();
   renderTargetControls();
+  renderDraftActions();
   const memo = document.getElementById('draftMemo');
   if (memo && memo.value !== draft.memo) memo.value = draft.memo;
 }
