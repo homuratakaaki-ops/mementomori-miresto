@@ -276,7 +276,7 @@
   }
   .preset-grid {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) auto auto auto;
+    grid-template-columns: minmax(0, 1fr) repeat(5, auto);
     gap: 8px;
     align-items: end;
   }
@@ -462,7 +462,9 @@
           <label for="presetSelect">保存済みプリセット</label>
           <select id="presetSelect"></select>
         </div>
-        <button class="btn primary" type="button" onclick="savePreset()">この編成を保存</button>
+        <button class="btn primary" type="button" onclick="savePreset('all')">全体保存</button>
+        <button class="btn" type="button" onclick="savePreset('ally')">自軍保存</button>
+        <button class="btn" type="button" onclick="savePreset('enemy')">敵軍保存</button>
         <button class="btn" type="button" onclick="loadPreset()">読み込み</button>
         <button class="btn danger" type="button" onclick="deletePreset()">削除</button>
       </div>
@@ -546,14 +548,28 @@ function normalizeEntries(sourceEntries) {
   );
 }
 
-function presetSnapshot() {
-  return entries.map((entry) => ({
+function scopedEntries(scope = 'all') {
+  return entries.filter((entry) => scope === 'all' || entry.side === scope);
+}
+
+function presetSnapshot(scope = 'all') {
+  return scopedEntries(scope).map((entry) => ({
     side: entry.side,
     slot: entry.slot,
     charaId: entry.charaId,
     rune: [...entry.rune],
     memo: entry.memo,
   }));
+}
+
+function presetScope(preset) {
+  return ['ally', 'enemy', 'all'].includes(preset?.scope) ? preset.scope : 'all';
+}
+
+function scopeLabel(scope) {
+  if (scope === 'ally') return '自軍';
+  if (scope === 'enemy') return '敵軍';
+  return '全体';
 }
 
 function readPresets() {
@@ -572,12 +588,15 @@ function writePresets(presets) {
 }
 
 function presetLabel(preset) {
-  const count = normalizeEntries(preset.entries).filter((entry) => entry.charaId).length;
+  const scope = presetScope(preset);
+  const count = normalizeEntries(preset.entries).filter((entry) =>
+    entry.charaId && (scope === 'all' || entry.side === scope)
+  ).length;
   const date = preset.updatedAt ? new Date(preset.updatedAt) : null;
   const dateText = date && !Number.isNaN(date.getTime())
     ? date.toLocaleString('ja-JP', { month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' })
     : '日時なし';
-  return `${preset.name || '無題'}（${count}体 / ${dateText}）`;
+  return `[${scopeLabel(scope)}] ${preset.name || '無題'}（${count}体 / ${dateText}）`;
 }
 
 function setPresetStatus(message) {
@@ -940,13 +959,15 @@ function renderPresetList(selectedId = '') {
     : '<option value="">保存済みプリセットなし</option>';
 }
 
-function savePreset() {
-  if (!entries.some((entry) => entry.charaId)) {
+function savePreset(scope = 'all') {
+  const normalizedScope = ['ally', 'enemy'].includes(scope) ? scope : 'all';
+  if (!scopedEntries(normalizedScope).some((entry) => entry.charaId)) {
     alert('保存するキャラがありません。');
     return;
   }
 
-  const name = prompt('プリセット名を入力してください。', '');
+  const label = scopeLabel(normalizedScope);
+  const name = prompt(`${label}プリセット名を入力してください。`, '');
   if (name === null) return;
   const trimmedName = name.trim();
   if (!trimmedName) {
@@ -958,9 +979,10 @@ function savePreset() {
   const preset = {
     id: `preset-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
     name: trimmedName,
+    scope: normalizedScope,
     createdAt: now,
     updatedAt: now,
-    entries: presetSnapshot(),
+    entries: presetSnapshot(normalizedScope),
   };
 
   try {
@@ -968,7 +990,7 @@ function savePreset() {
     presets.push(preset);
     writePresets(presets);
     renderPresetList(preset.id);
-    setPresetStatus(`保存しました：${trimmedName}`);
+    setPresetStatus(`保存しました：[${label}] ${trimmedName}`);
   } catch (error) {
     alert('保存に失敗しました。ブラウザの保存容量が足りない可能性があります。');
   }
@@ -987,14 +1009,26 @@ function loadPreset() {
     alert('読み込むプリセットを選択してください。');
     return;
   }
-  if (!confirm(`現在の編成を「${preset.name || '無題'}」で上書きします。よろしいですか？`)) return;
+  const scope = presetScope(preset);
+  const label = scopeLabel(scope);
+  const confirmMessage = scope === 'all'
+    ? `現在の自軍/敵軍を「${preset.name || '無題'}」で上書きします。よろしいですか？`
+    : `現在の${label}を「${preset.name || '無題'}」で上書きします。よろしいですか？`;
+  if (!confirm(confirmMessage)) return;
 
-  entries = normalizeEntries(preset.entries);
+  const loadedEntries = normalizeEntries(preset.entries);
+  entries = scope === 'all'
+    ? loadedEntries
+    : entries.map((entry) => {
+      if (entry.side !== scope) return entry;
+      const loaded = loadedEntries.find((item) => item.side === entry.side && item.slot === entry.slot);
+      return loaded || createEmptyEntry(entry.side, entry.slot);
+    });
   draft = createDraft();
   document.getElementById('resultArea').innerHTML = '';
   renderAll();
   renderPresetList(preset.id);
-  setPresetStatus(`読み込みました：${preset.name || '無題'}`);
+  setPresetStatus(`読み込みました：[${label}] ${preset.name || '無題'}`);
 }
 
 function deletePreset() {
