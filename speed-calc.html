@@ -282,7 +282,7 @@
   }
   .preset-grid {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) repeat(5, auto);
+    grid-template-columns: minmax(0, 1fr) repeat(6, auto);
     gap: 8px;
     align-items: end;
   }
@@ -476,6 +476,7 @@
           <select id="presetSelect"></select>
         </div>
         <button class="btn primary" type="button" onclick="loadPreset()">読み込み</button>
+        <button class="btn primary" type="button" onclick="overwritePreset()">上書き保存</button>
         <button class="btn primary" type="button" onclick="savePreset('all')">全体保存</button>
         <button class="btn" type="button" onclick="savePreset('ally')">自軍保存</button>
         <button class="btn" type="button" onclick="savePreset('enemy')">敵軍保存</button>
@@ -1026,6 +1027,44 @@ function selectedPreset() {
   const id = select?.value || '';
   if (!id) return null;
   return readPresets().find((preset) => preset.id === id) || null;
+}
+
+function overwritePreset() {
+  const preset = selectedPreset();
+  if (!preset) {
+    alert('上書きするプリセットを選択してください。');
+    return;
+  }
+
+  const scope = presetScope(preset);
+  const label = scopeLabel(scope);
+  if (!scopedEntries(scope).some((entry) => entry.charaId)) {
+    alert(`現在の${label}に保存するキャラがありません。`);
+    return;
+  }
+  if (!confirm(`プリセット「[${label}] ${preset.name || '無題'}」を現在の${label}で上書きします。よろしいですか？`)) return;
+
+  try {
+    const presets = readPresets();
+    const index = presets.findIndex((item) => item.id === preset.id);
+    if (index < 0) {
+      alert('上書き対象のプリセットが見つかりません。');
+      renderPresetList();
+      return;
+    }
+    const now = new Date().toISOString();
+    presets[index] = {
+      ...presets[index],
+      scope,
+      updatedAt: now,
+      entries: presetSnapshot(scope),
+    };
+    writePresets(presets);
+    renderPresetList(preset.id);
+    setPresetStatus(`上書き保存しました：[${label}] ${preset.name || '無題'}`);
+  } catch (error) {
+    alert('上書き保存に失敗しました。ブラウザの保存容量が足りない可能性があります。');
+  }
 }
 
 function loadPreset() {
