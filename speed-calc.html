@@ -141,6 +141,30 @@
   .draft-name { color: #f0e0c0; font-weight: 800; font-size: 15px; }
   .draft-meta { color: var(--text-dark); font-size: 11px; }
   .draft-speed { color: var(--gold); font-weight: 800; }
+  .draft-speed.manual,
+  .lineup-speed.manual,
+  .result-speed.manual {
+    color: #dbe5ff;
+  }
+  .manual-speed-input {
+    border-color: var(--gold-dim);
+  }
+  .manual-speed-input.active {
+    border-color: var(--blue);
+    background: rgba(131,162,255,0.1);
+    color: #dbe5ff;
+  }
+  .manual-badge {
+    display: inline-block;
+    margin-left: 6px;
+    padding: 1px 6px;
+    border: 1px solid rgba(131,162,255,0.35);
+    border-radius: 999px;
+    color: #dbe5ff;
+    background: rgba(131,162,255,0.1);
+    font-size: 10px;
+    font-weight: 700;
+  }
   .editing-banner {
     padding: 7px 9px;
     border: 1px solid rgba(131,162,255,0.35);
@@ -257,6 +281,20 @@
   .lineup-name { color: #f0e0c0; font-weight: 800; font-size: 14px; }
   .lineup-meta { color: var(--text-dark); font-size: 11px; margin-top: 3px; line-height: 1.5; }
   .lineup-speed { color: var(--gold); font-weight: 800; }
+  .lineup-manual-field {
+    display: grid;
+    grid-template-columns: auto minmax(120px, 180px);
+    gap: 8px;
+    align-items: center;
+    margin-top: 8px;
+    color: var(--text-dim);
+    font-size: 11px;
+  }
+  .lineup-manual-field input {
+    min-height: 30px;
+    padding: 5px 8px;
+    font-size: 12px;
+  }
   .lineup-actions { display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
   .lineup-actions .btn { min-height: 30px; padding: 5px 8px; font-size: 11px; }
   .quick-rune-actions {
@@ -426,6 +464,17 @@
             <button class="btn" type="button" onclick="setDraftAllRunes(0)">なし</button>
           </div>
 
+          <label for="draftManualSpeed">最終スピードを直接入力</label>
+          <input
+            id="draftManualSpeed"
+            class="manual-speed-input"
+            type="number"
+            inputmode="numeric"
+            min="0"
+            placeholder="空欄なら基礎＋ルーンで計算"
+            oninput="updateDraftManualSpeed(this.value)"
+          >
+
           <label for="draftMemo">メモ</label>
           <textarea id="draftMemo" placeholder="役割、注意点、調整メモ" oninput="updateDraftMemo(this.value)"></textarea>
 
@@ -532,11 +581,11 @@ let entries = [];
 let draft = createDraft();
 
 function createDraft(side = 'ally') {
-  return { charaId: '', rune: [0, 0, 0], memo: '', side, editingKey: null };
+  return { charaId: '', rune: [0, 0, 0], manualSpeed: '', memo: '', side, editingKey: null };
 }
 
 function createEmptyEntry(side, slot) {
-  return { side, slot, charaId: '', rune: [0, 0, 0], memo: '' };
+  return { side, slot, charaId: '', rune: [0, 0, 0], manualSpeed: '', memo: '' };
 }
 
 function normalizeEntry(entry, side, slot) {
@@ -547,6 +596,7 @@ function normalizeEntry(entry, side, slot) {
     slot,
     charaId: typeof entry?.charaId === 'string' ? entry.charaId : '',
     rune: rune.map((level) => Number.isFinite(Number(level)) ? Number(level) : 0),
+    manualSpeed: entry?.manualSpeed === undefined || entry?.manualSpeed === null ? '' : String(entry.manualSpeed),
     memo: typeof entry?.memo === 'string' ? entry.memo : '',
   };
 }
@@ -572,6 +622,7 @@ function presetSnapshot(scope = 'all') {
     slot: entry.slot,
     charaId: entry.charaId,
     rune: [...entry.rune],
+    manualSpeed: entry.manualSpeed,
     memo: entry.memo,
   }));
 }
@@ -664,9 +715,27 @@ function runeSum(data) {
   return data.rune.reduce((sum, level) => sum + runeSpeed(level), 0);
 }
 
-function finalSpeed(data) {
+function manualSpeedValue(data) {
+  const raw = String(data?.manualSpeed ?? '').replaceAll(',', '').trim();
+  if (!raw) return null;
+  const value = Number(raw);
+  return Number.isFinite(value) && value >= 0 ? Math.floor(value) : null;
+}
+
+function usesManualSpeed(data) {
+  return manualSpeedValue(data) !== null;
+}
+
+function calculatedSpeed(data) {
   const character = getCharacter(data.charaId);
   return character ? (character.speed || 0) + runeSum(data) : null;
+}
+
+function finalSpeed(data) {
+  const character = getCharacter(data.charaId);
+  if (!character) return null;
+  const manual = manualSpeedValue(data);
+  return manual !== null ? manual : calculatedSpeed(data);
 }
 
 function formatSpeed(value) {
@@ -731,6 +800,34 @@ function updateDraftMemo(value) {
   draft.memo = value;
 }
 
+function updateDraftManualSpeed(value) {
+  draft.manualSpeed = value;
+  renderDraftSummary();
+  renderManualSpeedInput();
+}
+
+function updateEntryManualSpeed(side, slot, value) {
+  const entry = findEntry(side, slot);
+  if (!entry) return;
+  entry.manualSpeed = value;
+  const manual = usesManualSpeed(entry);
+  const speed = document.getElementById(`lineupSpeed-${side}-${slot}`);
+  if (speed) {
+    speed.textContent = formatSpeed(finalSpeed(entry));
+    speed.classList.toggle('manual', manual);
+  }
+  const badge = document.getElementById(`manualBadge-${side}-${slot}`);
+  if (badge) badge.style.display = manual ? 'inline-block' : 'none';
+  const input = document.getElementById(`manualInput-${side}-${slot}`);
+  if (input) input.classList.toggle('active', manual);
+  if (draft.editingKey === keyOf(side, slot)) {
+    draft.manualSpeed = value;
+    renderDraftSummary();
+    renderManualSpeedInput();
+  }
+  document.getElementById('resultArea').innerHTML = '';
+}
+
 function setDraftSide(side) {
   draft.side = side;
   renderBuilder();
@@ -785,6 +882,7 @@ function placeDraft() {
 
   target.charaId = draft.charaId;
   target.rune = [...draft.rune];
+  target.manualSpeed = draft.manualSpeed;
   target.memo = draft.memo;
   draft = createDraft(nextSideAfterPlace(draft.side));
   document.getElementById('resultArea').innerHTML = '';
@@ -797,6 +895,7 @@ function editEntry(side, slot) {
   draft = {
     charaId: entry.charaId,
     rune: [...entry.rune],
+    manualSpeed: entry.manualSpeed,
     memo: entry.memo,
     side,
     editingKey: keyOf(side, slot),
@@ -860,6 +959,7 @@ function renderCharacterOptions() {
 function renderDraftSummary() {
   const character = getCharacter(draft.charaId);
   const speed = finalSpeed(draft);
+  const manual = usesManualSpeed(draft);
   const source = draft.editingKey ? entries.find((entry) => entryKey(entry) === draft.editingKey) : null;
   const editNotice = source
     ? `<div class="editing-banner">編集中：${escapeHtml(sideLabel(source.side))} ${source.slot + 1} を修正中</div>`
@@ -867,13 +967,23 @@ function renderDraftSummary() {
   document.getElementById('draftSummary').innerHTML = character ? `
     ${editNotice}
     <div class="draft-name">${escapeHtml(character.name)}</div>
-    <div class="draft-meta">${escapeHtml(character.attribute || '-')} / 基礎 ${(character.speed || 0).toLocaleString()} / ルーン +${runeSum(draft).toLocaleString()}</div>
-    <div>最終スピード：<span class="draft-speed">${formatSpeed(speed)}</span></div>
+    <div class="draft-meta">
+      ${escapeHtml(character.attribute || '-')} / 基礎 ${(character.speed || 0).toLocaleString()} / ルーン +${runeSum(draft).toLocaleString()}
+      ${manual ? `<span class="manual-badge">直入力使用</span>` : ''}
+    </div>
+    <div>最終スピード：<span class="draft-speed ${manual ? 'manual' : ''}">${formatSpeed(speed)}</span></div>
   ` : `
     ${editNotice}
     <div class="draft-name">未選択</div>
     <div class="draft-meta">絞り込み後、キャラを選んでからルーンを調整してください。</div>
   `;
+}
+
+function renderManualSpeedInput() {
+  const input = document.getElementById('draftManualSpeed');
+  if (!input) return;
+  if (input.value !== String(draft.manualSpeed ?? '')) input.value = draft.manualSpeed ?? '';
+  input.classList.toggle('active', usesManualSpeed(draft));
 }
 
 function renderDraftRunes() {
@@ -926,6 +1036,7 @@ function renderBuilder() {
   renderDraftRunes();
   renderTargetControls();
   renderDraftActions();
+  renderManualSpeedInput();
   const memo = document.getElementById('draftMemo');
   if (memo && memo.value !== draft.memo) memo.value = draft.memo;
 }
@@ -945,17 +1056,32 @@ function renderLineup() {
             </div>
           `;
         }
+        const manual = usesManualSpeed(entry);
         return `
           <div class="lineup-slot">
             <span class="lineup-num">${entry.slot + 1}</span>
             <div>
               <div class="lineup-name">${escapeHtml(character.name)}</div>
               <div class="lineup-meta">
-                最終 <span class="lineup-speed">${formatSpeed(finalSpeed(entry))}</span>
+                最終 <span id="lineupSpeed-${entry.side}-${entry.slot}" class="lineup-speed ${manual ? 'manual' : ''}">${formatSpeed(finalSpeed(entry))}</span>
+                <span id="manualBadge-${entry.side}-${entry.slot}" class="manual-badge" style="${manual ? '' : 'display:none'}">直入力使用</span>
                 / 基礎 ${(character.speed || 0).toLocaleString()}
                 / ルーン +${runeSum(entry).toLocaleString()}
                 ${entry.memo ? `<br>${escapeHtml(entry.memo)}` : ''}
               </div>
+              <label class="lineup-manual-field">
+                <span>直接入力</span>
+                <input
+                  id="manualInput-${entry.side}-${entry.slot}"
+                  class="manual-speed-input ${manual ? 'active' : ''}"
+                  type="number"
+                  inputmode="numeric"
+                  min="0"
+                  value="${escapeHtml(entry.manualSpeed ?? '')}"
+                  placeholder="空欄はルーン計算"
+                  oninput="updateEntryManualSpeed('${entry.side}', ${entry.slot}, this.value)"
+                >
+              </label>
             </div>
             <div class="lineup-actions">
               <button class="btn" type="button" onclick="editEntry('${entry.side}', ${entry.slot})">編集</button>
@@ -1121,6 +1247,7 @@ function validEntries() {
         base: character?.speed || 0,
         runeSum: runeSum(entry),
         finalSpeed: finalSpeed(entry) || 0,
+        manualSpeed: usesManualSpeed(entry),
         skill1: getSkillName(entry.charaId, 1),
         skill2: getSkillName(entry.charaId, 2),
         memo: entry.memo.trim(),
@@ -1140,7 +1267,7 @@ function resultRow(row, index, rows, skillName) {
         ${row.memo ? `<div class="result-memo">${escapeHtml(row.memo)}</div>` : ''}
       </div>
       <div class="result-speeds">
-        <div class="result-speed">${row.finalSpeed.toLocaleString()}</div>
+        <div class="result-speed ${row.manualSpeed ? 'manual' : ''}">${row.finalSpeed.toLocaleString()}</div>
         ${diff !== null ? `<div class="result-diff">↓ 差 ${diff.toLocaleString()}</div>` : ''}
       </div>
     </div>
