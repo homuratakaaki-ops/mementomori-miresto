@@ -4,9 +4,6 @@
     <loc>https://memento.musoudc.com/</loc>
   </url>
   <url>
-    <loc>https://memento.musoudc.com/index.html</loc>
-  </url>
-  <url>
     <loc>https://memento.musoudc.com/pages/characters/index.html</loc>
   </url>
   <url>
@@ -172,6 +169,6 @@
     <loc>https://memento.musoudc.com/contact.html</loc>
   </url>
   <url>
-    <loc>https://memento.musoudc.com/pages/guide/index.html</loc>
+    <loc>https://memento.musoudc.com/pages/guide/</loc>
   </url>
 </urlset>
