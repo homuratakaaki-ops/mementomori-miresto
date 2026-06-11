@@ -1,0 +1,521 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>リリコット / ミレスト・メメントモリ分析データ室</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #172033;
+      --muted: #647086;
+      --line: #d9dfeb;
+      --paper: #fbfaf7;
+      --panel: #ffffff;
+      --navy: #0b2a57;
+      --red: #9d2c2c;
+      --gold: #b88932;
+      --shadow: 0 12px 30px rgba(28, 40, 68, 0.12);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: "Yu Gothic", "Hiragino Sans", "Meiryo", system-ui, sans-serif;
+      letter-spacing: 0;
+    }
+
+    a { color: inherit; }
+
+    .page-header {
+      padding: 28px clamp(16px, 4vw, 48px) 24px;
+      background: linear-gradient(180deg, #ffffff 0%, #f3eeee 100%);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .header-inner,
+    main,
+    .footer-inner {
+      max-width: 1180px;
+      margin: 0 auto;
+    }
+
+    .eyebrow {
+      margin: 0 0 6px;
+      color: var(--red);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    h1, h2, h3, p { margin-top: 0; }
+
+    h1 {
+      margin-bottom: 10px;
+      font-size: clamp(34px, 5vw, 56px);
+      line-height: 1.05;
+    }
+
+    .role {
+      max-width: 760px;
+      margin-bottom: 18px;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.7;
+    }
+
+    .meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .badge,
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 32px;
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: #edf1f8;
+      color: #3b4b65;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .attribute {
+      background: var(--red);
+      color: #fff;
+    }
+
+    main {
+      padding: 22px clamp(12px, 3vw, 24px) 44px;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 320px;
+      gap: 16px;
+      align-items: start;
+    }
+
+    .section,
+    .side-panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+    }
+
+    .section {
+      padding: 18px;
+      margin-bottom: 16px;
+    }
+
+    .section h2 {
+      margin-bottom: 10px;
+      font-size: 24px;
+    }
+
+    .section-lead, li, dd { line-height: 1.7; }
+
+    .skill-grid,
+    .manual-block,
+    .stat-grid {
+      display: grid;
+      gap: 12px;
+    }
+
+    .skill-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      margin-top: 14px;
+    }
+
+    .skill-card,
+    .manual-card,
+    .stat-card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fffdf8;
+      overflow: hidden;
+    }
+
+    .skill-card header {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 12px;
+      border-bottom: 1px solid var(--line);
+      background: #f4eeee;
+    }
+
+    .skill-card h3 {
+      margin-bottom: 2px;
+      font-size: 18px;
+    }
+
+    .ct {
+      flex: 0 0 auto;
+      color: var(--navy);
+      font-weight: 800;
+    }
+
+    .skill-body {
+      display: grid;
+      gap: 10px;
+      padding: 12px;
+    }
+
+    .manual-card,
+    .stat-card { padding: 14px; }
+
+    .manual-card h3,
+    .stat-card h3 {
+      margin-bottom: 8px;
+      font-size: 18px;
+    }
+
+    .manual-card ul {
+      margin: 0;
+      padding-left: 1.2em;
+    }
+
+    .stat-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+    dl { margin: 0; }
+
+    dt {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    dd { margin: 3px 0 0; }
+
+    .compare-link,
+    .link-list a {
+      display: inline-flex;
+      justify-content: center;
+      width: 100%;
+      padding: 11px 12px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 800;
+    }
+
+    .compare-link {
+      margin-top: 14px;
+      background: var(--navy);
+      color: #fff;
+    }
+
+    .side-panel {
+      position: sticky;
+      top: 14px;
+      padding: 16px;
+    }
+
+    .side-panel h2 {
+      margin-bottom: 10px;
+      font-size: 20px;
+    }
+
+    .status {
+      padding: 12px;
+      border-left: 4px solid var(--red);
+      border-radius: 6px;
+      background: #f8f2f2;
+      color: #34404c;
+      line-height: 1.6;
+    }
+
+    .link-list {
+      display: grid;
+      gap: 8px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .link-list a {
+      border: 1px solid var(--line);
+      background: #fff;
+    }
+
+    footer {
+      padding: 24px clamp(14px, 4vw, 32px);
+      border-top: 1px solid var(--line);
+      background: #fff;
+      color: var(--muted);
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 14px;
+    }
+
+    .footer-links a {
+      color: var(--ink);
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    @media (max-width: 920px) {
+      .layout, .skill-grid, .stat-grid { grid-template-columns: 1fr; }
+      .side-panel { position: static; }
+    }
+  </style>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-BHKBSRGSJF"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BHKBSRGSJF');
+  </script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6389066329814944"
+     crossorigin="anonymous"></script>
+</head>
+<body>
+  <header class="page-header">
+    <div class="header-inner">
+      <p class="eyebrow">CHARACTER DETAIL</p>
+      <h1 id="characterName">リリコット</h1>
+      <p class="role" id="roleMemo">最大6個のバフ解除と2自傷供給で、黄属性耐久を崩す紅属性スナイパー。</p>
+      <div class="meta-row" id="characterMeta"></div>
+    </div>
+  </header>
+
+  <main>
+    <div class="layout">
+      <div>
+        <section class="section" aria-labelledby="skillsTitle">
+          <h2 id="skillsTitle">スキル一覧</h2>
+          <p class="section-lead">倍率は比較用の要約です。リリコットは単体で完結する汎用火力ではなく、紅自傷パで先手を取り、解除可能バフを剥がして勝ち筋を作るキャラとして評価します。</p>
+          <div class="skill-grid" id="skillGrid"></div>
+          <a class="compare-link" href="../../compare-prototype.html?character=lilicotte">スキル比較DBで見る</a>
+        </section>
+
+        <section class="section" aria-labelledby="reviewTitle">
+          <h2 id="reviewTitle">評価</h2>
+          <div class="manual-block">
+            <article class="manual-card">
+              <h3>役割解説</h3>
+              <p>リリコットは、開幕4ターンのスピード増加で先手を狙い、スキル1の2自傷・バフ解除・6連撃をまとめて通す紅属性スナイパーです。黄属性耐久パの解除可能バフを剥がし、ルシールやアイシェが動きやすい盤面を作る役割が中心です。</p>
+              <p>スキル1は、条件を満たすとバフ解除数が最大6個になります。倍率そのものは専用Lv3で3780%ですが、真価は「2自傷を供給しながら耐久バフを剥がし、そのまま削る」処理順にあります。</p>
+              <p>スキル2は攻撃力が高い敵3体を狙い、沈黙で行動を止める妨害寄りの攻撃です。ただし沈黙とバフ解除は確率が絡むため、弱体命中ルーンが足りない状態では評価をそのまま当てはめない方が安全です。</p>
+            </article>
+            <article class="manual-card">
+              <h3>強み</h3>
+              <ul>
+                <li>専用Lv1条件下で、解除可能バフを最大6個まで剥がせる</li>
+                <li>1回のスキルで2自傷を供給でき、紅自傷パの起動を早められる</li>
+                <li>開幕4ターンのスピード+30%で、素の3064よりかなり先手を取りやすい</li>
+                <li>バフ解除時に自身と攻撃力最高の味方を強化でき、紅属性なら増加量が大きい</li>
+                <li>スキル2の沈黙で、リーベの気絶後にさらに相手の行動を縛る流れを作れる</li>
+              </ul>
+            </article>
+            <article class="manual-card">
+              <h3>弱み・注意点</h3>
+              <ul>
+                <li>多重バリアを持たないため、先手を取れない相手にはかなり脆い</li>
+                <li>解除不可バフや不死身系ギミックには、バフ解除だけで解決できない</li>
+                <li>連撃のため、カウンター気絶や連撃対策を持つ相手に止められやすい</li>
+                <li>沈黙を安定させるには弱体命中ルーンが必要で、無凸置き物運用には限界がある</li>
+                <li>ルシール、リーベ、アイシェなどと枠を組む前提が強く、編成自由度は高くない</li>
+              </ul>
+            </article>
+          </div>
+        </section>
+
+        <section class="section" aria-labelledby="decisionTitle">
+          <h2 id="decisionTitle">ガチャ・育成判断</h2>
+          <div class="manual-block">
+            <article class="manual-card">
+              <h3>引きたい人</h3>
+              <ul>
+                <li>黄属性耐久パのバフを剥がせずに止まっている人</li>
+                <li>ルシールとリーベを持っており、紅自傷パを本格運用する人</li>
+                <li>スピードルーンと弱体命中ルーンをリリコットにも回せる人</li>
+                <li>ギルドバトルなどで、解除可能バフを積んだ耐久編成への対策札が欲しい人</li>
+                <li>無凸確保だけでなく、沈黙の通しやすさまで含めて育成する予定がある人</li>
+              </ul>
+            </article>
+            <article class="manual-card">
+              <h3>スルー寄りの人</h3>
+              <ul>
+                <li>紅自傷パを育てる予定がなく、汎用アタッカーだけを探している人</li>
+                <li>リーベやルシールがなく、行動停止やCT短縮の流れを組めない人</li>
+                <li>スピードルーンや弱体命中ルーンの在庫が薄い人</li>
+                <li>主な仮想敵が解除不可バフ中心、または連撃対策を厚く持つ編成の人</li>
+                <li>SR1枚だけで沈黙まで安定する前提で見ている人</li>
+              </ul>
+            </article>
+          </div>
+        </section>
+
+        <section class="section" aria-labelledby="weaponTitle">
+          <h2 id="weaponTitle">専用武器パッシブ</h2>
+          <div class="stat-grid">
+            <article class="stat-card"><h3>攻撃力</h3><p>+18%</p></article>
+            <article class="stat-card"><h3>命中</h3><p>+10%</p></article>
+            <article class="stat-card"><h3>クリティカル</h3><p>+10%</p></article>
+          </div>
+        </section>
+
+        <section class="section" aria-labelledby="profileTitle">
+          <h2 id="profileTitle">プロフィール・基礎データ</h2>
+          <div class="stat-grid">
+            <article class="stat-card"><h3>プロフィール</h3><dl><dt>タイプ</dt><dd>非恒常キャラ</dd><dt>属性 / 武器種</dt><dd>紅 / スナイパー</dd><dt>特徴</dt><dd>自傷・バフ解除・沈黙・先制</dd></dl></article>
+            <article class="stat-card"><h3>入手・状態</h3><dl><dt>入手</dt><dd>PU・運命</dd><dt>ガチャ状態</dt><dd>未定</dd><dt>確認日</dt><dd>2026年6月7日</dd></dl></article>
+            <article class="stat-card"><h3>ステータス（LR）</h3><dl><dt>戦闘力</dt><dd>7,027,497</dd><dt>攻撃力 / HP</dt><dd>686,951 / 5,240,660</dd><dt>スピード</dt><dd>3,064</dd></dl></article>
+            <article class="stat-card"><h3>防御・耐久</h3><dl><dt>物理防御力</dt><dd>516,984</dd><dt>魔法防御力</dt><dd>644,460</dd><dt>防御力</dt><dd>6</dd></dl></article>
+            <article class="stat-card"><h3>未確認項目</h3><dl><dt>実装日</dt><dd>未確認</dd><dt>直近ピックアップ</dt><dd>未確認</dd><dt>CV / ラメント</dt><dd>未確認</dd></dl></article>
+            <article class="stat-card"><h3>データ根拠</h3><dl><dt>基礎情報</dt><dd>添付カード画像</dd><dt>評価</dt><dd>note記事本文</dd><dt>note</dt><dd><a href="https://note.com/musoudc/n/n85aa1c0058ae">リリコット評価まとめ</a></dd></dl></article>
+          </div>
+        </section>
+
+        <section class="section" aria-labelledby="creativeTitle">
+          <h2 id="creativeTitle">創作関連</h2>
+          <div class="manual-card">
+            <p>note記事：<a href="https://note.com/musoudc/n/n85aa1c0058ae">リリコット評価まとめ</a>。本文はNote記事と添付カード画像の内容をもとに、サイト向けに要約・再構成しています。</p>
+          </div>
+        </section>
+      </div>
+
+      <aside class="side-panel">
+        <h2>関連リンク</h2>
+        <p id="gachaUpdated" class="status">ガチャ状態確認日：2026-06-07</p>
+        <p class="status">リリコットは対黄属性耐久の突破力が高い一方、紅自傷パの前提パーツとルーン要求が重いキャラです。汎用枠として雑に確保すると評価を誤ります。</p>
+        <ul class="link-list">
+          <li><a href="/">トップへ戻る</a></li>
+          <li><a href="../../compare-prototype.html">比較DBへ戻る</a></li>
+          <li><a href="./index.html">キャラ一覧へ戻る</a></li>
+        </ul>
+      </aside>
+    </div>
+
+  <!-- メメントモリver1 広告 -->
+  <ins class="adsbygoogle"
+       style="display:block"
+       data-ad-client="ca-pub-6389066329814944"
+       data-ad-slot="6111654373"
+       data-ad-format="auto"
+       data-full-width-responsive="true"></ins>
+  <script>
+       (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+</main>
+
+  <script>
+    const characterId = "lilicotte";
+
+    function valueOrDash(value) {
+      return value === null || value === undefined || value === "" ? "-" : value;
+    }
+
+    function renderMeta(character) {
+      document.querySelector("#characterMeta").innerHTML = [
+        `<span class="badge attribute">${character.attribute}</span>`,
+        `<span class="badge">${character.weaponType}</span>`,
+        `<span class="badge">スピード ${character.speed}</span>`,
+        `<span class="badge">${character.availability}</span>`,
+        `<span class="badge">${character.gachaStatus || "状態未設定"}</span>`
+      ].join("");
+    }
+
+    function renderSkills(skills) {
+      const grid = document.querySelector("#skillGrid");
+      grid.innerHTML = skills
+        .sort((a, b) => a.number - b.number)
+        .map((skill) => `
+          <article class="skill-card">
+            <header>
+              <div>
+                <h3>スキル${skill.number}：${skill.name}</h3>
+                <span class="tag">${skill.skillType}</span>
+                <span class="tag">${skill.category}</span>
+                <span class="tag">${skill.subCategory}</span>
+              </div>
+              <span class="ct">CT: ${valueOrDash(skill.ct)}</span>
+            </header>
+            <div class="skill-body">
+              <dl><dt>対象</dt><dd>${valueOrDash(skill.target)}</dd></dl>
+              <dl><dt>倍率・効果</dt><dd>${valueOrDash(skill.multiplierText)}</dd></dl>
+              <dl><dt>条件</dt><dd>${valueOrDash(skill.condition)}</dd></dl>
+              <dl><dt>専用武器</dt><dd>${valueOrDash(skill.exclusiveWeapon)}</dd></dl>
+              <dl><dt>比較メモ</dt><dd>${valueOrDash(skill.compareMemo)}</dd></dl>
+            </div>
+          </article>
+        `)
+        .join("");
+    }
+
+    async function fetchJson(path, optional = false) {
+      const response = await fetch(path, { cache: "no-store" });
+      if (!response.ok) {
+        if (optional && response.status === 404) return { characters: [], skills: [] };
+        throw new Error(`JSON読み込み失敗: ${response.status}`);
+      }
+      return response.json();
+    }
+
+    function mergeSkillData(baseData, overlayData) {
+      const characters = new Map((baseData.characters || []).map((character) => [character.id, character]));
+      const skills = new Map((baseData.skills || []).map((skill) => [skill.id, skill]));
+      (overlayData.characters || []).forEach((character) => characters.set(character.id, character));
+      (overlayData.skills || []).forEach((skill) => skills.set(skill.id, skill));
+      return { ...baseData, characters: [...characters.values()], skills: [...skills.values()] };
+    }
+
+    async function loadData() {
+      const baseData = await fetchJson("../../data/mementomori-skills.json");
+      const overlayData = await fetchJson("../../data/lilicotte-overlay.json", true);
+      return mergeSkillData(baseData, overlayData);
+    }
+
+    async function init() {
+      try {
+        const data = await loadData();
+        const character = data.characters.find((item) => item.id === characterId);
+        const skills = data.skills.filter((skill) => skill.characterId === characterId);
+        if (!character) throw new Error("キャラが見つかりません");
+
+        document.title = `${character.name} / ミレスト・メメントモリ分析データ室`;
+        document.querySelector("#characterName").textContent = character.name;
+        document.querySelector("#roleMemo").textContent = character.catchcopy || character.roleMemo;
+        document.querySelector("#gachaUpdated").textContent = `ガチャ状態確認日：${data.gachaStatusUpdatedAt || "未設定"}`;
+        renderMeta(character);
+        renderSkills(skills);
+      } catch (error) {
+        document.querySelector("#roleMemo").textContent = error.message;
+        console.error(error);
+      }
+    }
+
+    init();
+  </script>
+  <footer>
+    <div class="footer-inner">
+      <span>ミレスト・メメントモリ攻略・分析データベース / 非公式ファンサイト</span>
+      <nav class="footer-links" aria-label="固定ページ">
+        <a href="/">トップ</a>
+        <a href="../../privacy.html">プライバシーポリシー</a>
+        <a href="../../disclaimer.html">免責事項</a>
+        <a href="../../about.html">このサイトについて</a>
+        <a href="../../contact.html">お問い合わせ</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>
