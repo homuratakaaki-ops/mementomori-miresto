@@ -1,0 +1,521 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>アイビー / ミレスト・メメントモリ分析データ室</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #172033;
+      --muted: #647086;
+      --line: #d9dfeb;
+      --paper: #fbfaf7;
+      --panel: #ffffff;
+      --navy: #0b2a57;
+      --green: #2f8a55;
+      --gold: #b88932;
+      --shadow: 0 12px 30px rgba(28, 40, 68, 0.12);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: "Yu Gothic", "Hiragino Sans", "Meiryo", system-ui, sans-serif;
+      letter-spacing: 0;
+    }
+
+    a { color: inherit; }
+
+    .page-header {
+      padding: 28px clamp(16px, 4vw, 48px) 24px;
+      background: linear-gradient(180deg, #ffffff 0%, #eef4ee 100%);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .header-inner,
+    main,
+    .footer-inner {
+      max-width: 1180px;
+      margin: 0 auto;
+    }
+
+    .eyebrow {
+      margin: 0 0 6px;
+      color: var(--green);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    h1, h2, h3, p { margin-top: 0; }
+
+    h1 {
+      margin-bottom: 10px;
+      font-size: clamp(34px, 5vw, 56px);
+      line-height: 1.05;
+    }
+
+    .role {
+      max-width: 760px;
+      margin-bottom: 18px;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.7;
+    }
+
+    .meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .badge,
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 32px;
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: #edf1f8;
+      color: #3b4b65;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .attribute {
+      background: var(--green);
+      color: #fff;
+    }
+
+    main {
+      padding: 22px clamp(12px, 3vw, 24px) 44px;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 320px;
+      gap: 16px;
+      align-items: start;
+    }
+
+    .section,
+    .side-panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+    }
+
+    .section {
+      padding: 18px;
+      margin-bottom: 16px;
+    }
+
+    .section h2 {
+      margin-bottom: 10px;
+      font-size: 24px;
+    }
+
+    .section-lead, li, dd { line-height: 1.7; }
+
+    .skill-grid,
+    .manual-block,
+    .stat-grid {
+      display: grid;
+      gap: 12px;
+    }
+
+    .skill-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      margin-top: 14px;
+    }
+
+    .skill-card,
+    .manual-card,
+    .stat-card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fffdf8;
+      overflow: hidden;
+    }
+
+    .skill-card header {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 12px;
+      border-bottom: 1px solid var(--line);
+      background: #eef5ef;
+    }
+
+    .skill-card h3 {
+      margin-bottom: 2px;
+      font-size: 18px;
+    }
+
+    .ct {
+      flex: 0 0 auto;
+      color: var(--navy);
+      font-weight: 800;
+    }
+
+    .skill-body {
+      display: grid;
+      gap: 10px;
+      padding: 12px;
+    }
+
+    .manual-card,
+    .stat-card { padding: 14px; }
+
+    .manual-card h3,
+    .stat-card h3 {
+      margin-bottom: 8px;
+      font-size: 18px;
+    }
+
+    .manual-card ul {
+      margin: 0;
+      padding-left: 1.2em;
+    }
+
+    .stat-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+    dl { margin: 0; }
+
+    dt {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    dd { margin: 3px 0 0; }
+
+    .compare-link,
+    .link-list a {
+      display: inline-flex;
+      justify-content: center;
+      width: 100%;
+      padding: 11px 12px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 800;
+    }
+
+    .compare-link {
+      margin-top: 14px;
+      background: var(--navy);
+      color: #fff;
+    }
+
+    .side-panel {
+      position: sticky;
+      top: 14px;
+      padding: 16px;
+    }
+
+    .side-panel h2 {
+      margin-bottom: 10px;
+      font-size: 20px;
+    }
+
+    .status {
+      padding: 12px;
+      border-left: 4px solid var(--green);
+      border-radius: 6px;
+      background: #f2f8f3;
+      color: #34404c;
+      line-height: 1.6;
+    }
+
+    .link-list {
+      display: grid;
+      gap: 8px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .link-list a {
+      border: 1px solid var(--line);
+      background: #fff;
+    }
+
+    footer {
+      padding: 24px clamp(14px, 4vw, 32px);
+      border-top: 1px solid var(--line);
+      background: #fff;
+      color: var(--muted);
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 14px;
+    }
+
+    .footer-links a {
+      color: var(--ink);
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    @media (max-width: 920px) {
+      .layout, .skill-grid, .stat-grid { grid-template-columns: 1fr; }
+      .side-panel { position: static; }
+    }
+  </style>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-BHKBSRGSJF"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BHKBSRGSJF');
+  </script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6389066329814944"
+     crossorigin="anonymous"></script>
+</head>
+<body>
+  <header class="page-header">
+    <div class="header-inner">
+      <p class="eyebrow">CHARACTER DETAIL</p>
+      <h1 id="characterName">アイビー</h1>
+      <p class="role" id="roleMemo">直接攻撃と必中フィニッシュで硬い相手を抜く翠属性スナイパー。</p>
+      <div class="meta-row" id="characterMeta"></div>
+    </div>
+  </header>
+
+  <main>
+    <div class="layout">
+      <div>
+        <section class="section" aria-labelledby="skillsTitle">
+          <h2 id="skillsTitle">スキル一覧</h2>
+          <p class="section-lead">倍率は比較用の要約です。アイビーは恒常キャラですが、無凸置き物ではなく、凸・専用武器・クリティカル系ルーンまで含めて評価する投資型アタッカーです。</p>
+          <div class="skill-grid" id="skillGrid"></div>
+          <a class="compare-link" href="../../compare-prototype.html?character=ivy">スキル比較DBで見る</a>
+        </section>
+
+        <section class="section" aria-labelledby="reviewTitle">
+          <h2 id="reviewTitle">評価</h2>
+          <div class="manual-block">
+            <article class="manual-card">
+              <h3>役割解説</h3>
+              <p>アイビーは、スキル1の物理複数攻撃と技力依存の直接攻撃で、硬い相手を上から削る翠属性スナイパーです。防御バフを積んだ耐久相手に対して、通常の物理火力だけでなく直接攻撃を混ぜられる点が特徴です。</p>
+              <p>スキル2は、バフ数が増えるほど攻撃回数が伸び、弱体中の敵には1.5倍かつ必中になります。条件が揃ったときの最大値は高いですが、バフ数と弱体付与の両方が必要です。最大倍率だけを見て単独採用すると評価を誤ります。</p>
+              <p>パッシブは、開幕から攻撃力を上げ、味方が倒れるほどさらに火力が伸びる逆境型です。ただし最大250%は味方戦闘不能が進んだ状況の数値で、速攻戦では初期50%を基準に見るべきです。</p>
+            </article>
+            <article class="manual-card">
+              <h3>強み</h3>
+              <ul>
+                <li>技力依存の直接攻撃で、防御を固めた相手のHPを削れる</li>
+                <li>スキル2はバフ数と弱体条件が揃うと、最大4800%相当まで伸びる</li>
+                <li>弱体中の敵に対して必中になるため、回避が高い相手にも刺さる</li>
+                <li>通常攻撃時の気絶で、主火力とは別に行動阻害を狙える</li>
+                <li>恒常キャラなので、長期的に凸を進める計画を立てやすい</li>
+              </ul>
+            </article>
+            <article class="manual-card">
+              <h3>弱み・注意点</h3>
+              <ul>
+                <li>無凸SR1枚では機能しにくい。純アタッカーなので育成不足がそのまま火力不足になる</li>
+                <li>クリティカル、物理防御貫通、専用武器などの投資要求が重い</li>
+                <li>素のスピード2790は高くないため、プリマヴェーラなどの速度補助がないと先手を取りにくい</li>
+                <li>紅属性相手には属性相性が悪く、先制気絶や沈黙を受けると止まりやすい</li>
+                <li>スキル2の最大火力はバフ数依存なので、バフ解除を受けると火力が落ちる</li>
+              </ul>
+            </article>
+          </div>
+        </section>
+
+        <section class="section" aria-labelledby="decisionTitle">
+          <h2 id="decisionTitle">ガチャ・育成判断</h2>
+          <div class="manual-block">
+            <article class="manual-card">
+              <h3>育てたい人</h3>
+              <ul>
+                <li>翠パ・混成パを主軸にしていて、プリマヴェーラなどの速度基盤がある人</li>
+                <li>黄属性耐久など、硬い相手へ直接攻撃で縦突破したい人</li>
+                <li>恒常キャラとして長期的に凸を積み、専用武器まで見る人</li>
+                <li>クリティカルルーンと物理防御貫通ルーンを集中投資できる人</li>
+                <li>弱体付与役と組ませ、スキル2の必中・1.5倍条件を現実的に満たせる人</li>
+              </ul>
+            </article>
+            <article class="manual-card">
+              <h3>後回しでいい人</h3>
+              <ul>
+                <li>翠パの速度基盤がなく、アイビー単独で先手火力を期待している人</li>
+                <li>SR1枚の低コスト補助キャラとして見ている人</li>
+                <li>ルーンや進化素材を紅自傷パなど別軸に使っている途中の人</li>
+                <li>主な仮想敵が紅属性速攻で、気絶や沈黙を先に受けやすい環境の人</li>
+                <li>最大250%攻撃バフを常時前提として火力評価している人</li>
+              </ul>
+            </article>
+          </div>
+        </section>
+
+        <section class="section" aria-labelledby="weaponTitle">
+          <h2 id="weaponTitle">専用武器パッシブ</h2>
+          <div class="stat-grid">
+            <article class="stat-card"><h3>攻撃力</h3><p>+18%</p></article>
+            <article class="stat-card"><h3>クリティカル</h3><p>+10%</p></article>
+            <article class="stat-card"><h3>弱体効果命中</h3><p>+10%</p></article>
+          </div>
+        </section>
+
+        <section class="section" aria-labelledby="profileTitle">
+          <h2 id="profileTitle">プロフィール・基礎データ</h2>
+          <div class="stat-grid">
+            <article class="stat-card"><h3>プロフィール</h3><dl><dt>タイプ</dt><dd>恒常キャラ</dd><dt>属性 / 武器種</dt><dd>翠 / スナイパー</dd><dt>特徴</dt><dd>連撃・直接攻撃・気絶</dd></dl></article>
+            <article class="stat-card"><h3>入手・状態</h3><dl><dt>入手</dt><dd>恒常</dd><dt>ガチャ状態</dt><dd>恒常</dd><dt>確認日</dt><dd>2026年6月7日</dd></dl></article>
+            <article class="stat-card"><h3>ステータス（LR）</h3><dl><dt>戦闘力</dt><dd>6,972,018</dd><dt>攻撃力 / HP</dt><dd>699,845 / 4,828,902</dd><dt>スピード</dt><dd>2,790</dd></dl></article>
+            <article class="stat-card"><h3>命中・回避</h3><dl><dt>命中</dt><dd>293,933</dd><dt>回避</dt><dd>349,920</dd><dt>クリティカル</dt><dd>349,918</dd></dl></article>
+            <article class="stat-card"><h3>防御・耐性</h3><dl><dt>物理防御力</dt><dd>587,867</dd><dt>魔法防御力</dt><dd>601,864</dd><dt>クリティカル耐性</dt><dd>241,445</dd></dl></article>
+            <article class="stat-card"><h3>データ根拠</h3><dl><dt>基礎情報</dt><dd>添付カード画像</dd><dt>評価</dt><dd>note記事本文</dd><dt>note</dt><dd><a href="https://note.com/musoudc/n/n5770cf1ff769">アイビー評価まとめ</a></dd></dl></article>
+          </div>
+        </section>
+
+        <section class="section" aria-labelledby="creativeTitle">
+          <h2 id="creativeTitle">創作関連</h2>
+          <div class="manual-card">
+            <p>note記事：<a href="https://note.com/musoudc/n/n5770cf1ff769">アイビー評価まとめ</a>。本文はNote記事と添付カード画像の内容をもとに、サイト向けに要約・再構成しています。</p>
+          </div>
+        </section>
+      </div>
+
+      <aside class="side-panel">
+        <h2>関連リンク</h2>
+        <p id="gachaUpdated" class="status">ガチャ状態確認日：2026-06-07</p>
+        <p class="status">アイビーは恒常キャラですが、軽い補助枠ではありません。凸・専用武器・ルーン投資まで見る純アタッカーです。育成資源が薄い段階では後回しが安全です。</p>
+        <ul class="link-list">
+          <li><a href="/">トップへ戻る</a></li>
+          <li><a href="../../compare-prototype.html">比較DBへ戻る</a></li>
+          <li><a href="./index.html">キャラ一覧へ戻る</a></li>
+        </ul>
+      </aside>
+    </div>
+
+  <!-- メメントモリver1 広告 -->
+  <ins class="adsbygoogle"
+       style="display:block"
+       data-ad-client="ca-pub-6389066329814944"
+       data-ad-slot="6111654373"
+       data-ad-format="auto"
+       data-full-width-responsive="true"></ins>
+  <script>
+       (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+</main>
+
+  <script>
+    const characterId = "ivy";
+
+    function valueOrDash(value) {
+      return value === null || value === undefined || value === "" ? "-" : value;
+    }
+
+    function renderMeta(character) {
+      document.querySelector("#characterMeta").innerHTML = [
+        `<span class="badge attribute">${character.attribute}</span>`,
+        `<span class="badge">${character.weaponType}</span>`,
+        `<span class="badge">スピード ${character.speed}</span>`,
+        `<span class="badge">${character.availability}</span>`,
+        `<span class="badge">${character.gachaStatus || "状態未設定"}</span>`
+      ].join("");
+    }
+
+    function renderSkills(skills) {
+      const grid = document.querySelector("#skillGrid");
+      grid.innerHTML = skills
+        .sort((a, b) => a.number - b.number)
+        .map((skill) => `
+          <article class="skill-card">
+            <header>
+              <div>
+                <h3>スキル${skill.number}：${skill.name}</h3>
+                <span class="tag">${skill.skillType}</span>
+                <span class="tag">${skill.category}</span>
+                <span class="tag">${skill.subCategory}</span>
+              </div>
+              <span class="ct">CT: ${valueOrDash(skill.ct)}</span>
+            </header>
+            <div class="skill-body">
+              <dl><dt>対象</dt><dd>${valueOrDash(skill.target)}</dd></dl>
+              <dl><dt>倍率・効果</dt><dd>${valueOrDash(skill.multiplierText)}</dd></dl>
+              <dl><dt>条件</dt><dd>${valueOrDash(skill.condition)}</dd></dl>
+              <dl><dt>専用武器</dt><dd>${valueOrDash(skill.exclusiveWeapon)}</dd></dl>
+              <dl><dt>比較メモ</dt><dd>${valueOrDash(skill.compareMemo)}</dd></dl>
+            </div>
+          </article>
+        `)
+        .join("");
+    }
+
+    async function fetchJson(path, optional = false) {
+      const response = await fetch(path, { cache: "no-store" });
+      if (!response.ok) {
+        if (optional && response.status === 404) return { characters: [], skills: [] };
+        throw new Error(`JSON読み込み失敗: ${response.status}`);
+      }
+      return response.json();
+    }
+
+    function mergeSkillData(baseData, overlayData) {
+      const characters = new Map((baseData.characters || []).map((character) => [character.id, character]));
+      const skills = new Map((baseData.skills || []).map((skill) => [skill.id, skill]));
+      (overlayData.characters || []).forEach((character) => characters.set(character.id, character));
+      (overlayData.skills || []).forEach((skill) => skills.set(skill.id, skill));
+      return { ...baseData, characters: [...characters.values()], skills: [...skills.values()] };
+    }
+
+    async function loadData() {
+      const baseData = await fetchJson("../../data/mementomori-skills.json");
+      const overlayData = await fetchJson("../../data/ivy-overlay.json", true);
+      return mergeSkillData(baseData, overlayData);
+    }
+
+    async function init() {
+      try {
+        const data = await loadData();
+        const character = data.characters.find((item) => item.id === characterId);
+        const skills = data.skills.filter((skill) => skill.characterId === characterId);
+        if (!character) throw new Error("キャラが見つかりません");
+
+        document.title = `${character.name} / ミレスト・メメントモリ分析データ室`;
+        document.querySelector("#characterName").textContent = character.name;
+        document.querySelector("#roleMemo").textContent = character.catchcopy || character.roleMemo;
+        document.querySelector("#gachaUpdated").textContent = `ガチャ状態確認日：${data.gachaStatusUpdatedAt || "未設定"}`;
+        renderMeta(character);
+        renderSkills(skills);
+      } catch (error) {
+        document.querySelector("#roleMemo").textContent = error.message;
+        console.error(error);
+      }
+    }
+
+    init();
+  </script>
+  <footer>
+    <div class="footer-inner">
+      <span>ミレスト・メメントモリ攻略・分析データベース / 非公式ファンサイト</span>
+      <nav class="footer-links" aria-label="固定ページ">
+        <a href="/">トップ</a>
+        <a href="../../privacy.html">プライバシーポリシー</a>
+        <a href="../../disclaimer.html">免責事項</a>
+        <a href="../../about.html">このサイトについて</a>
+        <a href="../../contact.html">お問い合わせ</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>
