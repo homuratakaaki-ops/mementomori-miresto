@@ -571,6 +571,10 @@ function buildSoloHTML(rem) {
             <input type="number" id="ticketInput" value="${state.ticket}" min="0" oninput="onTicketInput(this.value)">
             <button class="btn-num" onclick="changeTicket(1)">＋</button>
           </div>
+          <div class="btn-quick-row">
+            <button class="btn-quick" onclick="changeTicket(10)">+10</button>
+            <button class="btn-quick" onclick="changeTicket(-10)">−10</button>
+          </div>
         </div>
       </div>
       <div class="field-group" style="margin-bottom:0">
@@ -661,6 +665,10 @@ function buildCombinedHTML(rem) {
             <input type="number" id="cmbTicket_pickup" value="${state.ticketPickup}" min="0" oninput="onCmbTicketInput('pickup',this.value)">
             <button class="btn-num" onclick="changeCmbTicket('pickup',1)">＋</button>
           </div>
+          <div class="btn-quick-row">
+            <button class="btn-quick" onclick="changeCmbTicket('pickup',10)">+10</button>
+            <button class="btn-quick" onclick="changeCmbTicket('pickup',-10)">−10</button>
+          </div>
         </div>
         <div class="input-col">
           <div class="input-col-title">運命ガチャ</div>
@@ -680,6 +688,10 @@ function buildCombinedHTML(rem) {
             <button class="btn-num" onclick="changeCmbTicket('destiny',-1)">−</button>
             <input type="number" id="cmbTicket_destiny" value="${state.ticketDestiny}" min="0" oninput="onCmbTicketInput('destiny',this.value)">
             <button class="btn-num" onclick="changeCmbTicket('destiny',1)">＋</button>
+          </div>
+          <div class="btn-quick-row">
+            <button class="btn-quick" onclick="changeCmbTicket('destiny',10)">+10</button>
+            <button class="btn-quick" onclick="changeCmbTicket('destiny',-10)">−10</button>
           </div>
         </div>
       </div>
