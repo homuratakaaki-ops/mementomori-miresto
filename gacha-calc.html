@@ -32,6 +32,7 @@
     font-family: 'Noto Sans JP', sans-serif;
     min-height: 100vh;
     padding: 24px 16px 40px;
+    overflow-x: hidden;
   }
 
   .container { max-width: 460px; margin: 0 auto; }
@@ -172,6 +173,8 @@
     display: flex;
     align-items: center;
     gap: 8px;
+    max-width: 100%;
+    overflow: hidden;
   }
   .extra-copies-label {
     font-size: 12px;
@@ -487,11 +490,10 @@
         <button class="btn-current" onclick="setCurrentRarity('LRp5',this)">LR+5</button>
       </div>
       <div class="extra-copies-row">
-        <span class="extra-copies-label">余り同名カード</span>
+        <span class="extra-copies-label">余り同名カード（枚）</span>
         <button class="btn-num" onclick="changeExtra(-1)">−</button>
-        <input type="number" id="extraInput" value="0" min="0" style="flex:1" oninput="onExtraInput(this.value)">
+        <input type="number" id="extraInput" value="0" min="0" style="flex:1;min-width:0" oninput="onExtraInput(this.value)">
         <button class="btn-num" onclick="changeExtra(1)">＋</button>
-        <span style="font-size:11px;color:var(--text-dark);flex-shrink:0">枚（SR換算）</span>
       </div>
       <div id="ownedSummary" style="font-size:11px;color:var(--text-dim);margin-top:6px;text-align:right"></div>
     </div>
