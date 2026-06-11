@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>パック確認ページ（動作確認用）</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --gold: #c8aa64;
+    --gold-dim: rgba(200,170,100,0.2);
+    --gold-bg: rgba(200,170,100,0.08);
+    --bg: #0d0a14;
+    --bg2: #1a1025;
+    --text: #e8d9c0;
+    --text-dim: #a08060;
+    --text-dark: #604030;
+    --border: rgba(200,170,100,0.25);
+    --green: #6ec97a;
+    --red: #e06060;
+  }
+  body {
+    background: linear-gradient(135deg, var(--bg) 0%, var(--bg2) 50%, var(--bg) 100%);
+    color: var(--text);
+    font-family: 'Noto Sans JP', 'Hiragino Sans', sans-serif;
+    min-height: 100vh;
+    padding: 24px 16px 48px;
+  }
+  .container { max-width: 860px; margin: 0 auto; }
+
+  /* ヘッダー */
+  .header { text-align: center; margin-bottom: 28px; }
+  .header h1 { font-size: 18px; color: var(--gold); letter-spacing: 2px; }
+  .header-note { font-size: 11px; color: var(--text-dark); margin-top: 6px; }
+
+  /* ステータスバー */
+  .status-bar {
+    padding: 10px 16px; border-radius: 8px; margin-bottom: 20px;
+    font-size: 12px; text-align: center;
+  }
+  .status-bar.loading { background: rgba(160,180,240,0.1); border: 1px solid rgba(160,180,240,0.3); color: #a0b4f0; }
+  .status-bar.ok      { background: rgba(110,201,122,0.1); border: 1px solid rgba(110,201,122,0.3); color: var(--green); }
+  .status-bar.error   { background: rgba(200,80,80,0.1);  border: 1px solid rgba(200,80,80,0.3);  color: var(--red); }
+
+  /* フィルター */
+  .filter-card {
+    background: rgba(255,255,255,0.03); border: 1px solid var(--border);
+    border-radius: 12px; padding: 16px 18px; margin-bottom: 20px;
+  }
+  .filter-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: 10px; }
+  .filter-row:last-child { margin-bottom: 0; }
+  .filter-label { font-size: 11px; color: var(--text-dim); width: 72px; flex-shrink: 0; }
+  .btn-filter {
+    padding: 6px 14px; border-radius: 6px; border: 1px solid var(--gold-dim);
+    background: rgba(255,255,255,0.03); color: var(--text-dim);
+    font-size: 12px; cursor: pointer; transition: all 0.15s; font-family: inherit;
+  }
+  .btn-filter.active { border-color: var(--gold); background: var(--gold-bg); color: #f0e0c0; }
+  .result-count { font-size: 11px; color: var(--text-dim); margin-left: auto; }
+
+  /* パックグリッド */
+  .pack-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 14px;
+  }
+  .pack-card {
+    background: rgba(255,255,255,0.03); border: 1px solid var(--border);
+    border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 10px;
+  }
+
+  /* サイクルバッジ */
+  .cycle-badge {
+    display: inline-block; font-size: 10px; padding: 2px 8px; border-radius: 4px;
+    font-weight: 700; letter-spacing: 0.5px;
+  }
+  .cycle-daily   { background: rgba(160,180,240,0.2); color: #a0b4f0; }
+  .cycle-weekly  { background: rgba(200,170,100,0.2); color: var(--gold); }
+  .cycle-monthly { background: rgba(110,201,122,0.2); color: var(--green); }
+
+  /* パックヘッダー */
+  .pack-header { display: flex; align-items: flex-start; gap: 8px; }
+  .pack-name { font-size: 13px; font-weight: 700; color: #f0e0c0; flex: 1; line-height: 1.4; }
+  .pack-meta { font-size: 11px; color: var(--text-dim); display: flex; gap: 10px; flex-wrap: wrap; }
+  .pack-price { color: var(--gold); font-weight: 700; }
+  .pack-limit { color: var(--text-dark); }
+
+  /* コンテンツリスト */
+  .contents-list { list-style: none; display: flex; flex-direction: column; gap: 5px; }
+  .contents-item {
+    display: flex; justify-content: space-between; align-items: baseline;
+    font-size: 11px; padding: 4px 0; border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+  .contents-item:last-child { border-bottom: none; }
+  .item-name { color: var(--text-dim); flex: 1; margin-right: 8px; }
+  .item-name.highlight-wish  { color: #d4a0f0; }
+  .item-name.highlight-star  { color: #a0c8f0; }
+  .item-qty { color: #f0e0c0; font-weight: 700; white-space: nowrap; }
+
+  /* 空状態 */
+  .empty-state {
+    text-align: center; padding: 48px 16px;
+    color: var(--text-dark); font-size: 13px;
+    grid-column: 1 / -1;
+  }
+
+  /* エラー詳細 */
+  .error-detail {
+    background: rgba(200,80,80,0.08); border: 1px solid rgba(200,80,80,0.3);
+    border-radius: 10px; padding: 16px; margin-bottom: 20px;
+    font-size: 12px; color: var(--red); line-height: 1.8;
+  }
+  .error-detail pre { font-size: 11px; margin-top: 8px; white-space: pre-wrap; word-break: break-all; }
+
+  /* デバッグパネル */
+  .debug-panel {
+    margin-top: 28px; background: rgba(255,255,255,0.02);
+    border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px;
+  }
+  .debug-title { font-size: 11px; color: var(--text-dim); letter-spacing: 1px; margin-bottom: 10px; }
+  .debug-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 8px; }
+  .debug-item { font-size: 11px; color: var(--text-dark); }
+  .debug-item span { color: var(--text-dim); }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="header">
+    <h1>パック確認ページ</h1>
+    <div class="header-note">動作確認用 — 本番ツール未組み込み</div>
+  </div>
+
+  <div id="statusBar" class="status-bar loading">読み込み中...</div>
+  <div id="errorDetail" style="display:none"></div>
+
+  <div class="filter-card" id="filterCard" style="display:none">
+    <div class="filter-row">
+      <span class="filter-label">周期</span>
+      <button class="btn-filter active" data-filter="cycle" data-value="all">すべて</button>
+      <button class="btn-filter" data-filter="cycle" data-value="daily">デイリー</button>
+      <button class="btn-filter" data-filter="cycle" data-value="weekly">ウィークリー</button>
+      <button class="btn-filter" data-filter="cycle" data-value="monthly">マンスリー</button>
+    </div>
+    <div class="filter-row">
+      <span class="filter-label">価格帯</span>
+      <button class="btn-filter active" data-filter="price" data-value="all">すべて</button>
+      <button class="btn-filter" data-filter="price" data-value="0-999">〜999円</button>
+      <button class="btn-filter" data-filter="price" data-value="1000-2999">1,000〜2,999円</button>
+      <button class="btn-filter" data-filter="price" data-value="3000-5999">3,000〜5,999円</button>
+      <button class="btn-filter" data-filter="price" data-value="6000-9999">6,000〜9,999円</button>
+      <button class="btn-filter" data-filter="price" data-value="10000-">10,000円〜</button>
+      <span class="result-count" id="resultCount"></span>
+    </div>
+  </div>
+
+  <div class="pack-grid" id="packGrid"></div>
+
+  <div class="debug-panel" id="debugPanel" style="display:none">
+    <div class="debug-title">READ CHECK</div>
+    <div class="debug-grid" id="debugGrid"></div>
+  </div>
+
+</div>
+
+<script>
+// フィルター状態
+const filters = { cycle: 'all', price: 'all' };
+let allPacks = [];
+let itemMap  = {};
+
+// ===== データ読み込み =====
+async function loadData() {
+  setStatus('loading', '読み込み中...');
+  try {
+    const [itemsRes, packsRes] = await Promise.all([
+      fetch('data/items.json'),
+      fetch('data/packs.json'),
+    ]);
+
+    if (!itemsRes.ok) throw new Error('items.json の読み込みに失敗しました (HTTP ' + itemsRes.status + ')');
+    if (!packsRes.ok) throw new Error('packs.json の読み込みに失敗しました (HTTP ' + packsRes.status + ')');
+
+    const itemsData = await itemsRes.json();
+    const packsData = await packsRes.json();
+
+    // itemId → name のマップ構築
+    itemsData.items.forEach(item => { itemMap[item.id] = item; });
+
+    allPacks = packsData.packs;
+
+    // 読み込み結果チェック
+    const unknownIds = [];
+    allPacks.forEach(pack => {
+      pack.contents.forEach(c => {
+        if (!itemMap[c.itemId]) unknownIds.push(pack.id + ':' + c.itemId);
+      });
+    });
+
+    if (unknownIds.length > 0) {
+      throw new Error('items.json に存在しない itemId があります:\n' + unknownIds.join('\n'));
+    }
+
+    setStatus('ok',
+      'データ読み込み完了 — ' +
+      'アイテム ' + itemsData.items.length + '件 / ' +
+      'パック ' + allPacks.length + '件'
+    );
+    document.getElementById('filterCard').style.display = '';
+    showDebug(itemsData, packsData);
+    renderPacks();
+
+  } catch (err) {
+    setStatus('error', '読み込みエラー');
+    const el = document.getElementById('errorDetail');
+    el.style.display = '';
+    el.className = 'error-detail';
+    el.innerHTML = '<strong>エラー内容：</strong><pre>' + escHtml(err.message) + '</pre>';
+  }
+}
+
+// ===== レンダリング =====
+function renderPacks() {
+  const grid = document.getElementById('packGrid');
+  const filtered = allPacks.filter(pack => {
+    if (filters.cycle !== 'all' && pack.cycle !== filters.cycle) return false;
+    if (filters.price !== 'all') {
+      const [min, max] = filters.price.split('-').map(v => v === '' ? Infinity : Number(v));
+      if (pack.priceYen < min || pack.priceYen > (max ?? Infinity)) return false;
+    }
+    return true;
+  });
+
+  document.getElementById('resultCount').textContent = filtered.length + '件';
+
+  if (filtered.length === 0) {
+    grid.innerHTML = '<div class="empty-state">条件に一致するパックがありません</div>';
+    return;
+  }
+
+  grid.innerHTML = filtered.map(pack => {
+    const cycleLabel = { daily:'デイリー', weekly:'ウィークリー', monthly:'マンスリー' }[pack.cycle] || pack.cycle;
+    const limitText = pack.purchaseLimit === null ? '無制限' : '月' + pack.purchaseLimit + '回';
+
+    const contentRows = pack.contents.map(c => {
+      const item = itemMap[c.itemId];
+      const name = item ? item.name : '不明(' + c.itemId + ')';
+      const cls = c.itemId === 'wish_star_ticket_case'  ? 'item-name highlight-wish' :
+                  c.itemId === 'starbow_ticket_case'     ? 'item-name highlight-star' : 'item-name';
+      const qty = c.itemId === 'paid_diamond'
+        ? c.quantity.toLocaleString() + '個'
+        : c.quantity.toLocaleString() + (item ? item.unit : '');
+      return '<li class="contents-item"><span class="' + cls + '">' + escHtml(name) + '</span><span class="item-qty">' + qty + '</span></li>';
+    }).join('');
+
+    return '<div class="pack-card">' +
+      '<div class="pack-header">' +
+        '<div class="pack-name">' + escHtml(pack.name) + '</div>' +
+        '<span class="cycle-badge cycle-' + pack.cycle + '">' + cycleLabel + '</span>' +
+      '</div>' +
+      '<div class="pack-meta">' +
+        '<span class="pack-price">' + pack.priceYen.toLocaleString() + '円</span>' +
+        '<span class="pack-limit">購入上限 ' + limitText + '</span>' +
+      '</div>' +
+      '<ul class="contents-list">' + contentRows + '</ul>' +
+    '</div>';
+  }).join('');
+}
+
+// ===== デバッグパネル =====
+function showDebug(itemsData, packsData) {
+  const panel = document.getElementById('debugPanel');
+  const grid  = document.getElementById('debugGrid');
+  panel.style.display = '';
+
+  const byCycle = { daily:0, weekly:0, monthly:0 };
+  packsData.packs.forEach(p => byCycle[p.cycle]++);
+
+  const wishPacks  = packsData.packs.filter(p => p.contents.some(c => c.itemId === 'wish_star_ticket_case')).map(p => p.name);
+  const starbowCnt = packsData.packs.filter(p => p.contents.some(c => c.itemId === 'starbow_ticket_case')).length;
+
+  const checks = [
+    ['総パック数',       packsData.packs.length + '件',   packsData.packs.length === 39],
+    ['アイテム数',       itemsData.items.length + '件',    true],
+    ['デイリー',         byCycle.daily  + '件',            byCycle.daily  === 13],
+    ['ウィークリー',     byCycle.weekly + '件',            byCycle.weekly === 14],
+    ['マンスリー',       byCycle.monthly + '件',           byCycle.monthly === 12],
+    ['願い星ケース',     wishPacks.length + '件',          wishPacks.length === 2],
+    ['星虹ケース使用',   starbowCnt + 'パック',            starbowCnt > 0],
+    ['スキーマver',      packsData.schemaVersion,          true],
+  ];
+
+  grid.innerHTML = checks.map(([label, val, ok]) =>
+    '<div class="debug-item">' + (ok ? '✅' : '❌') + ' ' + label + '：<span>' + escHtml(String(val)) + '</span></div>'
+  ).join('');
+}
+
+// ===== ユーティリティ =====
+function setStatus(type, msg) {
+  const el = document.getElementById('statusBar');
+  el.className = 'status-bar ' + type;
+  el.textContent = msg;
+}
+function escHtml(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// ===== フィルターイベント =====
+document.querySelectorAll('.btn-filter').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const filterType = btn.dataset.filter;
+    document.querySelectorAll('[data-filter="' + filterType + '"]').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    filters[filterType] = btn.dataset.value;
+    renderPacks();
+  });
+});
+
+// ===== 起動 =====
+loadData();
+</script>
+</body>
+</html>

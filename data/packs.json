@@ -1,0 +1,550 @@
+{
+  "schemaVersion": "1.0.0",
+  "updatedAt": "2026-06-11",
+  "scope": "メメントモリ常設課金パック（デイリー・ウィークリー・マンスリー）",
+  "notes": [
+    "contents.itemId は items.json の id を参照",
+    "purchaseLimit は購入回数上限（null = 無制限）",
+    "有償ダイヤは contents 内の paid_diamond として管理",
+    "未確認の内容は登録しない・推測で補完しない"
+  ],
+  "packs": [
+    {
+      "id": "daily_witch_fragment_sr",
+      "name": "魔女の心片（SR）パック",
+      "cycle": "daily",
+      "priceYen": 160,
+      "purchaseLimit": 1,
+      "contents": [
+        { "itemId": "paid_diamond", "quantity": 80 },
+        { "itemId": "gold_24h", "quantity": 1 },
+        { "itemId": "witch_fragment_sr", "quantity": 5 }
+      ],
+      "verifiedDate": "2026-06-11",
+      "source": "in_game_video"
+    },
+    {
+      "id": "daily_potential_orb",
+      "name": "潜在宝珠パック",
+      "cycle": "daily",
+      "priceYen": 650,
+      "purchaseLimit": 1,
+      "contents": [
+        { "itemId": "paid_diamond", "quantity": 325 },
+        { "itemId": "potential_orb", "quantity": 400 },
+        { "itemId": "potential_orb_6h", "quantity": 2 }
+      ],
+      "verifiedDate": "2026-06-11",
+      "source": "in_game_video"
+    },
+    {
+      "id": "daily_exp_orb",
+      "name": "経験珠パック",
+      "cycle": "daily",
+      "priceYen": 650,
+      "purchaseLimit": 1,
+      "contents": [
+        { "itemId": "paid_diamond", "quantity": 325 },
+        { "itemId": "exp_orb_24h", "quantity": 1 },
+        { "itemId": "enhancement_water", "quantity": 200 }
+      ],
+      "verifiedDate": "2026-06-11",
+      "source": "in_game_video"
+    },
+    {
+      "id": "daily_witch_fragment_r",
+      "name": "魔女の心片（R）パック",
+      "cycle": "daily",
+      "priceYen": 650,
+      "purchaseLimit": 3,
+      "contents": [
+        { "itemId": "paid_diamond", "quantity": 325 },
+        { "itemId": "witch_fragment_r", "quantity": 180 }
+      ],
+      "verifiedDate": "2026-06-11",
+      "source": "in_game_video"
+    },
+    {
+      "id": "daily_enhancement_water",
+      "name": "強化水パック",
+      "cycle": "daily",
+      "priceYen": 650,
+      "purchaseLimit": 3,
+      "contents": [
+        { "itemId": "paid_diamond", "quantity": 325 },
+        { "itemId": "enhancement_water", "quantity": 500 }
+      ],
+      "verifiedDate": "2026-06-11",
+      "source": "in_game_video"
+    },
+    {
+      "id": "daily_gold",
+      "name": "ゴールドパック",
+      "cycle": "daily",
+      "priceYen": 650,
+      "purchaseLimit": 3,
+      "contents": [
+        { "itemId": "paid_diamond", "quantity": 325 },
+        { "itemId": "gold", "quantity": 1500000 },
+        { "itemId": "gold_6h", "quantity": 6 }
+      ],
+      "verifiedDate": "2026-06-11",
+      "source": "in_game_video"
+    },
+    {
+      "id": "daily_enhancement_potion",
+      "name": "強化秘薬パック",
+      "cycle": "daily",
+      "priceYen": 1000,
+      "purchaseLimit": 3,
+      "contents": [
+        { "itemId": "paid_diamond", "quantity": 500 },
+        { "itemId": "enhancement_potion", "quantity": 50 }
+      ],
+      "verifiedDate": "2026-06-11",
+      "source": "in_game_video"
+    },
+    {
+      "id": "daily_refining_steel",
+      "name": "精錬鋼パック",
+      "cycle": "daily",
+      "priceYen": 1500,
+      "purchaseLimit": 3,
+      "contents": [
+        { "itemId": "paid_diamond", "quantity": 750 },
+        { "itemId": "gold_6h", "quantity": 2 },
+        { "itemId": "refining_steel", "quantity": 40000 }
+      ],
+      "verifiedDate": "2026-06-11",
+      "source": "in_game_video"
+    },
+    {
+      "id": "daily_sacred_steel",
+      "name": "聖装鋼パック",
+      "cycle": "daily",
+      "priceYen": 1500,
+      "purchaseLimit": 3,
+      "contents": [
+        { "itemId": "paid_diamond", "quantity": 750 },
+        { "itemId": "gold_6h", "quantity": 2 },
+        { "itemId": "sacred_steel", "quantity": 3000 }
+      ],
+      "verifiedDate": "2026-06-11",
+      "source": "in_game_video"
+    },
+    {
+      "id": "daily_leap",
+      "name": "飛躍パック",
+      "cycle": "daily",
+      "priceYen": 3000,
+      "purchaseLimit": 1,
+      "contents": [
+        { "itemId": "paid_diamond", "quantity": 1500 },
+        { "itemId": "potential_orb_24h", "quantity": 8 },
+        { "itemId": "gold_24h", "quantity": 8 }
+      ],
+      "verifiedDate": "2026-06-11",
+      "source": "in_game_video"
+    },
+    {
+      "id": "daily_growth",
+      "name": "育成パック",
+      "cycle": "daily",
+      "priceYen": 3000,
+      "purchaseLimit": 1,
+      "contents": [
+        { "itemId": "paid_diamond", "quantity": 1500 },
+        { "itemId": "exp_orb_24h", "quantity": 8 },
+        { "itemId": "gold_24h", "quantity": 8 }
+      ],
+      "verifiedDate": "2026-06-11",
+      "source": "in_game_video"
+    },
+    {
+      "id": "daily_witch_friendship",
+      "name": "魔女の親交パック",
+      "cycle": "daily",
+      "priceYen": 6000,
+      "purchaseLimit": 1,
+      "contents": [
+        { "itemId": "paid_diamond", "quantity": 3000 },
+        { "itemId": "platinum_gacha_ticket", "quantity": 20 },
+        { "itemId": "exp_orb_24h", "quantity": 2 }
+      ],
+      "verifiedDate": "2026-06-11",
+      "source": "in_game_video"
+    },
+    {
+      "id": "daily_witch_devotion",
+      "name": "魔女の信愛パック",
+      "cycle": "daily",
+      "priceYen": 11800,
+      "purchaseLimit": 1,
+      "contents": [
+        { "itemId": "paid_diamond", "quantity": 5900 },
+        { "itemId": "platinum_gacha_ticket", "quantity": 50 },
+        { "itemId": "potential_orb_24h", "quantity": 4 }
+      ],
+      "verifiedDate": "2026-06-11",
+      "source": "in_game_video"
+    },
+    {
+      "id": "weekly_witch_fragment_sr",
+      "name": "魔女の心片（SR）パック",
+      "cycle": "weekly",
+      "priceYen": 160,
+      "purchaseLimit": 1,
+      "contents": [
+        { "itemId": "paid_diamond", "quantity": 80 },
+        { "itemId": "gold_24h", "quantity": 1 },
+        { "itemId": "witch_fragment_sr", "quantity": 5 }
+      ],
+      "verifiedDate": "2026-06-11",
+      "source": "in_game_video"
+    },
+    {
+      "id": "weekly_premium_gacha",
+      "name": "高級ガチャパック",
+      "cycle": "weekly",
+      "priceYen": 1500,
+      "purchaseLimit": 3,
+      "contents": [
+        { "itemId": "paid_diamond", "quantity": 750 },
+        { "itemId": "potential_orb_6h", "quantity": 1 },
+        { "itemId": "platinum_gacha_ticket", "quantity": 5 }
+      ],
+      "verifiedDate": "2026-06-11",
+      "source": "in_game_video"
+    },
+    {
+      "id": "weekly_potential_orb_large",
+      "name": "潜在宝珠（大）パック",
+      "cycle": "weekly",
+      "priceYen": 1500,
+      "purchaseLimit": 3,
+      "contents": [
+        { "itemId": "paid_diamond", "quantity": 750 },
+        { "itemId": "potential_orb_24h", "quantity": 3 }
+      ],
+      "verifiedDate": "2026-06-11",
+      "source": "in_game_video"
+    },
+    {
+      "id": "weekly_exp_orb_large",
+      "name": "経験珠（大）パック",
+      "cycle": "weekly",
+      "priceYen": 1500,
+      "purchaseLimit": 3,
+      "contents": [
+        { "itemId": "paid_diamond", "quantity": 750 },
+        { "itemId": "exp_orb_24h", "quantity": 3 }
+      ],
+      "verifiedDate": "2026-06-11",
+      "source": "in_game_video"
+    },
+    {
+      "id": "weekly_gold_large",
+      "name": "ゴールド（大）パック",
+      "cycle": "weekly",
+      "priceYen": 1500,
+      "purchaseLimit": 3,
+      "contents": [
+        { "itemId": "paid_diamond", "quantity": 750 },
+        { "itemId": "gold_24h", "quantity": 6 }
+      ],
+      "verifiedDate": "2026-06-11",
+      "source": "in_game_video"
+    },
+    {
+      "id": "weekly_special_gacha",
+      "name": "特別ガチャパック",
+      "cycle": "weekly",
+      "priceYen": 3000,
+      "purchaseLimit": 3,
+      "contents": [
+        { "itemId": "paid_diamond", "quantity": 1500 },
+        { "itemId": "growth_set_24h", "quantity": 1 },
+        { "itemId": "platinum_gacha_ticket", "quantity": 10 }
+      ],
+      "verifiedDate": "2026-06-11",
+      "source": "in_game_video"
+    },
+    {
+      "id": "weekly_red_potion",
+      "name": "赤き秘薬パック",
+      "cycle": "weekly",
+      "priceYen": 3000,
+      "purchaseLimit": 3,
+      "contents": [
+        { "itemId": "paid_diamond", "quantity": 1500 },
+        { "itemId": "potential_orb_6h", "quantity": 6 },
+        { "itemId": "enhancement_potion", "quantity": 120 }
+      ],
+      "verifiedDate": "2026-06-11",
+      "source": "in_game_video"
+    },
+    {
+      "id": "weekly_mysterious_oil",
+      "name": "神秘の香油パック",
+      "cycle": "weekly",
+      "priceYen": 3000,
+      "purchaseLimit": 3,
+      "contents": [
+        { "itemId": "paid_diamond", "quantity": 1500 },
+        { "itemId": "exp_orb_6h", "quantity": 6 },
+        { "itemId": "magic_oil", "quantity": 8 }
+      ],
+      "verifiedDate": "2026-06-11",
+      "source": "in_game_video"
+    },
+    {
+      "id": "weekly_blessing_light",
+      "name": "祝福の光パック",
+      "cycle": "weekly",
+      "priceYen": 6000,
+      "purchaseLimit": 3,
+      "contents": [
+        { "itemId": "paid_diamond", "quantity": 3000 },
+        { "itemId": "potential_orb_24h", "quantity": 2 },
+        { "itemId": "starbow_ticket_case", "quantity": 4 }
+      ],
+      "verifiedDate": "2026-06-11",
+      "source": "in_game_video"
+    },
+    {
+      "id": "weekly_holy_knight",
+      "name": "聖騎士パック",
+      "cycle": "weekly",
+      "priceYen": 6000,
+      "purchaseLimit": 3,
+      "contents": [
+        { "itemId": "paid_diamond", "quantity": 3000 },
+        { "itemId": "potential_orb_24h", "quantity": 16 },
+        { "itemId": "enhancement_potion", "quantity": 90 }
+      ],
+      "verifiedDate": "2026-06-11",
+      "source": "in_game_video"
+    },
+    {
+      "id": "weekly_holy_maiden",
+      "name": "聖乙女パック",
+      "cycle": "weekly",
+      "priceYen": 6000,
+      "purchaseLimit": 3,
+      "contents": [
+        { "itemId": "paid_diamond", "quantity": 3000 },
+        { "itemId": "exp_orb_24h", "quantity": 16 },
+        { "itemId": "enhancement_water", "quantity": 6000 }
+      ],
+      "verifiedDate": "2026-06-11",
+      "source": "in_game_video"
+    },
+    {
+      "id": "weekly_holy_angel",
+      "name": "聖天使パック",
+      "cycle": "weekly",
+      "priceYen": 6000,
+      "purchaseLimit": 3,
+      "contents": [
+        { "itemId": "paid_diamond", "quantity": 3000 },
+        { "itemId": "gold_24h", "quantity": 32 },
+        { "itemId": "refining_steel", "quantity": 15000 }
+      ],
+      "verifiedDate": "2026-06-11",
+      "source": "in_game_video"
+    },
+    {
+      "id": "weekly_goddess_blessing",
+      "name": "女神の恩寵パック",
+      "cycle": "weekly",
+      "priceYen": 11800,
+      "purchaseLimit": 3,
+      "contents": [
+        { "itemId": "paid_diamond", "quantity": 5900 },
+        { "itemId": "destiny_gacha_ticket", "quantity": 25 }
+      ],
+      "verifiedDate": "2026-06-11",
+      "source": "in_game_video"
+    },
+    {
+      "id": "weekly_angel_teaching",
+      "name": "天使の教示パック",
+      "cycle": "weekly",
+      "priceYen": 11800,
+      "purchaseLimit": 3,
+      "contents": [
+        { "itemId": "paid_diamond", "quantity": 5900 },
+        { "itemId": "potential_orb_24h", "quantity": 4 },
+        { "itemId": "wish_star_ticket_case", "quantity": 3 }
+      ],
+      "verifiedDate": "2026-06-11",
+      "source": "in_game_video"
+    },
+    {
+      "id": "monthly_witch_fragment_sr",
+      "name": "魔女の心片（SR）パック",
+      "cycle": "monthly",
+      "priceYen": 160,
+      "purchaseLimit": 1,
+      "contents": [
+        { "itemId": "paid_diamond", "quantity": 80 },
+        { "itemId": "gold_24h", "quantity": 1 },
+        { "itemId": "witch_fragment_sr", "quantity": 5 }
+      ],
+      "verifiedDate": "2026-06-11",
+      "source": "in_game_video"
+    },
+    {
+      "id": "monthly_pure_prayer",
+      "name": "純心の祈りパック",
+      "cycle": "monthly",
+      "priceYen": 1000,
+      "purchaseLimit": 4,
+      "contents": [
+        { "itemId": "paid_diamond", "quantity": 500 },
+        { "itemId": "potential_orb", "quantity": 200 },
+        { "itemId": "platinum_gacha_ticket", "quantity": 5 }
+      ],
+      "verifiedDate": "2026-06-11",
+      "source": "in_game_video"
+    },
+    {
+      "id": "monthly_witch_thought",
+      "name": "魔女の想いパック",
+      "cycle": "monthly",
+      "priceYen": 1000,
+      "purchaseLimit": 4,
+      "contents": [
+        { "itemId": "paid_diamond", "quantity": 500 },
+        { "itemId": "potential_orb", "quantity": 200 },
+        { "itemId": "witch_fragment_r", "quantity": 300 }
+      ],
+      "verifiedDate": "2026-06-11",
+      "source": "in_game_video"
+    },
+    {
+      "id": "monthly_pure_vow",
+      "name": "清心の誓いパック",
+      "cycle": "monthly",
+      "priceYen": 3000,
+      "purchaseLimit": 3,
+      "contents": [
+        { "itemId": "paid_diamond", "quantity": 1500 },
+        { "itemId": "potential_orb", "quantity": 1200 },
+        { "itemId": "platinum_gacha_ticket", "quantity": 10 }
+      ],
+      "verifiedDate": "2026-06-11",
+      "source": "in_game_video"
+    },
+    {
+      "id": "monthly_witch_wish",
+      "name": "魔女の願いパック",
+      "cycle": "monthly",
+      "priceYen": 3000,
+      "purchaseLimit": 4,
+      "contents": [
+        { "itemId": "paid_diamond", "quantity": 1500 },
+        { "itemId": "potential_orb", "quantity": 1200 },
+        { "itemId": "witch_fragment_sr", "quantity": 60 }
+      ],
+      "verifiedDate": "2026-06-11",
+      "source": "in_game_video"
+    },
+    {
+      "id": "monthly_attribute_letter",
+      "name": "属性手紙パック",
+      "cycle": "monthly",
+      "priceYen": 3000,
+      "purchaseLimit": 3,
+      "contents": [
+        { "itemId": "paid_diamond", "quantity": 1500 },
+        { "itemId": "gold", "quantity": 2500000 },
+        { "itemId": "witch_letter_sr_attribute_select", "quantity": 1 }
+      ],
+      "verifiedDate": "2026-06-11",
+      "source": "in_game_video"
+    },
+    {
+      "id": "monthly_enhancement_potion_large",
+      "name": "強化秘薬（大）パック",
+      "cycle": "monthly",
+      "priceYen": 3000,
+      "purchaseLimit": 4,
+      "contents": [
+        { "itemId": "paid_diamond", "quantity": 1500 },
+        { "itemId": "enhancement_potion", "quantity": 160 }
+      ],
+      "verifiedDate": "2026-06-11",
+      "source": "in_game_video"
+    },
+    {
+      "id": "monthly_miracle_blessing",
+      "name": "奇跡の恵みパック",
+      "cycle": "monthly",
+      "priceYen": 6000,
+      "purchaseLimit": 3,
+      "contents": [
+        { "itemId": "paid_diamond", "quantity": 3000 },
+        { "itemId": "starbow_ticket_case", "quantity": 3 },
+        { "itemId": "witch_fragment_r", "quantity": 1620 }
+      ],
+      "verifiedDate": "2026-06-11",
+      "source": "in_game_video"
+    },
+    {
+      "id": "monthly_angel_wings",
+      "name": "天使の翼パック",
+      "cycle": "monthly",
+      "priceYen": 6000,
+      "purchaseLimit": 3,
+      "contents": [
+        { "itemId": "paid_diamond", "quantity": 3000 },
+        { "itemId": "gold_24h", "quantity": 20 },
+        { "itemId": "wish_star_ticket_case", "quantity": 5 }
+      ],
+      "verifiedDate": "2026-06-11",
+      "source": "in_game_video"
+    },
+    {
+      "id": "monthly_rune_ticket_large",
+      "name": "ルーンチケット（大）パック",
+      "cycle": "monthly",
+      "priceYen": 11800,
+      "purchaseLimit": 4,
+      "contents": [
+        { "itemId": "paid_diamond", "quantity": 5900 },
+        { "itemId": "rune_ticket", "quantity": 512 },
+        { "itemId": "gold_24h", "quantity": 20 }
+      ],
+      "verifiedDate": "2026-06-11",
+      "source": "in_game_video"
+    },
+    {
+      "id": "monthly_goddess_blessing",
+      "name": "女神の恩寵パック",
+      "cycle": "monthly",
+      "priceYen": 11800,
+      "purchaseLimit": 4,
+      "contents": [
+        { "itemId": "paid_diamond", "quantity": 5900 },
+        { "itemId": "destiny_gacha_ticket", "quantity": 25 }
+      ],
+      "verifiedDate": "2026-06-11",
+      "source": "in_game_video"
+    },
+    {
+      "id": "monthly_angel_guidance",
+      "name": "天使の導きパック",
+      "cycle": "monthly",
+      "priceYen": 11800,
+      "purchaseLimit": 4,
+      "contents": [
+        { "itemId": "paid_diamond", "quantity": 5900 },
+        { "itemId": "potential_orb", "quantity": 6000 },
+        { "itemId": "starbow_ticket_case", "quantity": 7 }
+      ],
+      "verifiedDate": "2026-06-11",
+      "source": "in_game_video"
+    }
+  ]
+}

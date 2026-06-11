@@ -1,0 +1,37 @@
+{
+  "schemaVersion": "1.0.0",
+  "updatedAt": "2026-06-11",
+  "scope": "メメントモリ常設パック（デイリー・ウィークリー・マンスリー）で確認したアイテム",
+  "notes": [
+    "directPackItem=true は常設パックに直接含まれていたアイテム",
+    "directPackItem=false は選択式チケットケースの交換先として必要な参照アイテム",
+    "聖装経験値は聖装武具を素材にした場合のみ増加する"
+  ],
+  "items": [
+    {"id":"paid_diamond","name":"有償ダイヤ","category":"currency","unit":"個","uses":["ガチャ","ショップ利用","VIP経験値の獲得"],"directPackItem":true},
+    {"id":"gold","name":"ゴールド","category":"common_resource","unit":"ゴールド","uses":["キャラ育成","武具強化","各種コンテンツ"],"directPackItem":true},
+    {"id":"gold_6h","name":"ゴールド（6時間）","category":"time_reward","unit":"個","durationHours":6,"rewardType":"gold","uses":["オートバトル6時間分のゴールドを獲得"],"directPackItem":true},
+    {"id":"gold_24h","name":"ゴールド（24時間）","category":"time_reward","unit":"個","durationHours":24,"rewardType":"gold","uses":["オートバトル24時間分のゴールドを獲得"],"directPackItem":true},
+    {"id":"exp_orb_6h","name":"経験珠（6時間）","category":"character_growth","unit":"個","durationHours":6,"rewardType":"exp_orb","uses":["オートバトル6時間分の経験珠を獲得"],"directPackItem":true},
+    {"id":"exp_orb_24h","name":"経験珠（24時間）","category":"character_growth","unit":"個","durationHours":24,"rewardType":"exp_orb","uses":["オートバトル24時間分の経験珠を獲得"],"directPackItem":true},
+    {"id":"potential_orb","name":"潜在宝珠","category":"character_growth","unit":"個","uses":["キャラのレベル突破"],"directPackItem":true},
+    {"id":"potential_orb_6h","name":"潜在宝珠（6時間）","category":"character_growth","unit":"個","durationHours":6,"rewardType":"potential_orb","uses":["オートバトル6時間分の潜在宝珠を獲得"],"directPackItem":true},
+    {"id":"potential_orb_24h","name":"潜在宝珠（24時間）","category":"character_growth","unit":"個","durationHours":24,"rewardType":"potential_orb","uses":["オートバトル24時間分の潜在宝珠を獲得"],"directPackItem":true},
+    {"id":"growth_set_24h","name":"育成セット（24時間）","category":"character_growth","unit":"個","durationHours":24,"uses":["ゴールド・経験珠・潜在宝珠の24時間分を獲得"],"directPackItem":true},
+    {"id":"witch_fragment_r","name":"魔女の心片（R）","category":"character_acquisition","unit":"個","uses":["60個集めてRキャラ1体を獲得"],"exchange":{"requiredQuantity":60,"result":"Rキャラ1体"},"directPackItem":true},
+    {"id":"witch_fragment_sr","name":"魔女の心片（SR）","category":"character_acquisition","unit":"個","uses":["60個集めてSRキャラ1体を獲得"],"exchange":{"requiredQuantity":60,"result":"SRキャラ1体"},"directPackItem":true},
+    {"id":"witch_letter_sr_attribute_select","name":"魔女の手紙（SR・属性選択）","category":"character_acquisition","unit":"個","uses":["選択した属性のSRキャラを獲得"],"directPackItem":true},
+    {"id":"platinum_gacha_ticket","name":"プラチナガチャチケット","category":"character_gacha_ticket","unit":"枚","uses":["プラチナガチャを引く"],"directPackItem":true},
+    {"id":"destiny_gacha_ticket","name":"運命ガチャチケット","category":"character_gacha_ticket","unit":"枚","uses":["運命ガチャを引く"],"directPackItem":true},
+    {"id":"star_guidance_gacha_ticket","name":"星の導きガチャチケット","category":"character_gacha_ticket","unit":"枚","uses":["星の導きガチャを引く"],"directPackItem":false},
+    {"id":"attribute_gacha_ticket","name":"属性ガチャチケット","category":"character_gacha_ticket","unit":"枚","uses":["属性ガチャを引く"],"directPackItem":false},
+    {"id":"starbow_ticket_case","name":"星虹のチケットケース","category":"choice_box","unit":"個","uses":["使用時に交換先を1つ選択"],"choices":[{"itemId":"star_guidance_gacha_ticket","quantity":4},{"itemId":"attribute_gacha_ticket","quantity":5}],"directPackItem":true},
+    {"id":"wish_star_ticket_case","name":"願い星のチケットケース","category":"choice_box","unit":"個","uses":["使用時に交換先を1つ選択"],"choices":[{"itemId":"star_guidance_gacha_ticket","quantity":3},{"itemId":"platinum_gacha_ticket","quantity":5}],"directPackItem":true},
+    {"id":"enhancement_water","name":"強化水","category":"equipment_upgrade","unit":"個","uses":["武具の強化"],"directPackItem":true},
+    {"id":"enhancement_potion","name":"強化秘薬","category":"equipment_upgrade","unit":"個","uses":["高レベル帯の武具強化"],"directPackItem":true},
+    {"id":"magic_oil","name":"魔装香油","category":"magic_equipment_upgrade","unit":"個","uses":["魔装経験値を増やして魔装のみを強化"],"effect":{"target":"magic_equipment","magicExp":1},"notes":["聖装経験値は増加しない"],"directPackItem":true},
+    {"id":"refining_steel","name":"精錬鋼","category":"equipment_exchange_currency","unit":"個","uses":["ショップで武具と交換"],"directPackItem":true},
+    {"id":"sacred_steel","name":"聖装鋼","category":"sacred_equipment_exchange_currency","unit":"個","uses":["ショップで聖装武具と交換"],"notes":["聖装経験値は聖装武具を素材にした場合のみ増加する"],"directPackItem":true},
+    {"id":"rune_ticket","name":"ルーンチケット","category":"rune_exchange_ticket","unit":"枚","uses":["ルーンショップで各種ルーンと交換"],"directPackItem":true}
+  ]
+}
