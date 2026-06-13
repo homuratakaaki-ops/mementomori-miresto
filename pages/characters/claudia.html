@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>クラウディア / ミレスト・メメントモリ分析データ室</title>
+  <style>
+    :root { color-scheme:light; --ink:#172033; --muted:#647086; --line:#d9dfeb; --paper:#fbfaf7; --panel:#fff; --navy:#0b2a57; --green:#1f704f; --shadow:0 12px 30px rgba(28,40,68,.12); }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--paper); color:var(--ink); font-family:"Yu Gothic","Hiragino Sans","Meiryo",system-ui,sans-serif; letter-spacing:0; }
+    a { color:inherit; }
+    .page-header { padding:28px clamp(16px,4vw,48px) 24px; background:linear-gradient(180deg,#fff 0%,#edf5ee 100%); border-bottom:1px solid var(--line); }
+    .header-inner,main,.footer-inner { max-width:1180px; margin:0 auto; }
+    .eyebrow { margin:0 0 6px; color:var(--green); font-size:12px; font-weight:800; }
+    h1,h2,h3,p { margin-top:0; }
+    h1 { margin-bottom:10px; font-size:clamp(34px,5vw,56px); line-height:1.05; }
+    .role { max-width:760px; margin-bottom:18px; color:var(--muted); font-size:17px; line-height:1.7; }
+    .meta-row { display:flex; flex-wrap:wrap; gap:8px; }
+    .badge,.tag { display:inline-flex; align-items:center; min-height:32px; padding:5px 10px; border-radius:999px; background:#edf1f8; color:#3b4b65; font-size:13px; font-weight:800; }
+    .attribute { background:var(--green); color:#fff; }
+    main { padding:22px clamp(12px,3vw,24px) 44px; }
+    .layout { display:grid; grid-template-columns:minmax(0,1fr) 320px; gap:16px; align-items:start; }
+    .section,.side-panel { background:var(--panel); border:1px solid var(--line); border-radius:8px; box-shadow:var(--shadow); }
+    .section { padding:18px; margin-bottom:16px; }
+    .section h2 { margin-bottom:10px; font-size:24px; }
+    .section-lead,li,dd { line-height:1.7; }
+    .skill-grid,.manual-block,.stat-grid { display:grid; gap:12px; }
+    .skill-grid { grid-template-columns:repeat(2,minmax(0,1fr)); margin-top:14px; }
+    .skill-card,.manual-card,.stat-card { border:1px solid var(--line); border-radius:8px; background:#fffdf8; overflow:hidden; }
+    .skill-card header { display:flex; justify-content:space-between; gap:10px; padding:12px; border-bottom:1px solid var(--line); background:#edf5ee; }
+    .skill-card h3,.manual-card h3,.stat-card h3 { margin-bottom:8px; font-size:18px; }
+    .ct { flex:0 0 auto; color:var(--navy); font-weight:800; }
+    .skill-body { display:grid; gap:10px; padding:12px; }
+    .manual-card,.stat-card { padding:14px; }
+    .manual-card ul { margin:0; padding-left:1.2em; }
+    .stat-grid { grid-template-columns:repeat(3,minmax(0,1fr)); }
+    dl { margin:0; } dt { color:var(--muted); font-size:12px; font-weight:800; } dd { margin:3px 0 0; }
+    .compare-link,.link-list a { display:inline-flex; justify-content:center; width:100%; padding:11px 12px; border-radius:8px; text-decoration:none; font-weight:800; }
+    .compare-link { margin-top:14px; background:var(--navy); color:#fff; }
+    .side-panel { position:sticky; top:14px; padding:16px; }
+    .side-panel h2 { margin-bottom:10px; font-size:20px; }
+    .status { padding:12px; border-left:4px solid var(--green); border-radius:6px; background:#f1f8f2; color:#34404c; line-height:1.6; }
+    .link-list { display:grid; gap:8px; margin:0; padding:0; list-style:none; } .link-list a { border:1px solid var(--line); background:#fff; }
+    footer { padding:24px clamp(14px,4vw,32px); border-top:1px solid var(--line); background:#fff; color:var(--muted); }
+    .footer-inner { display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap; } .footer-links { display:flex; flex-wrap:wrap; gap:8px 14px; } .footer-links a { color:var(--ink); text-decoration:none; font-weight:700; }
+    @media (max-width:920px) { .layout,.skill-grid,.stat-grid { grid-template-columns:1fr; } .side-panel { position:static; } }
+  </style>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-BHKBSRGSJF"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-BHKBSRGSJF');</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6389066329814944" crossorigin="anonymous"></script>
+</head>
+<body>
+  <header class="page-header"><div class="header-inner"><p class="eyebrow">CHARACTER DETAIL</p><h1 id="characterName">クラウディア</h1><p class="role" id="roleMemo">HPを削って火力を引き上げ、遮断と回復で踏みとどまる翠属性アタッカー。</p><div class="meta-row" id="characterMeta"></div></div></header>
+  <main>
+    <div class="layout">
+      <div>
+        <section class="section"><h2>スキル一覧</h2><p class="section-lead">倍率は比較用の要約です。クラウディアは決死の自傷でHP条件を作り、HP比例火力と遮断、自己回復を組み合わせて戦う耐久アタッカーです。</p><div class="skill-grid" id="skillGrid"></div><a class="compare-link" href="../../compare-prototype.html?character=claudia">スキル比較DBで見る</a></section>
+        <section class="section"><h2>評価</h2><div class="manual-block">
+          <article class="manual-card"><h3>役割解説</h3><p>クラウディアは「決死」で攻撃力を80%増加させる一方、毎ターン現在HPの20%を自ら削ります。この自傷をスキル1のHP比例火力とスキル2のHP50%未満条件へ繋げ、低HP時は遮断で耐える設計です。</p><p>スキル2は気絶と回避率低下を付与し、決死が解除されている場合はダメージ2倍、未撃破なら1回再発動します。専用Lv3時の条件最大は4000%ですが、複数条件が必要なため常時火力としては扱えません。</p><p>単体性能は高い一方、攻撃回数が少なく多重バリアに弱い点は明確です。主力にするならバリアを剥がす味方と育成投資が必要です。</p></article>
+          <article class="manual-card"><h3>強み</h3><ul><li>決死による攻撃力80%増加と自傷でHP条件を自力で作れる</li><li>スキル1はHP低下時に最大1800%となり、与ダメージ回復で継戦できる</li><li>スキル2は気絶・回避率低下・条件2倍・再発動を備える</li><li>最大HP60%増加と専用Lv2時最大80%遮断が解除不可</li><li>決死を奪われてもスキル2の2倍条件へ転用できる</li></ul></article>
+          <article class="manual-card"><h3>弱み・注意点</h3><ul><li>2連撃と条件付き再発動が中心で、多重バリアを剥がしにくい</li><li>攻撃回数が少ないため、1回の回避が戦果へ大きく響く</li><li>最大4000%にはHP50%未満、決死解除、再発動成立が必要</li><li>バリア対策役と耐久支援を同時に求め、編成コストが高い</li><li>PvEより対人向けで、汎用主力としては扱いにくい</li></ul></article>
+        </div></section>
+        <section class="section"><h2>ガチャ・育成判断</h2><div class="manual-block">
+          <article class="manual-card"><h3>育てたい人</h3><ul><li>翠属性の耐久編成を主軸として運用する人</li><li>フィアーやユルディズなどHP・耐久支援を揃えられる人</li><li>ポーラやコルディなど多重バリア対策を別枠で用意できる人</li><li>専用Lv2以上と高い育成水準まで投資できる人</li><li>対人戦で低HP耐久型の独自編成を組みたい人</li></ul></article>
+          <article class="manual-card"><h3>後回しでいい人</h3><ul><li>無・微課金で主力アタッカーの育成が未完成の人</li><li>多重バリア対策や手数補完を用意できない人</li><li>クエスト攻略を優先し、幅広い場面で使える主力が必要な人</li><li>低凸・低専用武器のまま即戦力を求める人</li><li>環境適応力を優先し、翠属性の他アタッカーと迷っている人</li></ul></article>
+        </div></section>
+        <section class="section"><h2>専用武器パッシブ</h2><div class="stat-grid"><article class="stat-card"><h3>攻撃力</h3><p>+18%</p></article><article class="stat-card"><h3>HP</h3><p>+22%</p></article><article class="stat-card"><h3>防御力</h3><p>+5%</p></article></div></section>
+        <section class="section"><h2>プロフィール・基礎データ</h2><div class="stat-grid">
+          <article class="stat-card"><h3>プロフィール</h3><dl><dt>タイプ</dt><dd>非恒常キャラ</dd><dt>属性 / 武器種</dt><dd>翠 / ウォーリア</dd><dt>特徴</dt><dd>決死・遮断・気絶・高火力</dd></dl></article>
+          <article class="stat-card"><h3>入手・状態</h3><dl><dt>入手</dt><dd>星の導き</dd><dt>実装日</dt><dd>未確認</dd><dt>直近ピックアップ</dt><dd>未確認</dd></dl></article>
+          <article class="stat-card"><h3>ステータス（LR）</h3><dl><dt>戦闘力</dt><dd>7,115,541</dd><dt>攻撃力 / HP</dt><dd>732,160 / 4,435,170</dd><dt>スピード</dt><dd>3,056</dd></dl></article>
+          <article class="stat-card"><h3>防御</h3><dl><dt>物理防御力</dt><dd>732,155</dd><dt>魔法防御力</dt><dd>598,396</dd><dt>防御力</dt><dd>7</dd></dl></article>
+          <article class="stat-card"><h3>次回ガチャ</h3><dl><dt>予定</dt><dd>星の導き</dd><dt>入手分類</dt><dd>限定</dd><dt>確認日</dt><dd>2026年6月13日</dd></dl></article>
+          <article class="stat-card"><h3>データ根拠</h3><dl><dt>基礎情報</dt><dd>添付カード画像</dd><dt>評価</dt><dd>note記事本文</dd><dt>note</dt><dd><a href="https://note.com/musoudc/n/n7e40800aca82">クラウディア評価まとめ</a></dd></dl></article>
+        </div></section>
+        <section class="section"><h2>創作関連</h2><div class="manual-card"><p>note記事：<a href="https://note.com/musoudc/n/n7e40800aca82">クラウディア評価まとめ</a>。本文はnote記事と添付カード画像をもとに、攻略DB向けに要約・再構成しています。</p></div></section>
+      </div>
+      <aside class="side-panel"><h2>関連リンク</h2><p id="gachaUpdated" class="status">ガチャ状態確認日：2026-06-13</p><p class="status">最大4000%は常時出る倍率ではありません。HP50%未満、決死解除、再発動成立を分けて評価する必要があります。</p><ul class="link-list"><li><a href="/">トップへ戻る</a></li><li><a href="../../compare-prototype.html">比較DBへ戻る</a></li><li><a href="./index.html">キャラ一覧へ戻る</a></li></ul></aside>
+    </div>
+    <!-- メメントモリver1 広告 -->
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6389066329814944" data-ad-slot="6111654373" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
+  </main>
+  <script>
+    const characterId="claudia";
+    function valueOrDash(value){return value===null||value===undefined||value===""?"-":value;}
+    function renderMeta(character){document.querySelector("#characterMeta").innerHTML=[`<span class="badge attribute">${character.attribute}</span>`,`<span class="badge">${character.weaponType}</span>`,`<span class="badge">スピード ${character.speed}</span>`,`<span class="badge">${character.availability}</span>`,`<span class="badge">${character.gachaStatus||"状態未設定"}</span>`].join("");}
+    function renderSkills(skills){document.querySelector("#skillGrid").innerHTML=skills.sort((a,b)=>a.number-b.number).map(skill=>`<article class="skill-card"><header><div><h3>スキル${skill.number}：${skill.name}</h3><span class="tag">${skill.skillType}</span> <span class="tag">${skill.category}</span> <span class="tag">${skill.subCategory}</span></div><span class="ct">CT: ${valueOrDash(skill.ct)}</span></header><div class="skill-body"><dl><dt>対象</dt><dd>${valueOrDash(skill.target)}</dd></dl><dl><dt>倍率・効果</dt><dd>${valueOrDash(skill.multiplierText)}</dd></dl><dl><dt>条件</dt><dd>${valueOrDash(skill.condition)}</dd></dl><dl><dt>専用武器</dt><dd>${valueOrDash(skill.exclusiveWeapon)}</dd></dl><dl><dt>比較メモ</dt><dd>${valueOrDash(skill.compareMemo)}</dd></dl></div></article>`).join("");}
+    async function fetchJson(path,optional=false){const response=await fetch(path,{cache:"no-store"});if(!response.ok){if(optional&&response.status===404)return{characters:[],skills:[]};throw new Error(`JSON読み込み失敗: ${response.status}`);}return response.json();}
+    function mergeSkillData(baseData,overlayData){const characters=new Map((baseData.characters||[]).map(character=>[character.id,character]));const skills=new Map((baseData.skills||[]).map(skill=>[skill.id,skill]));(overlayData.characters||[]).forEach(character=>characters.set(character.id,character));(overlayData.skills||[]).forEach(skill=>skills.set(skill.id,skill));return{...baseData,characters:[...characters.values()],skills:[...skills.values()]};}
+    async function loadData(){const baseData=await fetchJson("../../data/mementomori-skills.json");const overlayData=await fetchJson("../../data/claudia-overlay.json",true);return mergeSkillData(baseData,overlayData);}
+    async function init(){try{const data=await loadData();const character=data.characters.find(item=>item.id===characterId);const skills=data.skills.filter(skill=>skill.characterId===characterId);if(!character)throw new Error("キャラが見つかりません");document.title=`${character.name} / ミレスト・メメントモリ分析データ室`;document.querySelector("#characterName").textContent=character.name;document.querySelector("#roleMemo").textContent=character.catchcopy||character.roleMemo;document.querySelector("#gachaUpdated").textContent=`ガチャ状態確認日：${data.gachaStatusUpdatedAt||"未設定"}`;renderMeta(character);renderSkills(skills);}catch(error){document.querySelector("#roleMemo").textContent=error.message;console.error(error);}}
+    init();
+  </script>
+  <footer><div class="footer-inner"><span>ミレスト・メメントモリ攻略・分析データベース / 非公式ファンサイト</span><nav class="footer-links" aria-label="固定ページ"><a href="/">トップ</a><a href="../../privacy.html">プライバシーポリシー</a><a href="../../disclaimer.html">免責事項</a><a href="../../about.html">このサイトについて</a><a href="../../contact.html">お問い合わせ</a></nav></div></footer>
+</body>
+</html>

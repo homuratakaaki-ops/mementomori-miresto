@@ -1,0 +1,71 @@
+{
+  "gachaStatusUpdatedAt": "2026-06-13",
+  "characters": [{
+    "id": "claudia", "pageSlug": "claudia", "name": "クラウディア",
+    "catchcopy": "HPを削って火力を引き上げ、遮断と回復で踏みとどまる翠属性アタッカー",
+    "attribute": "翠", "weaponType": "ウォーリア", "speed": 3056,
+    "availability": "星の導き", "gachaStatus": "星の導き",
+    "roleMemo": "決死による自傷と攻撃力増加、HP比例火力、被ダメージ遮断を自己完結させる耐久アタッカー",
+    "noteUrl": "https://note.com/musoudc/n/n7e40800aca82", "imageUrl": "",
+    "sourceUrl": "./pages/characters/claudia.html"
+  }],
+  "skills": [
+    {
+      "id": "claudia-s1", "characterId": "claudia", "number": 1,
+      "name": "双剣流奥義暴れ竜!!", "skillType": "アクティブ", "category": "火力",
+      "subCategory": "2連撃 / HP比例 / 自己回復", "target": "ランダムな敵",
+      "multiplierText": "物理800%×2回 / HP低下時は合計最大1800%", "duration": "", "ct": 4,
+      "condition": "ランダムな敵に2回物理攻撃する。自身のHP割合が低いほどダメージが増加し、HP割合は攻撃ごとに判定する。自身のHPを総与ダメージ5%分回復する",
+      "exclusiveWeapon": "専用Lv1: HP回復量が総与ダメージ15%になる",
+      "compareMemo": "基本1600%、HP低下時は最大1800%。専用武器は直接倍率ではなく回復量を強化する",
+      "noteUrl": "https://note.com/musoudc/n/n7e40800aca82", "imageUrl": "", "sourceUrl": "./pages/characters/claudia.html",
+      "damage": {
+        "singleMultiplier": 800, "hitCount": 2, "baseTotal": 1600,
+        "exclusiveLv1Total": 1600, "exclusiveLv2Total": 1600, "exclusiveLv3Total": 1600,
+        "conditionMaxTotal": 1800,
+        "conditionMaxNote": "自身のHP割合低下による倍率上昇を反映。回復量強化は含めない",
+        "powerType": "複数物理 / HP比例", "maxStacks": null, "realityRank": "高",
+        "rankingTarget": "条件最大", "damageMemo": "基本1600%から最大1800%。2連撃のため多重バリア突破力は低い"
+      }
+    },
+    {
+      "id": "claudia-s2", "characterId": "claudia", "number": 2,
+      "name": "秘剣・双龍斬!!", "skillType": "アクティブ", "category": "火力・妨害",
+      "subCategory": "単体攻撃 / 気絶 / 再発動", "target": "攻撃力が最も高い敵",
+      "multiplierText": "物理900% / 専用Lv3で1000% / 条件最大4000%",
+      "duration": "回避率低下・気絶2ターン", "ct": 4,
+      "condition": "自身HP50%未満なら対象に回避率50%低下と気絶を付与して物理攻撃する。自身が決死中なら総与ダメージ15%分回復し、決死でない場合は物理ダメージが2倍になる。未撃破なら弱体付与と攻撃を1回だけ再発動する",
+      "exclusiveWeapon": "専用Lv3: 1回の物理攻撃が攻撃力1000%になる",
+      "compareMemo": "通常時は再発動込み1800%相当。専用Lv3・決死なし・再発動成立で最大4000%",
+      "noteUrl": "https://note.com/musoudc/n/n7e40800aca82", "imageUrl": "", "sourceUrl": "./pages/characters/claudia.html",
+      "damage": {
+        "singleMultiplier": 900, "hitCount": 1, "baseTotal": 900,
+        "exclusiveLv1Total": 900, "exclusiveLv2Total": 900, "exclusiveLv3Total": 1000,
+        "conditionMaxTotal": 4000,
+        "conditionMaxNote": "専用Lv3の1000%×決死なし2倍×再発動2回を反映",
+        "powerType": "単体物理 / 条件再発動", "maxStacks": null, "realityRank": "中",
+        "rankingTarget": "条件最大", "damageMemo": "HP50%未満、決死解除、未撃破による再発動が揃うと最大4000%。条件依存が大きい"
+      }
+    },
+    {
+      "id": "claudia-s3", "characterId": "claudia", "number": 3,
+      "name": "決死の覚悟", "skillType": "パッシブ", "category": "自己強化",
+      "subCategory": "攻撃力増加 / 自傷", "target": "自身",
+      "multiplierText": "攻撃力+80% / 現在HP20%の自傷", "duration": "決死40ターン", "ct": null,
+      "condition": "バトル開始時、自身に決死を40ターン付与して攻撃力を80%増加する。毎ターン行動開始時に現在HP20%の自傷ダメージを受ける。自傷は自身の攻撃力100%を超えない",
+      "exclusiveWeapon": "専用武器による追加効果なし",
+      "compareMemo": "自傷でHP比例火力とスキル2のHP50%未満条件へ近づける。決死は1つのバフとして扱う",
+      "noteUrl": "https://note.com/musoudc/n/n7e40800aca82", "imageUrl": "", "sourceUrl": "./pages/characters/claudia.html"
+    },
+    {
+      "id": "claudia-s4", "characterId": "claudia", "number": 4,
+      "name": "私の生き様", "skillType": "パッシブ", "category": "耐久",
+      "subCategory": "最大HP増加 / ダメージ遮断", "target": "自身",
+      "multiplierText": "最大HP+60% / ダメージ10%～40%遮断", "duration": "解除不可", "ct": null,
+      "condition": "自身の最大HPを60%増加する。被攻撃時にダメージを10%遮断し、自身のHP割合が低いほど遮断効果が増加して最大40%になる",
+      "exclusiveWeapon": "専用Lv2: 基礎遮断が20%、HP低下による増加を含む最大値が80%になる",
+      "compareMemo": "最大HP増加と遮断は解除不可。専用Lv2で低HP時の耐久性能が大きく伸びる",
+      "noteUrl": "https://note.com/musoudc/n/n7e40800aca82", "imageUrl": "", "sourceUrl": "./pages/characters/claudia.html"
+    }
+  ]
+}
