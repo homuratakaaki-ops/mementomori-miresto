@@ -1,0 +1,1293 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="index, follow">
+  <meta name="description" content="メメントモリのガチャシミュレーター。プラチナガチャ・ピックアップガチャの抽選結果を再現し、セレクト設定やピックアップ天井、必要ダイヤを確認できます。">
+  <title>ガチャシミュレーター Phase 1 | メメントモリ攻略</title>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6389066329814944"
+     crossorigin="anonymous"></script>
+  <style>
+    :root {
+      --bg: #0e1016;
+      --panel: #171b24;
+      --panel-2: #202635;
+      --ink: #f3efe6;
+      --muted: #b8af9f;
+      --line: #3b4354;
+      --gold: #d1ae68;
+      --red: #e17878;
+      --blue: #77a6e8;
+      --green: #7cc58d;
+      --yellow: #dac465;
+      --danger-bg: rgba(225, 120, 120, 0.14);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Yu Gothic", "Hiragino Sans", "Meiryo", system-ui, sans-serif;
+      letter-spacing: 0;
+    }
+
+    a { color: var(--gold); }
+
+    .shell {
+      width: min(1180px, calc(100% - 28px));
+      margin: 0 auto;
+      padding: 24px 0 42px;
+    }
+
+    .back {
+      display: inline-flex;
+      margin-bottom: 18px;
+      color: var(--gold);
+      font-size: 13px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    header {
+      margin-bottom: 20px;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 18px;
+    }
+
+    .eyebrow {
+      margin: 0 0 8px;
+      color: var(--gold);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      font-size: clamp(26px, 4vw, 42px);
+      line-height: 1.2;
+    }
+
+    .lead {
+      max-width: 760px;
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .notice {
+      margin-top: 14px;
+      border: 1px solid rgba(225, 120, 120, 0.45);
+      border-radius: 8px;
+      background: var(--danger-bg);
+      color: #ffd0d0;
+      padding: 12px 14px;
+      line-height: 1.7;
+    }
+
+    .info-note {
+      margin-top: 12px;
+      border: 1px solid rgba(209, 174, 104, 0.35);
+      border-radius: 8px;
+      background: rgba(209, 174, 104, 0.1);
+      color: #f1ddb3;
+      padding: 10px 12px;
+      line-height: 1.7;
+      font-size: 13px;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(320px, 0.76fr);
+      gap: 14px;
+      align-items: start;
+    }
+
+    .panel {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      padding: 16px;
+    }
+
+    .panel + .panel { margin-top: 14px; }
+
+    .ad-panel {
+      margin: 0 0 14px;
+      min-height: 90px;
+      overflow: hidden;
+    }
+
+    h2 {
+      margin: 0 0 12px;
+      color: var(--gold);
+      font-size: 17px;
+    }
+
+    h3 {
+      margin: 0 0 8px;
+      font-size: 14px;
+    }
+
+    .tabs,
+    .actions,
+    .quick-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    button {
+      min-height: 38px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel-2);
+      color: var(--ink);
+      cursor: pointer;
+      font-weight: 700;
+      padding: 8px 12px;
+    }
+
+    button:hover,
+    button.active {
+      border-color: var(--gold);
+      color: #fff8df;
+    }
+
+    button.primary {
+      border-color: var(--gold);
+      background: rgba(209, 174, 104, 0.16);
+    }
+
+    button.danger {
+      border-color: rgba(225, 120, 120, 0.5);
+      color: #ffd0d0;
+    }
+
+    button:disabled {
+      cursor: not-allowed;
+      opacity: 0.42;
+    }
+
+    label {
+      display: grid;
+      gap: 5px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    input[type="number"],
+    input[type="text"] {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #10141d;
+      color: var(--ink);
+      padding: 9px 10px;
+      outline: none;
+    }
+
+    input[type="number"]:focus,
+    input[type="text"]:focus {
+      border-color: var(--gold);
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .wallet-grid {
+      grid-template-columns: minmax(220px, 0.8fr) minmax(0, 1.2fr);
+    }
+
+    .diamond-field {
+      grid-column: 1 / -1;
+    }
+
+    .number-control {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 6px;
+      align-items: center;
+    }
+
+    .number-control input {
+      min-width: 72px;
+    }
+
+    #diamonds {
+      width: 72px !important;
+      min-width: unset;
+      max-width: unset;
+      box-sizing: border-box;
+    }
+
+    #platTickets {
+      width: 72px !important;
+      min-width: unset;
+      max-width: unset;
+      box-sizing: border-box;
+    }
+
+    #puTickets {
+      width: 72px !important;
+      min-width: unset;
+      max-width: unset;
+      box-sizing: border-box;
+    }
+
+    .pickup-hidden .number-control,
+    .platinum-hidden .number-control {
+      grid-template-columns: 72px auto;
+      width: max-content;
+      max-width: 100%;
+    }
+
+    .diamond-field .number-control {
+      grid-template-columns: 72px auto;
+      align-items: center;
+      width: max-content;
+      max-width: 100%;
+    }
+
+    .diamond-field .step-buttons {
+      justify-content: flex-start;
+    }
+
+    .step-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      justify-content: flex-end;
+    }
+
+    .step-buttons button {
+      min-height: 34px;
+      padding: 6px 8px;
+      font-size: 12px;
+    }
+
+    .pickup-only { display: none; }
+    body[data-gacha="pickup"] .pickup-only { display: block; }
+    body[data-gacha="platinum"] .platinum-hidden { display: none; }
+    body[data-gacha="pickup"] .pickup-hidden { display: none; }
+
+    .attr-block {
+      border-top: 1px solid var(--line);
+      padding-top: 12px;
+      margin-top: 12px;
+    }
+
+    .attr-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .attr-name {
+      font-weight: 800;
+    }
+
+    .attr-name.blue { color: var(--blue); }
+    .attr-name.red { color: var(--red); }
+    .attr-name.green { color: var(--green); }
+    .attr-name.yellow { color: var(--yellow); }
+
+    .count-badge {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .char-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 7px;
+    }
+
+    .char-option {
+      display: flex;
+      min-height: 38px;
+      align-items: center;
+      gap: 7px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #111722;
+      padding: 8px;
+      color: var(--ink);
+      font-size: 12px;
+      cursor: pointer;
+    }
+
+    .char-option input {
+      width: 16px;
+      height: 16px;
+      accent-color: var(--gold);
+      flex: 0 0 auto;
+    }
+
+    .char-option.disabled {
+      opacity: 0.46;
+      cursor: not-allowed;
+    }
+
+    .errors {
+      display: none;
+      margin-bottom: 12px;
+      border: 1px solid rgba(225, 120, 120, 0.5);
+      border-radius: 8px;
+      background: var(--danger-bg);
+      color: #ffd0d0;
+      padding: 10px 12px;
+      line-height: 1.7;
+    }
+
+    .errors.active { display: block; }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .metric {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #111722;
+      padding: 10px;
+    }
+
+    .metric span {
+      display: block;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .metric strong {
+      display: block;
+      margin-top: 4px;
+      color: var(--ink);
+      font-size: 20px;
+    }
+
+    .sr-list {
+      max-height: 360px;
+      overflow: auto;
+      display: grid;
+      gap: 7px;
+      margin-top: 10px;
+    }
+
+    .sr-item {
+      display: grid;
+      grid-template-columns: 72px minmax(0, 1fr) auto;
+      gap: 8px;
+      align-items: center;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #111722;
+      padding: 8px 10px;
+      font-size: 13px;
+    }
+
+    .tag {
+      border-radius: 999px;
+      background: rgba(209, 174, 104, 0.14);
+      color: #ffe1a0;
+      padding: 3px 8px;
+      font-size: 11px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    .footer-note {
+      margin-top: 14px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+    @media (max-width: 860px) {
+      .layout { grid-template-columns: 1fr; }
+      .form-grid { grid-template-columns: 1fr; }
+      .wallet-grid { grid-template-columns: 1fr; }
+      .diamond-field { grid-column: auto; }
+      .number-control { grid-template-columns: 1fr; }
+      .step-buttons { justify-content: flex-start; }
+      .char-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .sr-item { grid-template-columns: 58px minmax(0, 1fr); }
+      .sr-item .tag { grid-column: 2; justify-self: start; }
+    }
+  </style>
+</head>
+<body data-gacha="platinum">
+  <div class="shell">
+    <a class="back" href="./index.html">← トップへ戻る</a>
+    <header>
+      <p class="eyebrow">PHASE 1 / LOCAL SIMULATOR</p>
+      <h1>ガチャシミュレーター</h1>
+      <p class="lead">プラチナガチャとピックアップガチャのセレクト枠、チケット優先消費、ダイヤ不足、PU天井をまとめて検証するための試作版です。</p>
+      <div id="placeholderNotice" class="notice" hidden>プレースホルダーキャラが残っています。この状態では本番公開用の導線を追加しないでください。</div>
+    </header>
+
+    <div id="fatalErrors" class="errors"></div>
+
+    <section class="ad-panel" aria-label="広告枠">
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-6389066329814944"
+           data-ad-slot="6111654373"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>
+           (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+    </section>
+
+    <main class="layout">
+      <section>
+        <div class="panel">
+          <h2>ガチャ種別</h2>
+          <div class="tabs" id="gachaTabs">
+            <button type="button" class="active" data-gacha-tab="platinum">プラチナガチャ</button>
+            <button type="button" data-gacha-tab="pickup">ピックアップガチャ</button>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h2>セレクト設定</h2>
+          <p class="info-note">初期状態では各属性5体を選択済みにしています。調整したい場合は、不要なキャラのチェックを外してから選び直してください。</p>
+          <div id="selectArea"></div>
+        </div>
+
+        <div class="panel pickup-only">
+          <h2>ピックアップ設定</h2>
+          <p class="info-note">このシミュレーターのピックアップ確率は、藍・紅・翠・黄の4属性キャラが対象の場合を前提にしています。天・冥キャラがピックアップ対象の場合は確率テーブルが異なる可能性があります。</p>
+          <div class="form-grid">
+            <label>
+              ピックアップキャラ名
+              <input id="pickupName" type="text" value="ピックアップキャラ">
+            </label>
+            <label>
+              現在の天井カウント
+              <span class="number-control">
+                <input id="pityCount" type="number" min="0" max="99" step="1" value="0">
+                <span class="step-buttons">
+                  <button type="button" data-add-to="pityCount" data-add="10" data-max="99">+10</button>
+                  <button type="button" data-add-to="pityCount" data-add="50" data-max="99">+50</button>
+                  <button type="button" data-reset-input="pityCount" data-reset-value="0">リセット</button>
+                </span>
+              </span>
+            </label>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h2>手持ち</h2>
+          <div class="form-grid wallet-grid">
+            <label class="pickup-hidden">
+              プラチナチケット
+              <span class="number-control">
+                <input id="platTickets" type="number" min="0" step="1" value="0">
+                <span class="step-buttons">
+                  <button type="button" data-add-to="platTickets" data-add="10">+10</button>
+                  <button type="button" data-add-to="platTickets" data-add="50">+50</button>
+                  <button type="button" data-add-to="platTickets" data-add="100">+100</button>
+                  <button type="button" data-add-to="platTickets" data-add="-10">-10</button>
+                  <button type="button" data-add-to="platTickets" data-add="-50">-50</button>
+                  <button type="button" data-add-to="platTickets" data-add="-100">-100</button>
+                  <button type="button" data-clear-input="platTickets">クリア</button>
+                </span>
+              </span>
+            </label>
+            <label class="platinum-hidden">
+              PUチケット
+              <span class="number-control">
+                <input id="puTickets" type="number" min="0" step="1" value="0">
+                <span class="step-buttons">
+                  <button type="button" data-add-to="puTickets" data-add="10">+10</button>
+                  <button type="button" data-add-to="puTickets" data-add="50">+50</button>
+                  <button type="button" data-add-to="puTickets" data-add="100">+100</button>
+                  <button type="button" data-add-to="puTickets" data-add="-10">-10</button>
+                  <button type="button" data-add-to="puTickets" data-add="-50">-50</button>
+                  <button type="button" data-add-to="puTickets" data-add="-100">-100</button>
+                  <button type="button" data-clear-input="puTickets">クリア</button>
+                </span>
+              </span>
+            </label>
+            <label class="diamond-field">
+              所持ダイヤ
+              <span class="number-control">
+                <input id="diamonds" type="number" min="0" step="1" value="0">
+                <span class="step-buttons">
+                  <button type="button" data-add-to="diamonds" data-add="100">+100</button>
+                  <button type="button" data-add-to="diamonds" data-add="1000">+1000</button>
+                  <button type="button" data-add-to="diamonds" data-add="10000">+10000</button>
+                  <button type="button" data-add-to="diamonds" data-add="-100">-100</button>
+                  <button type="button" data-add-to="diamonds" data-add="-1000">-1000</button>
+                  <button type="button" data-add-to="diamonds" data-add="-10000">-10000</button>
+                  <button type="button" data-clear-input="diamonds">クリア</button>
+                </span>
+              </span>
+            </label>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h2>実行</h2>
+          <div id="inputErrors" class="errors"></div>
+          <div class="quick-actions">
+            <button type="button" data-run="10">10連</button>
+            <button type="button" data-run="100">100連</button>
+            <label>
+              任意回数
+              <span class="number-control">
+                <input id="pulls" type="number" min="1" max="10000" step="1" value="10">
+                <span class="step-buttons">
+                  <button type="button" data-add-to="pulls" data-add="10" data-max="10000">+10</button>
+                  <button type="button" data-add-to="pulls" data-add="50" data-max="10000">+50</button>
+                  <button type="button" data-add-to="pulls" data-add="100" data-max="10000">+100</button>
+                  <button type="button" data-reset-input="pulls" data-reset-value="10">リセット</button>
+                </span>
+              </span>
+            </label>
+            <button class="primary" type="button" id="runCustom">続きから実行</button>
+          </div>
+          <div class="actions" style="margin-top: 12px;">
+            <button type="button" id="resetResult">結果をリセット</button>
+            <button class="danger" type="button" id="resetAll">全条件リセット</button>
+          </div>
+        </div>
+      </section>
+
+      <aside>
+        <div class="panel">
+          <h2>結果</h2>
+          <div class="summary-grid" id="summaryGrid"></div>
+          <p class="footer-note" id="resultNote">まだ実行していません。</p>
+        </div>
+        <div class="panel">
+          <h2>SR履歴</h2>
+          <div id="srList" class="sr-list">
+            <p class="muted">SRが出るとここに表示されます。</p>
+          </div>
+        </div>
+      </aside>
+    </main>
+  </div>
+
+  <script>
+    const INPUT_LIMITS = {
+      MAX_PULLS: 10000,
+      MAX_PITY_COUNT: 99,
+      MIN_PITY_COUNT: 0
+    };
+
+    const SELECT_DEFAULTS_VERSION = 2;
+
+    const ATTR_LABELS = {
+      blue: "藍属性",
+      red: "紅属性",
+      green: "翠属性",
+      yellow: "黄属性"
+    };
+
+    const state = {
+      config: null,
+      characters: null,
+      gachaType: "platinum",
+      selectState: {},
+      ticketState: { platinum: 0, pickup: 0 },
+      diamondsOwned: 0,
+      pityState: { count: 0 },
+      tabSnapshots: {},
+      lastInputSnapshot: null,
+      cumulative: {
+        results: [],
+        ticketsUsed: 0,
+        diamondsUsed: 0,
+        diamondsShortfall: 0
+      }
+    };
+
+    const $ = (selector) => document.querySelector(selector);
+    const $$ = (selector) => Array.from(document.querySelectorAll(selector));
+
+    function toNonNegInt(value) {
+      const n = Math.floor(Number(value));
+      return Number.isNaN(n) || n < 0 ? 0 : n;
+    }
+
+    function validateInputs(raw) {
+      const errors = [];
+      const pulls = toNonNegInt(raw.pulls);
+
+      if (pulls === 0) errors.push("抽選回数は1以上を入力してください。");
+      if (pulls > INPUT_LIMITS.MAX_PULLS) {
+        errors.push(`抽選回数は1回あたり最大 ${INPUT_LIMITS.MAX_PULLS.toLocaleString()} 回です。`);
+      }
+
+      const platTickets = toNonNegInt(raw.platTickets);
+      const puTickets = toNonNegInt(raw.puTickets);
+      const diamonds = toNonNegInt(raw.diamonds);
+      const pityCount = Math.min(
+        INPUT_LIMITS.MAX_PITY_COUNT,
+        Math.max(INPUT_LIMITS.MIN_PITY_COUNT, toNonNegInt(raw.pityCount))
+      );
+
+      return {
+        ok: errors.length === 0,
+        errors,
+        pulls,
+        platTickets,
+        puTickets,
+        diamonds,
+        pityCount
+      };
+    }
+
+    function buildProbTable(gachaType, selectState, config, characters) {
+      const cfg = config.gacha_types[gachaType];
+      const table = [];
+
+      if (gachaType === "pickup") {
+        table.push({
+          id: "pickup",
+          name: ($("#pickupName")?.value || "ピックアップキャラ").trim() || "ピックアップキャラ",
+          rate: cfg.pickup_rate,
+          rarity: "SR",
+          type: "pickup"
+        });
+      }
+
+      for (const attr of cfg.attrs) {
+        const selected = selectState[attr] || [];
+        const k = selected.length;
+        if (k > cfg.max_select_per_attr) {
+          throw new Error(`${ATTR_LABELS[attr] || attr}のセレクト数が上限を超えています: ${k}`);
+        }
+
+        const attrChars = characters.chars.filter((c) => c.attr === attr && c[`is_${gachaType}_select`]);
+        const attrIds = new Set(attrChars.map((c) => c.id));
+        const invalidIds = selected.filter((id) => !attrIds.has(id));
+        if (invalidIds.length > 0) {
+          throw new Error(`${ATTR_LABELS[attr] || attr}に存在しないキャラIDがあります: ${invalidIds.join(", ")}`);
+        }
+
+        const unselectedRate = k < cfg.max_select_per_attr
+          ? ((cfg.max_select_per_attr - k) * cfg.select_rate_per_char) / (cfg.chars_per_attr - k)
+          : 0;
+
+        for (const ch of attrChars) {
+          const isSelected = selected.includes(ch.id);
+          table.push({
+            id: ch.id,
+            name: ch.name,
+            rate: isSelected ? cfg.select_rate_per_char : unselectedRate,
+            rarity: "SR",
+            type: isSelected ? "selected" : "unselected"
+          });
+        }
+      }
+
+      for (const sp of cfg.special_chars) {
+        table.push({
+          id: sp.id,
+          name: sp.name,
+          rate: sp.rate,
+          rarity: "SR",
+          type: "special",
+          attr_label: sp.attr_label
+        });
+      }
+
+      table.push({ id: "r_pool", name: "Rキャラ", rate: cfg.r_rate, rarity: "R", type: "pool" });
+      table.push({ id: "n_pool", name: "Nキャラ", rate: cfg.n_rate, rarity: "N", type: "pool" });
+
+      const total = table.reduce((sum, entry) => sum + entry.rate, 0);
+      console.assert(
+        Math.abs(total - 100.0) < 0.0001,
+        `[buildProbTable] 確率合計エラー (${gachaType}): ${total.toFixed(6)}%`
+      );
+
+      return table;
+    }
+
+    function draw(probTable, pityState, gachaType) {
+      if (gachaType === "pickup" && pityState && pityState.count >= 99) {
+        pityState.count = 0;
+        return { ...probTable.find((entry) => entry.type === "pickup"), pityTriggered: true };
+      }
+
+      const roll = Math.random() * 100;
+      let cumulative = 0;
+      let result = null;
+      for (const entry of probTable) {
+        cumulative += entry.rate;
+        if (roll < cumulative) {
+          result = entry;
+          break;
+        }
+      }
+      if (!result) result = probTable[probTable.length - 1];
+
+      if (gachaType === "pickup" && pityState) {
+        pityState.count = result.type === "pickup" ? 0 : pityState.count + 1;
+      }
+
+      return { ...result, pityTriggered: false };
+    }
+
+    function runGacha(n, gachaType, selectState, ticketState, diamondsOwned, config, characters, pityState) {
+      const probTable = buildProbTable(gachaType, selectState, config, characters);
+      const cfg = config.gacha_types[gachaType];
+      const workingTickets = { ...ticketState };
+      const workingPityState = pityState ? { ...pityState } : null;
+      const results = [];
+      let ticketsUsed = 0;
+      let diamondsUsed = 0;
+
+      for (let i = 0; i < n; i += 1) {
+        const result = draw(probTable, workingPityState, gachaType);
+        results.push({ ...result, pullNumber: i + 1 });
+
+        if (workingTickets[gachaType] > 0) {
+          workingTickets[gachaType] -= 1;
+          ticketsUsed += 1;
+        } else {
+          diamondsUsed += cfg.cost_per_pull;
+        }
+      }
+
+      return {
+        results,
+        ticketsUsed,
+        ticketsRemaining: workingTickets[gachaType],
+        diamondsUsed,
+        diamondsOwned,
+        diamondsShortfall: Math.max(0, diamondsUsed - diamondsOwned),
+        pityStateAfter: workingPityState
+      };
+    }
+
+    function applySessionResult(sessionResult, uiState, gachaType) {
+      uiState.ticketState[gachaType] = sessionResult.ticketsRemaining;
+      if (gachaType === "pickup" && sessionResult.pityStateAfter) {
+        uiState.pityState.count = sessionResult.pityStateAfter.count;
+      }
+      if (uiState.diamondsOwned > 0) {
+        uiState.diamondsOwned = Math.max(0, uiState.diamondsOwned - sessionResult.diamondsUsed);
+      }
+    }
+
+    function summarize(results, sessionCost, pityStateAfter) {
+      return {
+        totalPulls: results.length,
+        srTotal: results.filter((r) => r.rarity === "SR").length,
+        pickupCount: results.filter((r) => r.type === "pickup").length,
+        selectedCount: results.filter((r) => r.type === "selected").length,
+        unselectedCount: results.filter((r) => r.type === "unselected").length,
+        specialCount: results.filter((r) => r.type === "special").length,
+        pityTriggeredCount: results.filter((r) => r.pityTriggered).length,
+        ticketsUsed: sessionCost.ticketsUsed,
+        ticketsRemaining: sessionCost.ticketsRemaining,
+        diamondsUsed: sessionCost.diamondsUsed,
+        diamondsOwned: sessionCost.diamondsOwned,
+        diamondsShortfall: sessionCost.diamondsShortfall,
+        pityCountAfter: pityStateAfter ? pityStateAfter.count : null,
+        srList: results.filter((r) => r.rarity === "SR")
+      };
+    }
+
+    function resetCumulativeResults() {
+      state.cumulative = {
+        results: [],
+        ticketsUsed: 0,
+        diamondsUsed: 0,
+        diamondsShortfall: 0
+      };
+    }
+
+    function appendSessionResult(session) {
+      const offset = state.cumulative.results.length;
+      const adjustedResults = session.results.map((result) => ({
+        ...result,
+        pullNumber: offset + result.pullNumber
+      }));
+      state.cumulative.results.push(...adjustedResults);
+      state.cumulative.ticketsUsed += session.ticketsUsed;
+      state.cumulative.diamondsUsed += session.diamondsUsed;
+      state.cumulative.diamondsShortfall += session.diamondsShortfall;
+    }
+
+    function summarizeCumulative(pityStateAfter) {
+      return summarize(state.cumulative.results, {
+        ticketsUsed: state.cumulative.ticketsUsed,
+        ticketsRemaining: state.ticketState[state.gachaType],
+        diamondsUsed: state.cumulative.diamondsUsed,
+        diamondsOwned: state.diamondsOwned,
+        diamondsShortfall: state.cumulative.diamondsShortfall
+      }, pityStateAfter);
+    }
+
+    function makeSelectState(characters, cfg, gachaType, count) {
+      const selectState = {};
+      for (const attr of cfg.attrs) {
+        selectState[attr] = characters.chars
+          .filter((c) => c.attr === attr && c[`is_${gachaType}_select`])
+          .slice(0, count)
+          .map((c) => c.id);
+      }
+      return selectState;
+    }
+
+    function defaultSnapshot(gachaType) {
+      const cfg = state.config.gacha_types[gachaType];
+      return {
+        pulls: 10,
+        gachaType,
+        selectState: makeSelectState(
+          state.characters,
+          cfg,
+          gachaType,
+          cfg.max_select_per_attr
+        ),
+        selectDefaultsVersion: SELECT_DEFAULTS_VERSION,
+        ticketState: { platinum: 0, pickup: 0 },
+        diamondsOwned: 0,
+        pityState: { count: 0 }
+      };
+    }
+
+    function validateOnLoad(config, characters) {
+      const errors = [];
+      const warnings = [];
+
+      for (const [gachaType, cfg] of Object.entries(config.gacha_types)) {
+        for (const attr of cfg.attrs) {
+          const count = characters.chars.filter((c) => c.attr === attr && c[`is_${gachaType}_select`]).length;
+          if (count !== cfg.chars_per_attr) {
+            errors.push(`[${gachaType}] ${ATTR_LABELS[attr] || attr}のキャラ数が不正: 期待=${cfg.chars_per_attr} 実際=${count}`);
+          }
+        }
+      }
+
+      const placeholders = characters.chars.filter((c) => c.name.startsWith("【"));
+      if (placeholders.length > 0) {
+        warnings.push(`プレースホルダーキャラが${placeholders.length}体残っています。本番公開前に実名へ差し替えてください。`);
+        warnings._hasPlaceholder = true;
+      }
+
+      const smokeCases = [
+        ["platinum", makeSelectState(characters, config.gacha_types.platinum, "platinum", 5)],
+        ["platinum", makeSelectState(characters, config.gacha_types.platinum, "platinum", 0)],
+        ["pickup", makeSelectState(characters, config.gacha_types.pickup, "pickup", 5)],
+        ["pickup", makeSelectState(characters, config.gacha_types.pickup, "pickup", 0)]
+      ];
+
+      for (const [gachaType, selectState] of smokeCases) {
+        const table = buildProbTable(gachaType, selectState, config, characters);
+        const total = table.reduce((sum, entry) => sum + entry.rate, 0);
+        if (Math.abs(total - 100.0) >= 0.0001) {
+          errors.push(`[スモークテスト失敗] ${gachaType} 合計=${total.toFixed(6)}%`);
+        }
+      }
+
+      errors.forEach((e) => console.error("[ERROR]", e));
+      warnings.forEach((w) => console.warn("[WARNING]", w));
+      return { errors, warnings };
+    }
+
+    function snapshotInputs(pulls) {
+      state.selectState = sanitizeSelectState(state.selectState, state.gachaType);
+      return {
+        pulls,
+        gachaType: state.gachaType,
+        selectState: structuredClone(state.selectState),
+        selectDefaultsVersion: SELECT_DEFAULTS_VERSION,
+        ticketState: { ...state.ticketState },
+        diamondsOwned: state.diamondsOwned,
+        pityState: { ...state.pityState }
+      };
+    }
+
+    function storageKey(gachaType) {
+      return `gacha_sim_state_${gachaType}`;
+    }
+
+    function applySnapshot(snapshot) {
+      if (!snapshot) return;
+      state.gachaType = snapshot.gachaType || state.gachaType;
+      const shouldRefreshDefaultSelect = snapshot.selectDefaultsVersion !== SELECT_DEFAULTS_VERSION;
+      state.selectState = shouldRefreshDefaultSelect
+        ? defaultSnapshot(state.gachaType).selectState
+        : sanitizeSelectState(snapshot.selectState || {}, state.gachaType);
+      state.ticketState = { platinum: 0, pickup: 0, ...(snapshot.ticketState || {}) };
+      state.diamondsOwned = toNonNegInt(snapshot.diamondsOwned);
+      state.pityState = { count: Math.min(INPUT_LIMITS.MAX_PITY_COUNT, toNonNegInt(snapshot.pityState?.count)) };
+      if (snapshot.pulls) $("#pulls").value = snapshot.pulls;
+    }
+
+    function sanitizeSelectState(rawSelectState, gachaType) {
+      if (!state.config || !state.characters) return structuredClone(rawSelectState || {});
+
+      const cfg = state.config.gacha_types[gachaType];
+      const clean = {};
+      for (const attr of cfg.attrs) {
+        const validIds = new Set(
+          state.characters.chars
+            .filter((c) => c.attr === attr && c[`is_${gachaType}_select`])
+            .map((c) => c.id)
+        );
+        clean[attr] = [...new Set(rawSelectState[attr] || [])]
+          .filter((id) => validIds.has(id))
+          .slice(0, cfg.max_select_per_attr);
+      }
+      return clean;
+    }
+
+    function saveActiveState(snapshot) {
+      try {
+        localStorage.setItem(storageKey(snapshot.gachaType), JSON.stringify(snapshot));
+      } catch (error) {
+        // 保存不能な環境では初期値で動かせばよい。
+      }
+    }
+
+    function loadSavedState(gachaType) {
+      try {
+        const raw = localStorage.getItem(storageKey(gachaType));
+        return raw ? JSON.parse(raw) : null;
+      } catch (error) {
+        return null;
+      }
+    }
+
+    function clearSavedStates() {
+      try {
+        localStorage.removeItem(storageKey("platinum"));
+        localStorage.removeItem(storageKey("pickup"));
+      } catch (error) {
+        // 保存不能な環境では何もしない。
+      }
+    }
+
+    function setInputValuesFromState() {
+      $("#platTickets").value = state.ticketState.platinum;
+      $("#puTickets").value = state.ticketState.pickup;
+      $("#diamonds").value = state.diamondsOwned;
+      $("#pityCount").value = state.pityState.count;
+    }
+
+    function syncStateFromInputs(validated) {
+      state.ticketState.platinum = validated.platTickets;
+      state.ticketState.pickup = validated.puTickets;
+      state.diamondsOwned = validated.diamonds;
+      state.pityState.count = validated.pityCount;
+    }
+
+    function renderSelectArea() {
+      const cfg = state.config.gacha_types[state.gachaType];
+      const area = $("#selectArea");
+      area.innerHTML = "";
+      state.selectState = sanitizeSelectState(state.selectState, state.gachaType);
+
+      for (const attr of cfg.attrs) {
+        if (!state.selectState[attr]) state.selectState[attr] = [];
+        const attrChars = state.characters.chars.filter((c) => c.attr === attr && c[`is_${state.gachaType}_select`]);
+        const selectedCount = state.selectState[attr].length;
+        const block = document.createElement("section");
+        block.className = "attr-block";
+        block.innerHTML = `
+          <div class="attr-head">
+            <span class="attr-name ${attr}">${ATTR_LABELS[attr] || attr}</span>
+            <span class="count-badge" data-count-for="${attr}">${selectedCount}/${cfg.max_select_per_attr}</span>
+          </div>
+          <div class="char-grid"></div>
+        `;
+        const grid = block.querySelector(".char-grid");
+
+        for (const ch of attrChars) {
+          const selected = state.selectState[attr].includes(ch.id);
+          const disabled = !selected && selectedCount >= cfg.max_select_per_attr;
+          const label = document.createElement("label");
+          label.className = `char-option${disabled ? " disabled" : ""}`;
+          label.title = disabled ? `1属性あたり最大${cfg.max_select_per_attr}体まで選択できます。` : "";
+          label.innerHTML = `<input type="checkbox" value="${ch.id}" ${selected ? "checked" : ""} ${disabled ? "disabled" : ""}> <span>${ch.name}</span>`;
+          const input = label.querySelector("input");
+          input.addEventListener("change", () => {
+            const current = state.selectState[attr] || [];
+            if (input.checked) {
+              if (current.length >= cfg.max_select_per_attr) {
+                input.checked = false;
+                return;
+              }
+              state.selectState[attr] = [...current, ch.id];
+            } else {
+              state.selectState[attr] = current.filter((id) => id !== ch.id);
+            }
+            renderSelectArea();
+          });
+          grid.append(label);
+        }
+        area.append(block);
+      }
+    }
+
+    function renderSummary(summary = null) {
+      const grid = $("#summaryGrid");
+      if (!summary) {
+        grid.innerHTML = [
+          ["総抽選回数", "0回"],
+          ["SR排出総数", "0体"],
+          ["必要ダイヤ", "0個"],
+          ["不足ダイヤ", "0個"]
+        ].map(metricHtml).join("");
+        return;
+      }
+
+      const metrics = [
+        ["総抽選回数", `${summary.totalPulls.toLocaleString()}回`],
+        ["SR排出総数", `${summary.srTotal.toLocaleString()}体`],
+        ["PU排出", state.gachaType === "pickup" ? `${summary.pickupCount.toLocaleString()}体` : "-"],
+        ["セレクト済み", `${summary.selectedCount.toLocaleString()}体`],
+        ["未選択候補", `${summary.unselectedCount.toLocaleString()}体`],
+        ["天/冥キャラ排出数", `${summary.specialCount.toLocaleString()}体`],
+        ["天井発動", state.gachaType === "pickup" ? `${summary.pityTriggeredCount.toLocaleString()}回` : "-"],
+        ["使用チケット", `${summary.ticketsUsed.toLocaleString()}枚`],
+        ["チケット残数", `${summary.ticketsRemaining.toLocaleString()}枚`],
+        ["必要ダイヤ", `${summary.diamondsUsed.toLocaleString()}個`],
+        ["所持ダイヤ", `${summary.diamondsOwned.toLocaleString()}個`],
+        ["不足ダイヤ", summary.diamondsShortfall > 0 ? `${summary.diamondsShortfall.toLocaleString()}個` : "なし"],
+        ["抽選後天井", state.gachaType === "pickup" ? `${summary.pityCountAfter}` : "-"]
+      ];
+      grid.innerHTML = metrics.map(metricHtml).join("");
+    }
+
+    function metricHtml([label, value]) {
+      return `<div class="metric"><span>${label}</span><strong>${value}</strong></div>`;
+    }
+
+    function resultTypeLabel(item) {
+      if (item.type === "special") return item.attr_label || "天/冥";
+      const labels = {
+        pickup: "PU",
+        selected: "選択",
+        unselected: "未選択"
+      };
+      return labels[item.type] || item.type;
+    }
+
+    function renderSrList(srList = []) {
+      const list = $("#srList");
+      if (srList.length === 0) {
+        list.innerHTML = `<p class="muted">この実行ではSR排出がありません。</p>`;
+        return;
+      }
+      list.innerHTML = srList.map((item) => `
+        <div class="sr-item">
+          <strong>#${item.pullNumber}</strong>
+          <span>${item.name}${item.pityTriggered ? "（天井）" : ""}</span>
+          <span class="tag">${resultTypeLabel(item)}</span>
+        </div>
+      `).join("");
+    }
+
+    function setErrors(target, errors) {
+      const box = $(target);
+      if (!errors || errors.length === 0) {
+        box.classList.remove("active");
+        box.innerHTML = "";
+        return;
+      }
+      box.classList.add("active");
+      box.innerHTML = errors.map((e) => `<div>${e}</div>`).join("");
+    }
+
+    function incrementInput(button) {
+      const input = $(`#${button.dataset.addTo}`);
+      if (!input) return;
+      const next = toNonNegInt(input.value) + Number(button.dataset.add);
+      const max = button.dataset.max ? toNonNegInt(button.dataset.max) : null;
+      const clamped = Math.max(0, max === null ? next : Math.min(max, next));
+      input.value = clamped;
+    }
+
+    function clearInput(button) {
+      const input = $(`#${button.dataset.clearInput}`);
+      if (!input) return;
+      input.value = 0;
+    }
+
+    function resetInput(button) {
+      const input = $(`#${button.dataset.resetInput}`);
+      if (!input) return;
+      input.value = button.dataset.resetValue || input.defaultValue || 0;
+    }
+
+    function switchGacha(gachaType) {
+      const current = validateInputs({
+        pulls: $("#pulls").value,
+        platTickets: $("#platTickets").value,
+        puTickets: $("#puTickets").value,
+        diamonds: $("#diamonds").value,
+        pityCount: $("#pityCount").value
+      });
+      syncStateFromInputs(current);
+      state.tabSnapshots[state.gachaType] = snapshotInputs($("#pulls").value);
+      state.gachaType = gachaType;
+      const nextSnapshot = state.tabSnapshots[gachaType] || loadSavedState(gachaType) || defaultSnapshot(gachaType);
+      applySnapshot({ ...nextSnapshot, gachaType });
+      document.body.dataset.gacha = gachaType;
+      $$("#gachaTabs button").forEach((button) => {
+        button.classList.toggle("active", button.dataset.gachaTab === gachaType);
+      });
+      renderSelectArea();
+      resetCumulativeResults();
+      renderSummary();
+      renderSrList([]);
+      setInputValuesFromState();
+      $("#resultNote").textContent = "ガチャ種別を変更しました。結果表示は混在防止のためクリアしています。";
+    }
+
+    function runFromCurrentInputs(pulls) {
+      const validated = validateInputs({
+        pulls,
+        platTickets: $("#platTickets").value,
+        puTickets: $("#puTickets").value,
+        diamonds: $("#diamonds").value,
+        pityCount: $("#pityCount").value
+      });
+      setErrors("#inputErrors", validated.errors);
+      if (!validated.ok) return;
+
+      syncStateFromInputs(validated);
+      const beforeRun = snapshotInputs(validated.pulls);
+      state.lastInputSnapshot = beforeRun;
+      state.tabSnapshots[state.gachaType] = beforeRun;
+      saveActiveState(beforeRun);
+
+      try {
+        const session = runGacha(
+          validated.pulls,
+          state.gachaType,
+          state.selectState,
+          state.ticketState,
+          state.diamondsOwned,
+          state.config,
+          state.characters,
+          state.gachaType === "pickup" ? state.pityState : null
+        );
+        appendSessionResult(session);
+        applySessionResult(session, state, state.gachaType);
+        const summary = summarizeCumulative(session.pityStateAfter);
+        setInputValuesFromState();
+        renderSummary(summary);
+        renderSrList(summary.srList);
+        $("#resultNote").textContent = "実行完了。結果は累積し、チケット、ダイヤ、天井カウントは抽選後の状態へ引き継ぎました。";
+      } catch (error) {
+        setErrors("#inputErrors", [error.message]);
+      }
+    }
+
+    function resetResult() {
+      const snap = state.lastInputSnapshot || state.tabSnapshots[state.gachaType] || loadSavedState(state.gachaType);
+      if (snap) {
+        applySnapshot({ ...snap, gachaType: state.gachaType });
+      } else {
+        syncStateFromInputs(validateInputs({
+          pulls: $("#pulls").value,
+          platTickets: $("#platTickets").value,
+          puTickets: $("#puTickets").value,
+          diamonds: $("#diamonds").value,
+          pityCount: $("#pityCount").value
+        }));
+      }
+      setInputValuesFromState();
+      renderSelectArea();
+      resetCumulativeResults();
+      renderSummary();
+      renderSrList([]);
+      $("#resultNote").textContent = "結果をリセットしました。入力状態は実行前の値へ戻しています。";
+      setErrors("#inputErrors", []);
+    }
+
+    function resetAll() {
+      state.tabSnapshots = {};
+      state.lastInputSnapshot = null;
+      resetCumulativeResults();
+      clearSavedStates();
+      applySnapshot(defaultSnapshot(state.gachaType));
+      setInputValuesFromState();
+      renderSelectArea();
+      renderSummary();
+      renderSrList([]);
+      $("#resultNote").textContent = "全条件を初期値に戻しました。保存済み状態は次回実行時に上書きされます。";
+      setErrors("#inputErrors", []);
+    }
+
+    async function init() {
+      const [config, characters] = await Promise.all([
+        fetch("./data/gacha_config.json").then((res) => res.json()),
+        fetch("./data/characters.json").then((res) => res.json())
+      ]);
+      state.config = config;
+      state.characters = characters;
+
+      const validation = validateOnLoad(config, characters);
+      setErrors("#fatalErrors", validation.errors);
+      $("#placeholderNotice").hidden = !validation.warnings._hasPlaceholder;
+      if (validation.errors.length > 0) {
+        $$("button, input").forEach((el) => { el.disabled = true; });
+        return;
+      }
+
+      $$("#gachaTabs button").forEach((button) => {
+        button.addEventListener("click", () => switchGacha(button.dataset.gachaTab));
+      });
+      $$("[data-add-to]").forEach((button) => {
+        button.addEventListener("click", () => incrementInput(button));
+      });
+      $$("[data-clear-input]").forEach((button) => {
+        button.addEventListener("click", () => clearInput(button));
+      });
+      $$("[data-reset-input]").forEach((button) => {
+        button.addEventListener("click", () => resetInput(button));
+      });
+      $$("[data-run]").forEach((button) => {
+        button.addEventListener("click", () => runFromCurrentInputs(button.dataset.run));
+      });
+      $("#runCustom").addEventListener("click", () => runFromCurrentInputs($("#pulls").value));
+      $("#resetResult").addEventListener("click", resetResult);
+      $("#resetAll").addEventListener("click", resetAll);
+
+      applySnapshot(loadSavedState("platinum") || defaultSnapshot("platinum"));
+      setInputValuesFromState();
+      renderSelectArea();
+      renderSummary();
+    }
+
+    init().catch((error) => {
+      console.error(error);
+      setErrors("#fatalErrors", ["設定ファイルの読み込みに失敗しました。ローカルで確認する場合はHTTPサーバー経由で開いてください。"]);
+    });
+  </script>
+</body>
+</html>

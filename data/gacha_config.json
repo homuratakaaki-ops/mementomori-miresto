@@ -1,0 +1,38 @@
+{
+  "gacha_types": {
+    "platinum": {
+      "name": "プラチナガチャ",
+      "cost_per_pull": 300,
+      "pity_enabled": false,
+      "sr_rate": 4.46,
+      "r_rate": 43.77,
+      "n_rate": 51.77,
+      "select_rate_per_char": 0.213,
+      "chars_per_attr": 8,
+      "max_select_per_attr": 5,
+      "attrs": ["blue", "red", "green", "yellow"],
+      "special_chars": [
+        { "id": "natasha", "name": "ナターシャ", "rate": 0.1, "attr_label": "天" },
+        { "id": "lunalind", "name": "ルナリンド", "rate": 0.1, "attr_label": "冥" }
+      ]
+    },
+    "pickup": {
+      "name": "ピックアップガチャ",
+      "cost_per_pull": 300,
+      "pity_enabled": true,
+      "pity_count": 100,
+      "sr_rate": 4.46,
+      "r_rate": 43.77,
+      "n_rate": 51.77,
+      "pickup_rate": 1.37,
+      "select_rate_per_char": 0.1475,
+      "chars_per_attr": 8,
+      "max_select_per_attr": 5,
+      "attrs": ["blue", "red", "green", "yellow"],
+      "special_chars": [
+        { "id": "natasha", "name": "ナターシャ", "rate": 0.07, "attr_label": "天" },
+        { "id": "lunalind", "name": "ルナリンド", "rate": 0.07, "attr_label": "冥" }
+      ]
+    }
+  }
+}
