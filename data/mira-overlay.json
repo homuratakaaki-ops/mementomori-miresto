@@ -1,0 +1,68 @@
+{
+  "gachaStatusUpdatedAt": "2026-06-14",
+  "characters": [{
+    "id": "mira", "pageSlug": "mira", "name": "ミラ",
+    "catchcopy": "開幕HP増加と再生、遅延で翠属性の耐久戦を支える置き物サポーター",
+    "attribute": "翠", "weaponType": "ソーサラー", "speed": 3158,
+    "availability": "星の導き", "gachaStatus": "星の導き",
+    "roleMemo": "味方全体の最大HP増加、再生、遅延、自己回復を担う翠属性サポーター",
+    "noteUrl": "https://note.com/musoudc/n/n74f4731f707e", "imageUrl": "",
+    "sourceUrl": "./pages/characters/mira.html"
+  }],
+  "skills": [
+    {
+      "id": "mira-s1", "characterId": "mira", "number": 1,
+      "name": "決意のロンド", "skillType": "アクティブ", "category": "妨害・火力",
+      "subCategory": "複数攻撃 / 遅延 / 自己回復", "target": "ランダムな敵2体 / 専用Lv1で3体",
+      "multiplierText": "魔法180%×2体 / 専用Lv1で3体", "duration": "遅延1ターン", "ct": 4,
+      "condition": "ランダムな敵2体に魔法攻撃し、40%の確率で1ターン遅延を付与する。遅延判定後、自身HPを自身最大HP10%分回復する",
+      "exclusiveWeapon": "専用Lv1: 対象がランダムな敵3体になる",
+      "compareMemo": "基本360%、専用Lv1以降540%。回復量は直接倍率に含めない",
+      "noteUrl": "https://note.com/musoudc/n/n74f4731f707e", "imageUrl": "", "sourceUrl": "./pages/characters/mira.html",
+      "damage": {
+        "singleMultiplier": 180, "hitCount": 2, "baseTotal": 360,
+        "exclusiveLv1Total": 540, "exclusiveLv2Total": 540, "exclusiveLv3Total": 540,
+        "conditionMaxTotal": 540, "conditionMaxNote": "専用Lv1の対象3体化を反映。自己回復は含めない",
+        "powerType": "複数魔法 / 遅延", "maxStacks": null, "realityRank": "高",
+        "rankingTarget": "専用Lv1", "damageMemo": "火力より遅延付与と自己回復が主目的"
+      }
+    },
+    {
+      "id": "mira-s2", "characterId": "mira", "number": 2,
+      "name": "とっておきのおやつ", "skillType": "アクティブ", "category": "火力・回復",
+      "subCategory": "4連撃 / 条件追加攻撃 / 自己回復", "target": "ランダムな敵",
+      "multiplierText": "魔法440%×4回 / 専用Lv3で480%×4回", "duration": "", "ct": 4,
+      "condition": "自身HPを自身最大HP10%分回復し、ランダムな敵に4回魔法攻撃する。アクティブスキルで回復を受けた回数が6回以上なら同倍率の追加攻撃を行う",
+      "exclusiveWeapon": "専用Lv3: 1回の魔法攻撃が480%になり、条件追加攻撃も1920%になる",
+      "compareMemo": "基本1760%、専用Lv3で1920%。回復6回以上の追加攻撃込みで最大3840%",
+      "noteUrl": "https://note.com/musoudc/n/n74f4731f707e", "imageUrl": "", "sourceUrl": "./pages/characters/mira.html",
+      "damage": {
+        "singleMultiplier": 440, "hitCount": 4, "baseTotal": 1760,
+        "exclusiveLv1Total": 1760, "exclusiveLv2Total": 1760, "exclusiveLv3Total": 1920,
+        "conditionMaxTotal": 3840, "conditionMaxNote": "専用Lv3の1920%と回復6回以上による同倍率追加攻撃を反映",
+        "powerType": "複数魔法 / 条件追加攻撃", "maxStacks": null, "realityRank": "中",
+        "rankingTarget": "条件最大", "damageMemo": "最大火力にはアクティブ回復を6回以上受ける条件が必要"
+      }
+    },
+    {
+      "id": "mira-s3", "characterId": "mira", "number": 3,
+      "name": "空腹ダメぜったい！", "skillType": "パッシブ", "category": "耐久支援",
+      "subCategory": "最大HP増加 / 翠属性支援", "target": "自身以外の味方全体 / 自身",
+      "multiplierText": "味方最大HP+15% / 自身最大HPに攻撃力500%分加算", "duration": "解除不可", "ct": null,
+      "condition": "バトル開始時、自身以外の味方全体の最大HPを15%増加する。対象が翠属性なら最大HP増加量を自身攻撃力100%分追加する。自身の最大HPを自身攻撃力500%分増加する",
+      "exclusiveWeapon": "専用Lv2: 味方全体の最大HP増加が25%、翠属性への追加量が自身攻撃力200%分になる",
+      "compareMemo": "基礎HP増加は低育成でも機能し、翠属性への追加HPはミラの攻撃力と育成水準で伸びる",
+      "noteUrl": "https://note.com/musoudc/n/n74f4731f707e", "imageUrl": "", "sourceUrl": "./pages/characters/mira.html"
+    },
+    {
+      "id": "mira-s4", "characterId": "mira", "number": 4,
+      "name": "いのちの旋律", "skillType": "パッシブ", "category": "回復支援",
+      "subCategory": "味方全体再生", "target": "味方全体",
+      "multiplierText": "毎ターン最大HP5%回復 / 翠属性は10%", "duration": "再生4ターン・解除不可", "ct": null,
+      "condition": "ターン開始時、味方全体に再生を4ターン付与する。再生は毎ターン行動開始時に自身最大HP5%分を回復し、対象が翠属性なら10%分回復する。発動後4回行動終了まで再発動しない",
+      "exclusiveWeapon": "専用武器による追加効果なし",
+      "compareMemo": "開幕に付与されればミラが倒れても4ターン残る。行動阻害を受けにくい安定支援",
+      "noteUrl": "https://note.com/musoudc/n/n74f4731f707e", "imageUrl": "", "sourceUrl": "./pages/characters/mira.html"
+    }
+  ]
+}
