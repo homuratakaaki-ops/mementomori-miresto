@@ -1,0 +1,68 @@
+{
+  "gachaStatusUpdatedAt": "2026-06-14",
+  "characters": [{
+    "id": "alexandra", "pageSlug": "alexandra", "name": "アレクサンドラ",
+    "catchcopy": "7ターン目の守護騎士覚醒から10連撃と出血で仕留める翠属性アタッカー",
+    "attribute": "翠", "weaponType": "ウォーリア", "speed": 3051,
+    "availability": "星の導き", "gachaStatus": "星の導き",
+    "roleMemo": "出血、守護騎士による攻撃・命中強化、被ダメージ回復を持つ大器晩成型アタッカー",
+    "noteUrl": "https://note.com/musoudc/n/n71ea7c71d71e", "imageUrl": "",
+    "sourceUrl": "./pages/characters/alexandra.html"
+  }],
+  "skills": [
+    {
+      "id": "alexandra-s1", "characterId": "alexandra", "number": 1,
+      "name": "ナイト・ブレイク", "skillType": "アクティブ", "category": "火力・弱体",
+      "subCategory": "複数攻撃 / 出血", "target": "ランダムな敵4体 / 専用Lv1で5体",
+      "multiplierText": "物理250%×4体 / 専用Lv1で5体 / 専用Lv3で280%", "duration": "出血2ターン", "ct": 4,
+      "condition": "ランダムな敵4体に物理攻撃し、70%の確率で2ターン出血を付与する。出血は毎ターン行動開始時に自身の攻撃力50%分のダメージを与える",
+      "exclusiveWeapon": "専用Lv1: 対象が5体になる。専用Lv3: 1体あたりの物理攻撃が280%になる",
+      "compareMemo": "基本1000%、専用Lv1で1250%、専用Lv3で1400%。出血ダメージは直接倍率に含めない",
+      "noteUrl": "https://note.com/musoudc/n/n71ea7c71d71e", "imageUrl": "", "sourceUrl": "./pages/characters/alexandra.html",
+      "damage": {
+        "singleMultiplier": 250, "hitCount": 4, "baseTotal": 1000,
+        "exclusiveLv1Total": 1250, "exclusiveLv2Total": 1250, "exclusiveLv3Total": 1400,
+        "conditionMaxTotal": 1400, "conditionMaxNote": "専用Lv1の対象5体化と専用Lv3の280%を反映。出血は含めない",
+        "powerType": "複数物理 / 出血", "maxStacks": null, "realityRank": "高",
+        "rankingTarget": "専用Lv3", "damageMemo": "初手から使える複数攻撃。出血は攻撃力依存の持続ダメージとして別評価"
+      }
+    },
+    {
+      "id": "alexandra-s2", "characterId": "alexandra", "number": 2,
+      "name": "クリムゾン・クロス", "skillType": "アクティブ", "category": "火力",
+      "subCategory": "単体5～10連撃", "target": "攻撃力が最も高い敵",
+      "multiplierText": "物理420%×5回 / 守護騎士中は10回", "duration": "", "ct": 4,
+      "condition": "攻撃力が最も高い敵に5回物理攻撃する。自身が守護騎士中なら攻撃回数が10回になる",
+      "exclusiveWeapon": "専用武器による直接倍率強化なし",
+      "compareMemo": "通常2100%、守護騎士中4200%。守護騎士の攻撃力増加は倍率欄に含めない",
+      "noteUrl": "https://note.com/musoudc/n/n71ea7c71d71e", "imageUrl": "", "sourceUrl": "./pages/characters/alexandra.html",
+      "damage": {
+        "singleMultiplier": 420, "hitCount": 5, "baseTotal": 2100,
+        "exclusiveLv1Total": 2100, "exclusiveLv2Total": 2100, "exclusiveLv3Total": 2100,
+        "conditionMaxTotal": 4200, "conditionMaxNote": "守護騎士中の10連撃を反映。攻撃力最大+100%は含めない",
+        "powerType": "単体物理 / 条件連撃", "maxStacks": null, "realityRank": "中",
+        "rankingTarget": "条件最大", "damageMemo": "7ターン目の守護騎士発動が必要。直接倍率は最大4200%"
+      }
+    },
+    {
+      "id": "alexandra-s3", "characterId": "alexandra", "number": 3,
+      "name": "守護騎士の本懐", "skillType": "パッシブ", "category": "自己強化",
+      "subCategory": "攻撃力増加 / 命中増加 / CTリセット", "target": "自身",
+      "multiplierText": "攻撃力最大+100% / 命中率+80%", "duration": "守護騎士20ターン・解除不可", "ct": null,
+      "condition": "7ターン目開始時、自身に20ターン守護騎士を付与する。攻撃力が総被ダメージ5%分増加し、最大でステータス増減前の自身攻撃力100%まで増加する。命中率を80%増加し、7ターン目開始時に自身のスキルCTを0にする",
+      "exclusiveWeapon": "専用武器による追加効果なし",
+      "compareMemo": "7ターン目から火力・命中・手数をまとめて強化する。発動前に倒されない耐久設計が必要",
+      "noteUrl": "https://note.com/musoudc/n/n71ea7c71d71e", "imageUrl": "", "sourceUrl": "./pages/characters/alexandra.html"
+    },
+    {
+      "id": "alexandra-s4", "characterId": "alexandra", "number": 4,
+      "name": "教皇の忠実なる騎士", "skillType": "パッシブ", "category": "耐久",
+      "subCategory": "被ダメージ回復 / 翠属性編成", "target": "自身",
+      "multiplierText": "被ダメージ20%回復 / 翠属性味方1体につき+20%・最大80%", "duration": "", "ct": null,
+      "condition": "被攻撃時、自身HPを被ダメージ20%分回復する。自身以外の翠属性味方が生存している場合、1体につき回復量が20%増加して最大80%になる。戦闘不能時は発動せず、1ターンに5回まで発動する",
+      "exclusiveWeapon": "専用武器効果: バトル開始時6ターン、自身のHPドレインを40%増加する。解除不可",
+      "compareMemo": "ダメージを受けた後に回復するため、一撃で戦闘不能になる攻撃には対応できない",
+      "noteUrl": "https://note.com/musoudc/n/n71ea7c71d71e", "imageUrl": "", "sourceUrl": "./pages/characters/alexandra.html"
+    }
+  ]
+}

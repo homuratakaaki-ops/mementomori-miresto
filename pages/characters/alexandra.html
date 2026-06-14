@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>アレクサンドラ / ミレスト・メメントモリ分析データ室</title>
+  <style>
+    :root { color-scheme:light; --ink:#172033; --muted:#647086; --line:#d9dfeb; --paper:#fbfaf7; --panel:#fff; --navy:#0b2a57; --green:#1f704f; --shadow:0 12px 30px rgba(28,40,68,.12); }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--paper); color:var(--ink); font-family:"Yu Gothic","Hiragino Sans","Meiryo",system-ui,sans-serif; letter-spacing:0; }
+    a { color:inherit; }
+    .page-header { padding:28px clamp(16px,4vw,48px) 24px; background:linear-gradient(180deg,#fff 0%,#edf5ee 100%); border-bottom:1px solid var(--line); }
+    .header-inner,main,.footer-inner { max-width:1180px; margin:0 auto; }
+    .eyebrow { margin:0 0 6px; color:var(--green); font-size:12px; font-weight:800; }
+    h1,h2,h3,p { margin-top:0; }
+    h1 { margin-bottom:10px; font-size:clamp(34px,5vw,56px); line-height:1.05; }
+    .role { max-width:760px; margin-bottom:18px; color:var(--muted); font-size:17px; line-height:1.7; }
+    .meta-row { display:flex; flex-wrap:wrap; gap:8px; }
+    .badge,.tag { display:inline-flex; align-items:center; min-height:32px; padding:5px 10px; border-radius:999px; background:#edf1f8; color:#3b4b65; font-size:13px; font-weight:800; }
+    .attribute { background:var(--green); color:#fff; }
+    main { padding:22px clamp(12px,3vw,24px) 44px; }
+    .layout { display:grid; grid-template-columns:minmax(0,1fr) 320px; gap:16px; align-items:start; }
+    .section,.side-panel { background:var(--panel); border:1px solid var(--line); border-radius:8px; box-shadow:var(--shadow); }
+    .section { padding:18px; margin-bottom:16px; }
+    .section h2 { margin-bottom:10px; font-size:24px; }
+    .section-lead,li,dd { line-height:1.7; }
+    .skill-grid,.manual-block,.stat-grid { display:grid; gap:12px; }
+    .skill-grid { grid-template-columns:repeat(2,minmax(0,1fr)); margin-top:14px; }
+    .skill-card,.manual-card,.stat-card { border:1px solid var(--line); border-radius:8px; background:#fffdf8; overflow:hidden; }
+    .skill-card header { display:flex; justify-content:space-between; gap:10px; padding:12px; border-bottom:1px solid var(--line); background:#edf5ee; }
+    .skill-card h3,.manual-card h3,.stat-card h3 { margin-bottom:8px; font-size:18px; }
+    .ct { flex:0 0 auto; color:var(--navy); font-weight:800; }
+    .skill-body { display:grid; gap:10px; padding:12px; }
+    .manual-card,.stat-card { padding:14px; }
+    .manual-card ul { margin:0; padding-left:1.2em; }
+    .stat-grid { grid-template-columns:repeat(3,minmax(0,1fr)); }
+    dl { margin:0; } dt { color:var(--muted); font-size:12px; font-weight:800; } dd { margin:3px 0 0; }
+    .compare-link,.link-list a { display:inline-flex; justify-content:center; width:100%; padding:11px 12px; border-radius:8px; text-decoration:none; font-weight:800; }
+    .compare-link { margin-top:14px; background:var(--navy); color:#fff; }
+    .side-panel { position:sticky; top:14px; padding:16px; }
+    .side-panel h2 { margin-bottom:10px; font-size:20px; }
+    .status { padding:12px; border-left:4px solid var(--green); border-radius:6px; background:#f1f8f2; color:#34404c; line-height:1.6; }
+    .link-list { display:grid; gap:8px; margin:0; padding:0; list-style:none; } .link-list a { border:1px solid var(--line); background:#fff; }
+    footer { padding:24px clamp(14px,4vw,32px); border-top:1px solid var(--line); background:#fff; color:var(--muted); }
+    .footer-inner { display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap; } .footer-links { display:flex; flex-wrap:wrap; gap:8px 14px; } .footer-links a { color:var(--ink); text-decoration:none; font-weight:700; }
+    @media (max-width:920px) { .layout,.skill-grid,.stat-grid { grid-template-columns:1fr; } .side-panel { position:static; } }
+  </style>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-BHKBSRGSJF"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-BHKBSRGSJF');</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6389066329814944" crossorigin="anonymous"></script>
+</head>
+<body>
+  <header class="page-header"><div class="header-inner"><p class="eyebrow">CHARACTER DETAIL</p><h1 id="characterName">アレクサンドラ</h1><p class="role" id="roleMemo">7ターン目の守護騎士覚醒から10連撃と出血で仕留める翠属性アタッカー。</p><div class="meta-row" id="characterMeta"></div></div></header>
+  <main>
+    <div class="layout">
+      <div>
+        <section class="section"><h2>スキル一覧</h2><p class="section-lead">直接倍率はナイト・ブレイク最大1400%、クリムゾン・クロス最大4200%です。出血と守護騎士の攻撃力増加は倍率欄へ含めません。</p><div class="skill-grid" id="skillGrid"></div><a class="compare-link" href="../../compare-prototype.html?character=alexandra">スキル比較DBで見る</a></section>
+        <section class="section"><h2>評価</h2><div class="manual-block">
+          <article class="manual-card"><h3>役割解説</h3><p>アレクサンドラは、翠属性味方の生存数に応じた被ダメージ回復で7ターン目まで耐え、守護騎士発動後の10連撃と命中率増加で勝負を決める大器晩成型アタッカーです。</p><p>ナイト・ブレイクの出血は攻撃力依存の持続ダメージで、守護騎士による攻撃力増加後ほど威力が伸びます。直接倍率とは別枠で評価します。</p><p>ただし現在の高速・多段環境では、回復の1ターン5回上限と7ターン待ちが重い条件です。高育成と耐久支援なしでは本領を発揮できません。</p></article>
+          <article class="manual-card"><h3>強み</h3><ul><li>守護騎士中はスキル2が10連撃・合計4200%になる</li><li>命中率+80%により高回避相手へ攻撃を通しやすい</li><li>攻撃力最大+100%で直接攻撃と出血の両方を強化できる</li><li>出血による持続削りで特定の耐久・回避相手へ圧力をかけられる</li><li>翠染め時は被ダメージの最大80%を回復できる</li></ul></article>
+          <article class="manual-card"><h3>弱み・注意点</h3><ul><li>守護騎士は7ターン目開始で、発動前に倒されるリスクが高い</li><li>被ダメージ回復は1ターン5回までで、多段集中攻撃に弱い</li><li>一撃で戦闘不能になる場合は回復が発動しない</li><li>パッシブ回復のため、アクティブ回復を条件とするスタックを進められない</li><li>現在の翠属性主力と比べて育成コストに対する汎用性が低い</li></ul></article>
+        </div></section>
+        <section class="section"><h2>ガチャ・育成判断</h2><div class="manual-block">
+          <article class="manual-card"><h3>育てたい人</h3><ul><li>アレクサンドラをLR+5級まで重点育成できる人</li><li>7ターン目まで守る翠属性耐久編成を構築できる人</li><li>出血や命中増加を特定相手への対策として使いたい人</li><li>フィアー・ミラ・ユルディズなど耐久支援が揃っている人</li><li>キャラの個性を優先して長期運用する人</li></ul></article>
+          <article class="manual-card"><h3>後回しでいい人</h3><ul><li>無・微課金で最高水準の育成・装備投資が難しい人</li><li>現在の翠属性コアキャラの育成が未完成の人</li><li>短期決着や多段攻撃環境への対応力を重視する人</li><li>回復トリガー型の翠属性編成を中心に組む人</li><li>星の導きで汎用性の高い主力を優先したい人</li></ul></article>
+        </div></section>
+        <section class="section"><h2>専用武器パッシブ</h2><div class="stat-grid"><article class="stat-card"><h3>攻撃力</h3><p>+18%</p></article><article class="stat-card"><h3>HP</h3><p>+22%</p></article><article class="stat-card"><h3>弱体効果命中</h3><p>+10%</p></article></div></section>
+        <section class="section"><h2>プロフィール・基礎データ</h2><div class="stat-grid">
+          <article class="stat-card"><h3>プロフィール</h3><dl><dt>タイプ</dt><dd>非恒常キャラ</dd><dt>属性 / 武器種</dt><dd>翠 / ウォーリア</dd><dt>特徴</dt><dd>出血・守護騎士・ドレイン</dd></dl></article>
+          <article class="stat-card"><h3>入手・状態</h3><dl><dt>入手</dt><dd>星の導き</dd><dt>実装日</dt><dd>2024年5月31日</dd><dt>直近ピックアップ</dt><dd>2026年5月7日</dd></dl></article>
+          <article class="stat-card"><h3>ステータス（LR）</h3><dl><dt>戦闘力</dt><dd>7,108,640</dd><dt>攻撃力 / HP</dt><dd>729,449 / 4,390,817</dd><dt>スピード</dt><dd>3,051</dd></dl></article>
+          <article class="stat-card"><h3>防御</h3><dl><dt>物理防御力</dt><dd>729,444</dd><dt>魔法防御力</dt><dd>601,968</dd><dt>防御力</dt><dd>10</dd></dl></article>
+          <article class="stat-card"><h3>次回ガチャ</h3><dl><dt>予定</dt><dd>星の導き</dd><dt>入手分類</dt><dd>限定</dd><dt>確認日</dt><dd>2026年6月14日</dd></dl></article>
+          <article class="stat-card"><h3>データ根拠</h3><dl><dt>基礎情報</dt><dd>添付カード画像</dd><dt>評価</dt><dd>note記事本文</dd><dt>note</dt><dd><a href="https://note.com/musoudc/n/n71ea7c71d71e">アレクサンドラ評価まとめ</a></dd></dl></article>
+        </div></section>
+        <section class="section"><h2>創作関連</h2><div class="manual-card"><p>note記事：<a href="https://note.com/musoudc/n/n71ea7c71d71e">アレクサンドラ評価まとめ</a>。本文はnote記事と添付カード画像をもとに、攻略DB向けに要約・再構成しています。</p></div></section>
+      </div>
+      <aside class="side-panel"><h2>関連リンク</h2><p id="gachaUpdated" class="status">ガチャ状態確認日：2026-06-14</p><p class="status">守護騎士中の直接倍率は4200%です。攻撃力最大+100%を倍率へ重ねた8400%表記とは分けて扱います。</p><ul class="link-list"><li><a href="/">トップへ戻る</a></li><li><a href="../../compare-prototype.html">比較DBへ戻る</a></li><li><a href="./index.html">キャラ一覧へ戻る</a></li></ul></aside>
+    </div>
+    <!-- メメントモリver1 広告 -->
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6389066329814944" data-ad-slot="6111654373" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
+  </main>
+  <script>
+    const characterId="alexandra";
+    function valueOrDash(value){return value===null||value===undefined||value===""?"-":value;}
+    function renderMeta(character){document.querySelector("#characterMeta").innerHTML=[`<span class="badge attribute">${character.attribute}</span>`,`<span class="badge">${character.weaponType}</span>`,`<span class="badge">スピード ${character.speed}</span>`,`<span class="badge">${character.availability}</span>`,`<span class="badge">${character.gachaStatus||"状態未設定"}</span>`].join("");}
+    function renderSkills(skills){document.querySelector("#skillGrid").innerHTML=skills.sort((a,b)=>a.number-b.number).map(skill=>`<article class="skill-card"><header><div><h3>スキル${skill.number}：${skill.name}</h3><span class="tag">${skill.skillType}</span> <span class="tag">${skill.category}</span> <span class="tag">${skill.subCategory}</span></div><span class="ct">CT: ${valueOrDash(skill.ct)}</span></header><div class="skill-body"><dl><dt>対象</dt><dd>${valueOrDash(skill.target)}</dd></dl><dl><dt>倍率・効果</dt><dd>${valueOrDash(skill.multiplierText)}</dd></dl><dl><dt>条件</dt><dd>${valueOrDash(skill.condition)}</dd></dl><dl><dt>専用武器</dt><dd>${valueOrDash(skill.exclusiveWeapon)}</dd></dl><dl><dt>比較メモ</dt><dd>${valueOrDash(skill.compareMemo)}</dd></dl></div></article>`).join("");}
+    async function fetchJson(path,optional=false){const response=await fetch(path,{cache:"no-store"});if(!response.ok){if(optional&&response.status===404)return{characters:[],skills:[]};throw new Error(`JSON読み込み失敗: ${response.status}`);}return response.json();}
+    function mergeSkillData(baseData,overlayData){const characters=new Map((baseData.characters||[]).map(character=>[character.id,character]));const skills=new Map((baseData.skills||[]).map(skill=>[skill.id,skill]));(overlayData.characters||[]).forEach(character=>characters.set(character.id,character));(overlayData.skills||[]).forEach(skill=>skills.set(skill.id,skill));return{...baseData,characters:[...characters.values()],skills:[...skills.values()]};}
+    async function loadData(){const baseData=await fetchJson("../../data/mementomori-skills.json");const overlayData=await fetchJson("../../data/alexandra-overlay.json",true);return mergeSkillData(baseData,overlayData);}
+    async function init(){try{const data=await loadData();const character=data.characters.find(item=>item.id===characterId);const skills=data.skills.filter(skill=>skill.characterId===characterId);if(!character)throw new Error("キャラが見つかりません");document.title=`${character.name} / ミレスト・メメントモリ分析データ室`;document.querySelector("#characterName").textContent=character.name;document.querySelector("#roleMemo").textContent=character.catchcopy||character.roleMemo;document.querySelector("#gachaUpdated").textContent=`ガチャ状態確認日：${data.gachaStatusUpdatedAt||"未設定"}`;renderMeta(character);renderSkills(skills);}catch(error){document.querySelector("#roleMemo").textContent=error.message;console.error(error);}}
+    init();
+  </script>
+  <footer><div class="footer-inner"><span>ミレスト・メメントモリ攻略・分析データベース / 非公式ファンサイト</span><nav class="footer-links" aria-label="固定ページ"><a href="/">トップ</a><a href="../../privacy.html">プライバシーポリシー</a><a href="../../disclaimer.html">免責事項</a><a href="../../about.html">このサイトについて</a><a href="../../contact.html">お問い合わせ</a></nav></div></footer>
+</body>
+</html>
