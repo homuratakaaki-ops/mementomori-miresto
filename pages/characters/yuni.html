@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ユニ / ミレスト・メメントモリ分析データ室</title>
+  <style>
+    :root { color-scheme:light; --ink:#172033; --muted:#647086; --line:#d9dfeb; --paper:#fbfaf7; --panel:#fff; --navy:#0b2a57; --green:#1f704f; --shadow:0 12px 30px rgba(28,40,68,.12); }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--paper); color:var(--ink); font-family:"Yu Gothic","Hiragino Sans","Meiryo",system-ui,sans-serif; letter-spacing:0; }
+    a { color:inherit; }
+    .page-header { padding:28px clamp(16px,4vw,48px) 24px; background:linear-gradient(180deg,#fff 0%,#edf5ee 100%); border-bottom:1px solid var(--line); }
+    .header-inner,main,.footer-inner { max-width:1180px; margin:0 auto; }
+    .eyebrow { margin:0 0 6px; color:var(--green); font-size:12px; font-weight:800; }
+    h1,h2,h3,p { margin-top:0; }
+    h1 { margin-bottom:10px; font-size:clamp(34px,5vw,56px); line-height:1.05; }
+    .role { max-width:760px; margin-bottom:18px; color:var(--muted); font-size:17px; line-height:1.7; }
+    .meta-row { display:flex; flex-wrap:wrap; gap:8px; }
+    .badge,.tag { display:inline-flex; align-items:center; min-height:32px; padding:5px 10px; border-radius:999px; background:#edf1f8; color:#3b4b65; font-size:13px; font-weight:800; }
+    .attribute { background:var(--green); color:#fff; }
+    main { padding:22px clamp(12px,3vw,24px) 44px; }
+    .layout { display:grid; grid-template-columns:minmax(0,1fr) 320px; gap:16px; align-items:start; }
+    .section,.side-panel { background:var(--panel); border:1px solid var(--line); border-radius:8px; box-shadow:var(--shadow); }
+    .section { padding:18px; margin-bottom:16px; }
+    .section h2 { margin-bottom:10px; font-size:24px; }
+    .section-lead,li,dd { line-height:1.7; }
+    .skill-grid,.manual-block,.stat-grid { display:grid; gap:12px; }
+    .skill-grid { grid-template-columns:repeat(2,minmax(0,1fr)); margin-top:14px; }
+    .skill-card,.manual-card,.stat-card { border:1px solid var(--line); border-radius:8px; background:#fffdf8; overflow:hidden; }
+    .skill-card header { display:flex; justify-content:space-between; gap:10px; padding:12px; border-bottom:1px solid var(--line); background:#edf5ee; }
+    .skill-card h3,.manual-card h3,.stat-card h3 { margin-bottom:8px; font-size:18px; }
+    .ct { flex:0 0 auto; color:var(--navy); font-weight:800; }
+    .skill-body { display:grid; gap:10px; padding:12px; }
+    .manual-card,.stat-card { padding:14px; }
+    .manual-card ul { margin:0; padding-left:1.2em; }
+    .stat-grid { grid-template-columns:repeat(3,minmax(0,1fr)); }
+    dl { margin:0; } dt { color:var(--muted); font-size:12px; font-weight:800; } dd { margin:3px 0 0; }
+    .compare-link,.link-list a { display:inline-flex; justify-content:center; width:100%; padding:11px 12px; border-radius:8px; text-decoration:none; font-weight:800; }
+    .compare-link { margin-top:14px; background:var(--navy); color:#fff; }
+    .side-panel { position:sticky; top:14px; padding:16px; }
+    .side-panel h2 { margin-bottom:10px; font-size:20px; }
+    .status { padding:12px; border-left:4px solid var(--green); border-radius:6px; background:#f1f8f2; color:#34404c; line-height:1.6; }
+    .link-list { display:grid; gap:8px; margin:0; padding:0; list-style:none; } .link-list a { border:1px solid var(--line); background:#fff; }
+    footer { padding:24px clamp(14px,4vw,32px); border-top:1px solid var(--line); background:#fff; color:var(--muted); }
+    .footer-inner { display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap; } .footer-links { display:flex; flex-wrap:wrap; gap:8px 14px; } .footer-links a { color:var(--ink); text-decoration:none; font-weight:700; }
+    @media (max-width:920px) { .layout,.skill-grid,.stat-grid { grid-template-columns:1fr; } .side-panel { position:static; } }
+  </style>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-BHKBSRGSJF"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-BHKBSRGSJF');</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6389066329814944" crossorigin="anonymous"></script>
+</head>
+<body>
+  <header class="page-header"><div class="header-inner"><p class="eyebrow">CHARACTER DETAIL</p><h1 id="characterName">ユニ</h1><p class="role" id="roleMemo">4連続回復と最大HP増加で翠属性の耐久スタックを加速する支援役。</p><div class="meta-row" id="characterMeta"></div></div></header>
+  <main>
+    <div class="layout">
+      <div>
+        <section class="section"><h2>スキル一覧</h2><p class="section-lead">ユニの中心は回復と最大HP支援です。スキル2の12～16%は自身最大HP基準の累計回復量であり、攻撃倍率ではありません。</p><div class="skill-grid" id="skillGrid"></div><a class="compare-link" href="../../compare-prototype.html?character=yuni">スキル比較DBで見る</a></section>
+        <section class="section"><h2>評価</h2><div class="manual-block">
+          <article class="manual-card"><h3>役割解説</h3><p>ユニは、スキル2を合計4回発動して味方を連続回復し、回復発動を条件に強化されるポーラやユルディズのスタックを一気に進める特化型サポーターです。</p><p>スキル1では攻撃力が最も高い味方を回復し、弱体効果を2つ解除します。パッシブでは開幕と各ターンに最大HPを増加させるため、長期戦ほど支援量が積み上がります。</p><p>ただし回復量と最大HP増加量はユニ自身の最大HP・攻撃力に依存します。低育成では役割を果たしにくく、翠属性の完成編成向けです。</p></article>
+          <article class="manual-card"><h3>強み</h3><ul><li>4回連続回復で回復トリガー型スタックを高速で進められる</li><li>主力への最大HP比例回復と弱体効果2つ解除を同時に行える</li><li>専用Lv2で攻撃力最高の味方へ自身最大HP50%分の最大HP支援</li><li>2～10ターンに最大9スタックの最大HP増加を付与できる</li><li>防御・クリティカル耐性と隣接味方の被回復量を増加できる</li></ul></article>
+          <article class="manual-card"><h3>弱み・注意点</h3><ul><li>支援量がユニ自身の最大HP・攻撃力に依存し、育成要求が重い</li><li>ダメージ遮断を持たず、高火力による即時撃破には弱い</li><li>回復スタックを利用しない編成では4連続回復の価値が下がる</li><li>専用Lv2・Lv3まで進めないと主要な支援量が伸び切らない</li><li>フィアーとの入れ替えは高育成時の選択肢で、低育成では耐久低下を招く</li></ul></article>
+        </div></section>
+        <section class="section"><h2>ガチャ・育成判断</h2><div class="manual-block">
+          <article class="manual-card"><h3>育てたい人</h3><ul><li>ポーラやユルディズを含む回復スタック型の翠パを運用する人</li><li>ユニをLR以上まで育成し、最大HPと攻撃力を確保できる人</li><li>クラウディアやアレクサンドラなど耐久型主力を支援したい人</li><li>弱体解除と長期的な最大HP増加を同時に求める人</li><li>ギルドバトルの翠属性防衛編成を強化したい人</li></ul></article>
+          <article class="manual-card"><h3>後回しでいい人</h3><ul><li>無・微課金で主力アタッカーの育成が未完成の人</li><li>ポーラ軸・回復スタック型の翠パを組んでいない人</li><li>ユニ自身を高レアリティ・高HPまで育てられない人</li><li>属性を問わず使える汎用ヒーラーを求めている人</li><li>翠属性のコアキャラ確保を先に進める必要がある人</li></ul></article>
+        </div></section>
+        <section class="section"><h2>専用武器パッシブ</h2><div class="stat-grid"><article class="stat-card"><h3>耐久力</h3><p>+8%</p></article><article class="stat-card"><h3>HP</h3><p>+22%</p></article><article class="stat-card"><h3>弱体効果耐性</h3><p>+10%</p></article></div></section>
+        <section class="section"><h2>プロフィール・基礎データ</h2><div class="stat-grid">
+          <article class="stat-card"><h3>プロフィール</h3><dl><dt>タイプ</dt><dd>非恒常キャラ</dd><dt>属性 / 武器種</dt><dd>翠 / ソーサラー</dd><dt>特徴</dt><dd>HP増加・回復・弱体解除</dd></dl></article>
+          <article class="stat-card"><h3>入手・状態</h3><dl><dt>入手</dt><dd>星の導き</dd><dt>実装日</dt><dd>2024年2月29日</dd><dt>直近ピックアップ</dt><dd>2026年2月5日</dd></dl></article>
+          <article class="stat-card"><h3>ステータス（LR）</h3><dl><dt>戦闘力</dt><dd>6,850,365</dd><dt>攻撃力 / HP</dt><dd>624,327 / 6,382,059</dd><dt>スピード</dt><dd>2,889</dd></dl></article>
+          <article class="stat-card"><h3>防御</h3><dl><dt>物理防御力</dt><dd>554,962</dd><dt>魔法防御力</dt><dd>624,337</dd><dt>防御力</dt><dd>10</dd></dl></article>
+          <article class="stat-card"><h3>次回ガチャ</h3><dl><dt>予定</dt><dd>星の導き</dd><dt>入手分類</dt><dd>限定</dd><dt>確認日</dt><dd>2026年6月14日</dd></dl></article>
+          <article class="stat-card"><h3>データ根拠</h3><dl><dt>基礎情報</dt><dd>添付カード画像</dd><dt>評価</dt><dd>note記事本文</dd><dt>note</dt><dd><a href="https://note.com/musoudc/n/nf37e63297c94">ユニ評価まとめ</a></dd></dl></article>
+        </div></section>
+        <section class="section"><h2>創作関連</h2><div class="manual-card"><p>note記事：<a href="https://note.com/musoudc/n/nf37e63297c94">ユニ評価まとめ</a>。本文はnote記事と添付カード画像をもとに、攻略DB向けに要約・再構成しています。</p></div></section>
+      </div>
+      <aside class="side-panel"><h2>関連リンク</h2><p id="gachaUpdated" class="status">ガチャ状態確認日：2026-06-14</p><p class="status">ユニは低育成の置き物ではありません。回復量と最大HP支援はユニ自身の能力値に依存するため、LR級の育成を前提に判断します。</p><ul class="link-list"><li><a href="/">トップへ戻る</a></li><li><a href="../../compare-prototype.html">比較DBへ戻る</a></li><li><a href="./index.html">キャラ一覧へ戻る</a></li></ul></aside>
+    </div>
+    <!-- メメントモリver1 広告 -->
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6389066329814944" data-ad-slot="6111654373" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
+  </main>
+  <script>
+    const characterId="yuni";
+    function valueOrDash(value){return value===null||value===undefined||value===""?"-":value;}
+    function renderMeta(character){document.querySelector("#characterMeta").innerHTML=[`<span class="badge attribute">${character.attribute}</span>`,`<span class="badge">${character.weaponType}</span>`,`<span class="badge">スピード ${character.speed}</span>`,`<span class="badge">${character.availability}</span>`,`<span class="badge">${character.gachaStatus||"状態未設定"}</span>`].join("");}
+    function renderSkills(skills){document.querySelector("#skillGrid").innerHTML=skills.sort((a,b)=>a.number-b.number).map(skill=>`<article class="skill-card"><header><div><h3>スキル${skill.number}：${skill.name}</h3><span class="tag">${skill.skillType}</span> <span class="tag">${skill.category}</span> <span class="tag">${skill.subCategory}</span></div><span class="ct">CT: ${valueOrDash(skill.ct)}</span></header><div class="skill-body"><dl><dt>対象</dt><dd>${valueOrDash(skill.target)}</dd></dl><dl><dt>倍率・効果</dt><dd>${valueOrDash(skill.multiplierText)}</dd></dl><dl><dt>条件</dt><dd>${valueOrDash(skill.condition)}</dd></dl><dl><dt>専用武器</dt><dd>${valueOrDash(skill.exclusiveWeapon)}</dd></dl><dl><dt>比較メモ</dt><dd>${valueOrDash(skill.compareMemo)}</dd></dl></div></article>`).join("");}
+    async function fetchJson(path,optional=false){const response=await fetch(path,{cache:"no-store"});if(!response.ok){if(optional&&response.status===404)return{characters:[],skills:[]};throw new Error(`JSON読み込み失敗: ${response.status}`);}return response.json();}
+    function mergeSkillData(baseData,overlayData){const characters=new Map((baseData.characters||[]).map(character=>[character.id,character]));const skills=new Map((baseData.skills||[]).map(skill=>[skill.id,skill]));(overlayData.characters||[]).forEach(character=>characters.set(character.id,character));(overlayData.skills||[]).forEach(skill=>skills.set(skill.id,skill));return{...baseData,characters:[...characters.values()],skills:[...skills.values()]};}
+    async function loadData(){const baseData=await fetchJson("../../data/mementomori-skills.json");const overlayData=await fetchJson("../../data/yuni-overlay.json",true);return mergeSkillData(baseData,overlayData);}
+    async function init(){try{const data=await loadData();const character=data.characters.find(item=>item.id===characterId);const skills=data.skills.filter(skill=>skill.characterId===characterId);if(!character)throw new Error("キャラが見つかりません");document.title=`${character.name} / ミレスト・メメントモリ分析データ室`;document.querySelector("#characterName").textContent=character.name;document.querySelector("#roleMemo").textContent=character.catchcopy||character.roleMemo;document.querySelector("#gachaUpdated").textContent=`ガチャ状態確認日：${data.gachaStatusUpdatedAt||"未設定"}`;renderMeta(character);renderSkills(skills);}catch(error){document.querySelector("#roleMemo").textContent=error.message;console.error(error);}}
+    init();
+  </script>
+  <footer><div class="footer-inner"><span>ミレスト・メメントモリ攻略・分析データベース / 非公式ファンサイト</span><nav class="footer-links" aria-label="固定ページ"><a href="/">トップ</a><a href="../../privacy.html">プライバシーポリシー</a><a href="../../disclaimer.html">免責事項</a><a href="../../about.html">このサイトについて</a><a href="../../contact.html">お問い合わせ</a></nav></div></footer>
+</body>
+</html>

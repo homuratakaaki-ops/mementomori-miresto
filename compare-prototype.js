@@ -14,7 +14,7 @@ const datasets = {
   passive: []
 };
 
-const existingCharacterPages = new Set(["potpourri", "rea", "sophia", "veela", "sivi", "cerberus", "aa_dark", "cattleya", "claudia", "soltina", "amleth", "fenrir", "florence", "moddey", "sonya", "stella", "fenny", "tropon_holy_night", "giluial", "liselotte", "eir", "ivy", "minasumari", "nina", "nina_summer", "serruria", "eureka", "cordie", "cordie_ringmaster", "merlyn_winter", "merlin", "evelyn", "fia", "fia_trace", "sabrina", "sabrina_cool_breeze", "freycia", "amour", "lean", "chiffon", "artie", "belle", "dian", "cordie_summer", "priscilla", "matilda", "aishe", "lilicotte", "morgana", "soltina_warm_memory", "artoria", "shizu_snow", "lucile", "flack", "liebe", "mertillier", "luke"]);
+const existingCharacterPages = new Set(["potpourri", "rea", "sophia", "veela", "sivi", "cerberus", "aa_dark", "cattleya", "claudia", "yuni", "soltina", "amleth", "fenrir", "florence", "moddey", "sonya", "stella", "fenny", "tropon_holy_night", "giluial", "liselotte", "eir", "ivy", "minasumari", "nina", "nina_summer", "serruria", "eureka", "cordie", "cordie_ringmaster", "merlyn_winter", "merlin", "evelyn", "fia", "fia_trace", "sabrina", "sabrina_cool_breeze", "freycia", "amour", "lean", "chiffon", "artie", "belle", "dian", "cordie_summer", "priscilla", "matilda", "aishe", "lilicotte", "morgana", "soltina_warm_memory", "artoria", "shizu_snow", "lucile", "flack", "liebe", "mertillier", "luke"]);
 
 const modeMeta = {
   active: {
@@ -353,6 +353,7 @@ async function loadData() {
     fetchJson("./data/evelyn-overlay.json", true),
     fetchJson("./data/fia-overlay.json", true),
     fetchJson("./data/claudia-overlay.json", true),
+    fetchJson("./data/yuni-overlay.json", true),
     fetchJson("./data/fia-trace-overlay.json", true),
     fetchJson("./data/sabrina-overlay.json", true),
     fetchJson("./data/sabrina-cool-breeze-overlay.json", true),
