@@ -1,0 +1,48 @@
+{
+  "gachaStatusUpdatedAt": "2026-06-14",
+  "characters": [{
+    "id": "lunalynn_holy_night", "pageSlug": "lunalynn_holy_night", "name": "[聖夜の妖精]ルナリンド",
+    "catchcopy": "開幕多重バリアと脱力で耐え、7ターン目に覚醒する冬限定スナイパー",
+    "attribute": "翠", "weaponType": "スナイパー", "speed": 3037, "availability": "冬イベント",
+    "gachaStatus": "復刻待ち", "roleMemo": "多重バリア・脱力・浸食・HPドレインを持つ大器晩成型耐久アタッカー",
+    "noteUrl": "https://note.com/musoudc/n/nce8aaa2b22fc", "imageUrl": "", "sourceUrl": "./pages/characters/lunalynn_holy_night.html"
+  }],
+  "skills": [
+    {
+      "id": "lunalynn_holy_night-s1", "characterId": "lunalynn_holy_night", "number": 1, "name": "ダイヤモンドダスト",
+      "skillType": "アクティブ", "category": "火力", "subCategory": "脱力 / 7ターン強化", "target": "ランダム敵3体 / 専用Lv1で5体",
+      "multiplierText": "物理480%×3体 / 7ターン目以降1920%×5体", "duration": "脱力4ターン", "ct": 4,
+      "condition": "70%で脱力を付与し攻撃力30%減少。7ターン目以降は1体あたり物理1920%",
+      "exclusiveWeapon": "専用Lv1: 対象がランダム敵5体になる",
+      "compareMemo": "基本1440%。専用Lv1で2400%。7ターン目以降かつ5体対象なら条件MAX9600%。脱力は倍率外",
+      "noteUrl": "https://note.com/musoudc/n/nce8aaa2b22fc", "imageUrl": "", "sourceUrl": "./pages/characters/lunalynn_holy_night.html",
+      "damage": {"singleMultiplier":480,"hitCount":3,"baseTotal":1440,"exclusiveLv1Total":2400,"exclusiveLv2Total":2400,"exclusiveLv3Total":2400,"conditionMaxTotal":9600,"conditionMaxNote":"7ターン目以降かつ専用Lv1対象5体で1920%×5体","powerType":"7ターン強化","maxStacks":null,"realityRank":"中","rankingTarget":"条件MAX","damageMemo":"長期戦で大きく伸びる。脱力による耐久支援は倍率に含めない"}
+    },
+    {
+      "id": "lunalynn_holy_night-s2", "characterId": "lunalynn_holy_night", "number": 2, "name": "コールドフレア",
+      "skillType": "アクティブ", "category": "火力", "subCategory": "浸食 / 7ターン強化", "target": "ランダム敵5体",
+      "multiplierText": "物理520%×5体 / 専用Lv3・7ターン目以降2320%×5体", "duration": "浸食2ターン", "ct": 4,
+      "condition": "70%で浸食を付与。浸食は行動開始時に総ダメージ10%分。7ターン目以降は2080%",
+      "exclusiveWeapon": "専用Lv3: 基本580%、7ターン目以降2320%になる",
+      "compareMemo": "基本2600%。専用Lv3で2900%。専用Lv3かつ7ターン目以降は条件MAX11600%。浸食は倍率外",
+      "noteUrl": "https://note.com/musoudc/n/nce8aaa2b22fc", "imageUrl": "", "sourceUrl": "./pages/characters/lunalynn_holy_night.html",
+      "damage": {"singleMultiplier":520,"hitCount":5,"baseTotal":2600,"exclusiveLv1Total":2600,"exclusiveLv2Total":2600,"exclusiveLv3Total":2900,"conditionMaxTotal":11600,"conditionMaxNote":"専用Lv3かつ7ターン目以降で2320%×5体","powerType":"7ターン強化","maxStacks":null,"realityRank":"中","rankingTarget":"条件MAX","damageMemo":"終盤の主力。浸食ダメージは表示倍率に含めない"}
+    },
+    {
+      "id": "lunalynn_holy_night-s3", "characterId": "lunalynn_holy_night", "number": 3, "name": "姉の愛",
+      "skillType": "パッシブ", "category": "支援", "subCategory": "多重バリア", "target": "スピードが最も高い味方",
+      "multiplierText": "多重バリア1層 / 紅・翠属性なら4層", "duration": "解除不可", "ct": null,
+      "condition": "ターン開始時に付与。ダメージを受けると1層消費して無効化。発動後8回行動終了まで再発動しない",
+      "exclusiveWeapon": "専用武器による追加強化なし", "compareMemo": "最速味方の行動保証に使えるが、1ダメージでも層を消費する点に注意",
+      "noteUrl": "https://note.com/musoudc/n/nce8aaa2b22fc", "imageUrl": "", "sourceUrl": "./pages/characters/lunalynn_holy_night.html"
+    },
+    {
+      "id": "lunalynn_holy_night-s4", "characterId": "lunalynn_holy_night", "number": 4, "name": "雪解けの温もり",
+      "skillType": "パッシブ", "category": "耐久", "subCategory": "被ダメージ減少 / HPドレイン / CTリセット", "target": "自身",
+      "multiplierText": "被ダメージ20%減少 / HPドレイン80%増加", "duration": "HPドレイン6ターン / 解除不可", "ct": null,
+      "condition": "バトル開始時6ターンHPドレイン80%増加。7ターン目のターン開始時に自身のスキルCTを0にする",
+      "exclusiveWeapon": "専用Lv2: 被ダメージ減少量が60%になる", "compareMemo": "7ターン覚醒まで生存するための耐久パッシブ。高育成ほど機能しやすい",
+      "noteUrl": "https://note.com/musoudc/n/nce8aaa2b22fc", "imageUrl": "", "sourceUrl": "./pages/characters/lunalynn_holy_night.html"
+    }
+  ]
+}
