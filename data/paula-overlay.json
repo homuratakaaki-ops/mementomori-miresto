@@ -1,0 +1,28 @@
+{
+  "gachaStatusUpdatedAt": "2026-06-14",
+  "characters": [{
+    "id": "paula", "pageSlug": "paula", "name": "ポーラ", "catchcopy": "回復連鎖で翠属性を強化し、7ターン目に覚醒する耐久アタッカー",
+    "attribute": "翠", "weaponType": "スナイパー", "speed": 2956, "availability": "星の導き", "gachaStatus": "未定",
+    "roleMemo": "自己回復・翠属性攻撃支援・7ターン覚醒を持つ限定スナイパー", "noteUrl": "https://note.com/musoudc/n/nd87315c9fb2f", "imageUrl": "", "sourceUrl": "./pages/characters/paula.html"
+  }],
+  "skills": [
+    {
+      "id":"paula-s1","characterId":"paula","number":1,"name":"シャインバレット","skillType":"アクティブ","category":"火力","subCategory":"自己回復 / 7ターン強化","target":"ランダム敵3体 / 専用Lv1で5体","multiplierText":"物理540%×3体 / 専用Lv3・7ターン目以降590%×5体×2","duration":"","ct":4,
+      "condition":"自身HPを最大HP10%回復。7ターン目以降は回復せず物理ダメージ2倍","exclusiveWeapon":"専用Lv1: 対象5体。専用Lv3: 物理590%","compareMemo":"基本1620%。専用Lv1で2700%、専用Lv3で2950%。7ターン目以降の条件MAX5900%。回復量は倍率外","noteUrl":"https://note.com/musoudc/n/nd87315c9fb2f","imageUrl":"","sourceUrl":"./pages/characters/paula.html",
+      "damage":{"singleMultiplier":540,"hitCount":3,"baseTotal":1620,"exclusiveLv1Total":2700,"exclusiveLv2Total":2700,"exclusiveLv3Total":2950,"conditionMaxTotal":5900,"conditionMaxNote":"専用Lv3・対象5体・7ターン目以降で590%×5体×2","powerType":"7ターン強化","maxStacks":null,"realityRank":"中","rankingTarget":"条件MAX","damageMemo":"7ターン目以降に全体寄りの高火力へ変化"}
+    },
+    {
+      "id":"paula-s2","characterId":"paula","number":2,"name":"リベルト・リベルタ","skillType":"アクティブ","category":"火力","subCategory":"自己回復 / 8連撃 / 7ターン強化","target":"ランダム敵へ8回","multiplierText":"物理310%×8回 / 7ターン目以降2倍","duration":"","ct":4,
+      "condition":"自身HPを最大HP10%回復。7ターン目以降は回復せず物理ダメージ2倍","exclusiveWeapon":"専用武器による直接倍率強化なし","compareMemo":"基本2480%。7ターン目以降は条件MAX4960%。8連撃で多重バリアを削りやすい。回復量は倍率外","noteUrl":"https://note.com/musoudc/n/nd87315c9fb2f","imageUrl":"","sourceUrl":"./pages/characters/paula.html",
+      "damage":{"singleMultiplier":310,"hitCount":8,"baseTotal":2480,"exclusiveLv1Total":2480,"exclusiveLv2Total":2480,"exclusiveLv3Total":2480,"conditionMaxTotal":4960,"conditionMaxNote":"7ターン目以降で310%×8回×2","powerType":"7ターン強化","maxStacks":null,"realityRank":"高","rankingTarget":"条件MAX","damageMemo":"敵数が減るほど火力を集中しやすい8連撃"}
+    },
+    {
+      "id":"paula-s3","characterId":"paula","number":3,"name":"決断する勇気","skillType":"パッシブ","category":"支援","subCategory":"回復連鎖 / 攻撃力増加","target":"自身 / 翠属性味方全体","multiplierText":"自身最大HP5%回復 / 攻撃力+5%×最大15スタック","duration":"解除不可","ct":null,
+      "condition":"自身か味方のアクティブスキルでHP回復時に発動。バトル中15回まで。翠属性味方全体の攻撃力を最大75%増加","exclusiveWeapon":"専用武器による追加強化なし","compareMemo":"ユニ・ミラ・ユルディズなどの回復発動でスタックを進める翠染め向け中核パッシブ","noteUrl":"https://note.com/musoudc/n/nd87315c9fb2f","imageUrl":"","sourceUrl":"./pages/characters/paula.html"
+    },
+    {
+      "id":"paula-s4","characterId":"paula","number":4,"name":"報われない想い","skillType":"パッシブ","category":"耐久","subCategory":"最大HP増加 / 被ダメージ減少 / CTリセット","target":"自身","multiplierText":"最大HP+40% / 被ダメージ65%減少 / 7ターン目スピード+30%","duration":"解除不可","ct":null,
+      "condition":"バトル開始時に最大HP増加と被ダメージ減少。7ターン目開始時にスキルCTを0にしスピード30%増加","exclusiveWeapon":"専用Lv2: 最大HP増加量が100%になる","compareMemo":"6ターン耐えて7ターン目に先手で覚醒火力を出すための中核耐久パッシブ","noteUrl":"https://note.com/musoudc/n/nd87315c9fb2f","imageUrl":"","sourceUrl":"./pages/characters/paula.html"
+    }
+  ]
+}
