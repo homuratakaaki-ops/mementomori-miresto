@@ -1,0 +1,28 @@
+{
+  "gachaStatusUpdatedAt": "2026-06-15",
+  "characters": [{
+    "id": "dd", "pageSlug": "dd", "name": "D.D.", "catchcopy": "2ターン気絶と高耐久で7ターン覚醒を支える玄人向けコントローラー",
+    "attribute": "翠", "weaponType": "ソーサラー", "speed": 3075, "availability": "星の導き", "gachaStatus": "未定",
+    "roleMemo": "気絶・クリティカル抑制・7ターン攻撃支援を担う限定ソーサラー", "noteUrl": "https://note.com/musoudc/n/nab6bac256375", "imageUrl": "", "sourceUrl": "./pages/characters/dd.html"
+  }],
+  "skills": [
+    {
+      "id":"dd-s1","characterId":"dd","number":1,"name":"ラスト・リーヴァー","skillType":"アクティブ","category":"妨害","subCategory":"気絶 / クリティカル率減少","target":"ランダム敵3体","multiplierText":"魔法420%×3体 / 専用Lv3で470%×3体","duration":"クリティカル率減少3ターン / 気絶1ターン","ct":5,
+      "condition":"70%で対象のクリティカル率30%減少。70%で攻撃力が最も高い敵に気絶","exclusiveWeapon":"専用Lv1: 気絶が2ターン。専用Lv3: 魔法470%","compareMemo":"基本1260%。専用Lv3で1410%。デバフと気絶は倍率外。敵主力を止めて長期戦への移行を支える","noteUrl":"https://note.com/musoudc/n/nab6bac256375","imageUrl":"","sourceUrl":"./pages/characters/dd.html",
+      "damage":{"singleMultiplier":420,"hitCount":3,"baseTotal":1260,"exclusiveLv1Total":1260,"exclusiveLv2Total":1260,"exclusiveLv3Total":1410,"conditionMaxTotal":1410,"conditionMaxNote":"専用Lv3で470%×3体","powerType":"妨害付き範囲攻撃","maxStacks":null,"realityRank":"高","rankingTarget":"専用Lv3","damageMemo":"火力より気絶とクリティカル抑制が主目的"}
+    },
+    {
+      "id":"dd-s2","characterId":"dd","number":2,"name":"朽鉄の魔眼","skillType":"アクティブ","category":"火力","subCategory":"4連撃 / 7ターン攻撃支援","target":"ランダム敵へ4回","multiplierText":"魔法530%×4回","duration":"攻撃力増加5ターン","ct":5,
+      "condition":"7ターン目以降は攻撃前に攻撃力が高い味方2体へ攻撃力50%増加","exclusiveWeapon":"専用武器による直接倍率強化なし","compareMemo":"全段階2120%。7ターン目にポーラなどの覚醒火力へ攻撃力50%増加を合わせる主力支援","noteUrl":"https://note.com/musoudc/n/nab6bac256375","imageUrl":"","sourceUrl":"./pages/characters/dd.html",
+      "damage":{"singleMultiplier":530,"hitCount":4,"baseTotal":2120,"exclusiveLv1Total":2120,"exclusiveLv2Total":2120,"exclusiveLv3Total":2120,"conditionMaxTotal":2120,"conditionMaxNote":"直接倍率は全段階固定。味方への攻撃力増加は倍率外","powerType":"7ターン支援","maxStacks":null,"realityRank":"高","rankingTarget":"基本","damageMemo":"ランダム4連撃で残敵へ火力を集めやすい"}
+    },
+    {
+      "id":"dd-s3","characterId":"dd","number":3,"name":"廃鉄の姉妹","skillType":"パッシブ","category":"支援","subCategory":"クリティカル耐性","target":"自身と隣接味方2体","multiplierText":"クリティカル耐性率+15%","duration":"解除不可","ct":null,
+      "condition":"バトル開始時に付与","exclusiveWeapon":"専用武器による追加強化なし","compareMemo":"自身を含む3体の対クリティカル耐久を補強する配置依存パッシブ","noteUrl":"https://note.com/musoudc/n/nab6bac256375","imageUrl":"","sourceUrl":"./pages/characters/dd.html"
+    },
+    {
+      "id":"dd-s4","characterId":"dd","number":4,"name":"戦闘用ホムンクルス","skillType":"パッシブ","category":"耐久","subCategory":"最大HP増加 / ダメージ遮断","target":"自身","multiplierText":"最大HP+100% / 被ダメージ50%遮断 / 条件時70%遮断","duration":"解除不可","ct":null,
+      "condition":"攻撃を受けた時に遮断。専用Lv2では敵スピードが自身より低い場合、またはカウンターダメージ時に70%遮断","exclusiveWeapon":"専用Lv2: 条件成立時の遮断量が70%になる","compareMemo":"スピードで上を取れる育成なら高耐久。自己回復はないため装備・凸・味方支援が必要","noteUrl":"https://note.com/musoudc/n/nab6bac256375","imageUrl":"","sourceUrl":"./pages/characters/dd.html"
+    }
+  ]
+}
