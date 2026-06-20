@@ -154,6 +154,15 @@
     background: rgba(131,162,255,0.1);
     color: #dbe5ff;
   }
+  .buff-input-row {
+    display: grid;
+    grid-template-columns: minmax(120px, 1fr) minmax(100px, 140px);
+    gap: 8px;
+    align-items: end;
+  }
+  .buff-custom-input[disabled] {
+    opacity: 0.5;
+  }
   .manual-badge {
     display: inline-block;
     margin-left: 6px;
@@ -513,6 +522,29 @@
             <span>直接入力値を採用する</span>
           </label>
 
+          <label for="draftSpeedBuff">スピード増加</label>
+          <div class="buff-input-row">
+            <select id="draftSpeedBuff" onchange="setDraftSpeedBuffPreset(this.value)">
+              <option value="0">なし</option>
+              <option value="5">+5%</option>
+              <option value="10">+10%</option>
+              <option value="15">+15%</option>
+              <option value="20">+20%</option>
+              <option value="30">+30%</option>
+              <option value="custom">手入力</option>
+            </select>
+            <input
+              id="draftSpeedBuffCustom"
+              class="buff-custom-input"
+              type="number"
+              inputmode="decimal"
+              min="0"
+              step="0.1"
+              placeholder="%"
+              oninput="updateDraftSpeedBuff(this.value)"
+            >
+          </div>
+
           <label for="draftMemo">メモ</label>
           <textarea id="draftMemo" placeholder="役割、注意点、調整メモ" oninput="updateDraftMemo(this.value)"></textarea>
 
@@ -574,6 +606,13 @@
 
     <div id="resultArea"></div>
 
+    <section class="card">
+      <div class="section-title">計算メモ</div>
+      <p class="hint">スピード増加バフは、基礎スピードとスピードルーンを合計した値に倍率をかけて計算しています。</p>
+      <p class="hint">実際の行動順には乱数が含まれるため、表示順と完全に一致しない場合があります。</p>
+      <p class="hint">スピード減少デバフは、命中・弱体効果耐性・弱体効果無効などの影響を受けるため、現時点では自動計算には対応していません。</p>
+    </section>
+
     <!-- AdSense：ページ下部 -->
     <div class="ad-unit" style="margin: 24px auto; text-align: center;">
       <ins class="adsbygoogle"
@@ -622,6 +661,7 @@ const SIDES = [
   { id: 'enemy', label: '敵軍', target: 'enemyList' },
 ];
 const PRESET_STORAGE_KEY = 'speed-calc-presets';
+const SPEED_BUFF_PRESETS = [0, 5, 10, 15, 20, 30];
 
 let characters = [];
 let skills = [];
@@ -630,11 +670,11 @@ let entries = [];
 let draft = createDraft();
 
 function createDraft(side = 'ally') {
-  return { charaId: '', rune: [0, 0, 0], manualSpeed: '', manualSpeedEnabled: false, memo: '', side, editingKey: null };
+  return { charaId: '', rune: [0, 0, 0], manualSpeed: '', manualSpeedEnabled: false, speedBuffRate: '', memo: '', side, editingKey: null };
 }
 
 function createEmptyEntry(side, slot) {
-  return { side, slot, charaId: '', rune: [0, 0, 0], manualSpeed: '', manualSpeedEnabled: false, memo: '' };
+  return { side, slot, charaId: '', rune: [0, 0, 0], manualSpeed: '', manualSpeedEnabled: false, speedBuffRate: '', memo: '' };
 }
 
 function normalizeEntry(entry, side, slot) {
@@ -644,6 +684,7 @@ function normalizeEntry(entry, side, slot) {
   const manualSpeedEnabled = entry?.manualSpeedEnabled === undefined
     ? manualSpeed.trim() !== ''
     : Boolean(entry.manualSpeedEnabled);
+  const speedBuffRate = entry?.speedBuffRate === undefined || entry?.speedBuffRate === null ? '' : String(entry.speedBuffRate);
   return {
     side,
     slot,
@@ -651,6 +692,7 @@ function normalizeEntry(entry, side, slot) {
     rune: rune.map((level) => Number.isFinite(Number(level)) ? Number(level) : 0),
     manualSpeed,
     manualSpeedEnabled,
+    speedBuffRate,
     memo: typeof entry?.memo === 'string' ? entry.memo : '',
   };
 }
@@ -678,6 +720,7 @@ function presetSnapshot(scope = 'all') {
     rune: [...entry.rune],
     manualSpeed: entry.manualSpeed,
     manualSpeedEnabled: Boolean(entry.manualSpeedEnabled),
+    speedBuffRate: entry.speedBuffRate,
     memo: entry.memo,
   }));
 }
@@ -786,11 +829,24 @@ function calculatedSpeed(data) {
   return character ? (character.speed || 0) + runeSum(data) : null;
 }
 
+function speedBuffRateValue(data) {
+  const raw = String(data?.speedBuffRate ?? '').replaceAll(',', '').trim();
+  if (!raw) return 0;
+  const value = Number(raw);
+  return Number.isFinite(value) && value >= 0 ? value : 0;
+}
+
+function buffedSpeed(data) {
+  const runeIncluded = calculatedSpeed(data);
+  if (runeIncluded === null) return null;
+  return Math.floor((runeIncluded * (100 + speedBuffRateValue(data)) / 100) + 1e-9);
+}
+
 function finalSpeed(data) {
   const character = getCharacter(data.charaId);
   if (!character) return null;
   const manual = usesManualSpeed(data) ? manualSpeedValue(data) : null;
-  return manual !== null ? manual : calculatedSpeed(data);
+  return manual !== null ? manual : buffedSpeed(data);
 }
 
 function formatSpeed(value) {
@@ -867,6 +923,17 @@ function toggleDraftManualSpeed(checked) {
   renderManualSpeedInput();
 }
 
+function setDraftSpeedBuffPreset(value) {
+  draft.speedBuffRate = value === 'custom' ? 'custom' : value === '0' ? '' : value;
+  renderDraftSummary();
+  renderSpeedBuffInput();
+}
+
+function updateDraftSpeedBuff(value) {
+  draft.speedBuffRate = value;
+  renderDraftSummary();
+}
+
 function updateEntryManualSpeed(side, slot, value) {
   const entry = findEntry(side, slot);
   if (!entry) return;
@@ -893,7 +960,32 @@ function toggleEntryManualSpeed(side, slot, checked) {
   document.getElementById('resultArea').innerHTML = '';
 }
 
-function refreshEntryManualDisplay(entry) {
+function setEntrySpeedBuffPreset(side, slot, value) {
+  const entry = findEntry(side, slot);
+  if (!entry) return;
+  entry.speedBuffRate = value === 'custom' ? 'custom' : value === '0' ? '' : value;
+  refreshEntryManualDisplay(entry);
+  if (draft.editingKey === keyOf(side, slot)) {
+    draft.speedBuffRate = entry.speedBuffRate;
+    renderDraftSummary();
+    renderSpeedBuffInput();
+  }
+  document.getElementById('resultArea').innerHTML = '';
+}
+
+function updateEntrySpeedBuff(side, slot, value) {
+  const entry = findEntry(side, slot);
+  if (!entry) return;
+  entry.speedBuffRate = value;
+  refreshEntrySpeedDisplay(entry);
+  if (draft.editingKey === keyOf(side, slot)) {
+    draft.speedBuffRate = value;
+    renderDraftSummary();
+  }
+  document.getElementById('resultArea').innerHTML = '';
+}
+
+function refreshEntrySpeedDisplay(entry) {
   const manual = usesManualSpeed(entry);
   const side = entry.side;
   const slot = entry.slot;
@@ -904,10 +996,27 @@ function refreshEntryManualDisplay(entry) {
   }
   const badge = document.getElementById(`manualBadge-${side}-${slot}`);
   if (badge) badge.style.display = manual ? 'inline-block' : 'none';
+  const buff = document.getElementById(`lineupBuff-${side}-${slot}`);
+  if (buff) buff.textContent = formatBuffRate(speedBuffRateValue(entry));
+}
+
+function refreshEntryManualDisplay(entry) {
+  const manual = usesManualSpeed(entry);
+  const side = entry.side;
+  const slot = entry.slot;
+  refreshEntrySpeedDisplay(entry);
   const input = document.getElementById(`manualInput-${side}-${slot}`);
   if (input) input.classList.toggle('active', manual);
   const toggle = document.getElementById(`manualToggle-${side}-${slot}`);
   if (toggle) toggle.checked = Boolean(entry.manualSpeedEnabled);
+  const buffSelect = document.getElementById(`buffSelect-${side}-${slot}`);
+  const preset = speedBuffPresetValue(entry.speedBuffRate);
+  if (buffSelect) buffSelect.value = preset;
+  const buffInput = document.getElementById(`buffInput-${side}-${slot}`);
+  if (buffInput) {
+    buffInput.disabled = preset !== 'custom';
+    buffInput.value = preset === 'custom' ? String(entry.speedBuffRate ?? '') : '';
+  }
 }
 
 function setDraftSide(side) {
@@ -966,6 +1075,7 @@ function placeDraft() {
   target.rune = [...draft.rune];
   target.manualSpeed = draft.manualSpeed;
   target.manualSpeedEnabled = draft.manualSpeedEnabled;
+  target.speedBuffRate = draft.speedBuffRate;
   target.memo = draft.memo;
   draft = createDraft(nextSideAfterPlace(draft.side));
   document.getElementById('resultArea').innerHTML = '';
@@ -980,6 +1090,7 @@ function editEntry(side, slot) {
     rune: [...entry.rune],
     manualSpeed: entry.manualSpeed,
     manualSpeedEnabled: entry.manualSpeedEnabled,
+    speedBuffRate: entry.speedBuffRate,
     memo: entry.memo,
     side,
     editingKey: keyOf(side, slot),
@@ -1044,6 +1155,8 @@ function renderDraftSummary() {
   const character = getCharacter(draft.charaId);
   const speed = finalSpeed(draft);
   const manual = usesManualSpeed(draft);
+  const runeIncluded = calculatedSpeed(draft);
+  const buffRate = speedBuffRateValue(draft);
   const source = draft.editingKey ? entries.find((entry) => entryKey(entry) === draft.editingKey) : null;
   const editNotice = source
     ? `<div class="editing-banner">編集中：${escapeHtml(sideLabel(source.side))} ${source.slot + 1} を修正中</div>`
@@ -1052,15 +1165,39 @@ function renderDraftSummary() {
     ${editNotice}
     <div class="draft-name">${escapeHtml(character.name)}</div>
     <div class="draft-meta">
-      ${escapeHtml(character.attribute || '-')} / 基礎 ${(character.speed || 0).toLocaleString()} / ルーン +${runeSum(draft).toLocaleString()}
+      ${escapeHtml(character.attribute || '-')} / 基礎SPD ${(character.speed || 0).toLocaleString()} / ルーン補正 +${runeSum(draft).toLocaleString()} / ルーン込みSPD ${formatSpeed(runeIncluded)}
+      / スピード増加 ${formatBuffRate(buffRate)}
       ${manual ? `<span class="manual-badge">直入力使用</span>` : ''}
     </div>
-    <div>最終スピード：<span class="draft-speed ${manual ? 'manual' : ''}">${formatSpeed(speed)}</span></div>
+    <div>計算用SPD：<span class="draft-speed ${manual ? 'manual' : ''}">${formatSpeed(speed)}</span></div>
   ` : `
     ${editNotice}
     <div class="draft-name">未選択</div>
     <div class="draft-meta">絞り込み後、キャラを選んでからルーンを調整してください。</div>
   `;
+}
+
+function speedBuffPresetValue(rate) {
+  if (String(rate ?? '').trim() === 'custom') return 'custom';
+  const value = speedBuffRateValue({ speedBuffRate: rate });
+  if (SPEED_BUFF_PRESETS.includes(value)) return String(value);
+  return 'custom';
+}
+
+function formatBuffRate(rate) {
+  const value = Number(rate);
+  if (!Number.isFinite(value) || value <= 0) return 'なし';
+  return `+${value.toLocaleString()}%`;
+}
+
+function renderSpeedBuffInput() {
+  const select = document.getElementById('draftSpeedBuff');
+  const custom = document.getElementById('draftSpeedBuffCustom');
+  if (!select || !custom) return;
+  const preset = speedBuffPresetValue(draft.speedBuffRate);
+  select.value = preset;
+  custom.disabled = preset !== 'custom';
+  custom.value = preset === 'custom' ? String(draft.speedBuffRate ?? '') : '';
 }
 
 function renderManualSpeedInput() {
@@ -1123,6 +1260,7 @@ function renderBuilder() {
   renderTargetControls();
   renderDraftActions();
   renderManualSpeedInput();
+  renderSpeedBuffInput();
   const memo = document.getElementById('draftMemo');
   if (memo && memo.value !== draft.memo) memo.value = draft.memo;
 }
@@ -1143,18 +1281,50 @@ function renderLineup() {
           `;
         }
         const manual = usesManualSpeed(entry);
+        const runeIncluded = calculatedSpeed(entry);
+        const buffRate = speedBuffRateValue(entry);
+        const buffPreset = speedBuffPresetValue(entry.speedBuffRate);
         return `
           <div class="lineup-slot">
             <span class="lineup-num">${entry.slot + 1}</span>
             <div>
               <div class="lineup-name">${escapeHtml(character.name)}</div>
               <div class="lineup-meta">
-                最終 <span id="lineupSpeed-${entry.side}-${entry.slot}" class="lineup-speed ${manual ? 'manual' : ''}">${formatSpeed(finalSpeed(entry))}</span>
+                計算用SPD <span id="lineupSpeed-${entry.side}-${entry.slot}" class="lineup-speed ${manual ? 'manual' : ''}">${formatSpeed(finalSpeed(entry))}</span>
                 <span id="manualBadge-${entry.side}-${entry.slot}" class="manual-badge" style="${manual ? '' : 'display:none'}">直入力使用</span>
-                / 基礎 ${(character.speed || 0).toLocaleString()}
-                / ルーン +${runeSum(entry).toLocaleString()}
+                / 基礎SPD ${(character.speed || 0).toLocaleString()}
+                / ルーン補正 +${runeSum(entry).toLocaleString()}
+                / ルーン込みSPD ${formatSpeed(runeIncluded)}
+                / スピード増加 <span id="lineupBuff-${entry.side}-${entry.slot}">${formatBuffRate(buffRate)}</span>
                 ${entry.memo ? `<br>${escapeHtml(entry.memo)}` : ''}
               </div>
+              <label class="lineup-manual-field">
+                <span>スピード増加</span>
+                <select id="buffSelect-${entry.side}-${entry.slot}" onchange="setEntrySpeedBuffPreset('${entry.side}', ${entry.slot}, this.value)">
+                  <option value="0" ${buffPreset === '0' ? 'selected' : ''}>なし</option>
+                  <option value="5" ${buffPreset === '5' ? 'selected' : ''}>+5%</option>
+                  <option value="10" ${buffPreset === '10' ? 'selected' : ''}>+10%</option>
+                  <option value="15" ${buffPreset === '15' ? 'selected' : ''}>+15%</option>
+                  <option value="20" ${buffPreset === '20' ? 'selected' : ''}>+20%</option>
+                  <option value="30" ${buffPreset === '30' ? 'selected' : ''}>+30%</option>
+                  <option value="custom" ${buffPreset === 'custom' ? 'selected' : ''}>手入力</option>
+                </select>
+              </label>
+              <label class="lineup-manual-field">
+                <span>手入力%</span>
+                <input
+                  id="buffInput-${entry.side}-${entry.slot}"
+                  class="buff-custom-input"
+                  type="number"
+                  inputmode="decimal"
+                  min="0"
+                  step="0.1"
+                  value="${buffPreset === 'custom' ? escapeHtml(entry.speedBuffRate ?? '') : ''}"
+                  placeholder="%"
+                  ${buffPreset === 'custom' ? '' : 'disabled'}
+                  oninput="updateEntrySpeedBuff('${entry.side}', ${entry.slot}, this.value)"
+                >
+              </label>
               <label class="lineup-manual-field">
                 <span>直接入力</span>
                 <input
@@ -1341,6 +1511,8 @@ function validEntries() {
         name: character?.name || '不明',
         base: character?.speed || 0,
         runeSum: runeSum(entry),
+        runeIncludedSpeed: calculatedSpeed(entry) || 0,
+        speedBuffRate: speedBuffRateValue(entry),
         finalSpeed: finalSpeed(entry) || 0,
         manualSpeed: usesManualSpeed(entry),
         skill1: getSkillName(entry.charaId, 1),
@@ -1362,7 +1534,9 @@ function resultRow(row, index, rows, skillName) {
         ${row.memo ? `<div class="result-memo">${escapeHtml(row.memo)}</div>` : ''}
       </div>
       <div class="result-speeds">
-        <div class="result-speed ${row.manualSpeed ? 'manual' : ''}">${row.finalSpeed.toLocaleString()}</div>
+        <div class="result-speed ${row.manualSpeed ? 'manual' : ''}">計算用SPD ${row.finalSpeed.toLocaleString()}</div>
+        <div class="result-diff">基礎SPD ${row.base.toLocaleString()} / ルーン補正 +${row.runeSum.toLocaleString()}</div>
+        <div class="result-diff">ルーン込みSPD ${row.runeIncludedSpeed.toLocaleString()} / スピード増加 ${formatBuffRate(row.speedBuffRate)}</div>
         ${diff !== null ? `<div class="result-diff">↓ 差 ${diff.toLocaleString()}</div>` : ''}
       </div>
     </div>
