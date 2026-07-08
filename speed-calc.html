@@ -670,11 +670,21 @@ let entries = [];
 let draft = createDraft();
 
 function createDraft(side = 'ally') {
-  return { charaId: '', rune: [0, 0, 0], manualSpeed: '', manualSpeedEnabled: false, speedBuffRate: '', memo: '', side, editingKey: null };
+  return { charaId: '', rune: [0, 0, 0], manualSpeed: '', manualSpeedEnabled: false, speedBuffRate: '', buffCustomMode: false, memo: '', side, editingKey: null };
 }
 
 function createEmptyEntry(side, slot) {
-  return { side, slot, charaId: '', rune: [0, 0, 0], manualSpeed: '', manualSpeedEnabled: false, speedBuffRate: '', memo: '' };
+  return { side, slot, charaId: '', rune: [0, 0, 0], manualSpeed: '', manualSpeedEnabled: false, speedBuffRate: '', buffCustomMode: false, memo: '' };
+}
+
+function normalizeSpeedBuffState(entry) {
+  const raw = entry?.speedBuffRate === undefined || entry?.speedBuffRate === null ? '' : String(entry.speedBuffRate);
+  if (raw.trim() === 'custom') return { speedBuffRate: '', buffCustomMode: true };
+  if (entry?.buffCustomMode !== undefined) return { speedBuffRate: raw, buffCustomMode: Boolean(entry.buffCustomMode) };
+  const trimmed = raw.replaceAll(',', '').trim();
+  if (!trimmed) return { speedBuffRate: raw, buffCustomMode: false };
+  const value = Number(trimmed);
+  return { speedBuffRate: raw, buffCustomMode: !(Number.isFinite(value) && SPEED_BUFF_PRESETS.includes(value)) };
 }
 
 function normalizeEntry(entry, side, slot) {
@@ -684,7 +694,7 @@ function normalizeEntry(entry, side, slot) {
   const manualSpeedEnabled = entry?.manualSpeedEnabled === undefined
     ? manualSpeed.trim() !== ''
     : Boolean(entry.manualSpeedEnabled);
-  const speedBuffRate = entry?.speedBuffRate === undefined || entry?.speedBuffRate === null ? '' : String(entry.speedBuffRate);
+  const speedBuff = normalizeSpeedBuffState(entry);
   return {
     side,
     slot,
@@ -692,7 +702,8 @@ function normalizeEntry(entry, side, slot) {
     rune: rune.map((level) => Number.isFinite(Number(level)) ? Number(level) : 0),
     manualSpeed,
     manualSpeedEnabled,
-    speedBuffRate,
+    speedBuffRate: speedBuff.speedBuffRate,
+    buffCustomMode: speedBuff.buffCustomMode,
     memo: typeof entry?.memo === 'string' ? entry.memo : '',
   };
 }
@@ -721,6 +732,7 @@ function presetSnapshot(scope = 'all') {
     manualSpeed: entry.manualSpeed,
     manualSpeedEnabled: Boolean(entry.manualSpeedEnabled),
     speedBuffRate: entry.speedBuffRate,
+    buffCustomMode: Boolean(entry.buffCustomMode),
     memo: entry.memo,
   }));
 }
@@ -913,6 +925,7 @@ function updateDraftMemo(value) {
 
 function updateDraftManualSpeed(value) {
   draft.manualSpeed = value;
+  draft.manualSpeedEnabled = String(value ?? '').trim() !== '';
   renderDraftSummary();
   renderManualSpeedInput();
 }
@@ -924,13 +937,15 @@ function toggleDraftManualSpeed(checked) {
 }
 
 function setDraftSpeedBuffPreset(value) {
-  draft.speedBuffRate = value === 'custom' ? 'custom' : value === '0' ? '' : value;
+  draft.buffCustomMode = value === 'custom';
+  if (value !== 'custom') draft.speedBuffRate = value === '0' ? '' : value;
   renderDraftSummary();
   renderSpeedBuffInput();
 }
 
 function updateDraftSpeedBuff(value) {
   draft.speedBuffRate = value;
+  draft.buffCustomMode = true;
   renderDraftSummary();
 }
 
@@ -938,9 +953,11 @@ function updateEntryManualSpeed(side, slot, value) {
   const entry = findEntry(side, slot);
   if (!entry) return;
   entry.manualSpeed = value;
+  entry.manualSpeedEnabled = String(value ?? '').trim() !== '';
   refreshEntryManualDisplay(entry);
   if (draft.editingKey === keyOf(side, slot)) {
     draft.manualSpeed = value;
+    draft.manualSpeedEnabled = entry.manualSpeedEnabled;
     renderDraftSummary();
     renderManualSpeedInput();
   }
@@ -963,10 +980,12 @@ function toggleEntryManualSpeed(side, slot, checked) {
 function setEntrySpeedBuffPreset(side, slot, value) {
   const entry = findEntry(side, slot);
   if (!entry) return;
-  entry.speedBuffRate = value === 'custom' ? 'custom' : value === '0' ? '' : value;
+  entry.buffCustomMode = value === 'custom';
+  if (value !== 'custom') entry.speedBuffRate = value === '0' ? '' : value;
   refreshEntryManualDisplay(entry);
   if (draft.editingKey === keyOf(side, slot)) {
     draft.speedBuffRate = entry.speedBuffRate;
+    draft.buffCustomMode = entry.buffCustomMode;
     renderDraftSummary();
     renderSpeedBuffInput();
   }
@@ -977,9 +996,11 @@ function updateEntrySpeedBuff(side, slot, value) {
   const entry = findEntry(side, slot);
   if (!entry) return;
   entry.speedBuffRate = value;
+  entry.buffCustomMode = true;
   refreshEntrySpeedDisplay(entry);
   if (draft.editingKey === keyOf(side, slot)) {
     draft.speedBuffRate = value;
+    draft.buffCustomMode = true;
     renderDraftSummary();
   }
   document.getElementById('resultArea').innerHTML = '';
@@ -1010,7 +1031,7 @@ function refreshEntryManualDisplay(entry) {
   const toggle = document.getElementById(`manualToggle-${side}-${slot}`);
   if (toggle) toggle.checked = Boolean(entry.manualSpeedEnabled);
   const buffSelect = document.getElementById(`buffSelect-${side}-${slot}`);
-  const preset = speedBuffPresetValue(entry.speedBuffRate);
+  const preset = speedBuffPresetValue(entry);
   if (buffSelect) buffSelect.value = preset;
   const buffInput = document.getElementById(`buffInput-${side}-${slot}`);
   if (buffInput) {
@@ -1076,6 +1097,7 @@ function placeDraft() {
   target.manualSpeed = draft.manualSpeed;
   target.manualSpeedEnabled = draft.manualSpeedEnabled;
   target.speedBuffRate = draft.speedBuffRate;
+  target.buffCustomMode = draft.buffCustomMode;
   target.memo = draft.memo;
   draft = createDraft(nextSideAfterPlace(draft.side));
   document.getElementById('resultArea').innerHTML = '';
@@ -1091,6 +1113,7 @@ function editEntry(side, slot) {
     manualSpeed: entry.manualSpeed,
     manualSpeedEnabled: entry.manualSpeedEnabled,
     speedBuffRate: entry.speedBuffRate,
+    buffCustomMode: entry.buffCustomMode,
     memo: entry.memo,
     side,
     editingKey: keyOf(side, slot),
@@ -1141,10 +1164,10 @@ function sideLabel(side) {
 function renderCharacterOptions() {
   const candidates = filteredCharacters();
   const current = draft.charaId && !candidates.some((character) => character.id === draft.charaId)
-    ? `<option value="${draft.charaId}" selected>${escapeHtml(getCharacter(draft.charaId)?.name || '選択中のキャラ')}</option>`
+    ? `<option value="${escapeHtml(draft.charaId)}" selected>${escapeHtml(getCharacter(draft.charaId)?.name || '選択中のキャラ')}</option>`
     : '';
   const options = candidates.map((character) => `
-    <option value="${character.id}" ${character.id === draft.charaId ? 'selected' : ''}>
+    <option value="${escapeHtml(character.id)}" ${character.id === draft.charaId ? 'selected' : ''}>
       ${escapeHtml(character.name)}（${(character.speed || 0).toLocaleString()} / ${escapeHtml(character.attribute || '-')})
     </option>
   `).join('');
@@ -1177,9 +1200,9 @@ function renderDraftSummary() {
   `;
 }
 
-function speedBuffPresetValue(rate) {
-  if (String(rate ?? '').trim() === 'custom') return 'custom';
-  const value = speedBuffRateValue({ speedBuffRate: rate });
+function speedBuffPresetValue(data) {
+  if (data?.buffCustomMode) return 'custom';
+  const value = speedBuffRateValue(data);
   if (SPEED_BUFF_PRESETS.includes(value)) return String(value);
   return 'custom';
 }
@@ -1194,7 +1217,7 @@ function renderSpeedBuffInput() {
   const select = document.getElementById('draftSpeedBuff');
   const custom = document.getElementById('draftSpeedBuffCustom');
   if (!select || !custom) return;
-  const preset = speedBuffPresetValue(draft.speedBuffRate);
+  const preset = speedBuffPresetValue(draft);
   select.value = preset;
   custom.disabled = preset !== 'custom';
   custom.value = preset === 'custom' ? String(draft.speedBuffRate ?? '') : '';
@@ -1283,7 +1306,7 @@ function renderLineup() {
         const manual = usesManualSpeed(entry);
         const runeIncluded = calculatedSpeed(entry);
         const buffRate = speedBuffRateValue(entry);
-        const buffPreset = speedBuffPresetValue(entry.speedBuffRate);
+        const buffPreset = speedBuffPresetValue(entry);
         return `
           <div class="lineup-slot">
             <span class="lineup-num">${entry.slot + 1}</span>
