@@ -25,7 +25,6 @@ function formatDate(value, withTime = false) {
   const date = new Date(value);
   if (Number.isNaN(date.getTime())) return '-';
   return new Intl.DateTimeFormat('ja-JP', {
-    timeZone: 'Asia/Tokyo',
     year: 'numeric',
     month: '2-digit',
     day: '2-digit',
@@ -63,7 +62,14 @@ function renderStatus() {
 
 function updateClock() {
   const now = getJST();
-  document.querySelector('#currentJst').textContent = new Intl.DateTimeFormat('ja-JP', {
+  document.querySelector('#currentJst').textContent = formatDateWithWeekday(now);
+  document.querySelector('#nextReset').textContent = formatDate(getNextReset(), true);
+  document.querySelector('#untilReset').textContent = formatTimeUntilReset();
+  document.querySelector('#remainingFree').textContent = `${remainingFreeThisWeek(state.usedTodayFree)}回`;
+}
+
+function formatDateWithWeekday(value) {
+  return new Intl.DateTimeFormat('ja-JP', {
     year: 'numeric',
     month: '2-digit',
     day: '2-digit',
@@ -71,10 +77,7 @@ function updateClock() {
     hour: '2-digit',
     minute: '2-digit',
     second: '2-digit'
-  }).format(now);
-  document.querySelector('#nextReset').textContent = formatDate(getNextReset(), true);
-  document.querySelector('#untilReset').textContent = formatTimeUntilReset();
-  document.querySelector('#remainingFree').textContent = `${remainingFreeThisWeek(state.usedTodayFree)}回`;
+  }).format(new Date(value));
 }
 
 function renderCurrentLevelOptions() {
@@ -95,9 +98,13 @@ function renderTargetLevelOptions() {
 }
 
 function currentWeaponLevel() {
-  return document.querySelector('#weaponStatus').value === 'none'
+  return weaponStatusValue() === 'none'
     ? 0
     : Number(document.querySelector('#currentWeaponLevel').value);
+}
+
+function weaponStatusValue() {
+  return document.querySelector('input[name="weaponStatusChoice"]:checked')?.value || 'none';
 }
 
 function shouldShowAwakeningWarning(currentLevel, targetLevel) {
@@ -105,7 +112,7 @@ function shouldShowAwakeningWarning(currentLevel, targetLevel) {
 }
 
 function renderWeaponCost() {
-  const status = document.querySelector('#weaponStatus').value;
+  const status = weaponStatusValue();
   document.querySelector('#currentLevelWrap').hidden = status === 'none';
   renderTargetLevelOptions();
 
@@ -158,12 +165,9 @@ function renderGachaPlan() {
   document.querySelector('#planExpectedTotal').textContent = `${formatNumber(result.total, 2)}個`;
 
   const shortage = Math.max(targetCrystals - state.crystals, 0);
-  const weeklyExpected = calcCrystalEV(plan, plan, state.pullsUntilGuaranteed).total;
-  const weeksNeeded = shortage > 0 && weeklyExpected > 0 ? Math.ceil(shortage / weeklyExpected) : 0;
-  const totalPulls = weeksNeeded * plan;
-  const totalFree = Math.max(weeksNeeded * 7 - (state.usedTodayFree ? 1 : 0), 0);
-  const totalTicketPulls = Math.min(state.gachaTickets, Math.max(totalPulls - totalFree, 0));
-  const totalPaidPulls = Math.max(totalPulls - totalFree - totalTicketPulls, 0);
+  const longTermPlan = calcWeeksAndDiamonds(shortage, plan, state.usedTodayFree, state.gachaTickets);
+  const weeksNeeded = longTermPlan?.weeksNeeded || 0;
+  const totalPaidPulls = longTermPlan?.paidPulls || 0;
 
   document.querySelector('#shortageCrystals').textContent = `${formatNumber(shortage)}個`;
   document.querySelector('#weeksNeeded').textContent = `${formatNumber(weeksNeeded)}週`;
@@ -215,17 +219,10 @@ function bindStatusEvents() {
 
 function bindWeaponEvents() {
   document.querySelectorAll('input[name="weaponStatusChoice"]').forEach((input) => {
-    input.addEventListener('change', (event) => {
-      document.querySelector('#weaponStatus').value = event.target.value;
+    input.addEventListener('change', () => {
       renderWeaponCost();
       renderGachaPlan();
     });
-  });
-  document.querySelector('#weaponStatus').addEventListener('change', () => {
-    document.querySelector('#weaponStatusNone').checked = document.querySelector('#weaponStatus').value === 'none';
-    document.querySelector('#weaponStatusOwned').checked = document.querySelector('#weaponStatus').value === 'owned';
-    renderWeaponCost();
-    renderGachaPlan();
   });
   document.querySelector('#currentWeaponLevel').addEventListener('change', () => {
     renderTargetLevelOptions();
@@ -240,9 +237,9 @@ function bindWeaponEvents() {
     renderWeaponCost();
     renderGachaPlan();
   });
-  document.querySelector('#addFiveParts').addEventListener('click', () => {
+  document.querySelector('#addTenParts').addEventListener('click', () => {
     const input = document.querySelector('#ownedWeaponParts');
-    input.value = toNonNegativeInteger(input.value) + 5;
+    input.value = toNonNegativeInteger(input.value) + 10;
     renderWeaponCost();
     renderGachaPlan();
   });

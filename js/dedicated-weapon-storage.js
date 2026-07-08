@@ -2,6 +2,7 @@
 
 const STORAGE_KEY = 'miresto_dedWeapon_v1';
 
+// Depends on dedicated-weapon-logic.js being loaded before this file.
 function defaultState() {
   return {
     version: 1,
@@ -31,10 +32,25 @@ function normalizeState(value) {
   };
 }
 
+function applyStateResets(state, now = new Date()) {
+  if (!state.lastUpdated) return state;
+  const lastUpdated = new Date(state.lastUpdated);
+  if (Number.isNaN(lastUpdated.getTime())) return state;
+
+  const lastJst = getJST(lastUpdated);
+  if (lastJst < getCurrentWeekStart(now)) {
+    state.weeklyPullCount = 0;
+  }
+  if (lastJst < getCurrentDayStart(now)) {
+    state.usedTodayFree = false;
+  }
+  return state;
+}
+
 function loadState() {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
-    return raw ? normalizeState(JSON.parse(raw)) : defaultState();
+    return raw ? applyStateResets(normalizeState(JSON.parse(raw))) : defaultState();
   } catch (error) {
     console.warn('保存データを読み込めませんでした。', error);
     return defaultState();

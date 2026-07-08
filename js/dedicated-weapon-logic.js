@@ -155,6 +155,16 @@ function getCurrentWeekStart(now = new Date()) {
   return weekStart;
 }
 
+function getCurrentDayStart(now = new Date()) {
+  const jst = getJST(now);
+  const dayStart = new Date(jst);
+  if (jst.getHours() < GACHA.RESET_HOUR) {
+    dayStart.setDate(dayStart.getDate() - 1);
+  }
+  dayStart.setHours(GACHA.RESET_HOUR, 0, 0, 0);
+  return dayStart;
+}
+
 function getNextReset(now = new Date()) {
   const next = getCurrentWeekStart(now);
   next.setDate(next.getDate() + 7);
@@ -182,20 +192,21 @@ function formatTimeUntilReset(now = new Date()) {
   return `${hours}時間${minutes}分`;
 }
 
-function calcWeeksAndDiamonds(crystalsNeeded, weeklyPullsPlan, usedTodayFree) {
+function calcWeeksAndDiamonds(crystalsNeeded, weeklyPullsPlan, usedTodayFree, gachaTickets = 0) {
   const needed = Math.max(Number(crystalsNeeded) || 0, 0);
   const plan = toNonNegativeInteger(weeklyPullsPlan);
   if (needed <= 0) return { weeksNeeded: 0, totalPulls: 0, paidPulls: 0, diamonds: 0, arrivalDate: getJST() };
   if (plan <= 0) return null;
 
-  const ev = calcCrystalEV(plan, plan);
+  const ev = calcCrystalEV(plan, plan, null);
   if (ev.total <= 0) return null;
   const weeksNeeded = Math.ceil(needed / ev.total);
   const totalPulls = weeksNeeded * plan;
   const totalFree = Math.max(weeksNeeded * 7 - (usedTodayFree ? 1 : 0), 0);
-  const paidPulls = Math.max(totalPulls - totalFree, 0);
+  const ticketPulls = Math.min(toNonNegativeInteger(gachaTickets), Math.max(totalPulls - totalFree, 0));
+  const paidPulls = Math.max(totalPulls - totalFree - ticketPulls, 0);
   const diamonds = paidPulls * GACHA.DIAMOND_PER_PULL;
   const arrivalDate = getJST();
   arrivalDate.setDate(arrivalDate.getDate() + weeksNeeded * 7);
-  return { weeksNeeded, totalPulls, paidPulls, diamonds, arrivalDate };
+  return { weeksNeeded, totalPulls, ticketPulls, paidPulls, diamonds, arrivalDate };
 }
