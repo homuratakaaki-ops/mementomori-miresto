@@ -81,7 +81,7 @@ function importJSON(file, callback) {
     try {
       const data = JSON.parse(event.target.result);
       if (Number(data.version) !== 1) throw new Error('invalid schema');
-      callback(null, normalizeState(data));
+      callback(null, applyStateResets(normalizeState(data)));
     } catch (error) {
       callback(new Error('JSONの形式が正しくありません。'), null);
     }
