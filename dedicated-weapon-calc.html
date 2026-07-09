@@ -68,16 +68,16 @@
       <section class="card" aria-labelledby="statusTitle">
         <h2 class="section-title" id="statusTitle">01 現在の状況</h2>
         <div class="status-grid">
-          <label class="status-item balance"><span>現在所持している魔水晶</span><input id="crystalInput" type="number" min="0" step="1"></label>
-          <label class="status-item"><span>魔女の秘奥ガチャチケット</span><input id="gachaTicketCount" type="number" min="0" step="1"></label>
-          <label class="status-item">今週のガチャ回数<input id="weeklyPullCount" type="number" min="0" step="1"></label>
+          <label class="status-item balance"><span>現在所持している魔水晶</span><input id="crystalInput" type="number" inputmode="numeric" min="0" step="1"></label>
+          <label class="status-item"><span>魔女の秘奥ガチャチケット</span><input id="gachaTicketCount" type="number" inputmode="numeric" min="0" step="1"></label>
+          <label class="status-item">今週のガチャ回数<input id="weeklyPullCount" type="number" inputmode="numeric" min="0" step="1"></label>
           <label class="status-item toggle-label"><input id="usedTodayFree" type="checkbox">今日の無料分を使用済み</label>
           <div class="status-item"><span>現在日時（JST）</span><strong id="currentJst">-</strong></div>
           <div class="status-item"><span>次回リセット</span><strong id="nextReset">-</strong></div>
           <div class="status-item"><span>リセットまで</span><strong id="untilReset">-</strong></div>
           <div class="status-item"><span>次回リセットまでの無料分</span><strong id="remainingFree">-</strong></div>
           <div class="status-item"><span>次の週間報酬まで</span><strong id="nextWeeklyReward">-</strong></div>
-          <label class="status-item">次の10回確定まで<input id="pullsUntilGuaranteed" type="number" min="1" max="10" step="1"></label>
+          <label class="status-item">次の10回確定まで<select id="pullsUntilGuaranteed"><option value="10">あと10回</option><option value="9">あと9回</option><option value="8">あと8回</option><option value="7">あと7回</option><option value="6">あと6回</option><option value="5">あと5回</option><option value="4">あと4回</option><option value="3">あと3回</option><option value="2">あと2回</option><option value="1">あと1回（次で確定）</option></select></label>
         </div>
       </section>
 
@@ -92,7 +92,7 @@
           </div>
           <label id="currentLevelWrap">現在のレベル<select id="currentWeaponLevel"></select></label>
           <label>目標レベル<select id="targetWeaponLevel"></select></label>
-          <label>現在の所持パーツ<span class="parts-control"><input id="ownedWeaponParts" type="number" min="0" step="10" value="0"><button class="btn-parts-add" id="addTenParts" type="button">+10</button></span></label>
+          <label>現在の所持パーツ<span class="parts-control"><input id="ownedWeaponParts" type="number" inputmode="numeric" min="0" step="10" value="0"><button class="btn-parts-add" id="addTenParts" type="button">+10</button></span></label>
         </div>
         <div class="cost-summary">
           <div><span>強化範囲</span><strong id="weaponFromTo">未所持 → Lv180</strong></div>
@@ -107,10 +107,10 @@
       <section class="card" aria-labelledby="planTitle">
         <h2 class="section-title" id="planTitle">03 今週のガチャ計画</h2>
         <div class="form-grid three">
-          <label>現在の所持魔水晶数<input id="planCurrentCrystals" type="number" min="0" step="1"></label>
-          <label>目標魔水晶数<input id="targetCrystals" type="number" min="0" step="1"><span class="note" id="targetCrystalsNote" hidden>※ 02の計算結果から反映しました。手動で変更できます。</span></label>
+          <label>現在の所持魔水晶数<input id="planCurrentCrystals" type="number" inputmode="numeric" min="0" step="1"></label>
+          <label>目標魔水晶数<input id="targetCrystals" type="number" inputmode="numeric" min="0" step="1"><span class="note" id="targetCrystalsNote" hidden>※ 02の計算結果から反映しました。手動で変更できます。</span></label>
           <label>週あたり予定回数<select id="weeklyPlanPreset"><option value="15">15回</option><option value="25">25回</option><option value="35">35回</option><option value="custom">任意</option></select></label>
-          <label id="weeklyPlanCustomWrap">任意の週あたり予定回数<input id="weeklyPlanCustom" type="number" min="0" step="1"></label>
+          <label id="weeklyPlanCustomWrap">任意の週あたり予定回数<input id="weeklyPlanCustom" type="number" inputmode="numeric" min="0" step="1"></label>
         </div>
         <div class="plan-grid" style="margin-top:14px"><div class="plan-box"><span>目標まで残り</span><strong id="planRemainingPulls">0回</strong></div><div class="plan-box"><span>チケット使用見込み</span><strong id="planTicketPulls">0回</strong></div><div class="plan-box"><span>必要有料回数</span><strong id="planPaidPulls">0回</strong></div><div class="plan-box"><span>必要ダイヤ（今週概算）</span><strong id="planDiamonds">0個</strong></div><div class="plan-box confirmed"><span class="value-label">確定</span><span>確定枠・週間報酬</span><strong id="planGuaranteed">0個</strong></div><div class="plan-box expected"><span class="value-label">期待値</span><span>通常抽選</span><strong id="planExpected">0個</strong></div><div class="plan-box expected"><span class="value-label">期待値</span><span>合計</span><strong id="planExpectedTotal">0個</strong></div><div class="plan-box"><span>不足魔水晶数</span><strong id="shortageCrystals">0個</strong></div><div class="plan-box"><span>必要週数</span><strong id="weeksNeeded">0週</strong></div><div class="plan-box"><span>予想到達日</span><strong id="expectedArrivalDate">到達済み</strong></div><div class="plan-box"><span>必要ダイヤ（概算）</span><strong id="estimatedDiamonds">0個</strong></div></div>
         <details><summary>その他報酬の期待値</summary><ul class="other-rewards" id="otherRewards"></ul></details>

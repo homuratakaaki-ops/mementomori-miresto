@@ -46,11 +46,16 @@ function optionHTML(value, label, selectedValue) {
   return `<option value="${value}"${Number(selectedValue) === value ? ' selected' : ''}>${escapeHTML(label)}</option>`;
 }
 
+function setValueUnlessActive(selector, value) {
+  const element = document.querySelector(selector);
+  if (document.activeElement !== element) element.value = value;
+}
+
 function renderStatus() {
-  document.querySelector('#crystalInput').value = state.crystals;
-  document.querySelector('#planCurrentCrystals').value = state.crystals;
-  document.querySelector('#gachaTicketCount').value = state.gachaTickets;
-  document.querySelector('#weeklyPullCount').value = state.weeklyPullCount;
+  setValueUnlessActive('#crystalInput', state.crystals);
+  setValueUnlessActive('#planCurrentCrystals', state.crystals);
+  setValueUnlessActive('#gachaTicketCount', state.gachaTickets);
+  setValueUnlessActive('#weeklyPullCount', state.weeklyPullCount);
   document.querySelector('#pullsUntilGuaranteed').value = state.pullsUntilGuaranteed;
   document.querySelector('#usedTodayFree').checked = state.usedTodayFree;
   const nextReward = GACHA.WEEKLY_REWARDS.find((reward) => reward.count > state.weeklyPullCount);
@@ -153,9 +158,9 @@ function renderGachaPlan() {
   const guaranteedTotal = result.guaranteed + result.weeklyReward;
 
   document.querySelector('#weeklyPlanPreset').value = [15, 25, 35].includes(plan) ? String(plan) : 'custom';
-  document.querySelector('#weeklyPlanCustom').value = plan;
+  setValueUnlessActive('#weeklyPlanCustom', plan);
   document.querySelector('#weeklyPlanCustomWrap').hidden = [15, 25, 35].includes(plan);
-  document.querySelector('#targetCrystals').value = targetCrystals;
+  setValueUnlessActive('#targetCrystals', targetCrystals);
   document.querySelector('#planRemainingPulls').textContent = `${remainingPulls}回`;
   document.querySelector('#planTicketPulls').textContent = `${ticketPulls}回`;
   document.querySelector('#planPaidPulls').textContent = `${paidPulls}回`;
@@ -211,7 +216,7 @@ function bindStatusEvents() {
     state.usedTodayFree = event.target.checked;
     persistAndRender();
   });
-  document.querySelector('#pullsUntilGuaranteed').addEventListener('input', (event) => {
+  document.querySelector('#pullsUntilGuaranteed').addEventListener('change', (event) => {
     state.pullsUntilGuaranteed = Math.min(Math.max(toNonNegativeInteger(event.target.value), 1), 10);
     persistAndRender();
   });
