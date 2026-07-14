@@ -84,9 +84,9 @@
     }
     input:focus,select:focus { border-color:var(--gold); }
     select option { background:#1a1025; }
-    .rarity-r { color:var(--color-rarity-r); font-weight:700; }
-    .rarity-sr { color:var(--color-rarity-sr); font-weight:700; }
-    .rarity-ssr { color:var(--color-rarity-ssr); font-weight:700; }
+    .rarity-r { display:inline; color:var(--color-rarity-r); font-weight:700; }
+    .rarity-sr { display:inline; color:var(--color-rarity-sr); font-weight:700; }
+    .rarity-ssr { display:inline; color:var(--color-rarity-ssr); font-weight:700; }
     .group-same { color:var(--color-group-same)!important; }
     .group-attr { color:var(--color-group-attr)!important; }
     .result-box {
@@ -96,7 +96,7 @@
       border-radius:10px;
       background:rgba(255,255,255,.035);
     }
-    .result-box span { display:block; margin-bottom:5px; color:var(--text-dim); font-size:11px; }
+    .result-box > span { display:block; margin-bottom:5px; color:var(--text-dim); font-size:11px; }
     .result-box .result-label { color:var(--gold); font-size:14px; font-weight:700; line-height:1.45; }
     .result-box .result-label::before,
     .breakdown-group h3::before {
