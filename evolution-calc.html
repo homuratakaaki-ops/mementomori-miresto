@@ -291,7 +291,7 @@
         ["同名SR+素材", `${formatCount(result.sameCharSrPlusNeeded, "体")} = 同名SR ${formatCount(result.sameCharFromSrPlus, "枚")}`],
         ["同属性SR+素材", `${formatCount(result.sameAttrSrPlusNeeded, "体")} / 進化済み不足 ${formatCount(result.sameAttrSrPlusShortage, "体")}`],
         ["同属性SSR+素材", `${formatCount(result.sameAttrSsrPlusNeeded, "体")} / 進化済み不足 ${formatCount(result.sameAttrSsrPlusShortage, "体")}`],
-        ["所持素材のR換算", formatCount(result.ownedRValue, "枚相当")]
+        ["R充当可能数", formatCount(result.creditR, "枚相当")]
       ].map(([label, value]) => `<li><span>${label}</span><strong>${value}</strong></li>`).join("");
     }
 
@@ -317,8 +317,10 @@
       const sameAttrSrPlusShortage = Math.max(0, sameAttrSrPlusNeeded - ownedSameAttrSrPlus);
       const sameAttrSsrPlusShortage = Math.max(0, sameAttrSsrPlusNeeded - ownedSameAttrSsrPlus);
       const rRequired = (sameAttrSrPlusNeeded * conversion.sameAttrSRplus_to_R) + (sameAttrSsrPlusNeeded * conversion.sameAttrSSRplus_to_R);
-      const ownedRValue = ownedR + (ownedSameAttrSrPlus * conversion.sameAttrSRplus_to_R) + (ownedSameAttrSsrPlus * conversion.sameAttrSSRplus_to_R);
-      const rShortage = Math.max(0, rRequired - ownedRValue);
+      const shortageRRequired = (sameAttrSrPlusShortage * conversion.sameAttrSRplus_to_R) + (sameAttrSsrPlusShortage * conversion.sameAttrSSRplus_to_R);
+      const extraSrPlus = Math.max(0, ownedSameAttrSrPlus - sameAttrSrPlusNeeded);
+      const creditR = ownedR + (extraSrPlus * conversion.sameAttrSRplus_to_R);
+      const rShortage = Math.max(0, shortageRRequired - creditR);
 
       const result = {
         sameCharSrPlusNeeded: totals.sameCharSRplus,
@@ -327,7 +329,7 @@
         sameAttrSsrPlusNeeded,
         sameAttrSrPlusShortage,
         sameAttrSsrPlusShortage,
-        ownedRValue
+        creditR
       };
 
       els.sameCharTotal.textContent = `${formatCount(sameCharAdditional, "枚")} / 不足 ${formatCount(sameCharShortage, "枚")}`;
