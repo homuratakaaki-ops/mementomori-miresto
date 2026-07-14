@@ -179,9 +179,9 @@
       <section class="card" aria-labelledby="inputTitle">
         <h2 class="section-title" id="inputTitle">01 入力</h2>
         <div class="form-grid">
-          <div class="field-label">現在レアリティ
-            <input type="text" value="SR 固定" readonly>
-          </div>
+          <label>現在レアリティ
+            <select id="currentRarity"></select>
+          </label>
           <label>目標レアリティ
             <select id="targetRarity"></select>
           </label>
@@ -194,6 +194,9 @@
           </label>
           <label>所持: 同属性SSR+素材
             <input id="ownedSameAttrSsrPlus" type="number" inputmode="numeric" min="0" step="1" value="0">
+          </label>
+          <label>所持: R+キャラ(同属性)
+            <input id="ownedRplus" type="number" inputmode="numeric" min="0" step="1" value="0">
           </label>
           <label>所持: Rキャラ(同属性)
             <input id="ownedR" type="number" inputmode="numeric" min="0" step="1" value="0">
@@ -227,7 +230,7 @@
           <a class="btn" id="gachaLink" href="./gacha-calc.html?need=0" hidden>ガチャ計算ツールで必要ダイヤを見る</a>
           <button class="btn secondary" id="recalcButton" type="button">再計算</button>
         </div>
-        <p class="note">※ 不足同名キャラは、育成元のSR本体を除いた追加必要枚数でガチャ計算ツールへ渡します。<br>※ R換算は、同属性SR+素材1体=R18枚、同属性SSR+素材1体=R72枚として計算します。</p>
+        <p class="note">※ 不足同名キャラは、残りステップで追加必要な同名SR枚数としてガチャ計算ツールへ渡します。<br>※ R換算は、R+素材1体=R3枚、同属性SR+素材1体=R18枚、同属性SSR+素材1体=R72枚として計算します。</p>
         <p class="updated" id="updatedAt">進化テーブル更新日: -</p>
       </section>
     </main>
@@ -237,14 +240,17 @@
 
   <script>
     const state = {
-      table: null
+      table: null,
+      rarities: []
     };
 
     const els = {
+      currentRarity: document.querySelector("#currentRarity"),
       targetRarity: document.querySelector("#targetRarity"),
       ownedSameChar: document.querySelector("#ownedSameChar"),
       ownedSameAttrSrPlus: document.querySelector("#ownedSameAttrSrPlus"),
       ownedSameAttrSsrPlus: document.querySelector("#ownedSameAttrSsrPlus"),
+      ownedRplus: document.querySelector("#ownedRplus"),
       ownedR: document.querySelector("#ownedR"),
       sameCharBox: document.querySelector("#sameCharBox"),
       sameCharTotal: document.querySelector("#sameCharTotal"),
@@ -272,7 +278,7 @@
       return `${value.toLocaleString("ja-JP")}${unit}`;
     }
 
-    function sumMaterials(target) {
+    function sumMaterials(current, target) {
       const totals = {
         sameCharSR: 0,
         sameCharSRplus: 0,
@@ -280,7 +286,10 @@
         sameAttrSSRplus: 0
       };
 
+      let shouldAdd = false;
       for (const step of state.table.steps) {
+        if (step.from === current) shouldAdd = true;
+        if (!shouldAdd) continue;
         Object.entries(step.materials || {}).forEach(([key, value]) => {
           totals[key] = (totals[key] || 0) + value;
         });
@@ -308,11 +317,13 @@
       if (!state.table) return;
 
       const target = els.targetRarity.value;
-      const totals = sumMaterials(target);
+      const current = els.currentRarity.value;
+      const totals = sumMaterials(current, target);
       const conversion = state.table.conversion;
       const ownedSameChar = toCount(els.ownedSameChar.value);
       const ownedSameAttrSrPlus = toCount(els.ownedSameAttrSrPlus.value);
       const ownedSameAttrSsrPlus = toCount(els.ownedSameAttrSsrPlus.value);
+      const ownedRplus = toCount(els.ownedRplus.value);
       const ownedR = toCount(els.ownedR.value);
 
       const sameCharFromSrPlus = totals.sameCharSRplus * conversion.sameCharSRplus_to_sameCharSR;
@@ -328,7 +339,7 @@
       const rRequired = (sameAttrSrPlusNeeded * conversion.sameAttrSRplus_to_R) + (sameAttrSsrPlusNeeded * conversion.sameAttrSSRplus_to_R);
       const shortageRRequired = (sameAttrSrPlusShortage * conversion.sameAttrSRplus_to_R) + (sameAttrSsrPlusShortage * conversion.sameAttrSSRplus_to_R);
       const extraSrPlus = Math.max(0, ownedSameAttrSrPlus - sameAttrSrPlusNeeded);
-      const creditR = ownedR + (extraSrPlus * conversion.sameAttrSRplus_to_R);
+      const creditR = ownedR + (ownedRplus * conversion.Rplus_to_R) + (extraSrPlus * conversion.sameAttrSRplus_to_R);
       const rShortage = Math.max(0, shortageRRequired - creditR);
 
       const result = {
@@ -343,6 +354,7 @@
 
       els.sameCharTotal.textContent = `${formatCount(sameCharAdditional, "枚")} / 不足 ${formatCount(sameCharShortage, "枚")}`;
       els.sameCharSub.textContent = `進化元含む総数: ${formatCount(sameCharIncludingBase, "枚")}`;
+      els.sameCharSub.hidden = current !== "SR";
       els.sameAttrTotal.textContent = `${formatCount(sameAttrMaterialTotal, "体")} / 進化済み不足 ${formatCount(sameAttrSrPlusShortage + sameAttrSsrPlusShortage, "体")}`;
       els.sameAttrSub.textContent = `SR+ ${formatCount(sameAttrSrPlusNeeded, "体")} / SSR+ ${formatCount(sameAttrSsrPlusNeeded, "体")}`;
       els.rTotal.textContent = `${formatCount(rRequired, "枚")} / 不足 ${formatCount(rShortage, "枚")}`;
@@ -360,10 +372,22 @@
     }
 
     function populateTargets() {
-      els.targetRarity.innerHTML = state.table.steps.map((step) => {
-        return `<option value="${step.to}">${step.to}</option>`;
+      state.rarities = [state.table.steps[0].from, ...state.table.steps.map((step) => step.to)];
+      const currentOptions = state.rarities.slice(0, -1);
+      els.currentRarity.innerHTML = currentOptions.map((rarity) => {
+        return `<option value="${rarity}">${rarity}</option>`;
       }).join("");
-      els.targetRarity.value = "LR";
+      els.currentRarity.value = "SR";
+      updateTargetOptions("LR");
+    }
+
+    function updateTargetOptions(preferredTarget = els.targetRarity.value) {
+      const currentIndex = state.rarities.indexOf(els.currentRarity.value);
+      const targetOptions = state.rarities.slice(currentIndex + 1);
+      els.targetRarity.innerHTML = targetOptions.map((rarity) => {
+        return `<option value="${rarity}">${rarity}</option>`;
+      }).join("");
+      els.targetRarity.value = targetOptions.includes(preferredTarget) ? preferredTarget : targetOptions[0];
     }
 
     async function init() {
@@ -379,7 +403,11 @@
       }
     }
 
-    [els.targetRarity, els.ownedSameChar, els.ownedSameAttrSrPlus, els.ownedSameAttrSsrPlus, els.ownedR].forEach((input) => {
+    els.currentRarity.addEventListener("change", () => {
+      updateTargetOptions();
+      calculate();
+    });
+    [els.targetRarity, els.ownedSameChar, els.ownedSameAttrSrPlus, els.ownedSameAttrSsrPlus, els.ownedRplus, els.ownedR].forEach((input) => {
       input.addEventListener("input", calculate);
       input.addEventListener("change", calculate);
     });

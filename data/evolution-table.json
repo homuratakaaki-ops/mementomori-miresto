@@ -16,6 +16,7 @@
   ],
   "conversion": {
     "sameCharSRplus_to_sameCharSR": 2,
+    "Rplus_to_R": 3,
     "sameAttrSRplus_to_R": 18,
     "sameAttrSSRplus_to_R": 72,
     "R_to_SR_reference": 9
