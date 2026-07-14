@@ -85,6 +85,7 @@
       background:rgba(255,255,255,.035);
     }
     .result-box span { display:block; margin-bottom:5px; color:var(--text-dim); font-size:11px; }
+    .result-box .result-label { color:var(--gold); font-size:14px; font-weight:700; line-height:1.45; }
     .result-box strong { display:block; color:#f0e0c0; font-size:24px; line-height:1.3; }
     .result-box.confirmed { border-color:rgba(110,201,122,.35); background:rgba(110,201,122,.1); }
     .result-box.confirmed strong { color:var(--green); }
@@ -114,6 +115,22 @@
       display:grid;
       gap:8px;
       margin:14px 0 0;
+      padding:0;
+    }
+    .breakdown-group {
+      padding:12px 14px;
+      border:1px solid var(--gold-dim);
+      border-radius:10px;
+      background:rgba(255,255,255,.025);
+    }
+    .breakdown-group h3 {
+      margin:0 0 6px;
+      color:var(--gold);
+      font-size:13px;
+      letter-spacing:1px;
+    }
+    .breakdown-group ul {
+      margin:0;
       padding:0;
       list-style:none;
     }
@@ -209,22 +226,22 @@
         <h2 class="section-title" id="resultTitle">02 計算結果</h2>
         <div class="result-grid">
           <div class="result-box" id="sameCharBox">
-            <span>必要な同名SRキャラ</span>
+            <span class="result-label">必要な同名SRキャラ</span>
             <strong id="sameCharTotal">-</strong>
             <span id="sameCharSub">-</span>
           </div>
           <div class="result-box" id="sameAttrBox">
-            <span>必要な同属性素材</span>
+            <span class="result-label">必要な同属性素材</span>
             <strong id="sameAttrTotal">-</strong>
             <span id="sameAttrSub">-</span>
           </div>
           <div class="result-box" id="rBox">
-            <span>同属性素材のR換算</span>
+            <span class="result-label">同属性素材のR換算</span>
             <strong id="rTotal">-</strong>
             <span id="rSub">-</span>
           </div>
         </div>
-        <ul class="breakdown" id="breakdown"></ul>
+        <div class="breakdown" id="breakdown"></div>
         <p class="ok-message" id="okMessage" hidden>素材は足りています。</p>
         <div class="actions">
           <a class="btn" id="gachaLink" href="./gacha-calc.html?need=0" hidden>ガチャ計算ツールで必要ダイヤを見る</a>
@@ -305,12 +322,25 @@
     }
 
     function renderBreakdown(result) {
-      els.breakdown.innerHTML = [
-        ["同名SR+素材", `${formatCount(result.sameCharSrPlusNeeded, "体")} = 同名SR ${formatCount(result.sameCharFromSrPlus, "枚")}`],
+      const sameCharRows = [
+        ["同名SR+素材", `${formatCount(result.sameCharSrPlusNeeded, "体")} = 同名SR ${formatCount(result.sameCharFromSrPlus, "枚")}`]
+      ];
+      const sameAttrRows = [
         ["同属性SR+素材", `${formatCount(result.sameAttrSrPlusNeeded, "体")} / 進化済み不足 ${formatCount(result.sameAttrSrPlusShortage, "体")}`],
         ["同属性SSR+素材", `${formatCount(result.sameAttrSsrPlusNeeded, "体")} / 進化済み不足 ${formatCount(result.sameAttrSsrPlusShortage, "体")}`],
-        ["R充当可能数", formatCount(result.creditR, "枚相当")]
-      ].map(([label, value]) => `<li><span>${label}</span><strong>${value}</strong></li>`).join("");
+        ["R+・R充当可能数", formatCount(result.creditR, "枚相当")]
+      ];
+      const rowsToHtml = (rows) => rows.map(([label, value]) => `<li><span>${label}</span><strong>${value}</strong></li>`).join("");
+      els.breakdown.innerHTML = `
+        <section class="breakdown-group" aria-labelledby="sameCharBreakdownTitle">
+          <h3 id="sameCharBreakdownTitle">同名(育成キャラ自身)</h3>
+          <ul>${rowsToHtml(sameCharRows)}</ul>
+        </section>
+        <section class="breakdown-group" aria-labelledby="sameAttrBreakdownTitle">
+          <h3 id="sameAttrBreakdownTitle">同属性(素材キャラ)</h3>
+          <ul>${rowsToHtml(sameAttrRows)}</ul>
+        </section>
+      `;
     }
 
     function calculate() {
