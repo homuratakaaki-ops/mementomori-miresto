@@ -1,0 +1,23 @@
+{
+  "updatedAt": "2026-07-14",
+  "note": "通常4属性(藍・紅・翠・黄)専用。天冥は対象外。",
+  "steps": [
+    { "from": "SR",   "to": "SR+",  "materials": { "sameCharSR": 1 } },
+    { "from": "SR+",  "to": "SSR",  "materials": { "sameAttrSRplus": 2 } },
+    { "from": "SSR",  "to": "SSR+", "materials": { "sameCharSRplus": 1 } },
+    { "from": "SSR+", "to": "UR",   "materials": { "sameAttrSSRplus": 1 } },
+    { "from": "UR",   "to": "UR+",  "materials": { "sameAttrSSRplus": 1 } },
+    { "from": "UR+",  "to": "LR",   "materials": { "sameCharSRplus": 2 } },
+    { "from": "LR",   "to": "LR+1", "materials": { "sameCharSRplus": 1 } },
+    { "from": "LR+1", "to": "LR+2", "materials": { "sameCharSRplus": 1 } },
+    { "from": "LR+2", "to": "LR+3", "materials": { "sameCharSRplus": 1 } },
+    { "from": "LR+3", "to": "LR+4", "materials": { "sameCharSRplus": 1 } },
+    { "from": "LR+4", "to": "LR+5", "materials": { "sameCharSRplus": 2 } }
+  ],
+  "conversion": {
+    "sameCharSRplus_to_sameCharSR": 2,
+    "sameAttrSRplus_to_R": 18,
+    "sameAttrSSRplus_to_R": 72,
+    "R_to_SR_reference": 9
+  }
+}
