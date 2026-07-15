@@ -623,7 +623,10 @@
         results: [],
         ticketsUsed: 0,
         diamondsUsed: 0,
-        diamondsShortfall: 0
+        diamondsShortfall: 0,
+        pullsRequested: 0,
+        pullsExecuted: 0,
+        pullsSkipped: 0
       }
     };
 
@@ -633,6 +636,16 @@
     function toNonNegInt(value) {
       const n = Math.floor(Number(value));
       return Number.isNaN(n) || n < 0 ? 0 : n;
+    }
+
+    function escapeHtml(value) {
+      return String(value).replace(/[&<>"']/g, (char) => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;"
+      }[char]));
     }
 
     function validateInputs(raw) {
@@ -763,26 +776,36 @@
       const results = [];
       let ticketsUsed = 0;
       let diamondsUsed = 0;
+      let diamondsRemaining = toNonNegInt(diamondsOwned);
+      let pullsExecuted = 0;
 
       for (let i = 0; i < n; i += 1) {
-        const result = draw(probTable, workingPityState, gachaType);
-        results.push({ ...result, pullNumber: i + 1 });
-
         if (workingTickets[gachaType] > 0) {
           workingTickets[gachaType] -= 1;
           ticketsUsed += 1;
         } else {
+          if (diamondsRemaining < cfg.cost_per_pull) break;
+          diamondsRemaining -= cfg.cost_per_pull;
           diamondsUsed += cfg.cost_per_pull;
         }
+
+        const result = draw(probTable, workingPityState, gachaType);
+        pullsExecuted += 1;
+        results.push({ ...result, pullNumber: pullsExecuted });
       }
 
+      const pullsSkipped = Math.max(0, n - pullsExecuted);
       return {
         results,
+        pullsRequested: n,
+        pullsExecuted,
+        pullsSkipped,
         ticketsUsed,
         ticketsRemaining: workingTickets[gachaType],
         diamondsUsed,
         diamondsOwned,
-        diamondsShortfall: Math.max(0, diamondsUsed - diamondsOwned),
+        diamondsRemaining,
+        diamondsShortfall: pullsSkipped * cfg.cost_per_pull,
         pityStateAfter: workingPityState
       };
     }
@@ -792,9 +815,7 @@
       if (gachaType === "pickup" && sessionResult.pityStateAfter) {
         uiState.pityState.count = sessionResult.pityStateAfter.count;
       }
-      if (uiState.diamondsOwned > 0) {
-        uiState.diamondsOwned = Math.max(0, uiState.diamondsOwned - sessionResult.diamondsUsed);
-      }
+      uiState.diamondsOwned = sessionResult.diamondsRemaining;
     }
 
     function summarize(results, sessionCost, pityStateAfter) {
@@ -809,8 +830,11 @@
         ticketsUsed: sessionCost.ticketsUsed,
         ticketsRemaining: sessionCost.ticketsRemaining,
         diamondsUsed: sessionCost.diamondsUsed,
-        diamondsOwned: sessionCost.diamondsOwned,
+        diamondsOwned: sessionCost.diamondsRemaining ?? sessionCost.diamondsOwned,
         diamondsShortfall: sessionCost.diamondsShortfall,
+        pullsRequested: sessionCost.pullsRequested ?? results.length,
+        pullsExecuted: sessionCost.pullsExecuted ?? results.length,
+        pullsSkipped: sessionCost.pullsSkipped ?? 0,
         pityCountAfter: pityStateAfter ? pityStateAfter.count : null,
         srList: results.filter((r) => r.rarity === "SR")
       };
@@ -821,7 +845,10 @@
         results: [],
         ticketsUsed: 0,
         diamondsUsed: 0,
-        diamondsShortfall: 0
+        diamondsShortfall: 0,
+        pullsRequested: 0,
+        pullsExecuted: 0,
+        pullsSkipped: 0
       };
     }
 
@@ -835,6 +862,9 @@
       state.cumulative.ticketsUsed += session.ticketsUsed;
       state.cumulative.diamondsUsed += session.diamondsUsed;
       state.cumulative.diamondsShortfall += session.diamondsShortfall;
+      state.cumulative.pullsRequested += session.pullsRequested;
+      state.cumulative.pullsExecuted += session.pullsExecuted;
+      state.cumulative.pullsSkipped += session.pullsSkipped;
     }
 
     function summarizeCumulative(pityStateAfter) {
@@ -842,8 +872,11 @@
         ticketsUsed: state.cumulative.ticketsUsed,
         ticketsRemaining: state.ticketState[state.gachaType],
         diamondsUsed: state.cumulative.diamondsUsed,
-        diamondsOwned: state.diamondsOwned,
-        diamondsShortfall: state.cumulative.diamondsShortfall
+        diamondsRemaining: state.diamondsOwned,
+        diamondsShortfall: state.cumulative.diamondsShortfall,
+        pullsRequested: state.cumulative.pullsRequested,
+        pullsExecuted: state.cumulative.pullsExecuted,
+        pullsSkipped: state.cumulative.pullsSkipped
       }, pityStateAfter);
     }
 
@@ -1003,6 +1036,11 @@
       state.pityState.count = validated.pityCount;
     }
 
+    function hasEnoughResourceForOnePull(gachaType, ticketState, diamondsOwned) {
+      const cfg = state.config.gacha_types[gachaType];
+      return ticketState[gachaType] > 0 || diamondsOwned >= cfg.cost_per_pull;
+    }
+
     function renderSelectArea() {
       const cfg = state.config.gacha_types[state.gachaType];
       const area = $("#selectArea");
@@ -1017,7 +1055,7 @@
         block.className = "attr-block";
         block.innerHTML = `
           <div class="attr-head">
-            <span class="attr-name ${attr}">${ATTR_LABELS[attr] || attr}</span>
+            <span class="attr-name ${escapeHtml(attr)}">${escapeHtml(ATTR_LABELS[attr] || attr)}</span>
             <span class="count-badge" data-count-for="${attr}">${selectedCount}/${cfg.max_select_per_attr}</span>
           </div>
           <div class="char-grid"></div>
@@ -1030,7 +1068,7 @@
           const label = document.createElement("label");
           label.className = `char-option${disabled ? " disabled" : ""}`;
           label.title = disabled ? `1属性あたり最大${cfg.max_select_per_attr}体まで選択できます。` : "";
-          label.innerHTML = `<input type="checkbox" value="${ch.id}" ${selected ? "checked" : ""} ${disabled ? "disabled" : ""}> <span>${ch.name}</span>`;
+          label.innerHTML = `<input type="checkbox" value="${escapeHtml(ch.id)}" ${selected ? "checked" : ""} ${disabled ? "disabled" : ""}> <span>${escapeHtml(ch.name)}</span>`;
           const input = label.querySelector("input");
           input.addEventListener("change", () => {
             const current = state.selectState[attr] || [];
@@ -1082,7 +1120,7 @@
     }
 
     function metricHtml([label, value]) {
-      return `<div class="metric"><span>${label}</span><strong>${value}</strong></div>`;
+      return `<div class="metric"><span>${escapeHtml(label)}</span><strong>${escapeHtml(value)}</strong></div>`;
     }
 
     function resultTypeLabel(item) {
@@ -1104,8 +1142,8 @@
       list.innerHTML = srList.map((item) => `
         <div class="sr-item">
           <strong>#${item.pullNumber}</strong>
-          <span>${item.name}${item.pityTriggered ? "（天井）" : ""}</span>
-          <span class="tag">${resultTypeLabel(item)}</span>
+          <span>${escapeHtml(item.name)}${item.pityTriggered ? "（天井）" : ""}</span>
+          <span class="tag">${escapeHtml(resultTypeLabel(item))}</span>
         </div>
       `).join("");
     }
@@ -1118,7 +1156,7 @@
         return;
       }
       box.classList.add("active");
-      box.innerHTML = errors.map((e) => `<div>${e}</div>`).join("");
+      box.innerHTML = errors.map((e) => `<div>${escapeHtml(e)}</div>`).join("");
     }
 
     function incrementInput(button) {
@@ -1152,6 +1190,7 @@
       });
       syncStateFromInputs(current);
       state.tabSnapshots[state.gachaType] = snapshotInputs($("#pulls").value);
+      saveActiveState(state.tabSnapshots[state.gachaType]);
       state.gachaType = gachaType;
       const nextSnapshot = state.tabSnapshots[gachaType] || loadSavedState(gachaType) || defaultSnapshot(gachaType);
       applySnapshot({ ...nextSnapshot, gachaType });
@@ -1182,7 +1221,11 @@
       const beforeRun = snapshotInputs(validated.pulls);
       state.lastInputSnapshot = beforeRun;
       state.tabSnapshots[state.gachaType] = beforeRun;
-      saveActiveState(beforeRun);
+
+      if (!hasEnoughResourceForOnePull(state.gachaType, state.ticketState, state.diamondsOwned)) {
+        setErrors("#inputErrors", ["資源が不足しています。チケットまたはダイヤを設定してください。"]);
+        return;
+      }
 
       try {
         const session = runGacha(
@@ -1197,11 +1240,16 @@
         );
         appendSessionResult(session);
         applySessionResult(session, state, state.gachaType);
+        state.tabSnapshots[state.gachaType] = snapshotInputs(validated.pulls);
+        saveActiveState(state.tabSnapshots[state.gachaType]);
         const summary = summarizeCumulative(session.pityStateAfter);
         setInputValuesFromState();
         renderSummary(summary);
         renderSrList(summary.srList);
         $("#resultNote").textContent = "実行完了。結果は累積し、チケット、ダイヤ、天井カウントは抽選後の状態へ引き継ぎました。";
+        if (session.pullsSkipped > 0) {
+          $("#resultNote").textContent = `資源不足のため ${session.pullsExecuted.toLocaleString()}回で停止しました（残り${session.pullsSkipped.toLocaleString()}回にはダイヤ${session.diamondsShortfall.toLocaleString()}個必要）`;
+        }
       } catch (error) {
         setErrors("#inputErrors", [error.message]);
       }
@@ -1220,6 +1268,8 @@
           pityCount: $("#pityCount").value
         }));
       }
+      state.tabSnapshots[state.gachaType] = snapshotInputs($("#pulls").value);
+      saveActiveState(state.tabSnapshots[state.gachaType]);
       setInputValuesFromState();
       renderSelectArea();
       resetCumulativeResults();
