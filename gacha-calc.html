@@ -416,6 +416,7 @@ function soloKey() { return state.mode === 'both' ? 'pickup' : state.mode; }
 // ===== STEP1 操作 =====
 function setAttr(val, btn) {
   state.attr = val;
+  clampAllPity();
   document.querySelectorAll('.btn-toggle').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
   updateOwnedSummary(); render();
@@ -458,6 +459,7 @@ function updateOwnedSummary() {
 // ===== STEP2 ガチャ選択 =====
 function setMode(mode) {
   state.mode = mode;
+  clampAllPity();
   ['pickup','destiny','star','both'].forEach(m => {
     const el = document.getElementById('mode-' + m);
     if (el) el.classList.toggle('active', m === mode);
@@ -466,35 +468,43 @@ function setMode(mode) {
 }
 
 // ===== 単独 入力ハンドラ =====
-function changePity(d) {
-  const max = GACHA[soloKey()][state.attr].pity - 1;
-  state.pity = Math.max(0, Math.min(max, state.pity + d));
-  const el = document.getElementById('pityInput'); if (el) el.value = state.pity;
-  render();
+function clampPityFor(gKey, value) {
+  const max = GACHA[gKey][state.attr].pity - 1;
+  return Math.max(0, Math.min(max, parseInt(value, 10) || 0));
 }
-function onPityInput(v)   { state.pity    = Math.max(0, parseInt(v,10)||0); render(); }
-function changeTicket(d)  { state.ticket  = Math.max(0, state.ticket  + d); const el=document.getElementById('ticketInput');  if(el)el.value=state.ticket;  render(); }
-function onTicketInput(v) { state.ticket  = Math.max(0, parseInt(v,10)||0); render(); }
-function changeDiamond(d) { state.diamond = Math.max(0, state.diamond + d); const el=document.getElementById('diamondInput'); if(el)el.value=state.diamond; render(); }
-function onDiamondInput(v){ state.diamond = Math.max(0, parseInt(v,10)||0); render(); }
+function clampAllPity() {
+  state.pity = clampPityFor(soloKey(), state.pity);
+  state.pityPickup = clampPityFor('pickup', state.pityPickup);
+  state.pityDestiny = clampPityFor('destiny', state.pityDestiny);
+}
+function changePity(d) {
+  state.pity = clampPityFor(soloKey(), state.pity + d);
+  const el = document.getElementById('pityInput'); if (el) el.value = state.pity;
+  renderResult();
+}
+function onPityInput(v)   { state.pity    = clampPityFor(soloKey(), v); renderResult(); }
+function changeTicket(d)  { state.ticket  = Math.max(0, state.ticket  + d); const el=document.getElementById('ticketInput');  if(el)el.value=state.ticket;  renderResult(); }
+function onTicketInput(v) { state.ticket  = Math.max(0, parseInt(v,10)||0); renderResult(); }
+function changeDiamond(d) { state.diamond = Math.max(0, state.diamond + d); const el=document.getElementById('diamondInput'); if(el)el.value=state.diamond; renderResult(); }
+function onDiamondInput(v){ state.diamond = Math.max(0, parseInt(v,10)||0); renderResult(); }
 
 // ===== 併用 入力ハンドラ =====
 function changeCmbPity(w,d) {
   const sk = w==='pickup'?'pityPickup':'pityDestiny';
-  const max = GACHA[w][state.attr].pity - 1;
-  state[sk] = Math.max(0, Math.min(max, state[sk]+d));
+  state[sk] = clampPityFor(w, state[sk] + d);
   const el = document.getElementById('cmbPity_'+w); if(el) el.value=state[sk];
-  render();
+  renderResult();
 }
-function onCmbPityInput(w,v)   { state[w==='pickup'?'pityPickup':'pityDestiny']   = Math.max(0,parseInt(v,10)||0); render(); }
-function changeCmbTicket(w,d)  { const sk=w==='pickup'?'ticketPickup':'ticketDestiny'; state[sk]=Math.max(0,state[sk]+d); const el=document.getElementById('cmbTicket_'+w);if(el)el.value=state[sk]; render(); }
-function onCmbTicketInput(w,v) { state[w==='pickup'?'ticketPickup':'ticketDestiny'] = Math.max(0,parseInt(v,10)||0); render(); }
-function changeCmbDiamond(d)   { state.diamondCombined=Math.max(0,state.diamondCombined+d); const el=document.getElementById('cmbDiamond');if(el)el.value=state.diamondCombined; render(); }
-function onCmbDiamondInput(v)  { state.diamondCombined=Math.max(0,parseInt(v,10)||0); render(); }
+function onCmbPityInput(w,v)   { state[w==='pickup'?'pityPickup':'pityDestiny'] = clampPityFor(w, v); renderResult(); }
+function changeCmbTicket(w,d)  { const sk=w==='pickup'?'ticketPickup':'ticketDestiny'; state[sk]=Math.max(0,state[sk]+d); const el=document.getElementById('cmbTicket_'+w);if(el)el.value=state[sk]; renderResult(); }
+function onCmbTicketInput(w,v) { state[w==='pickup'?'ticketPickup':'ticketDestiny'] = Math.max(0,parseInt(v,10)||0); renderResult(); }
+function changeCmbDiamond(d)   { state.diamondCombined=Math.max(0,state.diamondCombined+d); const el=document.getElementById('cmbDiamond');if(el)el.value=state.diamondCombined; renderResult(); }
+function onCmbDiamondInput(v)  { state.diamondCombined=Math.max(0,parseInt(v,10)||0); renderResult(); }
 
 // ===== 計算ロジック =====
 function calcSolo(gKey, remaining, pity, diamond, ticket) {
   const g = GACHA[gKey][state.attr];
+  pity = Math.max(0, Math.min(g.pity - 1, parseInt(pity, 10) || 0));
   const expRolls  = Math.ceil(remaining / g.rate);
   const remPity   = g.pity - pity;
   const maxRolls  = remPity + Math.max(0, remaining-1) * g.pity;
@@ -509,6 +519,7 @@ function calcSolo(gKey, remaining, pity, diamond, ticket) {
 function ceilCost(needed, pityNow, tickets, gConf) {
   if (needed <= 0) return { rolls:0, diamond:0, ticketUsed:0 };
   const { pity, cost } = gConf;
+  pityNow = Math.max(0, Math.min(pity - 1, parseInt(pityNow, 10) || 0));
   let rolls=0, cur=pityNow;
   for (let i=0;i<needed;i++) { rolls += pity-cur; cur=0; }
   const ticketUsed = Math.min(tickets, rolls);
@@ -653,7 +664,8 @@ function buildSoloHTML(rem) {
       ${sfHTML}
       <div class="footer-note" style="margin-top:12px">
         天井カウント：${state.pity}回 → あと${r.remPity}回で1枚確定<br>
-        1回 ${r.g.cost}ダイヤ / 出現確率 ${(r.g.rate*100).toFixed(4)}%
+        1回 ${r.g.cost}ダイヤ / 出現確率 ${(r.g.rate*100).toFixed(4)}%<br>
+        ※ 期待値は天井による打ち切りを考慮しない単純概算です
       </div>
       <div class="share-row">
         <button class="btn-share" id="btnCopy" onclick="copyResult()">📋 テキストコピー</button>
@@ -791,6 +803,8 @@ function buildCombinedHTML(rem) {
             <div class="shortfall-val" style="color:${sfc===0?'var(--green)':'#e06060'}">${sfc===0?'足りる':'▲'+sfc.toLocaleString()+'💎'}</div>
           </div>
         </div>
+
+        <div class="footer-note" style="margin-top:8px;margin-bottom:0">※ 期待値最安と天井最安は異なる振り分けの場合があります</div>
       </div>`;
   }
 
@@ -828,7 +842,8 @@ function buildCombinedHTML(rem) {
       ${sfHTML}
       <div class="footer-note" style="margin-top:10px">
         ※ PU天井 ${gP.pity}回 / 運命天井 ${gD.pity}回<br>
-        ※ 期待値は通常確率による概算です
+        ※ 期待値は通常確率による概算です<br>
+        ※ 期待値は天井による打ち切りを考慮しない単純概算です
       </div>
       <div class="share-row">
         <button class="btn-share" id="btnCopy" onclick="copyResult()">📋 テキストコピー</button>
@@ -838,15 +853,34 @@ function buildCombinedHTML(rem) {
 }
 
 // ===== メインレンダリング =====
-function render() {
+function splitStep3HTML(html) {
+  const marker = '<div class="card" id="resultCard">';
+  const idx = html.indexOf(marker);
+  if (idx < 0) return { input: html, result: '' };
+  return { input: html.slice(0, idx), result: html.slice(idx) };
+}
+function buildStep3HTML(rem) {
+  return state.mode === 'both' ? buildCombinedHTML(rem) : buildSoloHTML(rem);
+}
+function renderResult() {
+  const area = document.getElementById('step3ResultArea');
+  if (!area) { render(); return; }
   const rem = getRemaining();
   const copyEl = document.getElementById('copyResult');
   copyEl.innerHTML = buildCopyHTML(rem);
   copyEl.style.display = '';
-  document.getElementById('step3Area').innerHTML =
-    state.mode === 'both' ? buildCombinedHTML(rem) : buildSoloHTML(rem);
+  area.innerHTML = splitStep3HTML(buildStep3HTML(rem)).result;
 }
-
+function render() {
+  clampAllPity();
+  const rem = getRemaining();
+  const copyEl = document.getElementById('copyResult');
+  copyEl.innerHTML = buildCopyHTML(rem);
+  copyEl.style.display = '';
+  const parts = splitStep3HTML(buildStep3HTML(rem));
+  document.getElementById('step3Area').innerHTML =
+    `${parts.input}<div id="step3ResultArea">${parts.result}</div>`;
+}
 // ===== シェア =====
 function buildShareText() {
   const rem = getRemaining();
