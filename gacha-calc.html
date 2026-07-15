@@ -482,7 +482,14 @@ function changePity(d) {
   const el = document.getElementById('pityInput'); if (el) el.value = state.pity;
   renderResult();
 }
-function onPityInput(v)   { state.pity    = clampPityFor(soloKey(), v); renderResult(); }
+function onPityInput(v) {
+  const raw = parseInt(v, 10);
+  state.pity = clampPityFor(soloKey(), v);
+  const max = GACHA[soloKey()][state.attr].pity - 1;
+  const el = document.getElementById('pityInput');
+  if (el && !Number.isNaN(raw) && (raw > max || raw < 0)) el.value = state.pity;
+  renderResult();
+}
 function changeTicket(d)  { state.ticket  = Math.max(0, state.ticket  + d); const el=document.getElementById('ticketInput');  if(el)el.value=state.ticket;  renderResult(); }
 function onTicketInput(v) { state.ticket  = Math.max(0, parseInt(v,10)||0); renderResult(); }
 function changeDiamond(d) { state.diamond = Math.max(0, state.diamond + d); const el=document.getElementById('diamondInput'); if(el)el.value=state.diamond; renderResult(); }
@@ -495,7 +502,15 @@ function changeCmbPity(w,d) {
   const el = document.getElementById('cmbPity_'+w); if(el) el.value=state[sk];
   renderResult();
 }
-function onCmbPityInput(w,v)   { state[w==='pickup'?'pityPickup':'pityDestiny'] = clampPityFor(w, v); renderResult(); }
+function onCmbPityInput(w,v) {
+  const raw = parseInt(v, 10);
+  const sk = w==='pickup'?'pityPickup':'pityDestiny';
+  state[sk] = clampPityFor(w, v);
+  const max = GACHA[w][state.attr].pity - 1;
+  const el = document.getElementById('cmbPity_'+w);
+  if (el && !Number.isNaN(raw) && (raw > max || raw < 0)) el.value = state[sk];
+  renderResult();
+}
 function changeCmbTicket(w,d)  { const sk=w==='pickup'?'ticketPickup':'ticketDestiny'; state[sk]=Math.max(0,state[sk]+d); const el=document.getElementById('cmbTicket_'+w);if(el)el.value=state[sk]; renderResult(); }
 function onCmbTicketInput(w,v) { state[w==='pickup'?'ticketPickup':'ticketDestiny'] = Math.max(0,parseInt(v,10)||0); renderResult(); }
 function changeCmbDiamond(d)   { state.diamondCombined=Math.max(0,state.diamondCombined+d); const el=document.getElementById('cmbDiamond');if(el)el.value=state.diamondCombined; renderResult(); }
@@ -945,7 +960,10 @@ function saveImage(cardId) {
   if(btn){btn.textContent='⏳ 生成中...';btn.disabled=true;}
   const t=document.getElementById(cardId);
   if(!t){if(btn){btn.textContent='🖼️ 画像を保存';btn.disabled=false;}return;}
-  html2canvas(t,{backgroundColor:'#1a1025',scale:2,useCORS:true,logging:false})
+  html2canvas(t,{
+    backgroundColor:'#1a1025',scale:2,useCORS:true,logging:false,
+    ignoreElements: el => el.classList && el.classList.contains('share-row')
+  })
     .then(c=>{
       const l=document.createElement('a');
       l.download='mementomori-gacha-calc.png'; l.href=c.toDataURL('image/png'); l.click();
