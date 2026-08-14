@@ -1,6 +1,6 @@
 {
   "schema": "mementomori_skill_compare_v1",
-  "updatedAt": "2026-08-15T01:00:00.000+09:00",
+  "updatedAt": "2026-08-15T02:00:00.000+09:00",
   "gachaStatusUpdatedAt": "2026-05-27",
   "notes": [
     "Skill effects are summarized for comparison and are not copied as full official text.",
@@ -1983,7 +1983,7 @@
       "name": "雪狼の牙",
       "skillType": "アクティブ",
       "category": "CT操作",
-      "majorCategory": "解除・操作",
+      "majorCategory": "味方強化",
       "subCategory": "CT短縮 / 単体火力",
       "target": "ランダム敵1体 / 隣接味方2体",
       "multiplierText": "魔法720%",
@@ -2733,7 +2733,7 @@
       "name": "高速装填装置",
       "skillType": "パッシブ",
       "category": "CT操作",
-      "majorCategory": "解除・操作",
+      "majorCategory": "味方強化",
       "subCategory": "自身CTリセット / スピード上昇",
       "target": "自身 / 低スピード味方2体",
       "multiplierText": "自身スピード+30%",
