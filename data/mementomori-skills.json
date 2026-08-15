@@ -396,7 +396,7 @@
       "roleMemo": "5回攻撃と気絶付与で単体寄りに削るウォーリア",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": ""
+      "sourceUrl": "https://ichigogames.net/mementomori/natasha/"
     },
     {
       "id": "fortina",
@@ -411,7 +411,7 @@
       "roleMemo": "味方全体へのシールド・再生・回復を扱う耐久支援ウォーリア",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": ""
+      "sourceUrl": "https://ichigogames.net/mementomori/fortina/"
     },
     {
       "id": "cerberus",
@@ -426,7 +426,7 @@
       "roleMemo": "高回数物理攻撃と弱体解除、即時戦闘不能条件を持つ速攻型ウォーリア",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": ""
+      "sourceUrl": "https://ichigogames.net/mementomori/cerberus/"
     },
     {
       "id": "rusalka",
@@ -576,7 +576,7 @@
       "roleMemo": "沈黙・毒・物理防御力支援を持つ妨害型ソーサラー",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": ""
+      "sourceUrl": "https://ichigogames.net/mementomori/lunalynn/"
     },
     {
       "id": "valriede",
@@ -591,7 +591,7 @@
       "roleMemo": "焔スタックで耐久しつつ撃破時に連鎖火力を狙うウォーリア",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": ""
+      "sourceUrl": "https://ichigogames.net/mementomori/valeriede/"
     },
     {
       "id": "aa_dark",
@@ -606,7 +606,7 @@
       "roleMemo": "魔力参照の直接攻撃と通常攻撃強化を持つサブアタッカー",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": ""
+      "sourceUrl": "https://ichigogames.net/mementomori/aa/"
     },
     {
       "id": "armstrong",
@@ -621,7 +621,7 @@
       "roleMemo": "再発動火力とクリティカル率支援、遮断で戦うスナイパー",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": ""
+      "sourceUrl": "https://ichigogames.net/mementomori/armstrong/"
     },
     {
       "id": "paladea",
@@ -651,7 +651,7 @@
       "roleMemo": "挑発・カウンタ・防御支援を持つ耐久型ウォーリア",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": ""
+      "sourceUrl": "https://ichigogames.net/mementomori/ophelia/"
     },
     {
       "id": "kaguya",
@@ -1176,7 +1176,7 @@
       "roleMemo": "高スピードで命中回避操作と回復を行う紅スナイパー",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/cordie_summer/"
+      "sourceUrl": "https://ichigogames.net/mementomori/cordie_yukata/"
     },
     {
       "id": "priscilla",
@@ -3185,7 +3185,19 @@
         "realityRank": "中",
         "rankingTarget": "条件込み",
         "damageMemo": "直接攻撃を通常倍率へ混ぜない"
-      }
+      },
+      "plainSummary": "3体攻撃と一番元気な敵への直接攻撃。自分が瀕死なら直撃2倍。",
+      "steps": [
+        {
+          "text": "ランダムな敵3体に物理530%"
+        },
+        {
+          "text": "HP割合が最も高い敵に技力320%の直接攻撃"
+        },
+        {
+          "text": "自身のHPが35%以下なら直接攻撃が2倍"
+        }
+      ]
     },
     {
       "id": "ivy-s2",
@@ -3200,7 +3212,7 @@
       "multiplierText": "物理540% / 最大5回",
       "duration": "",
       "ct": 4,
-      "condition": "自身のバフ1つにつき攻撃回数+1。対象が弱体効果中ならダメージ1.5倍",
+      "condition": "HP割合最低敵に物理540%。自身のバフ1つにつき攻撃回数+1、最大5回。対象が弱体効果中ならダメージ1.5倍。必ず命中",
       "exclusiveWeapon": "専用Lv2: 物理640%",
       "compareMemo": "バフ数と敵弱体の両方で最大火力が変わる",
       "noteUrl": "",
@@ -3220,7 +3232,27 @@
         "realityRank": "中",
         "rankingTarget": "条件込み",
         "damageMemo": "最大値は条件が多い。基本火力としては低く見える"
-      }
+      },
+      "plainSummary": "バフの数だけ連撃が増える追い打ち。",
+      "steps": [
+        {
+          "text": "HP割合が最も低い敵に物理540%"
+        },
+        {
+          "text": "自身のバフ1つにつき攻撃回数+1(最大5回)"
+        },
+        {
+          "text": "対象が弱体効果中ならダメージ1.5倍"
+        },
+        {
+          "text": "この物理攻撃は必ず命中する"
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "バフを配る支援が多いほど②が伸びる。根拠: 攻撃回数の参照が「自身のバフ数」のため"
+        }
+      ]
     },
     {
       "id": "ivy-s3",
@@ -3235,7 +3267,7 @@
       "multiplierText": "攻撃力+50% / 最大5スタック",
       "duration": "7T更新",
       "ct": null,
-      "condition": "バトル開始時と味方戦闘不能時に攻撃力上昇。最大250%",
+      "condition": "バトル開始時、7ターン攻撃力50%増加。味方戦闘不能時に攻撃力増加量+50%(最大5スタック、250%)。攻撃力が増加するたび残りターン数は7ターンに延長",
       "exclusiveWeapon": "専用武器効果なし",
       "compareMemo": "火力倍率ではなく攻撃力補正。現実性評価が必要",
       "noteUrl": "",
@@ -3255,7 +3287,19 @@
         "realityRank": "低",
         "rankingTarget": "対象外",
         "damageMemo": "倍率ではなく攻撃力補正。火力評価では別列で見る"
-      }
+      },
+      "plainSummary": "味方が倒れるたび攻撃力が跳ね上がる。",
+      "steps": [
+        {
+          "text": "バトル開始時、攻撃力+50%を7ターン付与"
+        },
+        {
+          "text": "味方が戦闘不能になるたび攻撃力増加量が+50%大きくなる(最大5スタック=+250%)"
+        },
+        {
+          "text": "このバフで攻撃力が増加するたび、残りターン数は7ターンに延長される"
+        }
+      ]
     },
     {
       "id": "ivy-s4",
@@ -3270,7 +3314,7 @@
       "multiplierText": "通常攻撃時 物理120%",
       "duration": "気絶1T",
       "ct": null,
-      "condition": "通常攻撃時に追加物理攻撃。対象スピードが自身より低い場合に気絶確率あり",
+      "condition": "通常攻撃時、ランダム敵2体に物理120%。対象のスピードが自身より低い場合、50%の確率で1ターン気絶",
       "exclusiveWeapon": "専用武器効果なし",
       "compareMemo": "通常攻撃強化なのでスキル火力ランキングとは別枠",
       "noteUrl": "",
@@ -3290,7 +3334,17 @@
         "realityRank": "中",
         "rankingTarget": "対象外",
         "damageMemo": "アクティブ火力ランキングとは別枠"
-      }
+      },
+      "plainSummary": "通常攻撃に追撃と気絶チャンスが付く。",
+      "steps": [
+        {
+          "text": "通常攻撃を強化し、通常攻撃時にランダムな敵2体へ物理120%の追加攻撃"
+        },
+        {
+          "text": "対象のスピードが自身より低い場合、50%の確率で気絶を1ターン付与",
+          "term": "気絶"
+        }
+      ]
     },
     {
       "id": "potpourri-s1",
@@ -5370,7 +5424,7 @@
       "compareMemo": "気絶付与率は専用武器で上昇。火力差は専用Lv3で小幅上昇",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "",
+      "sourceUrl": "https://ichigogames.net/mementomori/natasha/",
       "damage": {
         "singleMultiplier": 595,
         "hitCount": 5,
@@ -5384,7 +5438,17 @@
         "realityRank": "高",
         "rankingTarget": "基本",
         "damageMemo": "気絶は火力外評価"
-      }
+      },
+      "plainSummary": "格下相手なら気絶も狙える5連撃。",
+      "steps": [
+        {
+          "text": "ランダムな敵に物理595%×5回"
+        },
+        {
+          "text": "対象の腕力が自身より低い場合、50%の確率で気絶を1ターン付与",
+          "term": "気絶"
+        }
+      ]
     },
     {
       "id": "natasha-s2",
@@ -5404,7 +5468,7 @@
       "compareMemo": "低HP対象への追撃が主な差分。直接攻撃は通常倍率とは別枠",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "",
+      "sourceUrl": "https://ichigogames.net/mementomori/natasha/",
       "damage": {
         "singleMultiplier": 530,
         "hitCount": 5,
@@ -5418,7 +5482,16 @@
         "realityRank": "中",
         "rankingTarget": "基本",
         "damageMemo": "直接攻撃部分は通常倍率比較に混ぜない"
-      }
+      },
+      "plainSummary": "瀕死の敵には直接攻撃のとどめが乗る5体攻撃。",
+      "steps": [
+        {
+          "text": "ランダムな敵5体に物理530%"
+        },
+        {
+          "text": "対象のHP割合が20%未満なら、自身の腕力340%の直接攻撃を追加"
+        }
+      ]
     },
     {
       "id": "natasha-s3",
@@ -5438,7 +5511,13 @@
       "compareMemo": "低HP時の耐久補助。火力比較対象外",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": ""
+      "sourceUrl": "https://ichigogames.net/mementomori/natasha/",
+      "plainSummary": "削られてからが硬い。",
+      "steps": [
+        {
+          "text": "自身のHP割合が50%未満で攻撃を受けたとき、ダメージを40%遮断"
+        }
+      ]
     },
     {
       "id": "natasha-s4",
@@ -5458,7 +5537,13 @@
       "compareMemo": "自己火力を底上げする解除不可バフ",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": ""
+      "sourceUrl": "https://ichigogames.net/mementomori/natasha/",
+      "plainSummary": "攻撃力とクリダメの常時ブースト。",
+      "steps": [
+        {
+          "text": "自身の攻撃力+40%・クリダメ強化+40%(解除不可)"
+        }
+      ]
     },
     {
       "id": "fortina-s1",
@@ -5478,7 +5563,17 @@
       "compareMemo": "長期戦で2回目以降のシールド量が大きく伸びる",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": ""
+      "sourceUrl": "https://ichigogames.net/mementomori/fortina/",
+      "plainSummary": "全員に盾と再生を配るヒーラーの本命。",
+      "steps": [
+        {
+          "text": "味方全体に自身の攻撃力150%のシールドと再生を3ターン付与",
+          "term": "再生"
+        },
+        {
+          "text": "再生は行動開始時に付与者の最大HP7%分回復する"
+        }
+      ]
     },
     {
       "id": "fortina-s2",
@@ -5498,7 +5593,7 @@
       "compareMemo": "回復つきの低HP狙い。再発動は条件つきで1回まで",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "",
+      "sourceUrl": "https://ichigogames.net/mementomori/fortina/",
       "damage": {
         "singleMultiplier": 380,
         "hitCount": 1,
@@ -5512,7 +5607,27 @@
         "realityRank": "中",
         "rankingTarget": "条件込み",
         "damageMemo": "腕力125%直接攻撃と回復は通常倍率比較に含めない"
-      }
+      },
+      "plainSummary": "弱った敵を叩き、その分で一番傷ついた味方を大きく癒す。",
+      "steps": [
+        {
+          "text": "HP割合が最も低い敵に物理380%"
+        },
+        {
+          "text": "対象に自身の腕力125%の直接攻撃"
+        },
+        {
+          "text": "敵を戦闘不能にできなければ、回復前に物理攻撃と直接攻撃を1回再発動する"
+        },
+        {
+          "text": "HP割合が最も低い味方を総与ダメージの120%分回復する"
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "④の回復はアクティブスキル由来のため、アクティブ回復回数を参照する味方のスタック源になる。根拠: アクティブスキルによる回復のため"
+        }
+      ]
     },
     {
       "id": "fortina-s3",
@@ -5527,12 +5642,29 @@
       "multiplierText": "行動阻害無効",
       "duration": "3T / 2T",
       "ct": null,
-      "condition": "ターン開始時、自身に行動阻害無効。自身以外のステータス増減前攻撃力が最も高い味方にも付与",
+      "condition": "ターン開始時、自身に3ターン行動阻害無効。自身以外でステータス増減前攻撃力が最も高い味方にも2ターン行動阻害無効。発動後4回行動終了まで再発動不可",
       "exclusiveWeapon": "専用武器効果なし",
       "compareMemo": "主価値は行動阻害対策。発動後4回行動終了まで再発動不可",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": ""
+      "sourceUrl": "https://ichigogames.net/mementomori/fortina/",
+      "plainSummary": "自分とエースを行動阻害から守る。",
+      "steps": [
+        {
+          "text": "ターン開始時、自身に行動阻害無効を付与(3ターン、解除不可)"
+        },
+        {
+          "text": "自身以外でステータス増減前の攻撃力が最も高い味方にも行動阻害無効を付与(2ターン、解除不可)"
+        },
+        {
+          "text": "発動後4回行動まで再発動しない"
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "気絶・睡眠・沈黙を多用してくる敵への直接の回答になる。根拠: 効果が「行動阻害の無効化」のため"
+        }
+      ]
     },
     {
       "id": "fortina-s4",
@@ -5552,13 +5684,19 @@
       "compareMemo": "耐久ステータスを大きく伸ばす防御系パッシブ",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": ""
+      "sourceUrl": "https://ichigogames.net/mementomori/fortina/",
+      "plainSummary": "防御・カウンタ・物防の常時底上げ。",
+      "steps": [
+        {
+          "text": "自身の防御力+20%・カウンタ+20%・物理防御力+50%(解除不可)"
+        }
+      ]
     },
     {
       "id": "cerberus-s1",
       "characterId": "cerberus",
       "number": 1,
-      "name": "雷蹄の爪",
+      "name": "雷啼の爪",
       "skillType": "アクティブ",
       "category": "火力",
       "majorCategory": "攻撃",
@@ -5572,7 +5710,7 @@
       "compareMemo": "高回数連撃。専用武器は火力倍率ではなく撃破後の自己強化",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "",
+      "sourceUrl": "https://ichigogames.net/mementomori/cerberus/",
       "damage": {
         "singleMultiplier": 520,
         "hitCount": 6,
@@ -5586,7 +5724,16 @@
         "realityRank": "高",
         "rankingTarget": "基本",
         "damageMemo": "物防減少とクリダメ強化は別評価"
-      }
+      },
+      "plainSummary": "格下の物防を剥がしながらの6連撃。",
+      "steps": [
+        {
+          "text": "ランダムな敵に物理520%×6回"
+        },
+        {
+          "text": "対象の腕力が自身より低い場合、物理防御力50%減少を1ターン付与"
+        }
+      ]
     },
     {
       "id": "cerberus-s2",
@@ -5606,7 +5753,7 @@
       "compareMemo": "即時戦闘不能条件が主価値。通常火力は480%×5回",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "",
+      "sourceUrl": "https://ichigogames.net/mementomori/cerberus/",
       "damage": {
         "singleMultiplier": 480,
         "hitCount": 5,
@@ -5620,7 +5767,16 @@
         "realityRank": "中",
         "rankingTarget": "基本",
         "damageMemo": "即時戦闘不能条件は火力外評価"
-      }
+      },
+      "plainSummary": "弱った敵に「処刑」判定のある5連撃。",
+      "steps": [
+        {
+          "text": "HP割合が最も低い敵に物理480%×5回"
+        },
+        {
+          "text": "倒しきれず、対象のHP割合が15%以下かつ現在HPが自身の攻撃力1500%以下の場合、即時戦闘不能にする"
+        }
+      ]
     },
     {
       "id": "cerberus-s3",
@@ -5640,7 +5796,16 @@
       "compareMemo": "弱体解除か弱体無効に分岐する耐久補助",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": ""
+      "sourceUrl": "https://ichigogames.net/mementomori/cerberus/",
+      "plainSummary": "2ターン目に自分の弱体を一掃。きれいなら弱体無効に。",
+      "steps": [
+        {
+          "text": "2ターン目開始時、自身の弱体効果を全解除"
+        },
+        {
+          "text": "解除前に弱体を持っていなければ、弱体効果無効を3ターン付与"
+        }
+      ]
     },
     {
       "id": "cerberus-s4",
@@ -5660,7 +5825,13 @@
       "compareMemo": "自己火力を底上げする解除不可バフ",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": ""
+      "sourceUrl": "https://ichigogames.net/mementomori/cerberus/",
+      "plainSummary": "攻撃力とクリ率の常時ブースト。",
+      "steps": [
+        {
+          "text": "自身の攻撃力+40%・クリティカル率+20%(解除不可)"
+        }
+      ]
     },
     {
       "id": "rusalka-s1",
@@ -7110,7 +7281,7 @@
       "compareMemo": "火力より沈黙付与が主価値。CTが長い",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "",
+      "sourceUrl": "https://ichigogames.net/mementomori/lunalynn/",
       "damage": {
         "singleMultiplier": 300,
         "hitCount": 5,
@@ -7124,7 +7295,22 @@
         "realityRank": "高",
         "rankingTarget": "基本",
         "damageMemo": "沈黙は火力外評価"
-      }
+      },
+      "plainSummary": "クリティカルした相手を黙らせる全体魔法。",
+      "steps": [
+        {
+          "text": "ランダムな敵5体に魔法300%"
+        },
+        {
+          "text": "クリティカルヒットした対象に沈黙を1ターン付与",
+          "term": "沈黙"
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "沈黙の条件がクリティカルのため、クリ率を上げる支援の隣で真価が出る。根拠: 付与条件が「クリティカルヒット時」のため"
+        }
+      ]
     },
     {
       "id": "lunalynn-s2",
@@ -7144,7 +7330,7 @@
       "compareMemo": "毒の割合ダメージが主価値。通常倍率は控えめ",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "",
+      "sourceUrl": "https://ichigogames.net/mementomori/lunalynn/",
       "damage": {
         "singleMultiplier": 285,
         "hitCount": 5,
@@ -7158,7 +7344,17 @@
         "realityRank": "高",
         "rankingTarget": "基本",
         "damageMemo": "毒は継続ダメージとして別評価"
-      }
+      },
+      "plainSummary": "格下に重い毒を撒く全体魔法。",
+      "steps": [
+        {
+          "text": "ランダムな敵5体に魔法285%"
+        },
+        {
+          "text": "対象の魔力が自身より低い場合、毒を3ターン付与(行動開始時に現在HP15%ダメージ)",
+          "term": "毒"
+        }
+      ]
     },
     {
       "id": "lunalynn-s3",
@@ -7178,7 +7374,13 @@
       "compareMemo": "常時発動の味方全体耐久補助",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": ""
+      "sourceUrl": "https://ichigogames.net/mementomori/lunalynn/",
+      "plainSummary": "生きている限り全員の物防を底上げ。",
+      "steps": [
+        {
+          "text": "自身が生存している間、味方全体の物理防御力+20%(解除不可)"
+        }
+      ]
     },
     {
       "id": "lunalynn-s4",
@@ -7198,7 +7400,13 @@
       "compareMemo": "自己耐久を底上げする解除不可効果",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": ""
+      "sourceUrl": "https://ichigogames.net/mementomori/lunalynn/",
+      "plainSummary": "被ダメカットと吸血の常時装甲。",
+      "steps": [
+        {
+          "text": "自身の被ダメージを40%減少、HPドレイン+25%(解除不可)"
+        }
+      ]
     },
     {
       "id": "valriede-s1",
@@ -7210,15 +7418,15 @@
       "majorCategory": "攻撃",
       "subCategory": "単体連撃 / 撃破回復",
       "target": "ランダム敵1体",
-      "multiplierText": "物理340%×8回 / 専用Lv1で10回 / 専用Lv3で380%",
+      "multiplierText": "物理340%×8回 / 総ダメ25%回復",
       "duration": "焔ターン+1",
       "ct": 4,
-      "condition": "対象が戦闘不能または透明・ステルス付帯時は対象を選びなおす。敵を戦闘不能にするたび自身の焔ターン数+1",
+      "condition": "ランダム敵1体に8回物理340%。対象が戦闘不能または透明・ステルス付帯時は対象を選び直す。その後自身HPを総与ダメージ25%回復。敵を戦闘不能にするたび自身の焔ターン数+1。専用Lv1で10回、専用Lv3で380%",
       "exclusiveWeapon": "専用Lv1: 物理攻撃の回数が10回。専用Lv3: 物理攻撃が380%",
       "compareMemo": "専用武器込みで単体連撃火力が高い",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "",
+      "sourceUrl": "https://ichigogames.net/mementomori/valeriede/",
       "damage": {
         "singleMultiplier": 340,
         "hitCount": 8,
@@ -7232,7 +7440,19 @@
         "realityRank": "高",
         "rankingTarget": "基本",
         "damageMemo": "撃破時回復と焔ターン増加は別評価"
-      }
+      },
+      "plainSummary": "生きている敵を選び直して撃つ8連撃。倒すほど「焔」が延びる。",
+      "steps": [
+        {
+          "text": "ランダムな敵1体に物理340%×8回(対象が戦闘不能・透明・ステルスなら選び直す)"
+        },
+        {
+          "text": "自身のHPを総与ダメージ25%分回復する"
+        },
+        {
+          "text": "敵を戦闘不能にするたび、自身の焔のターン数+1"
+        }
+      ]
     },
     {
       "id": "valriede-s2",
@@ -7252,7 +7472,7 @@
       "compareMemo": "撃破時に全体寄り追加攻撃へつながる",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "",
+      "sourceUrl": "https://ichigogames.net/mementomori/valeriede/",
       "damage": {
         "singleMultiplier": 620,
         "hitCount": 3,
@@ -7266,7 +7486,22 @@
         "realityRank": "低",
         "rankingTarget": "条件込み",
         "damageMemo": "撃破・非撃破条件が分岐するため理論値扱い"
-      }
+      },
+      "plainSummary": "弱った敵を仕留めると5体への追撃が走る連鎖砲。",
+      "steps": [
+        {
+          "text": "HP割合が最も低い敵に物理620%×3回"
+        },
+        {
+          "text": "最初の3回で倒せなければ、同じ敵にさらに物理620%×3回(倒れた時点で終了)"
+        },
+        {
+          "text": "戦闘不能にした場合、ランダムな敵5体に物理620%"
+        },
+        {
+          "text": "このスキルで敵を戦闘不能にするたび、自身の焔のターン数+1"
+        }
+      ]
     },
     {
       "id": "valriede-s3",
@@ -7286,7 +7521,21 @@
       "compareMemo": "焔を維持できるほど耐久と攻撃力が伸びる",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": ""
+      "sourceUrl": "https://ichigogames.net/mementomori/valeriede/",
+      "plainSummary": "健康なほど攻撃力が上がり、「焔」で被ダメも軽減。",
+      "steps": [
+        {
+          "text": "毎ターン開始時・被攻撃時・アクティブスキルで回復を受けたとき、自身のHP割合が高いほど攻撃力増加(最大+70%、解除不可)"
+        },
+        {
+          "text": "バトル開始時、焔を2ターン付与(被ダメージ15%減少、解除不可)"
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "S1・S2の撃破で焔が延び、焔で耐えて高HPを維持するほど①の攻撃力も保てる自己完結の循環。根拠: 焔の延長条件が撃破、攻撃力の参照がHP割合のため"
+        }
+      ]
     },
     {
       "id": "valriede-s4",
@@ -7306,7 +7555,20 @@
       "compareMemo": "低HPで耐久を立て直す自己補助",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": ""
+      "sourceUrl": "https://ichigogames.net/mementomori/valeriede/",
+      "plainSummary": "削られたら再生で立て直し、回復しきったら攻めに戻る。",
+      "steps": [
+        {
+          "text": "被攻撃時、HP割合が40%以下なら被ダメージ10%減少と再生を4ターン付与(解除不可)",
+          "term": "再生"
+        },
+        {
+          "text": "再生は行動開始時に最大HP20%分回復する"
+        },
+        {
+          "text": "毎ターン開始時、HP割合が90%以上なら被ダメージ減少と再生を解除する"
+        }
+      ]
     },
     {
       "id": "aa_dark-s1",
@@ -7326,7 +7588,7 @@
       "compareMemo": "シンプルな魔法連撃",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "",
+      "sourceUrl": "https://ichigogames.net/mementomori/aa/",
       "damage": {
         "singleMultiplier": 710,
         "hitCount": 4,
@@ -7340,7 +7602,13 @@
         "realityRank": "高",
         "rankingTarget": "基本",
         "damageMemo": "通常倍率のみ"
-      }
+      },
+      "plainSummary": "素直な4連撃の主砲。",
+      "steps": [
+        {
+          "text": "ランダムな敵に魔法710%×4回"
+        }
+      ]
     },
     {
       "id": "aa_dark-s2",
@@ -7352,15 +7620,15 @@
       "majorCategory": "攻撃",
       "subCategory": "直接攻撃 / 回復",
       "target": "ランダム敵4体",
-      "multiplierText": "魔力890%直接攻撃 / 専用Lv3で980%",
+      "multiplierText": "魔力890%直接攻撃",
       "duration": "",
       "ct": 4,
-      "condition": "ランダム敵4体に自身の魔力890%の直接攻撃。自身HPを総与ダメージ20%回復",
+      "condition": "ランダム敵4体に自身の魔力890%の直接攻撃。自身HPを総与ダメージ20%回復。専用Lv3で980%",
       "exclusiveWeapon": "専用Lv3: 直接攻撃が自身の魔力980%になる",
       "compareMemo": "通常攻撃ではなく魔力参照の直接攻撃。回復つき",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "",
+      "sourceUrl": "https://ichigogames.net/mementomori/aa/",
       "damage": {
         "singleMultiplier": 890,
         "hitCount": 4,
@@ -7374,7 +7642,16 @@
         "realityRank": "高",
         "rankingTarget": "基本",
         "damageMemo": "直接攻撃だが比較用に魔力倍率として記録"
-      }
+      },
+      "plainSummary": "防御を素通しする直接攻撃と吸血。",
+      "steps": [
+        {
+          "text": "ランダムな敵4体に自身の魔力890%の直接攻撃"
+        },
+        {
+          "text": "総与ダメージの20%をHP回復する"
+        }
+      ]
     },
     {
       "id": "aa_dark-s3",
@@ -7394,7 +7671,16 @@
       "compareMemo": "通常攻撃を直接攻撃化するパッシブ",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": ""
+      "sourceUrl": "https://ichigogames.net/mementomori/aa/",
+      "plainSummary": "通常攻撃にも直接攻撃のおまけが付く。",
+      "steps": [
+        {
+          "text": "自身の通常攻撃を強化"
+        },
+        {
+          "text": "通常攻撃時、ランダムな敵3体に自身の魔力330%の直接攻撃"
+        }
+      ]
     },
     {
       "id": "aa_dark-s4",
@@ -7406,15 +7692,21 @@
       "majorCategory": "防御",
       "subCategory": "ダメージ遮断 / 命中率増加",
       "target": "自身",
-      "multiplierText": "ダメージ60%遮断 / 4ターン目終了まで85%",
+      "multiplierText": "ダメージ60%遮断",
       "duration": "",
       "ct": null,
-      "condition": "自身が攻撃を受けたとき、ダメージ60%遮断",
+      "condition": "自身が攻撃を受けたとき、ダメージ60%遮断。4ターン目終了時まで85%遮断は専用Lv1効果",
       "exclusiveWeapon": "専用Lv1: 4ターン目のターン終了時まで遮断量85%。専用Lv2: 命中率40%増加、解除不可",
       "compareMemo": "序盤の遮断量が高く、専用Lv2で命中率も補う",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": ""
+      "sourceUrl": "https://ichigogames.net/mementomori/aa/",
+      "plainSummary": "6割遮断の常時装甲。",
+      "steps": [
+        {
+          "text": "攻撃を受けたとき、ダメージを60%遮断"
+        }
+      ]
     },
     {
       "id": "armstrong-s1",
@@ -7434,7 +7726,7 @@
       "compareMemo": "倒せない場合に1回再発動する高倍率複数攻撃",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "",
+      "sourceUrl": "https://ichigogames.net/mementomori/armstrong/",
       "damage": {
         "singleMultiplier": 600,
         "hitCount": 2,
@@ -7448,7 +7740,16 @@
         "realityRank": "中",
         "rankingTarget": "条件込み",
         "damageMemo": "再発動は非撃破条件"
-      }
+      },
+      "plainSummary": "敵エース2体を撃ち、倒し損ねたらもう一度。",
+      "steps": [
+        {
+          "text": "攻撃力が高い敵2体に物理600%"
+        },
+        {
+          "text": "敵を戦闘不能にできなければ、このスキルを1回再発動する"
+        }
+      ]
     },
     {
       "id": "armstrong-s2",
@@ -7468,7 +7769,7 @@
       "compareMemo": "高HP対象には2倍、低HP対象には必中で役割が変わる",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "",
+      "sourceUrl": "https://ichigogames.net/mementomori/armstrong/",
       "damage": {
         "singleMultiplier": 250,
         "hitCount": 8,
@@ -7482,7 +7783,19 @@
         "realityRank": "中",
         "rankingTarget": "条件込み",
         "damageMemo": "対象HP50%以上が条件"
-      }
+      },
+      "plainSummary": "元気な敵には2倍、弱った敵には必中の8連撃。",
+      "steps": [
+        {
+          "text": "ランダムな敵に物理250%×8回"
+        },
+        {
+          "text": "対象のHP割合が50%以上ならダメージ2倍"
+        },
+        {
+          "text": "対象のHP割合が50%未満なら必ず命中"
+        }
+      ]
     },
     {
       "id": "armstrong-s3",
@@ -7502,7 +7815,24 @@
       "compareMemo": "ルナリンドなどクリティカル条件持ちとの相性が良い支援",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": ""
+      "sourceUrl": "https://ichigogames.net/mementomori/armstrong/",
+      "plainSummary": "自分と最速の味方のクリティカルを支える。",
+      "steps": [
+        {
+          "text": "自身のクリダメ強化+40%(解除不可)"
+        },
+        {
+          "text": "ターン開始時、自身と自身以外でスピードが最も高い味方のクリティカル率+40%(2ターン)"
+        },
+        {
+          "text": "クリティカル率増加は発動後4回行動まで再発動しない"
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "クリ率支援はクリティカル依存のアタッカーやクリティカル率増加を条件に持つ味方の発動条件に直結する。根拠: バフの内容がクリティカル率のため"
+        }
+      ]
     },
     {
       "id": "armstrong-s4",
@@ -7517,12 +7847,24 @@
       "multiplierText": "ダメージ50%遮断 / 攻撃力最大30%",
       "duration": "",
       "ct": null,
-      "condition": "自身が攻撃を受けたときダメージ50%遮断。攻撃がクリティカルヒットした場合、遮断効果が減少。毎ターン開始時、前ターンに自身が攻撃してクリティカルヒットした場合、自身の攻撃力増加",
+      "condition": "被攻撃時、ダメージ50%遮断。自身の攻撃がクリティカルヒットした場合、クリティカル回数1回につき遮断効果が2%減少(最小30%)。毎ターン開始時、前ターンに自身の攻撃がクリティカルしていれば、クリティカル回数1回につき攻撃力3%増加(最大30%、解除不可)",
       "exclusiveWeapon": "専用Lv2: ダメージ60%遮断、遮断効果は最小40%、攻撃力増加がクリティカルヒット回数1回につき4%、最大40%",
       "compareMemo": "クリティカル回数で攻撃力を伸ばしつつ被弾を遮断する",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": ""
+      "sourceUrl": "https://ichigogames.net/mementomori/armstrong/",
+      "plainSummary": "5割遮断。自分のクリティカルが攻撃力を上げる代わり、遮断は緩む。",
+      "steps": [
+        {
+          "text": "攻撃を受けたとき、ダメージを50%遮断"
+        },
+        {
+          "text": "自身の攻撃がクリティカルヒットした場合、クリティカル回数1回につき遮断効果が2%減少(最小30%)"
+        },
+        {
+          "text": "毎ターン開始時、前のターンに自身の攻撃がクリティカルしていれば、クリティカル回数1回につき攻撃力+3%(最大30%、解除不可)"
+        }
+      ]
     },
     {
       "id": "paladea-s1",
@@ -7695,7 +8037,7 @@
       "compareMemo": "回復つき複数攻撃。CT5",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "",
+      "sourceUrl": "https://ichigogames.net/mementomori/ophelia/",
       "damage": {
         "singleMultiplier": 380,
         "hitCount": 5,
@@ -7709,7 +8051,16 @@
         "realityRank": "高",
         "rankingTarget": "基本",
         "damageMemo": "回復は火力外評価"
-      }
+      },
+      "plainSummary": "5体を薙ぎながら自分も2割回復。",
+      "steps": [
+        {
+          "text": "ランダムな敵5体に物理380%"
+        },
+        {
+          "text": "自身のHPを最大HP20%分回復する"
+        }
+      ]
     },
     {
       "id": "ophelia-s2",
@@ -7729,7 +8080,7 @@
       "compareMemo": "単体攻撃と攻撃力減少を兼ねる",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "",
+      "sourceUrl": "https://ichigogames.net/mementomori/ophelia/",
       "damage": {
         "singleMultiplier": 760,
         "hitCount": 1,
@@ -7743,7 +8094,16 @@
         "realityRank": "高",
         "rankingTarget": "基本",
         "damageMemo": "攻撃力減少は別評価"
-      }
+      },
+      "plainSummary": "敵1体の攻撃力を4割落とす弱体砲。",
+      "steps": [
+        {
+          "text": "ランダムな敵1体に物理760%"
+        },
+        {
+          "text": "対象の攻撃力を40%減少(3ターン)"
+        }
+      ]
     },
     {
       "id": "ophelia-s3",
@@ -7763,7 +8123,24 @@
       "compareMemo": "挑発とカウンタで攻撃を受ける役割を作る",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": ""
+      "sourceUrl": "https://ichigogames.net/mementomori/ophelia/",
+      "plainSummary": "元気なうちは挑発で攻撃を引き受け、軽減とカウンタで返す。",
+      "steps": [
+        {
+          "text": "ターン開始時、自身のHP割合が60%以上なら挑発を3ターン付与し、回避率を50%減少"
+        },
+        {
+          "text": "同時に被ダメージ30%減少・カウンタ+50%"
+        },
+        {
+          "text": "発動後4回行動まで再発動しない"
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "挑発で被弾を集める設計は、被弾回数・被ダメージ蓄積を参照する味方のカウントを自分に集約できる。根拠: 挑発が攻撃対象を自身へ誘導するため"
+        }
+      ]
     },
     {
       "id": "ophelia-s4",
@@ -7783,7 +8160,19 @@
       "compareMemo": "通常スキル4と専用武器効果を分けて管理。専用効果はスキル5扱いにしない",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": ""
+      "sourceUrl": "https://ichigogames.net/mementomori/ophelia/",
+      "plainSummary": "高HP・クリ耐性に加え、一度だけ致命傷を耐えて全員の物防を上げる。",
+      "steps": [
+        {
+          "text": "自身の最大HP+40%・クリティカル耐性率+40%(解除不可)"
+        },
+        {
+          "text": "致命的ダメージ時、HP1で耐える(バトル中1回)"
+        },
+        {
+          "text": "発動時、自身の物理防御力+40%(2ターン)、自身以外の味方全体にも物理防御力+40%(1ターン)"
+        }
+      ]
     },
     {
       "id": "kaguya-s1",
@@ -12408,16 +12797,16 @@
       "category": "火力",
       "majorCategory": "攻撃",
       "subCategory": "命中回避操作",
-      "target": "攻撃力が高い味方2体 / ランダム敵5体",
-      "multiplierText": "物理330%×4回 / 専用Lv3 5回",
+      "target": "攻撃力高い味方2体 / ランダム敵",
+      "multiplierText": "命中率+25%・回避率-25% / 物理330%×4回",
       "duration": "命中+25% / 回避-25% 4T",
       "ct": 4,
-      "condition": "攻撃前に味方2体へ命中率増加・回避率減少を付与し、その後ランダム敵に攻撃",
+      "condition": "攻撃前、攻撃力が高い味方2体に4ターン命中率25%増加・回避率25%減少を付与(1つのバフ扱い)。その後ランダム敵に4回物理330%。専用Lv1で50%/50%、専用Lv3で5回",
       "exclusiveWeapon": "専用Lv1: 命中率+50%、回避率-50%。専用Lv3: 5回攻撃",
       "compareMemo": "攻撃力+18% / 命中+10% / 防御力+5%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/cordie_summer/",
+      "sourceUrl": "https://ichigogames.net/mementomori/cordie_yukata/",
       "damage": {
         "singleMultiplier": 330,
         "hitCount": 4,
@@ -12432,7 +12821,16 @@
         "realityRank": "中",
         "rankingTarget": "基本",
         "damageMemo": "画像カードからの暫定入力"
-      }
+      },
+      "plainSummary": "エース2人の命中を保証してから撃つ支援攻撃。",
+      "steps": [
+        {
+          "text": "攻撃前、攻撃力が高い味方2体に命中率+25%・回避率-25%を付与(4ターン、1つのバフ扱い)"
+        },
+        {
+          "text": "ランダムな敵に物理330%×4回"
+        }
+      ]
     },
     {
       "id": "cordie_summer-s2",
@@ -12452,7 +12850,7 @@
       "compareMemo": "攻撃力+18% / 命中+10% / 防御力+5%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/cordie_summer/",
+      "sourceUrl": "https://ichigogames.net/mementomori/cordie_yukata/",
       "damage": {
         "singleMultiplier": 300,
         "hitCount": 5,
@@ -12467,7 +12865,24 @@
         "realityRank": "中",
         "rankingTarget": "基本",
         "damageMemo": "画像カードからの暫定入力"
-      }
+      },
+      "plainSummary": "バフがあれば1.5倍。殴った分で一番傷ついた味方を回復。",
+      "steps": [
+        {
+          "text": "ランダムな敵5体に物理300%"
+        },
+        {
+          "text": "自身のバフが1つ以上ならダメージ1.5倍"
+        },
+        {
+          "text": "HP割合が最も低い味方を総与ダメージの30%分回復する"
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "③の回復はアクティブスキル由来のため、アクティブ回復回数を参照する味方のスタック源になる。根拠: アクティブスキルによる回復のため"
+        }
+      ]
     },
     {
       "id": "cordie_summer-s3",
@@ -12480,14 +12895,23 @@
       "subCategory": "攻撃力増加",
       "target": "攻撃力が最も高い味方",
       "multiplierText": "攻撃力+60%",
-      "duration": "1T",
+      "duration": "2ターン / 再発動4回行動後",
       "ct": null,
-      "condition": "ターン開始時に攻撃力最高味方を、自身の攻撃力60%分増加。発動後4回行動終了まで再発動不可",
+      "condition": "ターン開始時、2ターンの間攻撃力最高味方の攻撃力を自身の攻撃力60%分増加。発動後4回行動終了まで再発動不可。専用Lv2で対象が攻撃力高い味方2体",
       "exclusiveWeapon": "専用Lv2: 対象が攻撃力の高い味方2体",
       "compareMemo": "攻撃力+18% / 命中+10% / 防御力+5%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/cordie_summer/"
+      "sourceUrl": "https://ichigogames.net/mementomori/cordie_yukata/",
+      "plainSummary": "定期的にエースへ、コルディの攻撃力6割ぶんのバフを渡す。",
+      "steps": [
+        {
+          "text": "ターン開始時、攻撃力が最も高い味方の攻撃力を自身の攻撃力60%分増加(2ターン)"
+        },
+        {
+          "text": "発動後4回行動まで再発動しない"
+        }
+      ]
     },
     {
       "id": "cordie_summer-s4",
@@ -12499,15 +12923,27 @@
       "majorCategory": "味方強化",
       "subCategory": "防御・魔防増加",
       "target": "自身",
-      "multiplierText": "防御力+10% / 魔法防御力+10% スタック",
+      "multiplierText": "防御力・魔法防御力+10%スタック / 最大100%",
       "duration": "1T / 解除不可",
       "ct": null,
-      "condition": "自身が攻撃するたび防御力と魔法防御力を増加。攻撃回数・被攻撃回数に応じて増加量追加",
+      "condition": "自身が攻撃するたび、1ターン防御力と魔法防御力が10%増加(最大10スタック、最大100%、解除不可)。攻撃した回数または被攻撃回数1回につき増加量+10%。自身が攻撃を受けるたびにも発動",
       "exclusiveWeapon": "専用武器効果なし",
       "compareMemo": "攻撃力+18% / 命中+10% / 防御力+5%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/cordie_summer/"
+      "sourceUrl": "https://ichigogames.net/mementomori/cordie_yukata/",
+      "plainSummary": "撃ち合うほど硬くなる。",
+      "steps": [
+        {
+          "text": "自身が攻撃するたび、防御力・魔法防御力+10%を1ターン付与(最大10スタック、最大100%、解除不可)"
+        },
+        {
+          "text": "攻撃した回数1回につき、その回の増加量が+10%大きくなる"
+        },
+        {
+          "text": "自身が攻撃を受けるたびにも発動し、被攻撃回数1回につき増加量が+10%大きくなる"
+        }
+      ]
     },
     {
       "id": "priscilla-s1",
