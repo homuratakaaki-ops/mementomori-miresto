@@ -471,7 +471,7 @@
       "roleMemo": "記憶スタックを溜めて攻撃・弱体解除・シールド支援へつなぐソーサラー",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": ""
+      "sourceUrl": "https://ichigogames.net/mementomori/rosalie_apostle/"
     },
     {
       "id": "aine",
@@ -486,7 +486,7 @@
       "roleMemo": "敵弱体と味方シールドを組み合わせる支援型スナイパー",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": ""
+      "sourceUrl": "https://ichigogames.net/mementomori/aine/"
     },
     {
       "id": "meria",
@@ -636,7 +636,7 @@
       "roleMemo": "高倍率攻撃、クリティカル率スタック、多重バリアを扱うスナイパー",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": ""
+      "sourceUrl": "https://ichigogames.net/mementomori/paladea/"
     },
     {
       "id": "ophelia",
@@ -666,7 +666,7 @@
       "roleMemo": "クリティカル支援、弱体特効、カウンタ変更で粘るソーサラー",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": ""
+      "sourceUrl": "https://ichigogames.net/mementomori/kaguya/"
     },
     {
       "id": "natasha_bouquet",
@@ -3635,8 +3635,8 @@
       "category": "行動阻害",
       "majorCategory": "敵弱体",
       "subCategory": "睡眠",
-      "target": "正面の敵と隣接する敵2体",
-      "multiplierText": "物理980%",
+      "target": "正面の敵と隣接する敵1体",
+      "multiplierText": "物理880%",
       "duration": "70%で2ターンクリ耐性率40%減少 / 70%で2ターン睡眠",
       "ct": 4,
       "condition": "70%で2ターンクリ耐性率40%減少 / 70%で2ターン睡眠 / クリ耐性減少と睡眠は1つの弱体扱い / 対象が攻撃を受けると解除",
@@ -3646,20 +3646,33 @@
       "imageUrl": "",
       "sourceUrl": "https://ichigogames.net/mementomori/eir/",
       "damage": {
-        "singleMultiplier": 980,
+        "singleMultiplier": 880,
         "hitCount": 2,
-        "baseTotal": 1960,
-        "exclusiveLv1Total": 1960,
-        "exclusiveLv2Total": 1960,
-        "exclusiveLv3Total": 1960,
-        "conditionMaxTotal": 1960,
-        "conditionMaxNote": "カード用要約から暫定抽出",
+        "baseTotal": 1760,
+        "exclusiveLv1Total": 1760,
+        "exclusiveLv2Total": 1760,
+        "exclusiveLv3Total": 1760,
+        "conditionMaxTotal": 1760,
+        "conditionMaxNote": "正面の敵と隣接する敵1体",
         "powerType": "基本火力",
         "maxStacks": null,
         "realityRank": "高",
         "rankingTarget": "対象",
         "damageMemo": "カード生成JSONから自動マージ。専用Lv別・条件MAXは要精査"
-      }
+      },
+      "plainSummary": "正面一帯を眠らせにいく高倍率の起点。",
+      "steps": [
+        {
+          "text": "正面の敵と隣接する敵1体に物理880%"
+        },
+        {
+          "text": "70%の確率でクリティカル耐性40%減少と睡眠を2ターン付与",
+          "term": "睡眠"
+        },
+        {
+          "text": "クリティカル耐性減少と睡眠は1つの弱体扱い。対象が攻撃を受けると解除"
+        }
+      ]
     },
     {
       "id": "eir-s2",
@@ -3672,9 +3685,9 @@
       "subCategory": "条件火力",
       "target": "行動阻害中の敵全体",
       "multiplierText": "物理880% / 攻撃力50%",
-      "duration": "対象に2ターン出血",
+      "duration": "対象に1ターン出血",
       "ct": 4,
-      "condition": "対象に2ターン出血 / 出血は行動開始時に自身攻撃力50%ダメージ / 物理攻撃は必ず命中 / 条件未達なら通常攻撃",
+      "condition": "対象に1ターン出血 / 出血は行動開始時に自身攻撃力50%ダメージ / 物理攻撃は必ず命中 / 条件未達なら通常攻撃",
       "exclusiveWeapon": "Lv2: 出血1T→2T",
       "compareMemo": "行動阻害中の敵全体に物理880%（最大5体） / 対象に2ターン出血 / 出血は行動開始時に自身攻撃力50%ダメージ / 物理攻撃は必ず命中 / 条件未達なら通常攻撃",
       "noteUrl": "",
@@ -3694,7 +3707,25 @@
         "realityRank": "中",
         "rankingTarget": "対象",
         "damageMemo": "カード生成JSONから自動マージ。専用Lv別・条件MAXは要精査"
-      }
+      },
+      "plainSummary": "行動阻害中の敵だけを撃つ必中の追い打ち。",
+      "steps": [
+        {
+          "text": "行動阻害中の敵全体(最大5体)に物理880%(必ず命中)"
+        },
+        {
+          "text": "対象に出血を1ターン付与(行動開始時に自身の攻撃力50%ダメージ)",
+          "term": "出血"
+        },
+        {
+          "text": "条件を満たす敵がいなければ通常攻撃になる"
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "気絶・睡眠などの行動阻害を撒く味方がいるほど対象が増える。S1の睡眠が自給源でもあるが、S1の睡眠は被弾で解除されるため攻撃順に注意。根拠: 対象条件が「行動阻害中の敵」のため"
+        }
+      ]
     },
     {
       "id": "eir-s3",
@@ -3708,13 +3739,22 @@
       "target": "",
       "multiplierText": "攻撃力60% / 攻撃力500%",
       "duration": "ターン開始時、行動阻害中の敵がいれば1ターンスピード30%・攻撃力60%増加",
-      "ct": "",
+      "ct": null,
       "condition": "ターン開始時、行動阻害中の敵がいれば1ターンスピード30%・攻撃力60%増加 / 行動阻害中の敵がいなければ自身に攻撃力500%のシールド / 効果は解除不可",
       "exclusiveWeapon": "",
       "compareMemo": "ターン開始時、行動阻害中の敵がいれば1ターンスピード30%・攻撃力60%増加 / 行動阻害中の敵がいなければ自身に攻撃力500%のシールド / 効果は解除不可",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/eir/"
+      "sourceUrl": "https://ichigogames.net/mementomori/eir/",
+      "plainSummary": "獲物(行動阻害中の敵)がいれば加速、いなければ守りに入る。",
+      "steps": [
+        {
+          "text": "ターン開始時、行動阻害中の敵がいればスピード+30%・攻撃力+60%(1ターン、解除不可)"
+        },
+        {
+          "text": "行動阻害中の敵がいなければ、自身に攻撃力500%のシールドを1ターン付与(解除不可)"
+        }
+      ]
     },
     {
       "id": "eir-s4",
@@ -3728,7 +3768,7 @@
       "target": "通常攻撃時ランダム敵2体",
       "multiplierText": "物理200%",
       "duration": "30%で1ターン睡眠",
-      "ct": "",
+      "ct": null,
       "condition": "通常攻撃を強化 / 30%で1ターン睡眠",
       "exclusiveWeapon": "",
       "compareMemo": "通常攻撃を強化 / 通常攻撃時ランダム敵2体に物理200% / 30%で1ターン睡眠",
@@ -3749,7 +3789,17 @@
         "realityRank": "高",
         "rankingTarget": "対象",
         "damageMemo": "カード生成JSONから自動マージ。専用Lv別・条件MAXは要精査"
-      }
+      },
+      "plainSummary": "通常攻撃でも眠らせにいく。",
+      "steps": [
+        {
+          "text": "通常攻撃を強化(ランダムな敵2体に物理200%)"
+        },
+        {
+          "text": "30%の確率で睡眠を1ターン付与",
+          "term": "睡眠"
+        }
+      ]
     },
     {
       "id": "minasumari-s1",
@@ -3761,7 +3811,7 @@
       "majorCategory": "攻撃",
       "subCategory": "純火力",
       "target": "ランダム敵3体",
-      "multiplierText": "物理600% / 1.5倍",
+      "multiplierText": "物理450% / 1.5倍",
       "duration": "対象がスナイパー以外なら70%で2ターンスピード15%減少",
       "ct": 4,
       "condition": "対象がスナイパーならダメージ1.5倍・必中 / 対象がスナイパー以外なら70%で2ターンスピード15%減少",
@@ -3771,20 +3821,32 @@
       "imageUrl": "",
       "sourceUrl": "https://ichigogames.net/mementomori/minasumari/",
       "damage": {
-        "singleMultiplier": 600,
+        "singleMultiplier": 450,
         "hitCount": 3,
-        "baseTotal": 1800,
-        "exclusiveLv1Total": 1800,
-        "exclusiveLv2Total": 1800,
-        "exclusiveLv3Total": 1800,
-        "conditionMaxTotal": 1800,
-        "conditionMaxNote": "カード用要約から暫定抽出。条件の現実性は要確認",
+        "baseTotal": 1350,
+        "exclusiveLv1Total": 1350,
+        "exclusiveLv2Total": 1350,
+        "exclusiveLv3Total": 1350,
+        "conditionMaxTotal": 2025,
+        "conditionMaxNote": "対象がスナイパーなら1.5倍",
         "powerType": "条件火力",
         "maxStacks": null,
         "realityRank": "中",
         "rankingTarget": "対象",
         "damageMemo": "カード生成JSONから自動マージ。専用Lv別・条件MAXは要精査"
-      }
+      },
+      "plainSummary": "スナイパー特効の必中攻撃。それ以外には減速を配る。",
+      "steps": [
+        {
+          "text": "ランダムな敵3体に物理450%"
+        },
+        {
+          "text": "対象がスナイパーならダメージ1.5倍かつ必中"
+        },
+        {
+          "text": "スナイパー以外なら70%の確率でスピード15%減少(2ターン)"
+        }
+      ]
     },
     {
       "id": "minasumari-s2",
@@ -3796,30 +3858,44 @@
       "majorCategory": "攻撃",
       "subCategory": "純火力",
       "target": "ランダム敵3体",
-      "multiplierText": "物理700% / 物理1100%",
+      "multiplierText": "物理640% / 物理1040%",
       "duration": "",
       "ct": 4,
-      "condition": "自身と味方が攻撃を受けた回数1回につき物理+20%",
+      "condition": "自身と味方が攻撃を受けた回数1回につき物理+20%、最大1040%",
       "exclusiveWeapon": "Lv3: 物理640%→700%、最大1040%→1100%",
       "compareMemo": "ランダム敵3体に物理700% / 自身と味方が攻撃を受けた回数1回につき物理+20% / 最大物理1100%まで",
       "noteUrl": "",
       "imageUrl": "",
       "sourceUrl": "https://ichigogames.net/mementomori/minasumari/",
       "damage": {
-        "singleMultiplier": 700,
+        "singleMultiplier": 640,
         "hitCount": 3,
-        "baseTotal": 2100,
-        "exclusiveLv1Total": 2100,
-        "exclusiveLv2Total": 2100,
-        "exclusiveLv3Total": 2100,
-        "conditionMaxTotal": 3300,
-        "conditionMaxNote": "カード用要約から暫定抽出。条件の現実性は要確認",
+        "baseTotal": 1920,
+        "exclusiveLv1Total": 1920,
+        "exclusiveLv2Total": 1920,
+        "exclusiveLv3Total": 1920,
+        "conditionMaxTotal": 3120,
+        "conditionMaxNote": "被攻撃回数に応じて最大1040%×3体",
         "powerType": "条件火力",
         "maxStacks": null,
         "realityRank": "中",
         "rankingTarget": "対象",
         "damageMemo": "カード生成JSONから自動マージ。専用Lv別・条件MAXは要精査"
-      }
+      },
+      "plainSummary": "味方が殴られた回数だけ痛くなる復讐砲。",
+      "steps": [
+        {
+          "text": "ランダムな敵3体に物理640%"
+        },
+        {
+          "text": "自身と味方が攻撃を受けた回数1回につき+20%(最大1040%)"
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "被弾の多い持久戦・タンク編成ほど伸びる。根拠: 倍率の参照が「味方側の被攻撃回数」のため"
+        }
+      ]
     },
     {
       "id": "minasumari-s3",
@@ -3831,15 +3907,30 @@
       "majorCategory": "敵弱体",
       "subCategory": "ステルス",
       "target": "バトル開始時、自身と攻撃力最高の味方",
-      "multiplierText": "最大HP10%",
+      "multiplierText": "ステルス2T / 多重バリア1層",
       "duration": "バトル開始時、自身と攻撃力最高の味方に2ターンステルス / 4ターンに1回発動",
-      "ct": "",
-      "condition": "バトル開始時、自身と攻撃力最高の味方に2ターンステルス / 被攻撃でHP50%以下または戦闘不能時にステルス解除 / 自身が攻撃を受けてHP50%以下になった時、自身に多重バリア3層 / 最大HP10%以上の被ダメ時に1層消費して無効化 / 4ターンに1回発動",
+      "ct": null,
+      "condition": "バトル開始時、自身と攻撃力最高の味方に2ターンステルス / 被攻撃でHP50%以下または戦闘不能時にステルス解除 / 自身が攻撃を受けてHP50%以下になった時、自身に多重バリア1層 / 最大HP10%以上の被ダメ時に1層消費して無効化 / 4ターンに1回発動",
       "exclusiveWeapon": "Lv2: 多重バリア1層→3層",
-      "compareMemo": "バトル開始時、自身と攻撃力最高の味方に2ターンステルス / 被攻撃でHP50%以下または戦闘不能時にステルス解除 / 自身が攻撃を受けてHP50%以下になった時、自身に多重バリア3層 / 最大HP10%以上の被ダメ時に1層消費して無効化 / 4ターンに1回発動",
+      "compareMemo": "バトル開始時、自身と攻撃力最高の味方に2ターンステルス / 被攻撃でHP50%以下または戦闘不能時にステルス解除 / 自身が攻撃を受けてHP50%以下になった時、自身に多重バリア1層 / 最大HP10%以上の被ダメ時に1層消費して無効化 / 4ターンに1回発動",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/minasumari/"
+      "sourceUrl": "https://ichigogames.net/mementomori/minasumari/",
+      "plainSummary": "開幕、自分とエースを2ターン姿隠し。削られたらバリアで受ける。",
+      "steps": [
+        {
+          "text": "バトル開始時、自身と攻撃力が最も高い味方にステルスを2ターン付与"
+        },
+        {
+          "text": "自身が被攻撃でHP50%以下になるか戦闘不能になると、付与したステルスを解除"
+        },
+        {
+          "text": "自身が攻撃を受けてHP50%以下になったとき、多重バリア1層を付与(最大HP10%以上の被弾で1層消費)"
+        },
+        {
+          "text": "多重バリア付与は4ターンに1回発動"
+        }
+      ]
     },
     {
       "id": "minasumari-s4",
@@ -3853,13 +3944,19 @@
       "target": "",
       "multiplierText": "攻撃力50%",
       "duration": "",
-      "ct": "",
+      "ct": null,
       "condition": "自身以外の味方が戦闘不能時、1体につき攻撃力50%増加 / 最大2スタック、合計100% / 効果は解除不可",
       "exclusiveWeapon": "",
       "compareMemo": "自身以外の味方が戦闘不能時、1体につき攻撃力50%増加 / 最大2スタック、合計100% / 効果は解除不可",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/minasumari/"
+      "sourceUrl": "https://ichigogames.net/mementomori/minasumari/",
+      "plainSummary": "味方が倒れるたび攻撃力が跳ね上がる。",
+      "steps": [
+        {
+          "text": "自身以外の味方が戦闘不能になるたび攻撃力+50%(最大2スタック・合計100%、解除不可)"
+        }
+      ]
     },
     {
       "id": "nina_summer-s1",
@@ -4004,7 +4101,19 @@
         "realityRank": "中",
         "rankingTarget": "対象",
         "damageMemo": "カード生成JSONから自動マージ。専用Lv別・条件MAXは要精査"
-      }
+      },
+      "plainSummary": "味方が倒れるほど連撃が増える逆境スキル。",
+      "steps": [
+        {
+          "text": "ランダムな敵に物理480%×3回"
+        },
+        {
+          "text": "戦闘不能の味方1体につき攻撃回数+1(最大7回)"
+        },
+        {
+          "text": "制限解除中なら戦闘不能数に関わらず7回"
+        }
+      ]
     },
     {
       "id": "serruria-s2",
@@ -4039,7 +4148,19 @@
         "realityRank": "中",
         "rankingTarget": "対象",
         "damageMemo": "カード生成JSONから自動マージ。専用Lv別・条件MAXは要精査"
-      }
+      },
+      "plainSummary": "味方が倒れるほど倍率が跳ねる逆境砲。",
+      "steps": [
+        {
+          "text": "ランダムな敵3体に物理480%"
+        },
+        {
+          "text": "戦闘不能の味方1体につき+200%(最大1280%)"
+        },
+        {
+          "text": "制限解除中なら常に1280%"
+        }
+      ]
     },
     {
       "id": "serruria-s3",
@@ -4053,13 +4174,30 @@
       "target": "",
       "multiplierText": "攻撃力30%",
       "duration": "自身が敵からバフを解除された時、6ターン味方全体の命中率50%増加 / バトル開始時6ターン自身の命中率10%増加",
-      "ct": "",
+      "ct": null,
       "condition": "自身が敵からバフを解除された時、6ターン味方全体の命中率50%増加 / 自身に制限解除付与 / 制限解除中は自身の攻撃力30%増加 / バトル開始時6ターン自身の命中率10%増加",
       "exclusiveWeapon": "Lv2: 味方全体の命中率30%→50%",
       "compareMemo": "自身が敵からバフを解除された時、6ターン味方全体の命中率50%増加 / 自身に制限解除付与 / 制限解除中は自身の攻撃力30%増加 / バトル開始時6ターン自身の命中率10%増加",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/serruria/"
+      "sourceUrl": "https://ichigogames.net/mementomori/serruria/",
+      "plainSummary": "バフを剥がされたら「制限解除」で反撃モードに入る。",
+      "steps": [
+        {
+          "text": "自身が敵からバフを解除されたとき、味方全体の命中率を50%増加(6ターン)し、自身に制限解除を付与"
+        },
+        {
+          "text": "制限解除中は自身の攻撃力+30%"
+        },
+        {
+          "text": "バトル開始時、自身の命中率+10%(6ターン)"
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "バフ解除を多用してくる敵に対してこそ本領が出る逆用設計。S1・S2の制限解除条件もここで解禁される。根拠: 発動条件が「敵にバフを解除されたとき」のため"
+        }
+      ]
     },
     {
       "id": "serruria-s4",
@@ -4073,13 +4211,25 @@
       "target": "1ターン目開始時、自身",
       "multiplierText": "攻撃力800%",
       "duration": "1ターン目開始時、自身に6ターン攻撃力800%のシールド / 再付与は3ターン目以降は発動しない",
-      "ct": "",
+      "ct": null,
       "condition": "1ターン目開始時、自身に6ターン攻撃力800%のシールド / 被攻撃回数5/10/15/20回でシールド再付与 / 再付与は3ターン目以降は発動しない / 効果は解除不可",
       "exclusiveWeapon": "",
       "compareMemo": "1ターン目開始時、自身に6ターン攻撃力800%のシールド / 被攻撃回数5/10/15/20回でシールド再付与 / 再付与は3ターン目以降は発動しない / 効果は解除不可",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/serruria/"
+      "sourceUrl": "https://ichigogames.net/mementomori/serruria/",
+      "plainSummary": "開幕の大型シールド。序盤は被弾でも張り直される。",
+      "steps": [
+        {
+          "text": "1ターン目開始時、自身に攻撃力800%のシールドを6ターン付与(解除不可)"
+        },
+        {
+          "text": "被攻撃回数5/10/15/20回でシールドを再付与"
+        },
+        {
+          "text": "再付与は3ターン目以降は発動しない"
+        }
+      ]
     },
     {
       "id": "eureka-s1",
@@ -5411,7 +5561,7 @@
       "compareMemo": "火力は低めだが被ダメージ増加を付与できる",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "",
+      "sourceUrl": "https://ichigogames.net/mementomori/rosalie_apostle/",
       "damage": {
         "singleMultiplier": 240,
         "hitCount": 4,
@@ -5425,7 +5575,16 @@
         "realityRank": "高",
         "rankingTarget": "基本",
         "damageMemo": "被ダメ増加は支援効果として扱う"
-      }
+      },
+      "plainSummary": "敵を柔らかくしてから撃つ起点魔法。",
+      "steps": [
+        {
+          "text": "攻撃前、70%の確率で対象の被ダメージを10%増加(2ターン)"
+        },
+        {
+          "text": "ランダムな敵4体に魔法240%"
+        }
+      ]
     },
     {
       "id": "rosalie_caritas-s2",
@@ -5445,7 +5604,7 @@
       "compareMemo": "記憶15スタック時はCT短縮と隣接味方攻撃力増加へつながる",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "",
+      "sourceUrl": "https://ichigogames.net/mementomori/rosalie_apostle/",
       "damage": {
         "singleMultiplier": 160,
         "hitCount": 10,
@@ -5459,7 +5618,25 @@
         "realityRank": "中",
         "rankingTarget": "基本",
         "damageMemo": "ソウルサクリファイスも同倍率として扱う"
-      }
+      },
+      "plainSummary": "通常は10連撃。「記憶」が満タンならCT短縮と攻撃バフ付きのソウルサクリファイスに変わる。",
+      "steps": [
+        {
+          "text": "攻撃前、自身の記憶が15スタックなら記憶を解除し、代わりにソウルサクリファイスを発動"
+        },
+        {
+          "text": "通常時はランダムな敵に魔法160%×10回"
+        },
+        {
+          "text": "ソウルサクリファイス時もランダムな敵に魔法160%×10回"
+        },
+        {
+          "text": "ソウルサクリファイス後、隣接する味方2体のスキルCTを2減少"
+        },
+        {
+          "text": "さらに隣接する味方2体の攻撃力を自身の最大HP10%分増加(2ターン、解除不可)"
+        }
+      ]
     },
     {
       "id": "rosalie_caritas-s3",
@@ -5479,7 +5656,30 @@
       "compareMemo": "記憶スタックを支援効果へ変換する中核パッシブ",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": ""
+      "sourceUrl": "https://ichigogames.net/mementomori/rosalie_apostle/",
+      "plainSummary": "味方が弱体を受けるたび「記憶」が積もる。",
+      "steps": [
+        {
+          "text": "バトル開始時、記憶を1スタック付与(解除不可)"
+        },
+        {
+          "text": "自身か味方がアクティブスキルで弱体を受けるたび、味方側の弱体効果合計数ぶん記憶が増加(最大15)"
+        },
+        {
+          "text": "2ターン目以降の毎ターン開始時、記憶を3スタック増加"
+        },
+        {
+          "text": "15スタック時、自身の攻撃力を最大HP10%分増加し、弱体効果を2つ解除して最大HP80%のシールドを2ターン付与"
+        },
+        {
+          "text": "S2で記憶を解除した後は、新たに記憶を付与しない"
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "弱体を多用してくる敵ほど記憶が貯まり、S2の大技解禁が早まる。根拠: スタック条件が「味方側が弱体を受けたとき」のため"
+        }
+      ]
     },
     {
       "id": "rosalie_caritas-s4",
@@ -5499,7 +5699,16 @@
       "compareMemo": "開幕から隣接味方を守るシールド系パッシブ",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": ""
+      "sourceUrl": "https://ichigogames.net/mementomori/rosalie_apostle/",
+      "plainSummary": "開幕、自分と隣に「大ダメージの超過分をカットする」結界。",
+      "steps": [
+        {
+          "text": "バトル開始時、自身と隣接する味方2体に結界を2ターン付与"
+        },
+        {
+          "text": "結界は、付帯者の最大HP20%を超えたダメージ分を、付与者の最大HP20%分まで遮断する"
+        }
+      ]
     },
     {
       "id": "aine-s1",
@@ -5519,7 +5728,7 @@
       "compareMemo": "火力より弱体命中とクリティカル率減少が主価値",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "",
+      "sourceUrl": "https://ichigogames.net/mementomori/aine/",
       "damage": {
         "singleMultiplier": 380,
         "hitCount": 3,
@@ -5533,7 +5742,19 @@
         "realityRank": "高",
         "rankingTarget": "基本",
         "damageMemo": "弱体命中増加とクリ率減少は別評価"
-      }
+      },
+      "plainSummary": "自分のデバフ命中を上げてから、敵エースのクリ率を削る。",
+      "steps": [
+        {
+          "text": "攻撃前、自身の弱体効果命中率を50%増加(2ターン)"
+        },
+        {
+          "text": "攻撃力が高い敵3体に物理380%"
+        },
+        {
+          "text": "70%の確率で対象のクリティカル率を10%減少(2ターン)"
+        }
+      ]
     },
     {
       "id": "aine-s2",
@@ -5544,16 +5765,16 @@
       "category": "火力",
       "majorCategory": "攻撃",
       "subCategory": "再発動 / 条件3倍",
-      "target": "ランダム敵",
-      "multiplierText": "物理350%×4回 / 条件時3倍",
+      "target": "ランダム敵2体",
+      "multiplierText": "物理350% / 条件時3倍",
       "duration": "スピード減少2T / 防御力減少2T",
       "ct": 4,
-      "condition": "物理攻撃前、自身が悪魔の誘いを付帯していない場合、物理ダメージ3倍。再発動は2回まで",
+      "condition": "自身に2ターン、スピード5%減少を1スタック付与(最大3)。ランダム敵2体に物理350%後、対象に2ターン防御力15%減少を1スタック付与(最大3)。このスキルを再発動(最大2回)。悪魔の誘い非付帯なら物理3倍",
       "exclusiveWeapon": "専用Lv3: 物理攻撃が攻撃力380%になる",
       "compareMemo": "条件3倍と最大2回の再発動で理論値が大きい",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "",
+      "sourceUrl": "https://ichigogames.net/mementomori/aine/",
       "damage": {
         "singleMultiplier": 350,
         "hitCount": 4,
@@ -5567,7 +5788,25 @@
         "realityRank": "低",
         "rankingTarget": "条件込み",
         "damageMemo": "条件MAXは再発動2回と3倍条件をすべて満たす理論値"
-      }
+      },
+      "plainSummary": "自分に重い弱体を背負い、敵にも防御低下を積む。誘いが切れていれば3倍になる。",
+      "steps": [
+        {
+          "text": "自身にスピード5%減少を1スタック付与(2ターン、最大3スタック)"
+        },
+        {
+          "text": "ランダムな敵2体に物理350%"
+        },
+        {
+          "text": "対象に防御力15%減少を1スタック付与(2ターン、最大3スタック)"
+        },
+        {
+          "text": "このスキルを再発動(最大2回)"
+        },
+        {
+          "text": "攻撃前、自身が悪魔の誘いを付帯していない場合は物理ダメージ3倍"
+        }
+      ]
     },
     {
       "id": "aine-s3",
@@ -5587,7 +5826,22 @@
       "compareMemo": "対象ごとのタイプステータスを参照するため、通常HPシールドとは比較軸が違う",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": ""
+      "sourceUrl": "https://ichigogames.net/mementomori/aine/",
+      "plainSummary": "毎ターン、自分とエース2人にタイプ参照のシールドを配る。",
+      "steps": [
+        {
+          "text": "ターン開始時、自身と攻撃力が高い味方2体にシールドを付与(量は対象のタイプステータス200%、3ターン、解除不可)"
+        },
+        {
+          "text": "このシールド中はクリティカル耐性率+60%"
+        },
+        {
+          "text": "悪魔の誘いの減少数に応じてシールド量が増える(最大400%)"
+        },
+        {
+          "text": "発動後4回行動まで再発動しない"
+        }
+      ]
     },
     {
       "id": "aine-s4",
@@ -5607,7 +5861,24 @@
       "compareMemo": "悪魔の誘いスタックが火力とシールド再判定に関わる",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": ""
+      "sourceUrl": "https://ichigogames.net/mementomori/aine/",
+      "plainSummary": "開幕10個の「悪魔の誘い」を減らしていくほど強くなる時限装置。",
+      "steps": [
+        {
+          "text": "バトル開始時、自身に悪魔の誘いを10スタック付与(解除不可)"
+        },
+        {
+          "text": "行動開始時、S3のシールドを持つ味方1体につき悪魔の誘いを1減少"
+        },
+        {
+          "text": "スタックが減るたび自身の攻撃力+3%(最大30%)"
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "S3→S4→S2が一本の時限機構。シールド配布で誘いが減り、攻撃力が上がり、誘いが切れるとS2が3倍になる。根拠: S4の減少条件がS3のシールド、S2の倍率条件が「誘い非付帯」のため"
+        }
+      ]
     },
     {
       "id": "meria-s1",
@@ -6822,8 +7093,8 @@
       "category": "火力",
       "majorCategory": "攻撃",
       "subCategory": "クリ耐性減少 / 対象増加",
-      "target": "ランダム敵",
-      "multiplierText": "物理580%×4体 / 専用Lv1で5体",
+      "target": "ランダム敵4体",
+      "multiplierText": "物理580%",
       "duration": "2T",
       "ct": 4,
       "condition": "攻撃前、70%で2ターン対象のクリティカル耐性率40%減少",
@@ -6831,7 +7102,7 @@
       "compareMemo": "クリティカル耐性減少で後続火力を支援する",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "",
+      "sourceUrl": "https://ichigogames.net/mementomori/paladea/",
       "damage": {
         "singleMultiplier": 580,
         "hitCount": 4,
@@ -6840,12 +7111,21 @@
         "exclusiveLv2Total": 2900,
         "exclusiveLv3Total": 2900,
         "conditionMaxTotal": 2900,
-        "conditionMaxNote": "専用Lv1で5体対象",
+        "conditionMaxNote": "専用Lv1で5体",
         "powerType": "複数攻撃 / クリ耐性減少",
         "realityRank": "高",
         "rankingTarget": "基本",
         "damageMemo": "クリ耐性減少は支援効果"
-      }
+      },
+      "plainSummary": "敵のクリ耐性を剥がしてから撃つ起点スキル。",
+      "steps": [
+        {
+          "text": "攻撃前、70%の確率で対象のクリティカル耐性率を40%減少(2ターン)"
+        },
+        {
+          "text": "ランダムな敵4体に物理580%"
+        }
+      ]
     },
     {
       "id": "paladea-s2",
@@ -6857,7 +7137,7 @@
       "majorCategory": "攻撃",
       "subCategory": "高倍率 / ブラックバレット",
       "target": "ランダム敵",
-      "multiplierText": "物理880%×4回 / 専用Lv3で980% / ブラックバレット1960%",
+      "multiplierText": "物理880%×4回 / ブラックバレット1760%",
       "duration": "",
       "ct": 4,
       "condition": "正義の魔女のクリティカル率増加が20スタック以上ならスタックを0にしてブラックバレットを発動。ブラックバレットはランダム敵に4回物理1760%、必ずクリティカルヒットし、攻撃前に対象のバフを2つ解除",
@@ -6865,7 +7145,7 @@
       "compareMemo": "通常でも高倍率。20スタック時のブラックバレットが非常に強い",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "",
+      "sourceUrl": "https://ichigogames.net/mementomori/paladea/",
       "damage": {
         "singleMultiplier": 880,
         "hitCount": 4,
@@ -6874,13 +7154,25 @@
         "exclusiveLv2Total": 3520,
         "exclusiveLv3Total": 3920,
         "conditionMaxTotal": 7840,
-        "conditionMaxNote": "専用Lv3ブラックバレット1960%×4回。20スタック条件",
+        "conditionMaxNote": "ブラックバレットは1760%×4回。専用Lv3で1960%×4回",
         "powerType": "スタック条件 / 確定クリティカル",
         "maxStacks": 20,
         "realityRank": "低",
         "rankingTarget": "条件込み",
         "damageMemo": "ブラックバレットは20スタック前提"
-      }
+      },
+      "plainSummary": "クリ率スタックが満タンなら、確定クリ＋バフ剥がしのブラックバレットに変貌。",
+      "steps": [
+        {
+          "text": "正義の魔女のクリティカル率増加が20スタック以上なら、スタックを0にしてブラックバレットを発動"
+        },
+        {
+          "text": "ブラックバレットはランダムな敵に物理1760%×4回、必ずクリティカルし、攻撃前に対象のバフを2つ解除"
+        },
+        {
+          "text": "通常時はランダムな敵に物理880%×4回"
+        }
+      ]
     },
     {
       "id": "paladea-s3",
@@ -6900,7 +7192,18 @@
       "compareMemo": "ブラックバレット発動条件になるスタック管理パッシブ",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": ""
+      "sourceUrl": "https://ichigogames.net/mementomori/paladea/",
+      "plainSummary": "味方の誰かがクリティカルするたび、自分のクリ率が積もる。",
+      "steps": [
+        {
+          "text": "自身か味方の攻撃がクリティカルヒットするたび、クリティカル率+2%を1スタック付与(最大20スタック=+40%、解除不可)"
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "クリティカル率を上げる支援と組むと味方全体のクリ回数が増え、S2のブラックバレット解禁(20スタック)が早まる。根拠: スタック条件が「味方側のクリティカルヒット回数」のため"
+        }
+      ]
     },
     {
       "id": "paladea-s4",
@@ -6920,7 +7223,19 @@
       "compareMemo": "自身と味方に多重バリアを配る耐久支援",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": ""
+      "sourceUrl": "https://ichigogames.net/mementomori/paladea/",
+      "plainSummary": "開幕3層バリア。クリティカルするたび冥属性の味方にもバリアを配る。",
+      "steps": [
+        {
+          "text": "バトル開始時、自身に多重バリア3層(最大HP20%以上の被弾で1層消費、解除不可)"
+        },
+        {
+          "text": "自身の攻撃がクリティカルヒット2回するごとに、冥属性のうち攻撃力が高い味方3体に多重バリアを1層付与(最大2層、解除不可)"
+        },
+        {
+          "text": "味方側の多重バリアは最大HP10%以上の被弾で1層消費"
+        }
+      ]
     },
     {
       "id": "ophelia-s1",
@@ -7048,7 +7363,7 @@
       "compareMemo": "味方全体のクリティカル支援を兼ねる複数攻撃",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "",
+      "sourceUrl": "https://ichigogames.net/mementomori/kaguya/",
       "damage": {
         "singleMultiplier": 380,
         "hitCount": 5,
@@ -7062,7 +7377,21 @@
         "realityRank": "高",
         "rankingTarget": "基本",
         "damageMemo": "クリ支援は別評価"
-      }
+      },
+      "plainSummary": "全員のクリティカルを底上げしてから撃つ支援魔法。",
+      "steps": [
+        {
+          "text": "味方全体のクリティカル率+20%・クリダメ強化+20%(2ターン)"
+        },
+        {
+          "text": "ランダムな敵5体に魔法380%"
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "クリティカル依存のアタッカーや、クリ回数を条件に持つ味方と噛み合う。根拠: バフの内容がクリティカル率・クリダメ強化のため"
+        }
+      ]
     },
     {
       "id": "kaguya-s2",
@@ -7074,7 +7403,7 @@
       "majorCategory": "攻撃",
       "subCategory": "弱体特効 / 複数攻撃",
       "target": "ランダム敵5体",
-      "multiplierText": "魔法560% / 弱体中1.5倍 / 専用Lv3で620%",
+      "multiplierText": "魔法560% / 弱体中1.5倍",
       "duration": "",
       "ct": 4,
       "condition": "攻撃前、対象が弱体効果を付帯している場合、魔法ダメージ1.5倍",
@@ -7082,7 +7411,7 @@
       "compareMemo": "弱体付与済みの敵に火力が伸びる",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "",
+      "sourceUrl": "https://ichigogames.net/mementomori/kaguya/",
       "damage": {
         "singleMultiplier": 560,
         "hitCount": 5,
@@ -7091,12 +7420,21 @@
         "exclusiveLv2Total": 2800,
         "exclusiveLv3Total": 3100,
         "conditionMaxTotal": 4650,
-        "conditionMaxNote": "専用Lv3で620%×5体、弱体効果中なら1.5倍",
+        "conditionMaxNote": "専用Lv3で620%。対象が弱体効果中なら1.5倍",
         "powerType": "弱体特効 / 複数攻撃",
         "realityRank": "中",
         "rankingTarget": "条件込み",
         "damageMemo": "弱体付与役との組み合わせ前提"
-      }
+      },
+      "plainSummary": "弱体持ちの敵に1.5倍で刺さる全体魔法。",
+      "steps": [
+        {
+          "text": "ランダムな敵5体に魔法560%"
+        },
+        {
+          "text": "攻撃前、対象が弱体効果中なら1.5倍"
+        }
+      ]
     },
     {
       "id": "kaguya-s3",
@@ -7116,7 +7454,19 @@
       "compareMemo": "カウンタ変更と高倍率シールドで耐久する",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": ""
+      "sourceUrl": "https://ichigogames.net/mementomori/kaguya/",
+      "plainSummary": "無傷の間だけ、反撃が魔力参照の高倍率になる。",
+      "steps": [
+        {
+          "text": "バトル開始時、自身にカウンタ変更を4ターン付与(カウンタダメージが魔力300%、解除不可)"
+        },
+        {
+          "text": "毎ターン開始時または被攻撃時、HP割合が100%未満ならカウンタ変更は解除"
+        },
+        {
+          "text": "1ターン目開始時、攻撃力400%のシールドを4ターン付与"
+        }
+      ]
     },
     {
       "id": "kaguya-s4",
@@ -7128,15 +7478,27 @@
       "majorCategory": "敵弱体",
       "subCategory": "弱体 / 被ダメージ減少",
       "target": "敵 / 自身",
-      "multiplierText": "物防貫通50%減少 / クリ率20%減少 / 被ダメージ40%減少",
+      "multiplierText": "物魔防御貫通50%減少 / 攻撃力20%減少 / 被ダメージ40%減少",
       "duration": "4T / 解除不可",
       "ct": null,
-      "condition": "自身がアクティブスキルで弱体効果を受けたとき70%で発動。4ターン弱体効果を付与してきた敵の物理防御貫通50%減少、クリティカル率20%減少。バトル開始時、自身の被ダメージ40%減少",
+      "condition": "自身がアクティブスキルで弱体効果を受けたとき70%で発動。4ターン弱体効果を付与してきた敵の物魔防御貫通50%減少、攻撃力20%減少。バトル開始時、自身の被ダメージ40%減少",
       "exclusiveWeapon": "専用武器効果なし",
       "compareMemo": "弱体返しと自己耐久を兼ねる",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": ""
+      "sourceUrl": "https://ichigogames.net/mementomori/kaguya/",
+      "plainSummary": "弱体を撃ってきた敵に貫通・攻撃力ダウンで反撃する。",
+      "steps": [
+        {
+          "text": "自身がアクティブスキルで弱体を受けたとき、70%の確率で発動"
+        },
+        {
+          "text": "弱体を付与してきた敵の物魔防御貫通を50%減少・攻撃力を20%減少(4ターン)"
+        },
+        {
+          "text": "バトル開始時、自身の被ダメージを40%減少(解除不可)"
+        }
+      ]
     },
     {
       "id": "natasha_bouquet-s1",
@@ -9250,7 +9612,7 @@
       "multiplierText": "物理280%×5回",
       "duration": "",
       "ct": 4,
-      "condition": "回避された場合は風林火山の攻撃力増加+10ターン。戦闘不能にできない場合クリティカル率+10ターン",
+      "condition": "物理攻撃が回避された場合、10ターン自身の命中率10%増加。このスキルで敵を戦闘不能にできなかった場合、10ターン自身のクリティカル率10%増加",
       "exclusiveWeapon": "専用Lv1: 物理380%",
       "compareMemo": "攻撃力+18% / クリティカル耐性+10% / 弱体効果耐性+10%",
       "noteUrl": "",
@@ -9270,7 +9632,19 @@
         "realityRank": "中",
         "rankingTarget": "基本",
         "damageMemo": "詳細条件はconditionを参照"
-      }
+      },
+      "plainSummary": "5連撃。避けられても倒し損ねても長期バフが残る。",
+      "steps": [
+        {
+          "text": "ランダムな敵に物理280%×5回"
+        },
+        {
+          "text": "物理攻撃が回避された場合、自身の命中率を10%増加(10ターン)"
+        },
+        {
+          "text": "敵を戦闘不能にできなかった場合、自身のクリティカル率を10%増加(10ターン)"
+        }
+      ]
     },
     {
       "id": "asahi-s2",
@@ -9305,7 +9679,19 @@
         "realityRank": "中",
         "rankingTarget": "基本",
         "damageMemo": "詳細条件はconditionを参照"
-      }
+      },
+      "plainSummary": "風林火山が育つほど連発できる本命連撃。",
+      "steps": [
+        {
+          "text": "攻撃力が最も高い敵に物理340%×5回"
+        },
+        {
+          "text": "風林火山の攻撃力増加が6スタック以上なら再発動(1回まで)"
+        },
+        {
+          "text": "12スタック以上なら再発動2回まで"
+        }
+      ]
     },
     {
       "id": "asahi-s3",
@@ -9325,7 +9711,24 @@
       "compareMemo": "攻撃力+18% / クリティカル耐性+10% / 弱体効果耐性+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/asahi/"
+      "sourceUrl": "https://ichigogames.net/mementomori/asahi/",
+      "plainSummary": "行動するたび攻撃力が積もるエンジン。バフが多いほど加速。",
+      "steps": [
+        {
+          "text": "行動終了時、攻撃力+5%を1スタック付与(最大15スタック、解除不可)"
+        },
+        {
+          "text": "自身のバフ数が4以上なら付与数2、8以上なら付与数3になる"
+        },
+        {
+          "text": "バフ数はターン数減少後にカウントする"
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "バフを配る支援と組むほど②の加速が効き、S2の再発動条件(6/12スタック)に早く届く。根拠: 付与数の参照が「自身のバフ個数」のため"
+        }
+      ]
     },
     {
       "id": "asahi-s4",
@@ -9345,7 +9748,19 @@
       "compareMemo": "攻撃力+18% / クリティカル耐性+10% / 弱体効果耐性+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/asahi/"
+      "sourceUrl": "https://ichigogames.net/mementomori/asahi/",
+      "plainSummary": "序盤の被ダメカットと、黄染めで増える防御・シールド。",
+      "steps": [
+        {
+          "text": "バトル開始時、自身の被ダメージを15%減少(10ターン)"
+        },
+        {
+          "text": "自身以外の黄属性味方が1体以上なら、防御力+150%・物理防御力+100%(10ターン)"
+        },
+        {
+          "text": "自身以外の黄属性味方が2体以上なら、1ターン目開始時に攻撃力800%のシールドを10ターン付与"
+        }
+      ]
     },
     {
       "id": "tama-s1",
@@ -9357,10 +9772,10 @@
       "majorCategory": "攻撃",
       "subCategory": "画像カード準拠",
       "target": "攻撃力が最も高い味方 / ランダム敵3体",
-      "multiplierText": "命中率+200% / 物理280%",
+      "multiplierText": "命中率+20% / 3回目以降+80% / 物理280%",
       "duration": "",
       "ct": 4,
-      "condition": "4ターン命中率増加。バトル中3回目以降なら命中率増加量80%",
+      "condition": "4ターン、攻撃力が最も高い味方の命中率20%増加。バトル中3回目以降なら命中率増加量80%",
       "exclusiveWeapon": "専用Lv1: 命中増加対象が攻撃力高い味方2体",
       "compareMemo": "攻撃力+18% / クリティカル耐性+10% / 魔法クリダメ緩和+35%",
       "noteUrl": "",
@@ -9380,7 +9795,19 @@
         "realityRank": "中",
         "rankingTarget": "基本",
         "damageMemo": "詳細条件はconditionを参照"
-      }
+      },
+      "plainSummary": "エースの命中を保証してから撃つ支援スキル。3回目から命中補助が大きくなる。",
+      "steps": [
+        {
+          "text": "攻撃力が最も高い味方の命中率を20%増加(4ターン)"
+        },
+        {
+          "text": "バトル中3回目以降は命中率増加量が80%になる"
+        },
+        {
+          "text": "ランダムな敵3体に物理280%"
+        }
+      ]
     },
     {
       "id": "tama-s2",
@@ -9415,7 +9842,16 @@
         "realityRank": "中",
         "rankingTarget": "基本",
         "damageMemo": "詳細条件はconditionを参照"
-      }
+      },
+      "plainSummary": "敵エースの防御を半減させる連撃。3回目から4倍砲。",
+      "steps": [
+        {
+          "text": "攻撃前、対象の防御力と物理防御力を50%減少(4ターン)"
+        },
+        {
+          "text": "攻撃力が最も高い敵に物理260%×4回(バトル中3回目以降は1040%)"
+        }
+      ]
     },
     {
       "id": "tama-s3",
@@ -9435,7 +9871,19 @@
       "compareMemo": "攻撃力+18% / クリティカル耐性+10% / 魔法クリダメ緩和+35%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/tama/"
+      "sourceUrl": "https://ichigogames.net/mementomori/tama/",
+      "plainSummary": "エースに8ターンの長期シールドとチビタマ人形を配る。黄ならさらに厚くなる。",
+      "steps": [
+        {
+          "text": "ターン開始時、攻撃力が最も高い味方に最大HP30%のシールドとチビタマ人形3つを8ターン付与"
+        },
+        {
+          "text": "対象が黄属性なら、シールド量に付与者の攻撃力200%分を上乗せ"
+        },
+        {
+          "text": "発動後8回行動まで再発動しない"
+        }
+      ]
     },
     {
       "id": "tama-s4",
@@ -9455,7 +9903,13 @@
       "compareMemo": "攻撃力+18% / クリティカル耐性+10% / 魔法クリダメ緩和+35%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/tama/"
+      "sourceUrl": "https://ichigogames.net/mementomori/tama/",
+      "plainSummary": "削られたら透明になって狙われなくなる保険。",
+      "steps": [
+        {
+          "text": "自身のHPが70%未満になり、味方の生存が2体以上のとき、透明を32ターン付与(解除不可、バトル中1回)"
+        }
+      ]
     },
     {
       "id": "rustica-s1",
@@ -11570,7 +12024,7 @@
       "majorCategory": "攻撃",
       "subCategory": "自傷 / 攻撃力増加条件",
       "target": "ランダム敵",
-      "multiplierText": "魔法320%×5回 / 専用Lv1 420%",
+      "multiplierText": "魔法320%×5回",
       "duration": "",
       "ct": 4,
       "condition": "自身に現在HP20%の自傷。攻撃力増加2スタック以上ならHPを総ダメージ10%回復。攻撃ごと50%で被回復量20%減少",
@@ -11583,9 +12037,9 @@
         "singleMultiplier": 320,
         "hitCount": 5,
         "baseTotal": 1600,
-        "exclusiveLv1Total": 1600,
-        "exclusiveLv2Total": 1600,
-        "exclusiveLv3Total": 1600,
+        "exclusiveLv1Total": 2100,
+        "exclusiveLv2Total": 2100,
+        "exclusiveLv3Total": 2100,
         "conditionMaxTotal": 2100,
         "conditionMaxNote": "専用Lv1で420%×5回",
         "powerType": "画像カード準拠",
@@ -11593,7 +12047,22 @@
         "realityRank": "中",
         "rankingTarget": "基本",
         "damageMemo": "画像カードからの暫定入力"
-      }
+      },
+      "plainSummary": "自傷からの5連撃。育っていれば吸血も付く。",
+      "steps": [
+        {
+          "text": "自身に現在HP20%の自傷ダメージ"
+        },
+        {
+          "text": "ランダムな敵に魔法320%×5回"
+        },
+        {
+          "text": "攻撃力増加が2スタック以上なら総ダメージの10%をHP回復"
+        },
+        {
+          "text": "攻撃ごとに50%の確率で被回復量20%減少を2ターン付与"
+        }
+      ]
     },
     {
       "id": "morgana-s2",
@@ -11605,7 +12074,7 @@
       "majorCategory": "攻撃",
       "subCategory": "自傷 / 攻撃回数増加",
       "target": "ランダム敵",
-      "multiplierText": "魔法520%×3回 / 専用Lv3 580%",
+      "multiplierText": "魔法520%×3回",
       "duration": "",
       "ct": 4,
       "condition": "自身に現在HP20%の自傷。攻撃力増加1スタックごと攻撃回数+1、最大7回",
@@ -11620,15 +12089,27 @@
         "baseTotal": 1560,
         "exclusiveLv1Total": 1560,
         "exclusiveLv2Total": 1560,
-        "exclusiveLv3Total": 1560,
+        "exclusiveLv3Total": 1740,
         "conditionMaxTotal": 4060,
-        "conditionMaxNote": "攻撃力増加4スタック以上で最大7回。専用Lv3で580%",
+        "conditionMaxNote": "攻撃力増加4スタックで7回攻撃。専用Lv3で580%×7回",
         "powerType": "画像カード準拠",
         "maxStacks": null,
         "realityRank": "中",
         "rankingTarget": "基本",
         "damageMemo": "画像カードからの暫定入力"
-      }
+      },
+      "plainSummary": "攻撃力スタックの数だけ連撃が増える。",
+      "steps": [
+        {
+          "text": "自身に現在HP20%の自傷ダメージ"
+        },
+        {
+          "text": "ランダムな敵に魔法520%×3回"
+        },
+        {
+          "text": "攻撃力増加1スタックごとに攻撃回数+1(最大7回)"
+        }
+      ]
     },
     {
       "id": "morgana-s3",
@@ -11648,7 +12129,21 @@
       "compareMemo": "魔力+8% / 攻撃力+18% / 命中+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/morgana/"
+      "sourceUrl": "https://ichigogames.net/mementomori/morgana/",
+      "plainSummary": "自傷のたび攻撃力が積もるエンジン。",
+      "steps": [
+        {
+          "text": "自身か味方が自傷ダメージを受けるたび攻撃力+10%を1スタック付与(最大4スタック、解除不可)"
+        },
+        {
+          "text": "バトル開始時、物理防御力+50%"
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "紅の自傷パの一員。味方の自傷でも貯まり、S1の吸血・S2の連撃増加の両条件に直結する。根拠: カウント対象が「自身か味方の自傷回数」のため"
+        }
+      ]
     },
     {
       "id": "morgana-s4",
@@ -11668,7 +12163,19 @@
       "compareMemo": "魔力+8% / 攻撃力+18% / 命中+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/morgana/"
+      "sourceUrl": "https://ichigogames.net/mementomori/morgana/",
+      "plainSummary": "紅の頭数だけ攻撃力と開幕シールドが伸びる。",
+      "steps": [
+        {
+          "text": "バトル開始時、自身の攻撃力+10%(自身以外の紅属性味方1体ごとにさらに+10%、最大50%、解除不可)"
+        },
+        {
+          "text": "1ターン目開始時、攻撃力100%のシールドを6ターン付与"
+        },
+        {
+          "text": "自身以外の紅属性味方1体ごとにシールド量+100%(最大500%)"
+        }
+      ]
     },
     {
       "id": "soltina_warm_memory-s1",
