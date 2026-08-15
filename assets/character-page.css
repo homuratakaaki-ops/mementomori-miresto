@@ -12,20 +12,23 @@
   --accent-strong: var(--miresto-attr-green-strong);
   --accent-soft: var(--miresto-attr-green-page-soft);
   --accent-faint: var(--miresto-attr-green-page-faint);
-  --attribute-badge-bg: var(--accent);
-  --attribute-badge-border: var(--accent);
-  --attribute-badge-text: #fff;
   --ratio: #b0352a;
   --navy: #0b2a57;
   --shadow: 0 12px 30px rgba(28, 40, 68, 0.12);
 }
 
-body[data-attribute="藍"] { --accent: var(--miresto-attr-blue-accent); --accent-strong: var(--miresto-attr-blue-strong); --accent-soft: var(--miresto-attr-blue-page-soft); --accent-faint: var(--miresto-attr-blue-page-faint); }
-body[data-attribute="紅"] { --accent: var(--miresto-attr-red-accent); --accent-strong: var(--miresto-attr-red-strong); --accent-soft: var(--miresto-attr-red-page-soft); --accent-faint: var(--miresto-attr-red-page-faint); }
-body[data-attribute="翠"] { --accent: var(--miresto-attr-green-accent); --accent-strong: var(--miresto-attr-green-strong); --accent-soft: var(--miresto-attr-green-page-soft); --accent-faint: var(--miresto-attr-green-page-faint); }
-body[data-attribute="黄"] { --accent: var(--miresto-attr-yellow-accent); --accent-strong: var(--miresto-attr-yellow-strong); --accent-soft: var(--miresto-attr-yellow-page-soft); --accent-faint: var(--miresto-attr-yellow-page-faint); }
+body {
+  --attribute-badge-bg: var(--accent);
+  --attribute-badge-border: var(--accent);
+  --attribute-badge-text: #fff;
+}
+
+body[data-attribute="藍"] { --accent: var(--miresto-attr-blue-accent); --accent-strong: var(--miresto-attr-blue-strong); --accent-soft: var(--miresto-attr-blue-page-soft); --accent-faint: var(--miresto-attr-blue-page-faint); --attribute-badge-bg: var(--miresto-attr-blue-accent); --attribute-badge-border: var(--miresto-attr-blue-accent); --attribute-badge-text: #fff; }
+body[data-attribute="紅"] { --accent: var(--miresto-attr-red-accent); --accent-strong: var(--miresto-attr-red-strong); --accent-soft: var(--miresto-attr-red-page-soft); --accent-faint: var(--miresto-attr-red-page-faint); --attribute-badge-bg: var(--miresto-attr-red-accent); --attribute-badge-border: var(--miresto-attr-red-accent); --attribute-badge-text: #fff; }
+body[data-attribute="翠"] { --accent: var(--miresto-attr-green-accent); --accent-strong: var(--miresto-attr-green-strong); --accent-soft: var(--miresto-attr-green-page-soft); --accent-faint: var(--miresto-attr-green-page-faint); --attribute-badge-bg: var(--miresto-attr-green-accent); --attribute-badge-border: var(--miresto-attr-green-accent); --attribute-badge-text: #fff; }
+body[data-attribute="黄"] { --accent: var(--miresto-attr-yellow-accent); --accent-strong: var(--miresto-attr-yellow-strong); --accent-soft: var(--miresto-attr-yellow-page-soft); --accent-faint: var(--miresto-attr-yellow-page-faint); --attribute-badge-bg: var(--miresto-attr-yellow-accent); --attribute-badge-border: var(--miresto-attr-yellow-accent); --attribute-badge-text: #fff; }
 body[data-attribute="天"] { --accent: var(--miresto-attr-light-accent); --accent-strong: var(--miresto-attr-light-strong); --accent-soft: var(--miresto-attr-light-page-soft); --accent-faint: var(--miresto-attr-light-page-faint); --attribute-badge-bg: var(--miresto-attr-light-badge-bg); --attribute-badge-border: var(--miresto-attr-light-accent); --attribute-badge-text: var(--miresto-attr-light-strong); }
-body[data-attribute="冥"] { --accent: var(--miresto-attr-dark-accent); --accent-strong: var(--miresto-attr-dark-strong); --accent-soft: var(--miresto-attr-dark-page-soft); --accent-faint: var(--miresto-attr-dark-page-faint); }
+body[data-attribute="冥"] { --accent: var(--miresto-attr-dark-accent); --accent-strong: var(--miresto-attr-dark-strong); --accent-soft: var(--miresto-attr-dark-page-soft); --accent-faint: var(--miresto-attr-dark-page-faint); --attribute-badge-bg: var(--miresto-attr-dark-accent); --attribute-badge-border: var(--miresto-attr-dark-accent); --attribute-badge-text: #fff; }
 
 * { box-sizing: border-box; }
 
