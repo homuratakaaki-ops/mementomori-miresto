@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>plainSummary入力チェック | ミレスト管理用</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #172033;
+      --muted: #657084;
+      --line: #d9dfeb;
+      --paper: #fbfaf7;
+      --panel: #ffffff;
+      --navy: #0b2a57;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: "Yu Gothic", "Hiragino Sans", "Meiryo", system-ui, sans-serif;
+      letter-spacing: 0;
+    }
+
+    header,
+    main {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 24px clamp(14px, 4vw, 32px);
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      font-size: clamp(30px, 5vw, 52px);
+      line-height: 1.1;
+    }
+
+    p {
+      margin-top: 0;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .summary {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: #edf1f8;
+      color: #3b4b65;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    th,
+    td {
+      padding: 10px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+      line-height: 1.6;
+    }
+
+    th {
+      background: #eef2f8;
+      color: var(--navy);
+      font-size: 13px;
+    }
+
+    tr:last-child td { border-bottom: 0; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>plainSummary入力チェック</h1>
+    <p>スキル分解カード用のひとこと要約が未入力のスキルを確認する管理用ページです。</p>
+  </header>
+  <main>
+    <div class="summary" id="summary"></div>
+    <table>
+      <thead>
+        <tr>
+          <th>キャラ</th>
+          <th>属性</th>
+          <th>スキル</th>
+          <th>種別</th>
+          <th>対象</th>
+        </tr>
+      </thead>
+      <tbody id="missingList"></tbody>
+    </table>
+  </main>
+
+  <script>
+    function escapeHtml(value) {
+      return String(value ?? "").replace(/[&<>"']/g, (char) => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        "\"": "&quot;",
+        "'": "&#39;"
+      }[char]));
+    }
+
+    async function init() {
+      const response = await fetch("../../data/mementomori-skills.json", { cache: "no-store" });
+      if (!response.ok) throw new Error(`JSON読み込み失敗: ${response.status}`);
+      const data = await response.json();
+      const characters = new Map((data.characters || []).map((character) => [character.id, character]));
+      const skills = data.skills || [];
+      const missing = skills
+        .filter((skill) => !skill.plainSummary)
+        .sort((a, b) => {
+          const ca = characters.get(a.characterId);
+          const cb = characters.get(b.characterId);
+          return String(ca?.name || "").localeCompare(String(cb?.name || ""), "ja") || a.number - b.number;
+        });
+
+      document.querySelector("#summary").innerHTML = [
+        `<span class="badge">全スキル ${skills.length}件</span>`,
+        `<span class="badge">未入力 ${missing.length}件</span>`,
+        `<span class="badge">入力済み ${skills.length - missing.length}件</span>`
+      ].join("");
+
+      document.querySelector("#missingList").innerHTML = missing.map((skill) => {
+        const character = characters.get(skill.characterId) || {};
+        return `
+          <tr>
+            <td>${escapeHtml(character.name || skill.characterId)}</td>
+            <td>${escapeHtml(character.attribute || "")}</td>
+            <td>S${escapeHtml(skill.number)} ${escapeHtml(skill.name)}</td>
+            <td>${escapeHtml(skill.skillType || "")}</td>
+            <td>${escapeHtml(skill.target || "")}</td>
+          </tr>
+        `;
+      }).join("");
+    }
+
+    init().catch((error) => {
+      document.querySelector("#summary").innerHTML = `<span class="badge">${escapeHtml(error.message)}</span>`;
+      console.error(error);
+    });
+  </script>
+</body>
+</html>
