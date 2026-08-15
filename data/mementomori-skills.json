@@ -1,6 +1,6 @@
 {
   "schema": "mementomori_skill_compare_v1",
-  "updatedAt": "2026-08-15T02:00:00.000+09:00",
+  "updatedAt": "2026-08-15T03:00:00.000+09:00",
   "gachaStatusUpdatedAt": "2026-05-27",
   "notes": [
     "Skill effects are summarized for comparison and are not copied as full official text.",
@@ -1624,9 +1624,16 @@
       "availability": "PU・運命",
       "gachaStatus": "",
       "roleMemo": "回復回数条件と毒を扱う翠スナイパー",
-      "noteUrl": "",
+      "noteUrl": "https://note.com/wazu_019/n/n8d4b94e8b360",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/kobell/"
+      "sourceUrl": "https://ichigogames.net/mementomori/kobel/",
+      "pickupHistory": [
+        {
+          "date": "2026-02-12",
+          "kind": "PU",
+          "round": 1
+        }
+      ]
     },
     {
       "id": "idyne",
@@ -13355,7 +13362,7 @@
       "id": "kobell-s1",
       "characterId": "kobell",
       "number": 1,
-      "name": "朧水面鏡",
+      "name": "朧氷面鏡",
       "skillType": "アクティブ",
       "category": "火力",
       "majorCategory": "攻撃",
@@ -13369,22 +13376,35 @@
       "compareMemo": "攻撃力+18% / HP+22% / 弱体効果命中+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/kobell/",
+      "sourceUrl": "https://ichigogames.net/mementomori/kobel/",
       "damage": {
         "singleMultiplier": 440,
         "hitCount": 3,
         "baseTotal": 1320,
         "exclusiveLv1Total": 1320,
         "exclusiveLv2Total": 1320,
-        "exclusiveLv3Total": 1320,
-        "conditionMaxTotal": 1320,
-        "conditionMaxNote": "",
+        "exclusiveLv3Total": 1440,
+        "conditionMaxTotal": 1440,
+        "conditionMaxNote": "専用Lv3で480%×3",
         "powerType": "通常攻撃倍率",
         "maxStacks": null,
         "realityRank": "中",
         "rankingTarget": "条件込み",
         "damageMemo": ""
-      }
+      },
+      "plainSummary": "敵のアタッカーを狙って殴りながら、攻撃力を下げるスキル。",
+      "steps": [
+        {
+          "text": "まず自分のHPを少し回復する(最大HPの5%)"
+        },
+        {
+          "text": "攻撃力が高い敵3体に物理攻撃(攻撃力×440%)"
+        },
+        {
+          "text": "70%の確率で脱力を4ターン付与",
+          "term": "脱力"
+        }
+      ]
     },
     {
       "id": "kobell-s2",
@@ -13404,7 +13424,7 @@
       "compareMemo": "攻撃力+18% / HP+22% / 弱体効果命中+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/kobell/",
+      "sourceUrl": "https://ichigogames.net/mementomori/kobel/",
       "damage": {
         "singleMultiplier": 480,
         "hitCount": 3,
@@ -13412,14 +13432,37 @@
         "exclusiveLv1Total": 1440,
         "exclusiveLv2Total": 1440,
         "exclusiveLv3Total": 1440,
-        "conditionMaxTotal": 1440,
-        "conditionMaxNote": "",
-        "powerType": "通常攻撃倍率",
+        "conditionMaxTotal": 5760,
+        "conditionMaxNote": "HP回復効果15回以上で1920%×3",
+        "powerType": "回復回数条件",
         "maxStacks": null,
         "realityRank": "中",
         "rankingTarget": "条件込み",
         "damageMemo": ""
-      }
+      },
+      "plainSummary": "味方を回復しながら敵を殴って毒を撒く。回復を重ねると超火力が解禁される。",
+      "steps": [
+        {
+          "text": "HP割合が最も低い味方を回復(攻撃力の30%)。これを3回くり返す"
+        },
+        {
+          "text": "HP割合が高い敵3体に物理攻撃(攻撃力×480%)"
+        },
+        {
+          "text": "70%の確率で毒を2ターン付与",
+          "term": "毒"
+        },
+        {
+          "text": "(条件解禁)バトル中のHP回復効果の発動回数が15以上なら物理攻撃が1920%になる"
+        }
+      ],
+      "verifications": [
+        {
+          "text": "回復回数のカウント対象はアクティブスキルによる回復のみ。パッシブは対象外",
+          "sourceLabel": "ワーズさんの性能解説",
+          "sourceUrl": "https://note.com/wazu_019/n/n8d4b94e8b360"
+        }
+      ]
     },
     {
       "id": "kobell-s3",
@@ -13439,7 +13482,19 @@
       "compareMemo": "攻撃力+18% / HP+22% / 弱体効果命中+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/kobell/"
+      "sourceUrl": "https://ichigogames.net/mementomori/kobel/",
+      "plainSummary": "開幕から、隣の2人を「回復されやすく・硬く」する。",
+      "steps": [
+        {
+          "text": "バトル開始時、隣接する味方2体の被回復量を10%増やす(6ターン)"
+        },
+        {
+          "text": "同時に、その2体の最大HPをコベル自身の最大HPの20%分増やす(解除不可)"
+        },
+        {
+          "text": "コベルが戦闘不能になると、被回復量の増加だけ解除される"
+        }
+      ]
     },
     {
       "id": "kobell-s4",
@@ -13459,7 +13514,16 @@
       "compareMemo": "攻撃力+18% / HP+22% / 弱体効果命中+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/kobell/"
+      "sourceUrl": "https://ichigogames.net/mementomori/kobel/",
+      "plainSummary": "殴られるたび回復し、受けるダメージを常に4割カットする巫女の守り。",
+      "steps": [
+        {
+          "text": "攻撃を受けるたび、受けたダメージの40%ぶんHPを回復する(その攻撃で戦闘不能になる場合は発動しない)"
+        },
+        {
+          "text": "バトル開始時から、受けるダメージを40%減らす(解除不可)"
+        }
+      ]
     },
     {
       "id": "idyne-s1",

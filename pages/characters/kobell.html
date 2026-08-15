@@ -1,0 +1,618 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>コベル | ミレストのメメントモリ分析データ室</title>
+  <meta name="description" content="コベルのスキルを、効果の順番・対象・火力・検証情報に分けて確認するためのデータページです。">
+  <link rel="canonical" href="https://memento.musoudc.com/pages/characters/kobell.html">
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #172033;
+      --muted: #657084;
+      --line: #d9dfeb;
+      --paper: #fbfaf7;
+      --panel: #ffffff;
+      --panel-soft: #f6faf5;
+      --accent: #2f8f5b;
+      --accent-strong: #17663b;
+      --accent-soft: #dff1e6;
+      --accent-faint: #f0f8f2;
+      --ratio: #b0352a;
+      --navy: #0b2a57;
+      --gold: #b88932;
+      --shadow: 0 12px 30px rgba(28, 40, 68, 0.12);
+    }
+
+    body[data-attribute="藍"] { --accent: #3575b8; --accent-strong: #164f88; --accent-soft: #deebf8; --accent-faint: #f1f6fc; }
+    body[data-attribute="紅"] { --accent: #b84c49; --accent-strong: #852c2b; --accent-soft: #f5dfdc; --accent-faint: #fcf3f1; }
+    body[data-attribute="翠"] { --accent: #2f8f5b; --accent-strong: #17663b; --accent-soft: #dff1e6; --accent-faint: #f0f8f2; }
+    body[data-attribute="黄"] { --accent: #b88b25; --accent-strong: #815b0f; --accent-soft: #f6e8bc; --accent-faint: #fff9e8; }
+    body[data-attribute="天"] { --accent: #8c72c8; --accent-strong: #5b4596; --accent-soft: #ebe5f8; --accent-faint: #f7f3ff; }
+    body[data-attribute="冥"] { --accent: #566071; --accent-strong: #2f3746; --accent-soft: #e4e7ed; --accent-faint: #f4f5f8; }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: "Yu Gothic", "Hiragino Sans", "Meiryo", system-ui, sans-serif;
+      letter-spacing: 0;
+    }
+
+    a { color: inherit; }
+
+    .page-header {
+      padding: 24px clamp(16px, 4vw, 48px) 22px;
+      border-bottom: 1px solid var(--line);
+      background: linear-gradient(180deg, #ffffff 0%, var(--accent-faint) 100%);
+    }
+
+    .header-inner,
+    main,
+    .footer-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+
+    .top-link {
+      display: inline-flex;
+      margin-bottom: 14px;
+      color: var(--accent-strong);
+      font-size: 13px;
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .eyebrow {
+      margin: 0 0 8px;
+      color: var(--accent-strong);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
+    }
+
+    h1 {
+      margin-bottom: 10px;
+      font-size: clamp(34px, 5vw, 56px);
+      line-height: 1.05;
+    }
+
+    .role {
+      max-width: 760px;
+      margin-bottom: 18px;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    .meta-row,
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .badge,
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: #edf1f8;
+      color: #3b4b65;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .badge.attribute,
+    .tag.major {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    main {
+      padding: 22px clamp(12px, 3vw, 24px) 46px;
+    }
+
+    .notice,
+    .note-panel {
+      margin-bottom: 16px;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-left: 4px solid var(--accent);
+      border-radius: 8px;
+      background: var(--panel);
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .skill-list {
+      display: grid;
+      gap: 16px;
+    }
+
+    .skill-card {
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      box-shadow: var(--shadow);
+    }
+
+    .skill-head {
+      display: grid;
+      gap: 10px;
+      padding: 16px;
+      border-bottom: 1px solid var(--line);
+      background: var(--accent-faint);
+    }
+
+    .skill-head h2 {
+      margin-bottom: 0;
+      font-size: clamp(24px, 3vw, 34px);
+      line-height: 1.25;
+    }
+
+    .summary {
+      margin: 0;
+      color: var(--ink);
+      font-size: 16px;
+      font-weight: 800;
+      line-height: 1.7;
+    }
+
+    .skill-body {
+      display: grid;
+      gap: 16px;
+      padding: 16px;
+    }
+
+    .block-title {
+      margin-bottom: 10px;
+      color: var(--accent-strong);
+      font-size: 15px;
+      font-weight: 900;
+    }
+
+    .steps {
+      display: grid;
+      gap: 0;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      counter-reset: step;
+    }
+
+    .steps li {
+      position: relative;
+      min-height: 48px;
+      padding: 0 0 14px 42px;
+      line-height: 1.75;
+      counter-increment: step;
+    }
+
+    .steps li::before {
+      content: counter(step);
+      position: absolute;
+      left: 0;
+      top: 0;
+      display: grid;
+      place-items: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 900;
+      z-index: 1;
+    }
+
+    .steps li::after {
+      content: "";
+      position: absolute;
+      left: 13px;
+      top: 28px;
+      bottom: 0;
+      border-left: 2px solid var(--accent-soft);
+    }
+
+    .steps li:last-child::after { display: none; }
+
+    .term {
+      display: inline;
+    }
+
+    .term summary {
+      display: inline;
+      color: var(--accent-strong);
+      font-weight: 900;
+      cursor: pointer;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .term summary::-webkit-details-marker { display: none; }
+
+    .term-box {
+      display: block;
+      margin: 8px 0 0;
+      padding: 10px;
+      border: 1px solid var(--accent-soft);
+      border-radius: 8px;
+      background: var(--accent-faint);
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .data-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .data-item {
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+    }
+
+    .data-item dt {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .data-item dd {
+      margin: 5px 0 0;
+      line-height: 1.65;
+    }
+
+    .ratio {
+      color: var(--ratio);
+      font-weight: 900;
+    }
+
+    .verification-list {
+      display: grid;
+      gap: 8px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .verification-list li {
+      padding: 10px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      line-height: 1.7;
+    }
+
+    .verification-list a {
+      color: var(--accent-strong);
+      font-weight: 900;
+    }
+
+    .weapon-table {
+      width: 100%;
+      border-collapse: collapse;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+    }
+
+    .weapon-table th,
+    .weapon-table td {
+      padding: 10px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+      line-height: 1.7;
+    }
+
+    .weapon-table tr:last-child th,
+    .weapon-table tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .weapon-table th {
+      width: 96px;
+      color: var(--accent-strong);
+      background: var(--accent-faint);
+    }
+
+    .fallback-condition {
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      line-height: 1.7;
+    }
+
+    .note-panel {
+      margin-top: 18px;
+      margin-bottom: 0;
+    }
+
+    .note-panel h2 {
+      margin-bottom: 8px;
+      font-size: 20px;
+    }
+
+    .note-panel a {
+      color: var(--accent-strong);
+      font-weight: 900;
+    }
+
+    footer {
+      padding: 24px clamp(14px, 4vw, 32px);
+      border-top: 1px solid var(--line);
+      background: #fff;
+      color: var(--muted);
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 14px;
+    }
+
+    .footer-links a {
+      color: var(--ink);
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    @media (max-width: 760px) {
+      .data-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .skill-head,
+      .skill-body {
+        padding: 14px;
+      }
+    }
+  </style>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-BHKBSRGSJF"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BHKBSRGSJF');
+  </script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6389066329814944"
+     crossorigin="anonymous"></script>
+</head>
+<body data-attribute="翠">
+  <header class="page-header">
+    <div class="header-inner">
+      <a class="top-link" href="./index.html">キャラ一覧へ戻る</a>
+      <p class="eyebrow">CHARACTER SKILL DATA</p>
+      <h1 id="characterName">コベル</h1>
+      <p class="role" id="roleMemo">スキル情報を読み込んでいます。</p>
+      <div class="meta-row" id="characterMeta"></div>
+    </div>
+  </header>
+
+  <main>
+    <p class="notice">このページはスキル効果を順番に分解したデータページです。評価・採用判断・環境考察は掲載せず、検証情報は出典が確認できるものだけを表示します。</p>
+    <section class="skill-list" id="skillList" aria-label="スキル分解カード"></section>
+    <section class="note-panel" id="notePanel" hidden>
+      <h2>評価・考察記事</h2>
+      <p>評価や運用判断は外部記事で確認してください。サイト内では検証済みデータと出典の整理に留めます。</p>
+      <a id="noteLink" href="#" rel="noopener" target="_blank">note記事を開く</a>
+    </section>
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-6389066329814944"
+         data-ad-slot="6111654373"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <span>ミレストのメメントモリ攻略・分析データベース / 非公式ファンサイト</span>
+      <nav class="footer-links" aria-label="固定ページ">
+        <a href="../../privacy.html">プライバシーポリシー</a>
+        <a href="../../disclaimer.html">免責事項</a>
+        <a href="../../about.html">このサイトについて</a>
+        <a href="../../contact.html">お問い合わせ</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+    const characterId = "kobell";
+    const termDefinitions = {
+      "脱力": "敵の攻撃力を20%下げる状態異常。減少量はバフ適用後の攻撃力から計算される。重ね掛けしても効果が一番大きい1つだけが効く。",
+      "毒": "毎ターン行動開始時に、現在HPの10%のダメージを受ける状態異常。"
+    };
+
+    function escapeHtml(value) {
+      return String(value ?? "").replace(/[&<>"']/g, (char) => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        "\"": "&quot;",
+        "'": "&#39;"
+      }[char]));
+    }
+
+    function valueOrDash(value) {
+      return value === null || value === undefined || value === "" ? "-" : value;
+    }
+
+    function highlightRatios(value) {
+      return escapeHtml(value).replace(/(攻撃力×)(\d+%)/g, "$1<span class=\"ratio\">$2</span>");
+    }
+
+    function formatPickupHistory(character) {
+      const history = Array.isArray(character.pickupHistory) ? character.pickupHistory : [];
+      if (!history.length) return escapeHtml(character.availability || "");
+      const items = history.map((item) => {
+        const month = String(item.date || "").slice(0, 7);
+        if (item.kind === "星の導き") return `${month} 星の導き`;
+        const round = item.round ? `${item.round}回目` : "";
+        return `${round}${item.kind}: ${month}`;
+      }).filter(Boolean);
+      return [character.availability, ...items].filter(Boolean).map(escapeHtml).join("｜");
+    }
+
+    function renderMeta(character) {
+      document.body.dataset.attribute = character.attribute || "翠";
+      document.querySelector("#characterMeta").innerHTML = [
+        `<span class="badge attribute">${escapeHtml(character.attribute)}</span>`,
+        `<span class="badge">${escapeHtml(character.weaponType)}</span>`,
+        `<span class="badge">スピード ${escapeHtml(character.speed)}</span>`,
+        `<span class="badge">入手 ${formatPickupHistory(character)}</span>`
+      ].join("");
+    }
+
+    function renderTermText(step) {
+      const raw = step.text || "";
+      if (!step.term || !termDefinitions[step.term] || !raw.includes(step.term)) {
+        return highlightRatios(raw);
+      }
+      const [before, after] = raw.split(step.term);
+      return `${highlightRatios(before)}<details class="term"><summary>${escapeHtml(step.term)}</summary><span class="term-box">${escapeHtml(termDefinitions[step.term])}<br>用語ページは準備中。</span></details>${highlightRatios(after)}`;
+    }
+
+    function renderSteps(skill) {
+      if (!Array.isArray(skill.steps) || skill.steps.length === 0) {
+        return skill.condition ? `<div><h3 class="block-title">効果条件</h3><div class="fallback-condition">${highlightRatios(skill.condition)}</div></div>` : "";
+      }
+      return `
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            ${skill.steps.map((step) => `<li>${renderTermText(step)}</li>`).join("")}
+          </ol>
+        </div>
+      `;
+    }
+
+    function totalDamageText(skill) {
+      if (!skill.damage) return "";
+      const base = skill.damage.baseTotal ? `通常 ${skill.damage.baseTotal}%` : "";
+      const max = skill.damage.conditionMaxTotal && skill.damage.conditionMaxTotal !== skill.damage.baseTotal
+        ? `最大 ${skill.damage.conditionMaxTotal}%`
+        : "";
+      return [base, max].filter(Boolean).join(" / ");
+    }
+
+    function renderDataRows(skill) {
+      const rows = [
+        `<dl class="data-item"><dt>対象</dt><dd>${escapeHtml(valueOrDash(skill.target))}</dd></dl>`,
+        `<dl class="data-item"><dt>合計火力</dt><dd>${highlightRatios(totalDamageText(skill) || valueOrDash(skill.multiplierText))}</dd></dl>`
+      ];
+      if (Array.isArray(skill.verifications) && skill.verifications.length > 0) {
+        rows.push(`<dl class="data-item"><dt>検証情報</dt><dd>${skill.verifications.length}件</dd></dl>`);
+      }
+      return `<div class="data-grid">${rows.join("")}</div>`;
+    }
+
+    function renderVerifications(skill) {
+      if (!Array.isArray(skill.verifications) || skill.verifications.length === 0) return "";
+      const items = skill.verifications
+        .filter((item) => item.sourceUrl)
+        .map((item) => `
+          <li>
+            ${escapeHtml(item.text)}
+            <br><a href="${escapeHtml(item.sourceUrl)}" target="_blank" rel="noopener">${escapeHtml(item.sourceLabel || "出典")}</a>
+          </li>
+        `);
+      if (!items.length) return "";
+      return `<div><h3 class="block-title">検証情報</h3><ul class="verification-list">${items.join("")}</ul></div>`;
+    }
+
+    function renderWeapon(skill) {
+      if (!skill.exclusiveWeapon) return "";
+      const parts = String(skill.exclusiveWeapon).split(/(?=専用Lv\d:)/).filter(Boolean);
+      const rows = parts.length ? parts.map((part) => {
+        const match = part.match(/^(専用Lv\d):\s*(.*)$/);
+        if (!match) return `<tr><th>専用</th><td>${highlightRatios(part)}</td></tr>`;
+        return `<tr><th>${escapeHtml(match[1])}</th><td>${highlightRatios(match[2])}</td></tr>`;
+      }) : [`<tr><th>専用</th><td>${highlightRatios(skill.exclusiveWeapon)}</td></tr>`];
+      return `<div><h3 class="block-title">専用武器</h3><table class="weapon-table">${rows.join("")}</table></div>`;
+    }
+
+    function renderSkillCard(skill) {
+      const ct = skill.ct === null || skill.ct === undefined ? "-" : skill.ct;
+      return `
+        <article class="skill-card">
+          <header class="skill-head">
+            <div class="tag-row">
+              <span class="tag">S${skill.number}</span>
+              <span class="tag">${escapeHtml(skill.skillType)}</span>
+              <span class="tag major">${escapeHtml(skill.majorCategory || skill.category)}</span>
+              <span class="tag">CT ${escapeHtml(ct)}</span>
+            </div>
+            <h2>${escapeHtml(skill.name)}</h2>
+            ${skill.plainSummary ? `<p class="summary">${escapeHtml(skill.plainSummary)}</p>` : ""}
+          </header>
+          <div class="skill-body">
+            ${renderSteps(skill)}
+            ${renderDataRows(skill)}
+            ${renderVerifications(skill)}
+            ${renderWeapon(skill)}
+          </div>
+        </article>
+      `;
+    }
+
+    async function init() {
+      try {
+        const response = await fetch("../../data/mementomori-skills.json", { cache: "no-store" });
+        if (!response.ok) throw new Error(`JSON読み込み失敗: ${response.status}`);
+        const data = await response.json();
+        const character = data.characters.find((item) => item.id === characterId);
+        const skills = data.skills.filter((skill) => skill.characterId === characterId).sort((a, b) => a.number - b.number);
+        if (!character) throw new Error("キャラが見つかりません");
+
+        document.title = `${character.name} | ミレストのメメントモリ分析データ室`;
+        document.querySelector("#characterName").textContent = character.name;
+        document.querySelector("#roleMemo").textContent = character.catchcopy || character.roleMemo || "";
+        renderMeta(character);
+        document.querySelector("#skillList").innerHTML = skills.map(renderSkillCard).join("");
+
+        if (character.noteUrl) {
+          document.querySelector("#notePanel").hidden = false;
+          document.querySelector("#noteLink").href = character.noteUrl;
+        }
+      } catch (error) {
+        document.querySelector("#roleMemo").textContent = error.message;
+        console.error(error);
+      }
+    }
+
+    init();
+  </script>
+</body>
+</html>
