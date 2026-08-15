@@ -441,7 +441,7 @@
       "roleMemo": "弱体効果中の敵に火力を伸ばし、自身復帰と多重バリアで粘るソーサラー",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": ""
+      "sourceUrl": "https://ichigogames.net/mementomori/rusalka/"
     },
     {
       "id": "elfriede",
@@ -876,7 +876,7 @@
       "roleMemo": "低スピード味方をシールドと防御で守る黄ウォーリア",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/rishess/"
+      "sourceUrl": "https://ichigogames.net/mementomori/richesse/"
     },
     {
       "id": "moddey_summer",
@@ -891,7 +891,7 @@
       "roleMemo": "毒を軸に吸収と遮断を重ねる黄ソーサラー",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/moddey_summer/"
+      "sourceUrl": "https://ichigogames.net/mementomori/moddey_swimsuit/"
     },
     {
       "id": "iris_black",
@@ -1446,7 +1446,7 @@
       "roleMemo": "気絶と連撃を持つ夏イベントの翠ウォーリア",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/sabrina_cool_breeze/"
+      "sourceUrl": "https://ichigogames.net/mementomori/sabrina_swimsuit/"
     },
     {
       "id": "fia",
@@ -2470,10 +2470,10 @@
       "majorCategory": "味方強化",
       "subCategory": "与ダメ増加 / 被弾回数スケール / 単体火力",
       "target": "自身と低スピード味方2体 / 攻撃力最高の敵",
-      "multiplierText": "物理980%",
+      "multiplierText": "与ダメージ+25%〜75% / 物理980%",
       "duration": "与ダメ増加4T",
       "ct": 4,
-      "condition": "対象が攻撃を受けた回数に応じて与ダメ増加量が上昇",
+      "condition": "4ターン、自身とスピードが低い味方2体の与ダメージ25%増加。このターン中に対象が攻撃を受けた回数で45/60/70/75%に上昇(最大4回)。その後攻撃力最高敵に物理980%、自身HPを総与ダメージ30%回復",
       "exclusiveWeapon": "専用Lv1: 物理1170%。専用Lv2: 与ダメ25→30%、最大75→90%",
       "compareMemo": "低速味方に寄せた火力支援。被弾回数で伸びるため評価条件を分ける",
       "noteUrl": "",
@@ -2493,7 +2493,27 @@
         "realityRank": "高",
         "rankingTarget": "基本",
         "damageMemo": "火力支援が主で、本人火力ランキングだけでは価値が伝わりにくい"
-      }
+      },
+      "plainSummary": "遅い味方たちの与ダメージを、被弾回数に応じて底上げする。",
+      "steps": [
+        {
+          "text": "自身とスピードが低い味方2体に与ダメージ25%増加を付与(4ターン)"
+        },
+        {
+          "text": "このターン中に対象が攻撃を受けた回数に応じて増加量が45%・60%・70%・75%へ上昇(最大4回)"
+        },
+        {
+          "text": "攻撃力が最も高い敵に物理980%"
+        },
+        {
+          "text": "自身のHPを総与ダメージ30%分回復する"
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "被弾回数参照はミナシュマリS2・フィアーS2と同族で、受けの多いタンク編成ほど支援量が伸びる。根拠: 増加量の参照が「被攻撃回数」のため"
+        }
+      ]
     },
     {
       "id": "sivi-s2",
@@ -2528,7 +2548,19 @@
         "realityRank": "高",
         "rankingTarget": "基本",
         "damageMemo": "回復込みで見るべき複合スキル"
-      }
+      },
+      "plainSummary": "殴った分で、遅い味方3人を回復して弱体も全部剥がす。",
+      "steps": [
+        {
+          "text": "ランダムな敵3体に物理530%"
+        },
+        {
+          "text": "スピードが低い味方3体を総与ダメージの15%分回復する"
+        },
+        {
+          "text": "同じ対象の弱体効果を全て解除する"
+        }
+      ]
     },
     {
       "id": "sivi-s3",
@@ -2548,7 +2580,16 @@
       "compareMemo": "隣接配置前提の耐久補助。対象範囲を比較に残すべき",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/sivi/"
+      "sourceUrl": "https://ichigogames.net/mementomori/sivi/",
+      "plainSummary": "自分と隣の防御を常時底上げ。自分は特に硬い。",
+      "steps": [
+        {
+          "text": "自身と隣接する味方2体の防御力・物理防御力を25%増加(解除不可)"
+        },
+        {
+          "text": "自身のみ、防御力・物理防御力の増加量が100%になる"
+        }
+      ]
     },
     {
       "id": "sivi-s4",
@@ -2563,12 +2604,24 @@
       "multiplierText": "被ダメ30%減少",
       "duration": "3T",
       "ct": null,
-      "condition": "アクティブスキルで弱体を受け、弱体2個以上なら全解除",
+      "condition": "アクティブスキルで弱体を受け、弱体2個以上なら全解除。発動後4回行動終了まで再発動しない。発動時、3ターン自身の被ダメージ30%減少",
       "exclusiveWeapon": "専用武器効果なし",
       "compareMemo": "ソルティーナS3に近い自己解除。軽減が付く点が違う",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/sivi/"
+      "sourceUrl": "https://ichigogames.net/mementomori/sivi/",
+      "plainSummary": "弱体が溜まったら自分でまとめて掃除し、被ダメも軽減。",
+      "steps": [
+        {
+          "text": "アクティブスキルで弱体を受け、自身の弱体効果が2個以上なら全解除"
+        },
+        {
+          "text": "発動後4回行動まで再発動しない"
+        },
+        {
+          "text": "発動時、自身の被ダメージを30%減少(3ターン)"
+        }
+      ]
     },
     {
       "id": "stella-s1",
@@ -3411,9 +3464,9 @@
       "subCategory": "ターン経過強化 / 防御減少",
       "target": "ランダム敵4体",
       "multiplierText": "物理360% / 3回目以降540%",
-      "duration": "物理防御力減少",
+      "duration": "物理防御力25%減少2T / オート・ボス4T / 無窮の塔50%",
       "ct": 4,
-      "condition": "このスキルを使うのが3回目以降なら倍率540%",
+      "condition": "攻撃前、対象の物理防御力25%減少を2ターン付与。オートバトル・ボスバトルでは4ターン、無窮の塔では減少量50%。このスキルを使うのが3回目以降なら倍率540%",
       "exclusiveWeapon": "専用Lv1: 対象4→5体",
       "compareMemo": "長期戦で倍率が上がる。短期戦火力と分けるべき",
       "noteUrl": "",
@@ -3433,7 +3486,22 @@
         "realityRank": "中",
         "rankingTarget": "条件込み",
         "damageMemo": "3回目以降なので短期戦ランキングとは分ける"
-      }
+      },
+      "plainSummary": "物防を下げてから撃つ、使い込むと1.5倍になる4体攻撃。",
+      "steps": [
+        {
+          "text": "攻撃前、対象の物理防御力を25%減少(2ターン)"
+        },
+        {
+          "text": "オートバトル・ボスバトルでは物理防御力減少が4ターン、無窮の塔では減少量が50%になる"
+        },
+        {
+          "text": "ランダムな敵4体に物理360%"
+        },
+        {
+          "text": "このスキルを使うのが3回目以降なら物理540%"
+        }
+      ]
     },
     {
       "id": "amleth-summer-s2",
@@ -3468,7 +3536,22 @@
         "realityRank": "低",
         "rankingTarget": "条件込み",
         "damageMemo": "長期戦・HP条件・追加攻撃が重なる理論寄り火力"
-      }
+      },
+      "plainSummary": "攻撃ごとに追撃判定が付く連撃。自分が瀕死なら追撃確定。",
+      "steps": [
+        {
+          "text": "攻撃力が最も高い敵に物理520%×4回"
+        },
+        {
+          "text": "攻撃するたび50%の確率でランダムな敵へ追加攻撃(最大4回)"
+        },
+        {
+          "text": "追加攻撃の判定前、自身のHPが50%以下なら追加攻撃の確率が100%になる"
+        },
+        {
+          "text": "このスキルを使うのが3回目以降なら最初の攻撃と追加攻撃が物理780%になる"
+        }
+      ]
     },
     {
       "id": "amleth-summer-s3",
@@ -3488,7 +3571,13 @@
       "compareMemo": "倍率ではなく攻撃力補正。長期戦評価に必須",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/amleth_summer/"
+      "sourceUrl": "https://ichigogames.net/mementomori/amleth_summer/",
+      "plainSummary": "毎ターン攻撃力が積もる長期戦エンジン。",
+      "steps": [
+        {
+          "text": "毎ターン開始時、攻撃力+5%を1スタック付与(最大20スタック=+100%、解除不可)"
+        }
+      ]
     },
     {
       "id": "amleth-summer-s4",
@@ -3500,15 +3589,33 @@
       "majorCategory": "防御",
       "subCategory": "HP1耐え / 不死身 / 攻撃力減少",
       "target": "自身",
-      "multiplierText": "HP1耐え / 不死身",
+      "multiplierText": "HP1耐え / 王の覚悟10T",
       "duration": "10T",
       "ct": null,
-      "condition": "致命ダメージ時にHP1で耐え、王の覚悟を付与",
+      "condition": "致命ダメージ時にHP1で耐え、10ターン王の覚悟を付与。王の覚悟は攻撃力90%減少と不死身。発動後8回行動終了まで再発動不可、17ターン目以降は発動しない。HP1で攻撃を受けると王の覚悟ターン-1。7ターン目以降発動時は攻撃力減少なし",
       "exclusiveWeapon": "専用Lv2: 再発動制限短縮。7ターン目以降なら攻撃力減少なし",
       "compareMemo": "長期戦の生存補助だが、攻撃力減少の扱いに注意",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/amleth_summer/"
+      "sourceUrl": "https://ichigogames.net/mementomori/amleth_summer/",
+      "plainSummary": "致命傷をHP1で耐え、「王の覚悟」で立ち続ける。",
+      "steps": [
+        {
+          "text": "致命的ダメージを受けたときHP1で耐え、「王の覚悟」を10ターン付与(解除不可)"
+        },
+        {
+          "text": "王の覚悟は攻撃力90%減少と不死身の効果を持つ"
+        },
+        {
+          "text": "7ターン目以降に王の覚悟を付与した場合、攻撃力は減少しない"
+        },
+        {
+          "text": "発動後8回行動まで再発動せず、17ターン目以降は発動しない"
+        },
+        {
+          "text": "HP1で攻撃を受けると、王の覚悟のターン数が1減少する"
+        }
+      ]
     },
     {
       "id": "giluial-s1",
@@ -4146,10 +4253,10 @@
       "majorCategory": "攻撃",
       "subCategory": "条件火力",
       "target": "ランダム敵5体",
-      "multiplierText": "物理420%",
+      "multiplierText": "物理380%",
       "duration": "2ターン味方全体の防御力10%増加",
       "ct": 4,
-      "condition": "2ターン味方全体の防御力10%増加 / クリティカル回数1回につき防御力+10% / 防御力増加は最大60%",
+      "condition": "ランダム敵5体に物理380%。2ターン味方全体の防御力10%増加。クリティカル回数1回につき防御力+5%、最大35%。専用Lv3で420%、専用Lv1で+10%/最大60%",
       "exclusiveWeapon": "Lv1: クリ時防御増加5%→10%、最大35%→60% / Lv3: 物理380%→420%",
       "compareMemo": "ランダム敵5体に物理420% / 2ターン味方全体の防御力10%増加 / クリティカル回数1回につき防御力+10% / 防御力増加は最大60%",
       "noteUrl": "",
@@ -4169,7 +4276,19 @@
         "realityRank": "中",
         "rankingTarget": "対象",
         "damageMemo": "カード生成JSONから自動マージ。専用Lv別・条件MAXは要精査"
-      }
+      },
+      "plainSummary": "撃ちながら全員の防御を上げる。クリが出るほど硬くなる。",
+      "steps": [
+        {
+          "text": "ランダムな敵5体に物理380%"
+        },
+        {
+          "text": "味方全体の防御力を10%増加(2ターン)"
+        },
+        {
+          "text": "クリティカル1回につき増加量+5%(最大35%)"
+        }
+      ]
     },
     {
       "id": "nina_summer-s2",
@@ -4204,7 +4323,19 @@
         "realityRank": "高",
         "rankingTarget": "対象",
         "damageMemo": "カード生成JSONから自動マージ。専用Lv別・条件MAXは要精査"
-      }
+      },
+      "plainSummary": "味方の弱体を剥がしつつ、敵を柔らかくする。",
+      "steps": [
+        {
+          "text": "ランダムな味方3体の弱体効果を1つ解除"
+        },
+        {
+          "text": "ランダムな敵5体に物理420%"
+        },
+        {
+          "text": "70%の確率で対象の被ダメージを10%増加(3ターン)"
+        }
+      ]
     },
     {
       "id": "nina_summer-s3",
@@ -4218,13 +4349,30 @@
       "target": "",
       "multiplierText": "",
       "duration": "2ターン攻撃力増加、行動阻害の残りターン数で最大40%",
-      "ct": "",
+      "ct": null,
       "condition": "自身がアクティブスキルで行動阻害を受けた時、自身と攻撃力が高い味方2体の攻撃力増加 / 2ターン攻撃力増加、行動阻害の残りターン数で最大40% / 対象の弱体効果を2つ解除 / 効果は解除不可",
       "exclusiveWeapon": "",
       "compareMemo": "自身がアクティブスキルで行動阻害を受けた時、自身と攻撃力が高い味方2体の攻撃力増加 / 2ターン攻撃力増加、行動阻害の残りターン数で最大40% / 対象の弱体効果を2つ解除 / 効果は解除不可",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/nina_summer/"
+      "sourceUrl": "https://ichigogames.net/mementomori/nina_summer/",
+      "plainSummary": "行動阻害を受けたら、自分とエースを強化して浄化で返す。",
+      "steps": [
+        {
+          "text": "自身がアクティブスキルで行動阻害を受けたとき、自身と攻撃力が高い味方2体の攻撃力を10%増加(2ターン、解除不可)"
+        },
+        {
+          "text": "行動阻害の残りターン数1ターンにつき攻撃力増加量+10%(最大40%)"
+        },
+        {
+          "text": "対象の弱体効果を2つ解除"
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "気絶・睡眠など行動阻害を多用してくる敵に対する逆用設計。根拠: 発動条件が「行動阻害を受けたとき」のため"
+        }
+      ]
     },
     {
       "id": "nina_summer-s4",
@@ -4238,13 +4386,22 @@
       "target": "1ターン目開始時または味方戦闘不能時、自身と攻撃力最高の味方",
       "multiplierText": "攻撃力200% / 攻撃力5%",
       "duration": "1ターン目開始時または味方戦闘不能時、自身と攻撃力最高の味方に3ターンシールド",
-      "ct": "",
-      "condition": "1ターン目開始時または味方戦闘不能時、自身と攻撃力最高の味方に3ターンシールド / シールド量は自身の攻撃力200% / 同時に攻撃力5%増加、戦闘不能味方数で最大25% / シールド中に自身が被攻撃時、ダメージ40%遮断",
+      "ct": null,
+      "condition": "1ターン目開始時または自身以外の味方戦闘不能時、自身と自身以外の攻撃力最高味方に3ターンシールド。シールド量は自身の攻撃力200%。同時に攻撃力5%増加、戦闘不能味方数で最大25%。自身への遮断は専用Lv2効果",
       "exclusiveWeapon": "Lv2: シールド中の被攻撃ダメージ40%遮断",
       "compareMemo": "1ターン目開始時または味方戦闘不能時、自身と攻撃力最高の味方に3ターンシールド / シールド量は自身の攻撃力200% / 同時に攻撃力5%増加、戦闘不能味方数で最大25% / シールド中に自身が被攻撃時、ダメージ40%遮断",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/nina_summer/"
+      "sourceUrl": "https://ichigogames.net/mementomori/nina_summer/",
+      "plainSummary": "開幕と、味方が倒れた瞬間に自分とエースへ盾を張る。",
+      "steps": [
+        {
+          "text": "1ターン目開始時または自身以外の味方が戦闘不能になったとき、自身と自身以外で攻撃力が最も高い味方に攻撃力200%のシールドを3ターン付与"
+        },
+        {
+          "text": "同時に攻撃力+5%(戦闘不能の味方数に応じて最大25%、解除不可)"
+        }
+      ]
     },
     {
       "id": "serruria-s1",
@@ -5523,7 +5680,7 @@
       "compareMemo": "専用Lv2で火力上昇。与ダメ減少は条件つき付与",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "",
+      "sourceUrl": "https://ichigogames.net/mementomori/rusalka/",
       "damage": {
         "singleMultiplier": 480,
         "hitCount": 5,
@@ -5537,7 +5694,19 @@
         "realityRank": "高",
         "rankingTarget": "基本",
         "damageMemo": "魔力条件は付与率の条件で火力条件ではない"
-      }
+      },
+      "plainSummary": "敵全体の与ダメージを削る雨。格下には確定付与。",
+      "steps": [
+        {
+          "text": "ランダムな敵5体に魔法480%"
+        },
+        {
+          "text": "50%の確率で与ダメージ15%減少を1ターン付与"
+        },
+        {
+          "text": "対象の魔力が自身より低ければ付与確率100%"
+        }
+      ]
     },
     {
       "id": "rusalka-s2",
@@ -5557,7 +5726,7 @@
       "compareMemo": "弱体効果中の敵に対して火力が倍化する",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "",
+      "sourceUrl": "https://ichigogames.net/mementomori/rusalka/",
       "damage": {
         "singleMultiplier": 470,
         "hitCount": 4,
@@ -5571,7 +5740,21 @@
         "realityRank": "中",
         "rankingTarget": "条件込み",
         "damageMemo": "弱体付与役と組む前提で評価"
-      }
+      },
+      "plainSummary": "弱体持ちの敵に2倍で刺さる4連撃。",
+      "steps": [
+        {
+          "text": "ランダムな敵に魔法470%×4回"
+        },
+        {
+          "text": "対象が弱体効果中ならダメージ2倍"
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "S1の与ダメージ減少が②の条件を自給する。弱体を撒く味方とも噛み合う。根拠: 倍率条件が「弱体効果中」のため"
+        }
+      ]
     },
     {
       "id": "rusalka-s3",
@@ -5586,12 +5769,27 @@
       "multiplierText": "最大HP10%回復 / 多重バリア5層",
       "duration": "1T",
       "ct": null,
-      "condition": "戦闘不能時に1回だけ復活し、自身と味方全体に多重バリアを付与",
+      "condition": "戦闘不能時に最大HP10%回復で復活し、CTを0にする。自身に多重バリア5層、攻撃力70%・スピード30%増加を1ターン付与。自身以外の味方全体に多重バリア1層。バトル中1回",
       "exclusiveWeapon": "専用武器効果なし",
       "compareMemo": "一度だけ復帰し、攻撃力・スピード増加も得る耐久補助",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": ""
+      "sourceUrl": "https://ichigogames.net/mementomori/rusalka/",
+      "plainSummary": "一度だけ復活し、全員にバリアを配って戻ってくる。",
+      "steps": [
+        {
+          "text": "戦闘不能時に1回だけ復活(最大HP10%回復)し、自身のスキルCTを0にする"
+        },
+        {
+          "text": "自身に多重バリア5層を付与"
+        },
+        {
+          "text": "自身の攻撃力を70%、スピードを30%増加(1ターン)"
+        },
+        {
+          "text": "自身以外の味方全体に多重バリア1層を付与"
+        }
+      ]
     },
     {
       "id": "rusalka-s4",
@@ -5603,15 +5801,27 @@
       "majorCategory": "防御",
       "subCategory": "物防貫通 / クリ耐性 / スピード",
       "target": "自身",
-      "multiplierText": "物防貫通+50% / クリ耐性+50% / スピード+30%",
+      "multiplierText": "物魔防御貫通+50% / クリ耐性+50%",
       "duration": "3T / 専用Lv3で1T追加",
       "ct": null,
-      "condition": "バトル開始時または被攻撃時、HP条件に応じて耐久バフを付与。次に攻撃を受けた時に解除され再判定",
+      "condition": "バトル開始時または被攻撃時、HP50%未満なら3ターン物魔防御貫通50%増加、HP50%以上なら3ターンクリティカル耐性率50%増加。次に攻撃を受けた時に解除され再判定。スピード増加は専用Lv3効果",
       "exclusiveWeapon": "専用Lv3: バトル開始時1ターン自身のスピード30%増加",
       "compareMemo": "HP条件で耐久性能が変わる自己補助",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": ""
+      "sourceUrl": "https://ichigogames.net/mementomori/rusalka/",
+      "plainSummary": "被弾のたびに掛け替わる耐久バフ。",
+      "steps": [
+        {
+          "text": "バトル開始時または被攻撃時、自身のHPが50%未満なら物魔防御貫通を50%増加(3ターン)"
+        },
+        {
+          "text": "自身のHPが50%以上ならクリティカル耐性率を50%増加(3ターン)"
+        },
+        {
+          "text": "次に攻撃を受けたときにこのバフは解除され、再度HP割合を判定する"
+        }
+      ]
     },
     {
       "id": "elfriede-s1",
@@ -9417,12 +9627,21 @@
       "multiplierText": "攻撃力300%シールド",
       "duration": "",
       "ct": 4,
-      "condition": "3ターンシールドと弱体効果耐性50%増加",
+      "condition": "自身と自身以外のスピード最低味方に3ターン、攻撃力300%シールドと弱体効果耐性50%増加を付与",
       "exclusiveWeapon": "専用Lv1: シールド500%。専用Lv2: 弱体耐性100%",
       "compareMemo": "耐久力+8% / 攻撃力+18% / 弱体効果命中+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/rishess/"
+      "sourceUrl": "https://ichigogames.net/mementomori/richesse/",
+      "plainSummary": "自分と一番遅い味方に盾と弱体耐性を配る。",
+      "steps": [
+        {
+          "text": "自身と自身以外でスピードが最も低い味方に攻撃力300%のシールドを3ターン付与"
+        },
+        {
+          "text": "同じ対象の弱体効果耐性率を50%増加(3ターン)"
+        }
+      ]
     },
     {
       "id": "rishess-s2",
@@ -9442,7 +9661,7 @@
       "compareMemo": "耐久力+8% / 攻撃力+18% / 弱体効果命中+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/rishess/",
+      "sourceUrl": "https://ichigogames.net/mementomori/richesse/",
       "damage": {
         "singleMultiplier": 540,
         "hitCount": 3,
@@ -9457,7 +9676,17 @@
         "realityRank": "中",
         "rankingTarget": "基本",
         "damageMemo": "詳細条件はconditionを参照"
-      }
+      },
+      "plainSummary": "沈黙を狙う3体攻撃。",
+      "steps": [
+        {
+          "text": "ランダムな敵3体に物理540%"
+        },
+        {
+          "text": "55%の確率で沈黙を1ターン付与",
+          "term": "沈黙"
+        }
+      ]
     },
     {
       "id": "rishess-s3",
@@ -9477,7 +9706,18 @@
       "compareMemo": "耐久力+8% / 攻撃力+18% / 弱体効果命中+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/rishess/"
+      "sourceUrl": "https://ichigogames.net/mementomori/richesse/",
+      "plainSummary": "一番遅い味方と自分の防御を常時底上げ。",
+      "steps": [
+        {
+          "text": "自身と、自身以外でスピードが最も低い味方の防御力を50%増加(解除不可)"
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "スピードが最も低い味方を守る設計は、遅い高火力アタッカーを据える編成と噛み合う。根拠: 対象条件が「スピード最低の味方」のため"
+        }
+      ]
     },
     {
       "id": "rishess-s4",
@@ -9497,7 +9737,16 @@
       "compareMemo": "耐久力+8% / 攻撃力+18% / 弱体効果命中+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/rishess/"
+      "sourceUrl": "https://ichigogames.net/mementomori/richesse/",
+      "plainSummary": "味方が半分削られたら即座に盾を差し込む。",
+      "steps": [
+        {
+          "text": "味方が攻撃を受けてHP50%以下になったとき、攻撃力500%のシールドを1ターン付与"
+        },
+        {
+          "text": "発動後4回行動まで再発動しない"
+        }
+      ]
     },
     {
       "id": "moddey_summer-s1",
@@ -9510,14 +9759,14 @@
       "subCategory": "画像カード準拠",
       "target": "ランダム敵3体",
       "multiplierText": "魔法330%",
-      "duration": "",
+      "duration": "毒4T / 攻撃力15%吸収2T",
       "ct": 4,
-      "condition": "2ターン毒を付与。毒付帯中に攻撃力最高の敵の攻撃力15%を吸収",
+      "condition": "ランダム敵3体に魔法330%。4ターン毒を付与。毒は行動開始時に現在HP3%ダメージ。毒付与後、毒付帯中で攻撃力最高の敵の攻撃力15%を吸収し、2ターン自身に加える",
       "exclusiveWeapon": "専用Lv1: 対象4体。専用Lv2: 吸収30%。専用Lv3: 毒5%",
       "compareMemo": "魔力+8% / 攻撃力+18% / 弱体効果命中+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/moddey_summer/",
+      "sourceUrl": "https://ichigogames.net/mementomori/moddey_swimsuit/",
       "damage": {
         "singleMultiplier": 330,
         "hitCount": 3,
@@ -9532,7 +9781,20 @@
         "realityRank": "中",
         "rankingTarget": "基本",
         "damageMemo": "詳細条件はconditionを参照"
-      }
+      },
+      "plainSummary": "毒を撒き、毒のある間は敵エースの攻撃力を吸う。",
+      "steps": [
+        {
+          "text": "ランダムな敵3体に魔法330%"
+        },
+        {
+          "text": "毒を4ターン付与(行動開始時に現在HP3%ダメージ)",
+          "term": "毒"
+        },
+        {
+          "text": "毒付与後、毒を付帯している敵のうち攻撃力が最も高い敵の攻撃力15%を吸収し、2ターン自身に加える"
+        }
+      ]
     },
     {
       "id": "moddey_summer-s2",
@@ -9552,7 +9814,7 @@
       "compareMemo": "魔力+8% / 攻撃力+18% / 弱体効果命中+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/moddey_summer/",
+      "sourceUrl": "https://ichigogames.net/mementomori/moddey_swimsuit/",
       "damage": {
         "singleMultiplier": 230,
         "hitCount": 4,
@@ -9567,7 +9829,21 @@
         "realityRank": "中",
         "rankingTarget": "基本",
         "damageMemo": "詳細条件はconditionを参照"
-      }
+      },
+      "plainSummary": "毒の敵が多いほど連撃が増える。",
+      "steps": [
+        {
+          "text": "ランダムな敵に魔法230%×4回"
+        },
+        {
+          "text": "毒を付帯している敵1体につき攻撃回数+1(最大9回)"
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "S1の毒が②の弾数そのもの。毒を撒く味方がいればさらに加速する。根拠: 攻撃回数の参照が「毒付帯の敵数」のため"
+        }
+      ]
     },
     {
       "id": "moddey_summer-s3",
@@ -9587,7 +9863,19 @@
       "compareMemo": "魔力+8% / 攻撃力+18% / 弱体効果命中+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/moddey_summer/"
+      "sourceUrl": "https://ichigogames.net/mementomori/moddey_swimsuit/",
+      "plainSummary": "毒の敵からの攻撃とカウンタは7.5割カット。",
+      "steps": [
+        {
+          "text": "攻撃を受けたとき、ダメージを50%遮断"
+        },
+        {
+          "text": "攻撃してきた敵が毒付帯中なら遮断が75%になる"
+        },
+        {
+          "text": "自身がカウンタダメージを受けたときも同様に75%遮断する"
+        }
+      ]
     },
     {
       "id": "moddey_summer-s4",
@@ -9607,7 +9895,16 @@
       "compareMemo": "魔力+8% / 攻撃力+18% / 弱体効果命中+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/moddey_summer/"
+      "sourceUrl": "https://ichigogames.net/mementomori/moddey_swimsuit/",
+      "plainSummary": "毒の敵の数だけ毎ターン攻撃力が積もる。",
+      "steps": [
+        {
+          "text": "毎ターン開始時、攻撃力+5%を付与(最大20スタック=+100%、解除不可)"
+        },
+        {
+          "text": "毒を付帯している敵1体につき、その回の増加量がさらに+5%大きくなる"
+        }
+      ]
     },
     {
       "id": "iris_black-s1",
@@ -11822,7 +12119,16 @@
       "compareMemo": "耐久力+8% / 魔力+8% / 攻撃力+18%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/chiffon/"
+      "sourceUrl": "https://ichigogames.net/mementomori/chiffon/",
+      "plainSummary": "全員に防御・攻撃・シールドをまとめて配る。",
+      "steps": [
+        {
+          "text": "味方全体の防御力+50%・攻撃力+10%(4ターン)"
+        },
+        {
+          "text": "攻撃力100%のシールドを2ターン付与"
+        }
+      ]
     },
     {
       "id": "chiffon-s2",
@@ -11834,10 +12140,10 @@
       "majorCategory": "攻撃",
       "subCategory": "範囲火力 / 回復 / 睡眠",
       "target": "ランダム敵 / 味方5体",
-      "multiplierText": "魔法300% / HP回復",
+      "multiplierText": "魔法300% / 攻撃力100%回復",
       "duration": "クリ耐性減少・睡眠1T",
       "ct": 4,
-      "condition": "敵に当たると自身HP100%回復、味方に当たるとHP15%回復。クリ耐性30%減少と睡眠付与。挑発・ステルス無視",
+      "condition": "ランダムな敵か味方5体を対象にする。味方に当たると攻撃力100%分回復し、クリダメ強化15%増加を2ターン付与。敵に当たると魔法300%、1ターンクリティカル耐性率30%減少と睡眠を付与。これらは1つの弱体扱いで、対象が攻撃を受けると解除。挑発・ステルス無視",
       "exclusiveWeapon": "専用Lv2: クリダメ強化増加30%",
       "compareMemo": "耐久力+8% / 魔力+8% / 攻撃力+18%",
       "noteUrl": "",
@@ -11857,7 +12163,23 @@
         "realityRank": "中",
         "rankingTarget": "基本",
         "damageMemo": "画像カードからの暫定入力"
-      }
+      },
+      "plainSummary": "敵に当たれば妨害、味方に当たれば回復のランダム弾。",
+      "steps": [
+        {
+          "text": "ランダムな敵か味方5体を対象にする(挑発・ステルスを無視)"
+        },
+        {
+          "text": "味方に当たった場合、その味方を攻撃力100%分回復し、クリダメ強化を15%増加(2ターン)"
+        },
+        {
+          "text": "敵に当たった場合、対象に魔法300%を与え、クリティカル耐性率30%減少と睡眠を1ターン付与",
+          "term": "睡眠"
+        },
+        {
+          "text": "クリティカル耐性率減少と睡眠は1つの弱体扱いで、対象が攻撃を受けると解除される"
+        }
+      ]
     },
     {
       "id": "chiffon-s3",
@@ -11877,7 +12199,16 @@
       "compareMemo": "耐久力+8% / 魔力+8% / 攻撃力+18%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/chiffon/"
+      "sourceUrl": "https://ichigogames.net/mementomori/chiffon/",
+      "plainSummary": "自分の耐久と、開幕のエースへの盾。",
+      "steps": [
+        {
+          "text": "自身の最大HP+30%・防御力+30%(解除不可)"
+        },
+        {
+          "text": "1ターン目開始時、自身以外で攻撃力が最も高い味方に攻撃力150%のシールドを1ターン付与"
+        }
+      ]
     },
     {
       "id": "chiffon-s4",
@@ -11897,7 +12228,19 @@
       "compareMemo": "耐久力+8% / 魔力+8% / 攻撃力+18%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/chiffon/"
+      "sourceUrl": "https://ichigogames.net/mementomori/chiffon/",
+      "plainSummary": "序盤ほど強い、大ダメージの4割カット。",
+      "steps": [
+        {
+          "text": "最大HP10%を超えるダメージを受けたとき、40%遮断"
+        },
+        {
+          "text": "毎ターン開始時、遮断効果が4%ずつ減る"
+        },
+        {
+          "text": "11ターン目以降は発動しない"
+        }
+      ]
     },
     {
       "id": "artie-s1",
@@ -11912,7 +12255,7 @@
       "multiplierText": "魔法350%",
       "duration": "魔防-20% / 被ダメ+10% 4T",
       "ct": 4,
-      "condition": "攻撃前、対象の魔防減少と被ダメ増加。自身にクリティカル耐性率10%を付与、既に付帯中なら2スタック、なければ3スタック、最大10スタック。解除不可",
+      "condition": "攻撃前、対象の魔法防御力20%減少と被ダメージ10%増加を4ターン付与。ランダム敵5体に魔法350%。自身が付与したクリティカル耐性率増加を付帯中なら2スタック、なければ3スタック付与(最大10、解除不可)",
       "exclusiveWeapon": "専用Lv1: 魔防減少40%、被ダメ増加20%",
       "compareMemo": "魔力+8% / 攻撃力+18% / 命中+10%",
       "noteUrl": "",
@@ -11932,7 +12275,19 @@
         "realityRank": "中",
         "rankingTarget": "基本",
         "damageMemo": "画像カードからの暫定入力"
-      }
+      },
+      "plainSummary": "敵を柔らかくしながら、自分のクリ耐性を積む攻防一体スキル。",
+      "steps": [
+        {
+          "text": "攻撃前、対象の魔法防御力を20%減少させ、被ダメージを10%増加(4ターン)"
+        },
+        {
+          "text": "ランダムな敵5体に魔法350%"
+        },
+        {
+          "text": "自身にクリティカル耐性率+10%を付与(付帯中なら2スタック、なければ3スタック、最大10、解除不可)"
+        }
+      ]
     },
     {
       "id": "artie-s2",
@@ -11944,7 +12299,7 @@
       "majorCategory": "攻撃",
       "subCategory": "弱体条件 / 自己回復",
       "target": "ランダム敵",
-      "multiplierText": "魔法170%×7回 / 専用Lv3 200%",
+      "multiplierText": "魔法170%×7回",
       "duration": "",
       "ct": 4,
       "condition": "対象HP割合が自身より低い場合2倍。対象が弱体中なら必ずクリティカル。HPを総与ダメージ20%回復",
@@ -11967,7 +12322,22 @@
         "realityRank": "中",
         "rankingTarget": "基本",
         "damageMemo": "画像カードからの暫定入力"
-      }
+      },
+      "plainSummary": "弱った敵に2倍、弱体持ちには確定クリの吸血連撃。",
+      "steps": [
+        {
+          "text": "ランダムな敵に魔法170%×7回"
+        },
+        {
+          "text": "対象のHP割合が自身より低ければダメージ2倍"
+        },
+        {
+          "text": "対象が弱体効果中なら必ずクリティカル"
+        },
+        {
+          "text": "総与ダメージの20%をHP回復"
+        }
+      ]
     },
     {
       "id": "artie-s3",
@@ -11987,7 +12357,13 @@
       "compareMemo": "魔力+8% / 攻撃力+18% / 命中+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/artie/"
+      "sourceUrl": "https://ichigogames.net/mementomori/artie/",
+      "plainSummary": "耐久の常時底上げ。",
+      "steps": [
+        {
+          "text": "自身の最大HP+30%・被ダメージ30%減少(解除不可)"
+        }
+      ]
     },
     {
       "id": "artie-s4",
@@ -12007,7 +12383,21 @@
       "compareMemo": "魔力+8% / 攻撃力+18% / 命中+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/artie/"
+      "sourceUrl": "https://ichigogames.net/mementomori/artie/",
+      "plainSummary": "クリ耐性スタックを消費して、大ダメージの超過分をカットする。",
+      "steps": [
+        {
+          "text": "バトル開始時、クリティカル耐性+10%のスタックを8つ付与(最大10、解除不可)"
+        },
+        {
+          "text": "最大HP5%を超えるダメージを受けたとき、1スタック消費して超過分を70%遮断"
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "S1がスタックの補充源になっており、S1を回すほど②の遮断が長持ちする自己完結設計。根拠: S1の付与とS4の消費が同じスタックのため"
+        }
+      ]
     },
     {
       "id": "cordie_summer-s1",
@@ -14578,7 +14968,7 @@
       "compareMemo": "魔力+8% / 攻撃力+18% / クリティカル+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/sabrina_cool_breeze/",
+      "sourceUrl": "https://ichigogames.net/mementomori/sabrina_swimsuit/",
       "damage": {
         "singleMultiplier": 350,
         "hitCount": 4,
@@ -14593,7 +14983,23 @@
         "realityRank": "中",
         "rankingTarget": "条件込み",
         "damageMemo": ""
-      }
+      },
+      "plainSummary": "クリ耐性を剥がしてから撃ち、一番元気な敵を気絶させる。",
+      "steps": [
+        {
+          "text": "攻撃前、対象のクリティカル耐性率を40%減少(4ターン)"
+        },
+        {
+          "text": "ランダムな敵4体に物理350%"
+        },
+        {
+          "text": "対象の中でHP割合が最も高い敵に気絶を2ターン付与",
+          "term": "気絶"
+        },
+        {
+          "text": "物理攻撃の対象が全員戦闘不能になっている場合、気絶は発動しない"
+        }
+      ]
     },
     {
       "id": "sabrina_cool_breeze-s2",
@@ -14608,12 +15014,12 @@
       "multiplierText": "物理200%×5回",
       "duration": "",
       "ct": 4,
-      "condition": "クリティカル後の連撃は必ずクリティカル。4回以上クリティカルでバフ2つ解除と追加物理600%。撃破ごと攻撃回数+1、最大5回",
+      "condition": "ランダム敵に5回物理200%。クリティカル後の連撃は必ずクリティカル。4回以上クリティカルで連撃対象のうちHP割合最低の敵のバフを2つ解除し、追加で物理600%。敵を戦闘不能にするたび追加攻撃の攻撃回数+1、最大5回",
       "exclusiveWeapon": "専用Lv2: 最初の物理攻撃が7回",
       "compareMemo": "魔力+8% / 攻撃力+18% / クリティカル+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/sabrina_cool_breeze/",
+      "sourceUrl": "https://ichigogames.net/mementomori/sabrina_swimsuit/",
       "damage": {
         "singleMultiplier": 200,
         "hitCount": 5,
@@ -14628,7 +15034,27 @@
         "realityRank": "中",
         "rankingTarget": "条件込み",
         "damageMemo": ""
-      }
+      },
+      "plainSummary": "一度クリティカルが出ると後続が確定クリになる連撃。",
+      "steps": [
+        {
+          "text": "ランダムな敵に物理200%×5回"
+        },
+        {
+          "text": "クリティカル後の連撃は必ずクリティカルになる"
+        },
+        {
+          "text": "4回以上クリティカルで、連撃対象のうちHP割合が最も低い敵のバフを2つ解除し、追加で物理600%"
+        },
+        {
+          "text": "このスキルで敵を戦闘不能にするたび、追加攻撃の攻撃回数+1(最大5回)"
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "S1のクリ耐性減少が②の初回クリティカルを起こしやすくする自己完結設計。クリ率支援とも噛み合う。根拠: 連鎖の起点がクリティカル発生のため"
+        }
+      ]
     },
     {
       "id": "sabrina_cool_breeze-s3",
@@ -14648,7 +15074,20 @@
       "compareMemo": "魔力+8% / 攻撃力+18% / クリティカル+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/sabrina_cool_breeze/"
+      "sourceUrl": "https://ichigogames.net/mementomori/sabrina_swimsuit/",
+      "plainSummary": "倒された瞬間、相手を必ず気絶させる置き土産。",
+      "steps": [
+        {
+          "text": "自身が戦闘不能になったとき、攻撃してきた敵に100%の確率で気絶を1ターン付与",
+          "term": "気絶"
+        },
+        {
+          "text": "弱体効果によって戦闘不能になった場合は発動しない"
+        },
+        {
+          "text": "バトル開始時、自身の命中率+40%(解除不可)"
+        }
+      ]
     },
     {
       "id": "sabrina_cool_breeze-s4",
@@ -14668,7 +15107,13 @@
       "compareMemo": "魔力+8% / 攻撃力+18% / クリティカル+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/sabrina_cool_breeze/"
+      "sourceUrl": "https://ichigogames.net/mementomori/sabrina_swimsuit/",
+      "plainSummary": "耐久の常時底上げ。",
+      "steps": [
+        {
+          "text": "自身の最大HP+40%・防御力+100%(解除不可)"
+        }
+      ]
     },
     {
       "id": "fia-s1",
@@ -15138,7 +15583,17 @@
         "realityRank": "中",
         "rankingTarget": "条件込み",
         "damageMemo": ""
-      }
+      },
+      "plainSummary": "出血を撒く起点スキル。",
+      "steps": [
+        {
+          "text": "ランダムな敵4体に物理250%"
+        },
+        {
+          "text": "70%の確率で出血を2ターン付与(行動開始時に自身の攻撃力50%ダメージ)",
+          "term": "出血"
+        }
+      ]
     },
     {
       "id": "alexandra-s2",
@@ -15173,7 +15628,16 @@
         "realityRank": "中",
         "rankingTarget": "条件込み",
         "damageMemo": ""
-      }
+      },
+      "plainSummary": "「守護騎士」中は倍の10連撃になる主砲。",
+      "steps": [
+        {
+          "text": "攻撃力が最も高い敵に物理420%×5回"
+        },
+        {
+          "text": "自身が守護騎士中なら攻撃回数が10回になる"
+        }
+      ]
     },
     {
       "id": "alexandra-s3",
@@ -15193,7 +15657,27 @@
       "compareMemo": "攻撃力+18% / HP+22% / 弱体効果命中+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/alexandra/"
+      "sourceUrl": "https://ichigogames.net/mementomori/alexandra/",
+      "plainSummary": "7ターン目に「守護騎士」へ覚醒。受けた傷が攻撃力になる。",
+      "steps": [
+        {
+          "text": "7ターン目開始時、守護騎士を20ターン付与(解除不可)"
+        },
+        {
+          "text": "攻撃力がそれまでに受けた総被ダメージの5%分増加(上限はステータス増減前の自身攻撃力100%)"
+        },
+        {
+          "text": "同時に命中率を80%増加"
+        },
+        {
+          "text": "7ターン目開始時、自身のスキルCTを0にする"
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "7ターン目の覚醒とCTリセットが後半型の動きに直結する。被弾参照はフィアーS2・ミナシュマリS2と同系で、被弾の多い持久戦ほど伸びる。根拠: 発動条件が「7ターン目開始時」、増加参照が「総被ダメージ」のため"
+        }
+      ]
     },
     {
       "id": "alexandra-s4",
@@ -15208,12 +15692,27 @@
       "multiplierText": "被ダメージ20%回復",
       "duration": "",
       "ct": null,
-      "condition": "被攻撃時にHP回復。翠属性味方1体につき回復量+20%、最大80%。専用武器効果でバトル開始時6T自身のHPドレイン40%増加",
+      "condition": "被攻撃時にHP回復。バトル開始時の自身以外の翠属性味方1体につき回復量+20%、最大80%。この攻撃で戦闘不能になった場合は発動しない。1ターン5回まで",
       "exclusiveWeapon": "専用武器効果: バトル開始時6T自身のHPドレイン40%増加",
       "compareMemo": "攻撃力+18% / HP+22% / 弱体効果命中+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/alexandra/"
+      "sourceUrl": "https://ichigogames.net/mementomori/alexandra/",
+      "plainSummary": "被弾の一部を自動回復。翠の頭数で回復が伸びる。",
+      "steps": [
+        {
+          "text": "攻撃を受けたとき、被ダメージの20%をHP回復する"
+        },
+        {
+          "text": "バトル開始時の自身以外の翠属性味方1体につき回復量+20%(最大80%)"
+        },
+        {
+          "text": "この攻撃で戦闘不能になった場合は発動しない"
+        },
+        {
+          "text": "1ターンに5回まで発動する"
+        }
+      ]
     },
     {
       "id": "mira-s1",
