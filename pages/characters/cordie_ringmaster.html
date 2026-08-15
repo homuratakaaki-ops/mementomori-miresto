@@ -428,7 +428,7 @@
       <aside class="side-panel">
         <h2>関連リンク</h2>
         <p id="gachaUpdated" class="status">ガチャ状態確認日：2026-06-05</p>
-        <p class="status">恒常キャラではありません。直近ピックアップは2026年2月26日、次回ガチャはPU・運命扱い。</p>
+        <p id="pickupHistoryText" class="status" hidden></p>
         <ul class="link-list">
           <li><a href="/">トップへ戻る</a></li>
           <li><a href="../../compare-prototype.html">比較DBへ戻る</a></li>
@@ -456,14 +456,74 @@
       return value === null || value === undefined || value === "" ? "-" : value;
     }
 
-    function renderMeta(character) {
+    function formatDate(value, withYear = true) {
+      const match = String(value || "").match(/^(\d{4})-(\d{2})-(\d{2})$/);
+      if (!match) return value || "";
+      const year = Number(match[1]);
+      const month = Number(match[2]);
+      const day = Number(match[3]);
+      return withYear ? `${year}/${month}/${day}` : `${month}/${day}`;
+    }
+
+    function isFutureDate(value) {
+      if (!value) return false;
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      const target = new Date(`${value}T00:00:00`);
+      return !Number.isNaN(target.getTime()) && target >= today;
+    }
+
+    function mergePickupHistory(character, newsData) {
+      const gachaKinds = new Set(["PU", "復刻", "星の導き"]);
+      const baseItems = (Array.isArray(character.pickupHistory) ? character.pickupHistory : [])
+        .map((item) => ({ ...item, source: "pickupHistory" }));
+      const newsItems = ((newsData && newsData.items) || [])
+        .filter((item) => item.characterId === character.id && gachaKinds.has(item.kind))
+        .map((item) => ({ ...item, source: "news" }));
+      const seen = new Set();
+      return [...baseItems, ...newsItems]
+        .filter((item) => item.date && item.kind)
+        .sort((a, b) => String(a.date).localeCompare(String(b.date)))
+        .filter((item) => {
+          const key = [item.date, item.endDate || "", item.kind, item.characterId || character.id].join("|");
+          if (seen.has(key)) return false;
+          seen.add(key);
+          return true;
+        });
+    }
+
+    function formatPickupHistory(history) {
+      if (!history.length) return "";
+      let numberedCount = 0;
+      const items = history.map((item) => {
+        const period = item.endDate
+          ? `${formatDate(item.date)}〜${formatDate(item.endDate, false)}`
+          : formatDate(item.date);
+        const status = item.endDate
+          ? (isFutureDate(item.endDate) ? `（開催中〜${formatDate(item.endDate, false)}）` : "（終了）")
+          : "";
+        if (item.kind === "星の導き") return `星の導き ${period}${status}`;
+        numberedCount += 1;
+        return `${numberedCount}回目 ${period}${status}`;
+      });
+      return `PU履歴：${items.join(" / ")}`;
+    }
+
+    function renderMeta(character, newsData) {
+      const historyText = formatPickupHistory(mergePickupHistory(character, newsData));
       document.querySelector("#characterMeta").innerHTML = [
         `<span class="badge attribute">${character.attribute}</span>`,
         `<span class="badge">${character.weaponType}</span>`,
         `<span class="badge">スピード ${character.speed}</span>`,
         `<span class="badge">${character.availability}</span>`,
-        `<span class="badge">${character.gachaStatus || "状態未設定"}</span>`
+        `<span class="badge">${character.gachaStatus || "状態未設定"}</span>`,
+        historyText ? `<span class="badge">${historyText}</span>` : ""
       ].join("");
+      const historyNode = document.querySelector("#pickupHistoryText");
+      if (historyText) {
+        historyNode.hidden = false;
+        historyNode.textContent = historyText;
+      }
     }
 
     function renderSkills(skills) {
@@ -511,14 +571,17 @@
     }
 
     async function loadData() {
-      const baseData = await fetchJson("../../data/mementomori-skills.json");
-      const overlayData = await fetchJson("../../data/cordie-ringmaster-overlay.json", true);
-      return mergeSkillData(baseData, overlayData);
+      const [baseData, overlayData, newsData] = await Promise.all([
+        fetchJson("../../data/mementomori-skills.json"),
+        fetchJson("../../data/cordie-ringmaster-overlay.json", true),
+        fetchJson("../../data/news.json", true)
+      ]);
+      return { data: mergeSkillData(baseData, overlayData), newsData };
     }
 
     async function init() {
       try {
-        const data = await loadData();
+        const { data, newsData } = await loadData();
         const character = data.characters.find((item) => item.id === characterId);
         const skills = data.skills.filter((skill) => skill.characterId === characterId);
         if (!character) throw new Error("キャラが見つかりません");
@@ -527,7 +590,7 @@
         document.querySelector("#characterName").textContent = character.name;
         document.querySelector("#roleMemo").textContent = character.catchcopy || character.roleMemo;
         document.querySelector("#gachaUpdated").textContent = `ガチャ状態確認日：${data.gachaStatusUpdatedAt || "未設定"}`;
-        renderMeta(character);
+        renderMeta(character, newsData);
         renderSkills(skills);
       } catch (error) {
         document.querySelector("#roleMemo").textContent = error.message;

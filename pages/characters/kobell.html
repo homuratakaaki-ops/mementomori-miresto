@@ -473,25 +473,68 @@
       return escapeHtml(value).replace(/(攻撃力×)(\d+%)/g, "$1<span class=\"ratio\">$2</span>");
     }
 
-    function formatPickupHistory(character) {
-      const history = Array.isArray(character.pickupHistory) ? character.pickupHistory : [];
-      if (!history.length) return escapeHtml(character.availability || "");
-      const items = history.map((item) => {
-        const month = String(item.date || "").slice(0, 7);
-        if (item.kind === "星の導き") return `${month} 星の導き`;
-        const round = item.round ? `${item.round}回目` : "";
-        return `${round}${item.kind}: ${month}`;
-      }).filter(Boolean);
-      return [character.availability, ...items].filter(Boolean).map(escapeHtml).join("｜");
+    function formatDate(value, withYear = true) {
+      const match = String(value || "").match(/^(\d{4})-(\d{2})-(\d{2})$/);
+      if (!match) return value || "";
+      const year = Number(match[1]);
+      const month = Number(match[2]);
+      const day = Number(match[3]);
+      return withYear ? `${year}/${month}/${day}` : `${month}/${day}`;
     }
 
-    function renderMeta(character) {
+    function isFutureDate(value) {
+      if (!value) return false;
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      const target = new Date(`${value}T00:00:00`);
+      return !Number.isNaN(target.getTime()) && target >= today;
+    }
+
+    function mergePickupHistory(character, newsData) {
+      const gachaKinds = new Set(["PU", "復刻", "星の導き"]);
+      const baseItems = (Array.isArray(character.pickupHistory) ? character.pickupHistory : [])
+        .map((item) => ({ ...item, source: "pickupHistory" }));
+      const newsItems = ((newsData && newsData.items) || [])
+        .filter((item) => item.characterId === character.id && gachaKinds.has(item.kind))
+        .map((item) => ({ ...item, source: "news" }));
+      const seen = new Set();
+      return [...baseItems, ...newsItems]
+        .filter((item) => item.date && item.kind)
+        .sort((a, b) => String(a.date).localeCompare(String(b.date)))
+        .filter((item) => {
+          const key = [item.date, item.endDate || "", item.kind, item.characterId || character.id].join("|");
+          if (seen.has(key)) return false;
+          seen.add(key);
+          return true;
+        });
+    }
+
+    function formatPickupHistory(history) {
+      if (!history.length) return "";
+      let numberedCount = 0;
+      const items = history.map((item) => {
+        const period = item.endDate
+          ? `${formatDate(item.date)}〜${formatDate(item.endDate, false)}`
+          : formatDate(item.date);
+        const status = item.endDate
+          ? (isFutureDate(item.endDate) ? `（開催中〜${formatDate(item.endDate, false)}）` : "（終了）")
+          : "";
+        if (item.kind === "星の導き") return `星の導き ${period}${status}`;
+        numberedCount += 1;
+        return `${numberedCount}回目 ${period}${status}`;
+      });
+      return `PU履歴：${items.join(" / ")}`;
+    }
+
+    function renderMeta(character, newsData) {
+      const historyText = formatPickupHistory(mergePickupHistory(character, newsData));
       document.body.dataset.attribute = character.attribute || "翠";
       document.querySelector("#characterMeta").innerHTML = [
         `<span class="badge attribute">${escapeHtml(character.attribute)}</span>`,
         `<span class="badge">${escapeHtml(character.weaponType)}</span>`,
         `<span class="badge">スピード ${escapeHtml(character.speed)}</span>`,
-        `<span class="badge">入手 ${formatPickupHistory(character)}</span>`
+        `<span class="badge">入手 ${escapeHtml(character.availability || "")}</span>`,
+        historyText ? `<span class="badge">${escapeHtml(historyText)}</span>` : ""
       ].join("");
     }
 
@@ -589,9 +632,14 @@
 
     async function init() {
       try {
-        const response = await fetch("../../data/mementomori-skills.json", { cache: "no-store" });
+        const [response, newsResponse] = await Promise.all([
+          fetch("../../data/mementomori-skills.json", { cache: "no-store" }),
+          fetch("../../data/news.json", { cache: "no-store" })
+        ]);
         if (!response.ok) throw new Error(`JSON読み込み失敗: ${response.status}`);
+        if (!newsResponse.ok && newsResponse.status !== 404) throw new Error(`ニュース読み込み失敗: ${newsResponse.status}`);
         const data = await response.json();
+        const newsData = newsResponse.ok ? await newsResponse.json() : { items: [] };
         const character = data.characters.find((item) => item.id === characterId);
         const skills = data.skills.filter((skill) => skill.characterId === characterId).sort((a, b) => a.number - b.number);
         if (!character) throw new Error("キャラが見つかりません");
@@ -599,7 +647,7 @@
         document.title = `${character.name} | ミレストのメメントモリ分析データ室`;
         document.querySelector("#characterName").textContent = character.name;
         document.querySelector("#roleMemo").textContent = character.catchcopy || character.roleMemo || "";
-        renderMeta(character);
+        renderMeta(character, newsData);
         document.querySelector("#skillList").innerHTML = skills.map(renderSkillCard).join("");
 
         if (character.noteUrl) {

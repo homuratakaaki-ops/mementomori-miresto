@@ -1,0 +1,13 @@
+{
+  "schema": "miresto_news_v1",
+  "items": [
+    {
+      "id": "2026-08-06-cordie-ringmaster-fukkoku",
+      "date": "2026-08-06",
+      "endDate": "2026-08-24",
+      "kind": "復刻",
+      "characterId": "cordie_ringmaster",
+      "text": "コルディ(団長)のPU復刻が開始"
+    }
+  ]
+}

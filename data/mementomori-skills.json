@@ -1,6 +1,6 @@
 {
   "schema": "mementomori_skill_compare_v1",
-  "updatedAt": "2026-08-15T03:00:00.000+09:00",
+  "updatedAt": "2026-08-15T04:00:00.000+09:00",
   "gachaStatusUpdatedAt": "2026-05-27",
   "notes": [
     "Skill effects are summarized for comparison and are not copied as full official text.",
@@ -1624,12 +1624,13 @@
       "availability": "PU・運命",
       "gachaStatus": "",
       "roleMemo": "回復回数条件と毒を扱う翠スナイパー",
-      "noteUrl": "https://note.com/wazu_019/n/n8d4b94e8b360",
+      "noteUrl": "https://note.com/musoudc/n/n2f9824af791a",
       "imageUrl": "",
       "sourceUrl": "https://ichigogames.net/mementomori/kobel/",
       "pickupHistory": [
         {
           "date": "2026-02-12",
+          "endDate": "2026-02-26",
           "kind": "PU",
           "round": 1
         }

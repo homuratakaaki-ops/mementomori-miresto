@@ -153,14 +153,20 @@
     }
 
     .feature-grid,
-    .character-grid {
+    .character-grid,
+    .news-list {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 14px;
     }
 
+    .feature-grid,
+    .character-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
     .feature,
-    .character-card {
+    .character-card,
+    .news-item {
       padding: 18px;
       border: 1px solid var(--line);
       border-radius: 8px;
@@ -217,6 +223,24 @@
     .character-card .button {
       align-self: end;
       width: 100%;
+    }
+
+    .news-item {
+      display: grid;
+      grid-template-columns: auto auto minmax(0, 1fr);
+      align-items: center;
+      gap: 10px;
+    }
+
+    .news-date {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .news-text {
+      min-width: 0;
+      line-height: 1.7;
     }
 
     .empty {
@@ -331,15 +355,14 @@
       </div>
     </section>
 
-    <section aria-labelledby="pickup-title">
+    <section aria-labelledby="news-title" id="newsSection" hidden>
       <div class="section-head">
         <div>
-          <p class="eyebrow">PICK UP</p>
-          <h2 id="pickup-title">最新キャラ情報</h2>
+          <p class="eyebrow">NEWS</p>
+          <h2 id="news-title">ニュース</h2>
         </div>
-        <p id="gachaUpdated">ガチャ状態確認日：読み込み中</p>
       </div>
-      <div class="character-grid" id="pickupGrid"></div>
+      <div class="news-list" id="newsList"></div>
     </section>
   </main>
 
@@ -358,7 +381,24 @@
   </footer>
 
   <script>
-    const existingPages = new Set(["potpourri", "rea", "sophia", "veela", "sivi", "cerberus", "aa_dark", "cattleya", "claudia", "yuni", "alexandra", "mira", "soltina", "amleth", "fenrir", "florence", "moddey", "sonya", "stella", "fenny", "tropon_holy_night", "lunalynn_holy_night", "tilly", "paula", "dd", "giluial", "liselotte", "eir", "ivy", "minasumari", "nina", "nina_summer", "serruria", "eureka", "cordie", "cordie_ringmaster", "merlyn_winter", "merlin", "evelyn", "fia", "fia_trace", "sabrina", "sabrina_cool_breeze", "freycia", "amour", "lean", "chiffon", "artie", "belle", "dian", "cordie_summer", "priscilla", "matilda", "aishe", "lilicotte", "morgana", "soltina_warm_memory", "artoria", "shizu_snow", "lucile", "flack", "liebe", "mertillier", "luke"]);
+    const existingPages = new Set(["potpourri", "rea", "sophia", "veela", "sivi", "cerberus", "aa_dark", "cattleya", "claudia", "yuni", "alexandra", "mira", "soltina", "amleth", "fenrir", "florence", "moddey", "sonya", "stella", "fenny", "tropon_holy_night", "lunalynn_holy_night", "tilly", "paula", "dd", "giluial", "liselotte", "eir", "ivy", "minasumari", "nina", "nina_summer", "serruria", "eureka", "cordie", "cordie_ringmaster", "merlyn_winter", "merlin", "evelyn", "fia", "fia_trace", "sabrina", "sabrina_cool_breeze", "freycia", "amour", "lean", "chiffon", "artie", "belle", "dian", "cordie_summer", "priscilla", "matilda", "aishe", "lilicotte", "morgana", "soltina_warm_memory", "artoria", "shizu_snow", "lucile", "flack", "liebe", "mertillier", "luke", "kobell"]);
+    const newsKinds = new Set(["新キャラ", "PU", "復刻", "星の導き", "イベント", "サイト更新"]);
+
+    function escapeHtml(value) {
+      return String(value ?? "").replace(/[&<>"']/g, (char) => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        "\"": "&quot;",
+        "'": "&#39;"
+      }[char]));
+    }
+
+    function formatDate(value) {
+      const match = String(value || "").match(/^(\d{4})-(\d{2})-(\d{2})$/);
+      if (!match) return value || "";
+      return `${match[1]}/${Number(match[2])}/${Number(match[3])}`;
+    }
 
     function detailHref(character) {
       return existingPages.has(character.pageSlug)
@@ -395,6 +435,24 @@
           </article>
         `;
       }).join("");
+    }
+
+    function renderNews(newsData) {
+      const items = (newsData.items || [])
+        .filter((item) => newsKinds.has(item.kind) && item.date && item.text)
+        .sort((a, b) => String(b.date).localeCompare(String(a.date)))
+        .slice(0, 5);
+
+      if (!items.length) return;
+
+      document.querySelector("#newsSection").hidden = false;
+      document.querySelector("#newsList").innerHTML = items.map((item) => `
+        <article class="news-item">
+          <time class="news-date" datetime="${escapeHtml(item.date)}">${escapeHtml(formatDate(item.date))}</time>
+          <span class="badge pickup">${escapeHtml(item.kind)}</span>
+          <span class="news-text">${escapeHtml(item.text)}</span>
+        </article>
+      `).join("");
     }
 
     async function fetchJson(path, optional = false) {
@@ -484,11 +542,10 @@
 
     async function init() {
       try {
-        const data = await loadData();
-        document.querySelector("#gachaUpdated").textContent = `ガチャ状態確認日：${data.gachaStatusUpdatedAt || "未設定"}`;
-        renderPickup(data.characters || []);
+        const newsData = await fetchJson("./data/news.json", true);
+        renderNews(newsData);
       } catch (error) {
-        document.querySelector("#pickupGrid").innerHTML = `<div class="empty">${error.message}</div>`;
+        console.error(error);
       }
     }
 
