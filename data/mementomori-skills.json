@@ -561,7 +561,7 @@
       "roleMemo": "砂塵付与と高回数物理攻撃、味方攻撃力支援を扱うスナイパー",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": ""
+      "sourceUrl": "https://ichigogames.net/mementomori/liberia/"
     },
     {
       "id": "lunalynn",
@@ -741,7 +741,7 @@
       "roleMemo": "被ダメ増加、条件火力、面影スタック、防御遮断を持つスナイパー",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": ""
+      "sourceUrl": "https://ichigogames.net/mementomori/regina/"
     },
     {
       "id": "cattleya",
@@ -1011,7 +1011,7 @@
       "roleMemo": "隠し味スタックと結界で支える黄ウォーリア",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/fenrir_treasure/"
+      "sourceUrl": "https://ichigogames.net/mementomori/fenrir_another/"
     },
     {
       "id": "merlyn",
@@ -1026,7 +1026,7 @@
       "roleMemo": "妖精さんスタックで攻防を支援する黄ソーサラー",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/merlyn/"
+      "sourceUrl": "https://ichigogames.net/mementomori/myrlennia/"
     },
     {
       "id": "tricksy",
@@ -1041,7 +1041,7 @@
       "roleMemo": "気絶と防御上昇を扱う黄ソーサラー",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/tricksy/"
+      "sourceUrl": "https://ichigogames.net/mementomori/trixie/"
     },
     {
       "id": "freycia",
@@ -1326,7 +1326,7 @@
       "roleMemo": "解析スタックで再発動と火力を伸ばす紅スナイパー",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/aishe/"
+      "sourceUrl": "https://ichigogames.net/mementomori/ayse/"
     },
     {
       "id": "lilicotte",
@@ -1341,7 +1341,7 @@
       "roleMemo": "バフ解除と沈黙を扱う紅スナイパー",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/lilicotte/"
+      "sourceUrl": "https://ichigogames.net/mementomori/lillicotte/"
     },
     {
       "id": "merlin",
@@ -4352,31 +4352,43 @@
       "category": "バフ解除",
       "majorCategory": "解除・操作",
       "subCategory": "解除 / 奪取 / 弱体解除",
-      "target": "ランダム敵5体",
-      "multiplierText": "魔法580%",
+      "target": "ランダム敵3体",
+      "multiplierText": "魔法520%",
       "duration": "1ターン自身の防御力5%減少",
       "ct": 4,
-      "condition": "1ターン自身の防御力5%減少 / 攻撃力最高の味方の弱体効果を2つ解除",
+      "condition": "1ターン自身の防御力5%減少 / 魔法攻撃後、攻撃力最高の味方の弱体効果を2つ解除",
       "exclusiveWeapon": "Lv1: 対象が敵5体に増加 / Lv3: 魔法520%→580%",
       "compareMemo": "1ターン自身の防御力5%減少 / ランダム敵5体に魔法580% / 攻撃力最高の味方の弱体効果を2つ解除",
       "noteUrl": "",
       "imageUrl": "",
       "sourceUrl": "https://ichigogames.net/mementomori/merlyn_winter/",
       "damage": {
-        "singleMultiplier": 580,
-        "hitCount": 5,
-        "baseTotal": 2900,
-        "exclusiveLv1Total": 2900,
-        "exclusiveLv2Total": 2900,
+        "singleMultiplier": 520,
+        "hitCount": 3,
+        "baseTotal": 1560,
+        "exclusiveLv1Total": 2600,
+        "exclusiveLv2Total": 2600,
         "exclusiveLv3Total": 2900,
         "conditionMaxTotal": 2900,
-        "conditionMaxNote": "カード用要約から暫定抽出",
+        "conditionMaxNote": "専用Lv1で5体、専用Lv3で580%×5体",
         "powerType": "基本火力",
         "maxStacks": null,
         "realityRank": "高",
         "rankingTarget": "対象",
         "damageMemo": "カード生成JSONから自動マージ。専用Lv別・条件MAXは要精査"
-      }
+      },
+      "plainSummary": "自分の防御を少し下げてから撃ち、攻撃後にエースの弱体を2つ剥がす。",
+      "steps": [
+        {
+          "text": "自身の防御力を1ターン5%減少(命中・耐性判定を無視)"
+        },
+        {
+          "text": "ランダムな敵3体に魔法520%"
+        },
+        {
+          "text": "攻撃後、攻撃力が最も高い味方の弱体効果を2つ解除"
+        }
+      ]
     },
     {
       "id": "merlyn_winter-s2",
@@ -4391,7 +4403,7 @@
       "multiplierText": "魔法1560% / 魔法2340%",
       "duration": "",
       "ct": 4,
-      "condition": "",
+      "condition": "攻撃力が高い敵2体に魔法1560%。魔法攻撃前、自身と味方がスキルで解除した弱体効果の合計が5個以上なら魔法2340%",
       "exclusiveWeapon": "",
       "compareMemo": "攻撃力が高い敵2体に魔法1560% / 自身と味方がスキルで解除した弱体合計5個以上なら魔法2340%",
       "noteUrl": "",
@@ -4405,13 +4417,22 @@
         "exclusiveLv2Total": 3120,
         "exclusiveLv3Total": 3120,
         "conditionMaxTotal": 4680,
-        "conditionMaxNote": "カード用要約から暫定抽出。条件の現実性は要確認",
+        "conditionMaxNote": "スキルで解除した弱体効果合計5個以上なら2340%×2体",
         "powerType": "条件火力",
         "maxStacks": null,
         "realityRank": "中",
         "rankingTarget": "対象",
         "damageMemo": "カード生成JSONから自動マージ。専用Lv別・条件MAXは要精査"
-      }
+      },
+      "plainSummary": "敵のエース2体への高倍率魔法。弱体解除を重ねているとさらに伸びる。",
+      "steps": [
+        {
+          "text": "攻撃力が高い敵2体に魔法1560%"
+        },
+        {
+          "text": "攻撃前、自身と味方がスキルで解除した弱体効果の合計が5個以上なら魔法2340%"
+        }
+      ]
     },
     {
       "id": "merlyn_winter-s3",
@@ -4422,16 +4443,34 @@
       "category": "バフ解除",
       "majorCategory": "解除・操作",
       "subCategory": "解除 / 奪取 / 弱体解除",
-      "target": "",
+      "target": "藍属性の攻撃力最高味方",
       "multiplierText": "攻撃力50%",
       "duration": "1ターン藍属性の攻撃力が高い味方3体の攻撃力50%増加",
       "ct": "",
-      "condition": "自身か味方がアクティブスキルで弱体を受け、全体の弱体合計5個以上なら発動 / 1ターン藍属性の攻撃力が高い味方3体の攻撃力50%増加 / 自身の弱体効果を3つ解除 / 効果は解除不可",
+      "condition": "自身か味方がアクティブスキルで弱体を受け、全体の弱体合計5個以上なら発動 / 1ターン藍属性の攻撃力が最も高い味方の攻撃力50%増加 / 自身の弱体効果を3つ解除 / 効果は解除不可",
       "exclusiveWeapon": "Lv2: 攻撃力増加対象が藍属性の味方3体に増加",
       "compareMemo": "自身か味方がアクティブスキルで弱体を受け、全体の弱体合計5個以上なら発動 / 1ターン藍属性の攻撃力が高い味方3体の攻撃力50%増加 / 自身の弱体効果を3つ解除 / 効果は解除不可",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/merlyn_winter/"
+      "sourceUrl": "https://ichigogames.net/mementomori/merlyn_winter/",
+      "plainSummary": "場が弱体だらけになると、藍のエースを強化して自分の弱体を掃除する。",
+      "steps": [
+        {
+          "text": "自身か味方がアクティブスキルで弱体を受け、味方全体の弱体合計が5個以上のときに発動"
+        },
+        {
+          "text": "藍属性の攻撃力が最も高い味方の攻撃力を50%増加(1ターン、解除不可)"
+        },
+        {
+          "text": "自身の弱体効果を3つ解除"
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "弱体を多用してくる敵ほど発動しやすい。自身S1の防御力減少は命中・耐性判定を無視して付与される弱体だが、同じアクティブスキル由来としてカウントされるかは実機検証対象。",
+          "reason": "発動条件がアクティブスキルで弱体効果を受けたときのため"
+        }
+      ]
     },
     {
       "id": "merlyn_winter-s4",
@@ -4451,7 +4490,16 @@
       "compareMemo": "自身の被ダメージ70%減少 / バトル開始時6ターン物理防御力100%増加 / バトル開始時6ターン物理クリダメ緩和40%増加 / 効果は解除不可",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/merlyn_winter/"
+      "sourceUrl": "https://ichigogames.net/mementomori/merlyn_winter/",
+      "plainSummary": "7割カット＋物理特化の硬い開幕バフ。",
+      "steps": [
+        {
+          "text": "自身の被ダメージを70%減少(解除不可)"
+        },
+        {
+          "text": "バトル開始時、物理防御力+100%・物理クリダメ緩和+40%(6ターン、解除不可)"
+        }
+      ]
     },
     {
       "id": "evelyn-s1",
@@ -4463,30 +4511,39 @@
       "majorCategory": "攻撃",
       "subCategory": "純火力",
       "target": "ランダム敵5体",
-      "multiplierText": "魔法480%",
+      "multiplierText": "魔法440%",
       "duration": "4ターン攻撃力最高の味方の攻撃力・命中率50%増加",
       "ct": 4,
-      "condition": "4ターン攻撃力最高の味方の攻撃力・命中率50%増加 / 攻撃力増加と命中率増加は1つのバフ扱い",
+      "condition": "4ターン攻撃力最高の味方の攻撃力・命中率25%増加 / 攻撃力増加と命中率増加は1つのバフ扱い",
       "exclusiveWeapon": "Lv1: 攻撃力・命中率25%→50% / Lv3: 魔法440%→480%",
       "compareMemo": "4ターン攻撃力最高の味方の攻撃力・命中率50%増加 / 攻撃力増加と命中率増加は1つのバフ扱い / ランダム敵5体に魔法480%",
       "noteUrl": "",
       "imageUrl": "",
       "sourceUrl": "https://ichigogames.net/mementomori/evelyn/",
       "damage": {
-        "singleMultiplier": 480,
+        "singleMultiplier": 440,
         "hitCount": 5,
-        "baseTotal": 2400,
-        "exclusiveLv1Total": 2400,
-        "exclusiveLv2Total": 2400,
+        "baseTotal": 2200,
+        "exclusiveLv1Total": 2200,
+        "exclusiveLv2Total": 2200,
         "exclusiveLv3Total": 2400,
         "conditionMaxTotal": 2400,
-        "conditionMaxNote": "カード用要約から暫定抽出",
+        "conditionMaxNote": "専用Lv3で480%×5体",
         "powerType": "基本火力",
         "maxStacks": null,
         "realityRank": "高",
         "rankingTarget": "対象",
         "damageMemo": "カード生成JSONから自動マージ。専用Lv別・条件MAXは要精査"
-      }
+      },
+      "plainSummary": "エースに攻撃・命中バフを配ってから撃つ。",
+      "steps": [
+        {
+          "text": "攻撃力が最も高い味方の攻撃力・命中率を25%増加(4ターン。両者で1つのバフ扱い、解除不可)"
+        },
+        {
+          "text": "ランダムな敵5体に魔法440%"
+        }
+      ]
     },
     {
       "id": "evelyn-s2",
@@ -4501,7 +4558,7 @@
       "multiplierText": "魔法660% / 魔法990%",
       "duration": "自身以外の味方全体とランダム敵5体に4ターン反照1スタック",
       "ct": 4,
-      "condition": "自身以外の味方全体とランダム敵5体に4ターン反照1スタック / 反照は最大2スタック、1スタックにつき回避率5%減少",
+      "condition": "自身以外の味方全体とランダム敵5体に4ターン反照1スタック / 反照は最大2スタック、1スタックにつき回避率5%減少 / 魔法攻撃前、反照を持つ敵が3体以上なら魔法990%",
       "exclusiveWeapon": "",
       "compareMemo": "自身以外の味方全体とランダム敵5体に4ターン反照1スタック / 反照は最大2スタック、1スタックにつき回避率5%減少 / ランダム敵3体に魔法660% / 反照敵3体以上なら魔法990%",
       "noteUrl": "",
@@ -4515,13 +4572,25 @@
         "exclusiveLv2Total": 1980,
         "exclusiveLv3Total": 1980,
         "conditionMaxTotal": 2970,
-        "conditionMaxNote": "カード用要約から暫定抽出。条件の現実性は要確認",
+        "conditionMaxNote": "反照付帯中の敵が3体以上なら990%×3体",
         "powerType": "条件火力",
         "maxStacks": 2,
         "realityRank": "中",
         "rankingTarget": "対象",
         "damageMemo": "カード生成JSONから自動マージ。専用Lv別・条件MAXは要精査"
-      }
+      },
+      "plainSummary": "敵味方に「反照」をばら撒き、反照持ちが多いと高倍率になる変則砲。",
+      "steps": [
+        {
+          "text": "自身以外の味方全体とランダムな敵5体に反照を1スタック付与(4ターン、1スタックにつき回避率5%減少、最大2スタック)"
+        },
+        {
+          "text": "ランダムな敵3体に魔法660%"
+        },
+        {
+          "text": "攻撃前、反照を付帯している敵が3体以上なら魔法990%"
+        }
+      ]
     },
     {
       "id": "evelyn-s3",
@@ -4533,15 +4602,24 @@
       "majorCategory": "防御",
       "subCategory": "シールド / 耐久",
       "target": "1ターン目開始時、自身と攻撃力最高の味方",
-      "multiplierText": "最大HP80% / 攻撃力600%",
+      "multiplierText": "最大HP30% / 攻撃力200%",
       "duration": "1ターン目開始時、自身と攻撃力最高の味方に6ターンシールド",
       "ct": "",
-      "condition": "1ターン目開始時、自身と攻撃力最高の味方に6ターンシールド / シールド量はステータス増減前の対象最大HP80% / 対象が藍属性なら付与者攻撃力600%分を加算 / 効果は解除不可",
+      "condition": "1ターン目開始時、自身と攻撃力最高の味方に3ターンシールド / シールド量はステータス増減前の対象最大HP30% / 対象が藍属性なら付与者攻撃力200%分を加算 / 効果は解除不可",
       "exclusiveWeapon": "Lv2: シールド30%→80%、藍属性時+攻撃力200%→600%",
       "compareMemo": "1ターン目開始時、自身と攻撃力最高の味方に6ターンシールド / シールド量はステータス増減前の対象最大HP80% / 対象が藍属性なら付与者攻撃力600%分を加算 / 効果は解除不可",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/evelyn/"
+      "sourceUrl": "https://ichigogames.net/mementomori/evelyn/",
+      "plainSummary": "開幕、自分とエースにHP3割ぶんのシールド。藍なら攻撃力ぶんも上乗せ。",
+      "steps": [
+        {
+          "text": "1ターン目開始時、自身と攻撃力が最も高い味方に3ターンのシールドを付与(量は対象の最大HP30%、解除不可)"
+        },
+        {
+          "text": "対象が藍属性なら、付与者の攻撃力200%分を上乗せ"
+        }
+      ]
     },
     {
       "id": "evelyn-s4",
@@ -4561,7 +4639,25 @@
       "compareMemo": "自身がアクティブスキルで弱体を受けた時、ランダム敵3体に4ターン反照1スタック / 反照敵3体以上なら自身の弱体効果を2つ解除 / バトル開始時、自身の被ダメージ60%減少 / 効果は解除不可",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/evelyn/"
+      "sourceUrl": "https://ichigogames.net/mementomori/evelyn/",
+      "plainSummary": "弱体を受けたら反照で反撃し、自分の弱体も掃除する。",
+      "steps": [
+        {
+          "text": "自身がアクティブスキルで弱体を受けたとき、ランダムな敵3体に反照を1スタック付与(4ターン、最大2スタック)"
+        },
+        {
+          "text": "反照の敵が3体以上なら自身の弱体効果を2つ解除"
+        },
+        {
+          "text": "バトル開始時、自身の被ダメージを60%減少(解除不可)"
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "弱体を多用してくる敵ほど反照付与と自己解除が回る。",
+          "reason": "発動条件が自身がアクティブスキルで弱体効果を受けたときのため"
+        }
+      ]
     },
     {
       "id": "fia_trace-s1",
@@ -4572,31 +4668,40 @@
       "category": "シールド",
       "majorCategory": "防御",
       "subCategory": "多重バリア",
-      "target": "ランダム敵5体",
-      "multiplierText": "物理460%",
+      "target": "ランダム敵3体",
+      "multiplierText": "物理420%",
       "duration": "",
       "ct": 4,
-      "condition": "追加攻撃は最大1回",
+      "condition": "物理ダメージが多重バリアで無効化された場合、対象に物理420%の追加攻撃。追加攻撃は最大1回",
       "exclusiveWeapon": "Lv1: 対象が敵5体に増加 / Lv3: 物理420%→460%、追加攻撃も460%",
       "compareMemo": "ランダム敵5体に物理460% / 多重バリアで無効化された場合、対象に追加で物理460% / 追加攻撃は最大1回",
       "noteUrl": "",
       "imageUrl": "",
       "sourceUrl": "https://ichigogames.net/mementomori/fia_trace/",
       "damage": {
-        "singleMultiplier": 460,
-        "hitCount": 5,
-        "baseTotal": 2300,
-        "exclusiveLv1Total": 2300,
-        "exclusiveLv2Total": 2300,
+        "singleMultiplier": 420,
+        "hitCount": 3,
+        "baseTotal": 1260,
+        "exclusiveLv1Total": 2100,
+        "exclusiveLv2Total": 2100,
         "exclusiveLv3Total": 2300,
         "conditionMaxTotal": 2300,
-        "conditionMaxNote": "カード用要約から暫定抽出。条件の現実性は要確認",
+        "conditionMaxNote": "専用Lv1で5体、専用Lv3で460%。多重バリア無効化時に追加攻撃最大1回",
         "powerType": "条件火力",
         "maxStacks": null,
         "realityRank": "中",
         "rankingTarget": "対象",
         "damageMemo": "カード生成JSONから自動マージ。専用Lv別・条件MAXは要精査"
-      }
+      },
+      "plainSummary": "3体を薙ぎつつ、多重バリアで無効化された相手には追撃が1回乗る。",
+      "steps": [
+        {
+          "text": "ランダムな敵3体に物理420%"
+        },
+        {
+          "text": "物理ダメージが多重バリアで無効化された場合、対象に物理420%の追加攻撃(最大1回)"
+        }
+      ]
     },
     {
       "id": "fia_trace-s2",
@@ -4611,7 +4716,7 @@
       "multiplierText": "攻撃力30% / 物理380% / 物理570%",
       "duration": "1ターン自身と攻撃力最高の味方の防御力5%減少",
       "ct": 4,
-      "condition": "1ターン自身と攻撃力最高の味方の防御力5%減少 / 同対象の攻撃力30%増加",
+      "condition": "1ターン自身と攻撃力最高の味方の防御力5%減少 / 同対象の攻撃力30%増加 / 物理攻撃前、対象の怠惰が12スタックなら物理570%",
       "exclusiveWeapon": "",
       "compareMemo": "1ターン自身と攻撃力最高の味方の防御力5%減少 / 同対象の攻撃力30%増加 / ランダム敵5体に物理380% / 対象の怠惰12スタックなら物理570%",
       "noteUrl": "",
@@ -4625,13 +4730,28 @@
         "exclusiveLv2Total": 1900,
         "exclusiveLv3Total": 1900,
         "conditionMaxTotal": 2850,
-        "conditionMaxNote": "カード用要約から暫定抽出。条件の現実性は要確認",
+        "conditionMaxNote": "対象の怠惰12スタック時570%×5体",
         "powerType": "条件火力",
         "maxStacks": null,
         "realityRank": "中",
         "rankingTarget": "対象",
         "damageMemo": "カード生成JSONから自動マージ。専用Lv別・条件MAXは要精査"
-      }
+      },
+      "plainSummary": "自分とエースの防御を少し削る代わりに、攻撃力を上げてから撃つ。怠惰が満タンなら火力も上がる。",
+      "steps": [
+        {
+          "text": "自身と攻撃力が最も高い味方の防御力を1ターン5%減少(命中・耐性判定を無視)"
+        },
+        {
+          "text": "同じ対象の攻撃力を30%増加"
+        },
+        {
+          "text": "ランダムな敵5体に物理380%"
+        },
+        {
+          "text": "攻撃前、対象の怠惰が12スタックなら物理570%"
+        }
+      ]
     },
     {
       "id": "fia_trace-s3",
@@ -4646,12 +4766,21 @@
       "multiplierText": "",
       "duration": "1・5ターン目開始時、自身と攻撃力最高の味方に2ターン結界",
       "ct": "",
-      "condition": "1・5ターン目開始時、自身と攻撃力最高の味方に2ターン結界 / 結界中、被攻撃時のダメージを50%遮断 / バトル開始時、自身の被ダメージ70%減少 / 効果は解除不可",
+      "condition": "1・5ターン目開始時、自身と攻撃力最高の味方に2ターン結界 / 結界中、被攻撃時のダメージを20%遮断 / バトル開始時、自身の被ダメージ70%減少 / 効果は解除不可",
       "exclusiveWeapon": "Lv2: 結界の遮断量20%→50%",
       "compareMemo": "1・5ターン目開始時、自身と攻撃力最高の味方に2ターン結界 / 結界中、被攻撃時のダメージを50%遮断 / バトル開始時、自身の被ダメージ70%減少 / 効果は解除不可",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/fia_trace/"
+      "sourceUrl": "https://ichigogames.net/mementomori/fia_trace/",
+      "plainSummary": "1・5ターン目に結界を張り、自分は常時7割カットの壁役。",
+      "steps": [
+        {
+          "text": "1・5ターン目の開始時、自身と攻撃力が最も高い味方に結界を2ターン付与(被攻撃時のダメージを20%遮断、解除不可)"
+        },
+        {
+          "text": "バトル開始時、自身の被ダメージを70%減少(解除不可)"
+        }
+      ]
     },
     {
       "id": "fia_trace-s4",
@@ -4671,7 +4800,25 @@
       "compareMemo": "自身か味方がアクティブスキルで弱体を受けた時、ランダム敵5体に2ターン怠惰2スタック / 怠惰は最大12スタック、1スタックにつきクリティカル率5%減少 / 対象がクリティカル率増加を付帯していれば怠惰+1スタック / 怠惰付与前に自身の弱体効果を1つ解除",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/fia_trace/"
+      "sourceUrl": "https://ichigogames.net/mementomori/fia_trace/",
+      "plainSummary": "弱体を受けるたび、敵全体のクリ率を「怠惰」で削っていく報復デバフ。",
+      "steps": [
+        {
+          "text": "自身か味方がアクティブスキルで弱体を受けたとき、ランダムな敵5体に怠惰を2スタック付与(2ターン、1スタックにつきクリティカル率5%減少、最大12スタック)"
+        },
+        {
+          "text": "対象がクリティカル率増加を持っていれば、怠惰をさらに1スタック増やす"
+        },
+        {
+          "text": "怠惰付与前に自身の弱体効果を1つ解除"
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "弱体を多用してくる敵ほど発動機会が増える。",
+          "reason": "発動条件が味方側がアクティブスキルで弱体効果を受けたときのため"
+        }
+      ]
     },
     {
       "id": "natasha-s1",
@@ -5867,7 +6014,7 @@
       "compareMemo": "砂塵付与で後続ダメージを伸ばす。専用Lv1で攻撃回数が大きく増える",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "",
+      "sourceUrl": "https://ichigogames.net/mementomori/liberia/",
       "damage": {
         "singleMultiplier": 480,
         "hitCount": 5,
@@ -5882,7 +6029,19 @@
         "realityRank": "高",
         "rankingTarget": "基本",
         "damageMemo": "砂塵による被ダメージ増加は倍率に混ぜない"
-      }
+      },
+      "plainSummary": "「砂塵」を積んで敵を柔らかくしながらの5連撃。",
+      "steps": [
+        {
+          "text": "攻撃前、70%の確率で対象に砂塵を1スタック付与(2ターン、1スタックにつき被ダメージ5%増加、最大4スタック)"
+        },
+        {
+          "text": "砂塵付与後、対象のHP割合が70%以上ならさらに+1スタック"
+        },
+        {
+          "text": "ランダムな敵に物理480%×5回"
+        }
+      ]
     },
     {
       "id": "rivelia-s2",
@@ -5902,7 +6061,7 @@
       "compareMemo": "高倍率連撃。砂塵4スタック条件でバフ解除とCT0化が発動する",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "",
+      "sourceUrl": "https://ichigogames.net/mementomori/liberia/",
       "damage": {
         "singleMultiplier": 710,
         "hitCount": 5,
@@ -5917,7 +6076,25 @@
         "realityRank": "中",
         "rankingTarget": "基本",
         "damageMemo": "CT0化は火力表では別評価"
-      }
+      },
+      "plainSummary": "砂塵が満タンの敵がいると、バフ剥がし＋CTリセットまで付く大技。",
+      "steps": [
+        {
+          "text": "攻撃前、対象が砂塵4スタックならバフを2つ解除"
+        },
+        {
+          "text": "ランダムな敵に物理710%×5回"
+        },
+        {
+          "text": "最後の攻撃後、砂塵4スタックの敵がいれば自身のスキルCTを0にする(バトル中1回)"
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "S1で砂塵を積むほどS2の解除・CTリセットが働く自己完結型。",
+          "reason": "S2の条件が砂塵4スタックのため"
+        }
+      ]
     },
     {
       "id": "rivelia-s3",
@@ -5937,7 +6114,13 @@
       "compareMemo": "高攻撃力味方の火力を防御力参照で伸ばす支援",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": ""
+      "sourceUrl": "https://ichigogames.net/mementomori/liberia/",
+      "plainSummary": "エースに「リヴェリアの防御力2倍ぶん」の攻撃バフを渡す。",
+      "steps": [
+        {
+          "text": "バトル開始時、攻撃力が最も高い味方の攻撃力を増加(4ターン、量は対象の防御力200%分、解除不可)"
+        }
+      ]
     },
     {
       "id": "rivelia-s4",
@@ -5957,7 +6140,16 @@
       "compareMemo": "開幕命中補助と多重バリアで安定性を上げる",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": ""
+      "sourceUrl": "https://ichigogames.net/mementomori/liberia/",
+      "plainSummary": "開幕の命中保証と、序盤2ターンの一撃ガード。",
+      "steps": [
+        {
+          "text": "バトル開始時、自身の命中率を50%増加(2ターン、解除不可)"
+        },
+        {
+          "text": "1・2ターン目の開始時、自身に多重バリア1層を付与(最大HP10%以上のダメージを1回無効化)"
+        }
+      ]
     },
     {
       "id": "lunalynn-s1",
@@ -7168,7 +7360,7 @@
       "compareMemo": "被ダメージ増加を撒きつつ攻撃する",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "",
+      "sourceUrl": "https://ichigogames.net/mementomori/regina/",
       "damage": {
         "singleMultiplier": 440,
         "hitCount": 3,
@@ -7182,7 +7374,16 @@
         "realityRank": "高",
         "rankingTarget": "基本",
         "damageMemo": "被ダメージ増加は支援効果"
-      }
+      },
+      "plainSummary": "敵を柔らかくしてから撃つ起点スキル。格下にはさらに刺さる。",
+      "steps": [
+        {
+          "text": "攻撃前、対象の被ダメージを10%増加(4ターン。対象の攻撃力が自身より低ければ30%)"
+        },
+        {
+          "text": "ランダムな敵3体に物理440%"
+        }
+      ]
     },
     {
       "id": "regina-s2",
@@ -7202,7 +7403,7 @@
       "compareMemo": "攻撃力条件を満たすと高倍率になる",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "",
+      "sourceUrl": "https://ichigogames.net/mementomori/regina/",
       "damage": {
         "singleMultiplier": 1520,
         "hitCount": 2,
@@ -7216,7 +7417,16 @@
         "realityRank": "中",
         "rankingTarget": "条件込み",
         "damageMemo": "対象攻撃力条件あり"
-      }
+      },
+      "plainSummary": "敵のエース2体に叩き込む高倍率。格下なら1.5倍。",
+      "steps": [
+        {
+          "text": "攻撃力が高い敵2体に物理1520%"
+        },
+        {
+          "text": "対象の攻撃力が自身より低い場合は物理2280%"
+        }
+      ]
     },
     {
       "id": "regina-s3",
@@ -7236,7 +7446,25 @@
       "compareMemo": "面影を消費して火力支援とCT短縮を行う",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": ""
+      "sourceUrl": "https://ichigogames.net/mementomori/regina/",
+      "plainSummary": "開幕10個の「面影」を毎ターン消費して味方を強化する時限バフ。",
+      "steps": [
+        {
+          "text": "バトル開始時、自身に面影を10スタック付与(1スタックにつきクリティカル率+3%、解除不可)"
+        },
+        {
+          "text": "毎ターン開始時、面影を1消費して攻撃力が高い味方2体の攻撃力を30%増加(1ターン)"
+        },
+        {
+          "text": "3ターン目開始時、味方のクリティカルヒット合計が5以上なら面影を4消費し、攻撃力が最も高い味方のスキルCTを2減少"
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "クリティカル率を上げる支援がいるとCT短縮条件を満たしやすい。",
+          "reason": "条件がバトル中の自身と味方のクリティカルヒット回数の合計5以上のため"
+        }
+      ]
     },
     {
       "id": "regina-s4",
@@ -7256,7 +7484,16 @@
       "compareMemo": "面影中の遮断量が高く、味方最大HPも支援する",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": ""
+      "sourceUrl": "https://ichigogames.net/mementomori/regina/",
+      "plainSummary": "6〜7.5割遮断の硬さと、エースのHP底上げ。",
+      "steps": [
+        {
+          "text": "攻撃を受けたとき、ダメージを60%遮断(面影を持っている間は75%)"
+        },
+        {
+          "text": "バトル開始時、攻撃力が最も高い味方の最大HPを25%増加(解除不可)"
+        }
+      ]
     },
     {
       "id": "cattleya-s1",
@@ -9161,7 +9398,7 @@
       "compareMemo": "腕力+8% / 攻撃力+18% / HPドレイン+15%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/fenrir_treasure/",
+      "sourceUrl": "https://ichigogames.net/mementomori/fenrir_another/",
       "damage": {
         "singleMultiplier": 280,
         "hitCount": 3,
@@ -9176,7 +9413,19 @@
         "realityRank": "中",
         "rankingTarget": "基本",
         "damageMemo": "詳細条件はconditionを参照"
-      }
+      },
+      "plainSummary": "エースに「隠し味」を仕込みながら殴る。後半は3倍速で貯まる。",
+      "steps": [
+        {
+          "text": "ランダムな敵3体に物理280%"
+        },
+        {
+          "text": "攻撃力が最も高い味方に隠し味を1スタック付与(1スタックにつき攻撃力+6%、最大15、解除不可)"
+        },
+        {
+          "text": "7ターン目以降は付与スタック3"
+        }
+      ]
     },
     {
       "id": "fenrir_treasure-s2",
@@ -9190,28 +9439,45 @@
       "target": "ランダム敵",
       "multiplierText": "物理290%×5回",
       "duration": "",
-      "ct": 4,
+      "ct": 5,
       "condition": "最後の攻撃後、攻撃力最高味方に隠し味1スタック。7ターン目以降なら付与後自身のスキルCT-5",
       "exclusiveWeapon": "専用Lv3: 物理320%",
       "compareMemo": "腕力+8% / 攻撃力+18% / HPドレイン+15%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/fenrir_treasure/",
+      "sourceUrl": "https://ichigogames.net/mementomori/fenrir_another/",
       "damage": {
         "singleMultiplier": 290,
         "hitCount": 5,
         "baseTotal": 1450,
         "exclusiveLv1Total": 1450,
         "exclusiveLv2Total": 1450,
-        "exclusiveLv3Total": 1450,
-        "conditionMaxTotal": 1450,
-        "conditionMaxNote": "画像カード上の基本倍率で算出。条件強化はcondition参照",
+        "exclusiveLv3Total": 1600,
+        "conditionMaxTotal": 1600,
+        "conditionMaxNote": "専用Lv3で320%×5回。7ターン目以降のCT減少は別評価",
         "powerType": "画像カード準拠",
         "maxStacks": null,
         "realityRank": "中",
         "rankingTarget": "基本",
         "damageMemo": "詳細条件はconditionを参照"
-      }
+      },
+      "plainSummary": "5連撃＋隠し味。後半はCTが即戻るループ機になる。",
+      "steps": [
+        {
+          "text": "ランダムな敵に物理290%×5回"
+        },
+        {
+          "text": "最後の攻撃後、攻撃力が最も高い味方に隠し味を1スタック付与"
+        },
+        {
+          "text": "7ターン目以降は、付与後に自身のスキルCTを5減少"
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "7ターン目以降は③のCT短縮量がこのスキルのCTと同じになり、エースの隠し味を高頻度で積み直せる。"
+        }
+      ]
     },
     {
       "id": "fenrir_treasure-s3",
@@ -9226,12 +9492,24 @@
       "multiplierText": "ダメージ60%遮断 / 結界",
       "duration": "条件参照",
       "ct": null,
-      "condition": "被攻撃時に遮断。ターン開始時、隣接味方2体に4ターン結界を付与。発動後4回行動終了まで再発動不可",
+      "condition": "被攻撃時にダメージ60%遮断。ターン開始時、隣接味方2体に4ターン結界を付与。結界は最大HP10%を超えた分のダメージを20%遮断。発動後4回行動終了まで再発動不可",
       "exclusiveWeapon": "専用Lv2: 結界の遮断量50%",
       "compareMemo": "腕力+8% / 攻撃力+18% / HPドレイン+15%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/fenrir_treasure/"
+      "sourceUrl": "https://ichigogames.net/mementomori/fenrir_another/",
+      "plainSummary": "自分は6割遮断、隣の2人には結界を配る。",
+      "steps": [
+        {
+          "text": "攻撃を受けたとき、ダメージを60%遮断"
+        },
+        {
+          "text": "ターン開始時、隣接する味方2体に結界を4ターン付与(最大HP10%を超えた分のダメージを20%遮断、解除不可)"
+        },
+        {
+          "text": "②は発動後4回行動まで再発動しない"
+        }
+      ]
     },
     {
       "id": "fenrir_treasure-s4",
@@ -9251,7 +9529,16 @@
       "compareMemo": "腕力+8% / 攻撃力+18% / HPドレイン+15%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/fenrir_treasure/"
+      "sourceUrl": "https://ichigogames.net/mementomori/fenrir_another/",
+      "plainSummary": "序盤6ターン、毎ターン全員を自動回復。",
+      "steps": [
+        {
+          "text": "6ターン目まで毎ターン終了時、味方全体のHPを攻撃力50%分回復"
+        },
+        {
+          "text": "バトル開始時、味方全体のクリティカル耐性+60%(1ターン)"
+        }
+      ]
     },
     {
       "id": "merlyn-s1",
@@ -9271,7 +9558,7 @@
       "compareMemo": "攻撃力+18% / クリティカル耐性+10% / クリティカル+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/merlyn/",
+      "sourceUrl": "https://ichigogames.net/mementomori/myrlennia/",
       "damage": {
         "singleMultiplier": 400,
         "hitCount": 3,
@@ -9286,7 +9573,19 @@
         "realityRank": "中",
         "rankingTarget": "基本",
         "damageMemo": "詳細条件はconditionを参照"
-      }
+      },
+      "plainSummary": "敵の魔法防御を削りながら撃つ。使うほど削りが増える。",
+      "steps": [
+        {
+          "text": "攻撃前、魔法防御力減少を1スタック付与(最大8スタック、5ターン)"
+        },
+        {
+          "text": "このスキルの3回目以降は、付与後にスタックをさらに+2"
+        },
+        {
+          "text": "ランダムな敵3体に魔法400%"
+        }
+      ]
     },
     {
       "id": "merlyn-s2",
@@ -9306,7 +9605,7 @@
       "compareMemo": "攻撃力+18% / クリティカル耐性+10% / クリティカル+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/merlyn/",
+      "sourceUrl": "https://ichigogames.net/mementomori/myrlennia/",
       "damage": {
         "singleMultiplier": 420,
         "hitCount": 7,
@@ -9321,7 +9620,19 @@
         "realityRank": "中",
         "rankingTarget": "基本",
         "damageMemo": "詳細条件はconditionを参照"
-      }
+      },
+      "plainSummary": "使い込むほど倍率が上がり、4回目からはシールド無視の7連撃。",
+      "steps": [
+        {
+          "text": "魔法防御力が最も低い敵に魔法420%×7回"
+        },
+        {
+          "text": "このスキルの3回目以降は630%、4回目以降は840%"
+        },
+        {
+          "text": "4回目以降はシールドを無視する"
+        }
+      ]
     },
     {
       "id": "merlyn-s3",
@@ -9336,12 +9647,27 @@
       "multiplierText": "妖精さんスタック / 攻撃力+3%",
       "duration": "条件参照",
       "ct": null,
-      "condition": "毎ターン開始時に妖精さん1スタック。1スタックにつき攻撃力3%、物理防御5%増加。13ターン目以降は付与なし。黄属性味方条件で付与数2",
+      "condition": "毎ターン開始時に妖精さん1スタック。1スタックにつき攻撃力3%、物理防御5%増加。シールド付与は13ターン目以降なし。黄属性味方条件で妖精さん付与数2",
       "exclusiveWeapon": "専用Lv2: シールド攻撃力1000%",
       "compareMemo": "攻撃力+18% / クリティカル耐性+10% / クリティカル+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/merlyn/"
+      "sourceUrl": "https://ichigogames.net/mementomori/myrlennia/",
+      "plainSummary": "毎ターン「妖精さん」が積もり、攻守が育つ。序盤はシールドも張る。",
+      "steps": [
+        {
+          "text": "毎ターン開始時、妖精さんを1スタック付与(1スタックにつき攻撃力+3%・物理防御+5%、最大30スタック、解除不可)"
+        },
+        {
+          "text": "自身以外の黄属性の味方が2体以上なら付与数2"
+        },
+        {
+          "text": "ターン開始時、自身に攻撃力200%のシールドを4ターン付与"
+        },
+        {
+          "text": "シールド付与は発動後4回行動まで再発動せず、13ターン目以降は発動しない"
+        }
+      ]
     },
     {
       "id": "merlyn-s4",
@@ -9361,7 +9687,16 @@
       "compareMemo": "攻撃力+18% / クリティカル耐性+10% / クリティカル+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/merlyn/"
+      "sourceUrl": "https://ichigogames.net/mementomori/myrlennia/",
+      "plainSummary": "定期的にかかる3割カット＋防御バフ。",
+      "steps": [
+        {
+          "text": "ターン開始時、自身の被ダメージ30%減少・防御力+150%(4ターン)"
+        },
+        {
+          "text": "発動後4回行動まで再発動しない"
+        }
+      ]
     },
     {
       "id": "tricksy-s1",
@@ -9381,7 +9716,7 @@
       "compareMemo": "攻撃力+18% / 弱体効果命中+10% / 弱体効果耐性+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/tricksy/",
+      "sourceUrl": "https://ichigogames.net/mementomori/trixie/",
       "damage": {
         "singleMultiplier": 330,
         "hitCount": 3,
@@ -9396,7 +9731,19 @@
         "realityRank": "中",
         "rankingTarget": "基本",
         "damageMemo": "詳細条件はconditionを参照"
-      }
+      },
+      "plainSummary": "敵を遅くする搦め手。格下相手には長く効く。",
+      "steps": [
+        {
+          "text": "ランダムな敵3体に魔法330%"
+        },
+        {
+          "text": "70%の確率でスピード20%減少を2ターン付与"
+        },
+        {
+          "text": "対象の魔力が自身より低い場合は5ターンになる"
+        }
+      ]
     },
     {
       "id": "tricksy-s2",
@@ -9416,7 +9763,7 @@
       "compareMemo": "攻撃力+18% / 弱体効果命中+10% / 弱体効果耐性+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/tricksy/",
+      "sourceUrl": "https://ichigogames.net/mementomori/trixie/",
       "damage": {
         "singleMultiplier": 380,
         "hitCount": 4,
@@ -9424,14 +9771,27 @@
         "exclusiveLv1Total": 1520,
         "exclusiveLv2Total": 1520,
         "exclusiveLv3Total": 1520,
-        "conditionMaxTotal": 1520,
-        "conditionMaxNote": "画像カード上の基本倍率で算出。条件強化はcondition参照",
+        "conditionMaxTotal": 6080,
+        "conditionMaxNote": "3回目以降は1520%×4体",
         "powerType": "画像カード準拠",
         "maxStacks": null,
         "realityRank": "中",
         "rankingTarget": "基本",
         "damageMemo": "詳細条件はconditionを参照"
-      }
+      },
+      "plainSummary": "敵のエースを気絶させにいき、3回目からは4倍砲に化ける。",
+      "steps": [
+        {
+          "text": "ランダムな敵4体に魔法380%"
+        },
+        {
+          "text": "70%の確率で攻撃力が最も高い敵に気絶を1ターン付与(自身のバフが4個以上なら2ターン)",
+          "term": "気絶"
+        },
+        {
+          "text": "このスキルの3回目以降は魔法1520%"
+        }
+      ]
     },
     {
       "id": "tricksy-s3",
@@ -9446,12 +9806,27 @@
       "multiplierText": "攻撃力200%シールド / 黄属性なら500%",
       "duration": "条件参照",
       "ct": null,
-      "condition": "1ターン目開始時、10ターン自身にシールド。弱体効果無効または行動阻害無効を持つ敵がいれば対象が味方全体。解除不可",
+      "condition": "1ターン目開始時、10ターン自身に攻撃力200%のシールド。対象が黄属性なら500%。弱体効果無効または行動阻害無効を持つ敵がいれば対象が味方全体。バトル開始時、自身の被ダメージ10%減少。解除不可",
       "exclusiveWeapon": "専用Lv2: 被ダメージ減少70%",
       "compareMemo": "攻撃力+18% / 弱体効果命中+10% / 弱体効果耐性+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/tricksy/"
+      "sourceUrl": "https://ichigogames.net/mementomori/trixie/",
+      "plainSummary": "開幕から10ターン続くシールド。黄属性には厚く、敵条件を満たすと味方全体に広がる。",
+      "steps": [
+        {
+          "text": "1ターン目開始時、自身に攻撃力200%のシールドを10ターン付与(解除不可)"
+        },
+        {
+          "text": "シールド対象が黄属性なら、シールド量は攻撃力500%になる"
+        },
+        {
+          "text": "弱体効果無効または行動阻害無効を持つ敵がいる場合、シールド対象が味方全体になる"
+        },
+        {
+          "text": "バトル開始時、自身の被ダメージを10%減少(解除不可)"
+        }
+      ]
     },
     {
       "id": "tricksy-s4",
@@ -9471,7 +9846,19 @@
       "compareMemo": "攻撃力+18% / 弱体効果命中+10% / 弱体効果耐性+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/tricksy/"
+      "sourceUrl": "https://ichigogames.net/mementomori/trixie/",
+      "plainSummary": "定期的にかかる自己バフ。黄染めなら吸血も付く。",
+      "steps": [
+        {
+          "text": "行動開始時、自身の防御力+100%・命中率+30%(4ターン)"
+        },
+        {
+          "text": "自身以外の黄属性の味方が2体以上ならHPドレイン+20%も付与"
+        },
+        {
+          "text": "発動後4回行動まで再発動しない"
+        }
+      ]
     },
     {
       "id": "freycia-s1",
@@ -11426,7 +11813,7 @@
       "compareMemo": "攻撃力+18% / 命中+10% / 物理クリダメ緩和+35%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/aishe/",
+      "sourceUrl": "https://ichigogames.net/mementomori/ayse/",
       "damage": {
         "singleMultiplier": 610,
         "hitCount": 3,
@@ -11441,7 +11828,19 @@
         "realityRank": "中",
         "rankingTarget": "基本",
         "damageMemo": "画像カードからの暫定入力"
-      }
+      },
+      "plainSummary": "自傷してから3連撃。「解析」が貯まっていれば2周する。",
+      "steps": [
+        {
+          "text": "自身に現在HP10%の自傷ダメージ"
+        },
+        {
+          "text": "ランダムな敵に物理610%×3回"
+        },
+        {
+          "text": "最後の攻撃後、解析3スタック以上なら1回まで再発動"
+        }
+      ]
     },
     {
       "id": "aishe-s2",
@@ -11461,7 +11860,7 @@
       "compareMemo": "攻撃力+18% / 命中+10% / 物理クリダメ緩和+35%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/aishe/",
+      "sourceUrl": "https://ichigogames.net/mementomori/ayse/",
       "damage": {
         "singleMultiplier": 760,
         "hitCount": 5,
@@ -11476,7 +11875,19 @@
         "realityRank": "中",
         "rankingTarget": "基本",
         "damageMemo": "画像カードからの暫定入力"
-      }
+      },
+      "plainSummary": "元気な敵ほど痛い5連撃。",
+      "steps": [
+        {
+          "text": "自身に現在HP20%の自傷ダメージ"
+        },
+        {
+          "text": "ランダムな敵に物理760%×5回"
+        },
+        {
+          "text": "対象のHP割合が高いほどダメージ上昇(最大1520%、判定は攻撃ごと)"
+        }
+      ]
     },
     {
       "id": "aishe-s3",
@@ -11496,7 +11907,22 @@
       "compareMemo": "攻撃力+18% / 命中+10% / 物理クリダメ緩和+35%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/aishe/"
+      "sourceUrl": "https://ichigogames.net/mementomori/ayse/",
+      "plainSummary": "自傷のたび「解析」が積もり、満タンで加速する。",
+      "steps": [
+        {
+          "text": "自身か味方が自傷ダメージを受けるたび解析を1スタック付与(最大6、解除不可)"
+        },
+        {
+          "text": "1スタックにつき攻撃力+3%、6スタックでスピード+30%"
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "自傷スキルを持つ味方(グィネヴィア・リリコット等)がいるとスタックが早く貯まり、S1の再発動条件にも早く届く。",
+          "reason": "カウント対象が自身か味方の自傷回数のため"
+        }
+      ]
     },
     {
       "id": "aishe-s4",
@@ -11516,7 +11942,16 @@
       "compareMemo": "攻撃力+18% / 命中+10% / 物理クリダメ緩和+35%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/aishe/"
+      "sourceUrl": "https://ichigogames.net/mementomori/ayse/",
+      "plainSummary": "攻撃のついでに敵バフの寿命を縮め、開幕は一撃ガード持ち。",
+      "steps": [
+        {
+          "text": "自身の攻撃後、対象が弱体効果中なら70%の確率で対象のバフ1つのターン数を1減少"
+        },
+        {
+          "text": "バトル開始時、自身に多重バリア1層(最大HP20%以上のダメージを1回無効化、解除不可)"
+        }
+      ]
     },
     {
       "id": "lilicotte-s1",
@@ -11536,7 +11971,7 @@
       "compareMemo": "攻撃力+18% / 命中+10% / クリティカル+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/lilicotte/",
+      "sourceUrl": "https://ichigogames.net/mementomori/lillicotte/",
       "damage": {
         "singleMultiplier": 580,
         "hitCount": 6,
@@ -11551,7 +11986,19 @@
         "realityRank": "中",
         "rankingTarget": "基本",
         "damageMemo": "画像カードからの暫定入力"
-      }
+      },
+      "plainSummary": "自傷してから、バフの多い敵を剥がして6連撃。",
+      "steps": [
+        {
+          "text": "自身に現在HP20%の自傷ダメージを2回"
+        },
+        {
+          "text": "70%の確率で、バフが最も多い敵のバフを2つ解除"
+        },
+        {
+          "text": "ランダムな敵に物理580%×6回"
+        }
+      ]
     },
     {
       "id": "lilicotte-s2",
@@ -11566,12 +12013,12 @@
       "multiplierText": "物理1120%×3体",
       "duration": "沈黙2T",
       "ct": 4,
-      "condition": "自身に2回、現在HP20%の自傷。70%でバフ最多敵のバフ2つ解除後、攻撃力が高い敵3体に攻撃。70%で沈黙付与",
+      "condition": "自身に2回、現在HP20%の自傷。70%でバフ最多敵のバフ2つ解除後、攻撃力が高い敵3体に攻撃。70%で1T沈黙付与",
       "exclusiveWeapon": "専用Lv2: 沈黙2T",
       "compareMemo": "攻撃力+18% / 命中+10% / クリティカル+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/lilicotte/",
+      "sourceUrl": "https://ichigogames.net/mementomori/lillicotte/",
       "damage": {
         "singleMultiplier": 1120,
         "hitCount": 3,
@@ -11586,7 +12033,23 @@
         "realityRank": "中",
         "rankingTarget": "基本",
         "damageMemo": "画像カードからの暫定入力"
-      }
+      },
+      "plainSummary": "バフ剥がし＋高倍率＋沈黙を1本にまとめた主砲。",
+      "steps": [
+        {
+          "text": "自身に現在HP20%の自傷ダメージを2回"
+        },
+        {
+          "text": "70%の確率で、バフが最も多い敵のバフを2つ解除"
+        },
+        {
+          "text": "攻撃力が高い敵3体に物理1120%"
+        },
+        {
+          "text": "70%の確率で沈黙を1ターン付与",
+          "term": "沈黙"
+        }
+      ]
     },
     {
       "id": "lilicotte-s3",
@@ -11606,7 +12069,22 @@
       "compareMemo": "攻撃力+18% / 命中+10% / クリティカル+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/lilicotte/"
+      "sourceUrl": "https://ichigogames.net/mementomori/lillicotte/",
+      "plainSummary": "バフを剥がすたび、自分とエースが強くなる。",
+      "steps": [
+        {
+          "text": "自身が敵のバフを解除したとき、自身と攻撃力が最も高い味方の攻撃力・防御力を+20%(2ターン、解除不可)"
+        },
+        {
+          "text": "対象が紅属性なら増加量50%"
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "自身のS1・S2がバフ解除を持つため単独で回るが、他の味方がバフ解除しても発動源にはならない。",
+          "reason": "発動条件が自身が敵のバフを解除したときのため"
+        }
+      ]
     },
     {
       "id": "lilicotte-s4",
@@ -11626,7 +12104,25 @@
       "compareMemo": "攻撃力+18% / 命中+10% / クリティカル+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/lilicotte/"
+      "sourceUrl": "https://ichigogames.net/mementomori/lillicotte/",
+      "plainSummary": "通常攻撃が強化され、瀕死ほど痛くなる。",
+      "steps": [
+        {
+          "text": "通常攻撃を強化(ランダムな敵に物理300%×3回)"
+        },
+        {
+          "text": "自身のHP割合が低いほどダメージ上昇(最大600%、判定は攻撃ごと)"
+        },
+        {
+          "text": "バトル開始時、スピード+30%(4ターン、解除不可)"
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "S1・S2の自傷で自らHPが減る設計のため、低HP条件と自己完結で噛み合う。",
+          "reason": "自傷が現在HP20%×2回のため"
+        }
+      ]
     },
     {
       "id": "merlin-s1",
