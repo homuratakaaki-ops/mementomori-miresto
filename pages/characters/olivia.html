@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>オリヴィエ | ミレストのメメントモリ分析データ室</title>
+  <meta name="description" content="オリヴィエのスキルを、効果の順番・対象・火力・検証情報に分けて確認するためのデータページです。">
+  <link rel="canonical" href="https://memento.musoudc.com/pages/characters/olivia.html">
+  <link rel="stylesheet" href="../../assets/character-page.css">
+  <script src="../../js/character-page.js" defer></script>
+</head>
+<body data-character-page data-character-id="olivia">
+  <header class="page-header">
+    <div class="header-inner">
+      <a class="top-link" href="./index.html">キャラ一覧へ戻る</a>
+      <p class="eyebrow">CHARACTER SKILL DATA</p>
+      <h1 id="characterName">オリヴィエ</h1>
+      <p class="role" id="roleMemo"></p>
+      <div class="meta-row" id="characterMeta"></div>
+    </div>
+  </header>
+
+  <main>
+    <section class="note-panel" id="notePanel" hidden>
+      <strong>評価・運用メモはnoteへ</strong><br>
+      このページでは検証済みデータと出典整理に絞ります。評価や編成判断は外部記事で確認してください。<br>
+      <a id="noteLink" href="#" target="_blank" rel="noopener">ミレストのnote記事を開く</a>
+    </section>
+    <section class="skill-list" id="skillList"></section>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <span>ミレストのメメントモリ分析データ室 / 非公式ファンサイト</span>
+      <a href="../../compare-prototype.html">スキル比較DB</a>
+    </div>
+  </footer>
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      window.MirestoCharacterPage.init().catch((error) => {
+        document.querySelector('#roleMemo').textContent = error.message;
+        console.error(error);
+      });
+    });
+  </script>
+</body>
+</html>

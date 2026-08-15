@@ -1,0 +1,44 @@
+:root {
+  --miresto-attr-blue-accent: #83a2ff;
+  --miresto-attr-blue-strong: #4f6fd6;
+  --miresto-attr-blue-soft: rgba(131, 162, 255, 0.24);
+  --miresto-attr-blue-faint: rgba(131, 162, 255, 0.10);
+  --miresto-attr-blue-page-soft: #dfe8ff;
+  --miresto-attr-blue-page-faint: #f2f6ff;
+
+  --miresto-attr-red-accent: #e07070;
+  --miresto-attr-red-strong: #b64747;
+  --miresto-attr-red-soft: rgba(224, 112, 112, 0.28);
+  --miresto-attr-red-faint: rgba(224, 112, 112, 0.11);
+  --miresto-attr-red-page-soft: #f7dddd;
+  --miresto-attr-red-page-faint: #fff3f3;
+
+  --miresto-attr-green-accent: #2f8f5b;
+  --miresto-attr-green-strong: #17663b;
+  --miresto-attr-green-soft: rgba(47, 143, 91, 0.24);
+  --miresto-attr-green-faint: rgba(47, 143, 91, 0.10);
+  --miresto-attr-green-page-soft: #dff1e6;
+  --miresto-attr-green-page-faint: #f0f8f2;
+
+  --miresto-attr-yellow-accent: #c8aa64;
+  --miresto-attr-yellow-strong: #8f6a24;
+  --miresto-attr-yellow-soft: rgba(200, 170, 100, 0.24);
+  --miresto-attr-yellow-faint: rgba(200, 170, 100, 0.10);
+  --miresto-attr-yellow-page-soft: #f1e4bf;
+  --miresto-attr-yellow-page-faint: #fff9ea;
+
+  --miresto-attr-light-accent: #d8cfae;
+  --miresto-attr-light-strong: #8d7d4c;
+  --miresto-attr-light-soft: rgba(216, 207, 174, 0.36);
+  --miresto-attr-light-faint: rgba(216, 207, 174, 0.16);
+  --miresto-attr-light-page-soft: #eee7d1;
+  --miresto-attr-light-page-faint: #fffdf6;
+  --miresto-attr-light-badge-bg: #fffef8;
+
+  --miresto-attr-dark-accent: #7b55b8;
+  --miresto-attr-dark-strong: #4b2c7f;
+  --miresto-attr-dark-soft: rgba(123, 85, 184, 0.30);
+  --miresto-attr-dark-faint: rgba(123, 85, 184, 0.12);
+  --miresto-attr-dark-page-soft: #e8ddf5;
+  --miresto-attr-dark-page-faint: #f7f2fc;
+}
