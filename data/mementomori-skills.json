@@ -501,7 +501,7 @@
       "roleMemo": "成長因子スタックで物理火力を段階的に伸ばすウォーリア",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": ""
+      "sourceUrl": "https://ichigogames.net/mementomori/meria/"
     },
     {
       "id": "irene",
@@ -516,7 +516,7 @@
       "roleMemo": "防御力減少、ターン経過後の高倍率攻撃、結界で戦うスナイパー",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": ""
+      "sourceUrl": "https://ichigogames.net/mementomori/eirene/"
     },
     {
       "id": "aa_rusted_sky",
@@ -681,7 +681,7 @@
       "roleMemo": "再発動、毒、劇化、ダメージ遮断を組み合わせるスナイパー",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": ""
+      "sourceUrl": "https://ichigogames.net/mementomori/natasha_blossoms/"
     },
     {
       "id": "nebra",
@@ -1236,7 +1236,7 @@
       "roleMemo": "紅・翠属性支援と気絶を持つ紅ウォーリア",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/soltina_warm_memory/"
+      "sourceUrl": "https://ichigogames.net/mementomori/soltina_winter/"
     },
     {
       "id": "artoria",
@@ -1266,7 +1266,7 @@
       "roleMemo": "高倍率物理とカウンタ弱体を持つ紅ウォーリア",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/shizu_snow/"
+      "sourceUrl": "https://ichigogames.net/mementomori/shizu_spring/"
     },
     {
       "id": "lucile",
@@ -1536,7 +1536,7 @@
       "roleMemo": "7ターン目以降に大きく伸びる冬イベントスナイパー",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/lunalynn_holy_night/"
+      "sourceUrl": "https://ichigogames.net/mementomori/lunalynn_winter/"
     },
     {
       "id": "tilly",
@@ -4090,7 +4090,7 @@
       "category": "火力",
       "majorCategory": "攻撃",
       "subCategory": "純火力",
-      "target": "ランダム敵3体",
+      "target": "ランダム敵2体",
       "multiplierText": "魔法180%",
       "duration": "70%で2ターンバッテン付与",
       "ct": 4,
@@ -4102,19 +4102,28 @@
       "sourceUrl": "https://ichigogames.net/mementomori/eureka/",
       "damage": {
         "singleMultiplier": 180,
-        "hitCount": 3,
-        "baseTotal": 540,
+        "hitCount": 2,
+        "baseTotal": 360,
         "exclusiveLv1Total": 540,
         "exclusiveLv2Total": 540,
         "exclusiveLv3Total": 540,
         "conditionMaxTotal": 540,
-        "conditionMaxNote": "カード用要約から暫定抽出",
+        "conditionMaxNote": "専用Lv1で対象がランダム敵3体",
         "powerType": "基本火力",
         "maxStacks": null,
         "realityRank": "高",
         "rankingTarget": "対象",
         "damageMemo": "カード生成JSONから自動マージ。専用Lv別・条件MAXは要精査"
-      }
+      },
+      "plainSummary": "「バッテン」を撒いて敵の攻撃を鈍らせる起点スキル。",
+      "steps": [
+        {
+          "text": "ランダムな敵2体に魔法180%"
+        },
+        {
+          "text": "70%の確率でバッテンを2ターン付与(与ダメージ10%減少)"
+        }
+      ]
     },
     {
       "id": "eureka-s2",
@@ -4126,30 +4135,44 @@
       "majorCategory": "攻撃",
       "subCategory": "純火力",
       "target": "ランダム敵3体",
-      "multiplierText": "魔法480% / 魔法1920%",
+      "multiplierText": "魔法440% / 魔法1760%",
       "duration": "",
       "ct": 4,
-      "condition": "",
+      "condition": "対象がバッテンを付帯していれば魔法1760%",
       "exclusiveWeapon": "Lv3: 魔法440%→480%、バッテン時1760%→1920%",
       "compareMemo": "ランダム敵3体に魔法480% / 対象がバッテン付帯なら魔法1920%",
       "noteUrl": "",
       "imageUrl": "",
       "sourceUrl": "https://ichigogames.net/mementomori/eureka/",
       "damage": {
-        "singleMultiplier": 480,
+        "singleMultiplier": 440,
         "hitCount": 3,
-        "baseTotal": 1440,
-        "exclusiveLv1Total": 1440,
-        "exclusiveLv2Total": 1440,
+        "baseTotal": 1320,
+        "exclusiveLv1Total": 1320,
+        "exclusiveLv2Total": 1320,
         "exclusiveLv3Total": 1440,
         "conditionMaxTotal": 5760,
-        "conditionMaxNote": "カード用要約から暫定抽出。条件の現実性は要確認",
+        "conditionMaxNote": "専用Lv3で480%。対象がバッテン中なら1920%×3体",
         "powerType": "条件火力",
         "maxStacks": null,
         "realityRank": "中",
         "rankingTarget": "対象",
         "damageMemo": "カード生成JSONから自動マージ。専用Lv別・条件MAXは要精査"
-      }
+      },
+      "plainSummary": "バッテン持ちの敵には4倍で刺さる本命砲。",
+      "steps": [
+        {
+          "text": "ランダムな敵3体に魔法440%"
+        },
+        {
+          "text": "対象がバッテンを付帯していれば魔法1760%"
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "S1・S3で自給するバッテンが②の条件そのもの。根拠: 倍率条件が「バッテン付帯」のため"
+        }
+      ]
     },
     {
       "id": "eureka-s3",
@@ -4163,13 +4186,25 @@
       "target": "自身がアクティブスキルで弱体を受けた時、70%でランダム敵3体",
       "multiplierText": "",
       "duration": "自身がアクティブスキルで弱体を受けた時、70%でランダム敵3体に2ターンバッテン",
-      "ct": "",
+      "ct": null,
       "condition": "自身がアクティブスキルで弱体を受けた時、70%でランダム敵3体に2ターンバッテン / 自身と攻撃力が高い味方2体の弱体効果を1つ解除 / 受けた弱体が行動阻害ならバッテン対象が敵5体に増加",
       "exclusiveWeapon": "",
       "compareMemo": "自身がアクティブスキルで弱体を受けた時、70%でランダム敵3体に2ターンバッテン / 自身と攻撃力が高い味方2体の弱体効果を1つ解除 / 受けた弱体が行動阻害ならバッテン対象が敵5体に増加",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/eureka/"
+      "sourceUrl": "https://ichigogames.net/mementomori/eureka/",
+      "plainSummary": "弱体を受けたらバッテンで反撃し、自分とエースを浄化する。",
+      "steps": [
+        {
+          "text": "自身がアクティブスキルで弱体を受けたとき、70%の確率でランダムな敵3体にバッテンを2ターン付与"
+        },
+        {
+          "text": "受けた弱体が行動阻害なら、バッテン付与の対象がランダムな敵5体になる"
+        },
+        {
+          "text": "自身と攻撃力が高い味方2体の弱体効果を1つ解除"
+        }
+      ]
     },
     {
       "id": "eureka-s4",
@@ -4183,13 +4218,25 @@
       "target": "",
       "multiplierText": "攻撃力150% / 攻撃力50%",
       "duration": "自身戦闘不能時、4ターン攻撃力最高の味方にシールド",
-      "ct": "",
+      "ct": null,
       "condition": "自身戦闘不能時、4ターン攻撃力最高の味方にシールド / 基礎シールドは自身攻撃力150% / バッテン敵1体につき+150%、最大900% / 対象が藍属性なら攻撃力50%増加",
       "exclusiveWeapon": "Lv2: バトル開始時、自身に多重バリア1層",
       "compareMemo": "自身戦闘不能時、4ターン攻撃力最高の味方にシールド / 基礎シールドは自身攻撃力150% / バッテン敵1体につき+150%、最大900% / 対象が藍属性なら攻撃力50%増加",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/eureka/"
+      "sourceUrl": "https://ichigogames.net/mementomori/eureka/",
+      "plainSummary": "倒れたとき、エースに置き土産の大型シールド。",
+      "steps": [
+        {
+          "text": "自身が戦闘不能になったとき、攻撃力が最も高い味方にシールドを4ターン付与"
+        },
+        {
+          "text": "量は自身の攻撃力150%に、バッテンの敵1体につき150%を加算(最大900%)"
+        },
+        {
+          "text": "対象が藍属性なら攻撃力も50%増加"
+        }
+      ]
     },
     {
       "id": "cordie_ringmaster-s1",
@@ -5580,7 +5627,7 @@
       "compareMemo": "成長因子スタックで倍率が大きく伸びる。専用Lv1で攻撃回数増加",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "",
+      "sourceUrl": "https://ichigogames.net/mementomori/meria/",
       "damage": {
         "singleMultiplier": 100,
         "hitCount": 3,
@@ -5595,7 +5642,19 @@
         "realityRank": "低",
         "rankingTarget": "条件込み",
         "damageMemo": "最大値は成長因子10スタック前提"
-      }
+      },
+      "plainSummary": "「成長因子」の数だけ倍率が跳ね、撃つたび因子も育つ主砲。",
+      "steps": [
+        {
+          "text": "攻撃前、成長因子1スタックにつき物理ダメージ+100%(最大1100%)"
+        },
+        {
+          "text": "ランダムな敵に物理100%×3回"
+        },
+        {
+          "text": "攻撃後、自身に成長因子を2スタック付与(最大10、解除不可)"
+        }
+      ]
     },
     {
       "id": "meria-s2",
@@ -5615,7 +5674,7 @@
       "compareMemo": "成長因子で伸びる主力連撃。専用Lv3で倍率上限が上がる",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "",
+      "sourceUrl": "https://ichigogames.net/mementomori/meria/",
       "damage": {
         "singleMultiplier": 220,
         "hitCount": 5,
@@ -5630,7 +5689,24 @@
         "realityRank": "中",
         "rankingTarget": "条件込み",
         "damageMemo": "成長因子数に応じて段階上昇"
-      }
+      },
+      "plainSummary": "5連撃しつつ、味方に命中バフがあれば成長因子を自給する。",
+      "steps": [
+        {
+          "text": "攻撃前、成長因子1スタックにつき物理ダメージ+40%(最大620%)"
+        },
+        {
+          "text": "ランダムな敵に物理220%×5回"
+        },
+        {
+          "text": "最後の攻撃後、命中率増加を付帯している味方がいれば成長因子を3スタック付与"
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "③は「命中率増加を付帯している味方がいること」が条件のため、命中バフを配る味方がいると成長因子の自給が安定する。根拠: 付与条件が「命中率増加を付帯している味方がいる場合」のため"
+        }
+      ]
     },
     {
       "id": "meria-s3",
@@ -5650,7 +5726,16 @@
       "compareMemo": "多重バリアを自身または高攻撃力味方へ回す耐久支援",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": ""
+      "sourceUrl": "https://ichigogames.net/mementomori/meria/",
+      "plainSummary": "撃ち漏らすたびバリアが増える保険。あふれた分はエースへ。",
+      "steps": [
+        {
+          "text": "自身の攻撃で対象を戦闘不能にできなかった場合、自身に多重バリアを1層付与(最大4層、最大HP10%以上の被弾で1層消費、解除不可)"
+        },
+        {
+          "text": "自身が4層のときは、自身以外で攻撃力が最も高い味方に付与"
+        }
+      ]
     },
     {
       "id": "meria-s4",
@@ -5670,7 +5755,16 @@
       "compareMemo": "開幕と5ターン目に速度・命中を補助する",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": ""
+      "sourceUrl": "https://ichigogames.net/mementomori/meria/",
+      "plainSummary": "開幕の先手と、5ターン目からの命中保証。",
+      "steps": [
+        {
+          "text": "バトル開始時、自身のスピード+20%(1ターン)"
+        },
+        {
+          "text": "5ターン目開始時、自身の命中率+50%(解除不可)"
+        }
+      ]
     },
     {
       "id": "irene-s1",
@@ -5690,7 +5784,7 @@
       "compareMemo": "防御力減少が主価値。専用で対象数と倍率が上がる",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "",
+      "sourceUrl": "https://ichigogames.net/mementomori/eirene/",
       "damage": {
         "singleMultiplier": 260,
         "hitCount": 4,
@@ -5704,7 +5798,16 @@
         "realityRank": "高",
         "rankingTarget": "基本",
         "damageMemo": "防御力減少は火力外評価"
-      }
+      },
+      "plainSummary": "敵の防御を4ターン剥がしてから撃つ起点スキル。",
+      "steps": [
+        {
+          "text": "攻撃前、対象の防御力を25%減少(4ターン。オートバトル・ボスバトルでは解除不可、無窮の塔では50%)"
+        },
+        {
+          "text": "ランダムな敵4体に物理260%"
+        }
+      ]
     },
     {
       "id": "irene-s2",
@@ -5724,7 +5827,7 @@
       "compareMemo": "3回目以降に高倍率の単体連撃へ変化する",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "",
+      "sourceUrl": "https://ichigogames.net/mementomori/eirene/",
       "damage": {
         "singleMultiplier": 380,
         "hitCount": 4,
@@ -5738,7 +5841,19 @@
         "realityRank": "中",
         "rankingTarget": "条件込み",
         "damageMemo": "条件MAXはバトル中3回目以降の発動前提"
-      }
+      },
+      "plainSummary": "3回目から敵のエースへの8連撃「アストルム・ナタリス」に変貌する。",
+      "steps": [
+        {
+          "text": "ランダムな敵に物理380%×4回"
+        },
+        {
+          "text": "バトル中3回目以降は、攻撃力が最も高い敵に物理760%×8回へ変わる"
+        },
+        {
+          "text": "アストルム・ナタリスの最初の攻撃前、自身の命中率を50%増加(1ターン)"
+        }
+      ]
     },
     {
       "id": "irene-s3",
@@ -5753,12 +5868,32 @@
       "multiplierText": "通常攻撃強化 / スキルCT1減少 / 弱体効果2つ解除",
       "duration": "発動後3回行動終了まで再発動不可",
       "ct": null,
-      "condition": "ターン開始時、3ターン自身の通常攻撃を強化。強化通常攻撃時に自身のスキルCTを1減少し、弱体効果を2つ解除",
+      "condition": "ターン開始時、3ターン自身と自身以外のスピードが最も低い味方の通常攻撃を強化。強化通常攻撃時に自身のスキルCTを1減少し、弱体効果を2つ解除。その後通常攻撃強化を解除。発動後3回行動終了まで再発動不可",
       "exclusiveWeapon": "専用武器効果なし",
       "compareMemo": "通常攻撃強化とCT短縮で回転を上げる",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": ""
+      "sourceUrl": "https://ichigogames.net/mementomori/eirene/",
+      "plainSummary": "通常攻撃が強化され、撃つたびCT短縮と自己浄化が付く。",
+      "steps": [
+        {
+          "text": "ターン開始時、自身と自身以外でスピードが最も低い味方の通常攻撃を強化(3ターン)"
+        },
+        {
+          "text": "強化中の通常攻撃時、付帯者自身のスキルCTを1減少し、弱体効果を2つ解除"
+        },
+        {
+          "text": "強化通常攻撃後、通常攻撃強化を解除"
+        },
+        {
+          "text": "発動後3回行動まで再発動しない"
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "②のCT短縮でS2の「3回目」到達が早まる自己完結型。根拠: 短縮対象が自身のスキルCTのため"
+        }
+      ]
     },
     {
       "id": "irene-s4",
@@ -5778,7 +5913,19 @@
       "compareMemo": "低速味方を結界で守る耐久支援",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": ""
+      "sourceUrl": "https://ichigogames.net/mementomori/eirene/",
+      "plainSummary": "自分は7割遮断、一番遅い味方には結界を配る。",
+      "steps": [
+        {
+          "text": "攻撃を受けたとき、自身へのダメージを70%遮断"
+        },
+        {
+          "text": "ターン開始時、自身以外でスピードが最も低い味方に結界を4ターン付与(被攻撃時のダメージ30%遮断、解除不可)"
+        },
+        {
+          "text": "結界付与は発動後4回行動まで再発動しない"
+        }
+      ]
     },
     {
       "id": "aa_rusted_sky-s1",
@@ -7001,7 +7148,7 @@
       "majorCategory": "攻撃",
       "subCategory": "再発動 / スタック消費",
       "target": "ランダム敵3体",
-      "multiplierText": "物理380% / 専用Lv1で680%",
+      "multiplierText": "物理380%",
       "duration": "",
       "ct": 4,
       "condition": "このスキルを再発動する。再発動は1回まで。心に咲く花5スタック以上なら再発動が2回までになり、同条件で最後の物理攻撃後に心に咲く花を5消費",
@@ -7009,22 +7156,34 @@
       "compareMemo": "心に咲く花スタックで再発動回数が増える",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "",
+      "sourceUrl": "https://ichigogames.net/mementomori/natasha_blossoms/",
       "damage": {
         "singleMultiplier": 380,
         "hitCount": 3,
-        "baseTotal": 1140,
-        "exclusiveLv1Total": 2040,
-        "exclusiveLv2Total": 2040,
-        "exclusiveLv3Total": 2040,
+        "baseTotal": 2280,
+        "exclusiveLv1Total": 4080,
+        "exclusiveLv2Total": 4080,
+        "exclusiveLv3Total": 4080,
         "conditionMaxTotal": 6120,
-        "conditionMaxNote": "専用Lv1で680%×3体。心に咲く花5スタック以上なら初回+再発動2回まで",
+        "conditionMaxNote": "通常は再発動1回込み。花5以上で再発動2回まで。専用Lv1で680%",
         "powerType": "再発動 / スタック消費",
         "maxStacks": 10,
         "realityRank": "低",
         "rankingTarget": "条件込み",
         "damageMemo": "条件MAXはスタック5以上と再発動2回前提"
-      }
+      },
+      "plainSummary": "必ず2連発、「心に咲く花」が満タンなら3連発になる。",
+      "steps": [
+        {
+          "text": "ランダムな敵3体に物理380%"
+        },
+        {
+          "text": "このスキルを再発動(1回まで)"
+        },
+        {
+          "text": "心に咲く花5スタック以上なら再発動が2回までになり、最後の攻撃後に花を5消費"
+        }
+      ]
     },
     {
       "id": "natasha_bouquet-s2",
@@ -7044,7 +7203,7 @@
       "compareMemo": "高倍率攻撃と毒付与。スタック条件で倍率上昇",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "",
+      "sourceUrl": "https://ichigogames.net/mementomori/natasha_blossoms/",
       "damage": {
         "singleMultiplier": 1320,
         "hitCount": 3,
@@ -7059,7 +7218,20 @@
         "realityRank": "中",
         "rankingTarget": "条件込み",
         "damageMemo": "毒の割合ダメージは別評価"
-      }
+      },
+      "plainSummary": "毒付きの高倍率。花が満タンなら1.5倍。",
+      "steps": [
+        {
+          "text": "攻撃力が高い敵3体に物理1320%"
+        },
+        {
+          "text": "対象に毒を2ターン付与(毎ターン行動開始時、現在HP4%ダメージ)",
+          "term": "毒"
+        },
+        {
+          "text": "心に咲く花5スタック以上なら物理1980%(攻撃後に花を5消費)"
+        }
+      ]
     },
     {
       "id": "natasha_bouquet-s3",
@@ -7079,7 +7251,24 @@
       "compareMemo": "毒など持続ダメージ編成向けの補助",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": ""
+      "sourceUrl": "https://ichigogames.net/mementomori/natasha_blossoms/",
+      "plainSummary": "毎ターン「劇化」を撒き、持続ダメージを増幅する。",
+      "steps": [
+        {
+          "text": "毎ターン開始時、自身と攻撃力が高い敵3体に劇化を1ターン付与(解除不可)"
+        },
+        {
+          "text": "自身の受ける持続ダメージ+100%、敵側は+50%"
+        },
+        {
+          "text": "バトル開始時、自身の命中率+50%、味方全体の攻撃力と最大HP+10%(解除不可)"
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "毒・出血など持続ダメージを撒く味方と組むと劇化の増幅が乗る。自身も持続ダメージを倍受けする点に注意。根拠: 劇化の効果が「受ける持続ダメージの増加」のため"
+        }
+      ]
     },
     {
       "id": "natasha_bouquet-s4",
@@ -7099,7 +7288,16 @@
       "compareMemo": "高遮断とスタックで耐久しつつ火力条件を満たす",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": ""
+      "sourceUrl": "https://ichigogames.net/mementomori/natasha_blossoms/",
+      "plainSummary": "8割遮断で受けながら、被弾のたび「花」と貫通が積もる。",
+      "steps": [
+        {
+          "text": "攻撃を受けたとき、ダメージを80%遮断"
+        },
+        {
+          "text": "攻撃を受けるたび心に咲く花を1スタック付与(最大10、1スタックにつき防御貫通+3%、解除不可)"
+        }
+      ]
     },
     {
       "id": "nebra-s1",
@@ -9292,7 +9490,16 @@
         "realityRank": "中",
         "rankingTarget": "基本",
         "damageMemo": "詳細条件はconditionを参照"
-      }
+      },
+      "plainSummary": "バフの多い味方に吸血効率を配りながらの3連撃。",
+      "steps": [
+        {
+          "text": "バフ数が最も多い味方のHPドレインを30%増加(4ターン)"
+        },
+        {
+          "text": "ランダムな敵に物理580%×3回"
+        }
+      ]
     },
     {
       "id": "rustica-s2",
@@ -9327,7 +9534,19 @@
         "realityRank": "中",
         "rankingTarget": "基本",
         "damageMemo": "詳細条件はconditionを参照"
-      }
+      },
+      "plainSummary": "バフの多い味方を強化しつつ、撃つたびに手数が増える成長砲。",
+      "steps": [
+        {
+          "text": "バフ数が最も多い味方の攻撃力を30%増加(4ターン)"
+        },
+        {
+          "text": "攻撃力が最も高い敵に物理740%×4回"
+        },
+        {
+          "text": "このスキルを使うたび攻撃回数+1(最大6回)"
+        }
+      ]
     },
     {
       "id": "rustica-s3",
@@ -9347,7 +9566,21 @@
       "compareMemo": "攻撃力+18% / 防御力+5% / 物理クリダメ緩和+35%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/rustica/"
+      "sourceUrl": "https://ichigogames.net/mementomori/rustica/",
+      "plainSummary": "定期的に自分とバフ最多の味方へシールドを張る。",
+      "steps": [
+        {
+          "text": "行動終了時、自身とバフ数が最も多い味方に攻撃力75%のシールドを8ターン付与(対象が黄属性なら150%、解除不可)"
+        },
+        {
+          "text": "発動後8回行動まで再発動しない"
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "バフを積み上げる味方を対象にしやすく、黄染めでシールド量が倍になる。根拠: 対象条件が「バフ数最多」、増量条件が「黄属性」のため"
+        }
+      ]
     },
     {
       "id": "rustica-s4",
@@ -9367,7 +9600,19 @@
       "compareMemo": "攻撃力+18% / 防御力+5% / 物理クリダメ緩和+35%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/rustica/"
+      "sourceUrl": "https://ichigogames.net/mementomori/rustica/",
+      "plainSummary": "75%カットの守りと、バフの多い場での攻撃ブースト。",
+      "steps": [
+        {
+          "text": "バトル開始時、自身に青い鳥の守り人を付与(被ダメージ75%減少、1ターン、解除不可)"
+        },
+        {
+          "text": "行動終了時、バフ3つ以上の味方がいれば青い鳥の守り人を再付与"
+        },
+        {
+          "text": "行動開始時、バフ4つ以上の味方がいれば攻撃力+30%(1ターン、解除不可)"
+        }
+      ]
     },
     {
       "id": "mifuri-s1",
@@ -11438,12 +11683,12 @@
       "multiplierText": "物理440% / 専用Lv3 480%",
       "duration": "攻撃力・命中率増加4T",
       "ct": 4,
-      "condition": "攻撃力最高味方1体に攻撃力15%、命中率30%増加。紅・翠属性なら攻撃力30%、バフ32ターン。その後敵5体に攻撃",
+      "condition": "4ターン、攻撃力最高味方1体に攻撃力15%、命中率30%増加。紅・翠属性ならバフターン数32ターン、攻撃力30%。その後敵5体に攻撃",
       "exclusiveWeapon": "専用Lv1: 攻撃力増加30%、紅翠なら60%。専用Lv2: 命中率50%。専用Lv3: 480%",
       "compareMemo": "腕力+8% / 攻撃力+18% / 弱体効果命中+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/soltina_warm_memory/",
+      "sourceUrl": "https://ichigogames.net/mementomori/soltina_winter/",
       "damage": {
         "singleMultiplier": 440,
         "hitCount": 5,
@@ -11458,7 +11703,19 @@
         "realityRank": "中",
         "rankingTarget": "基本",
         "damageMemo": "画像カードからの暫定入力"
-      }
+      },
+      "plainSummary": "エースに攻撃・命中バフを配ってから5体を殴る。紅・翠には攻撃バフが倍で長持ち。",
+      "steps": [
+        {
+          "text": "攻撃力が最も高い味方の攻撃力+15%・命中率+30%(4ターン、解除不可。両者で1つのバフ扱い)"
+        },
+        {
+          "text": "対象が紅属性または翠属性なら、バフターン数が32ターンになり攻撃力増加が30%になる"
+        },
+        {
+          "text": "ランダムな敵5体に物理440%"
+        }
+      ]
     },
     {
       "id": "soltina_warm_memory-s2",
@@ -11478,7 +11735,7 @@
       "compareMemo": "腕力+8% / 攻撃力+18% / 弱体効果命中+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/soltina_warm_memory/",
+      "sourceUrl": "https://ichigogames.net/mementomori/soltina_winter/",
       "damage": {
         "singleMultiplier": 420,
         "hitCount": 5,
@@ -11493,7 +11750,17 @@
         "realityRank": "中",
         "rankingTarget": "基本",
         "damageMemo": "画像カードからの暫定入力"
-      }
+      },
+      "plainSummary": "敵のエースを気絶させにいく5連撃。",
+      "steps": [
+        {
+          "text": "攻撃力が最も高い敵に物理420%×5回"
+        },
+        {
+          "text": "攻撃するたび40%の確率で気絶を2ターン付与",
+          "term": "気絶"
+        }
+      ]
     },
     {
       "id": "soltina_warm_memory-s3",
@@ -11513,7 +11780,13 @@
       "compareMemo": "腕力+8% / 攻撃力+18% / 弱体効果命中+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/soltina_warm_memory/"
+      "sourceUrl": "https://ichigogames.net/mementomori/soltina_winter/",
+      "plainSummary": "弱体が溜まったら自分でまとめて掃除する。",
+      "steps": [
+        {
+          "text": "アクティブスキルで弱体を受け、自身の弱体効果が2個以上なら全解除"
+        }
+      ]
     },
     {
       "id": "soltina_warm_memory-s4",
@@ -11533,7 +11806,13 @@
       "compareMemo": "腕力+8% / 攻撃力+18% / 弱体効果命中+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/soltina_warm_memory/"
+      "sourceUrl": "https://ichigogames.net/mementomori/soltina_winter/",
+      "plainSummary": "開幕2ターンの先手ブースト。",
+      "steps": [
+        {
+          "text": "バトル開始時、自身のスピード+30%(2ターン、解除不可)"
+        }
+      ]
     },
     {
       "id": "artoria-s1",
@@ -11545,7 +11824,7 @@
       "majorCategory": "攻撃",
       "subCategory": "自傷 / 気絶",
       "target": "ランダム敵",
-      "multiplierText": "物理480%×3回 / 専用Lv3 520%",
+      "multiplierText": "物理480%×3回",
       "duration": "",
       "ct": 4,
       "condition": "自身に現在HP20%の自傷。対象が翠属性なら攻撃するたび70%で1ターン気絶",
@@ -11558,17 +11837,30 @@
         "singleMultiplier": 480,
         "hitCount": 3,
         "baseTotal": 1440,
-        "exclusiveLv1Total": 1440,
-        "exclusiveLv2Total": 1440,
-        "exclusiveLv3Total": 1440,
+        "exclusiveLv1Total": 2880,
+        "exclusiveLv2Total": 2880,
+        "exclusiveLv3Total": 3120,
         "conditionMaxTotal": 3120,
-        "conditionMaxNote": "専用Lv1で6回、専用Lv3で520%",
+        "conditionMaxNote": "専用Lv1で6回、専用Lv3で520%×6回",
         "powerType": "画像カード準拠",
         "maxStacks": null,
         "realityRank": "中",
         "rankingTarget": "基本",
         "damageMemo": "画像カードからの暫定入力"
-      }
+      },
+      "plainSummary": "自傷からの3連撃。翠属性には気絶チャンス付き。",
+      "steps": [
+        {
+          "text": "自身に現在HP20%の自傷ダメージ"
+        },
+        {
+          "text": "ランダムな敵に物理480%×3回"
+        },
+        {
+          "text": "対象が翠属性なら、攻撃するたび70%で気絶を1ターン付与",
+          "term": "気絶"
+        }
+      ]
     },
     {
       "id": "artoria-s2",
@@ -11603,7 +11895,19 @@
         "realityRank": "中",
         "rankingTarget": "基本",
         "damageMemo": "画像カードからの暫定入力"
-      }
+      },
+      "plainSummary": "攻撃力バフを積むほど痛くなる7連撃。",
+      "steps": [
+        {
+          "text": "自身に現在HP20%の自傷ダメージ"
+        },
+        {
+          "text": "ランダムな敵に物理540%×7回"
+        },
+        {
+          "text": "自身の攻撃力増加1スタックにつきダメージ+150%(最大1140%)"
+        }
+      ]
     },
     {
       "id": "artoria-s3",
@@ -11623,7 +11927,21 @@
       "compareMemo": "攻撃力+18% / クリティカル+10% / 命中+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/artoria/"
+      "sourceUrl": "https://ichigogames.net/mementomori/artoria/",
+      "plainSummary": "自傷のたび攻撃力が積もり、開幕は一撃ガード持ち。",
+      "steps": [
+        {
+          "text": "自身か味方が自傷ダメージを受けるたび攻撃力+10%をスタック(最大4、解除不可)"
+        },
+        {
+          "text": "バトル開始時、多重バリア1層を付与"
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "自傷パに混ぜると①が加速し、S2の倍率条件にも直結する。根拠: カウント対象が「自身か味方の自傷回数」、S2の参照が「奮い立つ正義の攻撃力増加スタック」のため"
+        }
+      ]
     },
     {
       "id": "artoria-s4",
@@ -11635,15 +11953,21 @@
       "majorCategory": "味方強化",
       "subCategory": "攻撃力増加 / スピード増加",
       "target": "自身 / 低スピード味方",
-      "multiplierText": "攻撃力+50% / スピード+20%",
+      "multiplierText": "攻撃力+50%",
       "duration": "2T / 解除不可",
       "ct": null,
-      "condition": "バトル開始時、自身以外でスピードが最も低い味方の攻撃力を増加",
+      "condition": "バトル開始時、2ターン自身以外でスピードが最も低い味方の攻撃力を増加",
       "exclusiveWeapon": "専用Lv2: 対象が紅属性ならスピード+20%",
       "compareMemo": "攻撃力+18% / クリティカル+10% / 命中+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/artoria/"
+      "sourceUrl": "https://ichigogames.net/mementomori/artoria/",
+      "plainSummary": "一番遅い味方に開幕の攻撃バフ。",
+      "steps": [
+        {
+          "text": "バトル開始時、自身以外でスピードが最も低い味方の攻撃力を50%増加(2ターン、解除不可)"
+        }
+      ]
     },
     {
       "id": "shizu_snow-s1",
@@ -11655,7 +11979,7 @@
       "majorCategory": "攻撃",
       "subCategory": "自傷 / スピード減少",
       "target": "ランダム敵",
-      "multiplierText": "物理520%×6回 / 専用Lv3 580%",
+      "multiplierText": "物理520%×6回",
       "duration": "スピード-30% 2T",
       "ct": 4,
       "condition": "自身に現在HP20%の自傷。70%で2ターン対象のスピード30%減少",
@@ -11663,22 +11987,34 @@
       "compareMemo": "攻撃力+18% / 防御力+5% / クリティカル+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/shizu_snow/",
+      "sourceUrl": "https://ichigogames.net/mementomori/shizu_spring/",
       "damage": {
         "singleMultiplier": 520,
         "hitCount": 6,
         "baseTotal": 3120,
-        "exclusiveLv1Total": 3120,
-        "exclusiveLv2Total": 3120,
-        "exclusiveLv3Total": 3120,
+        "exclusiveLv1Total": 4160,
+        "exclusiveLv2Total": 4160,
+        "exclusiveLv3Total": 4640,
         "conditionMaxTotal": 4640,
-        "conditionMaxNote": "専用Lv1で8回、専用Lv3で580%",
+        "conditionMaxNote": "専用Lv1で8回、専用Lv3で580%×8回",
         "powerType": "画像カード準拠",
         "maxStacks": null,
         "realityRank": "中",
         "rankingTarget": "基本",
         "damageMemo": "画像カードからの暫定入力"
-      }
+      },
+      "plainSummary": "自傷から6連撃、敵を遅くする。",
+      "steps": [
+        {
+          "text": "自身に現在HP20%の自傷ダメージ"
+        },
+        {
+          "text": "ランダムな敵に物理520%×6回"
+        },
+        {
+          "text": "70%の確率で対象のスピードを30%減少(2ターン)"
+        }
+      ]
     },
     {
       "id": "shizu_snow-s2",
@@ -11690,7 +12026,7 @@
       "majorCategory": "攻撃",
       "subCategory": "自傷 / HP条件高倍率",
       "target": "ランダム敵3体",
-      "multiplierText": "物理1120% / 条件時1680% / 専用Lv2 1520・2280%",
+      "multiplierText": "物理1120% / 条件時1680%",
       "duration": "",
       "ct": 4,
       "condition": "自身に現在HP20%の自傷。対象の現在HPが自身より高い場合1680%",
@@ -11698,22 +12034,39 @@
       "compareMemo": "攻撃力+18% / 防御力+5% / クリティカル+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/shizu_snow/",
+      "sourceUrl": "https://ichigogames.net/mementomori/shizu_spring/",
       "damage": {
         "singleMultiplier": 1120,
         "hitCount": 3,
         "baseTotal": 3360,
         "exclusiveLv1Total": 3360,
-        "exclusiveLv2Total": 3360,
-        "exclusiveLv3Total": 3360,
+        "exclusiveLv2Total": 4560,
+        "exclusiveLv3Total": 4560,
         "conditionMaxTotal": 6840,
-        "conditionMaxNote": "専用Lv2かつ対象HP条件時2280%×3体",
+        "conditionMaxNote": "専用Lv2で1520%。対象の現在HPが自身より高い場合2280%×3体",
         "powerType": "画像カード準拠",
         "maxStacks": null,
         "realityRank": "中",
         "rankingTarget": "基本",
         "damageMemo": "画像カードからの暫定入力"
-      }
+      },
+      "plainSummary": "自分よりHPの多い敵に1.5倍で刺さる高倍率。",
+      "steps": [
+        {
+          "text": "自身に現在HP20%の自傷ダメージ"
+        },
+        {
+          "text": "ランダムな敵3体に物理1120%"
+        },
+        {
+          "text": "対象の現在HPが自身より高い場合は1680%"
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "S1の自傷で自分のHPが下がるほど③の条件を満たしやすくなる自己完結型。根拠: 条件が「対象の現在HP＞自身の現在HP」のため"
+        }
+      ]
     },
     {
       "id": "shizu_snow-s3",
@@ -11733,7 +12086,16 @@
       "compareMemo": "攻撃力+18% / 防御力+5% / クリティカル+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/shizu_snow/"
+      "sourceUrl": "https://ichigogames.net/mementomori/shizu_spring/",
+      "plainSummary": "防御の2倍ぶんを攻撃力に上乗せする開幕ブースト。",
+      "steps": [
+        {
+          "text": "バトル開始時、攻撃力を防御力200%分増加(解除不可)"
+        },
+        {
+          "text": "多重バリア1層を付与(最大HP20%以上のダメージを1回無効化)"
+        }
+      ]
     },
     {
       "id": "shizu_snow-s4",
@@ -11753,7 +12115,19 @@
       "compareMemo": "攻撃力+18% / 防御力+5% / クリティカル+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/shizu_snow/"
+      "sourceUrl": "https://ichigogames.net/mementomori/shizu_spring/",
+      "plainSummary": "カウンタの高い敵を狙って弱体化させる対タンク性能。",
+      "steps": [
+        {
+          "text": "行動開始時、カウンタが最も高い敵の被ダメージを10%増加(2ターン)"
+        },
+        {
+          "text": "対象の防御力が自身より低ければカウンタを40%減少"
+        },
+        {
+          "text": "発動後4回行動まで再発動しない"
+        }
+      ]
     },
     {
       "id": "lucile-s1",
@@ -14039,7 +14413,7 @@
       "compareMemo": "技力+8% / 攻撃力+18% / HP+22%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/lunalynn_holy_night/",
+      "sourceUrl": "https://ichigogames.net/mementomori/lunalynn_winter/",
       "damage": {
         "singleMultiplier": 480,
         "hitCount": 3,
@@ -14054,7 +14428,17 @@
         "realityRank": "中",
         "rankingTarget": "条件込み",
         "damageMemo": ""
-      }
+      },
+      "plainSummary": "脱力を撒く前半、7ターン目からは4倍砲。",
+      "steps": [
+        {
+          "text": "ランダムな敵3体に物理480%(7ターン目以降は1920%)"
+        },
+        {
+          "text": "70%の確率で脱力を4ターン付与(攻撃力30%減少)",
+          "term": "脱力"
+        }
+      ]
     },
     {
       "id": "lunalynn_holy_night-s2",
@@ -14074,7 +14458,7 @@
       "compareMemo": "技力+8% / 攻撃力+18% / HP+22%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/lunalynn_holy_night/",
+      "sourceUrl": "https://ichigogames.net/mementomori/lunalynn_winter/",
       "damage": {
         "singleMultiplier": 520,
         "hitCount": 5,
@@ -14089,7 +14473,16 @@
         "realityRank": "中",
         "rankingTarget": "条件込み",
         "damageMemo": ""
-      }
+      },
+      "plainSummary": "浸食を撒く前半、7ターン目からは4倍砲。",
+      "steps": [
+        {
+          "text": "ランダムな敵5体に物理520%(7ターン目以降は2080%)"
+        },
+        {
+          "text": "70%の確率で浸食を2ターン付与(毎ターン行動開始時、このスキルの総与ダメージ10%のダメージ)"
+        }
+      ]
     },
     {
       "id": "lunalynn_holy_night-s3",
@@ -14109,7 +14502,16 @@
       "compareMemo": "技力+8% / 攻撃力+18% / HP+22%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/lunalynn_holy_night/"
+      "sourceUrl": "https://ichigogames.net/mementomori/lunalynn_winter/",
+      "plainSummary": "最速の味方に多重バリアを配り続ける。紅・翠なら4層。",
+      "steps": [
+        {
+          "text": "ターン開始時、スピードが最も高い味方に多重バリアを1層付与(対象が紅属性または翠属性なら4層、解除不可)"
+        },
+        {
+          "text": "発動後8回行動まで再発動しない"
+        }
+      ]
     },
     {
       "id": "lunalynn_holy_night-s4",
@@ -14129,7 +14531,24 @@
       "compareMemo": "技力+8% / 攻撃力+18% / HP+22%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/lunalynn_holy_night/"
+      "sourceUrl": "https://ichigogames.net/mementomori/lunalynn_winter/",
+      "plainSummary": "前半は吸血で粘り、7ターン目にCTリセットで開戦する。",
+      "steps": [
+        {
+          "text": "自身の被ダメージを20%減少(解除不可)"
+        },
+        {
+          "text": "バトル開始時、自身のHPドレインを80%増加(6ターン、解除不可)"
+        },
+        {
+          "text": "7ターン目開始時、自身のスキルCTを0にする"
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "7ターン目のCTリセットとS1・S2の後半強化が同時に噛み合う、後半特化の自己完結設計。根拠: いずれも発動条件が「7ターン目開始時」のため"
+        }
+      ]
     },
     {
       "id": "tilly-s1",
@@ -14414,7 +14833,7 @@
       "target": "ランダム敵3体",
       "multiplierText": "魔法420%",
       "duration": "",
-      "ct": 4,
+      "ct": 5,
       "condition": "70%で3Tクリティカル率30%減少、70%で攻撃力最高の敵に1T気絶",
       "exclusiveWeapon": "専用Lv1: 気絶2T。専用Lv3: 魔法470%",
       "compareMemo": "魔力+8% / 攻撃力+18% / 弱体効果命中+10%",
@@ -14435,7 +14854,20 @@
         "realityRank": "中",
         "rankingTarget": "条件込み",
         "damageMemo": ""
-      }
+      },
+      "plainSummary": "クリ耐性を削りつつ、エースの気絶も狙う妨害魔法。",
+      "steps": [
+        {
+          "text": "ランダムな敵3体に魔法420%"
+        },
+        {
+          "text": "70%の確率でクリティカル率30%減少を3ターン付与"
+        },
+        {
+          "text": "70%の確率で攻撃力が最も高い敵に気絶を1ターン付与",
+          "term": "気絶"
+        }
+      ]
     },
     {
       "id": "dd-s2",
@@ -14449,7 +14881,7 @@
       "target": "ランダム敵4体",
       "multiplierText": "魔法530%",
       "duration": "",
-      "ct": 4,
+      "ct": 5,
       "condition": "7T目以降なら攻撃前に攻撃力が高い味方2体の攻撃力50%増加を5T付与",
       "exclusiveWeapon": "専用武器効果なし",
       "compareMemo": "魔力+8% / 攻撃力+18% / 弱体効果命中+10%",
@@ -14470,7 +14902,16 @@
         "realityRank": "中",
         "rankingTarget": "条件込み",
         "damageMemo": ""
-      }
+      },
+      "plainSummary": "7ターン目からは味方2人への大型攻撃バフ付きに化ける。",
+      "steps": [
+        {
+          "text": "7ターン目以降なら、攻撃前に攻撃力が高い味方2体の攻撃力を50%増加(5ターン)"
+        },
+        {
+          "text": "ランダムな敵に魔法530%×4回"
+        }
+      ]
     },
     {
       "id": "dd-s3",
@@ -14490,7 +14931,13 @@
       "compareMemo": "魔力+8% / 攻撃力+18% / 弱体効果命中+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/dd/"
+      "sourceUrl": "https://ichigogames.net/mementomori/dd/",
+      "plainSummary": "自分と隣のクリ耐性を常時底上げ。",
+      "steps": [
+        {
+          "text": "バトル開始時、自身と隣接する味方2体のクリティカル耐性+15%(解除不可)"
+        }
+      ]
     },
     {
       "id": "dd-s4",
@@ -14510,7 +14957,16 @@
       "compareMemo": "魔力+8% / 攻撃力+18% / 弱体効果命中+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/dd/"
+      "sourceUrl": "https://ichigogames.net/mementomori/dd/",
+      "plainSummary": "HP2倍と5割遮断の頑丈さ。",
+      "steps": [
+        {
+          "text": "自身の最大HPを100%増加(解除不可)"
+        },
+        {
+          "text": "攻撃を受けたとき、ダメージを50%遮断"
+        }
+      ]
     },
     {
       "id": "yurdiz-s1",
