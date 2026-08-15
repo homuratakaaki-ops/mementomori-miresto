@@ -846,7 +846,7 @@
       "roleMemo": "沈黙とバフ解除を扱う黄ソーサラー",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/karol/"
+      "sourceUrl": "https://ichigogames.net/mementomori/carol/"
     },
     {
       "id": "wheeler",
@@ -861,7 +861,7 @@
       "roleMemo": "高速で攻撃力減少を付与する黄ソーサラー",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/wheeler/"
+      "sourceUrl": "https://ichigogames.net/mementomori/veela/"
     },
     {
       "id": "rishess",
@@ -1056,7 +1056,7 @@
       "roleMemo": "回復と被ダメージ減少で支える紅ソーサラー",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/freycia/"
+      "sourceUrl": "https://ichigogames.net/mementomori/freesia/"
     },
     {
       "id": "amour",
@@ -1551,7 +1551,7 @@
       "roleMemo": "高攻撃力味方への攻撃・クリ支援を持つソーサラー",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/tilly/"
+      "sourceUrl": "https://ichigogames.net/mementomori/tillie/"
     },
     {
       "id": "paula",
@@ -9281,7 +9281,16 @@
         "realityRank": "中",
         "rankingTarget": "条件込み",
         "damageMemo": "撃破連鎖前提"
-      }
+      },
+      "plainSummary": "倒すたび連撃が増えていく5から9連撃。",
+      "steps": [
+        {
+          "text": "ランダムな敵に物理315%×5回"
+        },
+        {
+          "text": "敵を戦闘不能にするたび攻撃回数+1(最大9回)"
+        }
+      ]
     },
     {
       "id": "mimi-s2",
@@ -9316,7 +9325,19 @@
         "realityRank": "中",
         "rankingTarget": "条件込み",
         "damageMemo": "バフ量に左右される"
-      }
+      },
+      "plainSummary": "バフの数だけ痛くなり、殴った分が盾になる。",
+      "steps": [
+        {
+          "text": "ランダムな敵5体に物理350%"
+        },
+        {
+          "text": "自身のバフ1つにつき+60%(最大590%)"
+        },
+        {
+          "text": "総与ダメージ20%のシールドを自身に4ターン付与"
+        }
+      ]
     },
     {
       "id": "mimi-s3",
@@ -9336,7 +9357,13 @@
       "compareMemo": "攻撃力+18% / クリティカル+10% / 物魔防御貫通+7000",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/mimi/"
+      "sourceUrl": "https://ichigogames.net/mementomori/mimi/",
+      "plainSummary": "被弾しない限り攻撃力8割増し。",
+      "steps": [
+        {
+          "text": "3ターン目以降の毎ターン開始時、直近2ターンにダメージを受けていなければ攻撃力+80%(3ターン、解除不可)"
+        }
+      ]
     },
     {
       "id": "mimi-s4",
@@ -9356,7 +9383,24 @@
       "compareMemo": "攻撃力+18% / クリティカル+10% / 物魔防御貫通+7000",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/mimi/"
+      "sourceUrl": "https://ichigogames.net/mementomori/mimi/",
+      "plainSummary": "一番硬い敵と一番柔らかい敵を「共鳴」で繋ぎ、片方への攻撃をもう片方にも通す。",
+      "steps": [
+        {
+          "text": "バトル開始時、防御力が最も高い敵と最も低い敵に共鳴を付与(解除不可)"
+        },
+        {
+          "text": "共鳴対象が受けたダメージの80%を、もう一方も受ける"
+        },
+        {
+          "text": "どちらかが戦闘不能になると解除される"
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "硬い敵を直接殴らず、柔らかい敵経由で削るルートを作る固有機構。単体高火力の味方と組むと効率が良い。根拠: 共鳴のダメージ転写が80%のため"
+        }
+      ]
     },
     {
       "id": "tropon-s1",
@@ -9368,10 +9412,10 @@
       "majorCategory": "攻撃",
       "subCategory": "自己回復 / HPドレイン減少",
       "target": "ランダム敵5体",
-      "multiplierText": "魔法310% / 専用Lv2 340%",
+      "multiplierText": "魔法310% / 使用ごと+70%",
       "duration": "",
       "ct": 4,
-      "condition": "このスキルを使うたび魔法ダメージ+70%。自身HPを総与ダメージ20%回復",
+      "condition": "ランダム敵5体に魔法310%。このスキルを使うたび魔法ダメージ+70%。自身HPを総与ダメージ20%回復。専用Lv2で340%",
       "exclusiveWeapon": "専用Lv1: 30%でHPドレイン30%減少。専用Lv2: 魔法340%。専用Lv3: HPドレイン減少確率60%",
       "compareMemo": "攻撃力+18% / 命中+10% / 弱体効果耐性+10%",
       "noteUrl": "",
@@ -9391,7 +9435,19 @@
         "realityRank": "中",
         "rankingTarget": "基本",
         "damageMemo": "自己回復つき"
-      }
+      },
+      "plainSummary": "使うたび7割ずつ強くなる吸血魔法。",
+      "steps": [
+        {
+          "text": "ランダムな敵5体に魔法310%"
+        },
+        {
+          "text": "このスキルを使うたびダメージ+70%"
+        },
+        {
+          "text": "総与ダメージの20%をHP回復する"
+        }
+      ]
     },
     {
       "id": "tropon-s2",
@@ -9426,7 +9482,19 @@
         "realityRank": "中",
         "rankingTarget": "基本",
         "damageMemo": "バフ延長が主目的"
-      }
+      },
+      "plainSummary": "全体攻撃と直接攻撃。撃破すれば自分のバフが全部延びる。",
+      "steps": [
+        {
+          "text": "ランダムな敵5体に魔法350%"
+        },
+        {
+          "text": "さらにランダムな敵1体に魔力320%の直接攻撃"
+        },
+        {
+          "text": "敵を戦闘不能にした場合、自身の全バフのターン数+2"
+        }
+      ]
     },
     {
       "id": "tropon-s3",
@@ -9446,7 +9514,13 @@
       "compareMemo": "攻撃力+18% / 命中+10% / 弱体効果耐性+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/tropon/"
+      "sourceUrl": "https://ichigogames.net/mementomori/tropon/",
+      "plainSummary": "HPとスピードの常時底上げ。",
+      "steps": [
+        {
+          "text": "自身の最大HP+40%・スピード+20%(解除不可)"
+        }
+      ]
     },
     {
       "id": "tropon-s4",
@@ -9466,7 +9540,16 @@
       "compareMemo": "攻撃力+18% / 命中+10% / 弱体効果耐性+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/tropon/"
+      "sourceUrl": "https://ichigogames.net/mementomori/tropon/",
+      "plainSummary": "クリティカルされたら相手のバフを盗み、通常被弾なら弱体を押し返す。",
+      "steps": [
+        {
+          "text": "クリティカルを受けたとき、攻撃者のバフを1つ解除して自身に付与(100%)"
+        },
+        {
+          "text": "クリティカル以外の被弾時は、自身の弱体を1つ解除して攻撃者に付与(100%)"
+        }
+      ]
     },
     {
       "id": "hathor-s1",
@@ -9501,7 +9584,16 @@
         "realityRank": "高",
         "rankingTarget": "基本",
         "damageMemo": "対象数が増える"
-      }
+      },
+      "plainSummary": "一番元気な敵の攻撃力を半減させにいく高倍率。",
+      "steps": [
+        {
+          "text": "現在HPが高い敵2体に物理720%"
+        },
+        {
+          "text": "50%の確率で攻撃力50%減少を2ターン付与"
+        }
+      ]
     },
     {
       "id": "hathor-s2",
@@ -9536,7 +9628,23 @@
         "realityRank": "高",
         "rankingTarget": "基本",
         "damageMemo": "気絶と浸食も評価対象"
-      }
+      },
+      "plainSummary": "弱体持ちは気絶、無傷には浸食を配る全体攻撃。",
+      "steps": [
+        {
+          "text": "ランダムな敵5体に物理500%"
+        },
+        {
+          "text": "対象が弱体効果中なら40%の確率で気絶を1ターン付与",
+          "term": "気絶"
+        },
+        {
+          "text": "自身のHPを総与ダメージ15%分回復する"
+        },
+        {
+          "text": "弱体効果を付帯していない対象には浸食を2ターン付与(行動開始時にこのスキルの総与ダメージ20%ダメージ)"
+        }
+      ]
     },
     {
       "id": "hathor-s3",
@@ -9556,7 +9664,18 @@
       "compareMemo": "攻撃力+18% / 命中+10% / クリダメ強化+35%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/hathor/"
+      "sourceUrl": "https://ichigogames.net/mementomori/hathor/",
+      "plainSummary": "被弾しない限り攻撃力8割増しで舞い続ける。",
+      "steps": [
+        {
+          "text": "3ターン目以降の毎ターン開始時、直近2ターンにダメージを受けていなければ攻撃力+80%(2ターン、解除不可)"
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "ステルス・透明・挑発持ちの味方で被弾を避けるほど条件を維持しやすい。根拠: 条件が「2ターン以内に被弾なし」のため"
+        }
+      ]
     },
     {
       "id": "hathor-s4",
@@ -9576,7 +9695,16 @@
       "compareMemo": "攻撃力+18% / 命中+10% / クリダメ強化+35%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/hathor/"
+      "sourceUrl": "https://ichigogames.net/mementomori/hathor/",
+      "plainSummary": "通常攻撃でクリティカルすると、デバフが当てやすくなる。",
+      "steps": [
+        {
+          "text": "通常攻撃を強化"
+        },
+        {
+          "text": "通常攻撃がクリティカルヒットしたとき、自身の弱体効果命中率+50%(1ターン、解除不可)"
+        }
+      ]
     },
     {
       "id": "olivia-s1",
@@ -9588,15 +9716,21 @@
       "majorCategory": "味方強化",
       "subCategory": "攻撃力 / 防御力増加",
       "target": "味方全体",
-      "multiplierText": "攻撃力+50% / 防御力+50%",
+      "multiplierText": "攻撃力+30% / 防御力+30%",
       "duration": "2T",
       "ct": 4,
-      "condition": "2ターン味方全体の攻撃力と防御力を自身の攻撃力・防御力基準で増加",
+      "condition": "2ターン味方全体の攻撃力を自身の攻撃力30%分、防御力を自身の防御力30%分増加。専用Lv1で40%、専用Lv3で50%",
       "exclusiveWeapon": "専用Lv1: 増加量40%。専用Lv3: 増加量50%",
       "compareMemo": "攻撃力+18% / クリティカル+10% / 防御力+5%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/olivia/"
+      "sourceUrl": "https://ichigogames.net/mementomori/olivia/",
+      "plainSummary": "全員にオリヴィエ基準の攻防バフを配る号令。",
+      "steps": [
+        {
+          "text": "味方全体の攻撃力・防御力を、自身の攻撃力・防御力30%分増加(2ターン)"
+        }
+      ]
     },
     {
       "id": "olivia-s2",
@@ -9607,11 +9741,11 @@
       "category": "火力",
       "majorCategory": "攻撃",
       "subCategory": "範囲火力 / シールド",
-      "target": "ランダム敵5体 / 味方全体",
-      "multiplierText": "物理390% / 専用Lv2 450%",
+      "target": "ランダム敵",
+      "multiplierText": "物理390%×5回",
       "duration": "シールド2T",
       "ct": 6,
-      "condition": "味方全体に総与ダメージ40%のシールド。敵を戦闘不能にした場合、攻撃力最高の味方のクリダメ強化30%増加",
+      "condition": "ランダム敵に5回物理390%。味方全体に総与ダメージ40%のシールド。敵を戦闘不能にした場合、2ターン攻撃力最高味方のクリダメ強化30%増加。専用Lv2で450%",
       "exclusiveWeapon": "専用Lv2: 物理450%",
       "compareMemo": "攻撃力+18% / クリティカル+10% / 防御力+5%",
       "noteUrl": "",
@@ -9631,7 +9765,19 @@
         "realityRank": "中",
         "rankingTarget": "基本",
         "damageMemo": "支援寄り"
-      }
+      },
+      "plainSummary": "連撃の与ダメージが、そのまま全員の盾になる。",
+      "steps": [
+        {
+          "text": "ランダムな敵に物理390%×5回"
+        },
+        {
+          "text": "味方全体に総与ダメージ40%のシールドを2ターン付与"
+        },
+        {
+          "text": "敵を戦闘不能にした場合、攻撃力が最も高い味方のクリダメ強化+30%(2ターン)"
+        }
+      ]
     },
     {
       "id": "olivia-s3",
@@ -9651,7 +9797,13 @@
       "compareMemo": "攻撃力+18% / クリティカル+10% / 防御力+5%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/olivia/"
+      "sourceUrl": "https://ichigogames.net/mementomori/olivia/",
+      "plainSummary": "耐久の常時底上げ。",
+      "steps": [
+        {
+          "text": "自身の最大HP+30%・防御力+50%(解除不可)"
+        }
+      ]
     },
     {
       "id": "olivia-s4",
@@ -9671,7 +9823,13 @@
       "compareMemo": "攻撃力+18% / クリティカル+10% / 防御力+5%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/olivia/"
+      "sourceUrl": "https://ichigogames.net/mementomori/olivia/",
+      "plainSummary": "クリティカルしてきた敵の攻撃力を削り返す。",
+      "steps": [
+        {
+          "text": "自身がクリティカルヒットを受けたとき、攻撃してきた敵の攻撃力を40%減少(1ターン)"
+        }
+      ]
     },
     {
       "id": "primavera-s1",
@@ -9686,7 +9844,7 @@
       "multiplierText": "物理410%×4回",
       "duration": "",
       "ct": 4,
-      "condition": "対象のスピードが自身より低い場合15%で気絶",
+      "condition": "正面の敵に4回物理410%。対象のスピードが自身より低い場合15%で1ターン気絶。専用Lv1で気絶30%",
       "exclusiveWeapon": "専用Lv1: 気絶確率30%",
       "compareMemo": "攻撃力+18% / 命中+10% / 弱体効果命中+10%",
       "noteUrl": "",
@@ -9706,7 +9864,17 @@
         "realityRank": "中",
         "rankingTarget": "基本",
         "damageMemo": "詳細条件はconditionを参照"
-      }
+      },
+      "plainSummary": "正面への4連撃。遅い相手には気絶チャンス。",
+      "steps": [
+        {
+          "text": "正面の敵に物理410%×4回"
+        },
+        {
+          "text": "対象のスピードが自身より低い場合、15%の確率で気絶を1ターン付与",
+          "term": "気絶"
+        }
+      ]
     },
     {
       "id": "primavera-s2",
@@ -9720,7 +9888,7 @@
       "target": "正面の敵と隣接敵2体",
       "multiplierText": "物理520%",
       "duration": "",
-      "ct": 4,
+      "ct": 3,
       "condition": "クリティカル時に3ターン対象へバフ無効と防御力20%減少",
       "exclusiveWeapon": "専用Lv2: ターン数4T。専用Lv3: 防御力減少30%",
       "compareMemo": "攻撃力+18% / 命中+10% / 弱体効果命中+10%",
@@ -9741,7 +9909,16 @@
         "realityRank": "中",
         "rankingTarget": "基本",
         "damageMemo": "詳細条件はconditionを参照"
-      }
+      },
+      "plainSummary": "クリティカルするとバフ封じと防御ダウンが乗る範囲攻撃。",
+      "steps": [
+        {
+          "text": "正面の敵と隣接する敵2体に物理520%"
+        },
+        {
+          "text": "クリティカル時、対象にバフ無効と防御力20%減少を3ターン付与"
+        }
+      ]
     },
     {
       "id": "primavera-s3",
@@ -9761,7 +9938,18 @@
       "compareMemo": "攻撃力+18% / 命中+10% / 弱体効果命中+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/primavera/"
+      "sourceUrl": "https://ichigogames.net/mementomori/primavera/",
+      "plainSummary": "生存者が多いほど全員が強く速くなる。",
+      "steps": [
+        {
+          "text": "味方全体の攻撃力・スピードを増加(バトル開始時の自身以外の味方生存1体につき+3%、解除不可)"
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "全体スピードバフはスピード計算と行動順に直結する。編成全体の先手率を底上げする置物性能。根拠: 効果がスピード増加のため"
+        }
+      ]
     },
     {
       "id": "primavera-s4",
@@ -9781,7 +9969,13 @@
       "compareMemo": "攻撃力+18% / 命中+10% / 弱体効果命中+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/primavera/"
+      "sourceUrl": "https://ichigogames.net/mementomori/primavera/",
+      "plainSummary": "攻撃力と弱体耐性の常時底上げ。",
+      "steps": [
+        {
+          "text": "自身の攻撃力+35%・弱体効果耐性率+100%(解除不可)"
+        }
+      ]
     },
     {
       "id": "karol-s1",
@@ -9793,15 +9987,15 @@
       "majorCategory": "攻撃",
       "subCategory": "画像カード準拠",
       "target": "ランダム敵3体",
-      "multiplierText": "魔法540%",
+      "multiplierText": "魔法540% / 沈黙20%",
       "duration": "",
-      "ct": 4,
-      "condition": "20%で1ターン沈黙",
+      "ct": 5,
+      "condition": "ランダム敵3体に魔法540%。20%で1ターン沈黙。専用Lv1で35%、専用Lv2で55%、専用Lv3で590%",
       "exclusiveWeapon": "専用Lv1: 沈黙35%。専用Lv2: 55%。専用Lv3: 魔法590%",
       "compareMemo": "耐久力+8% / 攻撃力+18% / 命中+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/karol/",
+      "sourceUrl": "https://ichigogames.net/mementomori/carol/",
       "damage": {
         "singleMultiplier": 540,
         "hitCount": 3,
@@ -9816,7 +10010,17 @@
         "realityRank": "中",
         "rankingTarget": "基本",
         "damageMemo": "詳細条件はconditionを参照"
-      }
+      },
+      "plainSummary": "沈黙を狙う3体魔法。",
+      "steps": [
+        {
+          "text": "ランダムな敵3体に魔法540%"
+        },
+        {
+          "text": "20%の確率で沈黙を1ターン付与",
+          "term": "沈黙"
+        }
+      ]
     },
     {
       "id": "karol-s2",
@@ -9836,7 +10040,7 @@
       "compareMemo": "耐久力+8% / 攻撃力+18% / 命中+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/karol/",
+      "sourceUrl": "https://ichigogames.net/mementomori/carol/",
       "damage": {
         "singleMultiplier": 480,
         "hitCount": 5,
@@ -9851,7 +10055,19 @@
         "realityRank": "中",
         "rankingTarget": "基本",
         "damageMemo": "詳細条件はconditionを参照"
-      }
+      },
+      "plainSummary": "バフを2つ剥がしてから撃つ。丸腰の敵には防御ダウン。",
+      "steps": [
+        {
+          "text": "ランダムな敵5体のバフを2つ解除(弱体効果命中の判定は1度のみ)"
+        },
+        {
+          "text": "解除前にバフがなかった対象には防御力40%減少を2ターン付与"
+        },
+        {
+          "text": "対象に魔法480%"
+        }
+      ]
     },
     {
       "id": "karol-s3",
@@ -9871,7 +10087,13 @@
       "compareMemo": "耐久力+8% / 攻撃力+18% / 命中+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/karol/"
+      "sourceUrl": "https://ichigogames.net/mementomori/carol/",
+      "plainSummary": "味方が殴られるたび、自分がじわじわ回復する。",
+      "steps": [
+        {
+          "text": "味方が攻撃を受けるか回避したとき、自身の失ったHPの7%を回復"
+        }
+      ]
     },
     {
       "id": "karol-s4",
@@ -9891,7 +10113,13 @@
       "compareMemo": "耐久力+8% / 攻撃力+18% / 命中+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/karol/"
+      "sourceUrl": "https://ichigogames.net/mementomori/carol/",
+      "plainSummary": "全員の防御を上げ、自分は特に硬い。",
+      "steps": [
+        {
+          "text": "バトル開始時、味方全体の防御力+25%(自身のみ+120%)"
+        }
+      ]
     },
     {
       "id": "wheeler-s1",
@@ -9911,7 +10139,7 @@
       "compareMemo": "攻撃力+18% / 弱体効果命中+10% / クリティカル耐性+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/wheeler/",
+      "sourceUrl": "https://ichigogames.net/mementomori/veela/",
       "damage": {
         "singleMultiplier": 430,
         "hitCount": 3,
@@ -9926,7 +10154,19 @@
         "realityRank": "中",
         "rankingTarget": "基本",
         "damageMemo": "詳細条件はconditionを参照"
-      }
+      },
+      "plainSummary": "確定で敵の攻撃力を35%削る妨害魔法。",
+      "steps": [
+        {
+          "text": "ランダムな敵3体に魔法430%"
+        },
+        {
+          "text": "100%の確率で攻撃力35%減少を1ターン付与"
+        },
+        {
+          "text": "対象の魔力が自身より低ければ攻撃力減少は2ターンになる"
+        }
+      ]
     },
     {
       "id": "wheeler-s2",
@@ -9946,7 +10186,7 @@
       "compareMemo": "攻撃力+18% / 弱体効果命中+10% / クリティカル耐性+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/wheeler/",
+      "sourceUrl": "https://ichigogames.net/mementomori/veela/",
       "damage": {
         "singleMultiplier": 380,
         "hitCount": 4,
@@ -9961,7 +10201,22 @@
         "realityRank": "中",
         "rankingTarget": "基本",
         "damageMemo": "詳細条件はconditionを参照"
-      }
+      },
+      "plainSummary": "減速を重ねるほど1.5倍が乗る吸血連撃。",
+      "steps": [
+        {
+          "text": "ランダムな敵に魔法380%×4回"
+        },
+        {
+          "text": "対象のスピードを15%減少(5ターン、最大4スタック)"
+        },
+        {
+          "text": "対象がスピード減少中ならダメージ1.5倍"
+        },
+        {
+          "text": "総与ダメージの30%をHP回復する"
+        }
+      ]
     },
     {
       "id": "wheeler-s3",
@@ -9981,7 +10236,13 @@
       "compareMemo": "攻撃力+18% / 弱体効果命中+10% / クリティカル耐性+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/wheeler/"
+      "sourceUrl": "https://ichigogames.net/mementomori/veela/",
+      "plainSummary": "命中とデバフ命中の常時底上げ。",
+      "steps": [
+        {
+          "text": "自身の命中率+40%・弱体効果命中率+40%(解除不可)"
+        }
+      ]
     },
     {
       "id": "wheeler-s4",
@@ -10001,7 +10262,19 @@
       "compareMemo": "攻撃力+18% / 弱体効果命中+10% / クリティカル耐性+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/wheeler/"
+      "sourceUrl": "https://ichigogames.net/mementomori/veela/",
+      "plainSummary": "瀕死で発動する浄化とシールド。",
+      "steps": [
+        {
+          "text": "攻撃を受けてHP割合が40%未満になったとき、自身の弱体効果を全解除"
+        },
+        {
+          "text": "攻撃力300%のシールドを3ターン付与"
+        },
+        {
+          "text": "発動後4回行動まで再発動しない"
+        }
+      ]
     },
     {
       "id": "rishess-s1",
@@ -11878,7 +12151,7 @@
       "compareMemo": "攻撃力+18% / 弱体効果耐性+10% / 防御力+5%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/freycia/",
+      "sourceUrl": "https://ichigogames.net/mementomori/freesia/",
       "damage": {
         "singleMultiplier": 280,
         "hitCount": 3,
@@ -11893,7 +12166,16 @@
         "realityRank": "中",
         "rankingTarget": "基本",
         "damageMemo": "画像カードからの暫定入力"
-      }
+      },
+      "plainSummary": "3体攻撃と、弱った敵への追い打ち。",
+      "steps": [
+        {
+          "text": "ランダムな敵3体に魔法280%"
+        },
+        {
+          "text": "HP割合が最も低い敵に、総与ダメージ20%の直接攻撃を追加"
+        }
+      ]
     },
     {
       "id": "freycia-s2",
@@ -11913,7 +12195,24 @@
       "compareMemo": "攻撃力+18% / 弱体効果耐性+10% / 防御力+5%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/freycia/"
+      "sourceUrl": "https://ichigogames.net/mementomori/freesia/",
+      "plainSummary": "傷ついた味方3人を回復。瀕死なら1.5倍と防御バフ。",
+      "steps": [
+        {
+          "text": "HP割合が低い味方3体を魔力270%分回復"
+        },
+        {
+          "text": "対象のHP割合が15%以下なら回復量1.5倍"
+        },
+        {
+          "text": "対象のHP割合が15%以下なら、さらに防御力+20%(2ターン)"
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "アクティブスキルの回復のため、アクティブ回復回数を参照する味方のスタック源になる。根拠: アクティブスキルによる回復のため"
+        }
+      ]
     },
     {
       "id": "freycia-s3",
@@ -11933,7 +12232,13 @@
       "compareMemo": "攻撃力+18% / 弱体効果耐性+10% / 防御力+5%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/freycia/"
+      "sourceUrl": "https://ichigogames.net/mementomori/freesia/",
+      "plainSummary": "生きている限り、全員の被ダメと回避を底上げ。",
+      "steps": [
+        {
+          "text": "自身が生存している間、味方全体の被ダメージ15%減少・回避率+15%(解除不可)"
+        }
+      ]
     },
     {
       "id": "freycia-s4",
@@ -11953,7 +12258,13 @@
       "compareMemo": "攻撃力+18% / 弱体効果耐性+10% / 防御力+5%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/freycia/"
+      "sourceUrl": "https://ichigogames.net/mementomori/freesia/",
+      "plainSummary": "通常攻撃のついでに回復が飛ぶことがある。",
+      "steps": [
+        {
+          "text": "通常攻撃時、30%の確率で自身とHP割合が最も低い味方を攻撃力20%分回復"
+        }
+      ]
     },
     {
       "id": "amour-s1",
@@ -15119,7 +15430,16 @@
         "realityRank": "中",
         "rankingTarget": "条件込み",
         "damageMemo": ""
-      }
+      },
+      "plainSummary": "殴った分を自分の盾に変える。",
+      "steps": [
+        {
+          "text": "ランダムな敵4体に魔法350%"
+        },
+        {
+          "text": "総与ダメージ40%のシールドを自身に3ターン付与"
+        }
+      ]
     },
     {
       "id": "mertillier-s2",
@@ -15139,7 +15459,24 @@
       "compareMemo": "耐久力+8% / 攻撃力+18% / 命中+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/mertillier/"
+      "sourceUrl": "https://ichigogames.net/mementomori/mertillier/",
+      "plainSummary": "エースのCTを2縮めて攻撃バフを乗せる、看板の支援スキル。",
+      "steps": [
+        {
+          "text": "攻撃力が最も高い味方のスキルCTを2減少"
+        },
+        {
+          "text": "攻撃力を65%増加(3ターン)"
+        },
+        {
+          "text": "対象が弱体効果中なら弱体効果を全解除"
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "CT4の主砲持ちに使うと再使用を大きく早め、攻撃バフも乗る。エース依存編成の中核支援。根拠: 効果が「攻撃力最高の味方のCT-2」のため"
+        }
+      ]
     },
     {
       "id": "mertillier-s3",
@@ -15159,7 +15496,20 @@
       "compareMemo": "耐久力+8% / 攻撃力+18% / 命中+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/mertillier/"
+      "sourceUrl": "https://ichigogames.net/mementomori/mertillier/",
+      "plainSummary": "削られたら再生とステルスで退避する自己保険。",
+      "steps": [
+        {
+          "text": "毎ターン開始時または被攻撃時、HPが40%未満なら再生を4ターン付与(解除不可)",
+          "term": "再生"
+        },
+        {
+          "text": "再生は行動開始時に最大HP20%分回復する"
+        },
+        {
+          "text": "同時にステルスを4ターン付与(解除不可)"
+        }
+      ]
     },
     {
       "id": "mertillier-s4",
@@ -15179,7 +15529,13 @@
       "compareMemo": "耐久力+8% / 攻撃力+18% / 命中+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/mertillier/"
+      "sourceUrl": "https://ichigogames.net/mementomori/mertillier/",
+      "plainSummary": "弱体がほぼ効かない体質。",
+      "steps": [
+        {
+          "text": "自身の弱体効果耐性率+100%(解除不可)"
+        }
+      ]
     },
     {
       "id": "luke-s1",
@@ -16477,15 +16833,15 @@
       "majorCategory": "攻撃",
       "subCategory": "画像記載効果",
       "target": "攻撃力最高の味方 / ランダム敵5体",
-      "multiplierText": "魔法330%",
+      "multiplierText": "攻撃力・クリ率+10% / 7ターン目以降+40% / 魔法330%",
       "duration": "",
       "ct": 4,
-      "condition": "攻撃力最高の味方の攻撃力とクリティカル率を4T10%増加。7T目以降は40%",
+      "condition": "攻撃力最高味方の攻撃力とクリティカル率を4T10%増加。7T目以降は40%。その後ランダム敵5体に魔法330%。専用Lv1でバフ対象2体、専用Lv3で魔法360%",
       "exclusiveWeapon": "専用Lv1: バフ対象が攻撃力高い味方2体。専用Lv3: 魔法360%",
       "compareMemo": "攻撃力+18% / 弱体効果耐性+10% / 物理クリダメ緩和+35%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/tilly/",
+      "sourceUrl": "https://ichigogames.net/mementomori/tillie/",
       "damage": {
         "singleMultiplier": 330,
         "hitCount": 5,
@@ -16500,7 +16856,19 @@
         "realityRank": "中",
         "rankingTarget": "条件込み",
         "damageMemo": ""
-      }
+      },
+      "plainSummary": "エースを強化してから撃つ。7ターン目から強化が4倍に。",
+      "steps": [
+        {
+          "text": "攻撃力が最も高い味方の攻撃力・クリティカル率を+10%(4ターン)"
+        },
+        {
+          "text": "7ターン目以降に使った場合、攻撃力・クリティカル率の増加量が+40%になる"
+        },
+        {
+          "text": "ランダムな敵5体に魔法330%"
+        }
+      ]
     },
     {
       "id": "tilly-s2",
@@ -16511,16 +16879,16 @@
       "category": "火力",
       "majorCategory": "攻撃",
       "subCategory": "画像記載効果",
-      "target": "ランダム敵5体",
-      "multiplierText": "魔法240%",
+      "target": "ランダム敵",
+      "multiplierText": "魔法240%×5回",
       "duration": "",
       "ct": 4,
-      "condition": "多重バリア付帯の敵を優先攻撃",
+      "condition": "ランダム敵に5回魔法240%。多重バリア付帯の敵を優先攻撃",
       "exclusiveWeapon": "専用武器効果なし",
       "compareMemo": "攻撃力+18% / 弱体効果耐性+10% / 物理クリダメ緩和+35%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/tilly/",
+      "sourceUrl": "https://ichigogames.net/mementomori/tillie/",
       "damage": {
         "singleMultiplier": 240,
         "hitCount": 5,
@@ -16535,7 +16903,21 @@
         "realityRank": "中",
         "rankingTarget": "条件込み",
         "damageMemo": ""
-      }
+      },
+      "plainSummary": "多重バリア持ちを優先して剥がしにいく5連魔法。",
+      "steps": [
+        {
+          "text": "ランダムな敵に魔法240%×5回"
+        },
+        {
+          "text": "多重バリアを付帯している敵を優先して攻撃する"
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "多重バリアで一撃を無効化するタイプの敵への対策枠。根拠: 対象選択が「多重バリア付帯の敵を優先」のため"
+        }
+      ]
     },
     {
       "id": "tilly-s3",
@@ -16555,7 +16937,19 @@
       "compareMemo": "攻撃力+18% / 弱体効果耐性+10% / 物理クリダメ緩和+35%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/tilly/"
+      "sourceUrl": "https://ichigogames.net/mementomori/tillie/",
+      "plainSummary": "高いHPと被弾リカバリーで場に残る。",
+      "steps": [
+        {
+          "text": "バトル開始時、最大HPを80%増加(解除不可)"
+        },
+        {
+          "text": "攻撃を受けたとき、被ダメージの60%をHP回復"
+        },
+        {
+          "text": "その攻撃で戦闘不能になる場合は発動しない"
+        }
+      ]
     },
     {
       "id": "tilly-s4",
@@ -16575,7 +16969,16 @@
       "compareMemo": "攻撃力+18% / 弱体効果耐性+10% / 物理クリダメ緩和+35%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/tilly/"
+      "sourceUrl": "https://ichigogames.net/mementomori/tillie/",
+      "plainSummary": "序盤だけ、エース3人をクリティカルから守る。",
+      "steps": [
+        {
+          "text": "バトル開始時、攻撃力が高い味方3体のクリティカル耐性率+30%(解除不可)"
+        },
+        {
+          "text": "毎ターン開始時または敵が戦闘不能になったとき、敵の生存が4体以下なら解除される"
+        }
+      ]
     },
     {
       "id": "paula-s1",
