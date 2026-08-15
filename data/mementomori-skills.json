@@ -1356,7 +1356,7 @@
       "roleMemo": "弱体解除と周辺支援を持つ翠属性バッファー",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/merlin/"
+      "sourceUrl": "https://ichigogames.net/mementomori/merlyn/"
     },
     {
       "id": "cordie",
@@ -1521,7 +1521,7 @@
       "roleMemo": "遅延と最大HP支援を持つソーサラー",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/mira/"
+      "sourceUrl": "https://ichigogames.net/mementomori/milla/"
     },
     {
       "id": "lunalynn_holy_night",
@@ -1566,7 +1566,7 @@
       "roleMemo": "自己回復と7ターン目以降の強化を持つスナイパー",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/paula/"
+      "sourceUrl": "https://ichigogames.net/mementomori/pola/"
     },
     {
       "id": "dd",
@@ -1596,7 +1596,7 @@
       "roleMemo": "狼と人の絆で味方と自身を強化するウォーリア",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/yurdiz/"
+      "sourceUrl": "https://ichigogames.net/mementomori/yildiz/"
     },
     {
       "id": "stella_holy_dark_star",
@@ -1611,7 +1611,7 @@
       "roleMemo": "7ターン目以降に攻撃性能が上がる聖夜ステラ",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/stella_holy_dark_star/"
+      "sourceUrl": "https://ichigogames.net/mementomori/stella_winter/"
     },
     {
       "id": "kobell",
@@ -1649,7 +1649,7 @@
       "roleMemo": "再生とHP回復連動バフを扱う翠ソーサラー",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/idyne/"
+      "sourceUrl": "https://ichigogames.net/mementomori/eidene/"
     },
     {
       "id": "guinevere",
@@ -2127,7 +2127,22 @@
         "realityRank": "中",
         "rankingTarget": "条件込み",
         "damageMemo": "クリティカル連鎖前提。基本火力と最大火力を分けるべき"
-      }
+      },
+      "plainSummary": "クリティカルが出るたび連撃が伸びる看板スキル。",
+      "steps": [
+        {
+          "text": "ランダムな敵に物理480%×4回"
+        },
+        {
+          "text": "クリティカルが出るたび攻撃回数+1(最大8回)"
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "クリティカル率を上げる支援(シロS1、マーリンS3等)と噛み合い、クリ耐性の高い敵が相手だと伸びにくい。",
+          "reason": "攻撃回数の増加条件がクリティカル発生のため"
+        }
+      ]
     },
     {
       "id": "florence-s2",
@@ -2162,7 +2177,16 @@
         "realityRank": "中",
         "rankingTarget": "条件込み",
         "damageMemo": "撃破条件があるため、最大値は別枠"
-      }
+      },
+      "plainSummary": "撃破すると弱った敵へ追撃が飛ぶ掃討スキル。",
+      "steps": [
+        {
+          "text": "ランダムな敵5体に物理510%"
+        },
+        {
+          "text": "このスキルで撃破すると、HPが最も低い敵に物理560%×2回の追加攻撃"
+        }
+      ]
     },
     {
       "id": "florence-s3",
@@ -2182,7 +2206,13 @@
       "compareMemo": "クリティカル依存スキルの土台。長期戦ほど伸びる",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/florence/"
+      "sourceUrl": "https://ichigogames.net/mementomori/florence/",
+      "plainSummary": "毎ターン、クリ率が積み上がる。",
+      "steps": [
+        {
+          "text": "毎ターン開始時、クリティカル率+6%をスタック(最大15スタック=+90%、解除不可)"
+        }
+      ]
     },
     {
       "id": "florence-s4",
@@ -2202,7 +2232,13 @@
       "compareMemo": "シンプルな自己火力強化。火力比較の基礎補正に使う",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/florence/"
+      "sourceUrl": "https://ichigogames.net/mementomori/florence/",
+      "plainSummary": "攻撃力と与ダメージの常時ブースト。",
+      "steps": [
+        {
+          "text": "自身の攻撃力+30%・与ダメージ+30%(解除不可)"
+        }
+      ]
     },
     {
       "id": "moddey-s1",
@@ -3147,7 +3183,28 @@
         "realityRank": "中",
         "rankingTarget": "条件込み",
         "damageMemo": "3スタック到達後と到達前を分けるべき"
-      }
+      },
+      "plainSummary": "「言霊」を貯めながら撃つ準備スキル。3スタックから3倍に。",
+      "steps": [
+        {
+          "text": "自身に「言霊のおまじない」を1スタック付与(最大5スタック、解除不可)"
+        },
+        {
+          "text": "スピードが最も高い敵に物理210%×4回"
+        },
+        {
+          "text": "言霊3スタック以上なら倍率630%"
+        },
+        {
+          "text": "黄属性の味方の数に応じて付与スタック数が増える"
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "黄属性で染めるほど言霊が早く貯まる。",
+          "reason": "スタック付与数の条件が黄属性味方の数のため"
+        }
+      ]
     },
     {
       "id": "potpourri-s2",
@@ -3159,10 +3216,10 @@
       "majorCategory": "攻撃",
       "subCategory": "スタック倍率 / 単体連撃",
       "target": "スピードが最も高い敵",
-      "multiplierText": "物理340%×3回 / 条件時1020%・2720%",
+      "multiplierText": "物理340%×4回 / 条件時1020%・2720%",
       "duration": "",
       "ct": 4,
-      "condition": "言霊3スタック以上で1020%、5スタックで2720%。Lv4で4回攻撃",
+      "condition": "言霊3スタック以上で1020%、5スタックで2720%。物理攻撃の回数は4回",
       "exclusiveWeapon": "専用武器効果なし",
       "compareMemo": "条件MAXは非常に高いが、スタック到達前提の理論寄り",
       "noteUrl": "",
@@ -3170,19 +3227,28 @@
       "sourceUrl": "https://ichigogames.net/mementomori/potpourri/",
       "damage": {
         "singleMultiplier": 340,
-        "hitCount": 3,
-        "baseTotal": 1020,
-        "exclusiveLv1Total": 1020,
-        "exclusiveLv2Total": 1020,
-        "exclusiveLv3Total": 1020,
-        "conditionMaxTotal": 8160,
-        "conditionMaxNote": "5スタック時2720%×3回。3スタック時は1020%×3回",
+        "hitCount": 4,
+        "baseTotal": 1360,
+        "exclusiveLv1Total": 1360,
+        "exclusiveLv2Total": 1360,
+        "exclusiveLv3Total": 1360,
+        "conditionMaxTotal": 10880,
+        "conditionMaxNote": "5スタック時2720%×4回。3スタック時は1020%×4回",
         "powerType": "スタック倍率",
         "maxStacks": 5,
         "realityRank": "低",
         "rankingTarget": "条件込み",
         "damageMemo": "条件MAXは非常に高いが、5スタック前提の理論寄り"
-      }
+      },
+      "plainSummary": "言霊5スタックで8倍に跳ねる大砲。",
+      "steps": [
+        {
+          "text": "スピードが最も高い敵に物理340%×4回"
+        },
+        {
+          "text": "言霊3スタック以上で1020%、5スタックで2720%"
+        }
+      ]
     },
     {
       "id": "potpourri-s3",
@@ -3202,7 +3268,16 @@
       "compareMemo": "火力ではなくスタックを貯めるための耐久補助",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/potpourri/"
+      "sourceUrl": "https://ichigogames.net/mementomori/potpourri/",
+      "plainSummary": "スタックを貯める時間を稼ぐ自己耐久。",
+      "steps": [
+        {
+          "text": "ターン開始時、クリティカル耐性+40%・防御力と物理防御力+100%(4ターン)"
+        },
+        {
+          "text": "発動後4回行動まで再発動しない"
+        }
+      ]
     },
     {
       "id": "potpourri-s4",
@@ -3222,7 +3297,19 @@
       "compareMemo": "火力比較では補助枠。長期戦の安定性に関わる",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/potpourri/"
+      "sourceUrl": "https://ichigogames.net/mementomori/potpourri/",
+      "plainSummary": "味方のバフを守るカバーと、自分の6割カット。",
+      "steps": [
+        {
+          "text": "ターン開始時、味方全体にバフカバーを付与(4ターン)"
+        },
+        {
+          "text": "自身の被ダメージを60%減少(解除不可)"
+        },
+        {
+          "text": "発動後4回行動まで再発動しない"
+        }
+      ]
     },
     {
       "id": "amleth-summer-s1",
@@ -7204,7 +7291,19 @@
         "realityRank": "中",
         "rankingTarget": "条件込み",
         "damageMemo": "使用回数で伸びるため長期戦寄り"
-      }
+      },
+      "plainSummary": "使うたびに強くなる成長型アタック。",
+      "steps": [
+        {
+          "text": "自身の攻撃力を20%増加(4ターン)"
+        },
+        {
+          "text": "ランダムな敵に物理360%×2回"
+        },
+        {
+          "text": "このスキルの2回目以降は攻撃力増加量が40%になる"
+        }
+      ]
     },
     {
       "id": "cattleya-s2",
@@ -7239,7 +7338,16 @@
         "realityRank": "中",
         "rankingTarget": "条件込み",
         "damageMemo": "長期戦では高いが初回火力とは分ける"
-      }
+      },
+      "plainSummary": "2回目で9連、3回目で12連に増える固定砲台。",
+      "steps": [
+        {
+          "text": "物理防御力が最も低い敵に物理410%×4回"
+        },
+        {
+          "text": "このスキルの2回目以降は9回、3回目以降は12回攻撃"
+        }
+      ]
     },
     {
       "id": "cattleya-s3",
@@ -7251,15 +7359,24 @@
       "majorCategory": "解除・操作",
       "subCategory": "味方解除 / 黄属性条件",
       "target": "自身と攻撃力が最も高い味方",
-      "multiplierText": "弱体効果解除1つ / 専用Lv2 2つ",
+      "multiplierText": "弱体効果解除2つ",
       "duration": "8T終了時",
       "ct": null,
-      "condition": "8ターン終了時に弱体効果を解除。専用Lv3で黄属性2体以上なら4・12ターンにも発動",
+      "condition": "8ターン目のターン終了時、自身と攻撃力が最も高い味方の弱体効果を2つ解除。自身以外の黄属性味方が2体以上なら4・12ターン目のターン終了時にも発動",
       "exclusiveWeapon": "専用Lv2: 解除2つ。専用Lv3: 黄属性2体以上なら4・12Tにも発動",
       "compareMemo": "攻撃力+18% / 弱体効果耐性+10% / 命中+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/cattleya/"
+      "sourceUrl": "https://ichigogames.net/mementomori/cattleya/",
+      "plainSummary": "8ターン目に自分とエースの弱体をまとめて掃除。黄属性が多いと発動機会が増える。",
+      "steps": [
+        {
+          "text": "8ターン目のターン終了時、自身と攻撃力が最も高い味方の弱体効果を2つ解除"
+        },
+        {
+          "text": "自身以外の黄属性の味方が2体以上なら、4ターン目と12ターン目のターン終了時にも発動"
+        }
+      ]
     },
     {
       "id": "cattleya-s4",
@@ -7271,15 +7388,30 @@
       "majorCategory": "防御",
       "subCategory": "自己シールド / 防御上昇",
       "target": "自身",
-      "multiplierText": "最大HP50%シールド / 専用Lv2 200%",
+      "multiplierText": "最大HP50%シールド / 被ダメージ-60% / 防御力+150%",
       "duration": "4T",
       "ct": null,
-      "condition": "ターン開始時に自身へシールド。発動後4回行動終了まで再発動不可",
+      "condition": "ターン開始時に自身へシールド。発動後4回行動終了まで再発動不可。バトル開始時、被ダメージ60%減少。ターン開始時、さらに防御力150%増加",
       "exclusiveWeapon": "専用Lv2: シールド最大HP200%。専用Lv3: 防御力+150%",
       "compareMemo": "攻撃力+18% / 弱体効果耐性+10% / 命中+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/cattleya/"
+      "sourceUrl": "https://ichigogames.net/mementomori/cattleya/",
+      "plainSummary": "定期的にシールドを張り直し、常時の被ダメ減少と防御バフで粘る。",
+      "steps": [
+        {
+          "text": "ターン開始時、自身に最大HP50%のシールドを付与(4ターン)"
+        },
+        {
+          "text": "バトル開始時、自身の被ダメージを60%減少(解除不可)"
+        },
+        {
+          "text": "ターン開始時、さらに防御力を150%増加(4ターン)"
+        },
+        {
+          "text": "発動後4回行動まで再発動しない"
+        }
+      ]
     },
     {
       "id": "mimi-s1",
@@ -11514,7 +11646,16 @@
       "compareMemo": "攻撃力+18% / 命中+10% / 防御力+5%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/merlin/"
+      "sourceUrl": "https://ichigogames.net/mementomori/merlyn/",
+      "plainSummary": "エースの弱体を剥がすか、無傷なら攻撃バフに変わる。",
+      "steps": [
+        {
+          "text": "攻撃力が最も高い味方の弱体効果を1つ解除"
+        },
+        {
+          "text": "対象に弱体効果がない場合は、攻撃力を40%増加(2ターン)"
+        }
+      ]
     },
     {
       "id": "merlin-s2",
@@ -11534,7 +11675,7 @@
       "compareMemo": "攻撃力+18% / 命中+10% / 防御力+5%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/merlin/",
+      "sourceUrl": "https://ichigogames.net/mementomori/merlyn/",
       "damage": {
         "singleMultiplier": 380,
         "hitCount": 3,
@@ -11549,7 +11690,16 @@
         "realityRank": "中",
         "rankingTarget": "条件込み",
         "damageMemo": ""
-      }
+      },
+      "plainSummary": "敵のバフを剥がしつつ、一番傷ついた味方を回復。",
+      "steps": [
+        {
+          "text": "HP割合が高い敵3体に魔法380%を行い、対象のバフを1つ解除"
+        },
+        {
+          "text": "HP割合が最も低い味方を、総与ダメージの15%回復"
+        }
+      ]
     },
     {
       "id": "merlin-s3",
@@ -11569,7 +11719,22 @@
       "compareMemo": "攻撃力+18% / 命中+10% / 防御力+5%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/merlin/"
+      "sourceUrl": "https://ichigogames.net/mementomori/merlyn/",
+      "plainSummary": "味方が多いうちはクリ支援、減ったら守りに切り替わる。",
+      "steps": [
+        {
+          "text": "味方の生存が3体以上なら、自身と隣接味方2体のクリティカル率+40%"
+        },
+        {
+          "text": "2体以下なら防御力+40%(解除不可)"
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "クリティカル依存のアタッカー(フローレンスS1等)を隣に置くと①が直接効く。",
+          "reason": "バフの内容がクリティカル率のため"
+        }
+      ]
     },
     {
       "id": "merlin-s4",
@@ -11589,7 +11754,14 @@
       "compareMemo": "攻撃力+18% / 命中+10% / 防御力+5%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/merlin/"
+      "sourceUrl": "https://ichigogames.net/mementomori/merlyn/",
+      "plainSummary": "HPが減った自分と隣を再生で立て直す。",
+      "steps": [
+        {
+          "text": "毎ターン開始時または被攻撃時、自身のHPが50%未満なら、自身と隣接味方2体に再生を付与(最大HP5%回復、解除不可)",
+          "term": "再生"
+        }
+      ]
     },
     {
       "id": "cordie-s1",
@@ -11624,7 +11796,16 @@
         "realityRank": "中",
         "rankingTarget": "条件込み",
         "damageMemo": ""
-      }
+      },
+      "plainSummary": "撃破するたび攻撃力が上がる高速4連撃。",
+      "steps": [
+        {
+          "text": "ランダムな敵に物理570%×4回"
+        },
+        {
+          "text": "このスキルで敵を戦闘不能にすると、自身の攻撃力を50%増加(1ターン)"
+        }
+      ]
     },
     {
       "id": "cordie-s2",
@@ -11659,7 +11840,25 @@
         "realityRank": "中",
         "rankingTarget": "条件込み",
         "damageMemo": ""
-      }
+      },
+      "plainSummary": "自分が削れているほど強く、弱った敵には必ずクリティカル。",
+      "steps": [
+        {
+          "text": "ランダムな敵5体に物理520%"
+        },
+        {
+          "text": "自身のHPが50%以下ならダメージ2倍"
+        },
+        {
+          "text": "対象が弱体効果中なら必ずクリティカル"
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "弱体を撒く味方がいると③の確定クリティカルを常時満たせる。",
+          "reason": "確定クリティカルの条件が対象が弱体効果中のため"
+        }
+      ]
     },
     {
       "id": "cordie-s3",
@@ -11679,7 +11878,13 @@
       "compareMemo": "攻撃力+18% / 命中+10% / クリダメ強化+35%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/cordie/"
+      "sourceUrl": "https://ichigogames.net/mementomori/cordie/",
+      "plainSummary": "攻撃力と防御貫通の常時ブースト。",
+      "steps": [
+        {
+          "text": "自身の攻撃力+40%・防御貫通+40%(解除不可)"
+        }
+      ]
     },
     {
       "id": "cordie-s4",
@@ -11699,7 +11904,16 @@
       "compareMemo": "攻撃力+18% / 命中+10% / クリダメ強化+35%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/cordie/"
+      "sourceUrl": "https://ichigogames.net/mementomori/cordie/",
+      "plainSummary": "定期的に張り直される弱体ガード。",
+      "steps": [
+        {
+          "text": "ターン開始時、自身に弱体効果無効を3ターン付与(解除不可)"
+        },
+        {
+          "text": "発動後3回行動まで再発動しない"
+        }
+      ]
     },
     {
       "id": "nina-s1",
@@ -12254,7 +12468,16 @@
         "realityRank": "中",
         "rankingTarget": "条件込み",
         "damageMemo": ""
-      }
+      },
+      "plainSummary": "攻撃しながら自分の吸血効率を上げる。",
+      "steps": [
+        {
+          "text": "ランダムな敵3体に物理480%"
+        },
+        {
+          "text": "自身にHPドレイン40%増加を4ターン付与"
+        }
+      ]
     },
     {
       "id": "fia-s2",
@@ -12274,7 +12497,19 @@
       "compareMemo": "耐久力+8% / 攻撃力+18% / 防御力+5%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/fia/"
+      "sourceUrl": "https://ichigogames.net/mementomori/fia/",
+      "plainSummary": "受けたダメージを溜めて撃ち返す反射砲。",
+      "steps": [
+        {
+          "text": "自身が過去20ターンに受けた総被ダメージ×20%の直接攻撃を、ランダムな敵3体に行う"
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "被弾の多い長期戦ほど威力が伸びる。",
+          "reason": "ダメージ参照元が過去20ターンの総被ダメージのため"
+        }
+      ]
     },
     {
       "id": "fia-s3",
@@ -12294,7 +12529,16 @@
       "compareMemo": "耐久力+8% / 攻撃力+18% / 防御力+5%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/fia/"
+      "sourceUrl": "https://ichigogames.net/mementomori/fia/",
+      "plainSummary": "自分のHPを倍にし、隣の2人にも分け与えるタンクの核。",
+      "steps": [
+        {
+          "text": "自身の最大HPを100%増加(解除不可)"
+        },
+        {
+          "text": "隣接する味方2体の最大HPを、自身の最大HP20%分増加"
+        }
+      ]
     },
     {
       "id": "fia-s4",
@@ -12309,12 +12553,24 @@
       "multiplierText": "回復 / カウンタ増加",
       "duration": "",
       "ct": null,
-      "condition": "ターン開始時、スピード最低の味方のカウンタを10%増加。攻撃を受けた時、被ダメージ20%回復。再発動制限4回行動",
+      "condition": "ターン開始時、スピード最低の味方のカウンタを10%増加。攻撃を受けた時、被ダメージ20%回復(最大で自身最大HP10%まで)。再発動制限4回行動",
       "exclusiveWeapon": "専用Lv3: 回復30%、回復上限15%",
       "compareMemo": "耐久力+8% / 攻撃力+18% / 防御力+5%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/fia/"
+      "sourceUrl": "https://ichigogames.net/mementomori/fia/",
+      "plainSummary": "遅い味方のカウンタを支援しつつ、被弾の2割を自動回復。",
+      "steps": [
+        {
+          "text": "ターン開始時、スピードが最も低い味方のカウンタを10%増加"
+        },
+        {
+          "text": "攻撃を受けたとき、被ダメージの20%をHP回復(最大で自身の最大HP10%まで)"
+        },
+        {
+          "text": "発動後4回行動まで再発動しない"
+        }
+      ]
     },
     {
       "id": "claudia-s1",
@@ -12518,7 +12774,7 @@
       "multiplierText": "最大HP増加 / 回復",
       "duration": "",
       "ct": null,
-      "condition": "攻撃力最高味方やHP割合最低味方の最大HPを増加。最大9スタック、解除不可。最大HP増加後にHP回復",
+      "condition": "攻撃力最高味方やHP割合最低味方の最大HPを増加。最大9スタック、解除不可。最大HP増加後に対象のHPを自身の攻撃力10%回復",
       "exclusiveWeapon": "専用Lv2: 攻撃力最高味方の最大HP増加が自身最大HP50%",
       "compareMemo": "耐久力+8% / HP+22% / 弱体効果耐性+10%",
       "noteUrl": "",
@@ -12530,7 +12786,7 @@
           "text": "攻撃力が最も高い味方やHP割合が最も低い味方の最大HPを増加(最大9スタック、解除不可)"
         },
         {
-          "text": "最大HP増加後、その分のHPを回復"
+          "text": "最大HP増加後、対象のHPをユニの攻撃力10%分回復"
         }
       ]
     },
@@ -12686,12 +12942,12 @@
       "multiplierText": "魔法180%",
       "duration": "",
       "ct": 4,
-      "condition": "40%で1T遅延を付与。遅延判定後、自身HPを最大HP10%回復",
+      "condition": "70%で1T遅延を付与。遅延判定後、自身HPを最大HP10%回復",
       "exclusiveWeapon": "専用Lv1: 対象3体",
       "compareMemo": "攻撃力+18% / 弱体効果命中+10% / HP+22%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/mira/",
+      "sourceUrl": "https://ichigogames.net/mementomori/milla/",
       "damage": {
         "singleMultiplier": 180,
         "hitCount": 2,
@@ -12713,7 +12969,7 @@
           "text": "ランダムな敵2体に魔法180%"
         },
         {
-          "text": "40%の確率で遅延を1ターン付与"
+          "text": "70%の確率で遅延を1ターン付与"
         },
         {
           "text": "判定後、自身のHPを最大HP10%回復"
@@ -12729,25 +12985,25 @@
       "category": "火力",
       "majorCategory": "攻撃",
       "subCategory": "画像記載効果",
-      "target": "ランダム敵4体",
-      "multiplierText": "魔法440%",
+      "target": "ランダム敵",
+      "multiplierText": "魔法440%×4回 / 条件時1760%×4回",
       "duration": "",
       "ct": 4,
-      "condition": "自身HPを最大HP10%回復。自身がアクティブスキルで回復を受けた回数6以上なら魔法1760%",
+      "condition": "自身HPを最大HP10%回復。自身がアクティブスキルで回復を受けた回数6以上なら魔法1760%×4回",
       "exclusiveWeapon": "専用Lv3: 魔法480%、条件時1920%",
       "compareMemo": "攻撃力+18% / 弱体効果命中+10% / HP+22%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/mira/",
+      "sourceUrl": "https://ichigogames.net/mementomori/milla/",
       "damage": {
         "singleMultiplier": 440,
         "hitCount": 4,
         "baseTotal": 1760,
         "exclusiveLv1Total": 1760,
         "exclusiveLv2Total": 1760,
-        "exclusiveLv3Total": 1760,
-        "conditionMaxTotal": 1760,
-        "conditionMaxNote": "",
+        "exclusiveLv3Total": 1920,
+        "conditionMaxTotal": 7040,
+        "conditionMaxNote": "回復を受けた回数6以上で1760%×4回。専用Lv3では1920%×4回",
         "powerType": "通常攻撃倍率",
         "maxStacks": null,
         "realityRank": "中",
@@ -12760,10 +13016,10 @@
           "text": "自身のHPを最大HP10%回復"
         },
         {
-          "text": "ランダムな敵4体に魔法440%"
+          "text": "ランダムな敵に魔法440%×4回"
         },
         {
-          "text": "自身がアクティブスキルで回復を受けた回数が6以上なら魔法1760%"
+          "text": "自身がアクティブスキルで回復を受けた回数が6以上なら魔法1760%×4回"
         }
       ],
       "synergyNotes": [
@@ -12791,7 +13047,7 @@
       "compareMemo": "攻撃力+18% / 弱体効果命中+10% / HP+22%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/mira/",
+      "sourceUrl": "https://ichigogames.net/mementomori/milla/",
       "plainSummary": "味方全員の最大HPを底上げする、置物性能の核。",
       "steps": [
         {
@@ -12823,7 +13079,7 @@
       "compareMemo": "攻撃力+18% / 弱体効果命中+10% / HP+22%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/mira/",
+      "sourceUrl": "https://ichigogames.net/mementomori/milla/",
       "plainSummary": "全員に再生を配り続ける自動ヒール。",
       "steps": [
         {
@@ -13073,7 +13329,7 @@
       "compareMemo": "攻撃力+18% / HP+22% / クリティカル+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/paula/",
+      "sourceUrl": "https://ichigogames.net/mementomori/pola/",
       "damage": {
         "singleMultiplier": 540,
         "hitCount": 3,
@@ -13088,7 +13344,19 @@
         "realityRank": "中",
         "rankingTarget": "条件込み",
         "damageMemo": ""
-      }
+      },
+      "plainSummary": "回復しながら殴り、7ターン目からは回復をやめて2倍撃ちに変わる。",
+      "steps": [
+        {
+          "text": "自身のHPを最大HP10%回復"
+        },
+        {
+          "text": "ランダムな敵3体に物理540%"
+        },
+        {
+          "text": "7ターン目以降は回復せず、物理ダメージ2倍"
+        }
+      ]
     },
     {
       "id": "paula-s2",
@@ -13108,7 +13376,7 @@
       "compareMemo": "攻撃力+18% / HP+22% / クリティカル+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/paula/",
+      "sourceUrl": "https://ichigogames.net/mementomori/pola/",
       "damage": {
         "singleMultiplier": 310,
         "hitCount": 8,
@@ -13123,7 +13391,19 @@
         "realityRank": "中",
         "rankingTarget": "条件込み",
         "damageMemo": ""
-      }
+      },
+      "plainSummary": "8連撃版のS1。後半に化けるのは同じ。",
+      "steps": [
+        {
+          "text": "自身のHPを最大HP10%回復"
+        },
+        {
+          "text": "ランダムな敵に物理310%×8回"
+        },
+        {
+          "text": "7ターン目以降は回復せず、物理ダメージ2倍"
+        }
+      ]
     },
     {
       "id": "paula-s3",
@@ -13138,12 +13418,30 @@
       "multiplierText": "HP回復 / 攻撃力+5%",
       "duration": "",
       "ct": null,
-      "condition": "味方のアクティブスキルでHP回復時、自身HPを最大HP5%回復。翠属性味方全体に攻撃力5%増加を1スタック付与、最大15",
+      "condition": "自身か味方のアクティブスキルでHP回復時、自身HPを最大HP5%回復。翠属性味方全体に攻撃力5%増加を1スタック付与、最大15。バトル中15回のみ発動",
       "exclusiveWeapon": "専用武器効果なし",
       "compareMemo": "攻撃力+18% / HP+22% / クリティカル+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/paula/"
+      "sourceUrl": "https://ichigogames.net/mementomori/pola/",
+      "plainSummary": "味方の回復のたびに、自分も回復して翠全員の攻撃力を積む。",
+      "steps": [
+        {
+          "text": "自身か味方のアクティブスキルでHP回復が発動するたび、自身のHPを最大HP5%回復"
+        },
+        {
+          "text": "翠属性の味方全体に攻撃力+5%を1スタック付与(最大15スタック、解除不可)"
+        },
+        {
+          "text": "この効果はバトル中15回のみ発動する"
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "アクティブスキルで回復を複数回発動する味方(例: コベルの3回連続回復、イディーネの3回回復)がいるとスタックが早く貯まる。",
+          "reason": "カウント対象がアクティブスキルによる回復の発動回数のため"
+        }
+      ]
     },
     {
       "id": "paula-s4",
@@ -13163,7 +13461,16 @@
       "compareMemo": "攻撃力+18% / HP+22% / クリティカル+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/paula/"
+      "sourceUrl": "https://ichigogames.net/mementomori/pola/",
+      "plainSummary": "高耐久で7ターン目まで生き延び、そこからCTリセットで加速する設計。",
+      "steps": [
+        {
+          "text": "バトル開始時、最大HP+40%・被ダメージ65%減少(解除不可)"
+        },
+        {
+          "text": "7ターン目開始時、自身のスキルCTを0にし、スピード+30%"
+        }
+      ]
     },
     {
       "id": "dd-s1",
@@ -13293,7 +13600,7 @@
       "compareMemo": "攻撃力+18% / HP+22% / 弱体効果命中+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/yurdiz/",
+      "sourceUrl": "https://ichigogames.net/mementomori/yildiz/",
       "damage": {
         "singleMultiplier": 620,
         "hitCount": 2,
@@ -13308,7 +13615,19 @@
         "realityRank": "中",
         "rankingTarget": "条件込み",
         "damageMemo": ""
-      }
+      },
+      "plainSummary": "回復しつつ、敵のバフを6ターン封じにいく。",
+      "steps": [
+        {
+          "text": "自身のHPを最大HP5%回復"
+        },
+        {
+          "text": "攻撃力が高い敵2体に物理620%"
+        },
+        {
+          "text": "70%の確率でバフ無効を6ターン付与"
+        }
+      ]
     },
     {
       "id": "yurdiz-s2",
@@ -13328,7 +13647,7 @@
       "compareMemo": "攻撃力+18% / HP+22% / 弱体効果命中+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/yurdiz/",
+      "sourceUrl": "https://ichigogames.net/mementomori/yildiz/",
       "damage": {
         "singleMultiplier": 280,
         "hitCount": 4,
@@ -13343,7 +13662,19 @@
         "realityRank": "中",
         "rankingTarget": "条件込み",
         "damageMemo": ""
-      }
+      },
+      "plainSummary": "「狼と人の絆」が満タンだと4倍に化ける単体連撃。",
+      "steps": [
+        {
+          "text": "自身のHPを最大HP5%回復"
+        },
+        {
+          "text": "攻撃力が最も高い敵に物理280%×4回"
+        },
+        {
+          "text": "攻撃前に「狼と人の絆」が10スタックなら物理1120%"
+        }
+      ]
     },
     {
       "id": "yurdiz-s3",
@@ -13358,12 +13689,21 @@
       "multiplierText": "最大HP+100% / 防御系増加",
       "duration": "",
       "ct": null,
-      "condition": "バトル開始時、自身最大HP100%増加。自身と攻撃力最高の味方の防御力・物理防御力・物理クリダメ緩和を増加。対象が翠属性なら増加量強化",
+      "condition": "バトル開始時、自身最大HP100%増加。自身と攻撃力最高の味方の防御力・物理防御力・物理クリダメ緩和を増加",
       "exclusiveWeapon": "専用武器効果なし",
       "compareMemo": "攻撃力+18% / HP+22% / 弱体効果命中+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/yurdiz/"
+      "sourceUrl": "https://ichigogames.net/mementomori/yildiz/",
+      "plainSummary": "自分とエースをまとめて硬くする開幕バフ。",
+      "steps": [
+        {
+          "text": "バトル開始時、自身の最大HPを100%増加(解除不可)"
+        },
+        {
+          "text": "自身と攻撃力が最も高い味方の防御力・物理防御力・物理クリダメ緩和を増加(解除不可)"
+        }
+      ]
     },
     {
       "id": "yurdiz-s4",
@@ -13378,12 +13718,27 @@
       "multiplierText": "狼と人の絆",
       "duration": "",
       "ct": null,
-      "condition": "HP回復時に狼と人の絆を付与。最大10スタック、解除不可。1スタックにつき攻撃力8%・命中率8%増加",
+      "condition": "自身か味方のアクティブスキルでHP回復効果が発動したとき、自身と攻撃力最高の味方に狼と人の絆を付与。最大10スタック、解除不可。1スタックにつき攻撃力8%・命中率8%増加",
       "exclusiveWeapon": "専用武器効果なし",
       "compareMemo": "攻撃力+18% / HP+22% / 弱体効果命中+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/yurdiz/"
+      "sourceUrl": "https://ichigogames.net/mementomori/yildiz/",
+      "plainSummary": "回復が発動するたび攻撃力と命中が積み上がるエンジン。",
+      "steps": [
+        {
+          "text": "自身か味方のアクティブスキルでHP回復効果が発動するたび「狼と人の絆」を付与(最大10スタック、解除不可)"
+        },
+        {
+          "text": "1スタックにつき攻撃力+8%・命中率+8%"
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "アクティブ回復を多く供給する味方(例: コベルの3回連続回復、イディーネの3回回復)がいるとS2の解禁条件(10スタック)に早く届く。",
+          "reason": "スタック付与条件がアクティブスキルによるHP回復効果の発動時のため"
+        }
+      ]
     },
     {
       "id": "stella_holy_dark_star-s1",
@@ -13403,7 +13758,7 @@
       "compareMemo": "魔力+8% / 攻撃力+18% / 弱体効果耐性+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/stella_holy_dark_star/",
+      "sourceUrl": "https://ichigogames.net/mementomori/stella_winter/",
       "damage": {
         "singleMultiplier": 320,
         "hitCount": 3,
@@ -13418,7 +13773,19 @@
         "realityRank": "中",
         "rankingTarget": "条件込み",
         "damageMemo": ""
-      }
+      },
+      "plainSummary": "回復と敵の柔らかくなるデバフを両方こなす前半の仕事役。",
+      "steps": [
+        {
+          "text": "自身のHPを最大HP10%回復(7ターン目以降は回復なし)"
+        },
+        {
+          "text": "攻撃前に被ダメージ増加と魔法防御力減少を4ターン付与"
+        },
+        {
+          "text": "ランダムな敵3体に魔法320%"
+        }
+      ]
     },
     {
       "id": "stella_holy_dark_star-s2",
@@ -13429,16 +13796,16 @@
       "category": "火力",
       "majorCategory": "攻撃",
       "subCategory": "画像記載効果",
-      "target": "ランダム敵4体",
-      "multiplierText": "魔法710%",
+      "target": "ランダム敵",
+      "multiplierText": "魔法710%×4回",
       "duration": "",
       "ct": 4,
-      "condition": "自身と攻撃力最高の味方HPを自身最大HP7%回復。7T目以降HP回復なし。7T目以降は最終攻撃後70%で沈黙",
+      "condition": "自身と攻撃力最高の味方HPを自身最大HP7%回復。7T目以降HP回復なし。7T目以降は最終攻撃後70%で攻撃力が高い敵2体に2T沈黙",
       "exclusiveWeapon": "専用Lv3: 魔法780%",
       "compareMemo": "魔力+8% / 攻撃力+18% / 弱体効果耐性+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/stella_holy_dark_star/",
+      "sourceUrl": "https://ichigogames.net/mementomori/stella_winter/",
       "damage": {
         "singleMultiplier": 710,
         "hitCount": 4,
@@ -13453,7 +13820,20 @@
         "realityRank": "中",
         "rankingTarget": "条件込み",
         "damageMemo": ""
-      }
+      },
+      "plainSummary": "味方も回復する主砲。7ターン目からは沈黙付きに変わる。",
+      "steps": [
+        {
+          "text": "自身と攻撃力が最も高い味方のHPを、自身最大HP7%回復(7ターン目以降は回復なし)"
+        },
+        {
+          "text": "ランダムな敵に魔法710%×4回"
+        },
+        {
+          "text": "7ターン目以降は最終攻撃後、70%の確率で攻撃力が高い敵2体に沈黙を2ターン付与",
+          "term": "沈黙"
+        }
+      ]
     },
     {
       "id": "stella_holy_dark_star-s3",
@@ -13473,7 +13853,16 @@
       "compareMemo": "魔力+8% / 攻撃力+18% / 弱体効果耐性+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/stella_holy_dark_star/"
+      "sourceUrl": "https://ichigogames.net/mementomori/stella_winter/",
+      "plainSummary": "前半を生き延びる耐久と、7ターン目のCTリセット。",
+      "steps": [
+        {
+          "text": "バトル開始時、被ダメージ減少・最大HP増加・防御力+150%(解除不可)"
+        },
+        {
+          "text": "7ターン目開始時、自身のスキルCTを0にする"
+        }
+      ]
     },
     {
       "id": "stella_holy_dark_star-s4",
@@ -13493,7 +13882,19 @@
       "compareMemo": "魔力+8% / 攻撃力+18% / 弱体効果耐性+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/stella_holy_dark_star/"
+      "sourceUrl": "https://ichigogames.net/mementomori/stella_winter/",
+      "plainSummary": "味方の回復のたびに攻守が積み上がるスタックエンジン。",
+      "steps": [
+        {
+          "text": "自身か味方のアクティブスキルでHP回復効果が発動するたび、攻撃力+10%・物理防御力+6%を各1スタック付与(最大10スタック、解除不可)"
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "アクティブ回復を多発する編成(コベル・イディーネ・ポーラ等)でスタックが早く貯まる。",
+          "reason": "カウント対象がアクティブスキルによる回復の発動回数のため"
+        }
+      ]
     },
     {
       "id": "kobell-s1",
@@ -13671,16 +14072,16 @@
       "category": "火力",
       "majorCategory": "攻撃",
       "subCategory": "画像記載効果",
-      "target": "ランダム敵4体",
-      "multiplierText": "魔法440%",
+      "target": "ランダム敵",
+      "multiplierText": "魔法440%×4回",
       "duration": "",
       "ct": 4,
-      "condition": "4T再生を付与し毎ターン最大HP10%回復。再生前に最大HP10%増加、最大2スタック。魔法攻撃",
+      "condition": "自身に4T再生を付与し毎ターン最大HP10%回復。再生前に自身の最大HP10%増加、最大2スタック。魔法攻撃",
       "exclusiveWeapon": "専用Lv1: 最大HP増加と再生の対象が味方全体。専用Lv2: 最大HP40%。専用Lv3: 魔法480%",
       "compareMemo": "攻撃力+18% / HP+22% / 弱体効果耐性+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/idyne/",
+      "sourceUrl": "https://ichigogames.net/mementomori/eidene/",
       "damage": {
         "singleMultiplier": 440,
         "hitCount": 4,
@@ -13695,7 +14096,20 @@
         "realityRank": "中",
         "rankingTarget": "条件込み",
         "damageMemo": ""
-      }
+      },
+      "plainSummary": "再生とHP上限アップを自分に付けてから撃つ魔法。",
+      "steps": [
+        {
+          "text": "自身に再生を4ターン付与(毎ターン最大HP10%回復、解除不可)",
+          "term": "再生"
+        },
+        {
+          "text": "再生の前に自身の最大HPを10%増加(最大2スタック、解除不可)"
+        },
+        {
+          "text": "ランダムな敵に魔法440%×4回"
+        }
+      ]
     },
     {
       "id": "idyne-s2",
@@ -13715,7 +14129,7 @@
       "compareMemo": "攻撃力+18% / HP+22% / 弱体効果耐性+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/idyne/",
+      "sourceUrl": "https://ichigogames.net/mementomori/eidene/",
       "damage": {
         "singleMultiplier": 480,
         "hitCount": 3,
@@ -13730,7 +14144,25 @@
         "realityRank": "中",
         "rankingTarget": "条件込み",
         "damageMemo": ""
-      }
+      },
+      "plainSummary": "自己回復を3回刻んでから撃つ。後半は回復不要になり3倍砲へ。",
+      "steps": [
+        {
+          "text": "自身のHPを最大HP5%回復、これを3回発動"
+        },
+        {
+          "text": "ランダムな敵3体に魔法480%"
+        },
+        {
+          "text": "7ターン目以降にHP回復が発動しなかった場合、魔法ダメージ3倍"
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "①の「3回発動」は回復回数をカウントする味方(ポーラS3・ユルディズS4・冬ステラS4・黄昏フローレンスS3)のスタックを1人で3回進める。",
+          "reason": "各スキルのカウント対象がアクティブスキルによる回復の発動回数のため"
+        }
+      ]
     },
     {
       "id": "idyne-s3",
@@ -13741,16 +14173,25 @@
       "category": "耐久",
       "majorCategory": "防御",
       "subCategory": "パッシブ効果",
-      "target": "自身と攻撃力最高の味方",
+      "target": "自身 / 攻撃力が高い味方2体",
       "multiplierText": "旺花スタック",
       "duration": "",
       "ct": null,
-      "condition": "HP回復効果発動時、旺花を1スタック付与。最大15、解除不可。攻撃力とカウンタを増加。対象が翠属性ならカウンタ増加量2%",
+      "condition": "HP回復効果発動時、旺花を1スタック付与。最大15、解除不可。1スタックにつき攻撃力5%・カウンタ1%増加。対象が翠属性ならカウンタ増加量2%。対象は自身と攻撃力が高い味方2体",
       "exclusiveWeapon": "専用武器効果なし",
       "compareMemo": "攻撃力+18% / HP+22% / 弱体効果耐性+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/idyne/"
+      "sourceUrl": "https://ichigogames.net/mementomori/eidene/",
+      "plainSummary": "回復のたびに攻撃とカウンタが積もる。",
+      "steps": [
+        {
+          "text": "HP回復効果が発動するたび、自身と攻撃力が高い味方2体に「旺花」を1スタック付与(最大15、解除不可)"
+        },
+        {
+          "text": "1スタックにつき攻撃力+5%・カウンタ+1%。対象が翠属性ならカウンタ+2%"
+        }
+      ]
     },
     {
       "id": "idyne-s4",
@@ -13770,7 +14211,16 @@
       "compareMemo": "攻撃力+18% / HP+22% / 弱体効果耐性+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/idyne/"
+      "sourceUrl": "https://ichigogames.net/mementomori/eidene/",
+      "plainSummary": "高いHPと被弾リカバリーで場に残る。",
+      "steps": [
+        {
+          "text": "バトル開始時、最大HPを100%増加(解除不可)"
+        },
+        {
+          "text": "攻撃を受けたとき、被ダメージの60%をHP回復(その攻撃で戦闘不能になる場合は発動しない)"
+        }
+      ]
     },
     {
       "id": "guinevere-s1",
