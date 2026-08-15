@@ -296,6 +296,11 @@ main {
   font-weight: 800;
 }
 
+.reason {
+  color: var(--muted);
+  font-size: 13px;
+}
+
 .weapon-table {
   width: 100%;
   border-collapse: collapse;

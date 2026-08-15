@@ -1,6 +1,6 @@
 {
   "schema": "mementomori_skill_compare_v1",
-  "updatedAt": "2026-08-15T04:00:00.000+09:00",
+  "updatedAt": "2026-08-15T05:00:00.000+09:00",
   "gachaStatusUpdatedAt": "2026-05-27",
   "notes": [
     "Skill effects are summarized for comparison and are not copied as full official text.",
@@ -4137,7 +4137,19 @@
         "realityRank": "中",
         "rankingTarget": "対象",
         "damageMemo": "カード生成JSONから自動マージ。専用Lv別・条件MAXは要精査"
-      }
+      },
+      "plainSummary": "高倍率で3体を殴る主砲。代償に自分がわずかに遅くなる。",
+      "steps": [
+        {
+          "text": "ランダムな敵3体に物理880%"
+        },
+        {
+          "text": "攻撃前に自身の笑顔喝采が5スタックなら物理1320%"
+        },
+        {
+          "text": "自身のスピードを1ターン5%減少(この付与は命中率・耐性率を無視)"
+        }
+      ]
     },
     {
       "id": "cordie_ringmaster-s2",
@@ -4172,7 +4184,16 @@
         "realityRank": "中",
         "rankingTarget": "対象",
         "damageMemo": "カード生成JSONから自動マージ。専用Lv別・条件MAXは要精査"
-      }
+      },
+      "plainSummary": "敵が残り1体になると連打に変わる、詰めの一撃。",
+      "steps": [
+        {
+          "text": "ランダムな敵3体に物理1180%"
+        },
+        {
+          "text": "敵の生存が1体なら攻撃回数3回"
+        }
+      ]
     },
     {
       "id": "cordie_ringmaster-s3",
@@ -4192,7 +4213,19 @@
       "compareMemo": "自身がアクティブスキルで弱体を受けた時、笑顔喝采1スタック / 行動阻害を受けた場合は5スタック / 1スタックにつき攻撃力10%増加、最大5スタック / 行動開始時、自身の弱体効果を3つ解除",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/cordie_ringmaster/"
+      "sourceUrl": "https://ichigogames.net/mementomori/cordie_ringmaster/",
+      "plainSummary": "弱体を受けるほど強くなり、自分で解除もする逆転パッシブ。",
+      "steps": [
+        {
+          "text": "アクティブスキルで弱体を受けると笑顔喝采1スタック(行動阻害なら5スタック)"
+        },
+        {
+          "text": "1スタックごとに攻撃力+10%(最大5スタック)"
+        },
+        {
+          "text": "行動開始時、自身の弱体効果を3つ解除"
+        }
+      ]
     },
     {
       "id": "cordie_ringmaster-s4",
@@ -4212,7 +4245,16 @@
       "compareMemo": "自身の被ダメージ60%減少 / 1ターン目開始時、4ターン自身に攻撃力500%のシールド / 効果は解除不可",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/cordie_ringmaster/"
+      "sourceUrl": "https://ichigogames.net/mementomori/cordie_ringmaster/",
+      "plainSummary": "常時6割カットと開幕シールドの守り。",
+      "steps": [
+        {
+          "text": "自身の被ダメージを60%減少(解除不可)"
+        },
+        {
+          "text": "1ターン目開始時、攻撃力500%のシールドを4ターン付与"
+        }
+      ]
     },
     {
       "id": "merlyn_winter-s1",
@@ -12417,7 +12459,19 @@
         "realityRank": "中",
         "rankingTarget": "条件込み",
         "damageMemo": ""
-      }
+      },
+      "plainSummary": "殴りながらエースを回復し、弱体も剥がす。",
+      "steps": [
+        {
+          "text": "ランダムな敵5体に魔法150%"
+        },
+        {
+          "text": "自身以外で攻撃力が最も高い味方を回復(対象最大HPの10%)"
+        },
+        {
+          "text": "対象が弱体効果中なら弱体を2つ解除"
+        }
+      ]
     },
     {
       "id": "yuni-s2",
@@ -12437,7 +12491,19 @@
       "compareMemo": "耐久力+8% / HP+22% / 弱体効果耐性+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/yuni/"
+      "sourceUrl": "https://ichigogames.net/mementomori/yuni/",
+      "plainSummary": "一番傷ついた味方を、最大4回まで連続ケア。",
+      "steps": [
+        {
+          "text": "HP割合が最も低い味方を回復(自身最大HPの3%)"
+        },
+        {
+          "text": "対象が弱体効果中なら弱体を1つ解除"
+        },
+        {
+          "text": "このスキルを最大3回再発動(合計4回)"
+        }
+      ]
     },
     {
       "id": "yuni-s3",
@@ -12457,7 +12523,16 @@
       "compareMemo": "耐久力+8% / HP+22% / 弱体効果耐性+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/yuni/"
+      "sourceUrl": "https://ichigogames.net/mementomori/yuni/",
+      "plainSummary": "味方の最大HPを積み上げ、増えた分だけ回復もする。",
+      "steps": [
+        {
+          "text": "攻撃力が最も高い味方やHP割合が最も低い味方の最大HPを増加(最大9スタック、解除不可)"
+        },
+        {
+          "text": "最大HP増加後、その分のHPを回復"
+        }
+      ]
     },
     {
       "id": "yuni-s4",
@@ -12477,7 +12552,16 @@
       "compareMemo": "耐久力+8% / HP+22% / 弱体効果耐性+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/yuni/"
+      "sourceUrl": "https://ichigogames.net/mementomori/yuni/",
+      "plainSummary": "自分の硬さと、隣の回復されやすさを上げる。",
+      "steps": [
+        {
+          "text": "自身の防御力とクリティカル耐性率を+50%"
+        },
+        {
+          "text": "バトル開始時、隣接味方2体の被回復量を20%増加(2ターン)"
+        }
+      ]
     },
     {
       "id": "alexandra-s1",
@@ -12622,7 +12706,19 @@
         "realityRank": "中",
         "rankingTarget": "条件込み",
         "damageMemo": ""
-      }
+      },
+      "plainSummary": "遅延を狙いつつ自分も回復する小技。",
+      "steps": [
+        {
+          "text": "ランダムな敵2体に魔法180%"
+        },
+        {
+          "text": "40%の確率で遅延を1ターン付与"
+        },
+        {
+          "text": "判定後、自身のHPを最大HP10%回復"
+        }
+      ]
     },
     {
       "id": "mira-s2",
@@ -12657,7 +12753,25 @@
         "realityRank": "中",
         "rankingTarget": "条件込み",
         "damageMemo": ""
-      }
+      },
+      "plainSummary": "回復を受けた回数で4倍に化けるアタック。",
+      "steps": [
+        {
+          "text": "自身のHPを最大HP10%回復"
+        },
+        {
+          "text": "ランダムな敵4体に魔法440%"
+        },
+        {
+          "text": "自身がアクティブスキルで回復を受けた回数が6以上なら魔法1760%"
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "ミラにアクティブ回復を多く当てられる味方(例: コベルの3回連続回復)がいると条件解禁が早い。",
+          "reason": "条件がアクティブスキルで回復を受けた回数のため"
+        }
+      ]
     },
     {
       "id": "mira-s3",
@@ -12677,7 +12791,19 @@
       "compareMemo": "攻撃力+18% / 弱体効果命中+10% / HP+22%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/mira/"
+      "sourceUrl": "https://ichigogames.net/mementomori/mira/",
+      "plainSummary": "味方全員の最大HPを底上げする、置物性能の核。",
+      "steps": [
+        {
+          "text": "味方全体の最大HPを15%増加(解除不可)"
+        },
+        {
+          "text": "対象が翠属性なら、ミラの攻撃力100%分をさらに追加"
+        },
+        {
+          "text": "自身は最大HP500%増加"
+        }
+      ]
     },
     {
       "id": "mira-s4",
@@ -12697,7 +12823,17 @@
       "compareMemo": "攻撃力+18% / 弱体効果命中+10% / HP+22%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/mira/"
+      "sourceUrl": "https://ichigogames.net/mementomori/mira/",
+      "plainSummary": "全員に再生を配り続ける自動ヒール。",
+      "steps": [
+        {
+          "text": "ターン開始時、味方全体に再生を4ターン付与(最大HP5%回復、翠属性なら10%)",
+          "term": "再生"
+        },
+        {
+          "text": "解除不可。発動後4回行動まで再発動しない"
+        }
+      ]
     },
     {
       "id": "lunalynn_holy_night-s1",
@@ -13669,7 +13805,19 @@
         "realityRank": "高",
         "rankingTarget": "条件込み",
         "damageMemo": "専用Lv3で大きく伸びる"
-      }
+      },
+      "plainSummary": "自分を傷つけてから撃つ、捨て身の5連撃。",
+      "steps": [
+        {
+          "text": "自身に現在HP20%の自傷ダメージを2回"
+        },
+        {
+          "text": "攻撃前に70%で被ダメージ増加を付与(2ターン)"
+        },
+        {
+          "text": "ランダムな敵に物理280%×5回"
+        }
+      ]
     },
     {
       "id": "guinevere-s2",
@@ -13704,7 +13852,19 @@
         "realityRank": "中",
         "rankingTarget": "条件込み",
         "damageMemo": "最大火力はスタック前提"
-      }
+      },
+      "plainSummary": "自傷で貯めた攻撃力スタックを火力に変える連撃。",
+      "steps": [
+        {
+          "text": "自身に現在HP20%の自傷ダメージを2回"
+        },
+        {
+          "text": "ランダムな敵に物理170%×3回"
+        },
+        {
+          "text": "S3「ハートフルラヴァー」のスタック数に応じて倍率・回数が上昇(最大740%×5回)"
+        }
+      ]
     },
     {
       "id": "guinevere-s3",
@@ -13725,7 +13885,19 @@
       "noteUrl": "",
       "imageUrl": "",
       "sourceUrl": "https://ichigogames.net/mementomori/guinevere/",
-      "damage": null
+      "damage": null,
+      "plainSummary": "自傷するほど攻撃力が積み上がるエンジン。",
+      "steps": [
+        {
+          "text": "自身か味方が自傷ダメージを受けた回数に応じて、攻撃力増加をスタック(最大8スタック、解除不可)"
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "自傷スキルを持つ味方がいるとスタックが早く貯まる。",
+          "reason": "カウント対象が自身か味方の自傷回数のため"
+        }
+      ]
     },
     {
       "id": "guinevere-s4",
@@ -13746,7 +13918,17 @@
       "noteUrl": "",
       "imageUrl": "",
       "sourceUrl": "https://ichigogames.net/mementomori/guinevere/",
-      "damage": null
+      "damage": null,
+      "plainSummary": "開幕のスピードアップと気絶ガード。",
+      "steps": [
+        {
+          "text": "バトル開始時、自身のスピードを増加(4ターン)"
+        },
+        {
+          "text": "紅属性の味方が2体以上なら、1ターン目の行動開始時に気絶無効を付与(2ターン)",
+          "term": "気絶"
+        }
+      ]
     },
     {
       "id": "shiloh-s1",
@@ -13758,7 +13940,7 @@
       "majorCategory": "味方強化",
       "subCategory": "クリティカル率増加 / クリダメ強化増加",
       "target": "ランダム敵3-5体 / 攻撃力が高い味方2体",
-      "multiplierText": "物理240%×3 / 専用Lv3 580%×5",
+      "multiplierText": "物理530%×3 / 専用Lv3 580%×5",
       "duration": "クリティカル率・クリダメ強化4T",
       "ct": 4,
       "condition": "Lv2で攻撃前に攻撃力が高い味方2体のクリティカル率とクリダメ強化を増加。メインクエストまたは9ターン目以降は増加量上昇",
@@ -13768,9 +13950,9 @@
       "imageUrl": "",
       "sourceUrl": "https://ichigogames.net/mementomori/shiloh/",
       "damage": {
-        "singleMultiplier": 240,
+        "singleMultiplier": 530,
         "hitCount": 3,
-        "baseTotal": 720,
+        "baseTotal": 1590,
         "exclusiveLv1Total": 2650,
         "exclusiveLv2Total": 2650,
         "exclusiveLv3Total": 2900,
@@ -13781,7 +13963,25 @@
         "realityRank": "高",
         "rankingTarget": "条件込み",
         "damageMemo": "専用Lv1以降は全体寄り"
-      }
+      },
+      "plainSummary": "味方2人のクリティカルを強化してから、自分も殴る応援スキル。",
+      "steps": [
+        {
+          "text": "攻撃の前に、攻撃力が高い味方2体のクリティカル率とクリダメ強化を+15%(4ターン)"
+        },
+        {
+          "text": "ランダムな敵3体に物理530%"
+        },
+        {
+          "text": "オートバトル・ボスバトル、または9ターン目以降の発動では、強化量が+30%になる"
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "クリティカル依存で火力が伸びる味方(クリティカルで攻撃回数や倍率が増えるスキル持ち)と噛み合う。",
+          "reason": "クリ率・クリダメ強化が相手の発動条件を満たしやすくするため"
+        }
+      ]
     },
     {
       "id": "shiloh-s2",
@@ -13793,7 +13993,7 @@
       "majorCategory": "攻撃",
       "subCategory": "9ターン目以降 / バフ数参照",
       "target": "ランダム敵に3-5回",
-      "multiplierText": "物理320%×3 / 最大940%×5",
+      "multiplierText": "物理640%×5 / 最大940%×5",
       "duration": "",
       "ct": 4,
       "condition": "9ターン目以降はバフ数最多の味方のバフ数に応じて倍率上昇",
@@ -13803,20 +14003,35 @@
       "imageUrl": "",
       "sourceUrl": "https://ichigogames.net/mementomori/shiloh/",
       "damage": {
-        "singleMultiplier": 320,
-        "hitCount": 3,
-        "baseTotal": 960,
-        "exclusiveLv1Total": 960,
-        "exclusiveLv2Total": 960,
-        "exclusiveLv3Total": 960,
+        "singleMultiplier": 640,
+        "hitCount": 5,
+        "baseTotal": 3200,
+        "exclusiveLv1Total": 3200,
+        "exclusiveLv2Total": 3200,
+        "exclusiveLv3Total": 3200,
         "conditionMaxTotal": 4700,
-        "conditionMaxNote": "Lv4かつバフ数条件最大で940%×5",
+        "conditionMaxNote": "9ターン目以降のバフ数条件最大で940%×5",
         "powerType": "バフ数参照",
         "maxStacks": null,
         "realityRank": "中",
         "rankingTarget": "条件込み",
         "damageMemo": "最大値は9ターン目以降かつバフ数条件が必要"
-      }
+      },
+      "plainSummary": "9ターン目以降、味方のバフの数だけ火力が跳ね上がる長期戦アタック。",
+      "steps": [
+        {
+          "text": "ランダムな敵に物理640%×5回"
+        },
+        {
+          "text": "9ターン目以降の発動では、バフが最も多い味方のバフ1つにつき+30%(最大940%)"
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "バフを多く積む味方がいるほど倍率が伸びる。",
+          "reason": "倍率参照がバフ個数のため"
+        }
+      ]
     },
     {
       "id": "shiloh-s3",
@@ -13837,7 +14052,19 @@
       "noteUrl": "",
       "imageUrl": "",
       "sourceUrl": "https://ichigogames.net/mementomori/shiloh/",
-      "damage": null
+      "damage": null,
+      "plainSummary": "毎ターン、一番のアタッカーに攻撃バフを配る。",
+      "steps": [
+        {
+          "text": "ターン開始時、攻撃力が最も高い味方の攻撃力を+10%(4ターン)"
+        },
+        {
+          "text": "オートバトル・ボスバトル、または9ターン目以降の発動では+50%"
+        },
+        {
+          "text": "発動後、4回行動が終わるまで再発動しない"
+        }
+      ]
     },
     {
       "id": "shiloh-s4",
@@ -13858,7 +14085,19 @@
       "noteUrl": "",
       "imageUrl": "",
       "sourceUrl": "https://ichigogames.net/mementomori/shiloh/",
-      "damage": null
+      "damage": null,
+      "plainSummary": "自分と味方2人にシロの防御力を分け与え、自分は常時ダメージカット。",
+      "steps": [
+        {
+          "text": "自身の行動開始時、自身と攻撃力が高い味方2体に防御力バフを3つ付与(付与者防御力50%分×3、4ターン。それぞれ別バフ扱い)"
+        },
+        {
+          "text": "バトル開始時、自身の被ダメージを75%減少(解除不可)"
+        },
+        {
+          "text": "防御力バフは発動後、4回行動が終わるまで再発動しない"
+        }
+      ]
     },
     {
       "id": "lily-s1",
@@ -13893,7 +14132,17 @@
         "realityRank": "高",
         "rankingTarget": "対象外",
         "damageMemo": "妨害目的が主"
-      }
+      },
+      "plainSummary": "敵のアタッカーを狙って気絶させにいく妨害弾。",
+      "steps": [
+        {
+          "text": "攻撃力が高い敵2体に魔法160%"
+        },
+        {
+          "text": "70%の確率で気絶を1ターン付与",
+          "term": "気絶"
+        }
+      ]
     },
     {
       "id": "lily-s2",
@@ -13928,7 +14177,25 @@
         "realityRank": "中",
         "rankingTarget": "条件込み",
         "damageMemo": "最大火力は残り香20スタック前提"
-      }
+      },
+      "plainSummary": "手数で押す連撃。残り香が満タンだと化ける。",
+      "steps": [
+        {
+          "text": "攻撃前に被回復量減少を付与(4ターン)"
+        },
+        {
+          "text": "ランダムな敵に魔法160%×6回"
+        },
+        {
+          "text": "残り香20スタック時は倍率・回数が上昇(最大320%×10回)"
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "弱体を多く撒く編成ほどS4の残り香が貯まり、このスキルが伸びる。",
+          "reason": "残り香の付与条件が味方の弱体付与のため"
+        }
+      ]
     },
     {
       "id": "lily-s3",
@@ -13949,7 +14216,16 @@
       "noteUrl": "",
       "imageUrl": "",
       "sourceUrl": "https://ichigogames.net/mementomori/lily/",
-      "damage": null
+      "damage": null,
+      "plainSummary": "開幕からデバフを当てやすくする自己準備。",
+      "steps": [
+        {
+          "text": "バトル開始時、弱体効果命中率を増加(解除不可)"
+        },
+        {
+          "text": "同属性の味方3体以上なら、スピード増加も付与(2ターン)"
+        }
+      ]
     },
     {
       "id": "lily-s4",
@@ -13970,7 +14246,16 @@
       "noteUrl": "",
       "imageUrl": "",
       "sourceUrl": "https://ichigogames.net/mementomori/lily/",
-      "damage": null
+      "damage": null,
+      "plainSummary": "弱体を撒くたび攻撃力が積もるスタックエンジン。",
+      "steps": [
+        {
+          "text": "自身か味方がアクティブスキルで弱体を付与するたび、弱体が付いた敵の数に応じて残り香をスタック"
+        },
+        {
+          "text": "1スタックにつき攻撃力+2%(最大20スタック、解除不可)"
+        }
+      ]
     },
     {
       "id": "illya_gods_curse-s1",
@@ -14005,7 +14290,19 @@
         "realityRank": "中",
         "rankingTarget": "条件込み",
         "damageMemo": "3回目以降かつ未撃破条件込み"
-      }
+      },
+      "plainSummary": "正面を10連撃。使い込むほど3倍に化ける。",
+      "steps": [
+        {
+          "text": "正面の敵に物理140%×10回"
+        },
+        {
+          "text": "このスキルの3回目以降は連撃ダメージ3倍"
+        },
+        {
+          "text": "命中率増加を1ターン付与"
+        }
+      ]
     },
     {
       "id": "illya_gods_curse-s2",
@@ -14040,7 +14337,19 @@
         "realityRank": "中",
         "rankingTarget": "条件込み",
         "damageMemo": "神呪解放と弱体条件が必要"
-      }
+      },
+      "plainSummary": "神呪解放中だけ撃てる解禁アタック。",
+      "steps": [
+        {
+          "text": "自身が神呪解放を付帯している場合に発動"
+        },
+        {
+          "text": "ランダムな敵に物理340%×4回"
+        },
+        {
+          "text": "弱体効果が付いた対象にはダメージ1.5倍(最大440%×5回)"
+        }
+      ]
     },
     {
       "id": "illya_gods_curse-s3",
@@ -14061,7 +14370,16 @@
       "noteUrl": "",
       "imageUrl": "",
       "sourceUrl": "https://ichigogames.net/mementomori/illya_gods_curse/",
-      "damage": null
+      "damage": null,
+      "plainSummary": "序盤は身代わり、条件で反撃モードへ切り替わるスイッチ。",
+      "steps": [
+        {
+          "text": "バトル開始時、献身を付与(被ダメージの20%を肩代わり)"
+        },
+        {
+          "text": "被攻撃回数または味方全滅の条件で献身を解除し、神呪解放へ移行(2〜8ターン)"
+        }
+      ]
     },
     {
       "id": "illya_gods_curse-s4",
@@ -14082,7 +14400,19 @@
       "noteUrl": "",
       "imageUrl": "",
       "sourceUrl": "https://ichigogames.net/mementomori/illya_gods_curse/",
-      "damage": null
+      "damage": null,
+      "plainSummary": "同じ敵からの攻撃を弾き、倒れても一度は立ち上がる守護。",
+      "steps": [
+        {
+          "text": "同一の敵からの2回目以降のダメージを遮断(70%)"
+        },
+        {
+          "text": "致命ダメージ時、HP1で耐えてHPを回復(100%)"
+        },
+        {
+          "text": "多重バリアも付与"
+        }
+      ]
     },
     {
       "id": "elaine-s1",
@@ -14117,7 +14447,16 @@
         "realityRank": "高",
         "rankingTarget": "対象外",
         "damageMemo": "妨害目的が主"
-      }
+      },
+      "plainSummary": "敵のデバフ命中を下げて、味方を状態異常から守る先制妨害。",
+      "steps": [
+        {
+          "text": "ランダムな敵3体に物理220%"
+        },
+        {
+          "text": "70%の確率で弱体効果命中率減少を4ターン付与"
+        }
+      ]
     },
     {
       "id": "elaine-s2",
@@ -14152,7 +14491,22 @@
         "realityRank": "中",
         "rankingTarget": "条件込み",
         "damageMemo": "最大値は霊痕付帯が必要"
-      }
+      },
+      "plainSummary": "霊痕をまとうと化ける本命アタック。",
+      "steps": [
+        {
+          "text": "ランダムな敵2体に物理720%"
+        },
+        {
+          "text": "自身が霊痕を付帯していると倍率・回数が上がる(最大1980%×3回)"
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "霊痕はS3(味方がHP30%以下まで削られたとき)で付くため、まったく被弾しない試合では強化が発動しない。",
+          "reason": "霊痕の付与条件がS3の発動条件のため"
+        }
+      ]
     },
     {
       "id": "elaine-s3",
@@ -14173,7 +14527,16 @@
       "noteUrl": "",
       "imageUrl": "",
       "sourceUrl": "https://ichigogames.net/mementomori/elaine/",
-      "damage": null
+      "damage": null,
+      "plainSummary": "瀕死の味方を自動で治し、霊痕を宿す救護パッシブ。",
+      "steps": [
+        {
+          "text": "味方が攻撃を受け、HP30%以下で生き残り、霊痕を持たない場合に発動"
+        },
+        {
+          "text": "その味方の弱体を解除し、HPを回復(攻撃力100〜400%)し、霊痕を付与(解除不可)"
+        }
+      ]
     },
     {
       "id": "elaine-s4",
@@ -14194,7 +14557,16 @@
       "noteUrl": "",
       "imageUrl": "",
       "sourceUrl": "https://ichigogames.net/mementomori/elaine/",
-      "damage": null
+      "damage": null,
+      "plainSummary": "開幕から自分とエースを硬くする常時の守り。",
+      "steps": [
+        {
+          "text": "バトル開始時、自身と攻撃力が最も高い味方の防御力・魔法防御力を増加(6ターン・解除不可)"
+        },
+        {
+          "text": "自身にはさらに被ダメージ減少を付与"
+        }
+      ]
     },
     {
       "id": "primavera_summer-s1",
@@ -14229,7 +14601,16 @@
         "realityRank": "高",
         "rankingTarget": "条件込み",
         "damageMemo": "専用Lv1で対象数が増える"
-      }
+      },
+      "plainSummary": "自分と味方に金縛りを掛けてから撃つ、変則の自己拘束スキル。",
+      "steps": [
+        {
+          "text": "自身と攻撃力が最も高い味方に金縛りを付与(1ターン。命中率・耐性率を無視して必ず付与)"
+        },
+        {
+          "text": "ランダムな敵3体に物理320%"
+        }
+      ]
     },
     {
       "id": "primavera_summer-s2",
@@ -14264,7 +14645,22 @@
         "realityRank": "中",
         "rankingTarget": "条件込み",
         "damageMemo": "最大値は弱体解除10個以上が必要"
-      }
+      },
+      "plainSummary": "味方が弱体を解除した数だけ連撃が増える。",
+      "steps": [
+        {
+          "text": "ランダムな敵に物理480%×2回"
+        },
+        {
+          "text": "味方側がスキルで解除した弱体効果の合計が10以上で攻撃回数が増加(最大5回)"
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "弱体解除を多く行う味方(解除持ちヒーラー等)と噛み合う。",
+          "reason": "攻撃回数の増加条件が味方側の弱体解除の累計のため"
+        }
+      ]
     },
     {
       "id": "primavera_summer-s3",
@@ -14285,7 +14681,16 @@
       "noteUrl": "",
       "imageUrl": "",
       "sourceUrl": "https://ichigogames.net/mementomori/primavera_summer/",
-      "damage": null
+      "damage": null,
+      "plainSummary": "受けた弱体を力に変える変換器。",
+      "steps": [
+        {
+          "text": "アクティブスキルで弱体を受けたとき、弱体を1つ解除して至高の旋律をスタック(攻撃力増加・最大10スタック・解除不可)"
+        },
+        {
+          "text": "行動阻害を受けた場合は付与スタック数が増える"
+        }
+      ]
     },
     {
       "id": "primavera_summer-s4",
@@ -14306,7 +14711,16 @@
       "noteUrl": "",
       "imageUrl": "",
       "sourceUrl": "https://ichigogames.net/mementomori/primavera_summer/",
-      "damage": null
+      "damage": null,
+      "plainSummary": "常時ダメージカットと開幕の防御バフ。",
+      "steps": [
+        {
+          "text": "自身の被ダメージを減少(解除不可)"
+        },
+        {
+          "text": "バトル開始時、防御力を増加(6ターン)。同属性または天属性の味方数で増加量が上がる"
+        }
+      ]
     },
     {
       "id": "florence_twilight-s1",
@@ -14341,7 +14755,16 @@
         "realityRank": "中",
         "rankingTarget": "条件込み",
         "damageMemo": "7ターン目以降に火力化"
-      }
+      },
+      "plainSummary": "序盤は回復しながら殴り、7ターン目からは回復をやめて火力に全振り。",
+      "steps": [
+        {
+          "text": "HP割合が最も低い味方を回復してから、ランダムな敵に物理520%×2回"
+        },
+        {
+          "text": "7ターン目以降は回復せず、倍率が上昇"
+        }
+      ]
     },
     {
       "id": "florence_twilight-s2",
@@ -14376,7 +14799,25 @@
         "realityRank": "中",
         "rankingTarget": "条件込み",
         "damageMemo": "黄昏の誓いとクリティカルが必要"
-      }
+      },
+      "plainSummary": "黄昏の誓い中だけ撃てる大連撃。",
+      "steps": [
+        {
+          "text": "自身が黄昏の誓いを付帯している場合に発動"
+        },
+        {
+          "text": "ランダムな敵に物理650%×4回"
+        },
+        {
+          "text": "クリティカルごとに攻撃回数が増加(最大1050%×10回)"
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "クリティカル率を上げる支援と噛み合い、逆に自身のクリ率を下げる敵・クリ耐性の高い敵が相手だと伸びにくい。",
+          "reason": "攻撃回数の増加条件がクリティカル発生のため"
+        }
+      ]
     },
     {
       "id": "florence_twilight-s3",
@@ -14397,7 +14838,22 @@
       "noteUrl": "",
       "imageUrl": "",
       "sourceUrl": "https://ichigogames.net/mementomori/florence_twilight/",
-      "damage": null
+      "damage": null,
+      "plainSummary": "回復の回数を積み、7ターン目に黄昏の誓いを解禁するカウンター。",
+      "steps": [
+        {
+          "text": "自身か味方のアクティブスキルがHP回復効果を発動するたびスタック(攻撃力・クリティカル率増加、最大10、解除不可)"
+        },
+        {
+          "text": "7ターン目以降に10スタックなら黄昏の誓いを付与"
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "アクティブスキルで回復を複数回発動する味方(例: コベルの3回連続回復)がいるとスタックが早く貯まる。",
+          "reason": "カウント対象がアクティブスキルによる回復の発動回数のため"
+        }
+      ]
     },
     {
       "id": "florence_twilight-s4",
@@ -14418,7 +14874,19 @@
       "noteUrl": "",
       "imageUrl": "",
       "sourceUrl": "https://ichigogames.net/mementomori/florence_twilight/",
-      "damage": null
+      "damage": null,
+      "plainSummary": "通常攻撃が5体攻撃と回復に変わる常時強化。",
+      "steps": [
+        {
+          "text": "バトル開始時から通常攻撃を強化(ランダムな敵5体に物理390%)"
+        },
+        {
+          "text": "通常攻撃後、HP割合が低い味方3体を回復"
+        },
+        {
+          "text": "回復対象のHP割合が回復前に50%以上なら、その対象の行動阻害をすべて解除"
+        }
+      ]
     }
   ],
   "tags": [

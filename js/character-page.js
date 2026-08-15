@@ -165,6 +165,19 @@
     return items.length ? `<div><h3 class="block-title">検証情報</h3><ul class="verification-list">${items.join("")}</ul></div>` : "";
   }
 
+  function renderSynergyNotes(skill) {
+    if (!Array.isArray(skill.synergyNotes) || skill.synergyNotes.length === 0) return "";
+    const items = skill.synergyNotes
+      .filter((item) => item && item.text)
+      .map((item) => `
+        <li>
+          ${escapeHtml(item.text)}
+          ${item.reason ? `<br><span class="reason">根拠: ${escapeHtml(item.reason)}</span>` : ""}
+        </li>
+      `);
+    return items.length ? `<div><h3 class="block-title">かみ合わせ</h3><ul class="verification-list synergy-list">${items.join("")}</ul></div>` : "";
+  }
+
   function renderWeapon(skill) {
     if (!skill.exclusiveWeapon) return "";
     const parts = String(skill.exclusiveWeapon).split(/(?=専用Lv\d:)/).filter(Boolean);
@@ -193,6 +206,7 @@
         <div class="skill-body">
           ${renderSteps(skill, terms)}
           ${renderDataRows(skill)}
+          ${renderSynergyNotes(skill)}
           ${renderVerifications(skill)}
           ${renderWeapon(skill)}
         </div>
