@@ -531,7 +531,7 @@
       "roleMemo": "多重バリア無効時の追加攻撃と解除不可シールドを持つサポート型ソーサラー",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": ""
+      "sourceUrl": "https://ichigogames.net/mementomori/aa_uniform/"
     },
     {
       "id": "lumika",
@@ -546,7 +546,7 @@
       "roleMemo": "多重バリアを無視する攻撃と再発動単体火力を持つウォーリア",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": ""
+      "sourceUrl": "https://ichigogames.net/mementomori/lumica/"
     },
     {
       "id": "rivelia",
@@ -696,7 +696,7 @@
       "roleMemo": "攻撃力・命中支援、弱体特効、泡沫スタックで戦うソーサラー",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": ""
+      "sourceUrl": "https://ichigogames.net/mementomori/nebra/"
     },
     {
       "id": "carmilla",
@@ -711,7 +711,7 @@
       "roleMemo": "出血、弱体なし特効、脱力付与、被ダメージ減少を持つウォーリア",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": ""
+      "sourceUrl": "https://ichigogames.net/mementomori/carmilla/"
     },
     {
       "id": "cerberus_candy",
@@ -726,7 +726,7 @@
       "roleMemo": "優しい魔法、直接攻撃、回復、命中支援を扱うソーサラー",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": ""
+      "sourceUrl": "https://ichigogames.net/mementomori/cerberus_another/"
     },
     {
       "id": "regina",
@@ -981,7 +981,7 @@
       "roleMemo": "陽炎の灯と高倍率魔法を扱う黄ソーサラー",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/mifuri/"
+      "sourceUrl": "https://ichigogames.net/mementomori/mihri/"
     },
     {
       "id": "moineau",
@@ -1281,7 +1281,7 @@
       "roleMemo": "彩光スタックと紅属性速度支援を持つ紅ウォーリア",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/lucile/"
+      "sourceUrl": "https://ichigogames.net/mementomori/lucille/"
     },
     {
       "id": "flack",
@@ -5798,7 +5798,7 @@
       "compareMemo": "多重バリア相手に追加攻撃が出る。専用Lv1で対象数増加",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "",
+      "sourceUrl": "https://ichigogames.net/mementomori/aa_uniform/",
       "damage": {
         "singleMultiplier": 680,
         "hitCount": 3,
@@ -5812,7 +5812,16 @@
         "realityRank": "中",
         "rankingTarget": "条件込み",
         "damageMemo": "条件MAXは多重バリア無効化前提"
-      }
+      },
+      "plainSummary": "多重バリアで防がれたら、もう一発同じ威力で撃ち直す。",
+      "steps": [
+        {
+          "text": "ランダムな敵3体に魔法680%"
+        },
+        {
+          "text": "多重バリアで無効化された場合、同じ対象に魔法680%の追加攻撃(最大1回)"
+        }
+      ]
     },
     {
       "id": "aa_rusted_sky-s2",
@@ -5832,7 +5841,7 @@
       "compareMemo": "単発高倍率。多重バリア相手には追加攻撃で倍化する",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "",
+      "sourceUrl": "https://ichigogames.net/mementomori/aa_uniform/",
       "damage": {
         "singleMultiplier": 1640,
         "hitCount": 3,
@@ -5846,7 +5855,21 @@
         "realityRank": "中",
         "rankingTarget": "条件込み",
         "damageMemo": "条件MAXは多重バリア無効化前提"
-      }
+      },
+      "plainSummary": "S1の大型版。バリア持ちには実質2連発。",
+      "steps": [
+        {
+          "text": "ランダムな敵3体に魔法1640%"
+        },
+        {
+          "text": "多重バリアで無効化された場合、同じ対象に魔法1640%の追加攻撃(最大1回)"
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "多重バリアで守る敵への対策枠。ルミカ(無視型)とはアプローチ違いの同役割。根拠: 追加攻撃の条件が「多重バリアによる無効化」のため"
+        }
+      ]
     },
     {
       "id": "aa_rusted_sky-s3",
@@ -5857,16 +5880,32 @@
       "category": "シールド",
       "majorCategory": "防御",
       "subCategory": "沈黙無効 / 解除不可シールド",
-      "target": "攻撃力が高い味方3体",
+      "target": "攻撃力が高い味方3体 / 攻撃力最高味方",
       "multiplierText": "沈黙無効1T / 最大HP30%解除不可シールド",
       "duration": "1T",
       "ct": null,
-      "condition": "開始時、攻撃力が高い味方3体に1ターン沈黙無効。1/11/21/31ターン開始時、攻撃力最高の味方へ最大HP30%の解除不可シールドを1ターン付与。自身戦闘不能でも発動",
+      "condition": "開始時、攻撃力が高い味方3体に1ターン沈黙無効。1/11/21/31ターン開始時、攻撃力最高の味方へ最大HP30%の解除不可シールドを1ターン付与。同属性の味方が3体以上ならシールド対象が攻撃力が高い味方3体になる。自身戦闘不能でも発動",
       "exclusiveWeapon": "専用Lv2: シールド量30%→100%",
       "compareMemo": "沈黙無効と解除不可シールドで味方を守る",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": ""
+      "sourceUrl": "https://ichigogames.net/mementomori/aa_uniform/",
+      "plainSummary": "沈黙ガードと、定期的に来る大型シールド。自分が倒れても働く。",
+      "steps": [
+        {
+          "text": "開始時、攻撃力が高い味方3体に沈黙無効を1ターン付与",
+          "term": "沈黙"
+        },
+        {
+          "text": "1・11・21・31ターン開始時、攻撃力が最も高い味方に最大HP30%の解除不可シールドを1ターン付与"
+        },
+        {
+          "text": "味方編成内で同じ属性の味方が3体以上なら、シールド対象が攻撃力が高い味方3体になる"
+        },
+        {
+          "text": "自身が戦闘不能でも発動する"
+        }
+      ]
     },
     {
       "id": "aa_rusted_sky-s4",
@@ -5878,15 +5917,24 @@
       "majorCategory": "防御",
       "subCategory": "ダメージ遮断",
       "target": "自身",
-      "multiplierText": "ダメージ60%遮断 / 4ターン目以降80%",
+      "multiplierText": "ダメージ60%遮断 / 4ターン目終了時まで80%",
       "duration": "",
       "ct": null,
-      "condition": "自身が攻撃を受けたとき、ダメージを60%遮断。さらに4ターン目のターン終了時まで遮断量が80%になる",
+      "condition": "自身が攻撃を受けたとき、ダメージを60%遮断。さらに4ターン目のターン終了時までは遮断量が80%になる",
       "exclusiveWeapon": "専用武器効果なし",
       "compareMemo": "自身の被弾を大きく減らす耐久パッシブ",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": ""
+      "sourceUrl": "https://ichigogames.net/mementomori/aa_uniform/",
+      "plainSummary": "6割遮断、序盤はさらに硬い。",
+      "steps": [
+        {
+          "text": "攻撃を受けたとき、ダメージを60%遮断"
+        },
+        {
+          "text": "4ターン目のターン終了時までは遮断量80%"
+        }
+      ]
     },
     {
       "id": "lumika-s1",
@@ -5898,7 +5946,7 @@
       "majorCategory": "攻撃",
       "subCategory": "多重バリア無視 / 条件倍率",
       "target": "ランダム敵",
-      "multiplierText": "物理580%×3回 / 多重バリア付帯中なら870%",
+      "multiplierText": "物理580%×3回",
       "duration": "",
       "ct": 4,
       "condition": "この攻撃は対象の多重バリアを無視する",
@@ -5906,7 +5954,7 @@
       "compareMemo": "多重バリアを無視でき、対象が多重バリア付帯中なら専用Lv1で倍率が上がる",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "",
+      "sourceUrl": "https://ichigogames.net/mementomori/lumica/",
       "damage": {
         "singleMultiplier": 580,
         "hitCount": 3,
@@ -5920,7 +5968,21 @@
         "realityRank": "中",
         "rankingTarget": "条件込み",
         "damageMemo": "多重バリア付帯中の敵を攻撃する前提"
-      }
+      },
+      "plainSummary": "多重バリアを無視して殴る対策キャラ。",
+      "steps": [
+        {
+          "text": "ランダムな敵に物理580%×3回"
+        },
+        {
+          "text": "この攻撃は対象の多重バリアを無視する"
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "多重バリアで一撃を無効化する敵への対策になる。根拠: 攻撃が「多重バリアを無視」する仕様のため"
+        }
+      ]
     },
     {
       "id": "lumika-s2",
@@ -5932,7 +5994,7 @@
       "majorCategory": "攻撃",
       "subCategory": "単体高火力 / 再発動",
       "target": "ランダム敵1体",
-      "multiplierText": "物理1240% / 専用Lv3で1360%",
+      "multiplierText": "物理1240%",
       "duration": "",
       "ct": 4,
       "condition": "敵を戦闘不能にできなかった場合、このスキルを再発動。再発動は3回まで",
@@ -5940,7 +6002,7 @@
       "compareMemo": "倒し切れない場合に最大3回まで再発動する単体火力",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "",
+      "sourceUrl": "https://ichigogames.net/mementomori/lumica/",
       "damage": {
         "singleMultiplier": 1240,
         "hitCount": 1,
@@ -5954,7 +6016,16 @@
         "realityRank": "低",
         "rankingTarget": "条件込み",
         "damageMemo": "再発動3回は敵を戦闘不能にできないことが条件"
-      }
+      },
+      "plainSummary": "倒すまで最大4回撃ち直す単体処刑砲。",
+      "steps": [
+        {
+          "text": "ランダムな敵1体に物理1240%"
+        },
+        {
+          "text": "敵を戦闘不能にできなかった場合、再発動(最大3回)"
+        }
+      ]
     },
     {
       "id": "lumika-s3",
@@ -5969,12 +6040,18 @@
       "multiplierText": "攻撃力+30% / スキルCT1減少",
       "duration": "1T",
       "ct": null,
-      "condition": "毎ターン終了時、このターン中に自身の攻撃で対象を戦闘不能にした場合に発動。攻撃力増加は解除不可",
+      "condition": "毎ターン終了時、このターン中に自身の攻撃で対象を戦闘不能にした場合に発動。1ターン攻撃力増加。さらに自身のスキルCT-1。攻撃力増加は解除不可",
       "exclusiveWeapon": "専用武器効果なし",
       "compareMemo": "撃破できる展開で次ターンの火力とスキル回転が上がる",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": ""
+      "sourceUrl": "https://ichigogames.net/mementomori/lumica/",
+      "plainSummary": "撃破するたび強く・速くなる。",
+      "steps": [
+        {
+          "text": "毎ターン終了時、そのターン中に自身の攻撃で敵を戦闘不能にしていた場合、攻撃力+30%(1ターン、解除不可)・スキルCTを1減少"
+        }
+      ]
     },
     {
       "id": "lumika-s4",
@@ -5994,7 +6071,13 @@
       "compareMemo": "開幕2ターンの自己強化。専用Lv2で天属性編成時に味方支援へ広がる",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": ""
+      "sourceUrl": "https://ichigogames.net/mementomori/lumica/",
+      "plainSummary": "開幕2ターンの自己ブースト。",
+      "steps": [
+        {
+          "text": "バトル開始時、自身の攻撃力・命中率・スピードを30%増加(2ターン、解除不可)"
+        }
+      ]
     },
     {
       "id": "rivelia-s1",
@@ -7028,7 +7111,7 @@
       "majorCategory": "攻撃",
       "subCategory": "攻撃支援 / 命中支援",
       "target": "攻撃力が最も高い味方 / ランダム敵3体",
-      "multiplierText": "魔法560% / 専用Lv3で620%",
+      "multiplierText": "魔法560%",
       "duration": "4T",
       "ct": 4,
       "condition": "4ターン攻撃力が最も高い味方の攻撃力20%増加、命中率20%増加。これらは一つのバフとして扱う。ランダム敵3体に魔法560%",
@@ -7036,7 +7119,7 @@
       "compareMemo": "攻撃力・命中支援と複数攻撃を兼ねる",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "",
+      "sourceUrl": "https://ichigogames.net/mementomori/nebra/",
       "damage": {
         "singleMultiplier": 560,
         "hitCount": 3,
@@ -7050,7 +7133,16 @@
         "realityRank": "高",
         "rankingTarget": "基本",
         "damageMemo": "バフ効果は別評価"
-      }
+      },
+      "plainSummary": "エースに攻撃・命中バフを配ってから撃つ。",
+      "steps": [
+        {
+          "text": "攻撃力が最も高い味方の攻撃力+20%・命中率+20%(4ターン、両者で1つのバフ扱い、解除不可)"
+        },
+        {
+          "text": "ランダムな敵3体に魔法560%"
+        }
+      ]
     },
     {
       "id": "nebra-s2",
@@ -7070,7 +7162,7 @@
       "compareMemo": "弱体効果中の敵に火力が伸びる",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "",
+      "sourceUrl": "https://ichigogames.net/mementomori/nebra/",
       "damage": {
         "singleMultiplier": 760,
         "hitCount": 3,
@@ -7084,7 +7176,21 @@
         "realityRank": "中",
         "rankingTarget": "条件込み",
         "damageMemo": "弱体付与前提"
-      }
+      },
+      "plainSummary": "弱体持ちの敵に1.5倍で刺さる魔法。",
+      "steps": [
+        {
+          "text": "ランダムな敵3体に魔法760%"
+        },
+        {
+          "text": "攻撃前、対象が弱体効果中なら魔法1140%"
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "弱体を撒く味方と好相性。カーミラS2とは条件が正反対なので同居させると噛み合わない。根拠: 条件が「弱体効果中」のため"
+        }
+      ]
     },
     {
       "id": "nebra-s3",
@@ -7104,7 +7210,20 @@
       "compareMemo": "序盤限定の妨害スタック",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": ""
+      "sourceUrl": "https://ichigogames.net/mementomori/nebra/",
+      "plainSummary": "殴られるたび相手に「泡沫」を返し、満タンで気絶させる。",
+      "steps": [
+        {
+          "text": "敵の攻撃で戦闘不能にならなかった場合、攻撃者に泡沫を1スタック付与(2ターン、1スタックにつき防御貫通10%減少、最大5)"
+        },
+        {
+          "text": "泡沫5スタックで解除して気絶を1ターン付与",
+          "term": "気絶"
+        },
+        {
+          "text": "3ターン目以降は発動しない"
+        }
+      ]
     },
     {
       "id": "nebra-s4",
@@ -7116,7 +7235,7 @@
       "majorCategory": "防御",
       "subCategory": "被ダメージ減少",
       "target": "自身",
-      "multiplierText": "被ダメージ75%減少 / 専用Lv2で7ターン目から50%",
+      "multiplierText": "被ダメージ75%減少",
       "duration": "6T / 解除不可",
       "ct": null,
       "condition": "バトル開始時、6ターン自身の被ダメージ75%減少。被ダメージ減少は解除不可",
@@ -7124,7 +7243,13 @@
       "compareMemo": "序盤耐久が非常に高い",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": ""
+      "sourceUrl": "https://ichigogames.net/mementomori/nebra/",
+      "plainSummary": "序盤6ターンの75%カット。",
+      "steps": [
+        {
+          "text": "バトル開始時、被ダメージ75%減少(6ターン、解除不可)"
+        }
+      ]
     },
     {
       "id": "carmilla-s1",
@@ -7144,7 +7269,7 @@
       "compareMemo": "出血付与が主価値。継続ダメージは別枠",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "",
+      "sourceUrl": "https://ichigogames.net/mementomori/carmilla/",
       "damage": {
         "singleMultiplier": 420,
         "hitCount": 5,
@@ -7158,7 +7283,17 @@
         "realityRank": "高",
         "rankingTarget": "基本",
         "damageMemo": "出血は継続ダメージとして別評価"
-      }
+      },
+      "plainSummary": "5体に噛みついて出血させる起点スキル。",
+      "steps": [
+        {
+          "text": "ランダムな敵5体に物理420%"
+        },
+        {
+          "text": "対象に出血を2ターン付与(毎ターン行動開始時、自身の攻撃力20%のダメージ)",
+          "term": "出血"
+        }
+      ]
     },
     {
       "id": "carmilla-s2",
@@ -7170,7 +7305,7 @@
       "majorCategory": "攻撃",
       "subCategory": "弱体なし特効",
       "target": "HP割合が低い敵3体",
-      "multiplierText": "物理570% / 弱体なし1710% / 専用Lv3で630%・1890%",
+      "multiplierText": "物理570% / 弱体なし1710%",
       "duration": "",
       "ct": 4,
       "condition": "対象が弱体効果を付帯していない場合、物理1710%",
@@ -7178,7 +7313,7 @@
       "compareMemo": "弱体なし対象に高倍率。弱体付与編成とは噛み合いに注意",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "",
+      "sourceUrl": "https://ichigogames.net/mementomori/carmilla/",
       "damage": {
         "singleMultiplier": 570,
         "hitCount": 3,
@@ -7192,7 +7327,21 @@
         "realityRank": "中",
         "rankingTarget": "条件込み",
         "damageMemo": "対象が弱体効果を付帯していないことが条件"
-      }
+      },
+      "plainSummary": "弱体が「付いていない」敵にこそ刺さる3倍砲。",
+      "steps": [
+        {
+          "text": "HP割合が低い敵3体に物理570%"
+        },
+        {
+          "text": "対象が弱体効果を付帯していない場合は物理1710%"
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "弱体を撒かない編成でも火力が出る逆条件型。自分のS1の出血が付いた敵には②が乗らない点に注意。根拠: 条件が「弱体効果を付帯していない場合」のため"
+        }
+      ]
     },
     {
       "id": "carmilla-s3",
@@ -7203,8 +7352,8 @@
       "category": "妨害",
       "majorCategory": "敵弱体",
       "subCategory": "物魔防御貫通減少 / 気絶 / 脱力",
-      "target": "スピードが最も高い敵 / 攻撃力が高い敵3体",
-      "multiplierText": "物魔防御貫通50%減少 / 気絶1T / 脱力4T",
+      "target": "スピードが最も高い敵",
+      "multiplierText": "物魔防御貫通50%減少 / 気絶1T",
       "duration": "1T / 4T",
       "ct": null,
       "condition": "4ターン目までの毎ターン開始時に発動。1ターン、スピードが最も高い敵の物魔防御貫通50%減少。対象HP割合10%以下の場合、1ターン気絶を付与",
@@ -7212,7 +7361,17 @@
       "compareMemo": "序盤限定の妨害。専用Lv2で脱力付与が追加",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": ""
+      "sourceUrl": "https://ichigogames.net/mementomori/carmilla/",
+      "plainSummary": "序盤4ターン、最速の敵の貫通を削り続ける。",
+      "steps": [
+        {
+          "text": "4ターン目までの毎ターン開始時、スピードが最も高い敵の物理・魔法防御貫通を50%減少(1ターン)"
+        },
+        {
+          "text": "対象のHP割合が10%以下なら気絶を1ターン付与",
+          "term": "気絶"
+        }
+      ]
     },
     {
       "id": "carmilla-s4",
@@ -7232,7 +7391,13 @@
       "compareMemo": "高い自己耐久を持つ",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": ""
+      "sourceUrl": "https://ichigogames.net/mementomori/carmilla/",
+      "plainSummary": "常時75%カットの硬さ。",
+      "steps": [
+        {
+          "text": "自身の被ダメージを75%減少(解除不可)"
+        }
+      ]
     },
     {
       "id": "cerberus_candy-s1",
@@ -7244,7 +7409,7 @@
       "majorCategory": "攻撃",
       "subCategory": "優しい魔法条件 / 攻撃回数増加",
       "target": "ランダム敵",
-      "multiplierText": "魔法340%×6回 / 優しい魔法時510% / 専用Lv1で10回",
+      "multiplierText": "魔法340%×6回 / 優しい魔法時510%",
       "duration": "",
       "ct": 4,
       "condition": "自身が優しい魔法を付帯している場合、魔法510%",
@@ -7252,7 +7417,7 @@
       "compareMemo": "優しい魔法付帯時に倍率上昇し、専用Lv1で攻撃回数も増える",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "",
+      "sourceUrl": "https://ichigogames.net/mementomori/cerberus_another/",
       "damage": {
         "singleMultiplier": 340,
         "hitCount": 6,
@@ -7266,7 +7431,16 @@
         "realityRank": "中",
         "rankingTarget": "条件込み",
         "damageMemo": "優しい魔法付帯が条件"
-      }
+      },
+      "plainSummary": "「優しい魔法」中は1.5倍になる6連撃。",
+      "steps": [
+        {
+          "text": "ランダムな敵に魔法340%×6回"
+        },
+        {
+          "text": "自身が「優しい魔法」を付帯している場合は魔法510%"
+        }
+      ]
     },
     {
       "id": "cerberus_candy-s2",
@@ -7286,7 +7460,7 @@
       "compareMemo": "多重バリア対策の直接攻撃を持つ",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "",
+      "sourceUrl": "https://ichigogames.net/mementomori/cerberus_another/",
       "damage": {
         "singleMultiplier": 1320,
         "hitCount": 3,
@@ -7300,7 +7474,21 @@
         "realityRank": "中",
         "rankingTarget": "条件込み",
         "damageMemo": "直接攻撃は無効化ダメージ参照のため通常倍率に混ぜない"
-      }
+      },
+      "plainSummary": "高倍率魔法と、多重バリアで防いだ敵への貫通おかわり。",
+      "steps": [
+        {
+          "text": "ランダムな敵3体に魔法1320%(優しい魔法中は1980%)"
+        },
+        {
+          "text": "攻撃後、このターン中に多重バリアでダメージを無効化した敵へ、無効化した分の20%の直接攻撃(多重バリアを無視、クリティカルしない)"
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "多重バリアで守る敵に対して、無効化を逆用してダメージを通せる。根拠: ②の発動条件が「多重バリアによる無効化」のため"
+        }
+      ]
     },
     {
       "id": "cerberus_candy-s3",
@@ -7320,7 +7508,19 @@
       "compareMemo": "HP1耐えと回復で立て直す耐久パッシブ",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": ""
+      "sourceUrl": "https://ichigogames.net/mementomori/cerberus_another/",
+      "plainSummary": "一度だけ死を免れ、回復して「優しい魔法」モードに入る。",
+      "steps": [
+        {
+          "text": "致命的ダメージを受けたときHP1で耐える(バトル中1回)"
+        },
+        {
+          "text": "回復前に弱体効果を1つ解除し、最大HP50%回復"
+        },
+        {
+          "text": "自身に優しい魔法を4ターン付与(効果中は被ダメージ30%遮断、解除後も20%遮断)"
+        }
+      ]
     },
     {
       "id": "cerberus_candy-s4",
@@ -7340,7 +7540,16 @@
       "compareMemo": "自身の命中と隣接味方を支援する",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": ""
+      "sourceUrl": "https://ichigogames.net/mementomori/cerberus_another/",
+      "plainSummary": "自分の命中保証と、隣2人の底上げ。",
+      "steps": [
+        {
+          "text": "バトル開始時、自身の命中率+40%(解除不可)"
+        },
+        {
+          "text": "隣接する味方2体の攻撃力+10%・スピード+10%(解除不可)"
+        }
+      ]
     },
     {
       "id": "regina-s1",
@@ -9173,12 +9382,12 @@
       "multiplierText": "最大HP10%シールド / 魔法410%",
       "duration": "",
       "ct": 4,
-      "condition": "3回目以降はシールドなし、魔法攻撃が1640%。黄属性対象ならシールドが自身の攻撃力100%分増加",
+      "condition": "味方全体に4ターン、最大HP10%のシールド。黄属性対象ならシールド量に自身の攻撃力100%分を加算。3回目以降はシールドなし、魔法1640%",
       "exclusiveWeapon": "専用Lv1: シールド最大HP30%、黄属性シールド攻撃力400%",
       "compareMemo": "攻撃力+18% / 防御力+5% / クリティカル耐性+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/mifuri/",
+      "sourceUrl": "https://ichigogames.net/mementomori/mihri/",
       "damage": {
         "singleMultiplier": 410,
         "hitCount": 4,
@@ -9193,7 +9402,19 @@
         "realityRank": "中",
         "rankingTarget": "基本",
         "damageMemo": "詳細条件はconditionを参照"
-      }
+      },
+      "plainSummary": "全員にシールドを配ってから撃つ。3回目からはシールドをやめて4倍砲に。",
+      "steps": [
+        {
+          "text": "味方全体に最大HP10%のシールドを4ターン付与(黄属性の対象には自身の攻撃力100%分を上乗せ)"
+        },
+        {
+          "text": "ランダムな敵4体に魔法410%"
+        },
+        {
+          "text": "このスキルの3回目以降はシールドなし、魔法1640%"
+        }
+      ]
     },
     {
       "id": "mifuri-s2",
@@ -9213,7 +9434,7 @@
       "compareMemo": "攻撃力+18% / 防御力+5% / クリティカル耐性+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/mifuri/",
+      "sourceUrl": "https://ichigogames.net/mementomori/mihri/",
       "damage": {
         "singleMultiplier": 260,
         "hitCount": 4,
@@ -9228,7 +9449,16 @@
         "realityRank": "中",
         "rankingTarget": "基本",
         "damageMemo": "詳細条件はconditionを参照"
-      }
+      },
+      "plainSummary": "使い込むと4倍になる連撃。撃つたび自分が軽くなる。",
+      "steps": [
+        {
+          "text": "ランダムな敵に魔法260%×4回(このスキルの3回目以降は1040%)"
+        },
+        {
+          "text": "最後の攻撃後、自身に「軽快」を付与"
+        }
+      ]
     },
     {
       "id": "mifuri-s3",
@@ -9243,12 +9473,24 @@
       "multiplierText": "陽炎の灯スタック",
       "duration": "条件参照",
       "ct": null,
-      "condition": "行動開始時に陽炎の灯を1スタック付与。1スタックにつき攻撃力5%増加。バフ4つ以上で付与数2、対象が自身以外の攻撃力最高味方になる",
+      "condition": "行動開始時に自身に陽炎の灯を1スタック付与。バフを4つ以上付帯している味方がいる場合は付与数2。対象は自身と自身以外の攻撃力最高味方",
       "exclusiveWeapon": "専用武器効果なし",
       "compareMemo": "攻撃力+18% / 防御力+5% / クリティカル耐性+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/mifuri/"
+      "sourceUrl": "https://ichigogames.net/mementomori/mihri/",
+      "plainSummary": "毎ターン「陽炎の灯」が積もり、育つとエースにも配り始める。",
+      "steps": [
+        {
+          "text": "行動開始時、陽炎の灯を1スタック付与(1スタックにつき攻撃力+5%、最大15スタック)"
+        },
+        {
+          "text": "バフを4つ以上付帯している味方がいる場合、付与数が2になる"
+        },
+        {
+          "text": "対象は自身と、自身以外で攻撃力が最も高い味方"
+        }
+      ]
     },
     {
       "id": "mifuri-s4",
@@ -9268,7 +9510,13 @@
       "compareMemo": "攻撃力+18% / 防御力+5% / クリティカル耐性+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/mifuri/"
+      "sourceUrl": "https://ichigogames.net/mementomori/mihri/",
+      "plainSummary": "常時の被ダメージカットとクリダメ緩和。",
+      "steps": [
+        {
+          "text": "自身の被ダメージを20%減少、物理クリダメ緩和+30%(解除不可)"
+        }
+      ]
     },
     {
       "id": "moineau-s1",
@@ -9303,7 +9551,20 @@
         "realityRank": "中",
         "rankingTarget": "基本",
         "damageMemo": "詳細条件はconditionを参照"
-      }
+      },
+      "plainSummary": "脱力と防御ダウンを重ねて敵の攻守を削る。",
+      "steps": [
+        {
+          "text": "攻撃前、対象の物理防御力を25%減少"
+        },
+        {
+          "text": "ランダムな敵3体に物理540%"
+        },
+        {
+          "text": "脱力を4ターン付与(攻撃力40%減少)",
+          "term": "脱力"
+        }
+      ]
     },
     {
       "id": "moineau-s2",
@@ -9338,7 +9599,16 @@
         "realityRank": "中",
         "rankingTarget": "基本",
         "damageMemo": "詳細条件はconditionを参照"
-      }
+      },
+      "plainSummary": "3回目から2倍になる遅延付き砲撃。",
+      "steps": [
+        {
+          "text": "ランダムな敵3体に物理980%(このスキルの3回目以降は1960%)"
+        },
+        {
+          "text": "70%の確率で遅延を1ターン付与"
+        }
+      ]
     },
     {
       "id": "moineau-s3",
@@ -9358,7 +9628,21 @@
       "compareMemo": "攻撃力+18% / 弱体効果耐性+10% / 弱体効果命中+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/moineau/"
+      "sourceUrl": "https://ichigogames.net/mementomori/moineau/",
+      "plainSummary": "一番バフを持っている味方から、バフを丸ごとコピーする。",
+      "steps": [
+        {
+          "text": "行動開始時、自身以外でバフ数が最も多い味方からバフを全コピー"
+        },
+        {
+          "text": "発動後4回行動まで再発動しない"
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "バフを大量に積む味方がいるほどコピーの価値が上がる。根拠: コピー対象が「バフ数が最も多い味方」のため"
+        }
+      ]
     },
     {
       "id": "moineau-s4",
@@ -9378,7 +9662,13 @@
       "compareMemo": "攻撃力+18% / 弱体効果耐性+10% / 弱体効果命中+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/moineau/"
+      "sourceUrl": "https://ichigogames.net/mementomori/moineau/",
+      "plainSummary": "開幕から10ターン持つ大きめの自己シールド。",
+      "steps": [
+        {
+          "text": "1ターン目開始時、自身に攻撃力800%のシールドを10ターン付与(解除不可)"
+        }
+      ]
     },
     {
       "id": "fenrir_treasure-s1",
@@ -11483,7 +11773,7 @@
       "compareMemo": "攻撃力+18% / クリティカル+10% / HP+22%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/lucile/",
+      "sourceUrl": "https://ichigogames.net/mementomori/lucille/",
       "damage": {
         "singleMultiplier": 330,
         "hitCount": 3,
@@ -11498,7 +11788,19 @@
         "realityRank": "中",
         "rankingTarget": "基本",
         "damageMemo": "画像カードからの暫定入力"
-      }
+      },
+      "plainSummary": "自傷してから撃つ。敵の弱体が多いほど倍率が段階上昇。",
+      "steps": [
+        {
+          "text": "自身に現在HP20%の自傷ダメージ"
+        },
+        {
+          "text": "ランダムな敵に物理330%×3回"
+        },
+        {
+          "text": "対象が弱体効果中なら530%、弱体2個以上なら730%"
+        }
+      ]
     },
     {
       "id": "lucile-s2",
@@ -11510,7 +11812,7 @@
       "majorCategory": "攻撃",
       "subCategory": "自傷 / CT短縮",
       "target": "ランダム敵",
-      "multiplierText": "物理520%×5回 / 専用Lv3 580%",
+      "multiplierText": "物理520%×5回",
       "duration": "",
       "ct": 4,
       "condition": "自身に現在HP20%の自傷。最後の攻撃後、彩光5スタックの敵がいる場合、攻撃力最高味方のスキルCT-2。バトル中1回",
@@ -11518,7 +11820,7 @@
       "compareMemo": "攻撃力+18% / クリティカル+10% / HP+22%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/lucile/",
+      "sourceUrl": "https://ichigogames.net/mementomori/lucille/",
       "damage": {
         "singleMultiplier": 520,
         "hitCount": 5,
@@ -11533,7 +11835,19 @@
         "realityRank": "中",
         "rankingTarget": "基本",
         "damageMemo": "画像カードからの暫定入力"
-      }
+      },
+      "plainSummary": "5連撃。「彩光」が満タンの敵がいればエースのCTを縮める。",
+      "steps": [
+        {
+          "text": "自身に現在HP20%の自傷ダメージ"
+        },
+        {
+          "text": "ランダムな敵に物理520%×5回"
+        },
+        {
+          "text": "最後の攻撃後、彩光5スタックの敵がいれば攻撃力が最も高い味方のスキルCTを2減少(バトル中1回)"
+        }
+      ]
     },
     {
       "id": "lucile-s3",
@@ -11553,7 +11867,16 @@
       "compareMemo": "攻撃力+18% / クリティカル+10% / HP+22%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/lucile/"
+      "sourceUrl": "https://ichigogames.net/mementomori/lucille/",
+      "plainSummary": "全員にルシールの攻撃力を分配し、紅は速くもなる。",
+      "steps": [
+        {
+          "text": "バトル開始時、味方全体の攻撃力を自身の攻撃力25%分増加(解除不可)"
+        },
+        {
+          "text": "紅属性の味方はスピード+5%も付与"
+        }
+      ]
     },
     {
       "id": "lucile-s4",
@@ -11573,7 +11896,18 @@
       "compareMemo": "攻撃力+18% / クリティカル+10% / HP+22%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/lucile/"
+      "sourceUrl": "https://ichigogames.net/mementomori/lucille/",
+      "plainSummary": "味方の自傷が、敵全体の被ダメージ増加に変わる。",
+      "steps": [
+        {
+          "text": "自身か味方が自傷ダメージを受けるたび、ランダムな敵5体に彩光を1スタック付与(2ターン、1スタックにつき被ダメージ+2%、最大5スタック)"
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "自傷持ちと組むほど彩光が回り、S2のCT短縮条件にもつながる。紅の自傷パの中核設計。根拠: 付与条件が「自身か味方の自傷」のため"
+        }
+      ]
     },
     {
       "id": "flack-s1",
@@ -11584,11 +11918,11 @@
       "category": "火力",
       "majorCategory": "攻撃",
       "subCategory": "回避低下 / 紅属性条件",
-      "target": "ランダム敵",
-      "multiplierText": "物理740%×3回 / 専用Lv3 790%",
+      "target": "ランダム敵3体",
+      "multiplierText": "物理740%",
       "duration": "回避率・被回復量減少1T",
       "ct": 4,
-      "condition": "自身に現在HP20%の自傷。攻撃前に回避率・被回復量20%減少。自身以外の紅属性味方1体以上なら減少量50%",
+      "condition": "自身に現在HP20%の自傷。攻撃前に1ターン、対象の回避率・被回復量20%減少。自身以外の紅属性味方1体以上なら減少量50%",
       "exclusiveWeapon": "専用Lv1: 対象5体。専用Lv2: 減少ターン4T。専用Lv3: 790%",
       "compareMemo": "攻撃力+18% / 弱体効果命中+10% / クリティカル+10%",
       "noteUrl": "",
@@ -11598,17 +11932,29 @@
         "singleMultiplier": 740,
         "hitCount": 3,
         "baseTotal": 2220,
-        "exclusiveLv1Total": 2220,
-        "exclusiveLv2Total": 2220,
-        "exclusiveLv3Total": 2220,
+        "exclusiveLv1Total": 3700,
+        "exclusiveLv2Total": 3700,
+        "exclusiveLv3Total": 3950,
         "conditionMaxTotal": 3950,
-        "conditionMaxNote": "専用Lv1で5体、専用Lv3で790%",
+        "conditionMaxNote": "専用Lv1で5体、専用Lv3で790%×5体",
         "powerType": "画像カード準拠",
         "maxStacks": null,
         "realityRank": "中",
         "rankingTarget": "基本",
         "damageMemo": "画像カードからの暫定入力"
-      }
+      },
+      "plainSummary": "自傷してから、敵の回避と回復を封じつつ3体を撃つ。",
+      "steps": [
+        {
+          "text": "自身に現在HP20%の自傷ダメージ"
+        },
+        {
+          "text": "攻撃前、対象の回避率・被回復量を1ターン20%減少(自身以外の紅属性味方が1体以上なら50%)"
+        },
+        {
+          "text": "ランダムな敵3体に物理740%"
+        }
+      ]
     },
     {
       "id": "flack-s2",
@@ -11643,7 +11989,16 @@
         "realityRank": "中",
         "rankingTarget": "基本",
         "damageMemo": "画像カードからの暫定入力"
-      }
+      },
+      "plainSummary": "「笑顔の才能」中は2倍になる5連撃。",
+      "steps": [
+        {
+          "text": "自身に現在HP20%の自傷ダメージ"
+        },
+        {
+          "text": "ランダムな敵に物理560%×5回(自身が笑顔の才能を付帯中なら1120%)"
+        }
+      ]
     },
     {
       "id": "flack-s3",
@@ -11663,7 +12018,24 @@
       "compareMemo": "攻撃力+18% / 弱体効果命中+10% / クリティカル+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/flack/"
+      "sourceUrl": "https://ichigogames.net/mementomori/flack/",
+      "plainSummary": "開幕と、場が弱体だらけのときに「笑顔の才能」が点く。",
+      "steps": [
+        {
+          "text": "バトル開始時、自身に笑顔の才能を1ターン付与"
+        },
+        {
+          "text": "2ターン目以降、毎ターン開始時に弱体を持つ敵が3体以上なら再付与"
+        },
+        {
+          "text": "自身のスピード+30%(解除不可)"
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "弱体を広く撒く味方がいるほど②の再付与が安定し、S2の2倍条件が維持できる。根拠: 再付与条件が「弱体を持つ敵の数」のため"
+        }
+      ]
     },
     {
       "id": "flack-s4",
@@ -11683,7 +12055,13 @@
       "compareMemo": "攻撃力+18% / 弱体効果命中+10% / クリティカル+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/flack/"
+      "sourceUrl": "https://ichigogames.net/mementomori/flack/",
+      "plainSummary": "開幕、自分とエース2人に攻撃と弱体命中のバフ。",
+      "steps": [
+        {
+          "text": "1ターン目の自身の行動開始時、自身と攻撃力が高い味方2体の攻撃力+30%・弱体効果命中率+30%(2ターン、解除不可)"
+        }
+      ]
     },
     {
       "id": "liebe-s1",
@@ -11695,7 +12073,7 @@
       "majorCategory": "攻撃",
       "subCategory": "防御低下 / 気絶",
       "target": "ランダム敵",
-      "multiplierText": "物理210%×5回 / 専用Lv3 390%",
+      "multiplierText": "物理210%×5回",
       "duration": "防御・物防-10% 2T / 気絶1T",
       "ct": 4,
       "condition": "自身に現在HP20%の自傷。攻撃前に防御と物防を10%減少。その後70%で攻撃力最高敵を気絶",
@@ -11718,7 +12096,23 @@
         "realityRank": "中",
         "rankingTarget": "基本",
         "damageMemo": "画像カードからの暫定入力"
-      }
+      },
+      "plainSummary": "自傷してから、防御を剥がして5連撃し、エースを気絶させにいく。",
+      "steps": [
+        {
+          "text": "自身に現在HP20%の自傷ダメージ"
+        },
+        {
+          "text": "攻撃前、対象の防御力・物理防御力を10%減少(2ターン)"
+        },
+        {
+          "text": "ランダムな敵に物理210%×5回"
+        },
+        {
+          "text": "70%の確率で攻撃力が最も高い敵に気絶を1ターン付与",
+          "term": "気絶"
+        }
+      ]
     },
     {
       "id": "liebe-s2",
@@ -11753,7 +12147,24 @@
         "realityRank": "中",
         "rankingTarget": "基本",
         "damageMemo": "画像カードからの暫定入力"
-      }
+      },
+      "plainSummary": "敵の弱体が多いほど痛くなる5連撃。",
+      "steps": [
+        {
+          "text": "自身に現在HP20%の自傷ダメージ"
+        },
+        {
+          "text": "ランダムな敵に物理320%×5回"
+        },
+        {
+          "text": "対象の弱体効果1つにつきダメージ+140%(上限1020%)"
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "弱体を多く撒く味方がいるほど③が伸びる。根拠: 倍率の参照が「対象の弱体効果の数」のため"
+        }
+      ]
     },
     {
       "id": "liebe-s3",
@@ -11773,7 +12184,16 @@
       "compareMemo": "攻撃力+18% / 弱体効果命中+10% / 命中+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/liebe/"
+      "sourceUrl": "https://ichigogames.net/mementomori/liebe/",
+      "plainSummary": "弱体持ちの敵の数だけ、自分とエースが強くなる。",
+      "steps": [
+        {
+          "text": "行動開始時、自身と攻撃力が最も高い味方の攻撃力を+10%(1ターン)"
+        },
+        {
+          "text": "弱体効果を持つ敵1体につきさらに+10%(最大60%)"
+        }
+      ]
     },
     {
       "id": "liebe-s4",
@@ -11793,7 +12213,21 @@
       "compareMemo": "攻撃力+18% / 弱体効果命中+10% / 命中+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/liebe/"
+      "sourceUrl": "https://ichigogames.net/mementomori/liebe/",
+      "plainSummary": "味方の自傷が全員の火力に変わる。",
+      "steps": [
+        {
+          "text": "自身か味方が自傷ダメージを受けるたび、味方全体に攻撃力+5%を1スタック付与(解除不可、最大5スタック)"
+        },
+        {
+          "text": "バトル開始時、自身に多重バリア1層"
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "自傷スキル持ちと組むほど①が加速し、リーベ自身のS1・S2の自傷も供給源になる。根拠: カウント対象が「自身か味方の自傷回数」のため"
+        }
+      ]
     },
     {
       "id": "aishe-s1",
