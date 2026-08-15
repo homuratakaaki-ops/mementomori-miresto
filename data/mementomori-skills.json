@@ -1086,7 +1086,7 @@
       "roleMemo": "クリティカルで攻撃力を伸ばす紅ウォーリア",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/lean/"
+      "sourceUrl": "https://ichigogames.net/mementomori/rean/"
     },
     {
       "id": "dian",
@@ -12626,7 +12626,16 @@
         "realityRank": "中",
         "rankingTarget": "基本",
         "damageMemo": "画像カードからの暫定入力"
-      }
+      },
+      "plainSummary": "弱った敵を仕留めると残り全員へ薙ぎ払いが走る。",
+      "steps": [
+        {
+          "text": "HP割合が最も低い敵に物理350%×3回"
+        },
+        {
+          "text": "このターン中に自身が敵を戦闘不能にしていた場合、残りの敵4体へ物理350%"
+        }
+      ]
     },
     {
       "id": "amour-s2",
@@ -12661,7 +12670,19 @@
         "realityRank": "中",
         "rankingTarget": "基本",
         "damageMemo": "画像カードからの暫定入力"
-      }
+      },
+      "plainSummary": "不治を撒いてから、受けと反撃の構えに入る。",
+      "steps": [
+        {
+          "text": "ランダムな敵4体に物理510%"
+        },
+        {
+          "text": "不治を3ターン付与"
+        },
+        {
+          "text": "攻撃後、自身の被ダメージを50%減少し、カウンタを100%増加(2ターン)"
+        }
+      ]
     },
     {
       "id": "amour-s3",
@@ -12681,7 +12702,25 @@
       "compareMemo": "攻撃力+18% / 弱体効果命中+10% / 回避+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/amour/"
+      "sourceUrl": "https://ichigogames.net/mementomori/amour/",
+      "plainSummary": "一度だけ復活し、溜め込んだ被ダメージを撃ち返す。",
+      "steps": [
+        {
+          "text": "戦闘不能時、最大HP30%で復活(バトル中1回)"
+        },
+        {
+          "text": "正面の敵と隣接する敵1体へ、過去20ターンの総被ダメージ15%の直接攻撃"
+        },
+        {
+          "text": "この直接攻撃は必ず命中する"
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "被ダメ蓄積参照はフィアーS2と同族。受けの多い試合ほど復活時の反撃が伸びる。",
+          "reason": "ダメージ参照が過去20ターンの総被ダメージのため"
+        }
+      ]
     },
     {
       "id": "amour-s4",
@@ -12701,7 +12740,16 @@
       "compareMemo": "攻撃力+18% / 弱体効果命中+10% / 回避+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/amour/"
+      "sourceUrl": "https://ichigogames.net/mementomori/amour/",
+      "plainSummary": "HPの常時底上げ。復活しても消えない。",
+      "steps": [
+        {
+          "text": "自身の最大HP+50%(解除不可)"
+        },
+        {
+          "text": "復活した場合、復活後に再付与される"
+        }
+      ]
     },
     {
       "id": "lean-s1",
@@ -12721,7 +12769,7 @@
       "compareMemo": "攻撃力+18% / クリティカル+10% / クリダメ強化+35%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/lean/",
+      "sourceUrl": "https://ichigogames.net/mementomori/rean/",
       "damage": {
         "singleMultiplier": 460,
         "hitCount": 4,
@@ -12736,7 +12784,25 @@
         "realityRank": "中",
         "rankingTarget": "基本",
         "damageMemo": "画像カードからの暫定入力"
-      }
+      },
+      "plainSummary": "クリティカルが出るほど攻撃バフが延び続ける連撃。",
+      "steps": [
+        {
+          "text": "ランダムな敵に物理460%×4回"
+        },
+        {
+          "text": "クリティカルヒットした場合、自身の攻撃力を30%増加(1ターン)"
+        },
+        {
+          "text": "クリティカルヒットするたび、攻撃力増加の継続ターンが1ターン延びる"
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "クリ率支援やS4の自己クリ率+60%と組み合わせると、攻撃力増加を維持しやすい。",
+          "reason": "バフ延長の条件がクリティカル発生のため"
+        }
+      ]
     },
     {
       "id": "lean-s2",
@@ -12756,7 +12822,7 @@
       "compareMemo": "攻撃力+18% / クリティカル+10% / クリダメ強化+35%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/lean/",
+      "sourceUrl": "https://ichigogames.net/mementomori/rean/",
       "damage": {
         "singleMultiplier": 550,
         "hitCount": 5,
@@ -12771,7 +12837,22 @@
         "realityRank": "中",
         "rankingTarget": "基本",
         "damageMemo": "画像カードからの暫定入力"
-      }
+      },
+      "plainSummary": "撃破が撃破を呼ぶ連鎖攻撃。半分は回復で返ってくる。",
+      "steps": [
+        {
+          "text": "ランダムな敵5体に物理550%"
+        },
+        {
+          "text": "このスキルで敵を戦闘不能にした場合、HP割合が最も低い敵へ物理480%の追撃"
+        },
+        {
+          "text": "撃破するたび追加攻撃の回数が1回増える(最大4回)"
+        },
+        {
+          "text": "総与ダメージの50%ぶんHPを回復する"
+        }
+      ]
     },
     {
       "id": "lean-s3",
@@ -12791,7 +12872,13 @@
       "compareMemo": "攻撃力+18% / クリティカル+10% / クリダメ強化+35%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/lean/"
+      "sourceUrl": "https://ichigogames.net/mementomori/rean/",
+      "plainSummary": "開幕の自己シールド。",
+      "steps": [
+        {
+          "text": "1ターン目開始時、自身に攻撃力500%のシールドを4ターン付与(解除不可)"
+        }
+      ]
     },
     {
       "id": "lean-s4",
@@ -12811,7 +12898,13 @@
       "compareMemo": "攻撃力+18% / クリティカル+10% / クリダメ強化+35%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/lean/"
+      "sourceUrl": "https://ichigogames.net/mementomori/rean/",
+      "plainSummary": "半分を切ってからクリティカルの鬼になる。",
+      "steps": [
+        {
+          "text": "毎ターン開始時または被攻撃時、HPが50%未満ならクリティカル率+60%(解除不可)"
+        }
+      ]
     },
     {
       "id": "dian-s1",
@@ -12846,7 +12939,21 @@
         "realityRank": "中",
         "rankingTarget": "基本",
         "damageMemo": "画像カードからの暫定入力"
-      }
+      },
+      "plainSummary": "出血を撒きつつ、自分には再生を仕込む。",
+      "steps": [
+        {
+          "text": "ランダムな敵3体に物理410%"
+        },
+        {
+          "text": "出血を3ターン付与(行動開始時に自身の攻撃力25%ダメージ)",
+          "term": "出血"
+        },
+        {
+          "text": "自身に再生を3ターン付与(行動開始時に最大HP5%回復)",
+          "term": "再生"
+        }
+      ]
     },
     {
       "id": "dian-s2",
@@ -12866,7 +12973,25 @@
       "compareMemo": "耐久力+8% / 攻撃力+18% / 命中+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/dian/"
+      "sourceUrl": "https://ichigogames.net/mementomori/dian/",
+      "plainSummary": "HPを削って撃つ、防御素通しの大口径。",
+      "steps": [
+        {
+          "text": "自身のHPが40%以上のときに発動し、最大HP35%の自傷ダメージ"
+        },
+        {
+          "text": "ランダムな敵2体に、消費したHP100%分の直接攻撃"
+        },
+        {
+          "text": "条件を満たさない場合は通常攻撃になる"
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "自傷は紅自傷パのカウント供給源になる。1回の自傷量が大きい点が特徴。",
+          "reason": "消費が最大HP35%の自傷のため"
+        }
+      ]
     },
     {
       "id": "dian-s3",
@@ -12886,7 +13011,16 @@
       "compareMemo": "耐久力+8% / 攻撃力+18% / 命中+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/dian/"
+      "sourceUrl": "https://ichigogames.net/mementomori/dian/",
+      "plainSummary": "開幕、自分とエースの回避を大きく上げる。",
+      "steps": [
+        {
+          "text": "バトル開始時、自身の回避率を50%増加(6ターン)"
+        },
+        {
+          "text": "攻撃力が最も高い味方の回避率を50%増加(5ターン)"
+        }
+      ]
     },
     {
       "id": "dian-s4",
@@ -12901,12 +13035,27 @@
       "multiplierText": "透明 / 通常攻撃250%",
       "duration": "解除不可",
       "ct": null,
-      "condition": "HP40%未満かつ味方生存2体以上で透明。バトル中1回。通常攻撃強化とバフ解除あり",
+      "condition": "自身が攻撃を受けてHP40%未満になり、味方の生存数が2体以上なら透明を付与(解除不可、バトル中1回)。通常攻撃時、ランダムな敵2体に物理250%を行い、100%で対象のバフを1つ解除",
       "exclusiveWeapon": "専用武器効果なし",
       "compareMemo": "耐久力+8% / 攻撃力+18% / 命中+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/dian/"
+      "sourceUrl": "https://ichigogames.net/mementomori/dian/",
+      "plainSummary": "瀕死になったら透明で退避。通常攻撃も強化される。",
+      "steps": [
+        {
+          "text": "HPが40%未満になり、味方の生存数が2体以上のとき、透明を付与(解除不可、バトル中1回)"
+        },
+        {
+          "text": "透明は毎ターン開始時または味方戦闘不能時、味方の生存数が1体以下なら解除される"
+        },
+        {
+          "text": "通常攻撃時、ランダムな敵2体に物理250%"
+        },
+        {
+          "text": "通常攻撃の対象のバフを100%の確率で1つ解除"
+        }
+      ]
     },
     {
       "id": "belle-s1",
@@ -12941,7 +13090,20 @@
         "realityRank": "中",
         "rankingTarget": "基本",
         "damageMemo": "画像カードからの暫定入力"
-      }
+      },
+      "plainSummary": "元気な敵には出血、削られていたらバフ剥がしに切り替わる連撃。",
+      "steps": [
+        {
+          "text": "攻撃力が最も高い敵に魔法420%×4回"
+        },
+        {
+          "text": "対象のHP割合が50%より大きい場合、出血を2ターン付与(行動開始時に自身の攻撃力10%ダメージ)",
+          "term": "出血"
+        },
+        {
+          "text": "対象のHP割合が50%以下の場合、バフを1つ解除"
+        }
+      ]
     },
     {
       "id": "belle-s2",
@@ -12976,7 +13138,19 @@
         "realityRank": "中",
         "rankingTarget": "基本",
         "damageMemo": "画像カードからの暫定入力"
-      }
+      },
+      "plainSummary": "必中の6連撃。撃破実績で手数が増える。",
+      "steps": [
+        {
+          "text": "HP割合が最も低い敵に魔法280%×6回(必ず命中)"
+        },
+        {
+          "text": "このスキルで敵を戦闘不能にした場合、魔法攻撃の回数が1回増える"
+        },
+        {
+          "text": "このスキルで敵を2体戦闘不能にした場合、増加する回数が2回になる"
+        }
+      ]
     },
     {
       "id": "belle-s3",
@@ -12996,27 +13170,45 @@
       "compareMemo": "攻撃力+18% / 命中+10% / クリティカル+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/belle/"
+      "sourceUrl": "https://ichigogames.net/mementomori/belle/",
+      "plainSummary": "通常攻撃のクリティカルで攻撃力が積もる。",
+      "steps": [
+        {
+          "text": "通常攻撃時、クリティカルヒットした場合、攻撃力+10%を付与(5ターン、最大5スタック、解除不可)"
+        }
+      ]
     },
     {
       "id": "belle-s4",
       "characterId": "belle",
       "number": 4,
-      "name": "報覆の焔",
+      "name": "報穣の焔",
       "skillType": "パッシブ",
       "category": "シールド",
       "majorCategory": "防御",
       "subCategory": "ダメージ遮断 / シールド",
       "target": "自身",
-      "multiplierText": "最大HP20%超過遮断 / 攻撃力20%超過分遮断",
+      "multiplierText": "最大HP20%超過遮断 / 最大HP20%超過分シールド",
       "duration": "3T",
       "ct": null,
-      "condition": "HP50%未満で最大HP20%超過ダメージを遮断。さらに攻撃被弾時HP50%未満なら3ターンシールド",
+      "condition": "HP50%未満で最大HP20%を超えるダメージを受けたとき、超過分を100%遮断。さらにHP50%未満で被弾すると、攻撃してきた敵の総与ダメージが自身の最大HP20%を超えた分のシールドを3ターン付与",
       "exclusiveWeapon": "専用武器効果なし",
       "compareMemo": "攻撃力+18% / 命中+10% / クリティカル+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/belle/"
+      "sourceUrl": "https://ichigogames.net/mementomori/belle/",
+      "plainSummary": "半分を切ってからの大ダメージに強い。",
+      "steps": [
+        {
+          "text": "HPが50%未満のとき、最大HP20%を超えるダメージの超過分を100%遮断"
+        },
+        {
+          "text": "さらにHP50%未満で被弾すると、シールドを3ターン付与"
+        },
+        {
+          "text": "シールド量は、攻撃してきた敵の総与ダメージが自身の最大HP20%を超えた分"
+        }
+      ]
     },
     {
       "id": "sophia-s1",
@@ -13051,7 +13243,16 @@
         "realityRank": "中",
         "rankingTarget": "基本",
         "damageMemo": "画像カードからの暫定入力"
-      }
+      },
+      "plainSummary": "自分を鼓舞してから、弱った敵に5連撃。",
+      "steps": [
+        {
+          "text": "自身の攻撃力を30%増加(1ターン)"
+        },
+        {
+          "text": "HP割合が最も低い敵に物理450%×5回"
+        }
+      ]
     },
     {
       "id": "sophia-s2",
@@ -13086,7 +13287,22 @@
         "realityRank": "中",
         "rankingTarget": "基本",
         "damageMemo": "画像カードからの暫定入力"
-      }
+      },
+      "plainSummary": "7連撃の与ダメージが、ピンチ時は全員の回復に変わる。",
+      "steps": [
+        {
+          "text": "ランダムな敵に物理360%×7回"
+        },
+        {
+          "text": "攻撃後、自身のHPが60%未満なら味方全体を総与ダメージ35%ぶん回復"
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "回復はアクティブスキル由来のため、回復回数を数える味方のスタック源になる。",
+          "reason": "アクティブスキルによる回復のため"
+        }
+      ]
     },
     {
       "id": "sophia-s3",
@@ -13101,12 +13317,24 @@
       "multiplierText": "弱体ターン-2 / 弱体命中-50%",
       "duration": "1T",
       "ct": null,
-      "condition": "自身がアクティブスキルで弱体効果を受けたとき、自身の弱体ターンを短縮し、付与者の弱体命中率を減少",
+      "condition": "アクティブスキルで弱体効果を受けたとき、自身の全弱体効果のターン数を2短縮。発動後4回行動終了まで再発動不可。付与者の弱体効果命中率を50%減少(1ターン)",
       "exclusiveWeapon": "専用Lv1: ターン開始時カウンタ+55%。専用Lv2: 付与者の攻撃力-40%",
       "compareMemo": "耐久力+8% / 攻撃力+18% / クリティカル+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/sophia/"
+      "sourceUrl": "https://ichigogames.net/mementomori/sophia/",
+      "plainSummary": "弱体を受けたら寿命を縮め、撃った相手のデバフ命中も削り返す。",
+      "steps": [
+        {
+          "text": "自身がアクティブスキルで弱体効果を受けたとき、自身の全弱体効果のターン数を2短縮"
+        },
+        {
+          "text": "発動後4回行動終了まで再発動しない"
+        },
+        {
+          "text": "弱体を付与してきた敵の弱体効果命中率を50%減少(1ターン)"
+        }
+      ]
     },
     {
       "id": "sophia-s4",
@@ -13126,7 +13354,13 @@
       "compareMemo": "耐久力+8% / 攻撃力+18% / クリティカル+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/sophia/"
+      "sourceUrl": "https://ichigogames.net/mementomori/sophia/",
+      "plainSummary": "耐久の常時底上げ。",
+      "steps": [
+        {
+          "text": "自身の最大HP+30%・クリティカル耐性率+30%(解除不可)"
+        }
+      ]
     },
     {
       "id": "chiffon-s1",
