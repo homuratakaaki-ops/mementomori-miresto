@@ -456,7 +456,7 @@
       "roleMemo": "味方バフ数・敵弱体数を参照して火力を伸ばす物理アタッカー",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": ""
+      "sourceUrl": "https://ichigogames.net/mementomori/elfriede/"
     },
     {
       "id": "rosalie_caritas",
@@ -906,7 +906,7 @@
       "roleMemo": "結界とシールドで支える黄ウォーリア",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/iris_black/"
+      "sourceUrl": "https://ichigogames.net/mementomori/iris_tainted/"
     },
     {
       "id": "amour_holy_night",
@@ -2713,7 +2713,19 @@
         "realityRank": "高",
         "rankingTarget": "基本",
         "damageMemo": "妨害込みの複合スキル"
-      }
+      },
+      "plainSummary": "敵のデバフ命中とバフを同時に封じる妨害弾。",
+      "steps": [
+        {
+          "text": "ランダムな敵5体に物理380%"
+        },
+        {
+          "text": "それぞれ70%の確率で、弱体効果命中率50%減少とバフ無効を4ターン付与"
+        },
+        {
+          "text": "弱体効果命中率減少とバフ無効は1つの弱体扱い"
+        }
+      ]
     },
     {
       "id": "fenny-s2",
@@ -2748,7 +2760,19 @@
         "realityRank": "中",
         "rankingTarget": "条件込み",
         "damageMemo": "2回目以降の火力を基本値に混ぜない"
-      }
+      },
+      "plainSummary": "一番元気な敵に浸食を撃ち込む。2発目からは2倍。",
+      "steps": [
+        {
+          "text": "HP割合が最も高い敵に物理680%"
+        },
+        {
+          "text": "70%の確率で浸食を4ターン付与(行動開始時にこのスキルの総与ダメージ40%分のダメージ)"
+        },
+        {
+          "text": "このスキルを使うのが2回目以降なら物理ダメージ2倍"
+        }
+      ]
     },
     {
       "id": "fenny-s3",
@@ -2768,7 +2792,13 @@
       "compareMemo": "生存補助。攻撃対象から外れる系として比較できる",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/fenny/"
+      "sourceUrl": "https://ichigogames.net/mementomori/fenny/",
+      "plainSummary": "削られたら透明になって退避する保険。",
+      "steps": [
+        {
+          "text": "被攻撃時、HPが70%未満かつ味方の生存が2体以上なら、透明を3ターン付与(解除不可、バトル中1回)"
+        }
+      ]
     },
     {
       "id": "fenny-s4",
@@ -2788,7 +2818,21 @@
       "compareMemo": "S2再使用を早める自己CT操作。実質的に浸食火力補助",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/fenny/"
+      "sourceUrl": "https://ichigogames.net/mementomori/fenny/",
+      "plainSummary": "3ターン目にS2を即リロードする加速装置。",
+      "steps": [
+        {
+          "text": "3ターン目開始時、「魔力浸透砲弾」のCTを0にする(バトル中1回)"
+        },
+        {
+          "text": "同時に自身のスピード+30%(1ターン、解除不可)"
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "S2の「2回目以降2倍」への到達を早める自己完結設計。根拠: リセット対象がS2のCTのため"
+        }
+      ]
     },
     {
       "id": "tropon-holy-night-s1",
@@ -2803,7 +2847,7 @@
       "multiplierText": "攻撃・防御15%吸収 / 現HP15%直接攻撃 / 総ダメ50%シールド",
       "duration": "吸収2T / シールド",
       "ct": 4,
-      "condition": "直接攻撃は自身攻撃力500%を超えない",
+      "condition": "現在HPが最も高い敵の攻撃力・防御力を15%吸収(2T)。対象に現在HP15%の直接攻撃(吸収後の自身攻撃力500%上限)。総与ダメージ50%のシールド。専用Lv1/2/3で35%/20%/100%",
       "exclusiveWeapon": "専用Lv1: 吸収15→35%。専用Lv2: 直接攻撃15→20%。専用Lv3: シールド50→100%",
       "compareMemo": "吸収・直接攻撃・シールドがまとまった複合スキル。比較時はシールド部分だけ抽出可能",
       "noteUrl": "",
@@ -2823,7 +2867,19 @@
         "realityRank": "中",
         "rankingTarget": "対象外",
         "damageMemo": "通常の攻撃倍率ランキングからは外す"
-      }
+      },
+      "plainSummary": "敵エースの攻防を吸い取り、削って、自分の盾に変える。",
+      "steps": [
+        {
+          "text": "現在HPが最も高い敵の攻撃力・防御力を15%吸収(2ターン、判定は別々)"
+        },
+        {
+          "text": "対象の現在HP15%の直接攻撃(クリティカルしない。吸収後の自身攻撃力500%上限)"
+        },
+        {
+          "text": "総与ダメージ50%のシールドを自身に2ターン付与"
+        }
+      ]
     },
     {
       "id": "tropon-holy-night-s2",
@@ -2858,7 +2914,28 @@
         "realityRank": "高",
         "rankingTarget": "基本",
         "damageMemo": "妨害込みの複合スキル"
-      }
+      },
+      "plainSummary": "気絶をばら撒きつつ、外れても自分のバフが延びる。",
+      "steps": [
+        {
+          "text": "ランダムな敵5体に魔法340%"
+        },
+        {
+          "text": "20%の確率で気絶を1ターン付与",
+          "term": "気絶"
+        },
+        {
+          "text": "敵を戦闘不能にできなければ、自身の全バフのターン数+1"
+        },
+        {
+          "text": "この攻撃時にS3で新たに奪取したバフも延長対象になる"
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "S1の吸収バフやシールド、S3で奪取したバフをS2で延命できる自己完結設計。根拠: 延長対象が「自身の全バフ」のため"
+        }
+      ]
     },
     {
       "id": "tropon-holy-night-s3",
@@ -2878,7 +2955,13 @@
       "compareMemo": "解除ではなく奪取。バフ対策として価値が高いが確率型",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/tropon_holy_night/"
+      "sourceUrl": "https://ichigogames.net/mementomori/tropon_holy_night/",
+      "plainSummary": "攻撃のたび3割で敵のバフを奪う。",
+      "steps": [
+        {
+          "text": "自身が攻撃したとき、30%の確率で対象のバフを1つ奪取する"
+        }
+      ]
     },
     {
       "id": "tropon-holy-night-s4",
@@ -2898,7 +2981,13 @@
       "compareMemo": "S2気絶やS3バフ奪取の安定性を補助する基礎強化",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/tropon_holy_night/"
+      "sourceUrl": "https://ichigogames.net/mementomori/tropon_holy_night/",
+      "plainSummary": "耐久とデバフ命中の常時底上げ。",
+      "steps": [
+        {
+          "text": "自身の最大HP+40%・弱体効果命中率+40%(解除不可)"
+        }
+      ]
     },
     {
       "id": "sabrina-s1",
@@ -3431,15 +3520,28 @@
       "majorCategory": "敵弱体",
       "subCategory": "沈黙",
       "target": "攻撃力が高い敵2体",
-      "multiplierText": "",
+      "multiplierText": "バフ解除1つ / 沈黙20%・条件時40%",
       "duration": "バフ解除後、対象のHP50%以上なら30%で1ターン沈黙",
       "ct": 5,
-      "condition": "攻撃力が高い敵2体のバフを1つ解除 / バフ解除後、対象のHP50%以上なら30%で1ターン沈黙 / さらに対象の魔力が自身未満なら沈黙確率60%",
+      "condition": "攻撃力が高い敵2体のバフを1つ解除。解除後、対象のHP50%以上なら20%で1ターン沈黙。対象の魔力が自身未満なら沈黙確率40%。専用Lv1で30%・60%",
       "exclusiveWeapon": "Lv1: 沈黙確率20%/40%→30%/60%",
       "compareMemo": "攻撃力が高い敵2体のバフを1つ解除 / バフ解除後、対象のHP50%以上なら30%で1ターン沈黙 / さらに対象の魔力が自身未満なら沈黙確率60%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/giluial/"
+      "sourceUrl": "https://ichigogames.net/mementomori/giluial/",
+      "plainSummary": "敵エース2体のバフを剥がし、沈黙まで狙う。",
+      "steps": [
+        {
+          "text": "攻撃力が高い敵2体のバフを1つ解除"
+        },
+        {
+          "text": "解除後、対象のHPが50%以上なら20%の確率で沈黙を1ターン付与",
+          "term": "沈黙"
+        },
+        {
+          "text": "対象の魔力が自身より低ければ沈黙の確率が40%になる"
+        }
+      ]
     },
     {
       "id": "giluial-s2",
@@ -3451,10 +3553,10 @@
       "majorCategory": "敵弱体",
       "subCategory": "沈黙",
       "target": "ランダム敵3体",
-      "multiplierText": "魔法880% / ダメージ2倍",
+      "multiplierText": "魔法780% / 条件時2倍",
       "duration": "50%で1ターン沈黙",
       "ct": 5,
-      "condition": "50%で1ターン沈黙 / 自身が弱体効果を付帯している場合、ダメージ2倍",
+      "condition": "ランダム敵3体に魔法780%。40%で1ターン沈黙。自身が弱体効果を付帯している場合、ダメージ2倍。専用Lv2で沈黙50%、専用Lv3で880%",
       "exclusiveWeapon": "Lv2: 沈黙確率40%→50% / Lv3: 魔法780%→880%",
       "compareMemo": "ランダム敵3体に魔法880% / 50%で1ターン沈黙 / 自身が弱体効果を付帯している場合、ダメージ2倍",
       "noteUrl": "",
@@ -3474,7 +3576,25 @@
         "realityRank": "中",
         "rankingTarget": "対象",
         "damageMemo": "カード生成JSONから自動マージ。専用Lv別・条件MAXは要精査"
-      }
+      },
+      "plainSummary": "自分が弱体を受けているときこそ2倍で撃てる魔法。",
+      "steps": [
+        {
+          "text": "ランダムな敵3体に魔法780%"
+        },
+        {
+          "text": "40%の確率で沈黙を1ターン付与",
+          "term": "沈黙"
+        },
+        {
+          "text": "自身が弱体効果を付帯している場合はダメージ2倍"
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "弱体を撃ってくる敵が相手だとS2の2倍条件とS3の弱体命中アップが同時に働く逆用設計。根拠: 両方の条件が「自身が弱体を受けている/受けたとき」のため"
+        }
+      ]
     },
     {
       "id": "giluial-s3",
@@ -3488,13 +3608,19 @@
       "target": "",
       "multiplierText": "",
       "duration": "自身がアクティブスキルで弱体またはバフを受けた時、1ターン弱体効果命中率30%増加",
-      "ct": "",
+      "ct": null,
       "condition": "自身がアクティブスキルで弱体またはバフを受けた時、1ターン弱体効果命中率30%増加",
       "exclusiveWeapon": "",
       "compareMemo": "自身がアクティブスキルで弱体またはバフを受けた時、1ターン弱体効果命中率30%増加",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/giluial/"
+      "sourceUrl": "https://ichigogames.net/mementomori/giluial/",
+      "plainSummary": "弱体やバフを受けるたび、デバフが当てやすくなる。",
+      "steps": [
+        {
+          "text": "自身がアクティブスキルで弱体またはバフを受けたとき、弱体効果命中率+30%(1ターン)"
+        }
+      ]
     },
     {
       "id": "giluial-s4",
@@ -3508,13 +3634,25 @@
       "target": "",
       "multiplierText": "",
       "duration": "",
-      "ct": "",
+      "ct": null,
       "condition": "自身のクリティカル耐性率40%増加 / 被クリティカル時、クリ耐性+20%（最大2スタック/合計80%） / バトル開始時、自身に多重バリア3層 / 効果は解除不可",
       "exclusiveWeapon": "",
       "compareMemo": "自身のクリティカル耐性率40%増加 / 被クリティカル時、クリ耐性+20%（最大2スタック/合計80%） / バトル開始時、自身に多重バリア3層 / 効果は解除不可",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/giluial/"
+      "sourceUrl": "https://ichigogames.net/mementomori/giluial/",
+      "plainSummary": "クリティカルに強く、開幕3層バリア持ち。",
+      "steps": [
+        {
+          "text": "自身のクリティカル耐性率+40%(解除不可)"
+        },
+        {
+          "text": "クリティカルを受けるたびクリティカル耐性率の増加量が20%大きくなる(最大2スタック、合計80%)"
+        },
+        {
+          "text": "バトル開始時、多重バリア3層を付与(解除不可)"
+        }
+      ]
     },
     {
       "id": "liselotte-s1",
@@ -3525,11 +3663,11 @@
       "category": "火力",
       "majorCategory": "攻撃",
       "subCategory": "純火力",
-      "target": "ランダム敵5体",
-      "multiplierText": "魔法540% / 1.5倍",
+      "target": "ランダム敵4体",
+      "multiplierText": "魔法540% / 条件時1.5倍",
       "duration": "",
       "ct": 4,
-      "condition": "自身HP50%以上ならダメージ1.5倍",
+      "condition": "自身HP50%以上ならダメージ1.5倍。専用Lv1で対象が5体になる",
       "exclusiveWeapon": "Lv1: 対象が敵5体に増加",
       "compareMemo": "ランダム敵5体に魔法540% / 自身HP50%以上ならダメージ1.5倍",
       "noteUrl": "",
@@ -3549,7 +3687,16 @@
         "realityRank": "中",
         "rankingTarget": "対象",
         "damageMemo": "カード生成JSONから自動マージ。専用Lv別・条件MAXは要精査"
-      }
+      },
+      "plainSummary": "自分が元気なら1.5倍で撃てる4体魔法。",
+      "steps": [
+        {
+          "text": "ランダムな敵4体に魔法540%"
+        },
+        {
+          "text": "自身のHPが50%以上ならダメージ1.5倍"
+        }
+      ]
     },
     {
       "id": "liselotte-s2",
@@ -3561,10 +3708,10 @@
       "majorCategory": "敵弱体",
       "subCategory": "気絶",
       "target": "ランダム敵",
-      "multiplierText": "魔法720%",
+      "multiplierText": "魔法660%×5回",
       "duration": "攻撃ごとに50%で1ターン気絶",
       "ct": 4,
-      "condition": "攻撃ごとに50%で1ターン気絶",
+      "condition": "ランダムな敵に5回魔法660%。攻撃ごとに50%で1ターン気絶。専用Lv3で720%",
       "exclusiveWeapon": "Lv3: 魔法660%→720%",
       "compareMemo": "ランダム敵に5回魔法720% / 攻撃ごとに50%で1ターン気絶",
       "noteUrl": "",
@@ -3584,7 +3731,17 @@
         "realityRank": "高",
         "rankingTarget": "対象",
         "damageMemo": "カード生成JSONから自動マージ。専用Lv別・条件MAXは要精査"
-      }
+      },
+      "plainSummary": "攻撃ごとに5割で気絶を狙う5連撃。",
+      "steps": [
+        {
+          "text": "ランダムな敵に魔法660%×5回"
+        },
+        {
+          "text": "攻撃するたび50%の確率で気絶を1ターン付与",
+          "term": "気絶"
+        }
+      ]
     },
     {
       "id": "liselotte-s3",
@@ -3598,13 +3755,24 @@
       "target": "",
       "multiplierText": "攻撃力50%",
       "duration": "行動開始時、自身がクリティカル率増加を付帯していれば1ターン攻撃力50%増加",
-      "ct": "",
+      "ct": null,
       "condition": "行動開始時、自身がクリティカル率増加を付帯していれば1ターン攻撃力50%増加 / 効果は解除不可",
       "exclusiveWeapon": "",
       "compareMemo": "行動開始時、自身がクリティカル率増加を付帯していれば1ターン攻撃力50%増加 / 効果は解除不可",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/liselotte/"
+      "sourceUrl": "https://ichigogames.net/mementomori/liselotte/",
+      "plainSummary": "クリ率バフをもらっている間だけ火力が跳ねる。",
+      "steps": [
+        {
+          "text": "行動開始時、自身がクリティカル率増加を付帯していれば攻撃力+50%(1ターン、解除不可)"
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "クリティカル率バフを配る味方が発動条件そのもの。単独では発動しない。根拠: 条件が「クリティカル率増加の付帯」のため"
+        }
+      ]
     },
     {
       "id": "liselotte-s4",
@@ -3618,13 +3786,23 @@
       "target": "",
       "multiplierText": "最大HP25%",
       "duration": "ターン開始時または被攻撃時、HP75%未満なら2ターン再生 / バトル中1回のみ発動",
-      "ct": "",
+      "ct": null,
       "condition": "ターン開始時または被攻撃時、HP75%未満なら2ターン再生 / 再生は行動開始時に最大HP25%回復 / バトル中1回のみ発動",
       "exclusiveWeapon": "Lv2: バトル開始時1ターン自身のスピード20%増加",
       "compareMemo": "ターン開始時または被攻撃時、HP75%未満なら2ターン再生 / 再生は行動開始時に最大HP25%回復 / バトル中1回のみ発動",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/liselotte/"
+      "sourceUrl": "https://ichigogames.net/mementomori/liselotte/",
+      "plainSummary": "一度だけ、削られたら再生で立て直す保険。",
+      "steps": [
+        {
+          "text": "ターン開始時または被攻撃時、HPが75%未満なら再生を2ターン付与(解除不可、バトル中1回)",
+          "term": "再生"
+        },
+        {
+          "text": "再生は行動開始時に最大HP25%分回復する"
+        }
+      ]
     },
     {
       "id": "eir-s1",
@@ -5444,16 +5622,16 @@
       "category": "火力",
       "majorCategory": "攻撃",
       "subCategory": "バフ数スケール / 命中増加",
-      "target": "ランダム敵",
-      "multiplierText": "物理800%×3体 / 最大1200%",
+      "target": "ランダム敵3体",
+      "multiplierText": "物理800% / 最大1200%",
       "duration": "命中率増加2T",
       "ct": 4,
-      "condition": "味方のバフ1つにつき物理ダメージ+50%。最大攻撃力1200%まで",
+      "condition": "2ターン自身の命中率50%増加。味方のバフ1つにつき物理ダメージ+50%、最大1200%。専用Lv1で対象5体",
       "exclusiveWeapon": "専用Lv1: 対象がランダム敵5体になる",
       "compareMemo": "味方バフ数で火力上限が伸び、専用Lv1で対象数が増える",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "",
+      "sourceUrl": "https://ichigogames.net/mementomori/elfriede/",
       "damage": {
         "singleMultiplier": 800,
         "hitCount": 3,
@@ -5467,7 +5645,24 @@
         "realityRank": "中",
         "rankingTarget": "条件込み",
         "damageMemo": "最大値はバフ数が必要"
-      }
+      },
+      "plainSummary": "味方のバフの数だけ痛くなる3体攻撃。",
+      "steps": [
+        {
+          "text": "自身の命中率を50%増加(2ターン)"
+        },
+        {
+          "text": "ランダムな敵3体に物理800%"
+        },
+        {
+          "text": "味方のバフ1つにつき+50%(最大1200%)"
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "バフを大量に配る編成ほど③が伸びる。根拠: 倍率の参照が「味方のバフ数」のため"
+        }
+      ]
     },
     {
       "id": "elfriede-s2",
@@ -5482,12 +5677,12 @@
       "multiplierText": "物理1400% / 最大2200%",
       "duration": "",
       "ct": 4,
-      "condition": "対象の弱体効果1つにつき物理ダメージ+400%。最大攻撃力2200%まで",
+      "condition": "対象の弱体効果1つにつき物理ダメージ+400%、最大2200%。専用Lv3で1600%/最大2400%",
       "exclusiveWeapon": "専用Lv3: 物理攻撃が1600%になり、最大攻撃力2400%まで",
       "compareMemo": "敵の弱体数で火力上限が上がる高倍率攻撃",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "",
+      "sourceUrl": "https://ichigogames.net/mementomori/elfriede/",
       "damage": {
         "singleMultiplier": 1400,
         "hitCount": 3,
@@ -5501,7 +5696,21 @@
         "realityRank": "中",
         "rankingTarget": "条件込み",
         "damageMemo": "最大値は対象の弱体数が必要"
-      }
+      },
+      "plainSummary": "敵の弱体の数だけ跳ね上がる高倍率砲。",
+      "steps": [
+        {
+          "text": "ランダムな敵3体に物理1400%"
+        },
+        {
+          "text": "対象の弱体効果1つにつき+400%(最大2200%)"
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "弱体を撒く味方が多いほど②が伸びる。根拠: 倍率の参照が「対象の弱体数」のため"
+        }
+      ]
     },
     {
       "id": "elfriede-s3",
@@ -5521,7 +5730,19 @@
       "compareMemo": "防御スタックと大ダメージ遮断で耐久する",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": ""
+      "sourceUrl": "https://ichigogames.net/mementomori/elfriede/",
+      "plainSummary": "バフを受けるたび防御が積もり、大ダメージには遮断が入る。",
+      "steps": [
+        {
+          "text": "バトル開始時、防御力・物理防御力・魔法防御力+10%のバフを4スタック付与(最大10、解除不可)"
+        },
+        {
+          "text": "自身がアクティブスキルでバフを受けるたび、この防御系バフのスタック数が4増加"
+        },
+        {
+          "text": "最大HP10%を超えるダメージを受けたとき、ダメージを40%遮断(発動後1回行動まで再発動しない)"
+        }
+      ]
     },
     {
       "id": "elfriede-s4",
@@ -5541,7 +5762,16 @@
       "compareMemo": "弱体付与編成向けの命中支援",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": ""
+      "sourceUrl": "https://ichigogames.net/mementomori/elfriede/",
+      "plainSummary": "定期的に、味方全員のデバフ命中を底上げする。",
+      "steps": [
+        {
+          "text": "ターン開始時、自身以外の味方全体の弱体効果命中率+30%(4ターン)"
+        },
+        {
+          "text": "発動後4回行動まで再発動しない"
+        }
+      ]
     },
     {
       "id": "rosalie_caritas-s1",
@@ -9397,7 +9627,7 @@
       "compareMemo": "攻撃力+18% / 弱体効果命中+10% / クリティカル+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/iris_black/",
+      "sourceUrl": "https://ichigogames.net/mementomori/iris_tainted/",
       "damage": {
         "singleMultiplier": 920,
         "hitCount": 3,
@@ -9412,7 +9642,16 @@
         "realityRank": "中",
         "rankingTarget": "基本",
         "damageMemo": "詳細条件はconditionを参照"
-      }
+      },
+      "plainSummary": "敵エース3体の攻撃力を削る高倍率。",
+      "steps": [
+        {
+          "text": "攻撃力が高い敵3体に物理920%"
+        },
+        {
+          "text": "70%の確率で攻撃力10%減少を2ターン付与"
+        }
+      ]
     },
     {
       "id": "iris_black-s2",
@@ -9432,7 +9671,7 @@
       "compareMemo": "攻撃力+18% / 弱体効果命中+10% / クリティカル+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/iris_black/",
+      "sourceUrl": "https://ichigogames.net/mementomori/iris_tainted/",
       "damage": {
         "singleMultiplier": 440,
         "hitCount": 6,
@@ -9447,7 +9686,21 @@
         "realityRank": "中",
         "rankingTarget": "基本",
         "damageMemo": "詳細条件はconditionを参照"
-      }
+      },
+      "plainSummary": "攻撃力の下がった敵には2倍で刺さる6連撃。",
+      "steps": [
+        {
+          "text": "ランダムな敵に物理440%×6回"
+        },
+        {
+          "text": "攻撃前、対象が攻撃力減少を付帯していればダメージ2倍"
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "S1の攻撃力減少が②の条件そのもの。脱力が攻撃力減少判定に含まれるかは出典上は明記なしのため、脱力連携は未確定として除外。根拠: 倍率条件が「攻撃力減少」付帯のため"
+        }
+      ]
     },
     {
       "id": "iris_black-s3",
@@ -9467,7 +9720,19 @@
       "compareMemo": "攻撃力+18% / 弱体効果命中+10% / クリティカル+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/iris_black/"
+      "sourceUrl": "https://ichigogames.net/mementomori/iris_tainted/",
+      "plainSummary": "自分とエース2人に「大ダメージの超過分をカットする」結界。",
+      "steps": [
+        {
+          "text": "バトル開始時、自身に結界を2ターン付与"
+        },
+        {
+          "text": "さらに自身以外で攻撃力が最も高い味方と、スピードが最も高い味方にも結界を付与"
+        },
+        {
+          "text": "結界は最大HP20%を超えたダメージ分を50%遮断する"
+        }
+      ]
     },
     {
       "id": "iris_black-s4",
@@ -9487,7 +9752,16 @@
       "compareMemo": "攻撃力+18% / 弱体効果命中+10% / クリティカル+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/iris_black/"
+      "sourceUrl": "https://ichigogames.net/mementomori/iris_tainted/",
+      "plainSummary": "瀕死で発動する、敵が多いほど大きいシールド。",
+      "steps": [
+        {
+          "text": "被攻撃でHP30%以下になったとき、シールドを3ターン付与(解除不可、バトル中1回)"
+        },
+        {
+          "text": "量は攻撃力50%を基礎に、敵の生存数1体につき攻撃力50%分増える(最大300%)"
+        }
+      ]
     },
     {
       "id": "amour_holy_night-s1",
@@ -9502,7 +9776,7 @@
       "multiplierText": "物理180%",
       "duration": "",
       "ct": 4,
-      "condition": "2ターン目以降、スピード最高味方のクリティカル率30%増加。クリティカル1回につき増加量+5%、最大55%",
+      "condition": "ランダム敵5体に物理180%。攻撃前、自身のクリティカル率30%増加。攻撃後、自身以外のスピード最高味方のクリティカル率30%増加。自身の物理攻撃でクリティカルした回数1回につき味方への増加量+5%、最大55%",
       "exclusiveWeapon": "専用Lv1: 対象が自身以外のスピードが高い味方3体",
       "compareMemo": "攻撃力+18% / クリティカル+10% / HP+22%",
       "noteUrl": "",
@@ -9522,7 +9796,22 @@
         "realityRank": "中",
         "rankingTarget": "基本",
         "damageMemo": "詳細条件はconditionを参照"
-      }
+      },
+      "plainSummary": "自分のクリ率を上げて撃ち、最速の味方にもクリ率を配る。",
+      "steps": [
+        {
+          "text": "攻撃前、自身のクリティカル率を30%増加(2ターン)"
+        },
+        {
+          "text": "ランダムな敵5体に物理180%"
+        },
+        {
+          "text": "自身以外でスピードが最も高い味方のクリティカル率を30%増加(2ターン)"
+        },
+        {
+          "text": "自身の物理攻撃でクリティカルした回数1回につき、味方への増加量+5%(最大55%)"
+        }
+      ]
     },
     {
       "id": "amour_holy_night-s2",
@@ -9557,7 +9846,19 @@
         "realityRank": "中",
         "rankingTarget": "基本",
         "damageMemo": "詳細条件はconditionを参照"
-      }
+      },
+      "plainSummary": "倒すまで撃ち直す追撃砲。自分が瀕死なら2倍。",
+      "steps": [
+        {
+          "text": "HP割合が最も高い敵に物理240%×3回(HP割合の判定は攻撃1回ごと)"
+        },
+        {
+          "text": "敵を戦闘不能にできなければ、このスキルを1回再発動する"
+        },
+        {
+          "text": "自身のHPが50%以下ならダメージ2倍"
+        }
+      ]
     },
     {
       "id": "amour_holy_night-s3",
@@ -9569,15 +9870,30 @@
       "majorCategory": "回復・復活",
       "subCategory": "パッシブ効果",
       "target": "戦闘不能味方 / 自身",
-      "multiplierText": "HP25%回復復活 / 最大HP+50%",
+      "multiplierText": "HP25%復活 / 最大HP+50% / 味方攻撃+20% / 味方CT-2",
       "duration": "条件参照",
       "ct": null,
-      "condition": "戦闘不能時、HP25%回復で復活。復活後、最大HP増加、攻撃力が高い味方2体の攻撃力増加、スキルCT-2",
+      "condition": "戦闘不能時、HP25%で復活。復活後、自身の最大HP50%増加、攻撃力が高い味方2体の攻撃力20%増加、攻撃力が高い味方2体のスキルCT-2。バトル中1回",
       "exclusiveWeapon": "専用Lv2: 攻撃力増加40%",
       "compareMemo": "攻撃力+18% / クリティカル+10% / HP+22%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/amour_holy_night/"
+      "sourceUrl": "https://ichigogames.net/mementomori/amour_holy_night/",
+      "plainSummary": "一度だけ自力で復活し、立ち上がりざまに味方を強化する。",
+      "steps": [
+        {
+          "text": "戦闘不能時、最大HP25%分のHPで復活する(バトル中1回)"
+        },
+        {
+          "text": "復活後、自身の最大HPを50%増加(解除不可)"
+        },
+        {
+          "text": "攻撃力が高い味方2体の攻撃力を20%増加(3ターン)"
+        },
+        {
+          "text": "攻撃力が高い味方2体のスキルCTを2減少"
+        }
+      ]
     },
     {
       "id": "amour_holy_night-s4",
@@ -9597,7 +9913,16 @@
       "compareMemo": "攻撃力+18% / クリティカル+10% / HP+22%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/amour_holy_night/"
+      "sourceUrl": "https://ichigogames.net/mementomori/amour_holy_night/",
+      "plainSummary": "全員の「最初の一発」を6割カットする開幕の守り。",
+      "steps": [
+        {
+          "text": "バトル開始時、味方全体の被ダメージを60%減少"
+        },
+        {
+          "text": "ターン経過では解除されず、各自が1回目の攻撃を受けたときに解除される"
+        }
+      ]
     },
     {
       "id": "asahi-s1",
@@ -11827,7 +12152,22 @@
         "realityRank": "中",
         "rankingTarget": "基本",
         "damageMemo": "画像カードからの暫定入力"
-      }
+      },
+      "plainSummary": "攻撃しつつ、エース2人を回復して弱体も剥がす。",
+      "steps": [
+        {
+          "text": "ランダムな敵3体に魔法200%"
+        },
+        {
+          "text": "攻撃力が高い味方2体を攻撃力50%分回復し、弱体効果を2つ解除"
+        },
+        {
+          "text": "最初の魔法攻撃でクリティカルが1回以上出ていれば解除数は3つになる"
+        },
+        {
+          "text": "対象に弱体効果耐性率+40%を2ターン付与"
+        }
+      ]
     },
     {
       "id": "priscilla-s2",
@@ -11862,7 +12202,28 @@
         "realityRank": "中",
         "rankingTarget": "基本",
         "damageMemo": "画像カードからの暫定入力"
-      }
+      },
+      "plainSummary": "傷ついた味方3人へ回復と再生を配る。",
+      "steps": [
+        {
+          "text": "ランダムな敵3体に魔法200%"
+        },
+        {
+          "text": "HP割合が低い味方3体を攻撃力50%分回復し、再生を付与",
+          "term": "再生"
+        },
+        {
+          "text": "再生は行動開始時に最大HP5%分回復する"
+        },
+        {
+          "text": "最初の魔法攻撃のクリティカル回数に応じて再生のターン数が延びる"
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "②の回復はアクティブ回復の発動回数をカウントする味方のスタック源になる。根拠: アクティブスキルによる回復のため"
+        }
+      ]
     },
     {
       "id": "priscilla-s3",
@@ -11882,7 +12243,13 @@
       "compareMemo": "攻撃力+18% / クリティカル+10% / HP+22%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/priscilla/"
+      "sourceUrl": "https://ichigogames.net/mementomori/priscilla/",
+      "plainSummary": "耐久とクリ率の常時底上げ。回復スキルの伸びにも効く。",
+      "steps": [
+        {
+          "text": "自身の最大HP+50%・魔法防御力+100%・クリティカル率+40%(解除不可)"
+        }
+      ]
     },
     {
       "id": "priscilla-s4",
@@ -11902,7 +12269,19 @@
       "compareMemo": "攻撃力+18% / クリティカル+10% / HP+22%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/priscilla/"
+      "sourceUrl": "https://ichigogames.net/mementomori/priscilla/",
+      "plainSummary": "弱体を受けたら防御バフを消費して自分を浄化し、味方も癒す。",
+      "steps": [
+        {
+          "text": "バトル開始時、防御力+50%(5ターン、解除不可)"
+        },
+        {
+          "text": "アクティブスキルで弱体を受けたとき、防御力増加のターンを1ターン消費して自身の全弱体効果のターン数を2ターン短縮"
+        },
+        {
+          "text": "防御力増加のターンを消費したとき、HP割合が最も低い味方を攻撃力50%分回復する"
+        }
+      ]
     },
     {
       "id": "matilda-s1",
@@ -11914,10 +12293,10 @@
       "majorCategory": "攻撃",
       "subCategory": "味方強化 / バフ解除",
       "target": "自身と攻撃力最高味方 / 攻撃力最高敵",
-      "multiplierText": "攻撃力680%魔法",
+      "multiplierText": "攻撃力・クリ率・命中率+20% / 魔法680%",
       "duration": "攻撃力・クリ率・命中率+20% 1T",
       "ct": 4,
-      "condition": "自身と攻撃力最高味方を強化後、攻撃力最高敵へ攻撃。対象が専用バフを付帯中なら解除し、このスキルのバフターン+4",
+      "condition": "自身と攻撃力最高味方に1ターン、攻撃力・クリティカル率・命中率20%増加を付与(解除不可、1つのバフ扱い)。対象がマチルダ厳選バナナで付与したバフを付帯中なら解除し、このスキルのバフターン数を4ターンにする",
       "exclusiveWeapon": "専用Lv1: 攻撃力・クリ率・命中率+50%",
       "compareMemo": "魔力+8% / HP+22% / 命中+10%",
       "noteUrl": "",
@@ -11937,7 +12316,19 @@
         "realityRank": "中",
         "rankingTarget": "基本",
         "damageMemo": "画像カードからの暫定入力"
-      }
+      },
+      "plainSummary": "自分とエースを強化してから、敵のエースを撃つ。",
+      "steps": [
+        {
+          "text": "自身と攻撃力が最も高い味方の攻撃力・クリティカル率・命中率を20%増加(1ターン、解除不可)"
+        },
+        {
+          "text": "攻撃力が最も高い敵に魔法680%"
+        },
+        {
+          "text": "対象が「マチルダ厳選バナナ」で付与したバフを付帯中なら解除し、1つ目のバフのターン数を4ターンにする"
+        }
+      ]
     },
     {
       "id": "matilda-s2",
@@ -11972,7 +12363,22 @@
         "realityRank": "中",
         "rankingTarget": "基本",
         "damageMemo": "画像カードからの暫定入力"
-      }
+      },
+      "plainSummary": "元気なら追撃、削られていたら回復に切り替わる二刀流。",
+      "steps": [
+        {
+          "text": "防御力が高い敵2体に魔法340%"
+        },
+        {
+          "text": "自身のHPが50%以上なら、防御力が低い敵2体に追加で魔法340%"
+        },
+        {
+          "text": "自身のHPが50%未満なら追加攻撃の代わりに、自身と攻撃力が最も高い味方を攻撃力50%分回復する"
+        },
+        {
+          "text": "このスキルの回復効果がバトル中1回目なら、回復量は攻撃力100%になる"
+        }
+      ]
     },
     {
       "id": "matilda-s3",
@@ -11992,7 +12398,16 @@
       "compareMemo": "魔力+8% / HP+22% / 命中+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/matilda/"
+      "sourceUrl": "https://ichigogames.net/mementomori/matilda/",
+      "plainSummary": "定期的に自分とエースへ攻撃・クリ・命中のバフを配る。",
+      "steps": [
+        {
+          "text": "ターン開始時、自身と攻撃力が最も高い味方の攻撃力+10%・クリティカル率+10%・命中率+20%(4ターン、解除不可)"
+        },
+        {
+          "text": "発動後4回行動まで再発動しない"
+        }
+      ]
     },
     {
       "id": "matilda-s4",
@@ -12012,7 +12427,16 @@
       "compareMemo": "魔力+8% / HP+22% / 命中+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/matilda/"
+      "sourceUrl": "https://ichigogames.net/mementomori/matilda/",
+      "plainSummary": "仲間がいるほど硬くなる遮断。",
+      "steps": [
+        {
+          "text": "攻撃を受けたとき、ダメージを10%遮断"
+        },
+        {
+          "text": "自身以外の味方が2体以上生存していれば遮断が40%になる"
+        }
+      ]
     },
     {
       "id": "morgana-s1",
@@ -14416,7 +14840,19 @@
         "realityRank": "中",
         "rankingTarget": "条件込み",
         "damageMemo": ""
-      }
+      },
+      "plainSummary": "瀕死なほど痛くなる2連撃。吸血付き。",
+      "steps": [
+        {
+          "text": "ランダムな敵に物理800%×2回"
+        },
+        {
+          "text": "自身のHP割合が低いほどダメージ増加(最大1800%、判定は攻撃ごと)"
+        },
+        {
+          "text": "総与ダメージの5%をHP回復する"
+        }
+      ]
     },
     {
       "id": "claudia-s2",
@@ -14451,7 +14887,23 @@
         "realityRank": "中",
         "rankingTarget": "条件込み",
         "damageMemo": ""
-      }
+      },
+      "plainSummary": "敵エースへの一撃。倒し損ねたらもう一発。",
+      "steps": [
+        {
+          "text": "自身のHPが50%未満なら、攻撃力が最も高い敵に回避率50%減少と気絶を2ターン付与"
+        },
+        {
+          "text": "攻撃力が最も高い敵に物理900%(決死でなければ2倍)",
+          "term": "気絶"
+        },
+        {
+          "text": "決死中なら総与ダメージの15%をHP回復する"
+        },
+        {
+          "text": "撃破できなければ、回復前に弱体付与と物理攻撃を1回再発動する"
+        }
+      ]
     },
     {
       "id": "claudia-s3",
@@ -14471,7 +14923,21 @@
       "compareMemo": "攻撃力+18% / HP+22% / 防御力+5%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/claudia/"
+      "sourceUrl": "https://ichigogames.net/mementomori/claudia/",
+      "plainSummary": "毎ターン自分を削って攻撃力を買う諸刃の剣。",
+      "steps": [
+        {
+          "text": "バトル開始時、「決死」を40ターン付与(攻撃力+80%、解除不可)"
+        },
+        {
+          "text": "毎ターン行動開始時、自身に現在HP20%の自傷ダメージ(攻撃力100%上限)"
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "毎ターンの自傷がS1の低HP強化・S4の遮断強化と自己完結で噛み合う。また自傷回数を参照する味方の供給源にもなる。根拠: 自傷が毎ターン発生する設計のため"
+        }
+      ]
     },
     {
       "id": "claudia-s4",
@@ -14491,7 +14957,16 @@
       "compareMemo": "攻撃力+18% / HP+22% / 防御力+5%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/claudia/"
+      "sourceUrl": "https://ichigogames.net/mementomori/claudia/",
+      "plainSummary": "HPが減るほど硬くなる。",
+      "steps": [
+        {
+          "text": "自身の最大HPを60%増加(解除不可)"
+        },
+        {
+          "text": "攻撃を受けたとき、HP割合が低いほど遮断が増える(最大40%)"
+        }
+      ]
     },
     {
       "id": "yuni-s1",
