@@ -1431,7 +1431,7 @@
       "roleMemo": "回避率減少と気絶で押す高火力スナイパー",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/rea/"
+      "sourceUrl": "https://ichigogames.net/mementomori/lea/"
     },
     {
       "id": "sabrina_cool_breeze",
@@ -1796,7 +1796,25 @@
         "realityRank": "高",
         "rankingTarget": "対象",
         "damageMemo": "火力より睡眠付与が主目的"
-      }
+      },
+      "plainSummary": "クリティカルした相手を眠らせる妨害魔法。",
+      "steps": [
+        {
+          "text": "ランダムな敵3体に魔法460%"
+        },
+        {
+          "text": "クリティカルヒットした対象にクリティカル耐性率80%減少と睡眠を1ターン付与",
+          "term": "睡眠"
+        },
+        {
+          "text": "クリティカル耐性率減少と睡眠は1つの弱体効果として扱い、対象が攻撃を受けると解除される"
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "睡眠の条件がクリティカルのため、クリ率支援と組むと安定する。ルナリンドS1の沈黙と同型の設計。根拠: 付与条件が「クリティカルヒット時」のため"
+        }
+      ]
     },
     {
       "id": "soltina-s2",
@@ -1811,7 +1829,7 @@
       "multiplierText": "魔法780%",
       "duration": "気絶1T",
       "ct": 4,
-      "condition": "対象の魔力が自身未満なら気絶。通常効果でも気絶付与",
+      "condition": "攻撃力最高敵に魔法780%。対象の魔力が自身より低い場合、100%で1ターン気絶",
       "exclusiveWeapon": "専用Lv2: 気絶2T",
       "compareMemo": "高火力対象を止めやすい単体妨害。専用込みで拘束性能が上がる",
       "noteUrl": "",
@@ -1831,7 +1849,17 @@
         "realityRank": "高",
         "rankingTarget": "対象外",
         "damageMemo": "妨害比較では重要だが火力ランキング向きではない"
-      }
+      },
+      "plainSummary": "敵のエースを気絶させにいく一撃。",
+      "steps": [
+        {
+          "text": "攻撃力が最も高い敵に魔法780%"
+        },
+        {
+          "text": "対象の魔力が自身より低い場合、100%の確率で気絶を1ターン付与",
+          "term": "気絶"
+        }
+      ]
     },
     {
       "id": "soltina-s3",
@@ -1846,12 +1874,24 @@
       "multiplierText": "クリ率+50%",
       "duration": "3T",
       "ct": null,
-      "condition": "アクティブスキルで弱体を受け、弱体効果が2個以上なら全解除",
+      "condition": "アクティブスキルで弱体を受け、弱体効果が2個以上なら全解除。発動後4回行動終了まで再発動不可。発動時、3ターン自身のクリティカル率50%増加(解除不可)",
       "exclusiveWeapon": "専用武器効果なし",
       "compareMemo": "弱体を受けてから動く受け身の解除。発動後4回行動まで再発動不可",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/soltina/"
+      "sourceUrl": "https://ichigogames.net/mementomori/soltina/",
+      "plainSummary": "弱体が溜まったら自分でまとめて掃除し、クリ率も上げる。",
+      "steps": [
+        {
+          "text": "アクティブスキルで弱体を受け、自身の弱体効果が2個以上なら全解除"
+        },
+        {
+          "text": "発動後4回行動まで再発動しない"
+        },
+        {
+          "text": "発動時、自身のクリティカル率を50%増加(3ターン、解除不可)"
+        }
+      ]
     },
     {
       "id": "soltina-s4",
@@ -1863,15 +1903,30 @@
       "majorCategory": "防御",
       "subCategory": "多重バリア / 被ダメ無効",
       "target": "自身",
-      "multiplierText": "最大HP10%以上の被ダメ無効",
+      "multiplierText": "多重バリア4層 / クリ率+30%",
       "duration": "4層 / バリア中クリ率+30%",
       "ct": null,
-      "condition": "ターン開始時に多重バリア4層。被ダメ無効時に1層消費",
+      "condition": "ターン開始時、自身に多重バリア4層。最大HP10%以上の被ダメージで1層消費して無効化。発動後4回行動終了まで再発動不可。多重バリア付帯中はクリティカル率30%増加",
       "exclusiveWeapon": "専用武器効果なし",
       "compareMemo": "シールドというより回数制の大ダメージ無効。比較上は防御系に寄せる",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/soltina/"
+      "sourceUrl": "https://ichigogames.net/mementomori/soltina/",
+      "plainSummary": "多重バリア4層で一撃を受け流し続ける看板の耐久。",
+      "steps": [
+        {
+          "text": "ターン開始時、自身に多重バリアを4層付与(解除不可)"
+        },
+        {
+          "text": "最大HP10%以上のダメージを受けると1層消費して無効化"
+        },
+        {
+          "text": "発動後4回行動まで再発動しない"
+        },
+        {
+          "text": "多重バリアを付帯している間、自身のクリティカル率を30%増加(解除不可)"
+        }
+      ]
     },
     {
       "id": "amleth-s1",
@@ -1886,7 +1941,7 @@
       "multiplierText": "物理350%",
       "duration": "被ダメ+10% 2T",
       "ct": 4,
-      "condition": "対象がソーサラーならダメージ1.5倍",
+      "condition": "ランダム敵4体に物理350%。対象がソーサラーならダメージ1.5倍。2ターン対象の被ダメージ10%増加",
       "exclusiveWeapon": "専用Lv1: 拘束2T追加。専用Lv3: 対ソーサラー2倍",
       "compareMemo": "対ソーサラーに寄せた火力兼デバフ。職業依存なので汎用性は相手次第",
       "noteUrl": "",
@@ -1906,7 +1961,19 @@
         "realityRank": "中",
         "rankingTarget": "条件込み",
         "damageMemo": "相手がソーサラーかどうかで評価が大きく変わる"
-      }
+      },
+      "plainSummary": "ソーサラー特効の4体攻撃。",
+      "steps": [
+        {
+          "text": "ランダムな敵4体に物理350%"
+        },
+        {
+          "text": "対象がソーサラーならダメージ1.5倍"
+        },
+        {
+          "text": "対象の被ダメージを10%増加(2ターン)"
+        }
+      ]
     },
     {
       "id": "amleth-s2",
@@ -1921,7 +1988,7 @@
       "multiplierText": "初撃330% / 2-4撃目310% / 追加380%",
       "duration": "撃破時HP回復",
       "ct": 4,
-      "condition": "各攻撃70%で追加攻撃。追加攻撃は最大4回。このスキルで撃破時HP10%回復",
+      "condition": "ランダム敵に4回物理攻撃。初撃330%、2〜4撃目310%。各攻撃70%で追加攻撃、追加は最大4回・380%。このスキルで撃破時、最大HP10%回復。撃破数ごと回復量+10%",
       "exclusiveWeapon": "専用Lv2: 追加攻撃400%",
       "compareMemo": "攻撃回数が伸びるほど強い連撃型。撃破時の自己回復もある",
       "noteUrl": "",
@@ -1942,7 +2009,22 @@
         "rankingTarget": "条件込み",
         "damageMemo": "追加攻撃の発生率が絡むため、安定火力とは分ける",
         "mixedMultiplier": true
-      }
+      },
+      "plainSummary": "追撃が連鎖する連撃。倒せば回復も増える。",
+      "steps": [
+        {
+          "text": "ランダムな敵に物理330%、以降は物理310%で合計4回攻撃"
+        },
+        {
+          "text": "攻撃するたび70%の確率で物理380%の追加攻撃(最大4回)"
+        },
+        {
+          "text": "このスキルで敵を戦闘不能にすると最大HP10%分回復する"
+        },
+        {
+          "text": "敵を戦闘不能にするたび回復量が最大HP10%分ずつ大きくなる"
+        }
+      ]
     },
     {
       "id": "amleth-s3",
@@ -1962,7 +2044,13 @@
       "compareMemo": "低HPで火力が伸びる自己強化。耐久スキルと噛み合う",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/amleth/"
+      "sourceUrl": "https://ichigogames.net/mementomori/amleth/",
+      "plainSummary": "追い込まれるほど強くなる。",
+      "steps": [
+        {
+          "text": "毎ターン開始時または被攻撃時、自身のHP割合が低いほど攻撃力が増加(最大+80%、解除不可)"
+        }
+      ]
     },
     {
       "id": "amleth-s4",
@@ -1982,7 +2070,21 @@
       "compareMemo": "低HP火力を活かすための耐久札。復活ではなく致命回避扱い",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/amleth/"
+      "sourceUrl": "https://ichigogames.net/mementomori/amleth/",
+      "plainSummary": "一度だけ致命傷をHP1で耐え、しばらく死ななくなる。",
+      "steps": [
+        {
+          "text": "致命的ダメージを受けたときHP1で耐える(バトル中1回)"
+        },
+        {
+          "text": "発動時、不死身を3ターン付与"
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "発動後はS3の低HP攻撃力増加が最大近くで働くため、耐えてから反撃する設計としてつながる。根拠: S3の参照がHP割合のため"
+        }
+      ]
     },
     {
       "id": "fenrir-s1",
@@ -1997,7 +2099,7 @@
       "multiplierText": "魔法720%",
       "duration": "隣接味方CT-1",
       "ct": 4,
-      "condition": "攻撃後、隣接する味方2体のCTを短縮",
+      "condition": "ランダム敵1体に魔法720%。攻撃後、隣接する味方2体のスキルCTを1減少。専用Lv1でCT減少量2",
       "exclusiveWeapon": "専用Lv1: CT-2。専用Lv2: 隣接味方攻撃力+10% 2T。専用Lv3: 攻撃力+20%",
       "compareMemo": "支援目的が強い単体攻撃。CT比較では優先度が高い",
       "noteUrl": "",
@@ -2017,7 +2119,21 @@
         "realityRank": "高",
         "rankingTarget": "対象外",
         "damageMemo": "CT短縮目的で見るスキル"
-      }
+      },
+      "plainSummary": "撃ったあと、隣2人のスキルを早回しする。",
+      "steps": [
+        {
+          "text": "ランダムな敵1体に魔法720%"
+        },
+        {
+          "text": "攻撃後、隣接する味方2体のスキルCTを1減少"
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "メルティーユS2と同じCT操作系。隣接配置が条件のため、並び順で支援先を選べる。根拠: 対象が「隣接する味方2体」のため"
+        }
+      ]
     },
     {
       "id": "fenrir-s2",
@@ -2052,7 +2168,16 @@
         "realityRank": "高",
         "rankingTarget": "基本",
         "damageMemo": "攻撃しながら解除できる点が評価軸"
-      }
+      },
+      "plainSummary": "撃ちながら自分と隣の弱体を掃除する。",
+      "steps": [
+        {
+          "text": "ランダムな敵5体に魔法380%"
+        },
+        {
+          "text": "自身と隣接する味方2体の弱体効果を2つずつ解除"
+        }
+      ]
     },
     {
       "id": "fenrir-s3",
@@ -2067,12 +2192,21 @@
       "multiplierText": "最大HP20%回復",
       "duration": "1回行動後まで再発動不可",
       "ct": null,
-      "condition": "味方が攻撃を受けた後、条件を満たす味方を回復",
+      "condition": "味方が攻撃を受けるか回避した後、HP50%以下ならその味方を最大HP20%回復。発動後1回行動終了まで再発動不可",
       "exclusiveWeapon": "専用武器効果なし",
       "compareMemo": "受けた後に反応する支援回復。即時予防ではない",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/fenrir/"
+      "sourceUrl": "https://ichigogames.net/mementomori/fenrir/",
+      "plainSummary": "半分以下まで削られた味方を自動で回復。",
+      "steps": [
+        {
+          "text": "味方が攻撃を受けるか回避した後、HPが50%以下ならその味方を最大HP20%分回復"
+        },
+        {
+          "text": "発動後1回行動まで再発動しない"
+        }
+      ]
     },
     {
       "id": "fenrir-s4",
@@ -2092,7 +2226,13 @@
       "compareMemo": "自己耐久強化。比較では防御バフとして扱う",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/fenrir/"
+      "sourceUrl": "https://ichigogames.net/mementomori/fenrir/",
+      "plainSummary": "防御の常時底上げ。",
+      "steps": [
+        {
+          "text": "自身の防御力+80%(解除不可)"
+        }
+      ]
     },
     {
       "id": "florence-s1",
@@ -2253,7 +2393,7 @@
       "multiplierText": "魔法420%",
       "duration": "毒2T",
       "ct": 4,
-      "condition": "毒は行動開始時に現在HP割合ダメージ。クリティカル時に対象のバフ1つ解除",
+      "condition": "ランダム敵4体に魔法420%。2ターン毒付与。毒は行動開始時に現在HP3%ダメージ。クリティカル時、対象のバフ1つ解除。専用Lv2で毒4T、専用Lv3で現在HP5%",
       "exclusiveWeapon": "専用Lv1: 毒ダメージ4%。専用Lv2: 毒4T。専用Lv3: 毒5%",
       "compareMemo": "毒とバフ解除を兼ねる。毒の割合は火力比較で別扱いが必要",
       "noteUrl": "",
@@ -2273,7 +2413,20 @@
         "realityRank": "高",
         "rankingTarget": "基本",
         "damageMemo": "毒割合ダメージは倍率ランキングに混ぜない"
-      }
+      },
+      "plainSummary": "毒を撒く継続ダメージの起点。クリでバフも剥がす。",
+      "steps": [
+        {
+          "text": "ランダムな敵4体に魔法420%"
+        },
+        {
+          "text": "毒を2ターン付与(行動開始時に現在HP3%ダメージ)",
+          "term": "毒"
+        },
+        {
+          "text": "クリティカルヒットした対象のバフを1つ解除"
+        }
+      ]
     },
     {
       "id": "moddey-s2",
@@ -2284,11 +2437,11 @@
       "category": "弱体",
       "majorCategory": "敵弱体",
       "subCategory": "不治 / 毒条件",
-      "target": "ランダム敵4体",
-      "multiplierText": "魔法380%",
+      "target": "ランダム敵",
+      "multiplierText": "魔法380%×4回",
       "duration": "不治4T",
       "ct": 4,
-      "condition": "対象が毒なら不治付与",
+      "condition": "ランダム敵に4回魔法380%。対象が毒なら4ターン不治付与",
       "exclusiveWeapon": "専用武器効果なし",
       "compareMemo": "毒付与後に価値が上がる条件付き弱体。回復対策として比較",
       "noteUrl": "",
@@ -2308,7 +2461,21 @@
         "realityRank": "高",
         "rankingTarget": "基本",
         "damageMemo": "回復阻害目的の弱体スキル"
-      }
+      },
+      "plainSummary": "毒の敵に「不治」を重ねて回復を封じる。",
+      "steps": [
+        {
+          "text": "ランダムな敵に魔法380%×4回"
+        },
+        {
+          "text": "対象が毒付帯中なら不治を4ターン付与"
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "S1の毒が②の条件そのもの。毒参照の味方や持続ダメージ増幅と噛み合う継続ダメージ族の始祖。根拠: 付与条件が「毒付帯中」のため"
+        }
+      ]
     },
     {
       "id": "moddey-s3",
@@ -2323,12 +2490,25 @@
       "multiplierText": "再生: 最大HP10%回復 / 反撃200%",
       "duration": "4T",
       "ct": null,
-      "condition": "被弾時、HP条件を初めて下回ると再生とカウンタ変更を付与",
+      "condition": "被攻撃時、HP割合が初めて70%/40%を下回った場合、4ターン再生とカウンタ変更を付与。再生は最大HP10%回復、カウンタダメージは攻撃力200%",
       "exclusiveWeapon": "専用武器効果なし",
       "compareMemo": "耐久しながら継続火力へ寄せる自己補助",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/moddey/"
+      "sourceUrl": "https://ichigogames.net/mementomori/moddey/",
+      "plainSummary": "削られたら再生と反撃モードに切り替わる。",
+      "steps": [
+        {
+          "text": "被弾でHP割合が初めて70%または40%を下回ったとき、再生を4ターン付与(解除不可)",
+          "term": "再生"
+        },
+        {
+          "text": "再生は行動開始時に最大HP10%分回復する"
+        },
+        {
+          "text": "同時にカウンタ変更を4ターン付与し、カウンタダメージが攻撃力200%になる"
+        }
+      ]
     },
     {
       "id": "moddey-s4",
@@ -2348,7 +2528,13 @@
       "compareMemo": "毒だけでなく通常火力も底上げする",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/moddey/"
+      "sourceUrl": "https://ichigogames.net/mementomori/moddey/",
+      "plainSummary": "攻撃力とクリ率の常時底上げ。",
+      "steps": [
+        {
+          "text": "自身の攻撃力+30%・クリティカル率+30%(解除不可)"
+        }
+      ]
     },
     {
       "id": "sonya-s1",
@@ -2383,7 +2569,22 @@
         "realityRank": "中",
         "rankingTarget": "条件込み",
         "damageMemo": "直接攻撃を合計倍率へ混ぜると誤解が出る"
-      }
+      },
+      "plainSummary": "一番元気な敵に確定クリで斬り込む。倒し損ねたらもう一度。",
+      "steps": [
+        {
+          "text": "現在HPが最も高い敵に物理400%"
+        },
+        {
+          "text": "対象のHPが60%以上なら必ずクリティカル"
+        },
+        {
+          "text": "対象が戦闘不能でなければ、技力250%の直接攻撃を追加"
+        },
+        {
+          "text": "撃破できなければこのスキルを1回再発動"
+        }
+      ]
     },
     {
       "id": "sonya-s2",
@@ -2418,7 +2619,27 @@
         "realityRank": "低",
         "rankingTarget": "条件込み",
         "damageMemo": "撃破時再発動のため安定火力とは分ける"
-      }
+      },
+      "plainSummary": "一番弱った敵に確定クリのとどめ。倒せたらもう一度。",
+      "steps": [
+        {
+          "text": "現在HPが最も低い敵に物理400%"
+        },
+        {
+          "text": "対象のHPが60%以下なら必ずクリティカル"
+        },
+        {
+          "text": "対象が戦闘不能でなければ、技力280%の直接攻撃を追加"
+        },
+        {
+          "text": "このスキルで撃破した場合、このスキルを1回再発動"
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "S1は高HP狙い、S2は低HP狙いで役割が対になっており、S1で削ってS2で刈り取る自己完結設計。根拠: 両者の対象条件と確定クリ条件が相補のため"
+        }
+      ]
     },
     {
       "id": "sonya-s3",
@@ -2438,7 +2659,13 @@
       "compareMemo": "単体火力と命中を支える自己強化",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/sonya/"
+      "sourceUrl": "https://ichigogames.net/mementomori/sonya/",
+      "plainSummary": "基礎性能の常時底上げ。",
+      "steps": [
+        {
+          "text": "自身の最大HP+30%・攻撃力+30%・命中率+50%(解除不可)"
+        }
+      ]
     },
     {
       "id": "sonya-s4",
@@ -2450,15 +2677,24 @@
       "majorCategory": "味方強化",
       "subCategory": "全体攻防バフ / 生存数条件",
       "target": "味方全体",
-      "multiplierText": "攻撃力+3% / 防御力+3% + 生存味方数補正",
+      "multiplierText": "攻撃力+3% / 最大HP+3% + 生存味方数補正",
       "duration": "永続",
       "ct": null,
-      "condition": "自身以外の味方1体生存ごとに追加で+3%。バトル開始時発動",
+      "condition": "バトル開始時、味方全体の攻撃力と最大HPを3%増加。自身以外の味方1体生存ごとに追加で+3%。解除不可",
       "exclusiveWeapon": "専用武器効果なし",
       "compareMemo": "全体支援だが数値は生存数依存。序盤火力補助として見る",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/sonya/"
+      "sourceUrl": "https://ichigogames.net/mementomori/sonya/",
+      "plainSummary": "仲間が多いほど全員が強く、しぶとくなる号令。",
+      "steps": [
+        {
+          "text": "バトル開始時、味方全体の攻撃力・最大HP+3%(解除不可)"
+        },
+        {
+          "text": "自身以外の生存味方1体につき増加量がさらに+3%"
+        }
+      ]
     },
     {
       "id": "sivi-s1",
@@ -2636,7 +2872,7 @@
       "multiplierText": "物理400%",
       "duration": "沈黙1T",
       "ct": 4,
-      "condition": "20%で沈黙。対象魔力が自身未満なら40%で沈黙",
+      "condition": "HP割合が低い敵3体に物理400%。20%で1ターン沈黙。対象の腕力が自身より低ければ40%。専用武器Lv1で40%/80%",
       "exclusiveWeapon": "専用Lv1: 沈黙20→40%。専用Lv1: 条件時40→80%",
       "compareMemo": "低HP敵を狙う沈黙。確率型なので安定性は専用前後で大きく変わる",
       "noteUrl": "",
@@ -2656,7 +2892,20 @@
         "realityRank": "高",
         "rankingTarget": "対象外",
         "damageMemo": "妨害目的が主"
-      }
+      },
+      "plainSummary": "弱った敵を黙らせにいく追い打ち。",
+      "steps": [
+        {
+          "text": "HP割合が低い敵3体に物理400%"
+        },
+        {
+          "text": "20%の確率で沈黙を1ターン付与",
+          "term": "沈黙"
+        },
+        {
+          "text": "対象の腕力が自身より低ければ沈黙の確率が40%になる"
+        }
+      ]
     },
     {
       "id": "stella-s2",
@@ -2691,7 +2940,16 @@
         "realityRank": "高",
         "rankingTarget": "基本",
         "damageMemo": "火力と回復を両方見るスキル"
-      }
+      },
+      "plainSummary": "敵エースを殴った分で、一番傷ついた味方を癒す。",
+      "steps": [
+        {
+          "text": "攻撃力が最も高い敵に物理1200%"
+        },
+        {
+          "text": "攻撃後、HP割合が最も低い味方を総与ダメージの50%分回復"
+        }
+      ]
     },
     {
       "id": "stella-s3",
@@ -2711,7 +2969,13 @@
       "compareMemo": "単純な自己シールドとして比較しやすい。倍率が高く持続も長い",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/stella/"
+      "sourceUrl": "https://ichigogames.net/mementomori/stella/",
+      "plainSummary": "開幕の大型シールド。",
+      "steps": [
+        {
+          "text": "1ターン目開始時、自身に攻撃力800%のシールドを6ターン付与(解除不可)"
+        }
+      ]
     },
     {
       "id": "stella-s4",
@@ -2726,12 +2990,28 @@
       "multiplierText": "防御力+50%",
       "duration": "防御10T / 沈黙2T",
       "ct": null,
-      "condition": "防御力増加がない状態で被攻撃時に再付与し、40%で沈黙付与",
+      "condition": "バトル開始時、10ターン自身の防御力50%増加。被攻撃時にこの防御力増加ターン数-1。自身が付与した防御力増加がない状態で被攻撃時、10ターン防御力50%増加し、40%でランダム敵5体に2ターン沈黙。戦闘不能になる攻撃では発動しない。専用Lv2で沈黙80%",
       "exclusiveWeapon": "専用Lv2: 沈黙40→80%。専用Lv3: バトル開始時スピード+25% 1T",
       "compareMemo": "防御維持と沈黙を兼ねる。被弾反応型なので能動妨害とは別枠",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/stella/"
+      "sourceUrl": "https://ichigogames.net/mementomori/stella/",
+      "plainSummary": "防御バフが剥がれたら張り直し、ついでに沈黙をばら撒く。",
+      "steps": [
+        {
+          "text": "バトル開始時、防御力+50%を10ターン付与"
+        },
+        {
+          "text": "攻撃を受けるたび、この防御力増加のターン数が1減少"
+        },
+        {
+          "text": "防御力増加がない状態で攻撃を受けたとき再付与し、40%の確率でランダムな敵5体に沈黙を2ターン付与",
+          "term": "沈黙"
+        },
+        {
+          "text": "その攻撃で戦闘不能になる場合は発動しない"
+        }
+      ]
     },
     {
       "id": "fenny-s1",
@@ -3075,7 +3355,24 @@
         "realityRank": "中",
         "rankingTarget": "条件込み",
         "damageMemo": "クリティカル前提だが連撃内で条件を満たしやすい"
-      }
+      },
+      "plainSummary": "一度クリティカルが出ると残り全部クリティカルになる連撃。",
+      "steps": [
+        {
+          "text": "ランダムな敵に物理420%×5回"
+        },
+        {
+          "text": "クリティカル発生後の連撃は必ずクリティカル"
+        },
+        {
+          "text": "クリティカル4回以上で自身の防御力+70%(2ターン)"
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "涼風サブリナS2と同じ連鎖クリ機構。クリ率支援やクリ耐性減少で初回クリを起こしやすくすると安定する。根拠: 連鎖の起点がクリティカル発生のため"
+        }
+      ]
     },
     {
       "id": "sabrina-s2",
@@ -3110,7 +3407,19 @@
         "realityRank": "中",
         "rankingTarget": "条件込み",
         "damageMemo": "自己付与のスピード減少が絡むため安定火力と分ける"
-      }
+      },
+      "plainSummary": "減速した敵に1.5倍が乗る3連撃。",
+      "steps": [
+        {
+          "text": "ランダムな敵に物理520%×3回"
+        },
+        {
+          "text": "30%の確率でスピード15%減少を1ターン付与"
+        },
+        {
+          "text": "対象がスピード減少中ならダメージ1.5倍"
+        }
+      ]
     },
     {
       "id": "sabrina-s3",
@@ -3125,12 +3434,24 @@
       "multiplierText": "弱体解除 / 行動阻害無効",
       "duration": "2T",
       "ct": null,
-      "condition": "ターン開始時、自身が弱体効果を付帯している場合に解除",
+      "condition": "ターン開始時、自身が弱体効果を付帯している場合、弱体効果を全解除。発動後4回行動終了まで再発動不可。さらに2ターン行動阻害無効を付与(解除不可)",
       "exclusiveWeapon": "専用武器効果なし",
       "compareMemo": "火力補助ではなく安定行動のための自己解除",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/sabrina/"
+      "sourceUrl": "https://ichigogames.net/mementomori/sabrina/",
+      "plainSummary": "毎ターン、自分の弱体を掃除して行動阻害にも備える。",
+      "steps": [
+        {
+          "text": "ターン開始時、自身が弱体効果を持っていれば全解除"
+        },
+        {
+          "text": "発動後4回行動まで再発動しない"
+        },
+        {
+          "text": "発動時、自身に行動阻害無効を2ターン付与(解除不可)"
+        }
+      ]
     },
     {
       "id": "sabrina-s4",
@@ -3150,7 +3471,13 @@
       "compareMemo": "直接火力ではないが長期戦の耐久に影響する",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/sabrina/"
+      "sourceUrl": "https://ichigogames.net/mementomori/sabrina/",
+      "plainSummary": "毎ターンHP上限が育ち続ける。",
+      "steps": [
+        {
+          "text": "毎ターン開始時、最大HP+7%を1スタック付与(最大20スタック=+140%、解除不可)"
+        }
+      ]
     },
     {
       "id": "ivy-s1",
@@ -15320,7 +15647,19 @@
         "realityRank": "中",
         "rankingTarget": "条件込み",
         "damageMemo": ""
-      }
+      },
+      "plainSummary": "バフ持ちからは奪い、丸腰にはデバフ命中を削る。",
+      "steps": [
+        {
+          "text": "攻撃前、対象がバフ付帯中なら80%の確率でバフを1つ奪取"
+        },
+        {
+          "text": "バフがない対象には弱体効果命中率40%減少を2ターン付与"
+        },
+        {
+          "text": "ランダムな敵5体に物理380%"
+        }
+      ]
     },
     {
       "id": "nina-s2",
@@ -15355,7 +15694,19 @@
         "realityRank": "中",
         "rankingTarget": "条件込み",
         "damageMemo": ""
-      }
+      },
+      "plainSummary": "自分の弱体を格下に押し付ける5体攻撃。",
+      "steps": [
+        {
+          "text": "攻撃前、対象の技力が自身より低い場合、自身の弱体効果を1つ解除"
+        },
+        {
+          "text": "解除した弱体効果を100%の確率で対象に付与"
+        },
+        {
+          "text": "ランダムな敵5体に物理480%"
+        }
+      ]
     },
     {
       "id": "nina-s3",
@@ -15375,7 +15726,13 @@
       "compareMemo": "攻撃力+18% / 弱体効果命中+10% / 防御貫通7000",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/nina/"
+      "sourceUrl": "https://ichigogames.net/mementomori/nina/",
+      "plainSummary": "回避と被ダメカットの常時底上げ。",
+      "steps": [
+        {
+          "text": "自身の回避率+30%・被ダメージ30%減少(解除不可)"
+        }
+      ]
     },
     {
       "id": "nina-s4",
@@ -15395,7 +15752,13 @@
       "compareMemo": "攻撃力+18% / 弱体効果命中+10% / 防御貫通7000",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/nina/"
+      "sourceUrl": "https://ichigogames.net/mementomori/nina/",
+      "plainSummary": "大ダメージの超過分をカットする。",
+      "steps": [
+        {
+          "text": "現在HP10%を超えるダメージを受けたとき、超過分を65%遮断"
+        }
+      ]
     },
     {
       "id": "mertillier-s1",
@@ -15570,7 +15933,22 @@
         "realityRank": "中",
         "rankingTarget": "条件込み",
         "damageMemo": ""
-      }
+      },
+      "plainSummary": "格下には確定クリ、一番屈強な敵には直接攻撃で攻撃力まで削る。",
+      "steps": [
+        {
+          "text": "ランダムな敵5体に物理540%"
+        },
+        {
+          "text": "対象の腕力が自身より低ければ必ずクリティカル"
+        },
+        {
+          "text": "腕力が最も高い敵に腕力150%の直接攻撃を行う"
+        },
+        {
+          "text": "同じ対象の攻撃力を50%減少(1ターン)"
+        }
+      ]
     },
     {
       "id": "luke-s2",
@@ -15590,7 +15968,24 @@
       "compareMemo": "攻撃力+18% / クリティカル+10% / 防御力+5%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/luke/"
+      "sourceUrl": "https://ichigogames.net/mementomori/luke/",
+      "plainSummary": "シールドも多重バリアも無視して撃ち抜く対盾の切り札。",
+      "steps": [
+        {
+          "text": "ランダムな敵1体のシールドを全解除"
+        },
+        {
+          "text": "腕力520%の直接攻撃を行う(ダメージ無効・シールド・多重バリアを無視)"
+        },
+        {
+          "text": "対象がシールドを持っていなければダメージ1.5倍"
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "多重バリア対策の第3系統。盾で守るタイプの敵への直接の回答。根拠: シールド全解除と無効化無視の仕様のため"
+        }
+      ]
     },
     {
       "id": "luke-s3",
@@ -15610,7 +16005,13 @@
       "compareMemo": "攻撃力+18% / クリティカル+10% / 防御力+5%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/luke/"
+      "sourceUrl": "https://ichigogames.net/mementomori/luke/",
+      "plainSummary": "クリティカルするたび、相手が柔らかくなっていく。",
+      "steps": [
+        {
+          "text": "自身の攻撃がクリティカルヒットしたとき、対象の被ダメージ+15%を付与(最大5スタック)"
+        }
+      ]
     },
     {
       "id": "luke-s4",
@@ -15622,15 +16023,21 @@
       "majorCategory": "防御",
       "subCategory": "クリティカル耐性 / 専用武器効果",
       "target": "自身 / 隣接味方",
-      "multiplierText": "クリ耐性+60% / HP回復",
+      "multiplierText": "クリ耐性+60%",
       "duration": "解除不可",
       "ct": null,
-      "condition": "バトル開始時、自身4Tと隣接味方1体3Tのクリティカル耐性率を増加。専用武器効果で毎ターン開始時に自身HPを攻撃力25%回復",
+      "condition": "バトル開始時、自身に4ターン、自身に隣接する味方1体に3ターン、クリティカル耐性率60%増加。専用武器効果で毎ターン開始時に自身HP回復",
       "exclusiveWeapon": "専用武器効果: 毎ターン開始時、自身HPを自身の攻撃力25%回復",
       "compareMemo": "攻撃力+18% / クリティカル+10% / 防御力+5%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/luke/"
+      "sourceUrl": "https://ichigogames.net/mementomori/luke/",
+      "plainSummary": "自分と隣のクリティカル耐性を上げる。",
+      "steps": [
+        {
+          "text": "バトル開始時、自身(4ターン)と隣接味方1体(3ターン)のクリティカル耐性率+60%"
+        }
+      ]
     },
     {
       "id": "rea-s1",
@@ -15645,12 +16052,12 @@
       "multiplierText": "物理700% / 条件時900%",
       "duration": "回避率減少2T / 気絶1T",
       "ct": 4,
-      "condition": "80%で気絶付与。気絶していない場合は必ず命中する物理900%。戦闘不能にできなければ1回再発動",
+      "condition": "攻撃力最高敵に2ターン回避率30%減少後、物理700%。その後80%で1ターン気絶。気絶していない場合、必ず命中する物理900%。戦闘不能にできなければ1回再発動。専用Lv1で回避率50%、専用Lv3で3ターン",
       "exclusiveWeapon": "専用Lv1: 回避率減少50%。専用Lv3: 回避率減少3T",
       "compareMemo": "技力+8% / 攻撃力+18% / クリティカル+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/rea/",
+      "sourceUrl": "https://ichigogames.net/mementomori/lea/",
       "damage": {
         "singleMultiplier": 700,
         "hitCount": 1,
@@ -15665,7 +16072,23 @@
         "realityRank": "中",
         "rankingTarget": "条件込み",
         "damageMemo": ""
-      }
+      },
+      "plainSummary": "敵エースを気絶させにいき、外れたら必中の強打に切り替わる。",
+      "steps": [
+        {
+          "text": "攻撃力が最も高い敵の回避率を30%減少(2ターン)"
+        },
+        {
+          "text": "同じ対象に物理700%、その後80%の確率で気絶を1ターン付与",
+          "term": "気絶"
+        },
+        {
+          "text": "対象が気絶していない場合は、必ず命中する物理900%に変わる"
+        },
+        {
+          "text": "戦闘不能にできなければ1回再発動"
+        }
+      ]
     },
     {
       "id": "rea-s2",
@@ -15685,7 +16108,7 @@
       "compareMemo": "技力+8% / 攻撃力+18% / クリティカル+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/rea/",
+      "sourceUrl": "https://ichigogames.net/mementomori/lea/",
       "damage": {
         "singleMultiplier": 800,
         "hitCount": 1,
@@ -15700,7 +16123,27 @@
         "realityRank": "中",
         "rankingTarget": "条件込み",
         "damageMemo": ""
-      }
+      },
+      "plainSummary": "回避を削った敵に1.5倍、自分が瀕死ならさらに伸びる。",
+      "steps": [
+        {
+          "text": "攻撃力が最も高い敵に物理800%"
+        },
+        {
+          "text": "対象が回避率減少中ならダメージ1.5倍"
+        },
+        {
+          "text": "対象が回避率減少中でなければ必ず命中"
+        },
+        {
+          "text": "自身のHP割合が低いほどダメージ増加(最大1600%)"
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "S1の回避率減少が②の条件そのもの。S1からS2の順で回す自己完結設計。根拠: 倍率条件が「回避率減少中」のため"
+        }
+      ]
     },
     {
       "id": "rea-s3",
@@ -15720,7 +16163,13 @@
       "compareMemo": "技力+8% / 攻撃力+18% / クリティカル+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/rea/"
+      "sourceUrl": "https://ichigogames.net/mementomori/lea/",
+      "plainSummary": "攻撃力とクリダメの常時底上げ。",
+      "steps": [
+        {
+          "text": "自身の攻撃力+35%・クリダメ強化+35%(解除不可)"
+        }
+      ]
     },
     {
       "id": "rea-s4",
@@ -15740,7 +16189,19 @@
       "compareMemo": "技力+8% / 攻撃力+18% / クリティカル+10%",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/rea/"
+      "sourceUrl": "https://ichigogames.net/mementomori/lea/",
+      "plainSummary": "開幕は姿を隠し、大ダメージを受けたら被ダメカットが入る。",
+      "steps": [
+        {
+          "text": "バトル開始時、ステルスを2ターン付与"
+        },
+        {
+          "text": "最大HP25%を超えるダメージを受けたとき、被ダメージ15%減少を2ターン付与"
+        },
+        {
+          "text": "発動後4回行動まで再発動しない"
+        }
+      ]
     },
     {
       "id": "sabrina_cool_breeze-s1",
