@@ -138,6 +138,9 @@
 
   function totalDamageText(skill) {
     if (!skill.damage) return "";
+    // damage の数値が攻撃力倍率でないスキル（魔力・腕力・消費HP・被ダメージ参照など）は、
+    // 合計値だけを出すと基準が伝わらないため multiplierText 側にフォールバックさせる。
+    if (skill.damage.nonAttackMultiplier) return "";
     const base = skill.damage.baseTotal ? `通常 ${skill.damage.baseTotal}%` : "";
     const max = skill.damage.conditionMaxTotal && skill.damage.conditionMaxTotal !== skill.damage.baseTotal
       ? `最大 ${skill.damage.conditionMaxTotal}%`

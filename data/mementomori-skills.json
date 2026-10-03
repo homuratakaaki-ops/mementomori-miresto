@@ -3202,8 +3202,9 @@
         "powerType": "直接攻撃 / 攻防吸収 / シールド",
         "maxStacks": null,
         "realityRank": "中",
-        "rankingTarget": "条件込み",
-        "damageMemo": "攻防吸収とシールドは火力倍率欄に含めず、生存補助として評価"
+        "rankingTarget": "対象外",
+        "damageMemo": "攻防吸収とシールドは火力倍率欄に含めず、生存補助として評価",
+        "nonAttackMultiplier": true
       },
       "plainSummary": "敵エースの攻防を吸い取り、削って、自分の盾に変える。",
       "steps": [
@@ -3357,7 +3358,7 @@
         "powerType": "クリティカル依存 / 攻撃回数増加",
         "maxStacks": null,
         "realityRank": "高",
-        "rankingTarget": "専用Lv2",
+        "rankingTarget": "専用Lv",
         "damageMemo": "クリティカル前提だが連撃内で条件を満たしやすい"
       },
       "plainSummary": "一度クリティカルが出ると残り全部クリティカルになる連撃。",
@@ -4046,7 +4047,7 @@
         "powerType": "バフ解除 / 沈黙",
         "maxStacks": null,
         "realityRank": "低",
-        "rankingTarget": "補助",
+        "rankingTarget": "参考",
         "damageMemo": "高火力スキルとの組み合わせ前提。倍率比較では0%として扱う"
       }
     },
@@ -9463,14 +9464,14 @@
       "imageUrl": "",
       "sourceUrl": "https://ichigogames.net/mementomori/cattleya/",
       "damage": {
-        "singleMultiplier": 360,
-        "hitCount": 2,
-        "baseTotal": 720,
-        "exclusiveLv1Total": 720,
-        "exclusiveLv2Total": 1440,
+        "singleMultiplier": 590,
+        "hitCount": 4,
+        "baseTotal": 2360,
+        "exclusiveLv1Total": 2360,
+        "exclusiveLv2Total": 2360,
         "exclusiveLv3Total": 2360,
         "conditionMaxTotal": 4248,
-        "conditionMaxNote": "専用Lv3の590%×4回に、3回目以降の攻撃力増加80%を条件込みで見る",
+        "conditionMaxNote": "最大スキルLv3で590%×4回=2360。専用武器に倍率変化はなく(Lv1は攻撃力増加量のみ、Lv2/Lv3は記載なし)、3回目以降の発動による攻撃力+80%を条件込みで見る",
         "powerType": "段階強化 / 攻撃回数増加",
         "maxStacks": null,
         "realityRank": "中",
@@ -12575,8 +12576,9 @@
         "powerType": "回復倍率",
         "maxStacks": null,
         "realityRank": "中",
-        "rankingTarget": "条件MAX",
-        "damageMemo": "攻撃倍率ではなく回復倍率として扱う"
+        "rankingTarget": "対象外",
+        "damageMemo": "攻撃倍率ではなく回復倍率として扱う",
+        "nonAttackMultiplier": true
       }
     },
     {
@@ -13042,8 +13044,9 @@
         "powerType": "HP依存直接攻撃 / 防御無視",
         "maxStacks": null,
         "realityRank": "中",
-        "rankingTarget": "条件MAX",
-        "damageMemo": "実ダメージは攻撃力ではなく最大HPに依存。HP40%以上の条件と自傷管理が必要"
+        "rankingTarget": "対象外",
+        "damageMemo": "実ダメージは攻撃力ではなく最大HPに依存。HP40%以上の条件と自傷管理が必要",
+        "nonAttackMultiplier": true
       }
     },
     {
@@ -13455,7 +13458,7 @@
         "powerType": "支援",
         "maxStacks": null,
         "realityRank": "高",
-        "rankingTarget": "支援性能",
+        "rankingTarget": "参考",
         "damageMemo": "防御力増加、攻撃力増加、シールドは倍率比較には含めない"
       }
     },
@@ -15810,7 +15813,7 @@
         "powerType": "通常攻撃倍率",
         "maxStacks": null,
         "realityRank": "高",
-        "rankingTarget": "専用Lv2〜3",
+        "rankingTarget": "専用Lv",
         "damageMemo": ""
       },
       "plainSummary": "撃破するたび攻撃力が上がる高速4連撃。",
@@ -15962,7 +15965,7 @@
         "powerType": "通常攻撃倍率",
         "maxStacks": null,
         "realityRank": "高",
-        "rankingTarget": "専用Lv2〜3",
+        "rankingTarget": "専用Lv",
         "damageMemo": ""
       },
       "plainSummary": "バフ持ちからは奪い、丸腰にはデバフ命中を削る。",
@@ -16108,7 +16111,7 @@
         "powerType": "複数魔法 / シールド",
         "maxStacks": null,
         "realityRank": "高",
-        "rankingTarget": "専用Lv1",
+        "rankingTarget": "専用Lv",
         "damageMemo": "火力目的というより、初動でシールドを貼りながら最低限の範囲攻撃を行うスキル"
       },
       "plainSummary": "殴った分を自分の盾に変える。",
@@ -16330,8 +16333,9 @@
         "powerType": "腕力直接攻撃 / シールド解除 / バリア無視",
         "maxStacks": null,
         "realityRank": "高",
-        "rankingTarget": "条件MAX",
-        "damageMemo": "シールド解除からの単体フィニッシュ性能は高いが、対象がランダムなのでPvPの狙い撃ち用途では過信しない"
+        "rankingTarget": "対象外",
+        "damageMemo": "シールド解除からの単体フィニッシュ性能は高いが、対象がランダムなのでPvPの狙い撃ち用途では過信しない",
+        "nonAttackMultiplier": true
       }
     },
     {
@@ -16581,7 +16585,7 @@
         "powerType": "複数物理 / クリティカル耐性減少 / 気絶",
         "maxStacks": null,
         "realityRank": "高",
-        "rankingTarget": "専用Lv2〜3",
+        "rankingTarget": "専用Lv",
         "damageMemo": "初動から4ターンのクリティカル耐性低下を撒ける点が主価値。火力だけで評価しない"
       },
       "plainSummary": "クリ耐性を剥がしてから撃ち、一番元気な敵を気絶させる。",
@@ -16746,7 +16750,7 @@
         "powerType": "複数物理 / HPドレイン増加",
         "maxStacks": null,
         "realityRank": "高",
-        "rankingTarget": "専用Lv1",
+        "rankingTarget": "専用Lv",
         "damageMemo": "最大直接倍率は2400%。カウンター後にHPを戻す継戦用スキルとして見る"
       },
       "plainSummary": "攻撃しながら自分の吸血効率を上げる。",
@@ -16802,8 +16806,9 @@
         "powerType": "被ダメージ蓄積直接攻撃",
         "maxStacks": null,
         "realityRank": "中",
-        "rankingTarget": "参考",
-        "damageMemo": "被弾量が多いほど伸びる反撃スキル。攻撃力倍率ランキングとは分けて読む"
+        "rankingTarget": "対象外",
+        "damageMemo": "被弾量が多いほど伸びる反撃スキル。攻撃力倍率ランキングとは分けて読む",
+        "nonAttackMultiplier": true
       }
     },
     {
@@ -16898,7 +16903,7 @@
         "powerType": "複数物理 / HP比例",
         "maxStacks": null,
         "realityRank": "高",
-        "rankingTarget": "条件最大",
+        "rankingTarget": "条件MAX",
         "damageMemo": "基本1600%から最大1800%。2連撃のため多重バリア突破力は低い"
       },
       "plainSummary": "瀕死なほど痛くなる2連撃。吸血付き。",
@@ -16945,7 +16950,7 @@
         "powerType": "単体物理 / 条件再発動",
         "maxStacks": null,
         "realityRank": "中",
-        "rankingTarget": "条件最大",
+        "rankingTarget": "条件MAX",
         "damageMemo": "HP50%未満、決死解除、未撃破による再発動が揃うと最大4000%。条件依存が大きい"
       },
       "plainSummary": "敵エースへの一撃。倒し損ねたらもう一発。",
@@ -17241,7 +17246,7 @@
         "powerType": "単体物理 / 条件連撃",
         "maxStacks": null,
         "realityRank": "中",
-        "rankingTarget": "条件最大",
+        "rankingTarget": "条件MAX",
         "damageMemo": "7ターン目の守護騎士発動が必要。直接倍率は最大4200%"
       },
       "plainSummary": "「守護騎士」中は倍の10連撃になる主砲。",
@@ -17360,7 +17365,7 @@
         "powerType": "複数魔法 / 遅延",
         "maxStacks": null,
         "realityRank": "高",
-        "rankingTarget": "専用Lv1",
+        "rankingTarget": "専用Lv",
         "damageMemo": "火力より遅延付与と自己回復が主目的"
       },
       "plainSummary": "遅延を狙いつつ自分も回復する小技。",
@@ -17407,7 +17412,7 @@
         "powerType": "複数魔法 / 条件追加攻撃",
         "maxStacks": null,
         "realityRank": "中",
-        "rankingTarget": "条件最大",
+        "rankingTarget": "条件MAX",
         "damageMemo": "最大火力にはアクティブ回復を6回以上受ける条件が必要"
       },
       "plainSummary": "回復を受けた回数で4倍に化けるアタック。",
