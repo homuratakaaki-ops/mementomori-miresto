@@ -295,6 +295,24 @@ main {
 
 .flow-effects li { line-height: 1.75; }
 
+/* 条件付きの行。常時起きる行と見分けられるよう背景を薄く変える */
+.flow-effects li.flow-cond-line {
+  margin: 0 -6px;
+  padding: 4px 6px;
+  border-radius: 6px;
+  background: #f4f6fa;
+}
+
+/* 合計火力。専用武器による伸びは含まない */
+.flow-total {
+  display: inline-block;
+  margin-left: 6px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
 .flow-chip {
   display: inline-block;
   margin: 0 6px 0 0;

@@ -136,46 +136,84 @@
   }
 
   /**
+   * flow 内に出す合計火力。専用武器による伸びは専用武器欄に任せるので出さない。
+   * 攻撃力倍率でないスキル（nonAttackMultiplier）も合計を出さない。
+   */
+  function flowTotals(skill) {
+    const damage = skill.damage;
+    if (!damage || damage.nonAttackMultiplier) return { base: "", max: "" };
+    return {
+      base: damage.baseTotal ? `合計 ${damage.baseTotal}%` : "",
+      max: damage.conditionMaxTotal > damage.baseTotal ? `条件最大 ${damage.conditionMaxTotal}%` : ""
+    };
+  }
+
+  /**
    * flow の1効果。確率・倍率・継続・条件・補足は、その効果と同じ行に添える。
    * 倍率チップがある効果は本文を省略し、チップだけを出す。
+   * 条件付きの行は背景を変えて、常時起きる行と見分けられるようにする。
    */
-  function renderFlowEffect(effect, terms) {
+  function renderFlowEffect(effect, terms, totals, state) {
     const before = [
       effect.chance ? `<span class="flow-chip">${escapeHtml(effect.chance)}</span>` : "",
       effect.condition ? `<span class="flow-chip cond">${highlightRatios(effect.condition)}</span>` : ""
     ].filter(Boolean).join("");
     const body = effect.multiplier ? "" : renderTermText(effect, terms);
+    let total = "";
+    if (effect.multiplier && effect.condition) {
+      total = totals.max;
+    } else if (effect.multiplier && !state.baseShown) {
+      total = totals.base;
+      state.baseShown = Boolean(total);
+    }
     const after = [
       effect.multiplier ? `<span class="flow-chip num">${highlightRatios(effect.multiplier)}</span>` : "",
+      total ? `<span class="flow-total">${escapeHtml(total)}</span>` : "",
       effect.duration ? `<span class="flow-chip">${escapeHtml(effect.duration)}</span>` : "",
       effect.note ? `<span class="flow-note">${escapeHtml(effect.note)}</span>` : ""
     ].filter(Boolean).join("");
-    return `<li>${before}${body}${after}</li>`;
+    return `<li${effect.condition ? ' class="flow-cond-line"' : ""}>${before}${body}${after}</li>`;
   }
 
   /**
    * 1枠。「誰に」は直前の枠と対象が変わるときだけ出す（同じ対象の繰り返しを避ける）。
    * 効果が1つだけの枠では「同時に発動」ラベルを出さない。
    */
-  function renderFlowBlock(block, terms, previousTarget) {
+  function renderFlowBlock(block, terms, showTarget, totals, state) {
     const effects = block.effects || [];
     const mode = block.mode === "simultaneous" && effects.length < 2 ? "" : FLOW_MODE_LABEL[block.mode];
-    const showTarget = block.target !== previousTarget;
     return `
           <li class="flow-block">
             <p class="flow-when"><span class="flow-when-text">${escapeHtml(flowOrderMark(block))}${escapeHtml(block.when)}</span>${mode ? `<span class="flow-mode">${escapeHtml(mode)}</span>` : ""}</p>
             ${showTarget ? `<div class="flow-row"><span class="flow-label">誰に</span><span class="flow-value">${escapeHtml(block.target)}</span></div>` : ""}
-            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects">${effects.map((effect) => renderFlowEffect(effect, terms)).join("")}</ul></div>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects">${effects.map((effect) => renderFlowEffect(effect, terms, totals, state)).join("")}</ul></div>
           </li>
         `;
+  }
+
+  /**
+   * 「誰に」を出す枠を決める。直前と同じ対象なら省略するが、
+   * 省略が2枠続いたら3枠目で出し直す（対象を見失わないため）。
+   */
+  function flowTargetVisibility(flow) {
+    let omitted = 0;
+    return flow.map((block, index) => {
+      const same = index > 0 && block.target === flow[index - 1].target;
+      if (same && omitted < 2) { omitted += 1; return false; }
+      omitted = 0;
+      return true;
+    });
   }
 
   /** 「いつ・誰に・何が起きる？」。flow を持つスキルだけ表示し、steps の代わりになる。 */
   function renderFlow(skill, terms) {
     if (!Array.isArray(skill.flow) || skill.flow.length === 0) return "";
     const dict = terms || defaultTerms;
+    const show = flowTargetVisibility(skill.flow);
+    const totals = flowTotals(skill);
+    const state = { baseShown: false };
     const blocks = skill.flow
-      .map((block, index) => renderFlowBlock(block, dict, index === 0 ? null : skill.flow[index - 1].target))
+      .map((block, index) => renderFlowBlock(block, dict, show[index], totals, state))
       .join("");
     return `
         <div>
@@ -183,6 +221,10 @@
           <ol class="flow">${blocks}</ol>
         </div>
       `;
+  }
+
+  function hasFlow(skill) {
+    return Array.isArray(skill.flow) && skill.flow.length > 0;
   }
 
   function renderSteps(skill, terms) {
@@ -279,7 +321,7 @@
         </header>
         <div class="skill-body">
           ${renderSteps(skill, terms)}
-          ${renderDataRows(skill)}
+          ${hasFlow(skill) ? "" : renderDataRows(skill)}
           ${renderSynergyNotes(skill)}
           ${renderVerifications(skill)}
           ${renderWeapon(skill)}
