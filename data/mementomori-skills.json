@@ -5202,7 +5202,7 @@
         "powerType": "純火力",
         "maxStacks": null,
         "realityRank": "高",
-        "rankingTarget": "専用Lv3",
+        "rankingTarget": "専用Lv",
         "damageMemo": "条件依存が薄い3回攻撃。単体残りでも攻撃回数を失いにくい"
       },
       "plainSummary": "敵が残り1体になると連打に変わる、詰めの一撃。",
@@ -5307,7 +5307,7 @@
         "powerType": "基本火力",
         "maxStacks": null,
         "realityRank": "高",
-        "rankingTarget": "専用Lv3",
+        "rankingTarget": "専用Lv",
         "damageMemo": "カード生成JSONから自動マージ。専用Lv別・条件MAXは要精査"
       },
       "plainSummary": "自分の防御を少し下げてから撃ち、攻撃後にエースの弱体を2つ剥がす。",
@@ -5465,7 +5465,7 @@
         "powerType": "基本火力",
         "maxStacks": null,
         "realityRank": "高",
-        "rankingTarget": "専用Lv3",
+        "rankingTarget": "専用Lv",
         "damageMemo": "カード生成JSONから自動マージ。専用Lv別・条件MAXは要精査"
       },
       "plainSummary": "エースに攻撃・命中バフを配ってから撃つ。",
@@ -7990,7 +7990,7 @@
         "conditionMaxNote": "専用Lv3で魔力980%×4体",
         "powerType": "直接攻撃 / 自己回復",
         "realityRank": "高",
-        "rankingTarget": "専用Lv3",
+        "rankingTarget": "専用Lv",
         "damageMemo": "自己回復つき。専用Lv3で火力上昇",
         "maxStacks": null
       },
@@ -9470,8 +9470,8 @@
         "exclusiveLv1Total": 2360,
         "exclusiveLv2Total": 2360,
         "exclusiveLv3Total": 2360,
-        "conditionMaxTotal": 4248,
-        "conditionMaxNote": "最大スキルLv3で590%×4回=2360。専用武器に倍率変化はなく(Lv1は攻撃力増加量のみ、Lv2/Lv3は記載なし)、3回目以降の発動による攻撃力+80%を条件込みで見る",
+        "conditionMaxTotal": 2360,
+        "conditionMaxNote": "最大スキルLv3で590%×4回=2360。専用武器に倍率変化はない(Lv1は攻撃力増加量のみ、Lv2/Lv3は記載なし)。2回目以降は攻撃力増加量40%、専用Lv1で3回目以降80%になるが、ステータスバフのため倍率換算しない",
         "powerType": "段階強化 / 攻撃回数増加",
         "maxStacks": null,
         "realityRank": "中",
@@ -15492,7 +15492,7 @@
         "powerType": "連撃物理 / 自傷 / バフ解除",
         "maxStacks": null,
         "realityRank": "高",
-        "rankingTarget": "専用Lv3",
+        "rankingTarget": "専用Lv",
         "damageMemo": "解除可能バフを剥がしてから殴る対耐久向けの主力。ランダム6Hitのため、狙いを絞るよりバフ解除と削りを同時に見る"
       },
       "plainSummary": "自傷してから、バフの多い敵を剥がして6連撃。",
@@ -17201,7 +17201,7 @@
         "powerType": "複数物理 / 出血",
         "maxStacks": null,
         "realityRank": "高",
-        "rankingTarget": "専用Lv3",
+        "rankingTarget": "専用Lv",
         "damageMemo": "初手から使える複数攻撃。出血は攻撃力依存の持続ダメージとして別評価"
       },
       "plainSummary": "出血を撒く起点スキル。",
@@ -17682,7 +17682,7 @@
         "powerType": "味方火力支援",
         "maxStacks": null,
         "realityRank": "高",
-        "rankingTarget": "専用Lv3",
+        "rankingTarget": "専用Lv",
         "damageMemo": "削りと支援を両立するが、主目的は攻撃力・クリティカル率バフ"
       },
       "plainSummary": "エースを強化してから撃つ。7ターン目から強化が4倍に。",
@@ -18000,7 +18000,7 @@
         "powerType": "妨害付き範囲攻撃",
         "maxStacks": null,
         "realityRank": "高",
-        "rankingTarget": "専用Lv3",
+        "rankingTarget": "専用Lv",
         "damageMemo": "火力より気絶とクリティカル抑制が主目的"
       },
       "plainSummary": "クリ耐性を削りつつ、エースの気絶も狙う妨害魔法。",

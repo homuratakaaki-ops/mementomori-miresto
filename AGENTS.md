@@ -8,6 +8,8 @@
   例：`speed-calc.html`
 - リポジトリルート直下のHTMLファイルは、Git管理下の本番ファイルです。
 - 共有データは `data/` 配下で管理します。
+- 指示書に記載されたパスと実ファイルの場所が食い違う場合は、
+  作業を進めず、その旨を報告してください。
 
 ## キャラページの生成（必須）
 
@@ -23,8 +25,26 @@
 - キャラデータの唯一の正は `data/mementomori-skills.json` です。
   `data/*-overlay.json` は参照しません（2026-10-03に参照を廃止）。
   キャラやスキルの追加・修正はすべて `mementomori-skills.json` に対して行うこと。
-- 指示書に記載されたパスと実ファイルの場所が食い違う場合は、
-  作業を進めず、その旨を報告してください。
+
+## 火力データ（damage）の基準
+
+- `baseTotal` / `exclusiveLv1〜3Total` / `conditionMaxTotal` は
+  **攻撃力倍率ベースの合計**で統一します。
+  `singleMultiplier × hitCount == baseTotal` とし、いずれも
+  **「専用武器なし・スキルLv最大」**の値を入れること。
+- **`conditionMaxTotal` に入れてよいのは、原文に明記された
+  倍率・攻撃回数・ダメージ倍（1.5倍/2倍など）の変化だけです。**
+  攻撃力増加・防御力増加・クリティカル率増加といった**ステータスバフは
+  倍率に換算しないこと。** バフの内容は `conditionMaxNote` に文章で書きます。
+  （例：カトレアのバーナリゼーションは3回目以降に攻撃力増加量が80%になるが、
+  これは倍率の変化ではないため `conditionMaxTotal` には反映しない）
+- 腕力・魔力・技力・消費HP・被ダメージなど**攻撃力以外を参照するダメージ**は、
+  合計値に混ぜず `damage.nonAttackMultiplier: true` を立てます。
+  このフラグが立っているとキャラページの「倍率・火力」欄は
+  `multiplierText` を表示します（`js/render-character.js` の `totalDamageText`）。
+- `damage` の数値を追加・変更するときは、対象スキルの `sourceUrl` の原文と
+  照合すること。`realityRank` / `rankingTarget` はサイト独自の分類のため
+  照合対象外です。
 
 ## コミット規約
 
