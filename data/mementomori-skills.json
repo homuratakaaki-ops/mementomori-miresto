@@ -7596,7 +7596,8 @@
           "effects": [
             {
               "text": "物理攻撃",
-              "multiplier": "物理480%×5回"
+              "multiplier": "物理480%×5回",
+              "damageTotal": "base"
             }
           ]
         }
@@ -7648,12 +7649,6 @@
           "text": "最後の攻撃後、砂塵4スタックの敵がいれば自身のスキルCTを0にする(バトル中1回)"
         }
       ],
-      "synergyNotes": [
-        {
-          "text": "S1で砂塵を積むほどS2の解除・CTリセットが働く自己完結型。",
-          "reason": "S2の条件が砂塵4スタックのため"
-        }
-      ],
       "flow": [
         {
           "when": "攻撃前",
@@ -7675,7 +7670,8 @@
           "effects": [
             {
               "text": "物理攻撃",
-              "multiplier": "物理710%×5回"
+              "multiplier": "物理710%×5回",
+              "damageTotal": "base"
             }
           ]
         },
@@ -7691,6 +7687,12 @@
               "note": "バトル中1回"
             }
           ]
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "S1で砂塵を積むほどS2の解除・CTリセットが働く自己完結型。",
+          "reason": "S2の条件が砂塵4スタックのため"
         }
       ]
     },
@@ -7713,7 +7715,7 @@
       "noteUrl": "",
       "imageUrl": "",
       "sourceUrl": "https://ichigogames.net/mementomori/liberia/",
-      "plainSummary": "エースに「リヴェリアの防御力2倍ぶん」の攻撃バフを渡す。",
+      "plainSummary": "エースに「対象自身の防御力2倍ぶん」の攻撃バフを渡す。",
       "steps": [
         {
           "text": "バトル開始時、攻撃力が最も高い味方の攻撃力を増加(4ターン、量は対象の防御力200%分、解除不可)"
@@ -18673,7 +18675,8 @@
           "effects": [
             {
               "text": "物理攻撃",
-              "multiplier": "攻撃力×440%"
+              "multiplier": "攻撃力×440%",
+              "damageTotal": "base"
             },
             {
               "text": "脱力を付与",
@@ -18735,13 +18738,6 @@
           "text": "(条件解禁)バトル中のHP回復効果の発動回数が15以上なら物理攻撃が1920%になる"
         }
       ],
-      "verifications": [
-        {
-          "text": "回復回数のカウント対象はアクティブスキルによる回復のみ。パッシブは対象外",
-          "sourceLabel": "ワーズさんの性能解説",
-          "sourceUrl": "https://note.com/wazu_019/n/n8d4b94e8b360"
-        }
-      ],
       "flow": [
         {
           "when": "攻撃前",
@@ -18762,7 +18758,8 @@
           "effects": [
             {
               "text": "物理攻撃",
-              "multiplier": "攻撃力×480%"
+              "multiplier": "攻撃力×480%",
+              "damageTotal": "base"
             },
             {
               "text": "毒を付与",
@@ -18771,11 +18768,19 @@
               "duration": "2ターン"
             },
             {
-              "text": "物理攻撃のダメージが上がる",
+              "text": "物理攻撃のダメージが変わる",
               "condition": "バトル中のHP回復効果の発動回数が15以上なら",
-              "multiplier": "攻撃力×1920%"
+              "multiplier": "攻撃力×1920%",
+              "damageTotal": "conditionMax"
             }
           ]
+        }
+      ],
+      "verifications": [
+        {
+          "text": "回復回数のカウント対象はアクティブスキルによる回復のみ。パッシブは対象外",
+          "sourceLabel": "ワーズさんの性能解説",
+          "sourceUrl": "https://note.com/wazu_019/n/n8d4b94e8b360"
         }
       ]
     },
@@ -18828,7 +18833,7 @@
         },
         {
           "when": "コベルが戦闘不能になったとき",
-          "mode": "conditional",
+          "mode": "release",
           "target": "隣接する味方2体",
           "effects": [
             {

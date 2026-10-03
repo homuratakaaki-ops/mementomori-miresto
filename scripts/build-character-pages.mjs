@@ -151,16 +151,20 @@ const FLOW_WHEN_PATTERNS = [
   /^バトル開始時$/,
   /^[0-9]+(?:[・,、][0-9]+)*ターン目(?:の)?開始時$/,
   /^ターン開始時$/,
+  /^ターン終了時$/,
   /^行動開始時$/,
+  /^スキル発動時$/,
   /^攻撃前$/,
   /^攻撃時$/,
   /^攻撃後$/,
   /^最後の攻撃後$/,
-  /攻撃を受けたとき$/,
+  /を受けたとき$/,
   /戦闘不能になったとき$/,
   /^常時$/,
   /^[0-9]+ターン目以降$/
 ];
+
+const FLOW_MODES = new Set(["sequence", "simultaneous", "passive", "conditional", "release"]);
 
 // 倍率チップは「チップ単独で意味が通るダメージ倍率」だけに使う（回復量・バフ量は text 側）。
 const FLOW_MULTIPLIER_PATTERN = /^(?:攻撃力×|物理|魔法|腕力×|魔力×|技力×)[0-9]+(?:\.[0-9]+)?%(?:×[0-9]+回)?$/;
@@ -174,6 +178,7 @@ function validateFlow(skill, errors) {
   if (!Array.isArray(skill.flow) || skill.flow.length === 0) return;
   const label = `${skill.id} (S${skill.number} ${skill.name})`;
   const frames = new Set();
+  const effects = [];
 
   for (const block of skill.flow) {
     if (!block.when || !block.target) {
@@ -189,23 +194,43 @@ function validateFlow(skill, errors) {
     if (!FLOW_WHEN_PATTERNS.some((pattern) => pattern.test(block.when))) {
       errors.push(`${label}: when「${block.when}」が語彙リストにも複合形にも合致しない`);
     }
+    if (!FLOW_MODES.has(block.mode)) errors.push(`${label}: mode「${block.mode}」は未定義`);
+    if (block.mode === "sequence" && !block.order) errors.push(`${label}: sequence の枠に order が無い`);
 
     if (!Array.isArray(block.effects) || block.effects.length === 0) {
       errors.push(`${label}: 「${block.when}」の枠に効果が無い`);
       continue;
     }
-    // ルール5: 倍率チップはダメージ倍率のみ
     for (const effect of block.effects) {
+      effects.push(effect);
+      // ルール2(改): 倍率チップがある効果にも本文を残す
+      if (!effect.text) errors.push(`${label}: 本文（text）の無い効果がある`);
+      // ルール5: 倍率チップはダメージ倍率のみ
       if (effect.multiplier && !FLOW_MULTIPLIER_PATTERN.test(effect.multiplier)) {
         errors.push(`${label}: multiplier「${effect.multiplier}」はダメージ倍率の形ではない`);
+      }
+      if (effect.damageTotal && !effect.multiplier) {
+        errors.push(`${label}: damageTotal は倍率チップのある効果にだけ付ける`);
       }
     }
   }
 
+  // ルール3(改): 合計は「damage が指す攻撃」の行に紐付ける
+  const damage = skill.damage;
+  const hasMultiplier = effects.some((effect) => effect.multiplier);
+  const bases = effects.filter((effect) => effect.damageTotal === "base").length;
+  const maxes = effects.filter((effect) => effect.damageTotal === "conditionMax").length;
+  if (bases > 1) errors.push(`${label}: damageTotal:"base" の効果が ${bases} 件ある（1件まで）`);
+  if (maxes > 1) errors.push(`${label}: damageTotal:"conditionMax" の効果が ${maxes} 件ある（1件まで）`);
+  if (damage && !damage.nonAttackMultiplier && damage.baseTotal && hasMultiplier && bases === 0) {
+    errors.push(`${label}: 倍率チップはあるのに damageTotal:"base" の効果が無い`);
+  }
+  if (maxes === 1 && !(damage && damage.conditionMaxTotal > damage.baseTotal)) {
+    errors.push(`${label}: conditionMaxTotal が baseTotal を超えないのに damageTotal:"conditionMax" がある`);
+  }
+
   // 旧「継続」カードにあった継続ターンが、flow の継続チップに必ず現れること
-  const chips = skill.flow
-    .flatMap((block) => (block.effects || []).map((effect) => effect.duration || ""))
-    .join(" ");
+  const chips = effects.map((effect) => effect.duration || "").join(" ");
   for (const turns of durationTurns(skill.duration)) {
     if (!chips.includes(`${turns}ターン`)) {
       errors.push(`${label}: 継続「${skill.duration}」の${turns}ターンが flow の継続チップに無い`);
@@ -222,25 +247,32 @@ function validateRenderedCard(skill, html, errors) {
     errors.push(`${skill.id}: 生成HTMLに「いつ・誰に・何が起きる？」が含まれていない`);
   }
 }
+/** 1ファイルも書き出す前に flow を点検する（検証に落ちたら出力を残さない）。 */
+function validateAll({ baseData, terms }) {
+  const errors = [];
+  let flowSkills = 0;
+  for (const skill of baseData.skills || []) {
+    validateFlow(skill, errors);
+    if (Array.isArray(skill.flow) && skill.flow.length > 0) {
+      flowSkills += 1;
+      validateRenderedCard(skill, renderer.renderSkillCard(skill, terms), errors);
+    }
+  }
+  if (errors.length) {
+    for (const message of errors) console.error(`flow検証NG: ${message}`);
+    throw new Error(`flow の検証に失敗しました（${errors.length}件）。上のログを確認してください。`);
+  }
+  return flowSkills;
+}
 
 function buildCharacterPages({ baseData, newsData, terms }) {
   const written = [];
   const unchanged = [];
   const slugs = [];
-  const errors = [];
-  let flowSkills = 0;
 
   for (const character of baseData.characters || []) {
     const skills = renderer.selectSkills(baseData, character.id);
     if (skills.length === 0) throw new Error(`スキルが0件です: ${character.id}`);
-
-    for (const skill of skills) {
-      validateFlow(skill, errors);
-      if (Array.isArray(skill.flow) && skill.flow.length > 0) {
-        flowSkills += 1;
-        validateRenderedCard(skill, renderer.renderSkillCard(skill, terms), errors);
-      }
-    }
 
     // ページのファイル名は既存ページと同じ pageSlug を使う。
     const slug = character.pageSlug || character.id;
@@ -256,12 +288,7 @@ function buildCharacterPages({ baseData, newsData, terms }) {
     (writeIfChanged(path, html) ? written : unchanged).push(slug);
   }
 
-  if (errors.length) {
-    for (const message of errors) console.error(`flow検証NG: ${message}`);
-    throw new Error(`flow の検証に失敗しました（${errors.length}件）。上のログを確認してください。`);
-  }
-
-  return { written, unchanged, slugs, flowSkills };
+  return { written, unchanged, slugs };
 }
 
 function buildIndexPage({ baseData }) {
@@ -279,11 +306,12 @@ function main() {
   const newsData = readJson(join(DATA_DIR, "news.json"), { items: [] });
   const terms = readJson(join(DATA_DIR, "terms.json"), { terms: {} }).terms || {};
 
+  const flowSkills = validateAll({ baseData, terms });
   const pages = buildCharacterPages({ baseData, newsData, terms });
   const index = buildIndexPage({ baseData });
 
   console.log(`キャラページ: ${pages.slugs.length}件 (更新 ${pages.written.length} / 変更なし ${pages.unchanged.length})`);
-  console.log(`flow 付きスキル: ${pages.flowSkills}件（検証OK）`);
+  console.log(`flow 付きスキル: ${flowSkills}件（検証OK）`);
   console.log(`キャラ一覧: ${index.total}件のカードを生成${index.changed ? " (更新)" : " (変更なし)"}`);
 }
 
