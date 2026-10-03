@@ -42,13 +42,21 @@
         <div class="skill-body">
           
         <div>
-          <h3 class="block-title">順番に何が起きる？</h3>
-          <ol class="steps">
-            <li>攻撃前、魔法防御力減少を1スタック付与(最大8スタック、5ターン)</li><li>このスキルの3回目以降は、付与後にスタックをさらに+2</li><li>ランダムな敵3体に魔法<span class="ratio">400%</span></li>
-          </ol>
+          <h3 class="block-title">いつ・誰に・何が起きる？</h3>
+          <ol class="flow">
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">① 攻撃前</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>ランダムな敵3体</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>魔法防御力減少を1スタック付与<span class="flow-chip">5ターン</span><span class="flow-note">最大8スタック</span></li><li class="flow-cond-line"><span class="flow-chip cond">このスキルの3回目以降は</span>付与後にスタックをさらに2つ増やす</li></ul></div>
+          </li>
+        
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">② 攻撃時</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>ランダムな敵3体</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>魔法攻撃<span class="flow-chip num">魔法<span class="ratio">400%</span></span><span class="flow-total">倍率合計 1200%（3体分）</span></li></ul></div>
+          </li>
+        </ol>
         </div>
       
-          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>ランダム敵3体</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 1200%</dd></dl></div>
+          
           
           
           <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用Lv1</th><td>対象5体。</td></tr><tr><th>専用Lv3</th><td>魔法<span class="ratio">440%</span></td></tr></table></div>
@@ -79,13 +87,16 @@
         <div class="skill-body">
           
         <div>
-          <h3 class="block-title">順番に何が起きる？</h3>
-          <ol class="steps">
-            <li>魔法防御力が最も低い敵に魔法<span class="ratio">420%</span>×7回</li><li>このスキルの3回目以降は630%、4回目以降は840%</li><li>4回目以降はシールドを無視する</li>
-          </ol>
+          <h3 class="block-title">いつ・誰に・何が起きる？</h3>
+          <ol class="flow">
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">攻撃時</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>魔法防御力が最も低い敵</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>魔法攻撃<span class="flow-chip num">魔法<span class="ratio">420%</span>×7回</span><span class="flow-total">倍率合計 2940%（7回分）</span></li><li class="flow-cond-line"><span class="flow-chip cond">このスキルの3回目以降は</span>魔法攻撃のダメージが変わる<span class="flow-chip num">魔法<span class="ratio">630%</span></span></li><li class="flow-cond-line"><span class="flow-chip cond">4回目以降は</span>魔法攻撃のダメージが変わる<span class="flow-chip num">魔法<span class="ratio">840%</span></span></li><li class="flow-cond-line"><span class="flow-chip cond">4回目以降は</span>シールドを無視する</li></ul></div>
+          </li>
+        </ol>
         </div>
       
-          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>魔法防御力が最も低い敵</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 2940%</dd></dl></div>
+          
           
           
           <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用</th><td>専用武器効果なし</td></tr></table></div>
@@ -116,13 +127,16 @@
         <div class="skill-body">
           
         <div>
-          <h3 class="block-title">順番に何が起きる？</h3>
-          <ol class="steps">
-            <li>毎ターン開始時、妖精さんを1スタック付与(1スタックにつき攻撃力+3%・物理防御+5%、最大30スタック、解除不可)</li><li>自身以外の黄属性の味方が2体以上なら付与数2</li><li>ターン開始時、自身に攻撃力200%のシールドを4ターン付与</li><li>シールド付与は発動後4回行動まで再発動せず、13ターン目以降は発動しない</li>
-          </ol>
+          <h3 class="block-title">いつ・誰に・何が起きる？</h3>
+          <ol class="flow">
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">ターン開始時</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>自身</span></span><span class="flow-mode">同時に発動</span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>妖精さんを1スタック付与<span class="flow-note">1スタックにつき攻撃力+3%・物理防御+5%、最大30スタック、解除不可</span></li><li class="flow-cond-line"><span class="flow-chip cond">自身以外の黄属性の味方が2体以上なら</span>付与数が2になる</li><li>攻撃力200%分のシールドを付与<span class="flow-chip">4ターン</span><span class="flow-note">発動後、4回行動が終わるまで再発動せず、13ターン目以降は発動しない</span></li></ul></div>
+          </li>
+        </ol>
         </div>
       
-          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>自身</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>妖精さんスタック / 攻撃力+3%</dd></dl><dl class="data-item"><dt>継続</dt><dd>条件参照</dd></dl></div>
+          
           
           
           <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用Lv2</th><td>シールド攻撃力1000%</td></tr></table></div>
@@ -153,13 +167,16 @@
         <div class="skill-body">
           
         <div>
-          <h3 class="block-title">順番に何が起きる？</h3>
-          <ol class="steps">
-            <li>ターン開始時、自身の被ダメージ30%減少・防御力+150%(4ターン)</li><li>発動後4回行動まで再発動しない</li>
-          </ol>
+          <h3 class="block-title">いつ・誰に・何が起きる？</h3>
+          <ol class="flow">
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">ターン開始時</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>自身</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>被ダメージ30%減少・防御力150%増加<span class="flow-chip">4ターン</span><span class="flow-note">発動後、4回行動が終わるまで再発動しない</span></li></ul></div>
+          </li>
+        </ol>
         </div>
       
-          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>自身</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>被ダメージ30%減少 / 防御力+150%</dd></dl><dl class="data-item"><dt>継続</dt><dd>条件参照</dd></dl></div>
+          
           
           
           <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用</th><td>専用武器効果なし</td></tr></table></div>

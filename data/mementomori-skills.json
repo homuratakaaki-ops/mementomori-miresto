@@ -5674,6 +5674,45 @@
         {
           "text": "攻撃後、攻撃力が最も高い味方の弱体効果を2つ解除"
         }
+      ],
+      "flow": [
+        {
+          "when": "攻撃前",
+          "mode": "sequence",
+          "order": 1,
+          "target": "自身",
+          "effects": [
+            {
+              "text": "防御力を5%減少",
+              "duration": "1ターン",
+              "note": "命中・耐性判定を無視"
+            }
+          ]
+        },
+        {
+          "when": "攻撃時",
+          "mode": "sequence",
+          "order": 2,
+          "target": "ランダムな敵3体",
+          "effects": [
+            {
+              "text": "魔法攻撃",
+              "multiplier": "魔法520%",
+              "damageTotal": "base"
+            }
+          ]
+        },
+        {
+          "when": "攻撃後",
+          "mode": "sequence",
+          "order": 3,
+          "target": "攻撃力が最も高い味方",
+          "effects": [
+            {
+              "text": "弱体効果を2つ解除"
+            }
+          ]
+        }
       ]
     },
     {
@@ -5718,6 +5757,27 @@
         {
           "text": "攻撃前、自身と味方がスキルで解除した弱体効果の合計が5個以上なら魔法2340%"
         }
+      ],
+      "flow": [
+        {
+          "when": "攻撃時",
+          "mode": "sequence",
+          "order": 1,
+          "target": "攻撃力が高い敵2体",
+          "effects": [
+            {
+              "text": "魔法攻撃",
+              "multiplier": "魔法1560%",
+              "damageTotal": "base"
+            },
+            {
+              "text": "魔法攻撃のダメージが変わる",
+              "condition": "攻撃前、自身と味方がスキルで解除した弱体効果の合計が5個以上なら",
+              "multiplier": "魔法2340%",
+              "damageTotal": "conditionMax"
+            }
+          ]
+        }
       ]
     },
     {
@@ -5749,6 +5809,32 @@
         },
         {
           "text": "自身の弱体効果を3つ解除"
+        }
+      ],
+      "flow": [
+        {
+          "when": "自身か味方がアクティブスキルで弱体を受けたとき",
+          "mode": "conditional",
+          "target": "藍属性の攻撃力が最も高い味方",
+          "effects": [
+            {
+              "text": "攻撃力を50%増加",
+              "condition": "味方全体の弱体合計が5個以上なら",
+              "duration": "1ターン",
+              "note": "解除不可"
+            }
+          ]
+        },
+        {
+          "when": "自身か味方がアクティブスキルで弱体を受けたとき",
+          "mode": "conditional",
+          "target": "自身",
+          "effects": [
+            {
+              "text": "自身の弱体効果を3つ解除",
+              "condition": "味方全体の弱体合計が5個以上なら"
+            }
+          ]
         }
       ],
       "synergyNotes": [
@@ -5784,6 +5870,31 @@
         },
         {
           "text": "バトル開始時、物理防御力+100%・物理クリダメ緩和+40%(6ターン、解除不可)"
+        }
+      ],
+      "flow": [
+        {
+          "when": "常時",
+          "mode": "passive",
+          "target": "自身",
+          "effects": [
+            {
+              "text": "受けるダメージを70%減少",
+              "note": "解除不可"
+            }
+          ]
+        },
+        {
+          "when": "バトル開始時",
+          "mode": "simultaneous",
+          "target": "自身",
+          "effects": [
+            {
+              "text": "物理防御力100%増加・物理クリティカルダメージ緩和40%増加",
+              "duration": "6ターン",
+              "note": "解除不可"
+            }
+          ]
         }
       ]
     },
@@ -5828,6 +5939,34 @@
         },
         {
           "text": "ランダムな敵5体に魔法440%"
+        }
+      ],
+      "flow": [
+        {
+          "when": "攻撃前",
+          "mode": "sequence",
+          "order": 1,
+          "target": "攻撃力が最も高い味方",
+          "effects": [
+            {
+              "text": "攻撃力・命中率を25%増加",
+              "duration": "4ターン",
+              "note": "両者で1つのバフ扱い、解除不可"
+            }
+          ]
+        },
+        {
+          "when": "攻撃時",
+          "mode": "sequence",
+          "order": 2,
+          "target": "ランダムな敵5体",
+          "effects": [
+            {
+              "text": "魔法攻撃",
+              "multiplier": "魔法440%",
+              "damageTotal": "base"
+            }
+          ]
         }
       ]
     },
@@ -5876,6 +6015,40 @@
         {
           "text": "攻撃前、反照を付帯している敵が3体以上なら魔法990%"
         }
+      ],
+      "flow": [
+        {
+          "when": "攻撃前",
+          "mode": "sequence",
+          "order": 1,
+          "target": "自身以外の味方全体とランダムな敵5体",
+          "effects": [
+            {
+              "text": "反照を1スタック付与",
+              "duration": "4ターン",
+              "note": "1スタックにつき回避率5%減少、最大2スタック"
+            }
+          ]
+        },
+        {
+          "when": "攻撃時",
+          "mode": "sequence",
+          "order": 2,
+          "target": "ランダムな敵3体",
+          "effects": [
+            {
+              "text": "魔法攻撃",
+              "multiplier": "魔法660%",
+              "damageTotal": "base"
+            },
+            {
+              "text": "魔法攻撃のダメージが変わる",
+              "condition": "攻撃前、反照を付帯している敵が3体以上なら",
+              "multiplier": "魔法990%",
+              "damageTotal": "conditionMax"
+            }
+          ]
+        }
       ]
     },
     {
@@ -5904,6 +6077,24 @@
         },
         {
           "text": "対象が藍属性なら、付与者の攻撃力200%分を上乗せ"
+        }
+      ],
+      "flow": [
+        {
+          "when": "1ターン目開始時",
+          "mode": "simultaneous",
+          "target": "自身と自身以外の攻撃力が最も高い味方",
+          "effects": [
+            {
+              "text": "シールドを付与",
+              "duration": "6ターン",
+              "note": "量は対象の最大HP30%、解除不可"
+            },
+            {
+              "text": "付与者の攻撃力200%分を上乗せ",
+              "condition": "対象が藍属性なら"
+            }
+          ]
         }
       ]
     },
@@ -5936,6 +6127,42 @@
         },
         {
           "text": "バトル開始時、自身の被ダメージを60%減少(解除不可)"
+        }
+      ],
+      "flow": [
+        {
+          "when": "バトル開始時",
+          "mode": "passive",
+          "target": "自身",
+          "effects": [
+            {
+              "text": "受けるダメージを60%減少",
+              "note": "解除不可"
+            }
+          ]
+        },
+        {
+          "when": "自身がアクティブスキルで弱体を受けたとき",
+          "mode": "conditional",
+          "target": "ランダムな敵3体",
+          "effects": [
+            {
+              "text": "反照を1スタック付与",
+              "duration": "4ターン",
+              "note": "最大2スタック"
+            }
+          ]
+        },
+        {
+          "when": "自身がアクティブスキルで弱体を受けたとき",
+          "mode": "conditional",
+          "target": "自身",
+          "effects": [
+            {
+              "text": "自身の弱体効果を2つ解除",
+              "condition": "反照の敵が3体以上なら"
+            }
+          ]
         }
       ],
       "synergyNotes": [
@@ -5987,6 +6214,35 @@
         {
           "text": "物理ダメージが多重バリアで無効化された場合、対象に物理420%の追加攻撃(最大1回)"
         }
+      ],
+      "flow": [
+        {
+          "when": "攻撃時",
+          "mode": "sequence",
+          "order": 1,
+          "target": "ランダムな敵3体",
+          "effects": [
+            {
+              "text": "物理攻撃",
+              "multiplier": "物理420%",
+              "damageTotal": "base"
+            }
+          ]
+        },
+        {
+          "when": "攻撃後",
+          "mode": "sequence",
+          "order": 2,
+          "target": "多重バリアで無効化した対象",
+          "effects": [
+            {
+              "text": "追加で物理攻撃",
+              "condition": "物理ダメージが多重バリアで無効化された場合",
+              "multiplier": "物理420%",
+              "note": "追加攻撃は最大1回"
+            }
+          ]
+        }
       ]
     },
     {
@@ -6037,6 +6293,43 @@
         {
           "text": "攻撃前、対象の怠惰が12スタックなら物理570%"
         }
+      ],
+      "flow": [
+        {
+          "when": "攻撃前",
+          "mode": "sequence",
+          "order": 1,
+          "target": "自身と攻撃力が最も高い味方",
+          "effects": [
+            {
+              "text": "防御力を5%減少",
+              "duration": "1ターン",
+              "note": "命中・耐性判定を無視"
+            },
+            {
+              "text": "同じ対象の攻撃力を30%増加"
+            }
+          ]
+        },
+        {
+          "when": "攻撃時",
+          "mode": "sequence",
+          "order": 2,
+          "target": "ランダムな敵5体",
+          "effects": [
+            {
+              "text": "物理攻撃",
+              "multiplier": "物理380%",
+              "damageTotal": "base"
+            },
+            {
+              "text": "物理攻撃のダメージが変わる",
+              "condition": "攻撃前、対象の怠惰が12スタックなら",
+              "multiplier": "物理570%",
+              "damageTotal": "conditionMax"
+            }
+          ]
+        }
       ]
     },
     {
@@ -6065,6 +6358,31 @@
         },
         {
           "text": "バトル開始時、自身の被ダメージを70%減少(解除不可)"
+        }
+      ],
+      "flow": [
+        {
+          "when": "バトル開始時",
+          "mode": "passive",
+          "target": "自身",
+          "effects": [
+            {
+              "text": "受けるダメージを70%減少",
+              "note": "解除不可"
+            }
+          ]
+        },
+        {
+          "when": "1・5ターン目の開始時",
+          "mode": "simultaneous",
+          "target": "自身と攻撃力が最も高い味方",
+          "effects": [
+            {
+              "text": "結界を付与",
+              "duration": "2ターン",
+              "note": "被攻撃時のダメージを20%遮断、解除不可"
+            }
+          ]
         }
       ]
     },
@@ -6097,6 +6415,34 @@
         },
         {
           "text": "怠惰付与前に自身の弱体効果を1つ解除"
+        }
+      ],
+      "flow": [
+        {
+          "when": "自身か味方がアクティブスキルで弱体を受けたとき",
+          "mode": "conditional",
+          "target": "自身",
+          "effects": [
+            {
+              "text": "怠惰を付与する前に、自身の弱体効果を1つ解除"
+            }
+          ]
+        },
+        {
+          "when": "自身か味方がアクティブスキルで弱体を受けたとき",
+          "mode": "conditional",
+          "target": "ランダムな敵5体",
+          "effects": [
+            {
+              "text": "怠惰を2スタック付与",
+              "duration": "2ターン",
+              "note": "1スタックにつきクリティカル率5%減少、最大12スタック"
+            },
+            {
+              "text": "怠惰をさらに1スタック増やす",
+              "condition": "対象がクリティカル率増加を持っていれば"
+            }
+          ]
         }
       ],
       "synergyNotes": [
@@ -9797,6 +10143,37 @@
         {
           "text": "ランダムな敵3体に物理440%"
         }
+      ],
+      "flow": [
+        {
+          "when": "攻撃前",
+          "mode": "sequence",
+          "order": 1,
+          "target": "ランダムな敵3体",
+          "effects": [
+            {
+              "text": "被ダメージを10%増加",
+              "duration": "4ターン"
+            },
+            {
+              "text": "増加量が30%になる",
+              "condition": "対象の攻撃力が自身より低ければ"
+            }
+          ]
+        },
+        {
+          "when": "攻撃時",
+          "mode": "sequence",
+          "order": 2,
+          "target": "ランダムな敵3体",
+          "effects": [
+            {
+              "text": "物理攻撃",
+              "multiplier": "物理440%",
+              "damageTotal": "base"
+            }
+          ]
+        }
       ]
     },
     {
@@ -9840,6 +10217,27 @@
         {
           "text": "対象の攻撃力が自身より低い場合は物理2280%"
         }
+      ],
+      "flow": [
+        {
+          "when": "攻撃時",
+          "mode": "sequence",
+          "order": 1,
+          "target": "攻撃力が高い敵2体",
+          "effects": [
+            {
+              "text": "物理攻撃",
+              "multiplier": "物理1520%",
+              "damageTotal": "base"
+            },
+            {
+              "text": "物理攻撃のダメージが変わる",
+              "condition": "対象の攻撃力が自身より低い場合は",
+              "multiplier": "物理2280%",
+              "damageTotal": "conditionMax"
+            }
+          ]
+        }
       ]
     },
     {
@@ -9871,6 +10269,41 @@
         },
         {
           "text": "3ターン目開始時、味方のクリティカルヒット合計が5以上なら面影を4消費し、攻撃力が最も高い味方のスキルCTを2減少"
+        }
+      ],
+      "flow": [
+        {
+          "when": "バトル開始時",
+          "mode": "simultaneous",
+          "target": "自身",
+          "effects": [
+            {
+              "text": "面影を10スタック付与",
+              "note": "1スタックにつきクリティカル率+3%、解除不可"
+            }
+          ]
+        },
+        {
+          "when": "ターン開始時",
+          "mode": "simultaneous",
+          "target": "攻撃力が高い味方2体",
+          "effects": [
+            {
+              "text": "面影を1消費して攻撃力を30%増加",
+              "duration": "1ターン"
+            }
+          ]
+        },
+        {
+          "when": "3ターン目開始時",
+          "mode": "conditional",
+          "target": "攻撃力が最も高い味方",
+          "effects": [
+            {
+              "text": "面影を4消費し、スキルCTを2減少",
+              "condition": "味方のクリティカルヒット合計が5以上なら"
+            }
+          ]
         }
       ],
       "synergyNotes": [
@@ -9906,6 +10339,30 @@
         },
         {
           "text": "バトル開始時、攻撃力が最も高い味方の最大HPを25%増加(解除不可)"
+        }
+      ],
+      "flow": [
+        {
+          "when": "バトル開始時",
+          "mode": "simultaneous",
+          "target": "攻撃力が最も高い味方",
+          "effects": [
+            {
+              "text": "最大HPを25%増加",
+              "note": "解除不可"
+            }
+          ]
+        },
+        {
+          "when": "攻撃を受けたとき",
+          "mode": "conditional",
+          "target": "自身",
+          "effects": [
+            {
+              "text": "ダメージを60%遮断",
+              "note": "面影を持っている間は75%"
+            }
+          ]
         }
       ]
     },
@@ -12620,6 +13077,37 @@
         {
           "text": "7ターン目以降は付与スタック3"
         }
+      ],
+      "flow": [
+        {
+          "when": "攻撃時",
+          "mode": "sequence",
+          "order": 1,
+          "target": "ランダムな敵3体",
+          "effects": [
+            {
+              "text": "物理攻撃",
+              "multiplier": "物理280%",
+              "damageTotal": "base"
+            }
+          ]
+        },
+        {
+          "when": "攻撃後",
+          "mode": "sequence",
+          "order": 2,
+          "target": "攻撃力が最も高い味方",
+          "effects": [
+            {
+              "text": "隠し味を1スタック付与",
+              "note": "1スタックにつき攻撃力+6%、最大15スタック、解除不可"
+            },
+            {
+              "text": "付与スタックが3になる",
+              "condition": "7ターン目以降は"
+            }
+          ]
+        }
       ]
     },
     {
@@ -12668,6 +13156,44 @@
           "text": "7ターン目以降は、付与後に自身のスキルCTを5減少"
         }
       ],
+      "flow": [
+        {
+          "when": "攻撃時",
+          "mode": "sequence",
+          "order": 1,
+          "target": "ランダムな敵",
+          "effects": [
+            {
+              "text": "物理攻撃",
+              "multiplier": "物理290%×5回",
+              "damageTotal": "base"
+            }
+          ]
+        },
+        {
+          "when": "最後の攻撃後",
+          "mode": "sequence",
+          "order": 2,
+          "target": "攻撃力が最も高い味方",
+          "effects": [
+            {
+              "text": "隠し味を1スタック付与"
+            }
+          ]
+        },
+        {
+          "when": "最後の攻撃後",
+          "mode": "sequence",
+          "order": 3,
+          "target": "自身",
+          "effects": [
+            {
+              "text": "付与後に自身のスキルCTを5減少",
+              "condition": "7ターン目以降は"
+            }
+          ]
+        }
+      ],
       "synergyNotes": [
         {
           "text": "7ターン目以降は③のCT短縮量がこのスキルのCTと同じになり、エースの隠し味を高頻度で積み直せる。"
@@ -12704,6 +13230,30 @@
         {
           "text": "②は発動後4回行動まで再発動しない"
         }
+      ],
+      "flow": [
+        {
+          "when": "攻撃を受けたとき",
+          "mode": "conditional",
+          "target": "自身",
+          "effects": [
+            {
+              "text": "ダメージを60%遮断"
+            }
+          ]
+        },
+        {
+          "when": "ターン開始時",
+          "mode": "simultaneous",
+          "target": "隣接する味方2体",
+          "effects": [
+            {
+              "text": "結界を付与",
+              "duration": "4ターン",
+              "note": "最大HP10%を超えた分のダメージを20%遮断、解除不可。発動後、4回行動が終わるまで再発動しない"
+            }
+          ]
+        }
       ]
     },
     {
@@ -12732,6 +13282,30 @@
         },
         {
           "text": "バトル開始時、味方全体のクリティカル耐性+60%(1ターン)"
+        }
+      ],
+      "flow": [
+        {
+          "when": "バトル開始時",
+          "mode": "simultaneous",
+          "target": "味方全体",
+          "effects": [
+            {
+              "text": "クリティカル耐性を60%増加",
+              "duration": "1ターン"
+            }
+          ]
+        },
+        {
+          "when": "ターン終了時",
+          "mode": "simultaneous",
+          "target": "味方全体",
+          "effects": [
+            {
+              "text": "HPを攻撃力50%分回復",
+              "note": "6ターン目まで毎ターン"
+            }
+          ]
         }
       ]
     },
@@ -12780,6 +13354,38 @@
         {
           "text": "ランダムな敵3体に魔法400%"
         }
+      ],
+      "flow": [
+        {
+          "when": "攻撃前",
+          "mode": "sequence",
+          "order": 1,
+          "target": "ランダムな敵3体",
+          "effects": [
+            {
+              "text": "魔法防御力減少を1スタック付与",
+              "duration": "5ターン",
+              "note": "最大8スタック"
+            },
+            {
+              "text": "付与後にスタックをさらに2つ増やす",
+              "condition": "このスキルの3回目以降は"
+            }
+          ]
+        },
+        {
+          "when": "攻撃時",
+          "mode": "sequence",
+          "order": 2,
+          "target": "ランダムな敵3体",
+          "effects": [
+            {
+              "text": "魔法攻撃",
+              "multiplier": "魔法400%",
+              "damageTotal": "base"
+            }
+          ]
+        }
       ]
     },
     {
@@ -12827,6 +13433,35 @@
         {
           "text": "4回目以降はシールドを無視する"
         }
+      ],
+      "flow": [
+        {
+          "when": "攻撃時",
+          "mode": "sequence",
+          "order": 1,
+          "target": "魔法防御力が最も低い敵",
+          "effects": [
+            {
+              "text": "魔法攻撃",
+              "multiplier": "魔法420%×7回",
+              "damageTotal": "base"
+            },
+            {
+              "text": "魔法攻撃のダメージが変わる",
+              "condition": "このスキルの3回目以降は",
+              "multiplier": "魔法630%"
+            },
+            {
+              "text": "魔法攻撃のダメージが変わる",
+              "condition": "4回目以降は",
+              "multiplier": "魔法840%"
+            },
+            {
+              "text": "シールドを無視する",
+              "condition": "4回目以降は"
+            }
+          ]
+        }
       ]
     },
     {
@@ -12862,6 +13497,28 @@
         {
           "text": "シールド付与は発動後4回行動まで再発動せず、13ターン目以降は発動しない"
         }
+      ],
+      "flow": [
+        {
+          "when": "ターン開始時",
+          "mode": "simultaneous",
+          "target": "自身",
+          "effects": [
+            {
+              "text": "妖精さんを1スタック付与",
+              "note": "1スタックにつき攻撃力+3%・物理防御+5%、最大30スタック、解除不可"
+            },
+            {
+              "text": "付与数が2になる",
+              "condition": "自身以外の黄属性の味方が2体以上なら"
+            },
+            {
+              "text": "攻撃力200%分のシールドを付与",
+              "duration": "4ターン",
+              "note": "発動後、4回行動が終わるまで再発動せず、13ターン目以降は発動しない"
+            }
+          ]
+        }
       ]
     },
     {
@@ -12890,6 +13547,20 @@
         },
         {
           "text": "発動後4回行動まで再発動しない"
+        }
+      ],
+      "flow": [
+        {
+          "when": "ターン開始時",
+          "mode": "simultaneous",
+          "target": "自身",
+          "effects": [
+            {
+              "text": "被ダメージ30%減少・防御力150%増加",
+              "duration": "4ターン",
+              "note": "発動後、4回行動が終わるまで再発動しない"
+            }
+          ]
         }
       ]
     },
@@ -12937,6 +13608,30 @@
         },
         {
           "text": "対象の魔力が自身より低い場合は5ターンになる"
+        }
+      ],
+      "flow": [
+        {
+          "when": "攻撃時",
+          "mode": "sequence",
+          "order": 1,
+          "target": "ランダムな敵3体",
+          "effects": [
+            {
+              "text": "魔法攻撃",
+              "multiplier": "魔法330%",
+              "damageTotal": "base"
+            },
+            {
+              "text": "スピード20%減少を付与",
+              "chance": "70%",
+              "duration": "2ターン"
+            },
+            {
+              "text": "継続が5ターンになる",
+              "condition": "対象の魔力が自身より低い場合は"
+            }
+          ]
         }
       ]
     },
@@ -12986,6 +13681,45 @@
         {
           "text": "このスキルの3回目以降は魔法1520%"
         }
+      ],
+      "flow": [
+        {
+          "when": "攻撃時",
+          "mode": "sequence",
+          "order": 1,
+          "target": "ランダムな敵4体",
+          "effects": [
+            {
+              "text": "魔法攻撃",
+              "multiplier": "魔法380%",
+              "damageTotal": "base"
+            },
+            {
+              "text": "魔法攻撃のダメージが変わる",
+              "condition": "このスキルの3回目以降は",
+              "multiplier": "魔法1520%",
+              "damageTotal": "conditionMax"
+            }
+          ]
+        },
+        {
+          "when": "攻撃時",
+          "mode": "sequence",
+          "order": 2,
+          "target": "攻撃力が最も高い敵",
+          "effects": [
+            {
+              "text": "気絶を付与",
+              "term": "気絶",
+              "chance": "70%",
+              "duration": "1ターン"
+            },
+            {
+              "text": "継続が2ターンになる",
+              "condition": "自身のバフが4個以上なら"
+            }
+          ]
+        }
       ]
     },
     {
@@ -13021,6 +13755,39 @@
         {
           "text": "バトル開始時、自身の被ダメージを10%減少(解除不可)"
         }
+      ],
+      "flow": [
+        {
+          "when": "バトル開始時",
+          "mode": "passive",
+          "target": "自身",
+          "effects": [
+            {
+              "text": "受けるダメージを10%減少",
+              "note": "解除不可"
+            }
+          ]
+        },
+        {
+          "when": "1ターン目開始時",
+          "mode": "simultaneous",
+          "target": "自身",
+          "effects": [
+            {
+              "text": "攻撃力200%分のシールドを付与",
+              "duration": "10ターン",
+              "note": "解除不可"
+            },
+            {
+              "text": "シールド量が攻撃力500%分になる",
+              "condition": "シールド対象が黄属性なら"
+            },
+            {
+              "text": "シールド対象が味方全体になる",
+              "condition": "弱体効果無効または行動阻害無効を持つ敵がいる場合"
+            }
+          ]
+        }
       ]
     },
     {
@@ -13052,6 +13819,24 @@
         },
         {
           "text": "発動後4回行動まで再発動しない"
+        }
+      ],
+      "flow": [
+        {
+          "when": "行動開始時",
+          "mode": "simultaneous",
+          "target": "自身",
+          "effects": [
+            {
+              "text": "防御力100%増加・命中率30%増加",
+              "duration": "4ターン",
+              "note": "発動後、4回行動が終わるまで再発動しない"
+            },
+            {
+              "text": "HPドレイン20%増加も付与",
+              "condition": "自身以外の黄属性の味方が2体以上なら"
+            }
+          ]
         }
       ]
     },
@@ -15919,6 +16704,44 @@
         {
           "text": "最後の攻撃後、解析3スタック以上なら1回まで再発動"
         }
+      ],
+      "flow": [
+        {
+          "when": "攻撃前",
+          "mode": "sequence",
+          "order": 1,
+          "target": "自身",
+          "effects": [
+            {
+              "text": "現在HP10%の自傷ダメージを受ける"
+            }
+          ]
+        },
+        {
+          "when": "攻撃時",
+          "mode": "sequence",
+          "order": 2,
+          "target": "ランダムな敵",
+          "effects": [
+            {
+              "text": "物理攻撃",
+              "multiplier": "物理610%×3回",
+              "damageTotal": "base"
+            }
+          ]
+        },
+        {
+          "when": "最後の攻撃後",
+          "mode": "sequence",
+          "order": 3,
+          "target": "自身",
+          "effects": [
+            {
+              "text": "このスキルを1回まで再発動",
+              "condition": "解析が3スタック以上なら"
+            }
+          ]
+        }
       ]
     },
     {
@@ -15966,6 +16789,39 @@
         {
           "text": "対象のHP割合が高いほどダメージ上昇(最大1520%、判定は攻撃ごと)"
         }
+      ],
+      "flow": [
+        {
+          "when": "攻撃前",
+          "mode": "sequence",
+          "order": 1,
+          "target": "自身",
+          "effects": [
+            {
+              "text": "現在HP20%の自傷ダメージを受ける"
+            }
+          ]
+        },
+        {
+          "when": "攻撃時",
+          "mode": "sequence",
+          "order": 2,
+          "target": "ランダムな敵",
+          "effects": [
+            {
+              "text": "物理攻撃",
+              "multiplier": "物理760%×5回",
+              "damageTotal": "base"
+            },
+            {
+              "text": "ダメージが上がり、最大でこの倍率に変わる",
+              "condition": "対象のHP割合が高いほど",
+              "multiplier": "物理1520%×5回",
+              "damageTotal": "conditionMax",
+              "note": "判定は攻撃ごと"
+            }
+          ]
+        }
       ]
     },
     {
@@ -15994,6 +16850,29 @@
         },
         {
           "text": "1スタックにつき攻撃力+3%、6スタックでスピード+30%"
+        }
+      ],
+      "flow": [
+        {
+          "when": "自身か味方が自傷ダメージを受けたとき",
+          "mode": "conditional",
+          "target": "自身",
+          "effects": [
+            {
+              "text": "解析を1スタック付与",
+              "note": "最大6スタック、解除不可"
+            }
+          ]
+        },
+        {
+          "when": "常時",
+          "mode": "passive",
+          "target": "自身",
+          "effects": [
+            {
+              "text": "解析1スタックにつき攻撃力+3%、6スタックでスピード+30%"
+            }
+          ]
         }
       ],
       "synergyNotes": [
@@ -16029,6 +16908,32 @@
         },
         {
           "text": "バトル開始時、自身に多重バリア1層(最大HP20%以上のダメージを1回無効化、解除不可)"
+        }
+      ],
+      "flow": [
+        {
+          "when": "バトル開始時",
+          "mode": "simultaneous",
+          "target": "自身",
+          "effects": [
+            {
+              "text": "多重バリア1層を付与",
+              "note": "最大HP20%以上のダメージを1回無効化、解除不可"
+            }
+          ]
+        },
+        {
+          "when": "攻撃後",
+          "mode": "sequence",
+          "order": 1,
+          "target": "攻撃した対象",
+          "effects": [
+            {
+              "text": "対象のバフ1つのターン数を1減少",
+              "condition": "対象が弱体効果中なら",
+              "chance": "70%"
+            }
+          ]
         }
       ]
     },
@@ -17492,6 +18397,33 @@
         {
           "text": "自身にHPドレイン40%増加を4ターン付与"
         }
+      ],
+      "flow": [
+        {
+          "when": "攻撃時",
+          "mode": "sequence",
+          "order": 1,
+          "target": "ランダムな敵3体",
+          "effects": [
+            {
+              "text": "物理攻撃",
+              "multiplier": "物理480%",
+              "damageTotal": "base"
+            }
+          ]
+        },
+        {
+          "when": "攻撃後",
+          "mode": "sequence",
+          "order": 2,
+          "target": "自身",
+          "effects": [
+            {
+              "text": "HPドレイン40%増加を付与",
+              "duration": "4ターン"
+            }
+          ]
+        }
       ]
     },
     {
@@ -17517,6 +18449,19 @@
       "steps": [
         {
           "text": "自身が過去20ターンに受けた総被ダメージ×20%の直接攻撃を、ランダムな敵3体に行う"
+        }
+      ],
+      "flow": [
+        {
+          "when": "攻撃時",
+          "mode": "sequence",
+          "order": 1,
+          "target": "ランダムな敵3体",
+          "effects": [
+            {
+              "text": "自身が過去20ターンに受けた総被ダメージ20%分の直接攻撃"
+            }
+          ]
         }
       ],
       "synergyNotes": [
@@ -17569,6 +18514,29 @@
         {
           "text": "隣接する味方2体の最大HPを、自身の最大HP20%分増加"
         }
+      ],
+      "flow": [
+        {
+          "when": "常時",
+          "mode": "passive",
+          "target": "自身",
+          "effects": [
+            {
+              "text": "最大HPを100%増加",
+              "note": "解除不可"
+            }
+          ]
+        },
+        {
+          "when": "常時",
+          "mode": "passive",
+          "target": "隣接する味方2体",
+          "effects": [
+            {
+              "text": "最大HPを、フィアー自身の最大HP20%分増加"
+            }
+          ]
+        }
       ]
     },
     {
@@ -17600,6 +18568,31 @@
         },
         {
           "text": "発動後4回行動まで再発動しない"
+        }
+      ],
+      "flow": [
+        {
+          "when": "ターン開始時",
+          "mode": "simultaneous",
+          "target": "スピードが最も低い味方",
+          "effects": [
+            {
+              "text": "カウンタを10%増加",
+              "duration": "2ターン",
+              "note": "対象が自身の場合は30%。発動後、4回行動が終わるまで再発動しない"
+            }
+          ]
+        },
+        {
+          "when": "攻撃を受けたとき",
+          "mode": "conditional",
+          "target": "自身",
+          "effects": [
+            {
+              "text": "被ダメージの20%をHP回復",
+              "note": "最大で自身の最大HP10%まで"
+            }
+          ]
         }
       ]
     },
@@ -18781,6 +19774,40 @@
         {
           "text": "7ターン目以降は回復せず、物理ダメージ2倍"
         }
+      ],
+      "flow": [
+        {
+          "when": "攻撃前",
+          "mode": "sequence",
+          "order": 1,
+          "target": "自身",
+          "effects": [
+            {
+              "text": "HPを最大HP10%回復"
+            },
+            {
+              "text": "回復しない",
+              "condition": "7ターン目以降は"
+            }
+          ]
+        },
+        {
+          "when": "攻撃時",
+          "mode": "sequence",
+          "order": 2,
+          "target": "ランダムな敵3体",
+          "effects": [
+            {
+              "text": "物理攻撃",
+              "multiplier": "物理540%",
+              "damageTotal": "base"
+            },
+            {
+              "text": "物理ダメージが2倍になる",
+              "condition": "7ターン目以降は"
+            }
+          ]
+        }
       ]
     },
     {
@@ -18828,6 +19855,42 @@
         {
           "text": "7ターン目以降は回復せず、物理ダメージ2倍"
         }
+      ],
+      "flow": [
+        {
+          "when": "攻撃前",
+          "mode": "sequence",
+          "order": 1,
+          "target": "自身",
+          "effects": [
+            {
+              "text": "HPを最大HP10%回復"
+            },
+            {
+              "text": "回復しない",
+              "condition": "7ターン目以降は"
+            }
+          ]
+        },
+        {
+          "when": "攻撃時",
+          "mode": "sequence",
+          "order": 2,
+          "target": "ランダムな敵",
+          "effects": [
+            {
+              "text": "物理攻撃",
+              "multiplier": "物理310%×8回",
+              "damageTotal": "base"
+            },
+            {
+              "text": "物理ダメージが2倍になる",
+              "condition": "7ターン目以降は",
+              "multiplier": "物理620%×8回",
+              "damageTotal": "conditionMax"
+            }
+          ]
+        }
       ]
     },
     {
@@ -18859,6 +19922,30 @@
         },
         {
           "text": "この効果はバトル中15回のみ発動する"
+        }
+      ],
+      "flow": [
+        {
+          "when": "自身か味方のアクティブスキルでHP回復が発動したとき",
+          "mode": "conditional",
+          "target": "自身",
+          "effects": [
+            {
+              "text": "HPを最大HP5%回復",
+              "note": "この効果はバトル中15回のみ発動する"
+            }
+          ]
+        },
+        {
+          "when": "自身か味方のアクティブスキルでHP回復が発動したとき",
+          "mode": "conditional",
+          "target": "翠属性の味方全体",
+          "effects": [
+            {
+              "text": "攻撃力5%増加を1スタック付与",
+              "note": "最大15スタック、解除不可"
+            }
+          ]
         }
       ],
       "synergyNotes": [
@@ -18894,6 +19981,32 @@
         },
         {
           "text": "7ターン目開始時、自身のスキルCTを0にし、スピード+30%"
+        }
+      ],
+      "flow": [
+        {
+          "when": "バトル開始時",
+          "mode": "simultaneous",
+          "target": "自身",
+          "effects": [
+            {
+              "text": "最大HP40%増加・被ダメージ65%減少",
+              "note": "解除不可"
+            }
+          ]
+        },
+        {
+          "when": "7ターン目開始時",
+          "mode": "simultaneous",
+          "target": "自身",
+          "effects": [
+            {
+              "text": "自身のスキルCTを0にする"
+            },
+            {
+              "text": "スピードを30%増加"
+            }
+          ]
         }
       ]
     },
@@ -19089,6 +20202,37 @@
         {
           "text": "70%の確率でバフ無効を6ターン付与"
         }
+      ],
+      "flow": [
+        {
+          "when": "攻撃前",
+          "mode": "sequence",
+          "order": 1,
+          "target": "自身",
+          "effects": [
+            {
+              "text": "HPを最大HP5%回復"
+            }
+          ]
+        },
+        {
+          "when": "攻撃時",
+          "mode": "sequence",
+          "order": 2,
+          "target": "攻撃力が高い敵2体",
+          "effects": [
+            {
+              "text": "物理攻撃",
+              "multiplier": "物理620%",
+              "damageTotal": "base"
+            },
+            {
+              "text": "バフ無効を付与",
+              "chance": "70%",
+              "duration": "6ターン"
+            }
+          ]
+        }
       ]
     },
     {
@@ -19136,6 +20280,37 @@
         {
           "text": "攻撃前に「狼と人の絆」が10スタックなら物理1120%"
         }
+      ],
+      "flow": [
+        {
+          "when": "攻撃前",
+          "mode": "sequence",
+          "order": 1,
+          "target": "自身",
+          "effects": [
+            {
+              "text": "HPを最大HP5%回復"
+            }
+          ]
+        },
+        {
+          "when": "攻撃時",
+          "mode": "sequence",
+          "order": 2,
+          "target": "攻撃力が最も高い敵",
+          "effects": [
+            {
+              "text": "物理攻撃",
+              "multiplier": "物理280%×4回",
+              "damageTotal": "base"
+            },
+            {
+              "text": "物理攻撃のダメージが変わる",
+              "condition": "攻撃前に「狼と人の絆」が10スタックなら",
+              "multiplier": "物理1120%"
+            }
+          ]
+        }
       ]
     },
     {
@@ -19165,6 +20340,30 @@
         {
           "text": "自身と攻撃力が最も高い味方の防御力・物理防御力・物理クリダメ緩和を増加(解除不可)"
         }
+      ],
+      "flow": [
+        {
+          "when": "バトル開始時",
+          "mode": "simultaneous",
+          "target": "自身",
+          "effects": [
+            {
+              "text": "最大HPを100%増加",
+              "note": "解除不可"
+            }
+          ]
+        },
+        {
+          "when": "バトル開始時",
+          "mode": "simultaneous",
+          "target": "自身と攻撃力が最も高い味方",
+          "effects": [
+            {
+              "text": "防御力・物理防御力・物理クリティカルダメージ緩和を増加",
+              "note": "解除不可"
+            }
+          ]
+        }
       ]
     },
     {
@@ -19193,6 +20392,29 @@
         },
         {
           "text": "1スタックにつき攻撃力+8%・命中率+8%"
+        }
+      ],
+      "flow": [
+        {
+          "when": "自身か味方のアクティブスキルでHP回復効果が発動したとき",
+          "mode": "conditional",
+          "target": "自身と攻撃力が最も高い味方",
+          "effects": [
+            {
+              "text": "「狼と人の絆」を1スタック付与",
+              "note": "最大10スタック、解除不可"
+            }
+          ]
+        },
+        {
+          "when": "常時",
+          "mode": "passive",
+          "target": "自身と攻撃力が最も高い味方",
+          "effects": [
+            {
+              "text": "狼と人の絆1スタックにつき攻撃力8%・命中率8%増加"
+            }
+          ]
         }
       ],
       "synergyNotes": [
@@ -19247,6 +20469,48 @@
         {
           "text": "ランダムな敵3体に魔法320%"
         }
+      ],
+      "flow": [
+        {
+          "when": "攻撃前",
+          "mode": "sequence",
+          "order": 1,
+          "target": "自身",
+          "effects": [
+            {
+              "text": "HPを最大HP10%回復"
+            },
+            {
+              "text": "回復しない",
+              "condition": "7ターン目以降は"
+            }
+          ]
+        },
+        {
+          "when": "攻撃前",
+          "mode": "sequence",
+          "order": 2,
+          "target": "ランダムな敵3体",
+          "effects": [
+            {
+              "text": "被ダメージ増加と魔法防御力減少を付与",
+              "duration": "4ターン"
+            }
+          ]
+        },
+        {
+          "when": "攻撃時",
+          "mode": "sequence",
+          "order": 3,
+          "target": "ランダムな敵3体",
+          "effects": [
+            {
+              "text": "魔法攻撃",
+              "multiplier": "魔法320%",
+              "damageTotal": "base"
+            }
+          ]
+        }
       ]
     },
     {
@@ -19295,6 +20559,51 @@
           "text": "7ターン目以降は最終攻撃後、70%の確率で攻撃力が高い敵2体に沈黙を2ターン付与",
           "term": "沈黙"
         }
+      ],
+      "flow": [
+        {
+          "when": "攻撃前",
+          "mode": "sequence",
+          "order": 1,
+          "target": "自身と攻撃力が最も高い味方",
+          "effects": [
+            {
+              "text": "HPをステラの最大HP7%回復"
+            },
+            {
+              "text": "回復しない",
+              "condition": "7ターン目以降は"
+            }
+          ]
+        },
+        {
+          "when": "攻撃時",
+          "mode": "sequence",
+          "order": 2,
+          "target": "ランダムな敵",
+          "effects": [
+            {
+              "text": "魔法攻撃",
+              "multiplier": "魔法710%×4回",
+              "damageTotal": "base"
+            }
+          ]
+        },
+        {
+          "when": "最後の攻撃後",
+          "mode": "sequence",
+          "order": 3,
+          "target": "攻撃力が高い敵2体",
+          "effects": [
+            {
+              "text": "沈黙を付与",
+              "term": "沈黙",
+              "condition": "7ターン目以降なら",
+              "chance": "70%",
+              "duration": "2ターン"
+            }
+          ]
+        }
       ]
     },
     {
@@ -19324,6 +20633,29 @@
         {
           "text": "7ターン目開始時、自身のスキルCTを0にする"
         }
+      ],
+      "flow": [
+        {
+          "when": "バトル開始時",
+          "mode": "simultaneous",
+          "target": "自身",
+          "effects": [
+            {
+              "text": "被ダメージ減少・最大HP増加・防御力150%増加",
+              "note": "解除不可"
+            }
+          ]
+        },
+        {
+          "when": "7ターン目開始時",
+          "mode": "simultaneous",
+          "target": "自身",
+          "effects": [
+            {
+              "text": "自身のスキルCTを0にする"
+            }
+          ]
+        }
       ]
     },
     {
@@ -19349,6 +20681,19 @@
       "steps": [
         {
           "text": "自身か味方のアクティブスキルでHP回復効果が発動するたび、攻撃力+10%・物理防御力+6%を各1スタック付与(最大10スタック、解除不可)"
+        }
+      ],
+      "flow": [
+        {
+          "when": "自身か味方のアクティブスキルでHP回復効果が発動したとき",
+          "mode": "conditional",
+          "target": "自身",
+          "effects": [
+            {
+              "text": "攻撃力10%増加・物理防御力6%増加を各1スタック付与",
+              "note": "最大10スタック、解除不可"
+            }
+          ]
         }
       ],
       "synergyNotes": [
@@ -19692,6 +21037,39 @@
         {
           "text": "ランダムな敵に魔法440%×4回"
         }
+      ],
+      "flow": [
+        {
+          "when": "攻撃前",
+          "mode": "sequence",
+          "order": 1,
+          "target": "自身",
+          "effects": [
+            {
+              "text": "最大HPを10%増加",
+              "note": "最大2スタック、解除不可"
+            },
+            {
+              "text": "再生を付与",
+              "term": "再生",
+              "duration": "4ターン",
+              "note": "毎ターン最大HP10%回復、解除不可"
+            }
+          ]
+        },
+        {
+          "when": "攻撃時",
+          "mode": "sequence",
+          "order": 2,
+          "target": "ランダムな敵",
+          "effects": [
+            {
+              "text": "魔法攻撃",
+              "multiplier": "魔法440%×4回",
+              "damageTotal": "base"
+            }
+          ]
+        }
       ]
     },
     {
@@ -19740,6 +21118,36 @@
           "text": "7ターン目以降にHP回復が発動しなかった場合、魔法ダメージ3倍"
         }
       ],
+      "flow": [
+        {
+          "when": "攻撃前",
+          "mode": "sequence",
+          "order": 1,
+          "target": "自身",
+          "effects": [
+            {
+              "text": "HPを最大HP5%回復。これを3回発動"
+            }
+          ]
+        },
+        {
+          "when": "攻撃時",
+          "mode": "sequence",
+          "order": 2,
+          "target": "ランダムな敵3体",
+          "effects": [
+            {
+              "text": "魔法攻撃",
+              "multiplier": "魔法480%",
+              "damageTotal": "base"
+            },
+            {
+              "text": "魔法ダメージが3倍になる",
+              "condition": "7ターン目以降にHP回復が発動しなかった場合"
+            }
+          ]
+        }
+      ],
       "synergyNotes": [
         {
           "text": "①の「3回発動」は回復回数をカウントする味方(ポーラS3・ユルディズS4・冬ステラS4・黄昏フローレンスS3)のスタックを1人で3回進める。",
@@ -19774,6 +21182,30 @@
         {
           "text": "1スタックにつき攻撃力+5%・カウンタ+1%。対象が翠属性ならカウンタ+2%"
         }
+      ],
+      "flow": [
+        {
+          "when": "HP回復効果が発動したとき",
+          "mode": "conditional",
+          "target": "自身と攻撃力が高い味方2体",
+          "effects": [
+            {
+              "text": "「旺花」を1スタック付与",
+              "note": "最大15スタック、解除不可"
+            }
+          ]
+        },
+        {
+          "when": "常時",
+          "mode": "passive",
+          "target": "自身と攻撃力が高い味方2体",
+          "effects": [
+            {
+              "text": "旺花1スタックにつき攻撃力5%・カウンタ1%増加",
+              "note": "対象が翠属性ならカウンタの増加量は2%"
+            }
+          ]
+        }
       ]
     },
     {
@@ -19802,6 +21234,30 @@
         },
         {
           "text": "攻撃を受けたとき、被ダメージの60%をHP回復(その攻撃で戦闘不能になる場合は発動しない)"
+        }
+      ],
+      "flow": [
+        {
+          "when": "バトル開始時",
+          "mode": "simultaneous",
+          "target": "自身",
+          "effects": [
+            {
+              "text": "最大HPを100%増加",
+              "note": "解除不可"
+            }
+          ]
+        },
+        {
+          "when": "攻撃を受けたとき",
+          "mode": "conditional",
+          "target": "自身",
+          "effects": [
+            {
+              "text": "被ダメージの60%をHP回復",
+              "note": "その攻撃で戦闘不能になる場合は発動しない"
+            }
+          ]
         }
       ]
     },

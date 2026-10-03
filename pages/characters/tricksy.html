@@ -42,13 +42,16 @@
         <div class="skill-body">
           
         <div>
-          <h3 class="block-title">順番に何が起きる？</h3>
-          <ol class="steps">
-            <li>ランダムな敵3体に魔法<span class="ratio">330%</span></li><li>70%の確率でスピード20%減少を2ターン付与</li><li>対象の魔力が自身より低い場合は5ターンになる</li>
-          </ol>
+          <h3 class="block-title">いつ・誰に・何が起きる？</h3>
+          <ol class="flow">
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">攻撃時</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>ランダムな敵3体</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>魔法攻撃<span class="flow-chip num">魔法<span class="ratio">330%</span></span><span class="flow-total">倍率合計 990%（3体分）</span></li><li><span class="flow-chip">確率70%</span>スピード20%減少を付与<span class="flow-chip">2ターン</span></li><li class="flow-cond-line"><span class="flow-chip cond">対象の魔力が自身より低い場合は</span>継続が5ターンになる</li></ul></div>
+          </li>
+        </ol>
         </div>
       
-          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>ランダム敵3体</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 990%</dd></dl></div>
+          
           
           
           <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用Lv1</th><td>対象5体。</td></tr><tr><th>専用Lv3</th><td>魔法<span class="ratio">360%</span></td></tr></table></div>
@@ -79,13 +82,21 @@
         <div class="skill-body">
           
         <div>
-          <h3 class="block-title">順番に何が起きる？</h3>
-          <ol class="steps">
-            <li>ランダムな敵4体に魔法<span class="ratio">380%</span></li><li>70%の確率で攻撃力が最も高い敵に<details class="term"><summary>気絶</summary><span class="term-box">行動できなくなる状態異常。効果中は通常の行動順が来てもスキルを使えない。</span></details>を1ターン付与(自身のバフが4個以上なら2ターン)</li><li>このスキルの3回目以降は魔法<span class="ratio">1520%</span></li>
-          </ol>
+          <h3 class="block-title">いつ・誰に・何が起きる？</h3>
+          <ol class="flow">
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">① 攻撃時</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>ランダムな敵4体</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>魔法攻撃<span class="flow-chip num">魔法<span class="ratio">380%</span></span><span class="flow-total">倍率合計 1520%（4体分）</span></li><li class="flow-cond-line"><span class="flow-chip cond">このスキルの3回目以降は</span>魔法攻撃のダメージが変わる<span class="flow-chip num">魔法<span class="ratio">1520%</span></span><span class="flow-total">条件時：倍率合計 6080%</span></li></ul></div>
+          </li>
+        
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">② 攻撃時</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>攻撃力が最も高い敵</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li><span class="flow-chip">確率70%</span><details class="term"><summary>気絶</summary><span class="term-box">行動できなくなる状態異常。効果中は通常の行動順が来てもスキルを使えない。</span></details>を付与<span class="flow-chip">1ターン</span></li><li class="flow-cond-line"><span class="flow-chip cond">自身のバフが4個以上なら</span>継続が2ターンになる</li></ul></div>
+          </li>
+        </ol>
         </div>
       
-          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>ランダム敵4体</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 1520% / 最大 6080%</dd></dl></div>
+          
           
           
           <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用</th><td>専用武器効果なし</td></tr></table></div>
@@ -116,13 +127,21 @@
         <div class="skill-body">
           
         <div>
-          <h3 class="block-title">順番に何が起きる？</h3>
-          <ol class="steps">
-            <li>1ターン目開始時、自身に攻撃力200%のシールドを10ターン付与(解除不可)</li><li>シールド対象が黄属性なら、シールド量は攻撃力500%になる</li><li>弱体効果無効または行動阻害無効を持つ敵がいる場合、シールド対象が味方全体になる</li><li>バトル開始時、自身の被ダメージを10%減少(解除不可)</li>
-          </ol>
+          <h3 class="block-title">いつ・誰に・何が起きる？</h3>
+          <ol class="flow">
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">バトル開始時</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>自身</span></span><span class="flow-mode">常時</span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>受けるダメージを10%減少<span class="flow-note">解除不可</span></li></ul></div>
+          </li>
+        
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">1ターン目開始時</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>自身</span></span><span class="flow-mode">同時に発動</span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>攻撃力200%分のシールドを付与<span class="flow-chip">10ターン</span><span class="flow-note">解除不可</span></li><li class="flow-cond-line"><span class="flow-chip cond">シールド対象が黄属性なら</span>シールド量が攻撃力500%分になる</li><li class="flow-cond-line"><span class="flow-chip cond">弱体効果無効または行動阻害無効を持つ敵がいる場合</span>シールド対象が味方全体になる</li></ul></div>
+          </li>
+        </ol>
         </div>
       
-          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>自身</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>攻撃力200%シールド / 黄属性なら500%</dd></dl><dl class="data-item"><dt>継続</dt><dd>条件参照</dd></dl></div>
+          
           
           
           <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用Lv2</th><td>被ダメージ減少70%</td></tr></table></div>
@@ -153,13 +172,16 @@
         <div class="skill-body">
           
         <div>
-          <h3 class="block-title">順番に何が起きる？</h3>
-          <ol class="steps">
-            <li>行動開始時、自身の防御力+100%・命中率+30%(4ターン)</li><li>自身以外の黄属性の味方が2体以上ならHPドレイン+20%も付与</li><li>発動後4回行動まで再発動しない</li>
-          </ol>
+          <h3 class="block-title">いつ・誰に・何が起きる？</h3>
+          <ol class="flow">
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">行動開始時</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>自身</span></span><span class="flow-mode">同時に発動</span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>防御力100%増加・命中率30%増加<span class="flow-chip">4ターン</span><span class="flow-note">発動後、4回行動が終わるまで再発動しない</span></li><li class="flow-cond-line"><span class="flow-chip cond">自身以外の黄属性の味方が2体以上なら</span>HPドレイン20%増加も付与</li></ul></div>
+          </li>
+        </ol>
         </div>
       
-          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>自身</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>防御力+100% / 命中率+30% / HPドレイン+20%</dd></dl><dl class="data-item"><dt>継続</dt><dd>条件参照</dd></dl></div>
+          
           
           
           <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用</th><td>専用武器効果なし</td></tr></table></div>
