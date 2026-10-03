@@ -1790,12 +1790,12 @@
         "exclusiveLv2Total": 1440,
         "exclusiveLv3Total": 1920,
         "conditionMaxTotal": 1920,
-        "conditionMaxNote": "専用Lv3で対象4体。睡眠条件は火力外",
-        "powerType": "対象数増加",
+        "conditionMaxNote": "専用Lv3で対象4体。睡眠とクリ耐性減少は火力外評価",
+        "powerType": "対象数増加 / 睡眠",
         "maxStacks": null,
         "realityRank": "高",
-        "rankingTarget": "対象",
-        "damageMemo": "火力より睡眠付与が主目的"
+        "rankingTarget": "基本",
+        "damageMemo": "妨害寄りの複数攻撃。倍率自体は控えめ"
       },
       "plainSummary": "クリティカルした相手を眠らせる妨害魔法。",
       "steps": [
@@ -1843,12 +1843,12 @@
         "exclusiveLv2Total": 780,
         "exclusiveLv3Total": 780,
         "conditionMaxTotal": 780,
-        "conditionMaxNote": "単体攻撃。気絶目的が主",
-        "powerType": "なし",
+        "conditionMaxNote": "専用武器でダメージ増加なし。気絶強化は火力外評価",
+        "powerType": "単体妨害 / 気絶",
         "maxStacks": null,
         "realityRank": "高",
-        "rankingTarget": "対象外",
-        "damageMemo": "妨害比較では重要だが火力ランキング向きではない"
+        "rankingTarget": "基本",
+        "damageMemo": "火力ではなく気絶妨害を見る"
       },
       "plainSummary": "敵のエースを気絶させにいく一撃。",
       "steps": [
@@ -1955,12 +1955,12 @@
         "exclusiveLv2Total": 1400,
         "exclusiveLv3Total": 1400,
         "conditionMaxTotal": 2800,
-        "conditionMaxNote": "対ソーサラーかつ専用Lv3なら2倍",
-        "powerType": "対職業特効",
+        "conditionMaxNote": "専用Lv3で対ソーサラー2倍。被ダメージ増加と拘束は火力外評価",
+        "powerType": "対職業特効 / 被ダメージ増加",
         "maxStacks": null,
         "realityRank": "中",
         "rankingTarget": "条件込み",
-        "damageMemo": "相手がソーサラーかどうかで評価が大きく変わる"
+        "damageMemo": "相手がソーサラーの場合のみ最大値になる"
       },
       "plainSummary": "ソーサラー特効の4体攻撃。",
       "steps": [
@@ -1999,15 +1999,15 @@
         "hitCount": 4,
         "baseTotal": 1260,
         "exclusiveLv1Total": 1260,
-        "exclusiveLv2Total": 1280,
-        "exclusiveLv3Total": 1280,
-        "conditionMaxTotal": 2880,
-        "conditionMaxNote": "初撃330% + 2-4撃目310%。追加攻撃400%が最大4回発生した場合。mixedMultiplier=true のため単純な倍率×回数検算から除外",
+        "exclusiveLv2Total": 1260,
+        "exclusiveLv3Total": 1260,
+        "conditionMaxTotal": 2860,
+        "conditionMaxNote": "初撃330% + 2-4撃目310% + 追加攻撃400%×4回",
         "powerType": "追加攻撃 / 撃破回復",
-        "maxStacks": null,
+        "maxStacks": 4,
         "realityRank": "中",
         "rankingTarget": "条件込み",
-        "damageMemo": "追加攻撃の発生率が絡むため、安定火力とは分ける",
+        "damageMemo": "追加攻撃70%の理論値。既存DBの2880%は計算値と合わないため補正",
         "mixedMultiplier": true
       },
       "plainSummary": "追撃が連鎖する連撃。倒せば回復も増える。",
@@ -2113,7 +2113,7 @@
         "exclusiveLv2Total": 720,
         "exclusiveLv3Total": 720,
         "conditionMaxTotal": 720,
-        "conditionMaxNote": "単体攻撃。専用はCT短縮と攻撃バフが主",
+        "conditionMaxNote": "単体攻撃。専用武器の主価値はCT短縮と攻撃力バフ",
         "powerType": "CT支援",
         "maxStacks": null,
         "realityRank": "高",
@@ -2261,7 +2261,7 @@
         "exclusiveLv2Total": 3150,
         "exclusiveLv3Total": 3150,
         "conditionMaxTotal": 5250,
-        "conditionMaxNote": "専用Lv2で初期6回・最大10回、専用Lv3で525%。全段到達時",
+        "conditionMaxNote": "専用Lv2で最大10回、専用Lv3で525%。全段到達時",
         "powerType": "クリティカル依存 / 攻撃回数増加",
         "maxStacks": null,
         "realityRank": "中",
@@ -2311,7 +2311,7 @@
         "exclusiveLv2Total": 2550,
         "exclusiveLv3Total": 2625,
         "conditionMaxTotal": 3745,
-        "conditionMaxNote": "専用Lv3で525%。撃破時の低HP敵2回560%を足した場合",
+        "conditionMaxNote": "専用Lv3で525%×5回。撃破時の低HP敵2回560%を足した場合",
         "powerType": "撃破追加攻撃",
         "maxStacks": null,
         "realityRank": "中",
@@ -2458,7 +2458,7 @@
         "conditionMaxNote": "毒対象なら不治付与。火力倍率は変化なし",
         "powerType": "条件付き弱体",
         "maxStacks": null,
-        "realityRank": "高",
+        "realityRank": "中",
         "rankingTarget": "基本",
         "damageMemo": "回復阻害目的の弱体スキル"
       },
@@ -2562,13 +2562,13 @@
         "exclusiveLv1Total": 540,
         "exclusiveLv2Total": 720,
         "exclusiveLv3Total": 720,
-        "conditionMaxTotal": 720,
-        "conditionMaxNote": "ギルド/グランドバトル時の専用Lv2倍率。直接攻撃と再発動は別枠",
+        "conditionMaxTotal": 1440,
+        "conditionMaxNote": "overlay は技力参照の直接攻撃(250〜280%)を合計に加算していて誤り。base の条件MAX=720 も誤りで、撃破失敗時の再発動1回を加えて720×2=1440",
         "powerType": "高HP条件 / 直接攻撃 / 再発動",
         "maxStacks": null,
         "realityRank": "中",
         "rankingTarget": "条件込み",
-        "damageMemo": "直接攻撃を合計倍率へ混ぜると誤解が出る"
+        "damageMemo": "直接攻撃と再発動を通常火力とは分ける"
       },
       "plainSummary": "一番元気な敵に確定クリで斬り込む。倒し損ねたらもう一度。",
       "steps": [
@@ -2616,7 +2616,7 @@
         "conditionMaxNote": "撃破時に再発動した場合の単純2回分。直接攻撃は別枠",
         "powerType": "低HP条件 / 直接攻撃 / 再発動",
         "maxStacks": null,
-        "realityRank": "低",
+        "realityRank": "高",
         "rankingTarget": "条件込み",
         "damageMemo": "撃破時再発動のため安定火力とは分ける"
       },
@@ -2723,12 +2723,12 @@
         "exclusiveLv2Total": 1170,
         "exclusiveLv3Total": 1170,
         "conditionMaxTotal": 1170,
-        "conditionMaxNote": "専用Lv1で1170%。与ダメ増加支援は別評価",
-        "powerType": "与ダメ増加支援",
+        "conditionMaxNote": "専用Lv1以降1170%。専用Lv2で与ダメージ増加最大90%",
+        "powerType": "物理",
         "maxStacks": null,
-        "realityRank": "高",
-        "rankingTarget": "基本",
-        "damageMemo": "火力支援が主で、本人火力ランキングだけでは価値が伝わりにくい"
+        "realityRank": "中",
+        "rankingTarget": "条件込み",
+        "damageMemo": "本体火力より、味方アタッカーへの与ダメージ増加が主価値"
       },
       "plainSummary": "遅い味方たちの与ダメージを、被弾回数に応じて底上げする。",
       "steps": [
@@ -2749,7 +2749,8 @@
         {
           "text": "被弾回数参照はミナシュマリS2・フィアーS2と同族で、受けの多いタンク編成ほど支援量が伸びる。根拠: 増加量の参照が「被攻撃回数」のため"
         }
-      ]
+      ],
+      "weaponPassive": "耐久力+8% / 攻撃力+18% / 防御力+5%"
     },
     {
       "id": "sivi-s2",
@@ -2778,12 +2779,12 @@
         "exclusiveLv2Total": 1590,
         "exclusiveLv3Total": 2120,
         "conditionMaxTotal": 2120,
-        "conditionMaxNote": "専用Lv3で敵4体対象。回復と弱体解除は別評価",
-        "powerType": "対象数増加 / ダメージ比例回復",
+        "conditionMaxNote": "専用Lv3で敵4体対象",
+        "powerType": "物理",
         "maxStacks": null,
         "realityRank": "高",
         "rankingTarget": "基本",
-        "damageMemo": "回復込みで見るべき複合スキル"
+        "damageMemo": "火力よりも、HP回復と弱体効果全解除が主価値"
       },
       "plainSummary": "殴った分で、遅い味方3人を回復して弱体も全部剥がす。",
       "steps": [
@@ -2796,7 +2797,8 @@
         {
           "text": "同じ対象の弱体効果を全て解除する"
         }
-      ]
+      ],
+      "weaponPassive": "耐久力+8% / 攻撃力+18% / 防御力+5%"
     },
     {
       "id": "sivi-s3",
@@ -2825,7 +2827,8 @@
         {
           "text": "自身のみ、防御力・物理防御力の増加量が100%になる"
         }
-      ]
+      ],
+      "weaponPassive": "耐久力+8% / 攻撃力+18% / 防御力+5%"
     },
     {
       "id": "sivi-s4",
@@ -2857,7 +2860,8 @@
         {
           "text": "発動時、自身の被ダメージを30%減少(3ターン)"
         }
-      ]
+      ],
+      "weaponPassive": "耐久力+8% / 攻撃力+18% / 防御力+5%"
     },
     {
       "id": "stella-s1",
@@ -2934,7 +2938,7 @@
         "exclusiveLv2Total": 1200,
         "exclusiveLv3Total": 1200,
         "conditionMaxTotal": 1200,
-        "conditionMaxNote": "単体攻撃。総ダメ50%回復あり",
+        "conditionMaxNote": "単体攻撃。総与ダメージ50%回復あり",
         "powerType": "ダメージ比例回復",
         "maxStacks": null,
         "realityRank": "高",
@@ -3040,12 +3044,12 @@
         "exclusiveLv2Total": 2400,
         "exclusiveLv3Total": 2400,
         "conditionMaxTotal": 2400,
-        "conditionMaxNote": "専用Lv1で480%×5体。弱体命中低下とバフ無効が主",
-        "powerType": "弱体付与",
+        "conditionMaxNote": "専用Lv1で480%×5体。弱体付与は火力外評価",
+        "powerType": "妨害 / バフ無効",
         "maxStacks": null,
         "realityRank": "高",
         "rankingTarget": "基本",
-        "damageMemo": "妨害込みの複合スキル"
+        "damageMemo": "ランダム敵5体への多段攻撃。追加火力条件なし"
       },
       "plainSummary": "敵のデバフ命中とバフを同時に封じる妨害弾。",
       "steps": [
@@ -3087,12 +3091,12 @@
         "exclusiveLv2Total": 680,
         "exclusiveLv3Total": 680,
         "conditionMaxTotal": 1360,
-        "conditionMaxNote": "2回目以降は物理ダメージ2倍。浸食ダメージは別枠",
-        "powerType": "再使用強化 / 継続ダメージ",
+        "conditionMaxNote": "このスキルの2回目以降は物理ダメージ2倍",
+        "powerType": "浸食 / 継続ダメージ",
         "maxStacks": null,
         "realityRank": "中",
         "rankingTarget": "条件込み",
-        "damageMemo": "2回目以降の火力を基本値に混ぜない"
+        "damageMemo": "浸食ダメージは倍率欄に含めず、継続削りとして評価"
       },
       "plainSummary": "一番元気な敵に浸食を撃ち込む。2発目からは2倍。",
       "steps": [
@@ -3193,13 +3197,13 @@
         "exclusiveLv1Total": 0,
         "exclusiveLv2Total": 0,
         "exclusiveLv3Total": 0,
-        "conditionMaxTotal": 0,
-        "conditionMaxNote": "直接攻撃とシールドが主。通常倍率では比較しにくい",
-        "powerType": "直接攻撃 / シールド",
+        "conditionMaxTotal": 500,
+        "conditionMaxNote": "原文のダメージは『対象の現在HP×15%(専用Lv2で20%)』で攻撃力倍率ではない。overlay はこのHP割合を倍率欄に入れていたため0に訂正。上限『吸収後の自身の攻撃力×500%』を条件MAXに記録",
+        "powerType": "直接攻撃 / 攻防吸収 / シールド",
         "maxStacks": null,
         "realityRank": "中",
-        "rankingTarget": "対象外",
-        "damageMemo": "通常の攻撃倍率ランキングからは外す"
+        "rankingTarget": "条件込み",
+        "damageMemo": "攻防吸収とシールドは火力倍率欄に含めず、生存補助として評価"
       },
       "plainSummary": "敵エースの攻防を吸い取り、削って、自分の盾に変える。",
       "steps": [
@@ -3241,12 +3245,12 @@
         "exclusiveLv2Total": 1700,
         "exclusiveLv3Total": 1700,
         "conditionMaxTotal": 1700,
-        "conditionMaxNote": "ランダム敵5体。20%気絶とバフターン延長あり",
+        "conditionMaxNote": "ランダム敵5体に340%の魔法攻撃。気絶とバフターン延長は火力外評価",
         "powerType": "気絶 / バフ延長",
         "maxStacks": null,
         "realityRank": "高",
         "rankingTarget": "基本",
-        "damageMemo": "妨害込みの複合スキル"
+        "damageMemo": "バフターン延長は倍率欄に含めない"
       },
       "plainSummary": "気絶をばら撒きつつ、外れても自分のバフが延びる。",
       "steps": [
@@ -3352,8 +3356,8 @@
         "conditionMaxNote": "専用Lv2で攻撃回数7回。クリティカル後の確定クリは火力安定要素",
         "powerType": "クリティカル依存 / 攻撃回数増加",
         "maxStacks": null,
-        "realityRank": "中",
-        "rankingTarget": "条件込み",
+        "realityRank": "高",
+        "rankingTarget": "専用Lv2",
         "damageMemo": "クリティカル前提だが連撃内で条件を満たしやすい"
       },
       "plainSummary": "一度クリティカルが出ると残り全部クリティカルになる連撃。",
@@ -3405,7 +3409,7 @@
         "powerType": "スピード減少特効 / 攻撃回数増加",
         "maxStacks": null,
         "realityRank": "中",
-        "rankingTarget": "条件込み",
+        "rankingTarget": "条件MAX",
         "damageMemo": "自己付与のスピード減少が絡むため安定火力と分ける"
       },
       "plainSummary": "減速した敵に1.5倍が乗る3連撃。",
@@ -3509,8 +3513,8 @@
         "conditionMaxNote": "専用Lv1で対象5体。技力参照の直接攻撃は別枠",
         "powerType": "対象数増加 / 直接攻撃",
         "maxStacks": null,
-        "realityRank": "中",
-        "rankingTarget": "条件込み",
+        "realityRank": "高",
+        "rankingTarget": "条件MAX",
         "damageMemo": "直接攻撃を通常倍率へ混ぜない"
       },
       "plainSummary": "3体攻撃と一番元気な敵への直接攻撃。自分が瀕死なら直撃2倍。",
@@ -3557,7 +3561,7 @@
         "powerType": "バフ数依存 / 弱体特効",
         "maxStacks": null,
         "realityRank": "中",
-        "rankingTarget": "条件込み",
+        "rankingTarget": "条件MAX",
         "damageMemo": "最大値は条件が多い。基本火力としては低く見える"
       },
       "plainSummary": "バフの数だけ連撃が増える追い打ち。",
@@ -4029,7 +4033,22 @@
         {
           "text": "対象の魔力が自身より低ければ沈黙の確率が40%になる"
         }
-      ]
+      ],
+      "damage": {
+        "singleMultiplier": 0,
+        "hitCount": 1,
+        "baseTotal": 0,
+        "exclusiveLv1Total": 0,
+        "exclusiveLv2Total": 0,
+        "exclusiveLv3Total": 0,
+        "conditionMaxTotal": 0,
+        "conditionMaxNote": "直接ダメージなし。バフ解除と沈黙付与が主目的",
+        "powerType": "バフ解除 / 沈黙",
+        "maxStacks": null,
+        "realityRank": "低",
+        "rankingTarget": "補助",
+        "damageMemo": "高火力スキルとの組み合わせ前提。倍率比較では0%として扱う"
+      }
     },
     {
       "id": "giluial-s2",
@@ -4051,19 +4070,19 @@
       "imageUrl": "",
       "sourceUrl": "https://ichigogames.net/mementomori/giluial/",
       "damage": {
-        "singleMultiplier": 880,
+        "singleMultiplier": 780,
         "hitCount": 3,
-        "baseTotal": 2640,
-        "exclusiveLv1Total": 2640,
-        "exclusiveLv2Total": 2640,
+        "baseTotal": 2340,
+        "exclusiveLv1Total": 2340,
+        "exclusiveLv2Total": 2340,
         "exclusiveLv3Total": 2640,
-        "conditionMaxTotal": 2640,
-        "conditionMaxNote": "カード用要約から暫定抽出。条件の現実性は要確認",
-        "powerType": "条件火力",
+        "conditionMaxTotal": 5280,
+        "conditionMaxNote": "専用Lv3の880%×3体が、自身弱体効果付帯時に2倍",
+        "powerType": "条件火力 / 沈黙",
         "maxStacks": null,
         "realityRank": "中",
-        "rankingTarget": "対象",
-        "damageMemo": "カード生成JSONから自動マージ。専用Lv別・条件MAXは要精査"
+        "rankingTarget": "条件込み",
+        "damageMemo": "条件MAXは自己弱体が必要。実戦値は中程度として扱う"
       },
       "plainSummary": "自分が弱体を受けているときこそ2倍で撃てる魔法。",
       "steps": [
@@ -4163,18 +4182,18 @@
       "sourceUrl": "https://ichigogames.net/mementomori/liselotte/",
       "damage": {
         "singleMultiplier": 540,
-        "hitCount": 5,
-        "baseTotal": 2700,
+        "hitCount": 4,
+        "baseTotal": 2160,
         "exclusiveLv1Total": 2700,
         "exclusiveLv2Total": 2700,
         "exclusiveLv3Total": 2700,
-        "conditionMaxTotal": 2700,
-        "conditionMaxNote": "カード用要約から暫定抽出。条件の現実性は要確認",
-        "powerType": "条件火力",
+        "conditionMaxTotal": 4050,
+        "conditionMaxNote": "専用Lv1で540%×5体、HP50%以上なら1.5倍",
+        "powerType": "HP条件火力",
         "maxStacks": null,
-        "realityRank": "中",
-        "rankingTarget": "対象",
-        "damageMemo": "カード生成JSONから自動マージ。専用Lv別・条件MAXは要精査"
+        "realityRank": "高",
+        "rankingTarget": "条件込み",
+        "damageMemo": "HP50%以上の維持が条件。対象増加で総倍率が大きく伸びる"
       },
       "plainSummary": "自分が元気なら1.5倍で撃てる4体魔法。",
       "steps": [
@@ -4206,19 +4225,19 @@
       "imageUrl": "",
       "sourceUrl": "https://ichigogames.net/mementomori/liselotte/",
       "damage": {
-        "singleMultiplier": 720,
+        "singleMultiplier": 660,
         "hitCount": 5,
-        "baseTotal": 3600,
-        "exclusiveLv1Total": 3600,
-        "exclusiveLv2Total": 3600,
+        "baseTotal": 3300,
+        "exclusiveLv1Total": 3300,
+        "exclusiveLv2Total": 3300,
         "exclusiveLv3Total": 3600,
         "conditionMaxTotal": 3600,
-        "conditionMaxNote": "カード用要約から暫定抽出",
-        "powerType": "基本火力",
+        "conditionMaxNote": "専用Lv3で720%×5回",
+        "powerType": "基本火力 / 気絶",
         "maxStacks": null,
         "realityRank": "高",
-        "rankingTarget": "対象",
-        "damageMemo": "カード生成JSONから自動マージ。専用Lv別・条件MAXは要精査"
+        "rankingTarget": "基本",
+        "damageMemo": "気絶付与も兼ねる多段火力。倍率上昇は専用Lv3"
       },
       "plainSummary": "攻撃ごとに5割で気絶を狙う5連撃。",
       "steps": [
@@ -4315,16 +4334,16 @@
         "singleMultiplier": 880,
         "hitCount": 2,
         "baseTotal": 1760,
-        "exclusiveLv1Total": 1760,
-        "exclusiveLv2Total": 1760,
-        "exclusiveLv3Total": 1760,
-        "conditionMaxTotal": 1760,
-        "conditionMaxNote": "正面の敵と隣接する敵1体",
-        "powerType": "基本火力",
+        "exclusiveLv1Total": 2640,
+        "exclusiveLv2Total": 2640,
+        "exclusiveLv3Total": 2940,
+        "conditionMaxTotal": 2940,
+        "conditionMaxNote": "overlay の single=980(専用Lv3値)・hitCount=3(専用Lv1値)が誤り。専用Lv欄は overlay が正",
+        "powerType": "行動阻害 / 条件支援",
         "maxStacks": null,
         "realityRank": "高",
-        "rankingTarget": "対象",
-        "damageMemo": "カード生成JSONから自動マージ。専用Lv別・条件MAXは要精査"
+        "rankingTarget": "基本",
+        "damageMemo": "正面と隣接対象を狙えるため現実性は高い。睡眠は攻撃で解除される点に注意"
       },
       "plainSummary": "正面一帯を眠らせにいく高倍率の起点。",
       "steps": [
@@ -4367,12 +4386,12 @@
         "exclusiveLv2Total": 4400,
         "exclusiveLv3Total": 4400,
         "conditionMaxTotal": 4400,
-        "conditionMaxNote": "カード用要約から暫定抽出。条件の現実性は要確認",
-        "powerType": "条件火力",
+        "conditionMaxNote": "行動阻害中の敵が5体いる場合の理論値。出血ダメージは倍率に含めない",
+        "powerType": "行動阻害特効",
         "maxStacks": null,
         "realityRank": "中",
-        "rankingTarget": "対象",
-        "damageMemo": "カード生成JSONから自動マージ。専用Lv別・条件MAXは要精査"
+        "rankingTarget": "条件MAX",
+        "damageMemo": "条件達成時は強いが、行動阻害付与後に組む前提で評価する"
       },
       "plainSummary": "行動阻害中の敵だけを撃つ必中の追い打ち。",
       "steps": [
@@ -4449,12 +4468,12 @@
         "exclusiveLv2Total": 400,
         "exclusiveLv3Total": 400,
         "conditionMaxTotal": 400,
-        "conditionMaxNote": "カード用要約から暫定抽出",
-        "powerType": "基本火力",
+        "conditionMaxNote": "通常攻撃強化。睡眠付与は確率効果",
+        "powerType": "通常攻撃強化",
         "maxStacks": null,
         "realityRank": "高",
-        "rankingTarget": "対象",
-        "damageMemo": "カード生成JSONから自動マージ。専用Lv別・条件MAXは要精査"
+        "rankingTarget": "基本",
+        "damageMemo": "火力より睡眠付与の補助価値を見る"
       },
       "plainSummary": "通常攻撃でも眠らせにいく。",
       "steps": [
@@ -4490,16 +4509,16 @@
         "singleMultiplier": 450,
         "hitCount": 3,
         "baseTotal": 1350,
-        "exclusiveLv1Total": 1350,
-        "exclusiveLv2Total": 1350,
-        "exclusiveLv3Total": 1350,
-        "conditionMaxTotal": 2025,
-        "conditionMaxNote": "対象がスナイパーなら1.5倍",
-        "powerType": "条件火力",
+        "exclusiveLv1Total": 1800,
+        "exclusiveLv2Total": 1800,
+        "exclusiveLv3Total": 1800,
+        "conditionMaxTotal": 2700,
+        "conditionMaxNote": "overlay の single=600(専用Lv1値)が誤り。base の専用Lv欄未入力・条件MAX=2025 も誤り(専用Lv1込みで1800×1.5=2700)",
+        "powerType": "対スナイパー特効",
         "maxStacks": null,
         "realityRank": "中",
-        "rankingTarget": "対象",
-        "damageMemo": "カード生成JSONから自動マージ。専用Lv別・条件MAXは要精査"
+        "rankingTarget": "条件MAX",
+        "damageMemo": "スナイパー相手には強いが、ランダム3体のため対象編成に依存する"
       },
       "plainSummary": "スナイパー特効の必中攻撃。それ以外には減速を配る。",
       "steps": [
@@ -4539,14 +4558,14 @@
         "baseTotal": 1920,
         "exclusiveLv1Total": 1920,
         "exclusiveLv2Total": 1920,
-        "exclusiveLv3Total": 1920,
-        "conditionMaxTotal": 3120,
-        "conditionMaxNote": "被攻撃回数に応じて最大1040%×3体",
-        "powerType": "条件火力",
+        "exclusiveLv3Total": 2100,
+        "conditionMaxTotal": 3300,
+        "conditionMaxNote": "overlay の single=700(専用Lv3値)が誤り。base の Lv3・条件MAX=3120 も誤り(専用Lv3時の最大1100%×3体=3300)",
+        "powerType": "被弾回数条件火力",
         "maxStacks": null,
         "realityRank": "中",
-        "rankingTarget": "対象",
-        "damageMemo": "カード生成JSONから自動マージ。専用Lv別・条件MAXは要精査"
+        "rankingTarget": "条件MAX",
+        "damageMemo": "条件MAXは強いが、被弾回数上限まで加味した値"
       },
       "plainSummary": "味方が殴られた回数だけ痛くなる復讐砲。",
       "steps": [
@@ -4644,19 +4663,19 @@
       "imageUrl": "",
       "sourceUrl": "https://ichigogames.net/mementomori/nina_summer/",
       "damage": {
-        "singleMultiplier": 420,
+        "singleMultiplier": 380,
         "hitCount": 5,
-        "baseTotal": 2100,
-        "exclusiveLv1Total": 2100,
-        "exclusiveLv2Total": 2100,
+        "baseTotal": 1900,
+        "exclusiveLv1Total": 1900,
+        "exclusiveLv2Total": 1900,
         "exclusiveLv3Total": 2100,
         "conditionMaxTotal": 2100,
-        "conditionMaxNote": "カード用要約から暫定抽出。条件の現実性は要確認",
-        "powerType": "条件火力",
+        "conditionMaxNote": "両データとも single=420(専用Lv3値)。原文の最大スキルLv2は380%×5体=1900。base の baseTotal=2100 も誤り",
+        "powerType": "防御支援 / 複数攻撃",
         "maxStacks": null,
-        "realityRank": "中",
-        "rankingTarget": "対象",
-        "damageMemo": "カード生成JSONから自動マージ。専用Lv別・条件MAXは要精査"
+        "realityRank": "高",
+        "rankingTarget": "基本",
+        "damageMemo": "防御支援込みで見るスキル。火力ランキングだけで評価しない"
       },
       "plainSummary": "撃ちながら全員の防御を上げる。クリが出るほど硬くなる。",
       "steps": [
@@ -4698,12 +4717,12 @@
         "exclusiveLv2Total": 2100,
         "exclusiveLv3Total": 2100,
         "conditionMaxTotal": 2100,
-        "conditionMaxNote": "カード用要約から暫定抽出",
-        "powerType": "基本火力",
+        "conditionMaxNote": "専用武器による追加倍率強化なし。被ダメージ増加は倍率外評価",
+        "powerType": "弱体解除 / 被ダメージ増加",
         "maxStacks": null,
         "realityRank": "高",
-        "rankingTarget": "対象",
-        "damageMemo": "カード生成JSONから自動マージ。専用Lv別・条件MAXは要精査"
+        "rankingTarget": "基本",
+        "damageMemo": "支援寄りだが、敵5体への攻撃として火力は安定"
       },
       "plainSummary": "味方の弱体を剥がしつつ、敵を柔らかくする。",
       "steps": [
@@ -4804,19 +4823,19 @@
       "imageUrl": "",
       "sourceUrl": "https://ichigogames.net/mementomori/serruria/",
       "damage": {
-        "singleMultiplier": 480,
+        "singleMultiplier": 240,
         "hitCount": 3,
-        "baseTotal": 1440,
-        "exclusiveLv1Total": 1440,
-        "exclusiveLv2Total": 1440,
+        "baseTotal": 720,
+        "exclusiveLv1Total": 1320,
+        "exclusiveLv2Total": 1320,
         "exclusiveLv3Total": 1440,
-        "conditionMaxTotal": 1440,
-        "conditionMaxNote": "カード用要約から暫定抽出。条件の現実性は要確認",
-        "powerType": "条件火力",
+        "conditionMaxTotal": 3360,
+        "conditionMaxNote": "両データとも single=480(専用Lv3値)。原文の無条件は240%×3回=720。専用Lv1で440%、専用Lv3で480%。制限解除時7回で3360。base の baseTotal=1440・条件MAX=1440 も誤り",
+        "powerType": "攻撃回数条件火力",
         "maxStacks": null,
         "realityRank": "中",
-        "rankingTarget": "対象",
-        "damageMemo": "カード生成JSONから自動マージ。専用Lv別・条件MAXは要精査"
+        "rankingTarget": "条件MAX",
+        "damageMemo": "条件未達では720から1440帯の段階火力。終盤や制限解除後に大きく伸びる"
       },
       "plainSummary": "味方が倒れるほど連撃が増える逆境スキル。",
       "steps": [
@@ -4858,12 +4877,12 @@
         "exclusiveLv2Total": 1440,
         "exclusiveLv3Total": 1440,
         "conditionMaxTotal": 3840,
-        "conditionMaxNote": "カード用要約から暫定抽出。条件の現実性は要確認",
+        "conditionMaxNote": "最大1280%×3体。制限解除中は戦闘不能味方数に関わらず最大倍率",
         "powerType": "条件火力",
         "maxStacks": null,
         "realityRank": "中",
-        "rankingTarget": "対象",
-        "damageMemo": "カード生成JSONから自動マージ。専用Lv別・条件MAXは要精査"
+        "rankingTarget": "条件MAX",
+        "damageMemo": "条件成立時の3体攻撃として優秀。条件未達では1440%の安定火力"
       },
       "plainSummary": "味方が倒れるほど倍率が跳ねる逆境砲。",
       "steps": [
@@ -4974,12 +4993,12 @@
         "exclusiveLv2Total": 540,
         "exclusiveLv3Total": 540,
         "conditionMaxTotal": 540,
-        "conditionMaxNote": "専用Lv1で対象がランダム敵3体",
-        "powerType": "基本火力",
+        "conditionMaxNote": "overlay の hitCount=3 が誤り(3体は専用Lv1)",
+        "powerType": "バッテン付与",
         "maxStacks": null,
         "realityRank": "高",
-        "rankingTarget": "対象",
-        "damageMemo": "カード生成JSONから自動マージ。専用Lv別・条件MAXは要精査"
+        "rankingTarget": "基本",
+        "damageMemo": "火力よりバッテン付与の起点として見る"
       },
       "plainSummary": "「バッテン」を撒いて敵の攻撃を鈍らせる起点スキル。",
       "steps": [
@@ -5018,12 +5037,12 @@
         "exclusiveLv2Total": 1320,
         "exclusiveLv3Total": 1440,
         "conditionMaxTotal": 5760,
-        "conditionMaxNote": "専用Lv3で480%。対象がバッテン中なら1920%×3体",
-        "powerType": "条件火力",
+        "conditionMaxNote": "overlay の single=480 が誤り(専用Lv3値)。原文の最大スキルLv基本は440%",
+        "powerType": "バッテン特効",
         "maxStacks": null,
         "realityRank": "中",
-        "rankingTarget": "対象",
-        "damageMemo": "カード生成JSONから自動マージ。専用Lv別・条件MAXは要精査"
+        "rankingTarget": "条件MAX",
+        "damageMemo": "バッテン付与後に大きく伸びる主力火力"
       },
       "plainSummary": "バッテン持ちの敵には4倍で刺さる本命砲。",
       "steps": [
@@ -5125,18 +5144,18 @@
       "sourceUrl": "https://ichigogames.net/mementomori/cordie_ringmaster/",
       "damage": {
         "singleMultiplier": 880,
-        "hitCount": 3,
-        "baseTotal": 2640,
+        "hitCount": 2,
+        "baseTotal": 1760,
         "exclusiveLv1Total": 2640,
         "exclusiveLv2Total": 2640,
         "exclusiveLv3Total": 2640,
         "conditionMaxTotal": 3960,
-        "conditionMaxNote": "カード用要約から暫定抽出。条件の現実性は要確認",
-        "powerType": "条件火力",
-        "maxStacks": null,
+        "conditionMaxNote": "原文は基本ランダム敵2体。両データとも hitCount=3(専用Lv1の値)。base の baseTotal=2640 も誤り",
+        "powerType": "笑顔喝采",
+        "maxStacks": 5,
         "realityRank": "中",
-        "rankingTarget": "対象",
-        "damageMemo": "カード生成JSONから自動マージ。専用Lv別・条件MAXは要精査"
+        "rankingTarget": "条件MAX",
+        "damageMemo": "自身へのスピード減少を伴う主力攻撃。最大火力は笑顔喝采5スタック前提"
       },
       "plainSummary": "高倍率で3体を殴る主砲。代償に自分がわずかに遅くなる。",
       "steps": [
@@ -5171,19 +5190,19 @@
       "imageUrl": "",
       "sourceUrl": "https://ichigogames.net/mementomori/cordie_ringmaster/",
       "damage": {
-        "singleMultiplier": 1180,
+        "singleMultiplier": 1080,
         "hitCount": 3,
-        "baseTotal": 3540,
-        "exclusiveLv1Total": 3540,
-        "exclusiveLv2Total": 3540,
+        "baseTotal": 3240,
+        "exclusiveLv1Total": 3240,
+        "exclusiveLv2Total": 3240,
         "exclusiveLv3Total": 3540,
         "conditionMaxTotal": 3540,
-        "conditionMaxNote": "カード用要約から暫定抽出。条件の現実性は要確認",
-        "powerType": "条件火力",
+        "conditionMaxNote": "原文は最大スキルLv4で1080%×3体。両データとも singleMultiplier=1180(専用Lv3値)。base の baseTotal=3540 も誤り",
+        "powerType": "純火力",
         "maxStacks": null,
-        "realityRank": "中",
-        "rankingTarget": "対象",
-        "damageMemo": "カード生成JSONから自動マージ。専用Lv別・条件MAXは要精査"
+        "realityRank": "高",
+        "rankingTarget": "専用Lv3",
+        "damageMemo": "条件依存が薄い3回攻撃。単体残りでも攻撃回数を失いにくい"
       },
       "plainSummary": "敵が残り1体になると連打に変わる、詰めの一撃。",
       "steps": [
@@ -5287,7 +5306,7 @@
         "powerType": "基本火力",
         "maxStacks": null,
         "realityRank": "高",
-        "rankingTarget": "対象",
+        "rankingTarget": "専用Lv3",
         "damageMemo": "カード生成JSONから自動マージ。専用Lv別・条件MAXは要精査"
       },
       "plainSummary": "自分の防御を少し下げてから撃ち、攻撃後にエースの弱体を2つ剥がす。",
@@ -5330,12 +5349,12 @@
         "exclusiveLv2Total": 3120,
         "exclusiveLv3Total": 3120,
         "conditionMaxTotal": 4680,
-        "conditionMaxNote": "スキルで解除した弱体効果合計5個以上なら2340%×2体",
-        "powerType": "条件火力",
+        "conditionMaxNote": "自身と味方がスキルで解除した弱体効果の合計が5個以上の時、魔法2340%×2体",
+        "powerType": "弱体解除数",
         "maxStacks": null,
         "realityRank": "中",
-        "rankingTarget": "対象",
-        "damageMemo": "カード生成JSONから自動マージ。専用Lv別・条件MAXは要精査"
+        "rankingTarget": "条件MAX",
+        "damageMemo": "条件未達でも3120%。条件MAXは解除数を稼げる相手・編成で評価する"
       },
       "plainSummary": "敵のエース2体への高倍率魔法。弱体解除を重ねているとさらに伸びる。",
       "steps": [
@@ -5445,7 +5464,7 @@
         "powerType": "基本火力",
         "maxStacks": null,
         "realityRank": "高",
-        "rankingTarget": "対象",
+        "rankingTarget": "専用Lv3",
         "damageMemo": "カード生成JSONから自動マージ。専用Lv別・条件MAXは要精査"
       },
       "plainSummary": "エースに攻撃・命中バフを配ってから撃つ。",
@@ -5485,12 +5504,12 @@
         "exclusiveLv2Total": 1980,
         "exclusiveLv3Total": 1980,
         "conditionMaxTotal": 2970,
-        "conditionMaxNote": "反照付帯中の敵が3体以上なら990%×3体",
-        "powerType": "条件火力",
+        "conditionMaxNote": "反照を付帯している敵が3体以上の時、魔法990%×3体",
+        "powerType": "反照条件",
         "maxStacks": 2,
-        "realityRank": "中",
-        "rankingTarget": "対象",
-        "damageMemo": "カード生成JSONから自動マージ。専用Lv別・条件MAXは要精査"
+        "realityRank": "高",
+        "rankingTarget": "条件MAX",
+        "damageMemo": "反照を3体以上に付与できれば条件MAXに届く。反照そのものの価値は別枠で評価する"
       },
       "plainSummary": "敵味方に「反照」をばら撒き、反照持ちが多いと高倍率になる変則砲。",
       "steps": [
@@ -5598,13 +5617,13 @@
         "exclusiveLv1Total": 2100,
         "exclusiveLv2Total": 2100,
         "exclusiveLv3Total": 2300,
-        "conditionMaxTotal": 2300,
-        "conditionMaxNote": "専用Lv1で5体、専用Lv3で460%。多重バリア無効化時に追加攻撃最大1回",
-        "powerType": "条件火力",
+        "conditionMaxTotal": 2760,
+        "conditionMaxNote": "overlay の single=460・hitCount=5・Lv2=2300 が誤り。base の条件MAX=2300 も誤りで、多重バリア無効化時の追加460%を加えて2760",
+        "powerType": "多重バリア反応",
         "maxStacks": null,
         "realityRank": "中",
-        "rankingTarget": "対象",
-        "damageMemo": "カード生成JSONから自動マージ。専用Lv別・条件MAXは要精査"
+        "rankingTarget": "条件MAX",
+        "damageMemo": "追加攻撃は相手の多重バリア依存。通常時は専用Lv1以降の5体攻撃として扱う"
       },
       "plainSummary": "3体を薙ぎつつ、多重バリアで無効化された相手には追撃が1回乗る。",
       "steps": [
@@ -5643,12 +5662,12 @@
         "exclusiveLv2Total": 1900,
         "exclusiveLv3Total": 1900,
         "conditionMaxTotal": 2850,
-        "conditionMaxNote": "対象の怠惰12スタック時570%×5体",
-        "powerType": "条件火力",
-        "maxStacks": null,
-        "realityRank": "中",
-        "rankingTarget": "対象",
-        "damageMemo": "カード生成JSONから自動マージ。専用Lv別・条件MAXは要精査"
+        "conditionMaxNote": "対象の怠惰が12スタックの時、物理570%×5体",
+        "powerType": "怠惰条件",
+        "maxStacks": 12,
+        "realityRank": "低",
+        "rankingTarget": "条件MAX",
+        "damageMemo": "怠惰12スタック条件のため最大火力の現実性は低め。攻撃力30%支援は別枠で評価する"
       },
       "plainSummary": "自分とエースの防御を少し削る代わりに、攻撃力を上げてから撃つ。怠惰が満タンなら火力も上がる。",
       "steps": [
@@ -6050,7 +6069,8 @@
         "powerType": "連撃 / 物防減少",
         "realityRank": "高",
         "rankingTarget": "基本",
-        "damageMemo": "物防減少とクリダメ強化は別評価"
+        "damageMemo": "物防減少とクリダメ強化は別評価",
+        "maxStacks": null
       },
       "plainSummary": "格下の物防を剥がしながらの6連撃。",
       "steps": [
@@ -6093,7 +6113,8 @@
         "powerType": "連撃 / 即時戦闘不能",
         "realityRank": "中",
         "rankingTarget": "基本",
-        "damageMemo": "即時戦闘不能条件は火力外評価"
+        "damageMemo": "即時戦闘不能条件は火力外評価",
+        "maxStacks": null
       },
       "plainSummary": "弱った敵に「処刑」判定のある5連撃。",
       "steps": [
@@ -7924,11 +7945,12 @@
         "exclusiveLv2Total": 2840,
         "exclusiveLv3Total": 2840,
         "conditionMaxTotal": 2840,
-        "conditionMaxNote": "倍率変化なし",
-        "powerType": "連撃",
+        "conditionMaxNote": "専用武器による火力変化なし",
+        "powerType": "魔法連撃",
         "realityRank": "高",
         "rankingTarget": "基本",
-        "damageMemo": "通常倍率のみ"
+        "damageMemo": "条件のない魔法710%×4回",
+        "maxStacks": null
       },
       "plainSummary": "素直な4連撃の主砲。",
       "steps": [
@@ -7964,11 +7986,12 @@
         "exclusiveLv2Total": 3560,
         "exclusiveLv3Total": 3920,
         "conditionMaxTotal": 3920,
-        "conditionMaxNote": "専用Lv3で魔力980%×4体の直接攻撃",
-        "powerType": "直接攻撃",
+        "conditionMaxNote": "専用Lv3で魔力980%×4体",
+        "powerType": "直接攻撃 / 自己回復",
         "realityRank": "高",
-        "rankingTarget": "基本",
-        "damageMemo": "直接攻撃だが比較用に魔力倍率として記録"
+        "rankingTarget": "専用Lv3",
+        "damageMemo": "自己回復つき。専用Lv3で火力上昇",
+        "maxStacks": null
       },
       "plainSummary": "防御を素通しする直接攻撃と吸血。",
       "steps": [
@@ -9446,13 +9469,13 @@
         "exclusiveLv1Total": 720,
         "exclusiveLv2Total": 1440,
         "exclusiveLv3Total": 2360,
-        "conditionMaxTotal": 2360,
-        "conditionMaxNote": "専用Lv2で4回攻撃、専用Lv3で590%×4回",
+        "conditionMaxTotal": 4248,
+        "conditionMaxNote": "専用Lv3の590%×4回に、3回目以降の攻撃力増加80%を条件込みで見る",
         "powerType": "段階強化 / 攻撃回数増加",
         "maxStacks": null,
         "realityRank": "中",
         "rankingTarget": "条件込み",
-        "damageMemo": "使用回数で伸びるため長期戦寄り"
+        "damageMemo": "長期戦で倍率が伸びる。短期戦とは分けるべき"
       },
       "plainSummary": "使うたびに強くなる成長型アタック。",
       "steps": [
@@ -9497,9 +9520,9 @@
         "conditionMaxNote": "3回目以降かつ専用Lv3で470%×12回",
         "powerType": "段階強化 / 攻撃回数増加",
         "maxStacks": null,
-        "realityRank": "中",
+        "realityRank": "低",
         "rankingTarget": "条件込み",
-        "damageMemo": "長期戦では高いが初回火力とは分ける"
+        "damageMemo": "3回目以降前提の理論寄り火力"
       },
       "plainSummary": "2回目で9連、3回目で12連に増える固定砲台。",
       "steps": [
@@ -10471,16 +10494,16 @@
         "singleMultiplier": 430,
         "hitCount": 3,
         "baseTotal": 1290,
-        "exclusiveLv1Total": 1290,
-        "exclusiveLv2Total": 1290,
-        "exclusiveLv3Total": 1290,
-        "conditionMaxTotal": 1290,
-        "conditionMaxNote": "画像カード上の基本倍率で算出。条件強化はcondition参照",
-        "powerType": "画像カード準拠",
+        "exclusiveLv1Total": 1720,
+        "exclusiveLv2Total": 1920,
+        "exclusiveLv3Total": 1920,
+        "conditionMaxTotal": 1920,
+        "conditionMaxNote": "専用Lv2以降で魔法480%×4体",
+        "powerType": "魔法",
         "maxStacks": null,
         "realityRank": "中",
         "rankingTarget": "基本",
-        "damageMemo": "詳細条件はconditionを参照"
+        "damageMemo": "デバフ目的。火力は専用Lv2以降で1920%"
       },
       "plainSummary": "確定で敵の攻撃力を35%削る妨害魔法。",
       "steps": [
@@ -10520,14 +10543,14 @@
         "baseTotal": 1520,
         "exclusiveLv1Total": 1520,
         "exclusiveLv2Total": 1520,
-        "exclusiveLv3Total": 1520,
-        "conditionMaxTotal": 1520,
-        "conditionMaxNote": "画像カード上の基本倍率で算出。条件強化はcondition参照",
-        "powerType": "画像カード準拠",
-        "maxStacks": null,
-        "realityRank": "中",
-        "rankingTarget": "基本",
-        "damageMemo": "詳細条件はconditionを参照"
+        "exclusiveLv3Total": 1680,
+        "conditionMaxTotal": 2520,
+        "conditionMaxNote": "専用Lv3かつスピード減少中の敵に1.5倍",
+        "powerType": "魔法",
+        "maxStacks": 4,
+        "realityRank": "低",
+        "rankingTarget": "条件込み",
+        "damageMemo": "基本は380%×4回。条件MAXはスピード減少が入っている前提"
       },
       "plainSummary": "減速を重ねるほど1.5倍が乗る吸血連撃。",
       "steps": [
@@ -12484,15 +12507,15 @@
         "hitCount": 3,
         "baseTotal": 840,
         "exclusiveLv1Total": 840,
-        "exclusiveLv2Total": 840,
-        "exclusiveLv3Total": 840,
+        "exclusiveLv2Total": 1400,
+        "exclusiveLv3Total": 1400,
         "conditionMaxTotal": 1400,
-        "conditionMaxNote": "専用Lv2で5体対象。追加直接攻撃は別枠",
-        "powerType": "画像カード準拠",
+        "conditionMaxNote": "原文: 最大スキルLv3で280%×3体=840、専用Lv2で5体=1400。overlay は総与ダメージ参照の追加直接攻撃(20〜25%)を合計に含めて1008/1750としていたため除外。base は専用Lv欄が未入力",
+        "powerType": "直接攻撃込み",
         "maxStacks": null,
-        "realityRank": "中",
-        "rankingTarget": "基本",
-        "damageMemo": "画像カードからの暫定入力"
+        "realityRank": "高",
+        "rankingTarget": "条件MAX",
+        "damageMemo": "直接攻撃分は倍率欄に含める。クリダメ強化15%減少は倍率に含めない"
       },
       "plainSummary": "3体攻撃と、弱った敵への追い打ち。",
       "steps": [
@@ -12539,7 +12562,22 @@
         {
           "text": "アクティブスキルの回復のため、アクティブ回復回数を参照する味方のスタック源になる。根拠: アクティブスキルによる回復のため"
         }
-      ]
+      ],
+      "damage": {
+        "singleMultiplier": 270,
+        "hitCount": 1,
+        "baseTotal": 270,
+        "exclusiveLv1Total": 270,
+        "exclusiveLv2Total": 270,
+        "exclusiveLv3Total": 270,
+        "conditionMaxTotal": 405,
+        "conditionMaxNote": "対象のHP割合が15%以下なら回復量1.5倍",
+        "powerType": "回復倍率",
+        "maxStacks": null,
+        "realityRank": "中",
+        "rankingTarget": "条件MAX",
+        "damageMemo": "攻撃倍率ではなく回復倍率として扱う"
+      }
     },
     {
       "id": "freycia-s3",
@@ -12616,16 +12654,16 @@
         "singleMultiplier": 350,
         "hitCount": 3,
         "baseTotal": 1050,
-        "exclusiveLv1Total": 1050,
-        "exclusiveLv2Total": 1050,
-        "exclusiveLv3Total": 1050,
+        "exclusiveLv1Total": 1830,
+        "exclusiveLv2Total": 1830,
+        "exclusiveLv3Total": 1830,
         "conditionMaxTotal": 2450,
-        "conditionMaxNote": "基本3回。条件達成時に残り敵4体へ追加攻撃",
-        "powerType": "画像カード準拠",
+        "conditionMaxNote": "overlay の hitCount=7 が誤り(原文は3回)。専用Lv1は未撃破時に260%×3回を追加するため Lv1以降1830 は overlay が正",
+        "powerType": "撃破時分岐",
         "maxStacks": null,
         "realityRank": "中",
-        "rankingTarget": "基本",
-        "damageMemo": "画像カードからの暫定入力"
+        "rankingTarget": "条件MAX",
+        "damageMemo": "撃破できるかどうかで火力の出方が変わる。追加火力は敵数と撃破状況に依存する"
       },
       "plainSummary": "弱った敵を仕留めると残り全員へ薙ぎ払いが走る。",
       "steps": [
@@ -12668,7 +12706,7 @@
         "powerType": "画像カード準拠",
         "maxStacks": null,
         "realityRank": "中",
-        "rankingTarget": "基本",
+        "rankingTarget": "条件MAX",
         "damageMemo": "画像カードからの暫定入力"
       },
       "plainSummary": "不治を撒いてから、受けと反撃の構えに入る。",
@@ -12775,15 +12813,15 @@
         "hitCount": 4,
         "baseTotal": 1840,
         "exclusiveLv1Total": 1840,
-        "exclusiveLv2Total": 1840,
-        "exclusiveLv3Total": 1840,
+        "exclusiveLv2Total": 2760,
+        "exclusiveLv3Total": 3090,
         "conditionMaxTotal": 3090,
-        "conditionMaxNote": "専用Lv2で6回、専用Lv3で515%",
-        "powerType": "画像カード準拠",
+        "conditionMaxNote": "overlay の hitCount=6(専用Lv2値)・条件MAX=4378(攻撃力増加を倍率に換算)が誤り。base の Lv2/Lv3 未入力も誤り",
+        "powerType": "クリティカル時攻撃力増加",
         "maxStacks": null,
         "realityRank": "中",
-        "rankingTarget": "基本",
-        "damageMemo": "画像カードからの暫定入力"
+        "rankingTarget": "条件MAX",
+        "damageMemo": "攻撃力増加はクリティカル発生とヒット順の影響を受けるため、最大値は理論寄り"
       },
       "plainSummary": "クリティカルが出るほど攻撃バフが延び続ける連撃。",
       "steps": [
@@ -12831,12 +12869,12 @@
         "exclusiveLv2Total": 2750,
         "exclusiveLv3Total": 2750,
         "conditionMaxTotal": 4670,
-        "conditionMaxNote": "基本5体。撃破時480%追撃最大4回",
-        "powerType": "画像カード準拠",
+        "conditionMaxNote": "550%×5体に、撃破時追撃480%×4回を加算",
+        "powerType": "撃破時追撃",
         "maxStacks": null,
         "realityRank": "中",
-        "rankingTarget": "基本",
-        "damageMemo": "画像カードからの暫定入力"
+        "rankingTarget": "条件MAX",
+        "damageMemo": "最大値には連続撃破が必要。実戦では敵HPと攻撃順の影響が大きい"
       },
       "plainSummary": "撃破が撃破を呼ぶ連鎖攻撃。半分は回復で返ってくる。",
       "steps": [
@@ -12929,16 +12967,16 @@
         "singleMultiplier": 410,
         "hitCount": 3,
         "baseTotal": 1230,
-        "exclusiveLv1Total": 1230,
-        "exclusiveLv2Total": 1230,
-        "exclusiveLv3Total": 1230,
+        "exclusiveLv1Total": 2050,
+        "exclusiveLv2Total": 2050,
+        "exclusiveLv3Total": 2050,
         "conditionMaxTotal": 2050,
-        "conditionMaxNote": "専用Lv1で5体対象",
-        "powerType": "画像カード準拠",
+        "conditionMaxNote": "overlay の hitCount=5 が誤り(5体は専用Lv1)。専用Lv1以降2050 は overlay が正",
+        "powerType": "範囲物理 / 出血・再生別評価",
         "maxStacks": null,
-        "realityRank": "中",
-        "rankingTarget": "基本",
-        "damageMemo": "画像カードからの暫定入力"
+        "realityRank": "高",
+        "rankingTarget": "条件MAX",
+        "damageMemo": "出血は継続ダメージとして別評価。最大直接倍率は専用Lv1以降の2050%"
       },
       "plainSummary": "出血を撒きつつ、自分には再生を仕込む。",
       "steps": [
@@ -12991,7 +13029,22 @@
           "text": "自傷は紅自傷パのカウント供給源になる。1回の自傷量が大きい点が特徴。",
           "reason": "消費が最大HP35%の自傷のため"
         }
-      ]
+      ],
+      "damage": {
+        "singleMultiplier": 483,
+        "hitCount": 1,
+        "baseTotal": 483,
+        "exclusiveLv1Total": 483,
+        "exclusiveLv2Total": 725,
+        "exclusiveLv3Total": 725,
+        "conditionMaxTotal": 725,
+        "conditionMaxNote": "ディアンの基準ステータスで、最大HP35%自傷を攻撃力換算した目安。専用Lv2以降は3体対象",
+        "powerType": "HP依存直接攻撃 / 防御無視",
+        "maxStacks": null,
+        "realityRank": "中",
+        "rankingTarget": "条件MAX",
+        "damageMemo": "実ダメージは攻撃力ではなく最大HPに依存。HP40%以上の条件と自傷管理が必要"
+      }
     },
     {
       "id": "dian-s3",
@@ -13081,15 +13134,15 @@
         "hitCount": 4,
         "baseTotal": 1680,
         "exclusiveLv1Total": 1680,
-        "exclusiveLv2Total": 1680,
-        "exclusiveLv3Total": 1680,
+        "exclusiveLv2Total": 2100,
+        "exclusiveLv3Total": 2100,
         "conditionMaxTotal": 2100,
-        "conditionMaxNote": "専用Lv2で5回攻撃",
-        "powerType": "画像カード準拠",
+        "conditionMaxNote": "overlay の hitCount=5 が誤り(5回は専用Lv2)。専用Lv2以降2100 は overlay が正",
+        "powerType": "集中魔法 / 出血・バフ解除別評価",
         "maxStacks": null,
-        "realityRank": "中",
-        "rankingTarget": "基本",
-        "damageMemo": "画像カードからの暫定入力"
+        "realityRank": "高",
+        "rankingTarget": "条件MAX",
+        "damageMemo": "最大直接倍率は専用Lv2以降の2100%。出血とバフ解除は火力外評価"
       },
       "plainSummary": "元気な敵には出血、削られていたらバフ剥がしに切り替わる連撃。",
       "steps": [
@@ -13132,12 +13185,12 @@
         "exclusiveLv2Total": 1680,
         "exclusiveLv3Total": 1680,
         "conditionMaxTotal": 2240,
-        "conditionMaxNote": "2体戦闘不能で8回攻撃",
-        "powerType": "画像カード準拠",
+        "conditionMaxNote": "overlay の hitCount=8 が誤り(8回は2体撃破時)。それ以外は一致",
+        "powerType": "必中連撃 / 撃破追撃",
         "maxStacks": null,
         "realityRank": "中",
-        "rankingTarget": "基本",
-        "damageMemo": "画像カードからの暫定入力"
+        "rankingTarget": "条件MAX",
+        "damageMemo": "必中は倍率欄に含めないが、回避相手への安定性として評価"
       },
       "plainSummary": "必中の6連撃。撃破実績で手数が増える。",
       "steps": [
@@ -13236,13 +13289,13 @@
         "exclusiveLv1Total": 2250,
         "exclusiveLv2Total": 2250,
         "exclusiveLv3Total": 2250,
-        "conditionMaxTotal": 3600,
-        "conditionMaxNote": "専用Lv3で8回攻撃",
-        "powerType": "画像カード準拠",
+        "conditionMaxTotal": 2250,
+        "conditionMaxNote": "添付の倍率比較では専用Lv3まで2250%",
+        "powerType": "物理",
         "maxStacks": null,
-        "realityRank": "中",
+        "realityRank": "高",
         "rankingTarget": "基本",
-        "damageMemo": "画像カードからの暫定入力"
+        "damageMemo": "450%×5回。低HP狙いのとどめ性能を評価"
       },
       "plainSummary": "自分を鼓舞してから、弱った敵に5連撃。",
       "steps": [
@@ -13279,14 +13332,14 @@
         "baseTotal": 2520,
         "exclusiveLv1Total": 2520,
         "exclusiveLv2Total": 2520,
-        "exclusiveLv3Total": 2520,
+        "exclusiveLv3Total": 2880,
         "conditionMaxTotal": 2880,
         "conditionMaxNote": "専用Lv3で8回攻撃",
-        "powerType": "画像カード準拠",
+        "powerType": "物理",
         "maxStacks": null,
-        "realityRank": "中",
+        "realityRank": "高",
         "rankingTarget": "基本",
-        "damageMemo": "画像カードからの暫定入力"
+        "damageMemo": "基本は360%×7回。専用Lv3で8回攻撃"
       },
       "plainSummary": "7連撃の与ダメージが、ピンチ時は全員の回復に変わる。",
       "steps": [
@@ -13389,7 +13442,22 @@
         {
           "text": "攻撃力100%のシールドを2ターン付与"
         }
-      ]
+      ],
+      "damage": {
+        "singleMultiplier": 0,
+        "hitCount": 0,
+        "baseTotal": 0,
+        "exclusiveLv1Total": 0,
+        "exclusiveLv2Total": 0,
+        "exclusiveLv3Total": 0,
+        "conditionMaxTotal": 0,
+        "conditionMaxNote": "直接攻撃なし",
+        "powerType": "支援",
+        "maxStacks": null,
+        "realityRank": "高",
+        "rankingTarget": "支援性能",
+        "damageMemo": "防御力増加、攻撃力増加、シールドは倍率比較には含めない"
+      }
     },
     {
       "id": "chiffon-s2",
@@ -13418,12 +13486,12 @@
         "exclusiveLv2Total": 1500,
         "exclusiveLv3Total": 1500,
         "conditionMaxTotal": 1500,
-        "conditionMaxNote": "敵対象時の魔法攻撃",
-        "powerType": "画像カード準拠",
+        "conditionMaxNote": "敵5体に命中した場合の300%×5体",
+        "powerType": "敵味方ランダム対象",
         "maxStacks": null,
         "realityRank": "中",
         "rankingTarget": "基本",
-        "damageMemo": "画像カードからの暫定入力"
+        "damageMemo": "対象が敵味方ランダムのため、実戦火力はぶれやすい"
       },
       "plainSummary": "敵に当たれば妨害、味方に当たれば回復のランダム弾。",
       "steps": [
@@ -13530,12 +13598,12 @@
         "exclusiveLv2Total": 1750,
         "exclusiveLv3Total": 1750,
         "conditionMaxTotal": 1750,
-        "conditionMaxNote": "画像カード上の基本倍率で算出。条件強化はcondition参照",
-        "powerType": "画像カード準拠",
-        "maxStacks": null,
-        "realityRank": "中",
+        "conditionMaxNote": "専用武器はデバフ量強化で、攻撃倍率は変化なし",
+        "powerType": "範囲魔法 / デバフ込み別評価",
+        "maxStacks": 10,
+        "realityRank": "高",
         "rankingTarget": "基本",
-        "damageMemo": "画像カードからの暫定入力"
+        "damageMemo": "魔法防御力減少と被ダメージ増加は倍率欄に含めない。実戦では魔法パーティ全体の火力補助として別評価"
       },
       "plainSummary": "敵を柔らかくしながら、自分のクリ耐性を積む攻防一体スキル。",
       "steps": [
@@ -13575,14 +13643,14 @@
         "baseTotal": 1190,
         "exclusiveLv1Total": 1190,
         "exclusiveLv2Total": 1190,
-        "exclusiveLv3Total": 1190,
+        "exclusiveLv3Total": 1400,
         "conditionMaxTotal": 2800,
-        "conditionMaxNote": "弱体条件で2倍。専用Lv3は200%",
-        "powerType": "画像カード準拠",
+        "conditionMaxNote": "専用Lv3の200%×7回に、対象HP割合が自身より低い場合の2倍を適用",
+        "powerType": "連撃 / 条件火力",
         "maxStacks": null,
         "realityRank": "中",
-        "rankingTarget": "基本",
-        "damageMemo": "画像カードからの暫定入力"
+        "rankingTarget": "条件MAX",
+        "damageMemo": "総与ダメージ20%回復は倍率欄に含めない"
       },
       "plainSummary": "弱った敵に2倍、弱体持ちには確定クリの吸血連撃。",
       "steps": [
@@ -13685,14 +13753,14 @@
         "baseTotal": 1320,
         "exclusiveLv1Total": 1320,
         "exclusiveLv2Total": 1320,
-        "exclusiveLv3Total": 1320,
+        "exclusiveLv3Total": 1650,
         "conditionMaxTotal": 1650,
-        "conditionMaxNote": "専用Lv3で5回攻撃",
-        "powerType": "画像カード準拠",
+        "conditionMaxNote": "overlay の hitCount=5 が誤り(5回は専用Lv3)。専用Lv3=1650 は overlay が正",
+        "powerType": "連撃 / 命中支援別評価",
         "maxStacks": null,
-        "realityRank": "中",
-        "rankingTarget": "基本",
-        "damageMemo": "画像カードからの暫定入力"
+        "realityRank": "高",
+        "rankingTarget": "条件MAX",
+        "damageMemo": "主価値は命中支援。直接倍率は専用Lv3で1650%"
       },
       "plainSummary": "エース2人の命中を保証してから撃つ支援攻撃。",
       "steps": [
@@ -13731,12 +13799,12 @@
         "exclusiveLv2Total": 1500,
         "exclusiveLv3Total": 1500,
         "conditionMaxTotal": 2250,
-        "conditionMaxNote": "自身のバフ数1以上で1.5倍",
-        "powerType": "画像カード準拠",
+        "conditionMaxNote": "自身のバフ数が1以上の場合、1500%×1.5倍",
+        "powerType": "範囲物理 / 回復別評価",
         "maxStacks": null,
-        "realityRank": "中",
-        "rankingTarget": "基本",
-        "damageMemo": "画像カードからの暫定入力"
+        "realityRank": "高",
+        "rankingTarget": "条件MAX",
+        "damageMemo": "HP回復30%は与ダメージ依存で、倍率欄に含めない"
       },
       "plainSummary": "バフがあれば1.5倍。殴った分で一番傷ついた味方を回復。",
       "steps": [
@@ -13844,12 +13912,12 @@
         "exclusiveLv2Total": 600,
         "exclusiveLv3Total": 600,
         "conditionMaxTotal": 600,
-        "conditionMaxNote": "画像カード上の基本倍率で算出。条件強化はcondition参照",
-        "powerType": "画像カード準拠",
+        "conditionMaxNote": "ランダム敵3体に200%。回復、弱体解除、弱体効果耐性は支援効果として別評価",
+        "powerType": "範囲魔法 / 支援別評価",
         "maxStacks": null,
-        "realityRank": "中",
-        "rankingTarget": "基本",
-        "damageMemo": "画像カードからの暫定入力"
+        "realityRank": "高",
+        "rankingTarget": "条件MAX",
+        "damageMemo": "火力目的ではなく、弱体解除と耐性支援を評価するスキル"
       },
       "plainSummary": "攻撃しつつ、エース2人を回復して弱体も剥がす。",
       "steps": [
@@ -13894,12 +13962,12 @@
         "exclusiveLv2Total": 600,
         "exclusiveLv3Total": 600,
         "conditionMaxTotal": 600,
-        "conditionMaxNote": "画像カード上の基本倍率で算出。条件強化はcondition参照",
-        "powerType": "画像カード準拠",
+        "conditionMaxNote": "ランダム敵3体に200%。HP回復、再生、再生ターン延長は倍率欄に含めない",
+        "powerType": "範囲魔法 / 回復・再生別評価",
         "maxStacks": null,
-        "realityRank": "中",
-        "rankingTarget": "基本",
-        "damageMemo": "画像カードからの暫定入力"
+        "realityRank": "高",
+        "rankingTarget": "条件MAX",
+        "damageMemo": "継続回復で編成の粘りを補う支援スキル"
       },
       "plainSummary": "傷ついた味方3人へ回復と再生を配る。",
       "steps": [
@@ -14008,12 +14076,12 @@
         "exclusiveLv2Total": 680,
         "exclusiveLv3Total": 680,
         "conditionMaxTotal": 680,
-        "conditionMaxNote": "画像カード上の基本倍率で算出。条件強化はcondition参照",
-        "powerType": "画像カード準拠",
+        "conditionMaxNote": "単体680%で固定。攻撃力、クリティカル率、命中率バフは支援効果として別評価",
+        "powerType": "単体魔法 / バフ別評価",
         "maxStacks": null,
-        "realityRank": "中",
-        "rankingTarget": "基本",
-        "damageMemo": "画像カードからの暫定入力"
+        "realityRank": "高",
+        "rankingTarget": "条件MAX",
+        "damageMemo": "バナナ連鎖による4ターン化が主価値。直接火力だけで評価しない"
       },
       "plainSummary": "自分とエースを強化してから、敵のエースを撃つ。",
       "steps": [
@@ -14053,14 +14121,14 @@
         "baseTotal": 680,
         "exclusiveLv1Total": 680,
         "exclusiveLv2Total": 680,
-        "exclusiveLv3Total": 680,
+        "exclusiveLv3Total": 760,
         "conditionMaxTotal": 1520,
-        "conditionMaxNote": "専用Lv3で380%、条件により2回攻撃",
-        "powerType": "画像カード準拠",
+        "conditionMaxNote": "専用Lv3で380%×2体を2回。HP50%以上維持が条件",
+        "powerType": "範囲魔法 / HP条件",
         "maxStacks": null,
-        "realityRank": "中",
-        "rankingTarget": "基本",
-        "damageMemo": "画像カードからの暫定入力"
+        "realityRank": "高",
+        "rankingTarget": "条件MAX",
+        "damageMemo": "HP50%以上なら攻撃、50%未満なら回復に切り替わるため、実戦では火力と補助の両面で見る"
       },
       "plainSummary": "元気なら追撃、削られていたら回復に切り替わる二刀流。",
       "steps": [
@@ -14163,12 +14231,12 @@
         "exclusiveLv2Total": 2100,
         "exclusiveLv3Total": 2100,
         "conditionMaxTotal": 2100,
-        "conditionMaxNote": "専用Lv1で420%×5回",
-        "powerType": "画像カード準拠",
+        "conditionMaxNote": "専用Lv1で420%×5回。自己回復と被回復量減少は補助効果として別評価",
+        "powerType": "連撃魔法 / 自傷",
         "maxStacks": null,
-        "realityRank": "中",
-        "rankingTarget": "基本",
-        "damageMemo": "画像カードからの暫定入力"
+        "realityRank": "高",
+        "rankingTarget": "条件MAX",
+        "damageMemo": "追加条件なしで最大直接倍率に届く主力スキル。被回復量減少で回復・HPドレイン系への妨害も兼ねる"
       },
       "plainSummary": "自傷からの5連撃。育っていれば吸血も付く。",
       "steps": [
@@ -14213,12 +14281,12 @@
         "exclusiveLv2Total": 1560,
         "exclusiveLv3Total": 1740,
         "conditionMaxTotal": 4060,
-        "conditionMaxNote": "攻撃力増加4スタックで7回攻撃。専用Lv3で580%×7回",
-        "powerType": "画像カード準拠",
-        "maxStacks": null,
+        "conditionMaxNote": "攻撃力増加4スタック以上で最大7回。専用Lv3なら580%×7回",
+        "powerType": "連撃魔法 / スタック条件",
+        "maxStacks": 4,
         "realityRank": "中",
-        "rankingTarget": "基本",
-        "damageMemo": "画像カードからの暫定入力"
+        "rankingTarget": "条件MAX",
+        "damageMemo": "最大値には攻撃力増加スタックの確保が必要。ランダム多段なので単体集中時は高火力"
       },
       "plainSummary": "攻撃力スタックの数だけ連撃が増える。",
       "steps": [
@@ -14324,14 +14392,14 @@
         "baseTotal": 2200,
         "exclusiveLv1Total": 2200,
         "exclusiveLv2Total": 2200,
-        "exclusiveLv3Total": 2200,
+        "exclusiveLv3Total": 2400,
         "conditionMaxTotal": 2400,
-        "conditionMaxNote": "専用Lv3で480%×5体",
-        "powerType": "画像カード準拠",
+        "conditionMaxNote": "専用Lv3で480%×5体。攻撃力・命中率バフは支援効果として別評価",
+        "powerType": "範囲物理 / 支援別評価",
         "maxStacks": null,
-        "realityRank": "中",
-        "rankingTarget": "基本",
-        "damageMemo": "画像カードからの暫定入力"
+        "realityRank": "高",
+        "rankingTarget": "条件MAX",
+        "damageMemo": "本命は攻撃力と命中率支援。直接火力は範囲5体攻撃として安定"
       },
       "plainSummary": "エースに攻撃・命中バフを配ってから5体を殴る。紅・翠には攻撃バフが倍で長持ち。",
       "steps": [
@@ -14373,12 +14441,12 @@
         "exclusiveLv2Total": 2100,
         "exclusiveLv3Total": 2100,
         "conditionMaxTotal": 2100,
-        "conditionMaxNote": "画像カード上の基本倍率で算出。条件強化はcondition参照",
-        "powerType": "画像カード準拠",
+        "conditionMaxNote": "420%×5回。気絶は倍率欄に含めない",
+        "powerType": "単体物理 / 気絶別評価",
         "maxStacks": null,
-        "realityRank": "中",
-        "rankingTarget": "基本",
-        "damageMemo": "画像カードからの暫定入力"
+        "realityRank": "高",
+        "rankingTarget": "条件MAX",
+        "damageMemo": "攻撃力が最も高い敵を狙うため、主力妨害として扱いやすい"
       },
       "plainSummary": "敵のエースを気絶させにいく5連撃。",
       "steps": [
@@ -14470,12 +14538,12 @@
         "exclusiveLv2Total": 2880,
         "exclusiveLv3Total": 3120,
         "conditionMaxTotal": 3120,
-        "conditionMaxNote": "専用Lv1で6回、専用Lv3で520%×6回",
-        "powerType": "画像カード準拠",
+        "conditionMaxNote": "専用Lv1で6回、専用Lv3で520%×6回。気絶は倍率欄に含めない",
+        "powerType": "連撃物理 / 自傷",
         "maxStacks": null,
-        "realityRank": "中",
-        "rankingTarget": "基本",
-        "damageMemo": "画像カードからの暫定入力"
+        "realityRank": "高",
+        "rankingTarget": "条件MAX",
+        "damageMemo": "専用武器で火力の伸び幅が大きい。対翠属性では気絶による先制妨害も狙える"
       },
       "plainSummary": "自傷からの3連撃。翠属性には気絶チャンス付き。",
       "steps": [
@@ -14518,12 +14586,12 @@
         "exclusiveLv2Total": 3780,
         "exclusiveLv3Total": 3780,
         "conditionMaxTotal": 7980,
-        "conditionMaxNote": "攻撃力増加4スタックで最大1140%×7回",
-        "powerType": "画像カード準拠",
-        "maxStacks": null,
+        "conditionMaxNote": "攻撃力増加4スタックで1Hitあたり1140%。540%+150%×4スタックの7回攻撃",
+        "powerType": "連撃物理 / スタック条件",
+        "maxStacks": 4,
         "realityRank": "中",
-        "rankingTarget": "基本",
-        "damageMemo": "画像カードからの暫定入力"
+        "rankingTarget": "条件MAX",
+        "damageMemo": "最大火力は非常に高いが、攻撃力増加スタックが前提。未達時も3780%の7連撃として扱う"
       },
       "plainSummary": "攻撃力バフを積むほど痛くなる7連撃。",
       "steps": [
@@ -14625,12 +14693,12 @@
         "exclusiveLv2Total": 4160,
         "exclusiveLv3Total": 4640,
         "conditionMaxTotal": 4640,
-        "conditionMaxNote": "専用Lv1で8回、専用Lv3で580%×8回",
-        "powerType": "画像カード準拠",
+        "conditionMaxNote": "専用Lv1で8回、専用Lv3で580%×8回。スピード減少は倍率欄に含めない",
+        "powerType": "連撃物理 / 自傷",
         "maxStacks": null,
-        "realityRank": "中",
-        "rankingTarget": "基本",
-        "damageMemo": "画像カードからの暫定入力"
+        "realityRank": "高",
+        "rankingTarget": "条件MAX",
+        "damageMemo": "専用Lv1で連撃数が増え、バリア剥がしと直接火力が大きく伸びる初動スキル"
       },
       "plainSummary": "自傷から6連撃、敵を遅くする。",
       "steps": [
@@ -14672,12 +14740,12 @@
         "exclusiveLv2Total": 4560,
         "exclusiveLv3Total": 4560,
         "conditionMaxTotal": 6840,
-        "conditionMaxNote": "専用Lv2で1520%。対象の現在HPが自身より高い場合2280%×3体",
-        "powerType": "画像カード準拠",
+        "conditionMaxNote": "専用Lv2かつ対象3体すべてが自身より現在HPが高い場合、2280%×3体",
+        "powerType": "範囲物理 / HP条件",
         "maxStacks": null,
         "realityRank": "中",
-        "rankingTarget": "基本",
-        "damageMemo": "画像カードからの暫定入力"
+        "rankingTarget": "条件MAX",
+        "damageMemo": "自傷後はHP条件を満たしやすいが、対象3体すべてで成立するかは相手編成と残HPに依存する"
       },
       "plainSummary": "自分よりHPの多い敵に1.5倍で刺さる高倍率。",
       "steps": [
@@ -14781,16 +14849,16 @@
         "singleMultiplier": 330,
         "hitCount": 3,
         "baseTotal": 990,
-        "exclusiveLv1Total": 990,
-        "exclusiveLv2Total": 990,
-        "exclusiveLv3Total": 990,
+        "exclusiveLv1Total": 1650,
+        "exclusiveLv2Total": 1650,
+        "exclusiveLv3Total": 1650,
         "conditionMaxTotal": 3650,
-        "conditionMaxNote": "専用Lv1で5回、弱体2個以上なら730%",
-        "powerType": "画像カード準拠",
+        "conditionMaxNote": "専用Lv1で5回、弱体効果2個以上なら730%×5回",
+        "powerType": "連撃物理 / 弱体条件",
         "maxStacks": null,
         "realityRank": "中",
-        "rankingTarget": "基本",
-        "damageMemo": "画像カードからの暫定入力"
+        "rankingTarget": "条件MAX",
+        "damageMemo": "フラッグやアイシェで弱体を用意できる紅自傷パでは条件達成が現実的。デバフなしでは控えめ"
       },
       "plainSummary": "自傷してから撃つ。敵の弱体が多いほど倍率が段階上昇。",
       "steps": [
@@ -14830,14 +14898,14 @@
         "baseTotal": 2600,
         "exclusiveLv1Total": 2600,
         "exclusiveLv2Total": 2600,
-        "exclusiveLv3Total": 2600,
+        "exclusiveLv3Total": 2900,
         "conditionMaxTotal": 2900,
-        "conditionMaxNote": "専用Lv3で580%×5回",
-        "powerType": "画像カード準拠",
-        "maxStacks": null,
-        "realityRank": "中",
-        "rankingTarget": "基本",
-        "damageMemo": "画像カードからの暫定入力"
+        "conditionMaxNote": "専用Lv3で580%×5回。彩光5スタック時のCT短縮は倍率欄に含めない",
+        "powerType": "連撃物理 / CT短縮補助",
+        "maxStacks": 5,
+        "realityRank": "高",
+        "rankingTarget": "条件MAX",
+        "damageMemo": "条件なしでも安定火力。CT短縮は2ターン目以降まで戦闘が続いた場合の保険"
       },
       "plainSummary": "5連撃。「彩光」が満タンの敵がいればエースのCTを縮める。",
       "steps": [
@@ -14942,8 +15010,8 @@
         "conditionMaxNote": "専用Lv1で5体、専用Lv3で790%×5体",
         "powerType": "画像カード準拠",
         "maxStacks": null,
-        "realityRank": "中",
-        "rankingTarget": "基本",
+        "realityRank": "高",
+        "rankingTarget": "条件MAX",
         "damageMemo": "画像カードからの暫定入力"
       },
       "plainSummary": "自傷してから、敵の回避と回復を封じつつ3体を撃つ。",
@@ -14986,12 +15054,12 @@
         "exclusiveLv2Total": 2800,
         "exclusiveLv3Total": 2800,
         "conditionMaxTotal": 5600,
-        "conditionMaxNote": "笑顔の才能付帯中なら1120%×5回",
-        "powerType": "画像カード準拠",
+        "conditionMaxNote": "笑顔の才能付帯中に1120%×5回",
+        "powerType": "連撃物理 / 自己バフ条件",
         "maxStacks": null,
-        "realityRank": "中",
-        "rankingTarget": "基本",
-        "damageMemo": "画像カードからの暫定入力"
+        "realityRank": "高",
+        "rankingTarget": "条件MAX",
+        "damageMemo": "1ターン目は条件を満たしやすい。2ターン目以降は敵3体以上への弱体維持が必要"
       },
       "plainSummary": "「笑顔の才能」中は2倍になる5連撃。",
       "steps": [
@@ -15089,16 +15157,16 @@
         "singleMultiplier": 210,
         "hitCount": 5,
         "baseTotal": 1050,
-        "exclusiveLv1Total": 1050,
-        "exclusiveLv2Total": 1050,
-        "exclusiveLv3Total": 1050,
+        "exclusiveLv1Total": 1800,
+        "exclusiveLv2Total": 1800,
+        "exclusiveLv3Total": 1950,
         "conditionMaxTotal": 1950,
-        "conditionMaxNote": "専用Lv3で390%×5回",
-        "powerType": "画像カード準拠",
+        "conditionMaxNote": "専用Lv2は気絶対象の変更のみで倍率に影響しない。overlay の Lv2=1950、base の Lv1〜Lv3=1050 がいずれも誤り",
+        "powerType": "連撃物理 / 気絶",
         "maxStacks": null,
-        "realityRank": "中",
-        "rankingTarget": "基本",
-        "damageMemo": "画像カードからの暫定入力"
+        "realityRank": "高",
+        "rankingTarget": "条件MAX",
+        "damageMemo": "専用Lv1で火力が大きく伸び、専用Lv2で紅編成時の制圧力が上がる"
       },
       "plainSummary": "自傷してから、防御を剥がして5連撃し、エースを気絶させにいく。",
       "steps": [
@@ -15144,12 +15212,12 @@
         "exclusiveLv2Total": 1600,
         "exclusiveLv3Total": 1600,
         "conditionMaxTotal": 5100,
-        "conditionMaxNote": "弱体5個で上限1020%×5回",
-        "powerType": "画像カード準拠",
-        "maxStacks": null,
+        "conditionMaxNote": "対象の弱体効果5個で1020%×5回",
+        "powerType": "連撃物理 / 弱体数条件",
+        "maxStacks": 5,
         "realityRank": "中",
-        "rankingTarget": "基本",
-        "damageMemo": "画像カードからの暫定入力"
+        "rankingTarget": "条件MAX",
+        "damageMemo": "基本倍率も高めだが、最大値は弱体効果を積める編成が前提"
       },
       "plainSummary": "敵の弱体が多いほど痛くなる5連撃。",
       "steps": [
@@ -15255,16 +15323,16 @@
         "singleMultiplier": 610,
         "hitCount": 3,
         "baseTotal": 1830,
-        "exclusiveLv1Total": 1830,
-        "exclusiveLv2Total": 1830,
-        "exclusiveLv3Total": 1830,
-        "conditionMaxTotal": 2680,
-        "conditionMaxNote": "専用Lv1で4回、専用Lv3で670%",
-        "powerType": "画像カード準拠",
-        "maxStacks": null,
+        "exclusiveLv1Total": 2440,
+        "exclusiveLv2Total": 2440,
+        "exclusiveLv3Total": 2680,
+        "conditionMaxTotal": 5360,
+        "conditionMaxNote": "専用Lv3の670%×4回を、解析3スタック以上で1回再発動。解析スタックの攻撃力補正は倍率欄に含めない",
+        "powerType": "連撃物理 / 自傷条件",
+        "maxStacks": 6,
         "realityRank": "中",
-        "rankingTarget": "基本",
-        "damageMemo": "画像カードからの暫定入力"
+        "rankingTarget": "条件MAX",
+        "damageMemo": "再発動には事前の解析3スタック以上が必要。自傷パの行動順とスタック準備で実戦火力が変わる"
       },
       "plainSummary": "自傷してから3連撃。「解析」が貯まっていれば2周する。",
       "steps": [
@@ -15306,12 +15374,12 @@
         "exclusiveLv2Total": 3800,
         "exclusiveLv3Total": 3800,
         "conditionMaxTotal": 7600,
-        "conditionMaxNote": "対象HP条件で最大1520%×5回",
-        "powerType": "画像カード準拠",
+        "conditionMaxNote": "対象のHP割合が高い場合、1Hit最大1520%×5回",
+        "powerType": "連撃物理 / HP割合条件",
         "maxStacks": null,
         "realityRank": "中",
-        "rankingTarget": "基本",
-        "damageMemo": "画像カードからの暫定入力"
+        "rankingTarget": "条件MAX",
+        "damageMemo": "高HPの敵やシールドで残った敵に強い。HPが削れた相手には最大倍率を出しにくい"
       },
       "plainSummary": "元気な敵ほど痛い5連撃。",
       "steps": [
@@ -15415,14 +15483,14 @@
         "baseTotal": 3480,
         "exclusiveLv1Total": 3480,
         "exclusiveLv2Total": 3480,
-        "exclusiveLv3Total": 3480,
+        "exclusiveLv3Total": 3780,
         "conditionMaxTotal": 3780,
-        "conditionMaxNote": "専用Lv3で630%×6回",
-        "powerType": "画像カード準拠",
+        "conditionMaxNote": "専用Lv3の630%×6回。バフ解除数の増加は倍率に含めない",
+        "powerType": "連撃物理 / 自傷 / バフ解除",
         "maxStacks": null,
-        "realityRank": "中",
-        "rankingTarget": "基本",
-        "damageMemo": "画像カードからの暫定入力"
+        "realityRank": "高",
+        "rankingTarget": "専用Lv3",
+        "damageMemo": "解除可能バフを剥がしてから殴る対耐久向けの主力。ランダム6Hitのため、狙いを絞るよりバフ解除と削りを同時に見る"
       },
       "plainSummary": "自傷してから、バフの多い敵を剥がして6連撃。",
       "steps": [
@@ -15464,12 +15532,12 @@
         "exclusiveLv2Total": 3360,
         "exclusiveLv3Total": 3360,
         "conditionMaxTotal": 3360,
-        "conditionMaxNote": "画像カード上の基本倍率で算出。条件強化はcondition参照",
-        "powerType": "画像カード準拠",
+        "conditionMaxNote": "沈黙延長は倍率に含めない",
+        "powerType": "範囲物理 / 自傷 / 沈黙",
         "maxStacks": null,
-        "realityRank": "中",
+        "realityRank": "高",
         "rankingTarget": "基本",
-        "damageMemo": "画像カードからの暫定入力"
+        "damageMemo": "火力よりも沈黙の通り方が重要。弱体命中ルーンが不足すると評価が落ちる"
       },
       "plainSummary": "バフ剥がし＋高倍率＋沈黙を1本にまとめた主砲。",
       "steps": [
@@ -15588,7 +15656,22 @@
         {
           "text": "対象に弱体効果がない場合は、攻撃力を40%増加(2ターン)"
         }
-      ]
+      ],
+      "damage": {
+        "singleMultiplier": 0,
+        "hitCount": 0,
+        "baseTotal": 0,
+        "exclusiveLv1Total": 0,
+        "exclusiveLv2Total": 0,
+        "exclusiveLv3Total": 0,
+        "conditionMaxTotal": 0,
+        "conditionMaxNote": "火力倍率ではなく支援スキル。回復350%とクリダメ強化は比較メモで扱う",
+        "powerType": "弱体解除 / 攻撃力支援 / 回復",
+        "maxStacks": null,
+        "realityRank": "高",
+        "rankingTarget": "対象外",
+        "damageMemo": "専用Lv2の対象2体・解除2つが実用性の分岐点。火力ランキングには混ぜない"
+      }
     },
     {
       "id": "merlin-s2",
@@ -15620,8 +15703,8 @@
         "conditionMaxNote": "",
         "powerType": "通常攻撃倍率",
         "maxStacks": null,
-        "realityRank": "中",
-        "rankingTarget": "条件込み",
+        "realityRank": "高",
+        "rankingTarget": "基本",
         "damageMemo": ""
       },
       "plainSummary": "敵のバフを剥がしつつ、一番傷ついた味方を回復。",
@@ -15726,8 +15809,8 @@
         "conditionMaxNote": "",
         "powerType": "通常攻撃倍率",
         "maxStacks": null,
-        "realityRank": "中",
-        "rankingTarget": "条件込み",
+        "realityRank": "高",
+        "rankingTarget": "専用Lv2〜3",
         "damageMemo": ""
       },
       "plainSummary": "撃破するたび攻撃力が上がる高速4連撃。",
@@ -15767,12 +15850,12 @@
         "exclusiveLv2Total": 2600,
         "exclusiveLv3Total": 2600,
         "conditionMaxTotal": 5200,
-        "conditionMaxNote": "HP50%以下で2倍",
-        "powerType": "通常攻撃倍率",
+        "conditionMaxNote": "HP50%以下のダメージ2倍を反映。必ずクリティカルは期待火力補正のため倍率比較には含めない",
+        "powerType": "複数物理 / 低HP時強化 / 弱体特効",
         "maxStacks": null,
-        "realityRank": "中",
-        "rankingTarget": "条件込み",
-        "damageMemo": ""
+        "realityRank": "高",
+        "rankingTarget": "条件MAX",
+        "damageMemo": "条件MAXはHP50%以下が前提。弱体中の必ずクリティカルで火力は安定するが、倍率自体は全段階2600%固定"
       },
       "plainSummary": "自分が削れているほど強く、弱った敵には必ずクリティカル。",
       "steps": [
@@ -15878,8 +15961,8 @@
         "conditionMaxNote": "",
         "powerType": "通常攻撃倍率",
         "maxStacks": null,
-        "realityRank": "中",
-        "rankingTarget": "条件込み",
+        "realityRank": "高",
+        "rankingTarget": "専用Lv2〜3",
         "damageMemo": ""
       },
       "plainSummary": "バフ持ちからは奪い、丸腰にはデバフ命中を削る。",
@@ -15922,12 +16005,12 @@
         "exclusiveLv2Total": 2400,
         "exclusiveLv3Total": 2400,
         "conditionMaxTotal": 2400,
-        "conditionMaxNote": "",
-        "powerType": "通常攻撃倍率",
+        "conditionMaxNote": "直接倍率は全段階2400%固定。条件成立時の追加弱体は倍率比較には含めない",
+        "powerType": "複数物理 / 弱体押しつけ / 命中率減少",
         "maxStacks": null,
-        "realityRank": "中",
-        "rankingTarget": "条件込み",
-        "damageMemo": ""
+        "realityRank": "高",
+        "rankingTarget": "基本",
+        "damageMemo": "安定火力に妨害性能が乗るタイプ。技力条件を満たす相手には弱体を押しつけられる"
       },
       "plainSummary": "自分の弱体を格下に押し付ける5体攻撃。",
       "steps": [
@@ -16021,12 +16104,12 @@
         "exclusiveLv2Total": 1640,
         "exclusiveLv3Total": 1640,
         "conditionMaxTotal": 1640,
-        "conditionMaxNote": "",
-        "powerType": "通常攻撃倍率",
+        "conditionMaxNote": "専用Lv1の410%×4体を反映。シールドは倍率比較には含めない",
+        "powerType": "複数魔法 / シールド",
         "maxStacks": null,
-        "realityRank": "中",
-        "rankingTarget": "条件込み",
-        "damageMemo": ""
+        "realityRank": "高",
+        "rankingTarget": "専用Lv1",
+        "damageMemo": "火力目的というより、初動でシールドを貼りながら最低限の範囲攻撃を行うスキル"
       },
       "plainSummary": "殴った分を自分の盾に変える。",
       "steps": [
@@ -16073,7 +16156,22 @@
         {
           "text": "CT4の主砲持ちに使うと再使用を大きく早め、攻撃バフも乗る。エース依存編成の中核支援。根拠: 効果が「攻撃力最高の味方のCT-2」のため"
         }
-      ]
+      ],
+      "damage": {
+        "singleMultiplier": 0,
+        "hitCount": 0,
+        "baseTotal": 0,
+        "exclusiveLv1Total": 0,
+        "exclusiveLv2Total": 0,
+        "exclusiveLv3Total": 0,
+        "conditionMaxTotal": 0,
+        "conditionMaxNote": "支援スキルのため直接倍率は0%。攻撃力増加とCT短縮は比較メモで扱う",
+        "powerType": "CT短縮 / 攻撃力増加 / 弱体解除",
+        "maxStacks": null,
+        "realityRank": "高",
+        "rankingTarget": "対象外",
+        "damageMemo": "コルディ軸など、攻撃力最高の主力を再行動しやすくする支援スキル。行動順調整が重要"
+      }
     },
     {
       "id": "mertillier-s3",
@@ -16164,8 +16262,8 @@
         "conditionMaxNote": "",
         "powerType": "通常攻撃倍率",
         "maxStacks": null,
-        "realityRank": "中",
-        "rankingTarget": "条件込み",
+        "realityRank": "高",
+        "rankingTarget": "基本",
         "damageMemo": ""
       },
       "plainSummary": "格下には確定クリ、一番屈強な敵には直接攻撃で攻撃力まで削る。",
@@ -16219,7 +16317,22 @@
         {
           "text": "多重バリア対策の第3系統。盾で守るタイプの敵への直接の回答。根拠: シールド全解除と無効化無視の仕様のため"
         }
-      ]
+      ],
+      "damage": {
+        "singleMultiplier": 520,
+        "hitCount": 1,
+        "baseTotal": 520,
+        "exclusiveLv1Total": 520,
+        "exclusiveLv2Total": 520,
+        "exclusiveLv3Total": 520,
+        "conditionMaxTotal": 780,
+        "conditionMaxNote": "シールドなし時の1.5倍を反映。シールド解除とバリア無視は倍率比較には含めない",
+        "powerType": "腕力直接攻撃 / シールド解除 / バリア無視",
+        "maxStacks": null,
+        "realityRank": "高",
+        "rankingTarget": "条件MAX",
+        "damageMemo": "シールド解除からの単体フィニッシュ性能は高いが、対象がランダムなのでPvPの狙い撃ち用途では過信しない"
+      }
     },
     {
       "id": "luke-s3",
@@ -16299,13 +16412,13 @@
         "exclusiveLv1Total": 700,
         "exclusiveLv2Total": 700,
         "exclusiveLv3Total": 700,
-        "conditionMaxTotal": 900,
-        "conditionMaxNote": "",
+        "conditionMaxTotal": 3200,
+        "conditionMaxNote": "overlay の baseTotal=1600 は条件付きの追加900%を含んでいて誤り。base の条件MAX=900 も誤り(気絶なし1600×再発動2回=3200)",
         "powerType": "通常攻撃倍率",
         "maxStacks": null,
         "realityRank": "中",
         "rankingTarget": "条件込み",
-        "damageMemo": ""
+        "damageMemo": "火力だけでなく、回避率減少と気絶で相手エースを止めるのが主目的"
       },
       "plainSummary": "敵エースを気絶させにいき、外れたら必中の強打に切り替わる。",
       "steps": [
@@ -16351,12 +16464,12 @@
         "exclusiveLv2Total": 1800,
         "exclusiveLv3Total": 1800,
         "conditionMaxTotal": 1800,
-        "conditionMaxNote": "",
+        "conditionMaxNote": "専用Lv2、回避率減少中、HP低下状態を満たした場合",
         "powerType": "通常攻撃倍率",
         "maxStacks": null,
         "realityRank": "中",
         "rankingTarget": "条件込み",
-        "damageMemo": ""
+        "damageMemo": "スキル1で回避率減少を入れてから撃つと火力が伸びる。必中効果もあり、回避型に強い"
       },
       "plainSummary": "回避を削った敵に1.5倍、自分が瀕死ならさらに伸びる。",
       "steps": [
@@ -16460,16 +16573,16 @@
         "singleMultiplier": 350,
         "hitCount": 4,
         "baseTotal": 1400,
-        "exclusiveLv1Total": 1400,
-        "exclusiveLv2Total": 1400,
-        "exclusiveLv3Total": 1400,
-        "conditionMaxTotal": 1400,
-        "conditionMaxNote": "",
-        "powerType": "通常攻撃倍率",
+        "exclusiveLv1Total": 1750,
+        "exclusiveLv2Total": 1750,
+        "exclusiveLv3Total": 2000,
+        "conditionMaxTotal": 2000,
+        "conditionMaxNote": "overlay の Lv2=2000 が誤り(専用Lv2に倍率変化なし)。base の専用Lv欄・条件MAXも未入力",
+        "powerType": "複数物理 / クリティカル耐性減少 / 気絶",
         "maxStacks": null,
-        "realityRank": "中",
-        "rankingTarget": "条件込み",
-        "damageMemo": ""
+        "realityRank": "高",
+        "rankingTarget": "専用Lv2〜3",
+        "damageMemo": "初動から4ターンのクリティカル耐性低下を撒ける点が主価値。火力だけで評価しない"
       },
       "plainSummary": "クリ耐性を剥がしてから撃ち、一番元気な敵を気絶させる。",
       "steps": [
@@ -16512,15 +16625,15 @@
         "hitCount": 5,
         "baseTotal": 1000,
         "exclusiveLv1Total": 1000,
-        "exclusiveLv2Total": 1000,
-        "exclusiveLv3Total": 1000,
-        "conditionMaxTotal": 1000,
-        "conditionMaxNote": "",
-        "powerType": "通常攻撃倍率",
-        "maxStacks": null,
+        "exclusiveLv2Total": 1400,
+        "exclusiveLv3Total": 1400,
+        "conditionMaxTotal": 3000,
+        "conditionMaxNote": "専用Lv2の7回連撃1400%に、追加攻撃最大5回分と600%追加を反映。バフ解除は倍率比較には含めない",
+        "powerType": "連撃物理 / バフ解除 / 撃破時追加攻撃",
+        "maxStacks": 5,
         "realityRank": "中",
-        "rankingTarget": "条件込み",
-        "damageMemo": ""
+        "rankingTarget": "条件MAX",
+        "damageMemo": "クリティカルと撃破連鎖が前提。実戦火力は相手構成と育成ラインに左右される"
       },
       "plainSummary": "一度クリティカルが出ると後続が確定クリになる連撃。",
       "steps": [
@@ -16625,16 +16738,16 @@
         "singleMultiplier": 480,
         "hitCount": 3,
         "baseTotal": 1440,
-        "exclusiveLv1Total": 1440,
-        "exclusiveLv2Total": 1440,
-        "exclusiveLv3Total": 1440,
-        "conditionMaxTotal": 1440,
-        "conditionMaxNote": "",
-        "powerType": "通常攻撃倍率",
+        "exclusiveLv1Total": 2400,
+        "exclusiveLv2Total": 2400,
+        "exclusiveLv3Total": 2400,
+        "conditionMaxTotal": 2400,
+        "conditionMaxNote": "専用Lv1の対象5体化を反映。HPドレイン増加は回復補助として扱う",
+        "powerType": "複数物理 / HPドレイン増加",
         "maxStacks": null,
-        "realityRank": "中",
-        "rankingTarget": "条件込み",
-        "damageMemo": ""
+        "realityRank": "高",
+        "rankingTarget": "専用Lv1",
+        "damageMemo": "最大直接倍率は2400%。カウンター後にHPを戻す継戦用スキルとして見る"
       },
       "plainSummary": "攻撃しながら自分の吸血効率を上げる。",
       "steps": [
@@ -16676,7 +16789,22 @@
           "text": "被弾の多い長期戦ほど威力が伸びる。",
           "reason": "ダメージ参照元が過去20ターンの総被ダメージのため"
         }
-      ]
+      ],
+      "damage": {
+        "singleMultiplier": 20,
+        "hitCount": 3,
+        "baseTotal": 60,
+        "exclusiveLv1Total": 60,
+        "exclusiveLv2Total": 60,
+        "exclusiveLv3Total": 60,
+        "conditionMaxTotal": 60,
+        "conditionMaxNote": "3体合計の換算値。実ダメージは過去20ターンの被ダメージ量に依存する",
+        "powerType": "被ダメージ蓄積直接攻撃",
+        "maxStacks": null,
+        "realityRank": "中",
+        "rankingTarget": "参考",
+        "damageMemo": "被弾量が多いほど伸びる反撃スキル。攻撃力倍率ランキングとは分けて読む"
+      }
     },
     {
       "id": "fia-s3",
@@ -16765,13 +16893,13 @@
         "exclusiveLv1Total": 1600,
         "exclusiveLv2Total": 1600,
         "exclusiveLv3Total": 1600,
-        "conditionMaxTotal": 1600,
-        "conditionMaxNote": "",
-        "powerType": "通常攻撃倍率",
+        "conditionMaxTotal": 1800,
+        "conditionMaxNote": "自身のHP割合低下による倍率上昇を反映。回復量強化は含めない",
+        "powerType": "複数物理 / HP比例",
         "maxStacks": null,
-        "realityRank": "中",
-        "rankingTarget": "条件込み",
-        "damageMemo": ""
+        "realityRank": "高",
+        "rankingTarget": "条件最大",
+        "damageMemo": "基本1600%から最大1800%。2連撃のため多重バリア突破力は低い"
       },
       "plainSummary": "瀕死なほど痛くなる2連撃。吸血付き。",
       "steps": [
@@ -16811,14 +16939,14 @@
         "baseTotal": 900,
         "exclusiveLv1Total": 900,
         "exclusiveLv2Total": 900,
-        "exclusiveLv3Total": 900,
-        "conditionMaxTotal": 900,
-        "conditionMaxNote": "",
-        "powerType": "通常攻撃倍率",
+        "exclusiveLv3Total": 1000,
+        "conditionMaxTotal": 4000,
+        "conditionMaxNote": "専用Lv3の1000%×決死なし2倍×再発動2回を反映",
+        "powerType": "単体物理 / 条件再発動",
         "maxStacks": null,
         "realityRank": "中",
-        "rankingTarget": "条件込み",
-        "damageMemo": ""
+        "rankingTarget": "条件最大",
+        "damageMemo": "HP50%未満、決死解除、未撃破による再発動が揃うと最大4000%。条件依存が大きい"
       },
       "plainSummary": "敵エースへの一撃。倒し損ねたらもう一発。",
       "steps": [
@@ -16927,12 +17055,12 @@
         "exclusiveLv2Total": 750,
         "exclusiveLv3Total": 750,
         "conditionMaxTotal": 750,
-        "conditionMaxNote": "",
-        "powerType": "通常攻撃倍率",
+        "conditionMaxNote": "回復量強化は直接倍率に含めない",
+        "powerType": "複数魔法 / 回復支援",
         "maxStacks": null,
-        "realityRank": "中",
-        "rankingTarget": "条件込み",
-        "damageMemo": ""
+        "realityRank": "高",
+        "rankingTarget": "基本",
+        "damageMemo": "5体攻撃は合計750%。火力より回復と弱体解除が主目的"
       },
       "plainSummary": "殴りながらエースを回復し、弱体も剥がす。",
       "steps": [
@@ -17060,16 +17188,16 @@
         "singleMultiplier": 250,
         "hitCount": 4,
         "baseTotal": 1000,
-        "exclusiveLv1Total": 1000,
-        "exclusiveLv2Total": 1000,
-        "exclusiveLv3Total": 1000,
-        "conditionMaxTotal": 1000,
-        "conditionMaxNote": "",
-        "powerType": "通常攻撃倍率",
+        "exclusiveLv1Total": 1250,
+        "exclusiveLv2Total": 1250,
+        "exclusiveLv3Total": 1400,
+        "conditionMaxTotal": 1400,
+        "conditionMaxNote": "専用Lv1の対象5体化と専用Lv3の280%を反映。出血は含めない",
+        "powerType": "複数物理 / 出血",
         "maxStacks": null,
-        "realityRank": "中",
-        "rankingTarget": "条件込み",
-        "damageMemo": ""
+        "realityRank": "高",
+        "rankingTarget": "専用Lv3",
+        "damageMemo": "初手から使える複数攻撃。出血は攻撃力依存の持続ダメージとして別評価"
       },
       "plainSummary": "出血を撒く起点スキル。",
       "steps": [
@@ -17108,13 +17236,13 @@
         "exclusiveLv1Total": 2100,
         "exclusiveLv2Total": 2100,
         "exclusiveLv3Total": 2100,
-        "conditionMaxTotal": 2100,
-        "conditionMaxNote": "",
-        "powerType": "通常攻撃倍率",
+        "conditionMaxTotal": 4200,
+        "conditionMaxNote": "守護騎士中の10連撃を反映。攻撃力最大+100%は含めない",
+        "powerType": "単体物理 / 条件連撃",
         "maxStacks": null,
         "realityRank": "中",
-        "rankingTarget": "条件込み",
-        "damageMemo": ""
+        "rankingTarget": "条件最大",
+        "damageMemo": "7ターン目の守護騎士発動が必要。直接倍率は最大4200%"
       },
       "plainSummary": "「守護騎士」中は倍の10連撃になる主砲。",
       "steps": [
@@ -17224,16 +17352,16 @@
         "singleMultiplier": 180,
         "hitCount": 2,
         "baseTotal": 360,
-        "exclusiveLv1Total": 360,
-        "exclusiveLv2Total": 360,
-        "exclusiveLv3Total": 360,
-        "conditionMaxTotal": 360,
-        "conditionMaxNote": "",
-        "powerType": "通常攻撃倍率",
+        "exclusiveLv1Total": 540,
+        "exclusiveLv2Total": 540,
+        "exclusiveLv3Total": 540,
+        "conditionMaxTotal": 540,
+        "conditionMaxNote": "専用Lv1の対象3体化を反映。自己回復は含めない",
+        "powerType": "複数魔法 / 遅延",
         "maxStacks": null,
-        "realityRank": "中",
-        "rankingTarget": "条件込み",
-        "damageMemo": ""
+        "realityRank": "高",
+        "rankingTarget": "専用Lv1",
+        "damageMemo": "火力より遅延付与と自己回復が主目的"
       },
       "plainSummary": "遅延を狙いつつ自分も回復する小技。",
       "steps": [
@@ -17274,13 +17402,13 @@
         "exclusiveLv1Total": 1760,
         "exclusiveLv2Total": 1760,
         "exclusiveLv3Total": 1920,
-        "conditionMaxTotal": 7040,
-        "conditionMaxNote": "回復を受けた回数6以上で1760%×4回。専用Lv3では1920%×4回",
-        "powerType": "通常攻撃倍率",
+        "conditionMaxTotal": 7680,
+        "conditionMaxNote": "原文『回復6回以上なら魔法攻撃のダメージが攻撃力×1920%になる』は1ヒットあたりの値で4回攻撃。条件MAXは1920×4=7680。overlay の3840・base の7040 はいずれも誤り",
+        "powerType": "複数魔法 / 条件追加攻撃",
         "maxStacks": null,
         "realityRank": "中",
-        "rankingTarget": "条件込み",
-        "damageMemo": ""
+        "rankingTarget": "条件最大",
+        "damageMemo": "最大火力にはアクティブ回復を6回以上受ける条件が必要"
       },
       "plainSummary": "回復を受けた回数で4倍に化けるアタック。",
       "steps": [
@@ -17386,16 +17514,16 @@
         "singleMultiplier": 480,
         "hitCount": 3,
         "baseTotal": 1440,
-        "exclusiveLv1Total": 1440,
-        "exclusiveLv2Total": 1440,
-        "exclusiveLv3Total": 1440,
-        "conditionMaxTotal": 1440,
-        "conditionMaxNote": "",
-        "powerType": "通常攻撃倍率",
+        "exclusiveLv1Total": 2400,
+        "exclusiveLv2Total": 2400,
+        "exclusiveLv3Total": 2400,
+        "conditionMaxTotal": 9600,
+        "conditionMaxNote": "7ターン目以降かつ専用Lv1対象5体で1920%×5体",
+        "powerType": "7ターン強化",
         "maxStacks": null,
         "realityRank": "中",
-        "rankingTarget": "条件込み",
-        "damageMemo": ""
+        "rankingTarget": "条件MAX",
+        "damageMemo": "長期戦で大きく伸びる。脱力による耐久支援は倍率に含めない"
       },
       "plainSummary": "脱力を撒く前半、7ターン目からは4倍砲。",
       "steps": [
@@ -17433,14 +17561,14 @@
         "baseTotal": 2600,
         "exclusiveLv1Total": 2600,
         "exclusiveLv2Total": 2600,
-        "exclusiveLv3Total": 2600,
-        "conditionMaxTotal": 2600,
-        "conditionMaxNote": "",
-        "powerType": "通常攻撃倍率",
+        "exclusiveLv3Total": 2900,
+        "conditionMaxTotal": 11600,
+        "conditionMaxNote": "専用Lv3かつ7ターン目以降で2320%×5体",
+        "powerType": "7ターン強化",
         "maxStacks": null,
         "realityRank": "中",
-        "rankingTarget": "条件込み",
-        "damageMemo": ""
+        "rankingTarget": "条件MAX",
+        "damageMemo": "終盤の主力。浸食ダメージは表示倍率に含めない"
       },
       "plainSummary": "浸食を撒く前半、7ターン目からは4倍砲。",
       "steps": [
@@ -17543,14 +17671,14 @@
         "baseTotal": 1650,
         "exclusiveLv1Total": 1650,
         "exclusiveLv2Total": 1650,
-        "exclusiveLv3Total": 1650,
-        "conditionMaxTotal": 1650,
-        "conditionMaxNote": "",
-        "powerType": "通常攻撃倍率",
+        "exclusiveLv3Total": 1800,
+        "conditionMaxTotal": 1800,
+        "conditionMaxNote": "専用Lv3で魔法360%×5体。7ターン目以降のバフ強化は倍率外",
+        "powerType": "味方火力支援",
         "maxStacks": null,
-        "realityRank": "中",
-        "rankingTarget": "条件込み",
-        "damageMemo": ""
+        "realityRank": "高",
+        "rankingTarget": "専用Lv3",
+        "damageMemo": "削りと支援を両立するが、主目的は攻撃力・クリティカル率バフ"
       },
       "plainSummary": "エースを強化してから撃つ。7ターン目から強化が4倍に。",
       "steps": [
@@ -17592,12 +17720,12 @@
         "exclusiveLv2Total": 1200,
         "exclusiveLv3Total": 1200,
         "conditionMaxTotal": 1200,
-        "conditionMaxNote": "",
-        "powerType": "通常攻撃倍率",
+        "conditionMaxNote": "多重バリア優先攻撃。条件による倍率増加なし",
+        "powerType": "多重バリア対策",
         "maxStacks": null,
-        "realityRank": "中",
-        "rankingTarget": "条件込み",
-        "damageMemo": ""
+        "realityRank": "高",
+        "rankingTarget": "基本",
+        "damageMemo": "低倍率の多段攻撃。多重バリアへの圧力は装備育成に左右される"
       },
       "plainSummary": "多重バリア持ちを優先して剥がしにいく5連魔法。",
       "steps": [
@@ -17698,16 +17826,16 @@
         "singleMultiplier": 540,
         "hitCount": 3,
         "baseTotal": 1620,
-        "exclusiveLv1Total": 1620,
-        "exclusiveLv2Total": 1620,
-        "exclusiveLv3Total": 1620,
-        "conditionMaxTotal": 1620,
-        "conditionMaxNote": "",
-        "powerType": "通常攻撃倍率",
+        "exclusiveLv1Total": 2700,
+        "exclusiveLv2Total": 2700,
+        "exclusiveLv3Total": 2950,
+        "conditionMaxTotal": 5900,
+        "conditionMaxNote": "専用Lv3・対象5体・7ターン目以降で590%×5体×2",
+        "powerType": "7ターン強化",
         "maxStacks": null,
         "realityRank": "中",
-        "rankingTarget": "条件込み",
-        "damageMemo": ""
+        "rankingTarget": "条件MAX",
+        "damageMemo": "7ターン目以降に全体寄りの高火力へ変化"
       },
       "plainSummary": "回復しながら殴り、7ターン目からは回復をやめて2倍撃ちに変わる。",
       "steps": [
@@ -17748,13 +17876,13 @@
         "exclusiveLv1Total": 2480,
         "exclusiveLv2Total": 2480,
         "exclusiveLv3Total": 2480,
-        "conditionMaxTotal": 2480,
-        "conditionMaxNote": "",
-        "powerType": "通常攻撃倍率",
+        "conditionMaxTotal": 4960,
+        "conditionMaxNote": "7ターン目以降で310%×8回×2",
+        "powerType": "7ターン強化",
         "maxStacks": null,
-        "realityRank": "中",
-        "rankingTarget": "条件込み",
-        "damageMemo": ""
+        "realityRank": "高",
+        "rankingTarget": "条件MAX",
+        "damageMemo": "敵数が減るほど火力を集中しやすい8連撃"
       },
       "plainSummary": "8連撃版のS1。後半に化けるのは同じ。",
       "steps": [
@@ -17861,14 +17989,14 @@
         "baseTotal": 1260,
         "exclusiveLv1Total": 1260,
         "exclusiveLv2Total": 1260,
-        "exclusiveLv3Total": 1260,
-        "conditionMaxTotal": 1260,
-        "conditionMaxNote": "",
-        "powerType": "通常攻撃倍率",
+        "exclusiveLv3Total": 1410,
+        "conditionMaxTotal": 1410,
+        "conditionMaxNote": "専用Lv3で470%×3体",
+        "powerType": "妨害付き範囲攻撃",
         "maxStacks": null,
-        "realityRank": "中",
-        "rankingTarget": "条件込み",
-        "damageMemo": ""
+        "realityRank": "高",
+        "rankingTarget": "専用Lv3",
+        "damageMemo": "火力より気絶とクリティカル抑制が主目的"
       },
       "plainSummary": "クリ耐性を削りつつ、エースの気絶も狙う妨害魔法。",
       "steps": [
@@ -17911,12 +18039,12 @@
         "exclusiveLv2Total": 2120,
         "exclusiveLv3Total": 2120,
         "conditionMaxTotal": 2120,
-        "conditionMaxNote": "",
-        "powerType": "通常攻撃倍率",
+        "conditionMaxNote": "直接倍率は全段階固定。味方への攻撃力増加は倍率外",
+        "powerType": "7ターン支援",
         "maxStacks": null,
-        "realityRank": "中",
-        "rankingTarget": "条件込み",
-        "damageMemo": ""
+        "realityRank": "高",
+        "rankingTarget": "基本",
+        "damageMemo": "ランダム4連撃で残敵へ火力を集めやすい"
       },
       "plainSummary": "7ターン目からは味方2人への大型攻撃バフ付きに化ける。",
       "steps": [
