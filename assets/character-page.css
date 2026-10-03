@@ -227,6 +227,110 @@ main {
 
 .steps li:last-child::after { display: none; }
 
+/* 「いつ・誰に・何が起きる？」 */
+.flow {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.flow-block {
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+}
+
+.flow-when {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 6px;
+  margin: 0;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--line);
+  background: var(--accent-faint);
+}
+
+.flow-when-text {
+  color: var(--accent-strong);
+  font-size: 15px;
+  font-weight: 900;
+}
+
+.flow-mode {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.flow-row {
+  display: grid;
+  grid-template-columns: 4.5em minmax(0, 1fr);
+  gap: 10px;
+  padding: 10px 12px;
+}
+
+.flow-row + .flow-row { border-top: 1px dashed var(--line); }
+
+.flow-label {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1.75;
+}
+
+.flow-value { line-height: 1.75; }
+
+.flow-effects {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.flow-effects li { line-height: 1.75; }
+
+.flow-chip {
+  display: inline-block;
+  margin: 0 6px 0 0;
+  padding: 1px 7px;
+  border: 1px solid var(--accent-soft);
+  border-radius: 999px;
+  background: var(--accent-faint);
+  color: var(--accent-strong);
+  font-size: 12px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.flow-chip.num {
+  margin: 0 0 0 6px;
+  border-color: var(--line);
+  background: #fff;
+  color: var(--ratio);
+}
+
+.flow-chip.cond {
+  border-color: var(--line);
+  background: #f4f6fa;
+  color: #3b4b65;
+  white-space: normal;
+}
+
+.flow-effects li .flow-chip:not(.cond):not(.num) { margin: 0 6px; }
+.flow-effects li .flow-chip:first-child { margin-left: 0; }
+
+.flow-note {
+  margin-left: 6px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
 .term { display: inline; }
 
 .term summary {

@@ -42,10 +42,20 @@
         <div class="skill-body">
           
         <div>
-          <h3 class="block-title">順番に何が起きる？</h3>
-          <ol class="steps">
-            <li>まず自分のHPを少し回復する(最大HPの5%)</li><li>攻撃力が高い敵3体に物理攻撃(攻撃力×<span class="ratio">440%</span>)</li><li>70%の確率で<details class="term"><summary>脱力</summary><span class="term-box">攻撃力を下げる状態異常。重ね掛けしても効果が一番大きい1つだけが適用される。</span></details>を4ターン付与</li>
-          </ol>
+          <h3 class="block-title">いつ・誰に・何が起きる？</h3>
+          <ol class="flow">
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-text">① 攻撃前</span></p>
+            <div class="flow-row"><span class="flow-label">誰に</span><span class="flow-value">自身</span></div>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>自分のHPを少し回復する<span class="flow-chip num">最大HPの5%</span></li></ul></div>
+          </li>
+        
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-text">② 攻撃時</span></p>
+            <div class="flow-row"><span class="flow-label">誰に</span><span class="flow-value">攻撃力が高い敵3体</span></div>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>物理攻撃<span class="flow-chip num">攻撃力×<span class="ratio">440%</span></span></li><li><span class="flow-chip">70%</span><details class="term"><summary>脱力</summary><span class="term-box">攻撃力を下げる状態異常。重ね掛けしても効果が一番大きい1つだけが適用される。</span></details>を付与<span class="flow-chip">4ターン</span></li></ul></div>
+          </li>
+        </ol>
         </div>
       
           <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>攻撃力が高い敵3体</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 1320% / 最大 1440%</dd></dl></div>
@@ -69,10 +79,26 @@
         <div class="skill-body">
           
         <div>
-          <h3 class="block-title">順番に何が起きる？</h3>
-          <ol class="steps">
-            <li>HP割合が最も低い味方を回復(攻撃力の30%)。これを3回くり返す</li><li>HP割合が高い敵3体に物理攻撃(攻撃力×<span class="ratio">480%</span>)</li><li>70%の確率で<details class="term"><summary>毒</summary><span class="term-box">行動開始時に現在HPに応じたダメージを受ける状態異常。</span></details>を2ターン付与</li><li>(条件解禁)バトル中のHP回復効果の発動回数が15以上なら物理攻撃が1920%になる</li>
-          </ol>
+          <h3 class="block-title">いつ・誰に・何が起きる？</h3>
+          <ol class="flow">
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-text">① 攻撃前</span></p>
+            <div class="flow-row"><span class="flow-label">誰に</span><span class="flow-value">HP割合が最も低い味方</span></div>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>HPを回復する。これを3回くり返す<span class="flow-chip num">攻撃力の30%</span></li></ul></div>
+          </li>
+        
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-text">② 攻撃時</span></p>
+            <div class="flow-row"><span class="flow-label">誰に</span><span class="flow-value">HP割合が高い敵3体</span></div>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>物理攻撃<span class="flow-chip num">攻撃力×<span class="ratio">480%</span></span></li><li><span class="flow-chip">70%</span><details class="term"><summary>毒</summary><span class="term-box">行動開始時に現在HPに応じたダメージを受ける状態異常。</span></details>を付与<span class="flow-chip">2ターン</span></li></ul></div>
+          </li>
+        
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-text">攻撃時</span><span class="flow-mode">条件付き</span></p>
+            <div class="flow-row"><span class="flow-label">誰に</span><span class="flow-value">HP割合が高い敵3体</span></div>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li><span class="flow-chip cond">バトル中のHP回復効果の発動回数が15以上なら</span>物理攻撃のダメージが上がる<span class="flow-chip num">攻撃力×<span class="ratio">1920%</span></span></li></ul></div>
+          </li>
+        </ol>
         </div>
       
           <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>HP割合が高い敵3体</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 1440% / 最大 5760%</dd></dl><dl class="data-item"><dt>検証情報</dt><dd>1件</dd></dl></div>
@@ -101,10 +127,20 @@
         <div class="skill-body">
           
         <div>
-          <h3 class="block-title">順番に何が起きる？</h3>
-          <ol class="steps">
-            <li>バトル開始時、隣接する味方2体の被回復量を10%増やす(6ターン)</li><li>同時に、その2体の最大HPをコベル自身の最大HPの20%分増やす(解除不可)</li><li>コベルが戦闘不能になると、被回復量の増加だけ解除される</li>
-          </ol>
+          <h3 class="block-title">いつ・誰に・何が起きる？</h3>
+          <ol class="flow">
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-text">バトル開始時</span><span class="flow-mode">同時に発動</span></p>
+            <div class="flow-row"><span class="flow-label">誰に</span><span class="flow-value">隣接する味方2体</span></div>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>被回復量を10%増加<span class="flow-chip">6ターン</span></li><li>最大HPを、コベル自身の最大HPの20%分増加<span class="flow-note">解除不可</span></li></ul></div>
+          </li>
+        
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-text">コベルが戦闘不能になったとき</span><span class="flow-mode">条件付き</span></p>
+            <div class="flow-row"><span class="flow-label">誰に</span><span class="flow-value">上記の味方2体</span></div>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>被回復量の増加だけ解除</li></ul></div>
+          </li>
+        </ol>
         </div>
       
           <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>隣接味方2体</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>被回復量+10% / 最大HP増加</dd></dl></div>
@@ -128,10 +164,20 @@
         <div class="skill-body">
           
         <div>
-          <h3 class="block-title">順番に何が起きる？</h3>
-          <ol class="steps">
-            <li>攻撃を受けるたび、受けたダメージの40%ぶんHPを回復する(その攻撃で戦闘不能になる場合は発動しない)</li><li>バトル開始時から、受けるダメージを40%減らす(解除不可)</li>
-          </ol>
+          <h3 class="block-title">いつ・誰に・何が起きる？</h3>
+          <ol class="flow">
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-text">バトル開始時</span><span class="flow-mode">常時</span></p>
+            <div class="flow-row"><span class="flow-label">誰に</span><span class="flow-value">自身</span></div>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>受けるダメージを40%減らす<span class="flow-note">解除不可</span></li></ul></div>
+          </li>
+        
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-text">攻撃を受けたとき</span><span class="flow-mode">条件付き</span></p>
+            <div class="flow-row"><span class="flow-label">誰に</span><span class="flow-value">自身</span></div>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>受けたダメージの40%ぶんHPを回復する<span class="flow-note">その攻撃で戦闘不能になる場合は発動しない</span></li></ul></div>
+          </li>
+        </ol>
         </div>
       
           <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>自身</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>被ダメージ40%回復 / 被ダメージ-40%</dd></dl></div>

@@ -7568,6 +7568,46 @@
         {
           "text": "ランダムな敵に物理480%×5回"
         }
+      ],
+      "flow": [
+        {
+          "when": "攻撃前",
+          "mode": "sequence",
+          "order": 1,
+          "target": "ランダムな敵",
+          "effects": [
+            {
+              "text": "砂塵を1スタック付与",
+              "chance": "70%",
+              "duration": "2ターン",
+              "note": "1スタックにつき被ダメージ5%増加、最大4スタック"
+            }
+          ]
+        },
+        {
+          "when": "攻撃前",
+          "mode": "sequence",
+          "order": 2,
+          "target": "ランダムな敵",
+          "effects": [
+            {
+              "text": "砂塵をさらに1スタック追加",
+              "condition": "砂塵付与後、対象のHP割合が70%以上なら"
+            }
+          ]
+        },
+        {
+          "when": "攻撃時",
+          "mode": "sequence",
+          "order": 3,
+          "target": "ランダムな敵",
+          "effects": [
+            {
+              "text": "物理攻撃",
+              "multiplier": "物理480%×5回"
+            }
+          ]
+        }
       ]
     },
     {
@@ -7621,6 +7661,45 @@
           "text": "S1で砂塵を積むほどS2の解除・CTリセットが働く自己完結型。",
           "reason": "S2の条件が砂塵4スタックのため"
         }
+      ],
+      "flow": [
+        {
+          "when": "攻撃前",
+          "mode": "sequence",
+          "order": 1,
+          "target": "ランダムな敵",
+          "effects": [
+            {
+              "text": "バフを2つ解除",
+              "condition": "対象が砂塵4スタックなら"
+            }
+          ]
+        },
+        {
+          "when": "攻撃時",
+          "mode": "sequence",
+          "order": 2,
+          "target": "ランダムな敵",
+          "effects": [
+            {
+              "text": "物理攻撃",
+              "multiplier": "物理710%×5回"
+            }
+          ]
+        },
+        {
+          "when": "最後の攻撃後",
+          "mode": "sequence",
+          "order": 3,
+          "target": "自身",
+          "effects": [
+            {
+              "text": "自身のスキルCTを0にする",
+              "condition": "砂塵4スタックの敵がいれば",
+              "note": "バトル中1回"
+            }
+          ]
+        }
       ]
     },
     {
@@ -7646,6 +7725,21 @@
       "steps": [
         {
           "text": "バトル開始時、攻撃力が最も高い味方の攻撃力を増加(4ターン、量は対象の防御力200%分、解除不可)"
+        }
+      ],
+      "flow": [
+        {
+          "when": "バトル開始時",
+          "mode": "simultaneous",
+          "target": "攻撃力が最も高い味方",
+          "effects": [
+            {
+              "text": "攻撃力を増加",
+              "multiplier": "対象の防御力200%分",
+              "duration": "4ターン",
+              "note": "解除不可"
+            }
+          ]
         }
       ]
     },
@@ -7675,6 +7769,31 @@
         },
         {
           "text": "1・2ターン目の開始時、自身に多重バリア1層を付与(最大HP10%以上のダメージを1回無効化)"
+        }
+      ],
+      "flow": [
+        {
+          "when": "バトル開始時",
+          "mode": "simultaneous",
+          "target": "自身",
+          "effects": [
+            {
+              "text": "命中率を50%増加",
+              "duration": "2ターン",
+              "note": "解除不可"
+            }
+          ]
+        },
+        {
+          "when": "1・2ターン目の開始時",
+          "mode": "simultaneous",
+          "target": "自身",
+          "effects": [
+            {
+              "text": "多重バリア1層を付与",
+              "note": "最大HP10%以上のダメージを1回無効化"
+            }
+          ]
         }
       ]
     },
@@ -18542,6 +18661,38 @@
           "text": "70%の確率で脱力を4ターン付与",
           "term": "脱力"
         }
+      ],
+      "flow": [
+        {
+          "when": "攻撃前",
+          "mode": "sequence",
+          "order": 1,
+          "target": "自身",
+          "effects": [
+            {
+              "text": "自分のHPを少し回復する",
+              "multiplier": "最大HPの5%"
+            }
+          ]
+        },
+        {
+          "when": "攻撃時",
+          "mode": "sequence",
+          "order": 2,
+          "target": "攻撃力が高い敵3体",
+          "effects": [
+            {
+              "text": "物理攻撃",
+              "multiplier": "攻撃力×440%"
+            },
+            {
+              "text": "脱力を付与",
+              "term": "脱力",
+              "chance": "70%",
+              "duration": "4ターン"
+            }
+          ]
+        }
       ]
     },
     {
@@ -18600,6 +18751,50 @@
           "sourceLabel": "ワーズさんの性能解説",
           "sourceUrl": "https://note.com/wazu_019/n/n8d4b94e8b360"
         }
+      ],
+      "flow": [
+        {
+          "when": "攻撃前",
+          "mode": "sequence",
+          "order": 1,
+          "target": "HP割合が最も低い味方",
+          "effects": [
+            {
+              "text": "HPを回復する。これを3回くり返す",
+              "multiplier": "攻撃力の30%"
+            }
+          ]
+        },
+        {
+          "when": "攻撃時",
+          "mode": "sequence",
+          "order": 2,
+          "target": "HP割合が高い敵3体",
+          "effects": [
+            {
+              "text": "物理攻撃",
+              "multiplier": "攻撃力×480%"
+            },
+            {
+              "text": "毒を付与",
+              "term": "毒",
+              "chance": "70%",
+              "duration": "2ターン"
+            }
+          ]
+        },
+        {
+          "when": "攻撃時",
+          "mode": "conditional",
+          "target": "HP割合が高い敵3体",
+          "effects": [
+            {
+              "text": "物理攻撃のダメージが上がる",
+              "condition": "バトル中のHP回復効果の発動回数が15以上なら",
+              "multiplier": "攻撃力×1920%"
+            }
+          ]
+        }
       ]
     },
     {
@@ -18632,6 +18827,33 @@
         {
           "text": "コベルが戦闘不能になると、被回復量の増加だけ解除される"
         }
+      ],
+      "flow": [
+        {
+          "when": "バトル開始時",
+          "mode": "simultaneous",
+          "target": "隣接する味方2体",
+          "effects": [
+            {
+              "text": "被回復量を10%増加",
+              "duration": "6ターン"
+            },
+            {
+              "text": "最大HPを、コベル自身の最大HPの20%分増加",
+              "note": "解除不可"
+            }
+          ]
+        },
+        {
+          "when": "コベルが戦闘不能になったとき",
+          "mode": "conditional",
+          "target": "上記の味方2体",
+          "effects": [
+            {
+              "text": "被回復量の増加だけ解除"
+            }
+          ]
+        }
       ]
     },
     {
@@ -18660,6 +18882,30 @@
         },
         {
           "text": "バトル開始時から、受けるダメージを40%減らす(解除不可)"
+        }
+      ],
+      "flow": [
+        {
+          "when": "バトル開始時",
+          "mode": "passive",
+          "target": "自身",
+          "effects": [
+            {
+              "text": "受けるダメージを40%減らす",
+              "note": "解除不可"
+            }
+          ]
+        },
+        {
+          "when": "攻撃を受けたとき",
+          "mode": "conditional",
+          "target": "自身",
+          "effects": [
+            {
+              "text": "受けたダメージの40%ぶんHPを回復する",
+              "note": "その攻撃で戦闘不能になる場合は発動しない"
+            }
+          ]
         }
       ]
     },

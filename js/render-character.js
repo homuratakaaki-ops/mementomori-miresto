@@ -121,7 +121,60 @@
     return `${highlightRatios(before)}<details class="term"><summary>${escapeHtml(step.term)}</summary><span class="term-box">${escapeHtml(terms[step.term])}</span></details>${highlightRatios(after)}`;
   }
 
+  const FLOW_MODE_LABEL = {
+    simultaneous: "同時に発動",
+    passive: "常時",
+    conditional: "条件付き"
+    // sequence は order の番号そのものが順番を示すのでラベルを出さない
+  };
+
+  const CIRCLED = ["", "①", "②", "③", "④", "⑤", "⑥", "⑦", "⑧", "⑨"];
+
+  function flowOrderMark(block) {
+    if (block.mode !== "sequence" || !block.order) return "";
+    return `${CIRCLED[block.order] || block.order} `;
+  }
+
+  /** flow の1効果。確率・倍率・継続・条件・補足は、その効果と同じ行に添える。 */
+  function renderFlowEffect(effect, terms) {
+    const before = [
+      effect.chance ? `<span class="flow-chip">${escapeHtml(effect.chance)}</span>` : "",
+      effect.condition ? `<span class="flow-chip cond">${highlightRatios(effect.condition)}</span>` : ""
+    ].filter(Boolean).join("");
+    const after = [
+      effect.multiplier ? `<span class="flow-chip num">${highlightRatios(effect.multiplier)}</span>` : "",
+      effect.duration ? `<span class="flow-chip">${escapeHtml(effect.duration)}</span>` : "",
+      effect.note ? `<span class="flow-note">${escapeHtml(effect.note)}</span>` : ""
+    ].filter(Boolean).join("");
+    return `<li>${before}${renderTermText(effect, terms)}${after}</li>`;
+  }
+
+  function renderFlowBlock(block, terms) {
+    const mode = FLOW_MODE_LABEL[block.mode];
+    const effects = (block.effects || []).map((effect) => renderFlowEffect(effect, terms)).join("");
+    return `
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-text">${escapeHtml(flowOrderMark(block))}${escapeHtml(block.when)}</span>${mode ? `<span class="flow-mode">${escapeHtml(mode)}</span>` : ""}</p>
+            <div class="flow-row"><span class="flow-label">誰に</span><span class="flow-value">${escapeHtml(block.target)}</span></div>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects">${effects}</ul></div>
+          </li>
+        `;
+  }
+
+  /** 「いつ・誰に・何が起きる？」。flow を持つスキルだけ表示し、steps の代わりになる。 */
+  function renderFlow(skill, terms) {
+    if (!Array.isArray(skill.flow) || skill.flow.length === 0) return "";
+    return `
+        <div>
+          <h3 class="block-title">いつ・誰に・何が起きる？</h3>
+          <ol class="flow">${skill.flow.map((block) => renderFlowBlock(block, terms || defaultTerms)).join("")}</ol>
+        </div>
+      `;
+  }
+
   function renderSteps(skill, terms) {
+    // flow があるスキルは「いつ・誰に・何が起きる？」に置き換える（steps のデータは保持する）
+    if (Array.isArray(skill.flow) && skill.flow.length > 0) return renderFlow(skill, terms);
     if (Array.isArray(skill.steps) && skill.steps.length > 0) {
       return `
         <div>
@@ -264,6 +317,7 @@
     formatPickupHistory,
     renderMetaHtml,
     renderTermText,
+    renderFlow,
     renderSteps,
     totalDamageText,
     renderDataRows,
