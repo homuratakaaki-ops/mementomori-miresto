@@ -4,19 +4,20 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>[湖畔の歌姫]プリマヴェーラ | ミレストのメメントモリ分析データ室</title>
-  <meta name="description" content="[湖畔の歌姫]プリマヴェーラのスキルを、効果の順番・対象・火力・検証情報に分けて確認するためのデータページです。">
+  <meta name="description" content="[湖畔の歌姫]プリマヴェーラ(藍属性・スナイパー)のスキル4種を効果の順番・対象・倍率で分解。S1 湖畔のメロディ、S2 コトリ行進曲ほか。">
   <link rel="canonical" href="https://memento.musoudc.com/pages/characters/primavera_summer.html">
   <link rel="stylesheet" href="../../assets/character-page.css">
+  <script src="../../js/render-character.js" defer></script>
   <script src="../../js/character-page.js" defer></script>
 </head>
-<body data-character-page data-character-id="primavera_summer">
+<body data-character-page data-character-id="primavera_summer" data-attribute="藍" data-prerendered>
   <header class="page-header">
     <div class="header-inner">
       <a class="top-link" href="./index.html">キャラ一覧へ戻る</a>
       <p class="eyebrow">CHARACTER SKILL DATA</p>
       <h1 id="characterName">[湖畔の歌姫]プリマヴェーラ</h1>
-      <p class="role" id="roleMemo"></p>
-      <div class="meta-row" id="characterMeta"></div>
+      <p class="role" id="roleMemo">金縛りと弱体解除連動で火力を伸ばす夏イベントの藍スナイパー</p>
+      <div class="meta-row" id="characterMeta"><span class="badge attribute">藍</span><span class="badge">スナイパー</span><span class="badge">スピード 2678</span><span class="badge">入手 夏イベント</span></div>
     </div>
   </header>
 
@@ -26,7 +27,120 @@
       このページでは検証済みデータと出典整理に絞ります。評価や編成判断は外部記事で確認してください。<br>
       <a id="noteLink" href="#" target="_blank" rel="noopener">ミレストのnote記事を開く</a>
     </section>
-    <section class="skill-list" id="skillList"></section>
+    <section class="skill-list" id="skillList">
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S1</span>
+            <span class="tag">アクティブ</span>
+            <span class="tag major">敵弱体</span>
+            <span class="tag">CT 4</span>
+          </div>
+          <h2>湖畔のメロディ</h2>
+          <p class="summary">自分と味方に金縛りを掛けてから撃つ、変則の自己拘束スキル。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>自身と攻撃力が最も高い味方に金縛りを付与(1ターン。命中率・耐性率を無視して必ず付与)</li><li>ランダムな敵3体に物理<span class="ratio">320%</span></li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>自身と攻撃力が最も高い味方 / ランダム敵3-5体</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 960% / 最大 3400%</dd></dl><dl class="data-item"><dt>継続</dt><dd>金縛り1T</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用Lv1</th><td>攻撃対象5体</td></tr></table></div>
+        </div>
+      </article>
+    
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S2</span>
+            <span class="tag">アクティブ</span>
+            <span class="tag major">攻撃</span>
+            <span class="tag">CT 4</span>
+          </div>
+          <h2>コトリ行進曲</h2>
+          <p class="summary">味方が弱体を解除した数だけ連撃が増える。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>ランダムな敵に物理<span class="ratio">480%</span>×2回</li><li>味方側がスキルで解除した弱体効果の合計が10以上で攻撃回数が増加(最大5回)</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>ランダム敵に2-5回</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 960% / 最大 4700%</dd></dl></div>
+          <div><h3 class="block-title">かみ合わせ</h3><ul class="verification-list synergy-list">
+        <li>
+          弱体解除を多く行う味方(解除持ちヒーラー等)と噛み合う。
+          <br><span class="reason">根拠: 攻撃回数の増加条件が味方側の弱体解除の累計のため</span>
+        </li>
+      </ul></div>
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用Lv3</th><td>物理<span class="ratio">940%</span></td></tr></table></div>
+        </div>
+      </article>
+    
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S3</span>
+            <span class="tag">パッシブ</span>
+            <span class="tag major">解除・操作</span>
+            
+          </div>
+          <h2>奇跡の歌姫</h2>
+          <p class="summary">受けた弱体を力に変える変換器。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>アクティブスキルで弱体を受けたとき、弱体を1つ解除して至高の旋律をスタック(攻撃力増加・最大10スタック・解除不可)</li><li>行動阻害を受けた場合は付与スタック数が増える</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>自身</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>攻撃力+2-5%×最大10</dd></dl><dl class="data-item"><dt>継続</dt><dd>解除不可</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用</th><td>専用武器での直接強化なし</td></tr></table></div>
+        </div>
+      </article>
+    
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S4</span>
+            <span class="tag">パッシブ</span>
+            <span class="tag major">防御</span>
+            
+          </div>
+          <h2>歌姫の心音</h2>
+          <p class="summary">常時ダメージカットと開幕の防御バフ。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>自身の被ダメージを減少(解除不可)</li><li>バトル開始時、防御力を増加(6ターン)。同属性または天属性の味方数で増加量が上がる</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>自身</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>被ダメージ-30-70% / 防御力+90-150%</dd></dl><dl class="data-item"><dt>継続</dt><dd>解除不可 / 防御力増加6T</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用Lv2</th><td>被ダメージ減少量70%</td></tr></table></div>
+        </div>
+      </article>
+    </section>
   </main>
 
   <footer>

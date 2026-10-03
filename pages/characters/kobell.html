@@ -4,29 +4,143 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>コベル | ミレストのメメントモリ分析データ室</title>
-  <meta name="description" content="コベルのスキルを、効果の順番・対象・火力・検証情報に分けて確認するためのデータページです。">
+  <meta name="description" content="コベル(翠属性・スナイパー)のスキル4種を効果の順番・対象・倍率で分解。S1 朧氷面鏡、S2 山の恵み…？ほか。">
   <link rel="canonical" href="https://memento.musoudc.com/pages/characters/kobell.html">
   <link rel="stylesheet" href="../../assets/character-page.css">
+  <script src="../../js/render-character.js" defer></script>
   <script src="../../js/character-page.js" defer></script>
 </head>
-<body data-character-page data-character-id="kobell">
+<body data-character-page data-character-id="kobell" data-attribute="翠" data-prerendered>
   <header class="page-header">
     <div class="header-inner">
       <a class="top-link" href="./index.html">キャラ一覧へ戻る</a>
       <p class="eyebrow">CHARACTER SKILL DATA</p>
       <h1 id="characterName">コベル</h1>
-      <p class="role" id="roleMemo"></p>
-      <div class="meta-row" id="characterMeta"></div>
+      <p class="role" id="roleMemo">回復回数条件と毒を扱う翠スナイパー</p>
+      <div class="meta-row" id="characterMeta"><span class="badge attribute">翠</span><span class="badge">スナイパー</span><span class="badge">スピード 3179</span><span class="badge">入手 PU・運命</span><span class="badge">PU履歴：1回目 2026/2/12〜2/26（終了）</span></div>
     </div>
   </header>
 
   <main>
-    <section class="note-panel" id="notePanel" hidden>
+    <section class="note-panel" id="notePanel">
       <strong>評価・運用メモはnoteへ</strong><br>
       このページでは検証済みデータと出典整理に絞ります。評価や編成判断は外部記事で確認してください。<br>
-      <a id="noteLink" href="#" target="_blank" rel="noopener">ミレストのnote記事を開く</a>
+      <a id="noteLink" href="https://note.com/musoudc/n/n2f9824af791a" target="_blank" rel="noopener">ミレストのnote記事を開く</a>
     </section>
-    <section class="skill-list" id="skillList"></section>
+    <section class="skill-list" id="skillList">
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S1</span>
+            <span class="tag">アクティブ</span>
+            <span class="tag major">攻撃</span>
+            <span class="tag">CT 4</span>
+          </div>
+          <h2>朧氷面鏡</h2>
+          <p class="summary">敵のアタッカーを狙って殴りながら、攻撃力を下げるスキル。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>まず自分のHPを少し回復する(最大HPの5%)</li><li>攻撃力が高い敵3体に物理攻撃(攻撃力×<span class="ratio">440%</span>)</li><li>70%の確率で<details class="term"><summary>脱力</summary><span class="term-box">攻撃力を下げる状態異常。重ね掛けしても効果が一番大きい1つだけが適用される。</span></details>を4ターン付与</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>攻撃力が高い敵3体</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 1320% / 最大 1440%</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用Lv1</th><td>脱力40%。</td></tr><tr><th>専用Lv3</th><td>物理<span class="ratio">480%</span></td></tr></table></div>
+        </div>
+      </article>
+    
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S2</span>
+            <span class="tag">アクティブ</span>
+            <span class="tag major">攻撃</span>
+            <span class="tag">CT 4</span>
+          </div>
+          <h2>山の恵み…？</h2>
+          <p class="summary">味方を回復しながら敵を殴って毒を撒く。回復を重ねると超火力が解禁される。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>HP割合が最も低い味方を回復(攻撃力の30%)。これを3回くり返す</li><li>HP割合が高い敵3体に物理攻撃(攻撃力×<span class="ratio">480%</span>)</li><li>70%の確率で<details class="term"><summary>毒</summary><span class="term-box">行動開始時に現在HPに応じたダメージを受ける状態異常。</span></details>を2ターン付与</li><li>(条件解禁)バトル中のHP回復効果の発動回数が15以上なら物理攻撃が1920%になる</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>HP割合が高い敵3体</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 1440% / 最大 5760%</dd></dl><dl class="data-item"><dt>検証情報</dt><dd>1件</dd></dl></div>
+          
+          <div><h3 class="block-title">検証情報</h3><ul class="verification-list">
+        <li>
+          回復回数のカウント対象はアクティブスキルによる回復のみ。パッシブは対象外
+          <br><a href="https://note.com/wazu_019/n/n8d4b94e8b360" target="_blank" rel="noopener">ワーズさんの性能解説</a>
+        </li>
+      </ul></div>
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用</th><td>専用武器効果なし</td></tr></table></div>
+        </div>
+      </article>
+    
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S3</span>
+            <span class="tag">パッシブ</span>
+            <span class="tag major">防御</span>
+            
+          </div>
+          <h2>竜神さまのご加護</h2>
+          <p class="summary">開幕から、隣の2人を「回復されやすく・硬く」する。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>バトル開始時、隣接する味方2体の被回復量を10%増やす(6ターン)</li><li>同時に、その2体の最大HPをコベル自身の最大HPの20%分増やす(解除不可)</li><li>コベルが戦闘不能になると、被回復量の増加だけ解除される</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>隣接味方2体</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>被回復量+10% / 最大HP増加</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用Lv2</th><td>対象が味方全体</td></tr></table></div>
+        </div>
+      </article>
+    
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S4</span>
+            <span class="tag">パッシブ</span>
+            <span class="tag major">防御</span>
+            
+          </div>
+          <h2>踏み出す巫女</h2>
+          <p class="summary">殴られるたび回復し、受けるダメージを常に4割カットする巫女の守り。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>攻撃を受けるたび、受けたダメージの40%ぶんHPを回復する(その攻撃で戦闘不能になる場合は発動しない)</li><li>バトル開始時から、受けるダメージを40%減らす(解除不可)</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>自身</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>被ダメージ40%回復 / 被ダメージ-40%</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用</th><td>専用武器効果なし</td></tr></table></div>
+        </div>
+      </article>
+    </section>
   </main>
 
   <footer>

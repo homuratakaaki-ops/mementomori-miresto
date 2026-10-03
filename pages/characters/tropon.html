@@ -4,19 +4,20 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>トロポン | ミレストのメメントモリ分析データ室</title>
-  <meta name="description" content="トロポンのスキルを、効果の順番・対象・火力・検証情報に分けて確認するためのデータページです。">
+  <meta name="description" content="トロポン(黄属性・ソーサラー)のスキル4種を効果の順番・対象・倍率で分解。S1 ライアースティング、S2 トリックスターほか。">
   <link rel="canonical" href="https://memento.musoudc.com/pages/characters/tropon.html">
   <link rel="stylesheet" href="../../assets/character-page.css">
+  <script src="../../js/render-character.js" defer></script>
   <script src="../../js/character-page.js" defer></script>
 </head>
-<body data-character-page data-character-id="tropon">
+<body data-character-page data-character-id="tropon" data-attribute="黄" data-prerendered>
   <header class="page-header">
     <div class="header-inner">
       <a class="top-link" href="./index.html">キャラ一覧へ戻る</a>
       <p class="eyebrow">CHARACTER SKILL DATA</p>
       <h1 id="characterName">トロポン</h1>
-      <p class="role" id="roleMemo"></p>
-      <div class="meta-row" id="characterMeta"></div>
+      <p class="role" id="roleMemo">HPドレインとバフ反転を持つ黄ソーサラー</p>
+      <div class="meta-row" id="characterMeta"><span class="badge attribute">黄</span><span class="badge">ソーサラー</span><span class="badge">スピード 2657</span><span class="badge">入手 恒常</span></div>
     </div>
   </header>
 
@@ -26,7 +27,115 @@
       このページでは検証済みデータと出典整理に絞ります。評価や編成判断は外部記事で確認してください。<br>
       <a id="noteLink" href="#" target="_blank" rel="noopener">ミレストのnote記事を開く</a>
     </section>
-    <section class="skill-list" id="skillList"></section>
+    <section class="skill-list" id="skillList">
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S1</span>
+            <span class="tag">アクティブ</span>
+            <span class="tag major">攻撃</span>
+            <span class="tag">CT 4</span>
+          </div>
+          <h2>ライアースティング</h2>
+          <p class="summary">使うたび7割ずつ強くなる吸血魔法。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>ランダムな敵5体に魔法<span class="ratio">310%</span></li><li>このスキルを使うたびダメージ+70%</li><li>総与ダメージの20%をHP回復する</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>ランダム敵5体</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 1550% / 最大 1700%</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用Lv1</th><td>30%でHPドレイン30%減少。</td></tr><tr><th>専用Lv2</th><td>魔法<span class="ratio">340%</span>。</td></tr><tr><th>専用Lv3</th><td>HPドレイン減少確率60%</td></tr></table></div>
+        </div>
+      </article>
+    
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S2</span>
+            <span class="tag">アクティブ</span>
+            <span class="tag major">攻撃</span>
+            <span class="tag">CT 4</span>
+          </div>
+          <h2>トリックスター</h2>
+          <p class="summary">全体攻撃と直接攻撃。撃破すれば自分のバフが全部延びる。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>ランダムな敵5体に魔法<span class="ratio">350%</span></li><li>さらにランダムな敵1体に魔力320%の直接攻撃</li><li>敵を戦闘不能にした場合、自身の全バフのターン数+2</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>ランダム敵5体 + ランダム敵1体</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 1750%</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用</th><td>専用武器効果なし</td></tr></table></div>
+        </div>
+      </article>
+    
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S3</span>
+            <span class="tag">パッシブ</span>
+            <span class="tag major">味方強化</span>
+            
+          </div>
+          <h2>優しい詐欺師</h2>
+          <p class="summary">HPとスピードの常時底上げ。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>自身の最大HP+40%・スピード+20%(解除不可)</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>自身</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>最大HP+40% / スピード+20%</dd></dl><dl class="data-item"><dt>継続</dt><dd>解除不可</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用</th><td>専用武器効果なし</td></tr></table></div>
+        </div>
+      </article>
+    
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S4</span>
+            <span class="tag">パッシブ</span>
+            <span class="tag major">解除・操作</span>
+            
+          </div>
+          <h2>イリュージョン</h2>
+          <p class="summary">クリティカルされたら相手のバフを盗み、通常被弾なら弱体を押し返す。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>クリティカルを受けたとき、攻撃者のバフを1つ解除して自身に付与(100%)</li><li>クリティカル以外の被弾時は、自身の弱体を1つ解除して攻撃者に付与(100%)</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>自身 / 攻撃者</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>クリ被弾時バフ解除・弱体解除</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用</th><td>専用武器効果なし</td></tr></table></div>
+        </div>
+      </article>
+    </section>
   </main>
 
   <footer>

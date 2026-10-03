@@ -4,19 +4,20 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>ミミ | ミレストのメメントモリ分析データ室</title>
-  <meta name="description" content="ミミのスキルを、効果の順番・対象・火力・検証情報に分けて確認するためのデータページです。">
+  <meta name="description" content="ミミ(黄属性・ウォーリア)のスキル4種を効果の順番・対象・倍率で分解。S1 ワイルドクロー、S2 宵猫のワルツほか。">
   <link rel="canonical" href="https://memento.musoudc.com/pages/characters/mimi.html">
   <link rel="stylesheet" href="../../assets/character-page.css">
+  <script src="../../js/render-character.js" defer></script>
   <script src="../../js/character-page.js" defer></script>
 </head>
-<body data-character-page data-character-id="mimi">
+<body data-character-page data-character-id="mimi" data-attribute="黄" data-prerendered>
   <header class="page-header">
     <div class="header-inner">
       <a class="top-link" href="./index.html">キャラ一覧へ戻る</a>
       <p class="eyebrow">CHARACTER SKILL DATA</p>
       <h1 id="characterName">ミミ</h1>
-      <p class="role" id="roleMemo"></p>
-      <div class="meta-row" id="characterMeta"></div>
+      <p class="role" id="roleMemo">共鳴で敵同士にダメージを通す黄ウォーリア</p>
+      <div class="meta-row" id="characterMeta"><span class="badge attribute">黄</span><span class="badge">ウォーリア</span><span class="badge">スピード 3328</span><span class="badge">入手 恒常</span></div>
     </div>
   </header>
 
@@ -26,7 +27,120 @@
       このページでは検証済みデータと出典整理に絞ります。評価や編成判断は外部記事で確認してください。<br>
       <a id="noteLink" href="#" target="_blank" rel="noopener">ミレストのnote記事を開く</a>
     </section>
-    <section class="skill-list" id="skillList"></section>
+    <section class="skill-list" id="skillList">
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S1</span>
+            <span class="tag">アクティブ</span>
+            <span class="tag major">攻撃</span>
+            <span class="tag">CT 5</span>
+          </div>
+          <h2>ワイルドクロー</h2>
+          <p class="summary">倒すたび連撃が増えていく5から9連撃。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>ランダムな敵に物理<span class="ratio">315%</span>×5回</li><li>敵を戦闘不能にするたび攻撃回数+1(最大9回)</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>ランダム敵</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 1575% / 最大 3060%</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用Lv1</th><td>物理<span class="ratio">340%</span></td></tr></table></div>
+        </div>
+      </article>
+    
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S2</span>
+            <span class="tag">アクティブ</span>
+            <span class="tag major">攻撃</span>
+            <span class="tag">CT 4</span>
+          </div>
+          <h2>宵猫のワルツ</h2>
+          <p class="summary">バフの数だけ痛くなり、殴った分が盾になる。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>ランダムな敵5体に物理<span class="ratio">350%</span></li><li>自身のバフ1つにつき+60%(最大590%)</li><li>総与ダメージ20%のシールドを自身に4ターン付与</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>ランダム敵5体</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 1750% / 最大 2950%</dd></dl><dl class="data-item"><dt>継続</dt><dd>シールド4T</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用Lv2</th><td>シールド対象が自身とHP割合が最も低い味方。</td></tr><tr><th>専用Lv3</th><td>シールド30%</td></tr></table></div>
+        </div>
+      </article>
+    
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S3</span>
+            <span class="tag">パッシブ</span>
+            <span class="tag major">味方強化</span>
+            
+          </div>
+          <h2>夢踊る野良猫</h2>
+          <p class="summary">被弾しない限り攻撃力8割増し。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>3ターン目以降の毎ターン開始時、直近2ターンにダメージを受けていなければ攻撃力+80%(3ターン、解除不可)</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>自身</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>攻撃力+80%</dd></dl><dl class="data-item"><dt>継続</dt><dd>3T</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用</th><td>専用武器効果なし</td></tr></table></div>
+        </div>
+      </article>
+    
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S4</span>
+            <span class="tag">パッシブ</span>
+            <span class="tag major">特殊</span>
+            
+          </div>
+          <h2>ユニゾンダンス</h2>
+          <p class="summary">一番硬い敵と一番柔らかい敵を「共鳴」で繋ぎ、片方への攻撃をもう片方にも通す。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>バトル開始時、防御力が最も高い敵と最も低い敵に共鳴を付与(解除不可)</li><li>共鳴対象が受けたダメージの80%を、もう一方も受ける</li><li>どちらかが戦闘不能になると解除される</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>防御力が最も高い敵と最も低い敵</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>共鳴対象が互いに80%ダメージ</dd></dl><dl class="data-item"><dt>継続</dt><dd>解除不可</dd></dl></div>
+          <div><h3 class="block-title">かみ合わせ</h3><ul class="verification-list synergy-list">
+        <li>
+          硬い敵を直接殴らず、柔らかい敵経由で削るルートを作る固有機構。単体高火力の味方と組むと効率が良い。根拠: 共鳴のダメージ転写が80%のため
+          
+        </li>
+      </ul></div>
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用</th><td>専用武器効果なし</td></tr></table></div>
+        </div>
+      </article>
+    </section>
   </main>
 
   <footer>

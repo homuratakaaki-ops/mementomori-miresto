@@ -4,19 +4,20 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>リリー | ミレストのメメントモリ分析データ室</title>
-  <meta name="description" content="リリーのスキルを、効果の順番・対象・火力・検証情報に分けて確認するためのデータページです。">
+  <meta name="description" content="リリー(天属性・ソーサラー)のスキル4種を効果の順番・対象・倍率で分解。S1 ファントムダスト、S2 ラストグレインほか。">
   <link rel="canonical" href="https://memento.musoudc.com/pages/characters/lily.html">
   <link rel="stylesheet" href="../../assets/character-page.css">
+  <script src="../../js/render-character.js" defer></script>
   <script src="../../js/character-page.js" defer></script>
 </head>
-<body data-character-page data-character-id="lily">
+<body data-character-page data-character-id="lily" data-attribute="天" data-prerendered>
   <header class="page-header">
     <div class="header-inner">
       <a class="top-link" href="./index.html">キャラ一覧へ戻る</a>
       <p class="eyebrow">CHARACTER SKILL DATA</p>
       <h1 id="characterName">リリー</h1>
-      <p class="role" id="roleMemo"></p>
-      <div class="meta-row" id="characterMeta"></div>
+      <p class="role" id="roleMemo">気絶と残り香スタックで戦う天ソーサラー</p>
+      <div class="meta-row" id="characterMeta"><span class="badge attribute">天</span><span class="badge">ソーサラー</span><span class="badge">スピード 3058</span><span class="badge">入手 PU・運命</span></div>
     </div>
   </header>
 
@@ -26,7 +27,120 @@
       このページでは検証済みデータと出典整理に絞ります。評価や編成判断は外部記事で確認してください。<br>
       <a id="noteLink" href="#" target="_blank" rel="noopener">ミレストのnote記事を開く</a>
     </section>
-    <section class="skill-list" id="skillList"></section>
+    <section class="skill-list" id="skillList">
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S1</span>
+            <span class="tag">アクティブ</span>
+            <span class="tag major">敵弱体</span>
+            <span class="tag">CT 4</span>
+          </div>
+          <h2>ファントムダスト</h2>
+          <p class="summary">敵のアタッカーを狙って気絶させにいく妨害弾。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>攻撃力が高い敵2体に魔法<span class="ratio">160%</span></li><li>70%の確率で<details class="term"><summary>気絶</summary><span class="term-box">行動できなくなる状態異常。効果中は通常の行動順が来てもスキルを使えない。</span></details>を1ターン付与</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>攻撃力が高い敵2-3体</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 320% / 最大 720%</dd></dl><dl class="data-item"><dt>継続</dt><dd>気絶1T</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用Lv1</th><td>対象3体。</td></tr><tr><th>専用Lv3</th><td>魔法<span class="ratio">240%</span></td></tr></table></div>
+        </div>
+      </article>
+    
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S2</span>
+            <span class="tag">アクティブ</span>
+            <span class="tag major">攻撃</span>
+            <span class="tag">CT 4</span>
+          </div>
+          <h2>ラストグレイン</h2>
+          <p class="summary">手数で押す連撃。残り香が満タンだと化ける。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>攻撃前に被回復量減少を付与(4ターン)</li><li>ランダムな敵に魔法<span class="ratio">160%</span>×6回</li><li>残り香20スタック時は倍率・回数が上昇(最大320%×10回)</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>ランダム敵に6-10回</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 960% / 最大 3200%</dd></dl><dl class="data-item"><dt>継続</dt><dd>被回復量減少4T</dd></dl></div>
+          <div><h3 class="block-title">かみ合わせ</h3><ul class="verification-list synergy-list">
+        <li>
+          弱体を多く撒く編成ほどS4の残り香が貯まり、このスキルが伸びる。
+          <br><span class="reason">根拠: 残り香の付与条件が味方の弱体付与のため</span>
+        </li>
+      </ul></div>
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用</th><td>専用武器での直接強化なし</td></tr></table></div>
+        </div>
+      </article>
+    
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S3</span>
+            <span class="tag">パッシブ</span>
+            <span class="tag major">味方強化</span>
+            
+          </div>
+          <h2>情報転写体</h2>
+          <p class="summary">開幕からデバフを当てやすくする自己準備。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>バトル開始時、弱体効果命中率を増加(解除不可)</li><li>同属性の味方3体以上なら、スピード増加も付与(2ターン)</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>自身</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>弱体効果命中率+15-30% / スピード+10-30%</dd></dl><dl class="data-item"><dt>継続</dt><dd>2T / 解除不可</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用Lv2</th><td>スピード増加量30%</td></tr></table></div>
+        </div>
+      </article>
+    
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S4</span>
+            <span class="tag">パッシブ</span>
+            <span class="tag major">味方強化</span>
+            
+          </div>
+          <h2>後悔の残り香</h2>
+          <p class="summary">弱体を撒くたび攻撃力が積もるスタックエンジン。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>自身か味方がアクティブスキルで弱体を付与するたび、弱体が付いた敵の数に応じて残り香をスタック</li><li>1スタックにつき攻撃力+2%(最大20スタック、解除不可)</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>自身 / Lv3で攻撃力が高い味方2体も対象</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>攻撃力+2%×最大20</dd></dl><dl class="data-item"><dt>継続</dt><dd>解除不可</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用</th><td>専用武器での直接強化なし</td></tr></table></div>
+        </div>
+      </article>
+    </section>
   </main>
 
   <footer>

@@ -4,29 +4,143 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>ルーク | ミレストのメメントモリ分析データ室</title>
-  <meta name="description" content="ルークのスキルを、効果の順番・対象・火力・検証情報に分けて確認するためのデータページです。">
+  <meta name="description" content="ルーク(翠属性・ウォーリア)のスキル4種を効果の順番・対象・倍率で分解。S1 光導の一閃、S2 ナイトプライドほか。">
   <link rel="canonical" href="https://memento.musoudc.com/pages/characters/luke.html">
   <link rel="stylesheet" href="../../assets/character-page.css">
+  <script src="../../js/render-character.js" defer></script>
   <script src="../../js/character-page.js" defer></script>
 </head>
-<body data-character-page data-character-id="luke">
+<body data-character-page data-character-id="luke" data-attribute="翠" data-prerendered>
   <header class="page-header">
     <div class="header-inner">
       <a class="top-link" href="./index.html">キャラ一覧へ戻る</a>
       <p class="eyebrow">CHARACTER SKILL DATA</p>
       <h1 id="characterName">ルーク</h1>
-      <p class="role" id="roleMemo"></p>
-      <div class="meta-row" id="characterMeta"></div>
+      <p class="role" id="roleMemo">クリティカルで被ダメージ増加を積む翠属性ウォーリア</p>
+      <div class="meta-row" id="characterMeta"><span class="badge attribute">翠</span><span class="badge">ウォーリア</span><span class="badge">スピード 3093</span><span class="badge">入手 星の導き</span></div>
     </div>
   </header>
 
   <main>
-    <section class="note-panel" id="notePanel" hidden>
+    <section class="note-panel" id="notePanel">
       <strong>評価・運用メモはnoteへ</strong><br>
       このページでは検証済みデータと出典整理に絞ります。評価や編成判断は外部記事で確認してください。<br>
-      <a id="noteLink" href="#" target="_blank" rel="noopener">ミレストのnote記事を開く</a>
+      <a id="noteLink" href="https://note.com/musoudc/n/n95b1ba239bbd" target="_blank" rel="noopener">ミレストのnote記事を開く</a>
     </section>
-    <section class="skill-list" id="skillList"></section>
+    <section class="skill-list" id="skillList">
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S1</span>
+            <span class="tag">アクティブ</span>
+            <span class="tag major">攻撃</span>
+            <span class="tag">CT 4</span>
+          </div>
+          <h2>光導の一閃</h2>
+          <p class="summary">格下には確定クリ、一番屈強な敵には直接攻撃で攻撃力まで削る。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>ランダムな敵5体に物理<span class="ratio">540%</span></li><li>対象の腕力が自身より低ければ必ずクリティカル</li><li>腕力が最も高い敵に腕力150%の直接攻撃を行う</li><li>同じ対象の攻撃力を50%減少(1ターン)</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>ランダム敵5体 / 腕力最高の敵</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 2700%</dd></dl><dl class="data-item"><dt>継続</dt><dd>攻撃力減少1T</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用</th><td>専用武器効果なし</td></tr></table></div>
+        </div>
+      </article>
+    
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S2</span>
+            <span class="tag">アクティブ</span>
+            <span class="tag major">攻撃</span>
+            <span class="tag">CT 5</span>
+          </div>
+          <h2>ナイトプライド</h2>
+          <p class="summary">シールドも多重バリアも無視して撃ち抜く対盾の切り札。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>ランダムな敵1体のシールドを全解除</li><li>腕力520%の直接攻撃を行う(ダメージ無効・シールド・多重バリアを無視)</li><li>対象がシールドを持っていなければダメージ1.5倍</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>ランダム敵1体</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>腕力520%直接攻撃</dd></dl></div>
+          <div><h3 class="block-title">かみ合わせ</h3><ul class="verification-list synergy-list">
+        <li>
+          多重バリア対策の第3系統。盾で守るタイプの敵への直接の回答。根拠: シールド全解除と無効化無視の仕様のため
+          
+        </li>
+      </ul></div>
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用</th><td>専用武器効果なし</td></tr></table></div>
+        </div>
+      </article>
+    
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S3</span>
+            <span class="tag">パッシブ</span>
+            <span class="tag major">敵弱体</span>
+            
+          </div>
+          <h2>君ガ為ノ剣</h2>
+          <p class="summary">クリティカルするたび、相手が柔らかくなっていく。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>自身の攻撃がクリティカルヒットしたとき、対象の被ダメージ+15%を付与(最大5スタック)</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>攻撃対象</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>被ダメージ+15%</dd></dl><dl class="data-item"><dt>継続</dt><dd>最大5スタック</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用</th><td>専用武器効果なし</td></tr></table></div>
+        </div>
+      </article>
+    
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S4</span>
+            <span class="tag">パッシブ</span>
+            <span class="tag major">防御</span>
+            
+          </div>
+          <h2>誇り高き騎士</h2>
+          <p class="summary">自分と隣のクリティカル耐性を上げる。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>バトル開始時、自身(4ターン)と隣接味方1体(3ターン)のクリティカル耐性率+60%</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>自身 / 隣接味方</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>クリ耐性+60%</dd></dl><dl class="data-item"><dt>継続</dt><dd>解除不可</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用</th><td>専用武器効果: 毎ターン開始時、自身HPを自身の攻撃力25%回復</td></tr></table></div>
+        </div>
+      </article>
+    </section>
   </main>
 
   <footer>

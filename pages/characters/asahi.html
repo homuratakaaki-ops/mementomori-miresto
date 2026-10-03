@@ -4,19 +4,20 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>アサヒ | ミレストのメメントモリ分析データ室</title>
-  <meta name="description" content="アサヒのスキルを、効果の順番・対象・火力・検証情報に分けて確認するためのデータページです。">
+  <meta name="description" content="アサヒ(黄属性・スナイパー)のスキル4種を効果の順番・対象・倍率で分解。S1 忍法・乱れ刃、S2 忍法・日影崩しほか。">
   <link rel="canonical" href="https://memento.musoudc.com/pages/characters/asahi.html">
   <link rel="stylesheet" href="../../assets/character-page.css">
+  <script src="../../js/render-character.js" defer></script>
   <script src="../../js/character-page.js" defer></script>
 </head>
-<body data-character-page data-character-id="asahi">
+<body data-character-page data-character-id="asahi" data-attribute="黄" data-prerendered>
   <header class="page-header">
     <div class="header-inner">
       <a class="top-link" href="./index.html">キャラ一覧へ戻る</a>
       <p class="eyebrow">CHARACTER SKILL DATA</p>
       <h1 id="characterName">アサヒ</h1>
-      <p class="role" id="roleMemo"></p>
-      <div class="meta-row" id="characterMeta"></div>
+      <p class="role" id="roleMemo">風林火山のスタックで攻防を伸ばす黄スナイパー</p>
+      <div class="meta-row" id="characterMeta"><span class="badge attribute">黄</span><span class="badge">スナイパー</span><span class="badge">スピード 3044</span><span class="badge">入手 星の導き</span></div>
     </div>
   </header>
 
@@ -26,7 +27,120 @@
       このページでは検証済みデータと出典整理に絞ります。評価や編成判断は外部記事で確認してください。<br>
       <a id="noteLink" href="#" target="_blank" rel="noopener">ミレストのnote記事を開く</a>
     </section>
-    <section class="skill-list" id="skillList"></section>
+    <section class="skill-list" id="skillList">
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S1</span>
+            <span class="tag">アクティブ</span>
+            <span class="tag major">攻撃</span>
+            <span class="tag">CT 4</span>
+          </div>
+          <h2>忍法・乱れ刃</h2>
+          <p class="summary">5連撃。避けられても倒し損ねても長期バフが残る。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>ランダムな敵に物理<span class="ratio">280%</span>×5回</li><li>物理攻撃が回避された場合、自身の命中率を10%増加(10ターン)</li><li>敵を戦闘不能にできなかった場合、自身のクリティカル率を10%増加(10ターン)</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>ランダム敵</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 1400%</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用Lv1</th><td>物理<span class="ratio">380%</span></td></tr></table></div>
+        </div>
+      </article>
+    
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S2</span>
+            <span class="tag">アクティブ</span>
+            <span class="tag major">攻撃</span>
+            <span class="tag">CT 4</span>
+          </div>
+          <h2>忍法・日影崩し</h2>
+          <p class="summary">風林火山が育つほど連発できる本命連撃。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>攻撃力が最も高い敵に物理<span class="ratio">340%</span>×5回</li><li>風林火山の攻撃力増加が6スタック以上なら再発動(1回まで)</li><li>12スタック以上なら再発動2回まで</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>攻撃力が最も高い敵</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 1700%</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用Lv3</th><td>物理<span class="ratio">380%</span></td></tr></table></div>
+        </div>
+      </article>
+    
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S3</span>
+            <span class="tag">パッシブ</span>
+            <span class="tag major">味方強化</span>
+            
+          </div>
+          <h2>風林火山</h2>
+          <p class="summary">行動するたび攻撃力が積もるエンジン。バフが多いほど加速。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>行動終了時、攻撃力+5%を1スタック付与(最大15スタック、解除不可)</li><li>自身のバフ数が4以上なら付与数2、8以上なら付与数3になる</li><li>バフ数はターン数減少後にカウントする</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>自身</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>攻撃力+5%スタック</dd></dl><dl class="data-item"><dt>継続</dt><dd>条件参照</dd></dl></div>
+          <div><h3 class="block-title">かみ合わせ</h3><ul class="verification-list synergy-list">
+        <li>
+          バフを配る支援と組むほど②の加速が効き、S2の再発動条件(6/12スタック)に早く届く。根拠: 付与数の参照が「自身のバフ個数」のため
+          
+        </li>
+      </ul></div>
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用</th><td>専用武器効果なし</td></tr></table></div>
+        </div>
+      </article>
+    
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S4</span>
+            <span class="tag">パッシブ</span>
+            <span class="tag major">防御</span>
+            
+          </div>
+          <h2>月影の従者</h2>
+          <p class="summary">序盤の被ダメカットと、黄染めで増える防御・シールド。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>バトル開始時、自身の被ダメージを15%減少(10ターン)</li><li>自身以外の黄属性味方が1体以上なら、防御力+150%・物理防御力+100%(10ターン)</li><li>自身以外の黄属性味方が2体以上なら、1ターン目開始時に攻撃力800%のシールドを10ターン付与</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>自身</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>被ダメージ減少 / シールド</dd></dl><dl class="data-item"><dt>継続</dt><dd>条件参照</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用Lv2</th><td>被ダメージ減少30%</td></tr></table></div>
+        </div>
+      </article>
+    </section>
   </main>
 
   <footer>

@@ -4,19 +4,20 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>イディーネ | ミレストのメメントモリ分析データ室</title>
-  <meta name="description" content="イディーネのスキルを、効果の順番・対象・火力・検証情報に分けて確認するためのデータページです。">
+  <meta name="description" content="イディーネ(翠属性・ソーサラー)のスキル4種を効果の順番・対象・倍率で分解。S1 ウィリディタスの解放、S2 フローソイデスの開花ほか。">
   <link rel="canonical" href="https://memento.musoudc.com/pages/characters/idyne.html">
   <link rel="stylesheet" href="../../assets/character-page.css">
+  <script src="../../js/render-character.js" defer></script>
   <script src="../../js/character-page.js" defer></script>
 </head>
-<body data-character-page data-character-id="idyne">
+<body data-character-page data-character-id="idyne" data-attribute="翠" data-prerendered>
   <header class="page-header">
     <div class="header-inner">
       <a class="top-link" href="./index.html">キャラ一覧へ戻る</a>
       <p class="eyebrow">CHARACTER SKILL DATA</p>
       <h1 id="characterName">イディーネ</h1>
-      <p class="role" id="roleMemo"></p>
-      <div class="meta-row" id="characterMeta"></div>
+      <p class="role" id="roleMemo">再生とHP回復連動バフを扱う翠ソーサラー</p>
+      <div class="meta-row" id="characterMeta"><span class="badge attribute">翠</span><span class="badge">ソーサラー</span><span class="badge">スピード 3261</span><span class="badge">入手 ピックアップ</span></div>
     </div>
   </header>
 
@@ -26,7 +27,120 @@
       このページでは検証済みデータと出典整理に絞ります。評価や編成判断は外部記事で確認してください。<br>
       <a id="noteLink" href="#" target="_blank" rel="noopener">ミレストのnote記事を開く</a>
     </section>
-    <section class="skill-list" id="skillList"></section>
+    <section class="skill-list" id="skillList">
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S1</span>
+            <span class="tag">アクティブ</span>
+            <span class="tag major">攻撃</span>
+            <span class="tag">CT 4</span>
+          </div>
+          <h2>ウィリディタスの解放</h2>
+          <p class="summary">再生とHP上限アップを自分に付けてから撃つ魔法。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>自身に<details class="term"><summary>再生</summary><span class="term-box">ターン開始時などにHPを回復する継続回復効果。回復量や継続ターンは付与した効果ごとに異なる。</span></details>を4ターン付与(毎ターン最大HP10%回復、解除不可)</li><li>再生の前に自身の最大HPを10%増加(最大2スタック、解除不可)</li><li>ランダムな敵に魔法<span class="ratio">440%</span>×4回</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>ランダム敵</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 1760%</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用Lv1</th><td>最大HP増加と再生の対象が味方全体。</td></tr><tr><th>専用Lv2</th><td>最大HP40%。</td></tr><tr><th>専用Lv3</th><td>魔法<span class="ratio">480%</span></td></tr></table></div>
+        </div>
+      </article>
+    
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S2</span>
+            <span class="tag">アクティブ</span>
+            <span class="tag major">攻撃</span>
+            <span class="tag">CT 4</span>
+          </div>
+          <h2>フローソイデスの開花</h2>
+          <p class="summary">自己回復を3回刻んでから撃つ。後半は回復不要になり3倍砲へ。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>自身のHPを最大HP5%回復、これを3回発動</li><li>ランダムな敵3体に魔法<span class="ratio">480%</span></li><li>7ターン目以降にHP回復が発動しなかった場合、魔法ダメージ3倍</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>ランダム敵3体</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 1440%</dd></dl></div>
+          <div><h3 class="block-title">かみ合わせ</h3><ul class="verification-list synergy-list">
+        <li>
+          ①の「3回発動」は回復回数をカウントする味方(ポーラS3・ユルディズS4・冬ステラS4・黄昏フローレンスS3)のスタックを1人で3回進める。
+          <br><span class="reason">根拠: 各スキルのカウント対象がアクティブスキルによる回復の発動回数のため</span>
+        </li>
+      </ul></div>
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用</th><td>専用武器効果なし</td></tr></table></div>
+        </div>
+      </article>
+    
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S3</span>
+            <span class="tag">パッシブ</span>
+            <span class="tag major">防御</span>
+            
+          </div>
+          <h2>命溢るるカンテラ</h2>
+          <p class="summary">回復のたびに攻撃とカウンタが積もる。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>HP回復効果が発動するたび、自身と攻撃力が高い味方2体に「旺花」を1スタック付与(最大15、解除不可)</li><li>1スタックにつき攻撃力+5%・カウンタ+1%。対象が翠属性ならカウンタ+2%</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>自身 / 攻撃力が高い味方2体</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>旺花スタック</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用</th><td>専用武器効果なし</td></tr></table></div>
+        </div>
+      </article>
+    
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S4</span>
+            <span class="tag">パッシブ</span>
+            <span class="tag major">防御</span>
+            
+          </div>
+          <h2>帰り花のよすが</h2>
+          <p class="summary">高いHPと被弾リカバリーで場に残る。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>バトル開始時、最大HPを100%増加(解除不可)</li><li>攻撃を受けたとき、被ダメージの60%をHP回復(その攻撃で戦闘不能になる場合は発動しない)</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>自身</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>被ダメージ60%回復 / 最大HP+100%</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用</th><td>専用武器効果なし</td></tr></table></div>
+        </div>
+      </article>
+    </section>
   </main>
 
   <footer>

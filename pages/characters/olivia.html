@@ -4,19 +4,20 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>オリヴィエ | ミレストのメメントモリ分析データ室</title>
-  <meta name="description" content="オリヴィエのスキルを、効果の順番・対象・火力・検証情報に分けて確認するためのデータページです。">
+  <meta name="description" content="オリヴィエ(黄属性・ウォーリア)のスキル4種を効果の順番・対象・倍率で分解。S1 勇気への祝福、S2 続け、聖なる旗にほか。">
   <link rel="canonical" href="https://memento.musoudc.com/pages/characters/olivia.html">
   <link rel="stylesheet" href="../../assets/character-page.css">
+  <script src="../../js/render-character.js" defer></script>
   <script src="../../js/character-page.js" defer></script>
 </head>
-<body data-character-page data-character-id="olivia">
+<body data-character-page data-character-id="olivia" data-attribute="黄" data-prerendered>
   <header class="page-header">
     <div class="header-inner">
       <a class="top-link" href="./index.html">キャラ一覧へ戻る</a>
       <p class="eyebrow">CHARACTER SKILL DATA</p>
       <h1 id="characterName">オリヴィエ</h1>
-      <p class="role" id="roleMemo"></p>
-      <div class="meta-row" id="characterMeta"></div>
+      <p class="role" id="roleMemo">味方全体の攻防を底上げする黄ウォーリア</p>
+      <div class="meta-row" id="characterMeta"><span class="badge attribute">黄</span><span class="badge">ウォーリア</span><span class="badge">スピード 3120</span><span class="badge">入手 恒常</span></div>
     </div>
   </header>
 
@@ -26,7 +27,115 @@
       このページでは検証済みデータと出典整理に絞ります。評価や編成判断は外部記事で確認してください。<br>
       <a id="noteLink" href="#" target="_blank" rel="noopener">ミレストのnote記事を開く</a>
     </section>
-    <section class="skill-list" id="skillList"></section>
+    <section class="skill-list" id="skillList">
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S1</span>
+            <span class="tag">アクティブ</span>
+            <span class="tag major">味方強化</span>
+            <span class="tag">CT 4</span>
+          </div>
+          <h2>勇気への祝福</h2>
+          <p class="summary">全員にオリヴィエ基準の攻防バフを配る号令。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>味方全体の攻撃力・防御力を、自身の攻撃力・防御力30%分増加(2ターン)</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>味方全体</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>攻撃力+30% / 防御力+30%</dd></dl><dl class="data-item"><dt>継続</dt><dd>2T</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用Lv1</th><td>増加量40%。</td></tr><tr><th>専用Lv3</th><td>増加量50%</td></tr></table></div>
+        </div>
+      </article>
+    
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S2</span>
+            <span class="tag">アクティブ</span>
+            <span class="tag major">攻撃</span>
+            <span class="tag">CT 6</span>
+          </div>
+          <h2>続け、聖なる旗に</h2>
+          <p class="summary">連撃の与ダメージが、そのまま全員の盾になる。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>ランダムな敵に物理<span class="ratio">390%</span>×5回</li><li>味方全体に総与ダメージ40%のシールドを2ターン付与</li><li>敵を戦闘不能にした場合、攻撃力が最も高い味方のクリダメ強化+30%(2ターン)</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>ランダム敵</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 1950% / 最大 2250%</dd></dl><dl class="data-item"><dt>継続</dt><dd>シールド2T</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用Lv2</th><td>物理<span class="ratio">450%</span></td></tr></table></div>
+        </div>
+      </article>
+    
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S3</span>
+            <span class="tag">パッシブ</span>
+            <span class="tag major">防御</span>
+            
+          </div>
+          <h2>善行の報い</h2>
+          <p class="summary">耐久の常時底上げ。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>自身の最大HP+30%・防御力+50%(解除不可)</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>自身</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>最大HP+30% / 防御力+50%</dd></dl><dl class="data-item"><dt>継続</dt><dd>解除不可</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用</th><td>専用武器効果なし</td></tr></table></div>
+        </div>
+      </article>
+    
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S4</span>
+            <span class="tag">パッシブ</span>
+            <span class="tag major">敵弱体</span>
+            
+          </div>
+          <h2>神に愛されし者</h2>
+          <p class="summary">クリティカルしてきた敵の攻撃力を削り返す。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>自身がクリティカルヒットを受けたとき、攻撃してきた敵の攻撃力を40%減少(1ターン)</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>攻撃してきた敵</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>攻撃力40%減少</dd></dl><dl class="data-item"><dt>継続</dt><dd>1T</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用</th><td>専用武器効果なし</td></tr></table></div>
+        </div>
+      </article>
+    </section>
   </main>
 
   <footer>

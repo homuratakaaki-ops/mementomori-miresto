@@ -4,19 +4,20 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>オフィーリア | ミレストのメメントモリ分析データ室</title>
-  <meta name="description" content="オフィーリアのスキルを、効果の順番・対象・火力・検証情報に分けて確認するためのデータページです。">
+  <meta name="description" content="オフィーリア(冥属性・ウォーリア)のスキル4種を効果の順番・対象・倍率で分解。S1 目を奪うは眩き刃、S2 クリスタルタイドほか。">
   <link rel="canonical" href="https://memento.musoudc.com/pages/characters/ophelia.html">
   <link rel="stylesheet" href="../../assets/character-page.css">
+  <script src="../../js/render-character.js" defer></script>
   <script src="../../js/character-page.js" defer></script>
 </head>
-<body data-character-page data-character-id="ophelia">
+<body data-character-page data-character-id="ophelia" data-attribute="冥" data-prerendered>
   <header class="page-header">
     <div class="header-inner">
       <a class="top-link" href="./index.html">キャラ一覧へ戻る</a>
       <p class="eyebrow">CHARACTER SKILL DATA</p>
       <h1 id="characterName">オフィーリア</h1>
-      <p class="role" id="roleMemo"></p>
-      <div class="meta-row" id="characterMeta"></div>
+      <p class="role" id="roleMemo">挑発とカウンタで相手を倒す冥属性ウォーリア</p>
+      <div class="meta-row" id="characterMeta"><span class="badge attribute">冥</span><span class="badge">ウォーリア</span><span class="badge">スピード 3007</span><span class="badge">入手 星の導き</span></div>
     </div>
   </header>
 
@@ -26,7 +27,120 @@
       このページでは検証済みデータと出典整理に絞ります。評価や編成判断は外部記事で確認してください。<br>
       <a id="noteLink" href="#" target="_blank" rel="noopener">ミレストのnote記事を開く</a>
     </section>
-    <section class="skill-list" id="skillList"></section>
+    <section class="skill-list" id="skillList">
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S1</span>
+            <span class="tag">アクティブ</span>
+            <span class="tag major">攻撃</span>
+            <span class="tag">CT 5</span>
+          </div>
+          <h2>目を奪うは眩き刃</h2>
+          <p class="summary">5体を薙ぎながら自分も2割回復。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>ランダムな敵5体に物理<span class="ratio">380%</span></li><li>自身のHPを最大HP20%分回復する</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>ランダム敵5体</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 1900%</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用Lv2</th><td>3ターン自身の弱体効果耐性率30%増加。</td></tr><tr><th>専用Lv3</th><td>弱体効果耐性率50%</td></tr></table></div>
+        </div>
+      </article>
+    
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S2</span>
+            <span class="tag">アクティブ</span>
+            <span class="tag major">攻撃</span>
+            <span class="tag">CT 4</span>
+          </div>
+          <h2>クリスタルタイド</h2>
+          <p class="summary">敵1体の攻撃力を4割落とす弱体砲。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>ランダムな敵1体に物理<span class="ratio">760%</span></li><li>対象の攻撃力を40%減少(3ターン)</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>ランダム敵1体</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 760%</dd></dl><dl class="data-item"><dt>継続</dt><dd>3T</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用</th><td>専用武器効果なし</td></tr></table></div>
+        </div>
+      </article>
+    
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S3</span>
+            <span class="tag">パッシブ</span>
+            <span class="tag major">防御</span>
+            
+          </div>
+          <h2>誓いを守る者</h2>
+          <p class="summary">元気なうちは挑発で攻撃を引き受け、軽減とカウンタで返す。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>ターン開始時、自身のHP割合が60%以上なら挑発を3ターン付与し、回避率を50%減少</li><li>同時に被ダメージ30%減少・カウンタ+50%</li><li>発動後4回行動まで再発動しない</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>自身</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>挑発3T / 被ダメージ30%減少 / カウンタ+50%</dd></dl><dl class="data-item"><dt>継続</dt><dd>3T</dd></dl></div>
+          <div><h3 class="block-title">かみ合わせ</h3><ul class="verification-list synergy-list">
+        <li>
+          挑発で被弾を集める設計は、被弾回数・被ダメージ蓄積を参照する味方のカウントを自分に集約できる。根拠: 挑発が攻撃対象を自身へ誘導するため
+          
+        </li>
+      </ul></div>
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用</th><td>専用武器効果なし</td></tr></table></div>
+        </div>
+      </article>
+    
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S4</span>
+            <span class="tag">パッシブ</span>
+            <span class="tag major">防御</span>
+            
+          </div>
+          <h2>近衛の誉れ</h2>
+          <p class="summary">高HP・クリ耐性に加え、一度だけ致命傷を耐えて全員の物防を上げる。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>自身の最大HP+40%・クリティカル耐性率+40%(解除不可)</li><li>致命的ダメージ時、HP1で耐える(バトル中1回)</li><li>発動時、自身の物理防御力+40%(2ターン)、自身以外の味方全体にも物理防御力+40%(1ターン)</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>自身 / 味方全体</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>最大HP+40% / クリ耐性+40% / 物理防御力+40%</dd></dl><dl class="data-item"><dt>継続</dt><dd>解除不可 / 2T</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用</th><td>専用武器効果: 自身が物理攻撃を受けたとき、自身HPを被ダメージ35%回復。この攻撃で自身が戦闘不能になった場合は発動しない</td></tr></table></div>
+        </div>
+      </article>
+    </section>
   </main>
 
   <footer>

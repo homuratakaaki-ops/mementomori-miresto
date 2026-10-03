@@ -4,19 +4,20 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>アイリーン | ミレストのメメントモリ分析データ室</title>
-  <meta name="description" content="アイリーンのスキルを、効果の順番・対象・火力・検証情報に分けて確認するためのデータページです。">
+  <meta name="description" content="アイリーン(天属性・スナイパー)のスキル4種を効果の順番・対象・倍率で分解。S1 アンティークショット、S2 アストルムほか。">
   <link rel="canonical" href="https://memento.musoudc.com/pages/characters/irene.html">
   <link rel="stylesheet" href="../../assets/character-page.css">
+  <script src="../../js/render-character.js" defer></script>
   <script src="../../js/character-page.js" defer></script>
 </head>
-<body data-character-page data-character-id="irene">
+<body data-character-page data-character-id="irene" data-attribute="天" data-prerendered>
   <header class="page-header">
     <div class="header-inner">
       <a class="top-link" href="./index.html">キャラ一覧へ戻る</a>
       <p class="eyebrow">CHARACTER SKILL DATA</p>
       <h1 id="characterName">アイリーン</h1>
-      <p class="role" id="roleMemo"></p>
-      <div class="meta-row" id="characterMeta"></div>
+      <p class="role" id="roleMemo">防御減少とターン条件火力を持つ天属性スナイパー</p>
+      <div class="meta-row" id="characterMeta"><span class="badge attribute">天</span><span class="badge">スナイパー</span><span class="badge">スピード 3148</span><span class="badge">入手 星の導き</span></div>
     </div>
   </header>
 
@@ -26,7 +27,120 @@
       このページでは検証済みデータと出典整理に絞ります。評価や編成判断は外部記事で確認してください。<br>
       <a id="noteLink" href="#" target="_blank" rel="noopener">ミレストのnote記事を開く</a>
     </section>
-    <section class="skill-list" id="skillList"></section>
+    <section class="skill-list" id="skillList">
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S1</span>
+            <span class="tag">アクティブ</span>
+            <span class="tag major">攻撃</span>
+            <span class="tag">CT 4</span>
+          </div>
+          <h2>アンティークショット</h2>
+          <p class="summary">敵の防御を4ターン剥がしてから撃つ起点スキル。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>攻撃前、対象の防御力を25%減少(4ターン。オートバトル・ボスバトルでは解除不可、無窮の塔では50%)</li><li>ランダムな敵4体に物理<span class="ratio">260%</span></li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>ランダム敵</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 1040% / 最大 1400%</dd></dl><dl class="data-item"><dt>継続</dt><dd>防御力減少4T</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用Lv1</th><td>対象がランダム敵5体。</td></tr><tr><th>専用Lv3</th><td>物理攻撃が280%</td></tr></table></div>
+        </div>
+      </article>
+    
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S2</span>
+            <span class="tag">アクティブ</span>
+            <span class="tag major">攻撃</span>
+            <span class="tag">CT 4</span>
+          </div>
+          <h2>アストルム</h2>
+          <p class="summary">3回目から敵のエースへの8連撃「アストルム・ナタリス」に変貌する。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>ランダムな敵に物理<span class="ratio">380%</span>×4回</li><li>バトル中3回目以降は、攻撃力が最も高い敵に物理<span class="ratio">760%</span>×8回へ変わる</li><li>アストルム・ナタリスの最初の攻撃前、自身の命中率を50%増加(1ターン)</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>ランダム敵 / 攻撃力最高の敵</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 1520% / 最大 6080%</dd></dl><dl class="data-item"><dt>継続</dt><dd>命中率増加1T</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用</th><td>専用武器効果なし</td></tr></table></div>
+        </div>
+      </article>
+    
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S3</span>
+            <span class="tag">パッシブ</span>
+            <span class="tag major">味方強化</span>
+            
+          </div>
+          <h2>暗き夜の契約</h2>
+          <p class="summary">通常攻撃が強化され、撃つたびCT短縮と自己浄化が付く。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>ターン開始時、自身と自身以外でスピードが最も低い味方の通常攻撃を強化(3ターン)</li><li>強化中の通常攻撃時、付帯者自身のスキルCTを1減少し、弱体効果を2つ解除</li><li>強化通常攻撃後、通常攻撃強化を解除</li><li>発動後3回行動まで再発動しない</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>自身 / スピードが最も低い味方</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常攻撃強化 / スキルCT1減少 / 弱体効果2つ解除</dd></dl><dl class="data-item"><dt>継続</dt><dd>発動後3回行動終了まで再発動不可</dd></dl></div>
+          <div><h3 class="block-title">かみ合わせ</h3><ul class="verification-list synergy-list">
+        <li>
+          ②のCT短縮でS2の「3回目」到達が早まる自己完結型。根拠: 短縮対象が自身のスキルCTのため
+          
+        </li>
+      </ul></div>
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用</th><td>専用武器効果なし</td></tr></table></div>
+        </div>
+      </article>
+    
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S4</span>
+            <span class="tag">パッシブ</span>
+            <span class="tag major">防御</span>
+            
+          </div>
+          <h2>頑張る姿を応援するよ</h2>
+          <p class="summary">自分は7割遮断、一番遅い味方には結界を配る。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>攻撃を受けたとき、自身へのダメージを70%遮断</li><li>ターン開始時、自身以外でスピードが最も低い味方に結界を4ターン付与(被攻撃時のダメージ30%遮断、解除不可)</li><li>結界付与は発動後4回行動まで再発動しない</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>自身 / スピードが最も低い味方</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>ダメージ70%遮断 / 結界</dd></dl><dl class="data-item"><dt>継続</dt><dd>4T</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用Lv2</th><td>結界のダメージ遮断量が45%になる</td></tr></table></div>
+        </div>
+      </article>
+    </section>
   </main>
 
   <footer>

@@ -4,19 +4,20 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>エルフリンデ | ミレストのメメントモリ分析データ室</title>
-  <meta name="description" content="エルフリンデのスキルを、効果の順番・対象・火力・検証情報に分けて確認するためのデータページです。">
+  <meta name="description" content="エルフリンデ(天属性・ウォーリア)のスキル4種を効果の順番・対象・倍率で分解。S1 神聖なる滅光、S2 裁きの魔光ほか。">
   <link rel="canonical" href="https://memento.musoudc.com/pages/characters/elfriede.html">
   <link rel="stylesheet" href="../../assets/character-page.css">
+  <script src="../../js/render-character.js" defer></script>
   <script src="../../js/character-page.js" defer></script>
 </head>
-<body data-character-page data-character-id="elfriede">
+<body data-character-page data-character-id="elfriede" data-attribute="天" data-prerendered>
   <header class="page-header">
     <div class="header-inner">
       <a class="top-link" href="./index.html">キャラ一覧へ戻る</a>
       <p class="eyebrow">CHARACTER SKILL DATA</p>
       <h1 id="characterName">エルフリンデ</h1>
-      <p class="role" id="roleMemo"></p>
-      <div class="meta-row" id="characterMeta"></div>
+      <p class="role" id="roleMemo">味方バフと敵弱体数で火力上限が伸びる天属性ウォーリア</p>
+      <div class="meta-row" id="characterMeta"><span class="badge attribute">天</span><span class="badge">ウォーリア</span><span class="badge">スピード 3049</span><span class="badge">入手 星の導き</span></div>
     </div>
   </header>
 
@@ -26,7 +27,125 @@
       このページでは検証済みデータと出典整理に絞ります。評価や編成判断は外部記事で確認してください。<br>
       <a id="noteLink" href="#" target="_blank" rel="noopener">ミレストのnote記事を開く</a>
     </section>
-    <section class="skill-list" id="skillList"></section>
+    <section class="skill-list" id="skillList">
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S1</span>
+            <span class="tag">アクティブ</span>
+            <span class="tag major">攻撃</span>
+            <span class="tag">CT 4</span>
+          </div>
+          <h2>神聖なる滅光</h2>
+          <p class="summary">味方のバフの数だけ痛くなる3体攻撃。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>自身の命中率を50%増加(2ターン)</li><li>ランダムな敵3体に物理<span class="ratio">800%</span></li><li>味方のバフ1つにつき+50%(最大1200%)</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>ランダム敵3体</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 2400% / 最大 6000%</dd></dl><dl class="data-item"><dt>継続</dt><dd>命中率増加2T</dd></dl></div>
+          <div><h3 class="block-title">かみ合わせ</h3><ul class="verification-list synergy-list">
+        <li>
+          バフを大量に配る編成ほど③が伸びる。根拠: 倍率の参照が「味方のバフ数」のため
+          
+        </li>
+      </ul></div>
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用Lv1</th><td>対象がランダム敵5体になる</td></tr></table></div>
+        </div>
+      </article>
+    
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S2</span>
+            <span class="tag">アクティブ</span>
+            <span class="tag major">攻撃</span>
+            <span class="tag">CT 4</span>
+          </div>
+          <h2>裁きの魔光</h2>
+          <p class="summary">敵の弱体の数だけ跳ね上がる高倍率砲。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>ランダムな敵3体に物理<span class="ratio">1400%</span></li><li>対象の弱体効果1つにつき+400%(最大2200%)</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>ランダム敵3体</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 4200% / 最大 7200%</dd></dl></div>
+          <div><h3 class="block-title">かみ合わせ</h3><ul class="verification-list synergy-list">
+        <li>
+          弱体を撒く味方が多いほど②が伸びる。根拠: 倍率の参照が「対象の弱体数」のため
+          
+        </li>
+      </ul></div>
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用Lv3</th><td>物理攻撃が1600%になり、最大攻撃力2400%まで</td></tr></table></div>
+        </div>
+      </article>
+    
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S3</span>
+            <span class="tag">パッシブ</span>
+            <span class="tag major">防御</span>
+            
+          </div>
+          <h2>教皇の祝福</h2>
+          <p class="summary">バフを受けるたび防御が積もり、大ダメージには遮断が入る。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>バトル開始時、防御力・物理防御力・魔法防御力+10%のバフを4スタック付与(最大10、解除不可)</li><li>自身がアクティブスキルでバフを受けるたび、この防御系バフのスタック数が4増加</li><li>最大HP10%を超えるダメージを受けたとき、ダメージを40%遮断(発動後1回行動まで再発動しない)</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>自身</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>防御力・物防・魔防+10%スタック / ダメージ遮断</dd></dl><dl class="data-item"><dt>継続</dt><dd>解除不可 / 再発動制限あり</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用Lv2</th><td>最大HP10%超過ダメージの遮断が90%になる</td></tr></table></div>
+        </div>
+      </article>
+    
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S4</span>
+            <span class="tag">パッシブ</span>
+            <span class="tag major">敵弱体</span>
+            
+          </div>
+          <h2>救世の祈り</h2>
+          <p class="summary">定期的に、味方全員のデバフ命中を底上げする。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>ターン開始時、自身以外の味方全体の弱体効果命中率+30%(4ターン)</li><li>発動後4回行動まで再発動しない</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>自身以外の味方全体</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>弱体効果命中率+30%</dd></dl><dl class="data-item"><dt>継続</dt><dd>4T</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用</th><td>専用武器効果なし</td></tr></table></div>
+        </div>
+      </article>
+    </section>
   </main>
 
   <footer>

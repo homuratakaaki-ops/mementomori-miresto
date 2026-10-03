@@ -4,19 +4,20 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>[墓守の夏休み]モーザ | ミレストのメメントモリ分析データ室</title>
-  <meta name="description" content="[墓守の夏休み]モーザのスキルを、効果の順番・対象・火力・検証情報に分けて確認するためのデータページです。">
+  <meta name="description" content="[墓守の夏休み]モーザ(黄属性・ソーサラー)のスキル4種を効果の順番・対象・倍率で分解。S1 レストインパラダイス、S2 水底の幽かな声ほか。">
   <link rel="canonical" href="https://memento.musoudc.com/pages/characters/moddey_summer.html">
   <link rel="stylesheet" href="../../assets/character-page.css">
+  <script src="../../js/render-character.js" defer></script>
   <script src="../../js/character-page.js" defer></script>
 </head>
-<body data-character-page data-character-id="moddey_summer">
+<body data-character-page data-character-id="moddey_summer" data-attribute="黄" data-prerendered>
   <header class="page-header">
     <div class="header-inner">
       <a class="top-link" href="./index.html">キャラ一覧へ戻る</a>
       <p class="eyebrow">CHARACTER SKILL DATA</p>
       <h1 id="characterName">[墓守の夏休み]モーザ</h1>
-      <p class="role" id="roleMemo"></p>
-      <div class="meta-row" id="characterMeta"></div>
+      <p class="role" id="roleMemo">毒を軸に吸収と遮断を重ねる黄ソーサラー</p>
+      <div class="meta-row" id="characterMeta"><span class="badge attribute">黄</span><span class="badge">ソーサラー</span><span class="badge">スピード 3245</span><span class="badge">入手 夏イベント</span></div>
     </div>
   </header>
 
@@ -26,7 +27,120 @@
       このページでは検証済みデータと出典整理に絞ります。評価や編成判断は外部記事で確認してください。<br>
       <a id="noteLink" href="#" target="_blank" rel="noopener">ミレストのnote記事を開く</a>
     </section>
-    <section class="skill-list" id="skillList"></section>
+    <section class="skill-list" id="skillList">
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S1</span>
+            <span class="tag">アクティブ</span>
+            <span class="tag major">攻撃</span>
+            <span class="tag">CT 4</span>
+          </div>
+          <h2>レストインパラダイス</h2>
+          <p class="summary">毒を撒き、毒のある間は敵エースの攻撃力を吸う。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>ランダムな敵3体に魔法<span class="ratio">330%</span></li><li><details class="term"><summary>毒</summary><span class="term-box">行動開始時に現在HPに応じたダメージを受ける状態異常。</span></details>を4ターン付与(行動開始時に現在HP3%ダメージ)</li><li>毒付与後、毒を付帯している敵のうち攻撃力が最も高い敵の攻撃力15%を吸収し、2ターン自身に加える</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>ランダム敵3体</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 990%</dd></dl><dl class="data-item"><dt>継続</dt><dd>毒4T / 攻撃力15%吸収2T</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用Lv1</th><td>対象4体。</td></tr><tr><th>専用Lv2</th><td>吸収30%。</td></tr><tr><th>専用Lv3</th><td>毒5%</td></tr></table></div>
+        </div>
+      </article>
+    
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S2</span>
+            <span class="tag">アクティブ</span>
+            <span class="tag major">攻撃</span>
+            <span class="tag">CT 4</span>
+          </div>
+          <h2>水底の幽かな声</h2>
+          <p class="summary">毒の敵が多いほど連撃が増える。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>ランダムな敵に魔法<span class="ratio">230%</span>×4回</li><li>毒を付帯している敵1体につき攻撃回数+1(最大9回)</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>ランダム敵</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 920%</dd></dl></div>
+          <div><h3 class="block-title">かみ合わせ</h3><ul class="verification-list synergy-list">
+        <li>
+          S1の毒が②の弾数そのもの。毒を撒く味方がいればさらに加速する。根拠: 攻撃回数の参照が「毒付帯の敵数」のため
+          
+        </li>
+      </ul></div>
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用</th><td>専用武器効果なし</td></tr></table></div>
+        </div>
+      </article>
+    
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S3</span>
+            <span class="tag">パッシブ</span>
+            <span class="tag major">防御</span>
+            
+          </div>
+          <h2>それが墓守の仕事</h2>
+          <p class="summary">毒の敵からの攻撃とカウンタは7.5割カット。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>攻撃を受けたとき、ダメージを50%遮断</li><li>攻撃してきた敵が毒付帯中なら遮断が75%になる</li><li>自身がカウンタダメージを受けたときも同様に75%遮断する</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>自身</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>ダメージ50%遮断</dd></dl><dl class="data-item"><dt>継続</dt><dd>条件参照</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用</th><td>専用武器効果なし</td></tr></table></div>
+        </div>
+      </article>
+    
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S4</span>
+            <span class="tag">パッシブ</span>
+            <span class="tag major">味方強化</span>
+            
+          </div>
+          <h2>ライラの守り</h2>
+          <p class="summary">毒の敵の数だけ毎ターン攻撃力が積もる。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>毎ターン開始時、攻撃力+5%を付与(最大20スタック=+100%、解除不可)</li><li>毒を付帯している敵1体につき、その回の増加量がさらに+5%大きくなる</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>自身</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>攻撃力+5% / 最大100%</dd></dl><dl class="data-item"><dt>継続</dt><dd>条件参照</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用</th><td>専用武器効果なし</td></tr></table></div>
+        </div>
+      </article>
+    </section>
   </main>
 
   <footer>

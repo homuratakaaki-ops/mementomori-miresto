@@ -4,29 +4,143 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>リズ | ミレストのメメントモリ分析データ室</title>
-  <meta name="description" content="リズのスキルを、効果の順番・対象・火力・検証情報に分けて確認するためのデータページです。">
+  <meta name="description" content="リズ(藍属性・ソーサラー)のスキル4種を効果の順番・対象・倍率で分解。S1 グングニル、S2 スプリングウォーターほか。">
   <link rel="canonical" href="https://memento.musoudc.com/pages/characters/liselotte.html">
   <link rel="stylesheet" href="../../assets/character-page.css">
+  <script src="../../js/render-character.js" defer></script>
   <script src="../../js/character-page.js" defer></script>
 </head>
-<body data-character-page data-character-id="liselotte">
+<body data-character-page data-character-id="liselotte" data-attribute="藍" data-prerendered>
   <header class="page-header">
     <div class="header-inner">
       <a class="top-link" href="./index.html">キャラ一覧へ戻る</a>
       <p class="eyebrow">CHARACTER SKILL DATA</p>
       <h1 id="characterName">リズ</h1>
-      <p class="role" id="roleMemo"></p>
-      <div class="meta-row" id="characterMeta"></div>
+      <p class="role" id="roleMemo">クリ率バフ依存で火力を伸ばすコラボソーサラー</p>
+      <div class="meta-row" id="characterMeta"><span class="badge attribute">藍</span><span class="badge">ソーサラー</span><span class="badge">スピード 2999</span><span class="badge">入手 星の導き</span></div>
     </div>
   </header>
 
   <main>
-    <section class="note-panel" id="notePanel" hidden>
+    <section class="note-panel" id="notePanel">
       <strong>評価・運用メモはnoteへ</strong><br>
       このページでは検証済みデータと出典整理に絞ります。評価や編成判断は外部記事で確認してください。<br>
-      <a id="noteLink" href="#" target="_blank" rel="noopener">ミレストのnote記事を開く</a>
+      <a id="noteLink" href="https://note.com/musoudc/n/n983831ba7bc2" target="_blank" rel="noopener">ミレストのnote記事を開く</a>
     </section>
-    <section class="skill-list" id="skillList"></section>
+    <section class="skill-list" id="skillList">
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S1</span>
+            <span class="tag">アクティブ</span>
+            <span class="tag major">攻撃</span>
+            <span class="tag">CT 4</span>
+          </div>
+          <h2>グングニル</h2>
+          <p class="summary">自分が元気なら1.5倍で撃てる4体魔法。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>ランダムな敵4体に魔法<span class="ratio">540%</span></li><li>自身のHPが50%以上ならダメージ1.5倍</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>ランダム敵4体</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 2700%</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用</th><td>Lv1: 対象が敵5体に増加</td></tr></table></div>
+        </div>
+      </article>
+    
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S2</span>
+            <span class="tag">アクティブ</span>
+            <span class="tag major">敵弱体</span>
+            <span class="tag">CT 4</span>
+          </div>
+          <h2>スプリングウォーター</h2>
+          <p class="summary">攻撃ごとに5割で気絶を狙う5連撃。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>ランダムな敵に魔法<span class="ratio">660%</span>×5回</li><li>攻撃するたび50%の確率で<details class="term"><summary>気絶</summary><span class="term-box">行動できなくなる状態異常。効果中は通常の行動順が来てもスキルを使えない。</span></details>を1ターン付与</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>ランダム敵</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 3600%</dd></dl><dl class="data-item"><dt>継続</dt><dd>攻撃ごとに50%で1ターン気絶</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用</th><td>Lv3: 魔法<span class="ratio">660%</span>→720%</td></tr></table></div>
+        </div>
+      </article>
+    
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S3</span>
+            <span class="tag">パッシブ</span>
+            <span class="tag major">味方強化</span>
+            
+          </div>
+          <h2>文献を紐解きましょう</h2>
+          <p class="summary">クリ率バフをもらっている間だけ火力が跳ねる。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>行動開始時、自身がクリティカル率増加を付帯していれば攻撃力+50%(1ターン、解除不可)</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>自身</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>攻撃力50%</dd></dl><dl class="data-item"><dt>継続</dt><dd>行動開始時、自身がクリティカル率増加を付帯していれば1ターン攻撃力50%増加</dd></dl></div>
+          <div><h3 class="block-title">かみ合わせ</h3><ul class="verification-list synergy-list">
+        <li>
+          クリティカル率バフを配る味方が発動条件そのもの。単独では発動しない。根拠: 条件が「クリティカル率増加の付帯」のため
+          
+        </li>
+      </ul></div>
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用</th><td>専用武器効果なし</td></tr></table></div>
+        </div>
+      </article>
+    
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S4</span>
+            <span class="tag">パッシブ</span>
+            <span class="tag major">回復・復活</span>
+            
+          </div>
+          <h2>玲瓏の秘書官</h2>
+          <p class="summary">一度だけ、削られたら再生で立て直す保険。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>ターン開始時または被攻撃時、HPが75%未満なら<details class="term"><summary>再生</summary><span class="term-box">ターン開始時などにHPを回復する継続回復効果。回復量や継続ターンは付与した効果ごとに異なる。</span></details>を2ターン付与(解除不可、バトル中1回)</li><li>再生は行動開始時に最大HP25%分回復する</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>自身</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>最大HP25%</dd></dl><dl class="data-item"><dt>継続</dt><dd>ターン開始時または被攻撃時、HP75%未満なら2ターン再生 / バトル中1回のみ発動</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用</th><td>Lv2: バトル開始時1ターン自身のスピード20%増加</td></tr></table></div>
+        </div>
+      </article>
+    </section>
   </main>
 
   <footer>

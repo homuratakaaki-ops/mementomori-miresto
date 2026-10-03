@@ -4,29 +4,148 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>リリコット | ミレストのメメントモリ分析データ室</title>
-  <meta name="description" content="リリコットのスキルを、効果の順番・対象・火力・検証情報に分けて確認するためのデータページです。">
+  <meta name="description" content="リリコット(紅属性・スナイパー)のスキル4種を効果の順番・対象・倍率で分解。S1 誓い結うリボン、S2 願い託す花傘ほか。">
   <link rel="canonical" href="https://memento.musoudc.com/pages/characters/lilicotte.html">
   <link rel="stylesheet" href="../../assets/character-page.css">
+  <script src="../../js/render-character.js" defer></script>
   <script src="../../js/character-page.js" defer></script>
 </head>
-<body data-character-page data-character-id="lilicotte">
+<body data-character-page data-character-id="lilicotte" data-attribute="紅" data-prerendered>
   <header class="page-header">
     <div class="header-inner">
       <a class="top-link" href="./index.html">キャラ一覧へ戻る</a>
       <p class="eyebrow">CHARACTER SKILL DATA</p>
       <h1 id="characterName">リリコット</h1>
-      <p class="role" id="roleMemo"></p>
-      <div class="meta-row" id="characterMeta"></div>
+      <p class="role" id="roleMemo">最大6個のバフ解除と2自傷供給で、黄属性耐久を崩す紅属性スナイパー</p>
+      <div class="meta-row" id="characterMeta"><span class="badge attribute">紅</span><span class="badge">スナイパー</span><span class="badge">スピード 3064</span><span class="badge">入手 PU・運命</span></div>
     </div>
   </header>
 
   <main>
-    <section class="note-panel" id="notePanel" hidden>
+    <section class="note-panel" id="notePanel">
       <strong>評価・運用メモはnoteへ</strong><br>
       このページでは検証済みデータと出典整理に絞ります。評価や編成判断は外部記事で確認してください。<br>
-      <a id="noteLink" href="#" target="_blank" rel="noopener">ミレストのnote記事を開く</a>
+      <a id="noteLink" href="https://note.com/musoudc/n/n85aa1c0058ae" target="_blank" rel="noopener">ミレストのnote記事を開く</a>
     </section>
-    <section class="skill-list" id="skillList"></section>
+    <section class="skill-list" id="skillList">
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S1</span>
+            <span class="tag">アクティブ</span>
+            <span class="tag major">攻撃</span>
+            <span class="tag">CT 4</span>
+          </div>
+          <h2>誓い結うリボン</h2>
+          <p class="summary">自傷してから、バフの多い敵を剥がして6連撃。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>自身に現在HP20%の自傷ダメージを2回</li><li>70%の確率で、バフが最も多い敵のバフを2つ解除</li><li>ランダムな敵に物理<span class="ratio">580%</span>×6回</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>バフ最多敵 / ランダム敵</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 3480% / 最大 3780%</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用Lv1</th><td>紅属性味方3体以上ならバフ解除数6。</td></tr><tr><th>専用Lv3</th><td>630%</td></tr></table></div>
+        </div>
+      </article>
+    
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S2</span>
+            <span class="tag">アクティブ</span>
+            <span class="tag major">攻撃</span>
+            <span class="tag">CT 4</span>
+          </div>
+          <h2>願い託す花傘</h2>
+          <p class="summary">バフ剥がし＋高倍率＋沈黙を1本にまとめた主砲。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>自身に現在HP20%の自傷ダメージを2回</li><li>70%の確率で、バフが最も多い敵のバフを2つ解除</li><li>攻撃力が高い敵3体に物理<span class="ratio">1120%</span></li><li>70%の確率で<details class="term"><summary>沈黙</summary><span class="term-box">アクティブスキルの使用を封じる状態異常。通常攻撃やパッシブの扱いは効果内容に従う。</span></details>を1ターン付与</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>バフ最多敵 / 攻撃力高い敵3体</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 3360%</dd></dl><dl class="data-item"><dt>継続</dt><dd>沈黙2T</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用Lv2</th><td>沈黙2T</td></tr></table></div>
+        </div>
+      </article>
+    
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S3</span>
+            <span class="tag">パッシブ</span>
+            <span class="tag major">味方強化</span>
+            
+          </div>
+          <h2>祈り宿るブローチ</h2>
+          <p class="summary">バフを剥がすたび、自分とエースが強くなる。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>自身が敵のバフを解除したとき、自身と攻撃力が最も高い味方の攻撃力・防御力を+20%(2ターン、解除不可)</li><li>対象が紅属性なら増加量50%</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>自身と攻撃力最高味方</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>攻撃力+20% / 防御力+20% / 紅属性なら50%</dd></dl><dl class="data-item"><dt>継続</dt><dd>2T / 解除不可</dd></dl></div>
+          <div><h3 class="block-title">かみ合わせ</h3><ul class="verification-list synergy-list">
+        <li>
+          自身のS1・S2がバフ解除を持つため単独で回るが、他の味方がバフ解除しても発動源にはならない。
+          <br><span class="reason">根拠: 発動条件が自身が敵のバフを解除したときのため</span>
+        </li>
+      </ul></div>
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用</th><td>専用武器効果なし</td></tr></table></div>
+        </div>
+      </article>
+    
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S4</span>
+            <span class="tag">パッシブ</span>
+            <span class="tag major">攻撃</span>
+            
+          </div>
+          <h2>想い刻む懐中時計</h2>
+          <p class="summary">通常攻撃が強化され、瀕死ほど痛くなる。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>通常攻撃を強化(ランダムな敵に物理<span class="ratio">300%</span>×3回)</li><li>自身のHP割合が低いほどダメージ上昇(最大600%、判定は攻撃ごと)</li><li>バトル開始時、スピード+30%(4ターン、解除不可)</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>ランダム敵3体 / 自身</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常攻撃300% / 最大600% / スピード+30%</dd></dl><dl class="data-item"><dt>継続</dt><dd>4T / 解除不可</dd></dl></div>
+          <div><h3 class="block-title">かみ合わせ</h3><ul class="verification-list synergy-list">
+        <li>
+          S1・S2の自傷で自らHPが減る設計のため、低HP条件と自己完結で噛み合う。
+          <br><span class="reason">根拠: 自傷が現在HP20%×2回のため</span>
+        </li>
+      </ul></div>
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用</th><td>専用武器効果なし</td></tr></table></div>
+        </div>
+      </article>
+    </section>
   </main>
 
   <footer>

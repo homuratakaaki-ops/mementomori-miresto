@@ -4,29 +4,143 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>モルガナ | ミレストのメメントモリ分析データ室</title>
-  <meta name="description" content="モルガナのスキルを、効果の順番・対象・火力・検証情報に分けて確認するためのデータページです。">
+  <meta name="description" content="モルガナ(紅属性・ソーサラー)のスキル4種を効果の順番・対象・倍率で分解。S1 プラハーン、S2 ボーヤルグほか。">
   <link rel="canonical" href="https://memento.musoudc.com/pages/characters/morgana.html">
   <link rel="stylesheet" href="../../assets/character-page.css">
+  <script src="../../js/render-character.js" defer></script>
   <script src="../../js/character-page.js" defer></script>
 </head>
-<body data-character-page data-character-id="morgana">
+<body data-character-page data-character-id="morgana" data-attribute="紅" data-prerendered>
   <header class="page-header">
     <div class="header-inner">
       <a class="top-link" href="./index.html">キャラ一覧へ戻る</a>
       <p class="eyebrow">CHARACTER SKILL DATA</p>
       <h1 id="characterName">モルガナ</h1>
-      <p class="role" id="roleMemo"></p>
-      <div class="meta-row" id="characterMeta"></div>
+      <p class="role" id="roleMemo">紅染め編成で巨大シールドと自傷連撃を扱う紅属性ソーサラー</p>
+      <div class="meta-row" id="characterMeta"><span class="badge attribute">紅</span><span class="badge">ソーサラー</span><span class="badge">スピード 2715</span><span class="badge">入手 星の導き</span></div>
     </div>
   </header>
 
   <main>
-    <section class="note-panel" id="notePanel" hidden>
+    <section class="note-panel" id="notePanel">
       <strong>評価・運用メモはnoteへ</strong><br>
       このページでは検証済みデータと出典整理に絞ります。評価や編成判断は外部記事で確認してください。<br>
-      <a id="noteLink" href="#" target="_blank" rel="noopener">ミレストのnote記事を開く</a>
+      <a id="noteLink" href="https://note.com/musoudc/n/ne1f860d79777" target="_blank" rel="noopener">ミレストのnote記事を開く</a>
     </section>
-    <section class="skill-list" id="skillList"></section>
+    <section class="skill-list" id="skillList">
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S1</span>
+            <span class="tag">アクティブ</span>
+            <span class="tag major">攻撃</span>
+            <span class="tag">CT 4</span>
+          </div>
+          <h2>プラハーン</h2>
+          <p class="summary">自傷からの5連撃。育っていれば吸血も付く。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>自身に現在HP20%の自傷ダメージ</li><li>ランダムな敵に魔法<span class="ratio">320%</span>×5回</li><li>攻撃力増加が2スタック以上なら総ダメージの10%をHP回復</li><li>攻撃ごとに50%の確率で被回復量20%減少を2ターン付与</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>ランダム敵</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 1600% / 最大 2100%</dd></dl><dl class="data-item"><dt>継続</dt><dd>被回復量減少2ターン</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用Lv1</th><td>魔法<span class="ratio">420%</span></td></tr></table></div>
+        </div>
+      </article>
+    
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S2</span>
+            <span class="tag">アクティブ</span>
+            <span class="tag major">攻撃</span>
+            <span class="tag">CT 4</span>
+          </div>
+          <h2>ボーヤルグ</h2>
+          <p class="summary">攻撃力スタックの数だけ連撃が増える。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>自身に現在HP20%の自傷ダメージ</li><li>ランダムな敵に魔法<span class="ratio">520%</span>×3回</li><li>攻撃力増加1スタックごとに攻撃回数+1(最大7回)</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>ランダム敵</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 1560% / 最大 4060%</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用Lv3</th><td>魔法<span class="ratio">580%</span></td></tr></table></div>
+        </div>
+      </article>
+    
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S3</span>
+            <span class="tag">パッシブ</span>
+            <span class="tag major">味方強化</span>
+            
+          </div>
+          <h2>奮起する心</h2>
+          <p class="summary">自傷のたび攻撃力が積もるエンジン。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>自身か味方が自傷ダメージを受けるたび攻撃力+10%を1スタック付与(最大4スタック、解除不可)</li><li>バトル開始時、物理防御力+50%</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>自身</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>攻撃力+10%スタック / 物防+50%</dd></dl><dl class="data-item"><dt>継続</dt><dd>解除不可</dd></dl></div>
+          <div><h3 class="block-title">かみ合わせ</h3><ul class="verification-list synergy-list">
+        <li>
+          紅の自傷パの一員。味方の自傷でも貯まり、S1の吸血・S2の連撃増加の両条件に直結する。根拠: カウント対象が「自身か味方の自傷回数」のため
+          
+        </li>
+      </ul></div>
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用</th><td>専用武器効果なし</td></tr></table></div>
+        </div>
+      </article>
+    
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S4</span>
+            <span class="tag">パッシブ</span>
+            <span class="tag major">味方強化</span>
+            
+          </div>
+          <h2>絆の力</h2>
+          <p class="summary">紅の頭数だけ攻撃力と開幕シールドが伸びる。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>バトル開始時、自身の攻撃力+10%(自身以外の紅属性味方1体ごとにさらに+10%、最大50%、解除不可)</li><li>1ターン目開始時、攻撃力100%のシールドを6ターン付与</li><li>自身以外の紅属性味方1体ごとにシールド量+100%(最大500%)</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>自身 / 紅属性味方</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>攻撃力+10% / 紅1体ごと+10% / 攻撃力100%シールド</dd></dl><dl class="data-item"><dt>継続</dt><dd>6T / 解除不可</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用Lv2</th><td>シールド攻撃力200%、紅属性1体ごと200%、合計最大1000%</td></tr></table></div>
+        </div>
+      </article>
+    </section>
   </main>
 
   <footer>

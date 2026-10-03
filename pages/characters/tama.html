@@ -4,19 +4,20 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>タマ | ミレストのメメントモリ分析データ室</title>
-  <meta name="description" content="タマのスキルを、効果の順番・対象・火力・検証情報に分けて確認するためのデータページです。">
+  <meta name="description" content="タマ(黄属性・スナイパー)のスキル4種を効果の順番・対象・倍率で分解。S1 妖狐燐火、S2 狐火乱舞ほか。">
   <link rel="canonical" href="https://memento.musoudc.com/pages/characters/tama.html">
   <link rel="stylesheet" href="../../assets/character-page.css">
+  <script src="../../js/render-character.js" defer></script>
   <script src="../../js/character-page.js" defer></script>
 </head>
-<body data-character-page data-character-id="tama">
+<body data-character-page data-character-id="tama" data-attribute="黄" data-prerendered>
   <header class="page-header">
     <div class="header-inner">
       <a class="top-link" href="./index.html">キャラ一覧へ戻る</a>
       <p class="eyebrow">CHARACTER SKILL DATA</p>
       <h1 id="characterName">タマ</h1>
-      <p class="role" id="roleMemo"></p>
-      <div class="meta-row" id="characterMeta"></div>
+      <p class="role" id="roleMemo">命中支援と黄属性向けシールドを持つ黄スナイパー</p>
+      <div class="meta-row" id="characterMeta"><span class="badge attribute">黄</span><span class="badge">スナイパー</span><span class="badge">スピード 3286</span><span class="badge">入手 星の導き</span></div>
     </div>
   </header>
 
@@ -26,7 +27,115 @@
       このページでは検証済みデータと出典整理に絞ります。評価や編成判断は外部記事で確認してください。<br>
       <a id="noteLink" href="#" target="_blank" rel="noopener">ミレストのnote記事を開く</a>
     </section>
-    <section class="skill-list" id="skillList"></section>
+    <section class="skill-list" id="skillList">
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S1</span>
+            <span class="tag">アクティブ</span>
+            <span class="tag major">攻撃</span>
+            <span class="tag">CT 4</span>
+          </div>
+          <h2>妖狐燐火</h2>
+          <p class="summary">エースの命中を保証してから撃つ支援スキル。3回目から命中補助が大きくなる。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>攻撃力が最も高い味方の命中率を20%増加(4ターン)</li><li>バトル中3回目以降は命中率増加量が80%になる</li><li>ランダムな敵3体に物理<span class="ratio">280%</span></li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>攻撃力が最も高い味方 / ランダム敵3体</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 840%</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用Lv1</th><td>命中増加対象が攻撃力高い味方2体</td></tr></table></div>
+        </div>
+      </article>
+    
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S2</span>
+            <span class="tag">アクティブ</span>
+            <span class="tag major">攻撃</span>
+            <span class="tag">CT 4</span>
+          </div>
+          <h2>狐火乱舞</h2>
+          <p class="summary">敵エースの防御を半減させる連撃。3回目から4倍砲。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>攻撃前、対象の防御力と物理防御力を50%減少(4ターン)</li><li>攻撃力が最も高い敵に物理<span class="ratio">260%</span>×4回(バトル中3回目以降は1040%)</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>攻撃力が最も高い敵</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 1040%</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用Lv3</th><td>物理<span class="ratio">280%</span>、3回目以降1120%</td></tr></table></div>
+        </div>
+      </article>
+    
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S3</span>
+            <span class="tag">パッシブ</span>
+            <span class="tag major">防御</span>
+            
+          </div>
+          <h2>サイキョーの守り神</h2>
+          <p class="summary">エースに8ターンの長期シールドとチビタマ人形を配る。黄ならさらに厚くなる。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>ターン開始時、攻撃力が最も高い味方に最大HP30%のシールドとチビタマ人形3つを8ターン付与</li><li>対象が黄属性なら、シールド量に付与者の攻撃力200%分を上乗せ</li><li>発動後8回行動まで再発動しない</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>攻撃力が最も高い味方</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>最大HP30%シールド / 攻撃力200%</dd></dl><dl class="data-item"><dt>継続</dt><dd>条件参照</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用Lv2</th><td>シールド最大HP80%、黄属性対象は攻撃力600%</td></tr></table></div>
+        </div>
+      </article>
+    
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S4</span>
+            <span class="tag">パッシブ</span>
+            <span class="tag major">防御</span>
+            
+          </div>
+          <h2>モノノケの悪戯</h2>
+          <p class="summary">削られたら透明になって狙われなくなる保険。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>自身のHPが70%未満になり、味方の生存が2体以上のとき、透明を32ターン付与(解除不可、バトル中1回)</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>自身</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>透明</dd></dl><dl class="data-item"><dt>継続</dt><dd>条件参照</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用</th><td>専用武器効果なし</td></tr></table></div>
+        </div>
+      </article>
+    </section>
   </main>
 
   <footer>

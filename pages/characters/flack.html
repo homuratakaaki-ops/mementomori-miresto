@@ -4,29 +4,143 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>フラック | ミレストのメメントモリ分析データ室</title>
-  <meta name="description" content="フラックのスキルを、効果の順番・対象・火力・検証情報に分けて確認するためのデータページです。">
+  <meta name="description" content="フラック(紅属性・スナイパー)のスキル4種を効果の順番・対象・倍率で分解。S1 トリック＆シュート、S2 コンフェティショットほか。">
   <link rel="canonical" href="https://memento.musoudc.com/pages/characters/flack.html">
   <link rel="stylesheet" href="../../assets/character-page.css">
+  <script src="../../js/render-character.js" defer></script>
   <script src="../../js/character-page.js" defer></script>
 </head>
-<body data-character-page data-character-id="flack">
+<body data-character-page data-character-id="flack" data-attribute="紅" data-prerendered>
   <header class="page-header">
     <div class="header-inner">
       <a class="top-link" href="./index.html">キャラ一覧へ戻る</a>
       <p class="eyebrow">CHARACTER SKILL DATA</p>
       <h1 id="characterName">フラック</h1>
-      <p class="role" id="roleMemo"></p>
-      <div class="meta-row" id="characterMeta"></div>
+      <p class="role" id="roleMemo">開幕の笑顔の才能と回避・被回復量減少で速攻紅パを前へ押し出す紅属性スナイパー</p>
+      <div class="meta-row" id="characterMeta"><span class="badge attribute">紅</span><span class="badge">スナイパー</span><span class="badge">スピード 3048</span><span class="badge">入手 星の導き</span></div>
     </div>
   </header>
 
   <main>
-    <section class="note-panel" id="notePanel" hidden>
+    <section class="note-panel" id="notePanel">
       <strong>評価・運用メモはnoteへ</strong><br>
       このページでは検証済みデータと出典整理に絞ります。評価や編成判断は外部記事で確認してください。<br>
-      <a id="noteLink" href="#" target="_blank" rel="noopener">ミレストのnote記事を開く</a>
+      <a id="noteLink" href="https://note.com/musoudc/n/n85f2244dead3" target="_blank" rel="noopener">ミレストのnote記事を開く</a>
     </section>
-    <section class="skill-list" id="skillList"></section>
+    <section class="skill-list" id="skillList">
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S1</span>
+            <span class="tag">アクティブ</span>
+            <span class="tag major">攻撃</span>
+            <span class="tag">CT 4</span>
+          </div>
+          <h2>トリック＆シュート</h2>
+          <p class="summary">自傷してから、敵の回避と回復を封じつつ3体を撃つ。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>自身に現在HP20%の自傷ダメージ</li><li>攻撃前、対象の回避率・被回復量を1ターン20%減少(自身以外の紅属性味方が1体以上なら50%)</li><li>ランダムな敵3体に物理<span class="ratio">740%</span></li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>ランダム敵3体</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 2220% / 最大 3950%</dd></dl><dl class="data-item"><dt>継続</dt><dd>回避率・被回復量減少1T</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用Lv1</th><td>対象5体。</td></tr><tr><th>専用Lv2</th><td>減少ターン4T。</td></tr><tr><th>専用Lv3</th><td>790%</td></tr></table></div>
+        </div>
+      </article>
+    
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S2</span>
+            <span class="tag">アクティブ</span>
+            <span class="tag major">攻撃</span>
+            <span class="tag">CT 4</span>
+          </div>
+          <h2>コンフェティショット</h2>
+          <p class="summary">「笑顔の才能」中は2倍になる5連撃。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>自身に現在HP20%の自傷ダメージ</li><li>ランダムな敵に物理<span class="ratio">560%</span>×5回(自身が笑顔の才能を付帯中なら1120%)</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>ランダム敵</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 2800% / 最大 5600%</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用</th><td>専用武器効果なし</td></tr></table></div>
+        </div>
+      </article>
+    
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S3</span>
+            <span class="tag">パッシブ</span>
+            <span class="tag major">味方強化</span>
+            
+          </div>
+          <h2>うちにもご注目！</h2>
+          <p class="summary">開幕と、場が弱体だらけのときに「笑顔の才能」が点く。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>バトル開始時、自身に笑顔の才能を1ターン付与</li><li>2ターン目以降、毎ターン開始時に弱体を持つ敵が3体以上なら再付与</li><li>自身のスピード+30%(解除不可)</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>自身</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>スピード+30%</dd></dl><dl class="data-item"><dt>継続</dt><dd>解除不可</dd></dl></div>
+          <div><h3 class="block-title">かみ合わせ</h3><ul class="verification-list synergy-list">
+        <li>
+          弱体を広く撒く味方がいるほど②の再付与が安定し、S2の2倍条件が維持できる。根拠: 再付与条件が「弱体を持つ敵の数」のため
+          
+        </li>
+      </ul></div>
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用</th><td>専用武器効果なし</td></tr></table></div>
+        </div>
+      </article>
+    
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S4</span>
+            <span class="tag">パッシブ</span>
+            <span class="tag major">味方強化</span>
+            
+          </div>
+          <h2>憧れの笑顔</h2>
+          <p class="summary">開幕、自分とエース2人に攻撃と弱体命中のバフ。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>1ターン目の自身の行動開始時、自身と攻撃力が高い味方2体の攻撃力+30%・弱体効果命中率+30%(2ターン、解除不可)</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>自身と攻撃力が高い味方2体</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>攻撃力+30% / 弱体命中+30%</dd></dl><dl class="data-item"><dt>継続</dt><dd>2T / 解除不可</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用</th><td>専用武器効果なし</td></tr></table></div>
+        </div>
+      </article>
+    </section>
   </main>
 
   <footer>

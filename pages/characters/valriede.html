@@ -4,19 +4,20 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>ヴァルリーデ | ミレストのメメントモリ分析データ室</title>
-  <meta name="description" content="ヴァルリーデのスキルを、効果の順番・対象・火力・検証情報に分けて確認するためのデータページです。">
+  <meta name="description" content="ヴァルリーデ(冥属性・ウォーリア)のスキル4種を効果の順番・対象・倍率で分解。S1 バーストネメシス、S2 炎龍の慟哭ほか。">
   <link rel="canonical" href="https://memento.musoudc.com/pages/characters/valriede.html">
   <link rel="stylesheet" href="../../assets/character-page.css">
+  <script src="../../js/render-character.js" defer></script>
   <script src="../../js/character-page.js" defer></script>
 </head>
-<body data-character-page data-character-id="valriede">
+<body data-character-page data-character-id="valriede" data-attribute="冥" data-prerendered>
   <header class="page-header">
     <div class="header-inner">
       <a class="top-link" href="./index.html">キャラ一覧へ戻る</a>
       <p class="eyebrow">CHARACTER SKILL DATA</p>
       <h1 id="characterName">ヴァルリーデ</h1>
-      <p class="role" id="roleMemo"></p>
-      <div class="meta-row" id="characterMeta"></div>
+      <p class="role" id="roleMemo">被ダメージ減少の焔を伸ばして戦う冥属性ウォーリア</p>
+      <div class="meta-row" id="characterMeta"><span class="badge attribute">冥</span><span class="badge">ウォーリア</span><span class="badge">スピード 2883</span><span class="badge">入手 星の導き</span></div>
     </div>
   </header>
 
@@ -26,7 +27,120 @@
       このページでは検証済みデータと出典整理に絞ります。評価や編成判断は外部記事で確認してください。<br>
       <a id="noteLink" href="#" target="_blank" rel="noopener">ミレストのnote記事を開く</a>
     </section>
-    <section class="skill-list" id="skillList"></section>
+    <section class="skill-list" id="skillList">
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S1</span>
+            <span class="tag">アクティブ</span>
+            <span class="tag major">攻撃</span>
+            <span class="tag">CT 4</span>
+          </div>
+          <h2>バーストネメシス</h2>
+          <p class="summary">生きている敵を選び直して撃つ8連撃。倒すほど「焔」が延びる。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>ランダムな敵1体に物理<span class="ratio">340%</span>×8回(対象が戦闘不能・透明・ステルスなら選び直す)</li><li>自身のHPを総与ダメージ25%分回復する</li><li>敵を戦闘不能にするたび、自身の焔のターン数+1</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>ランダム敵1体</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 2720% / 最大 3800%</dd></dl><dl class="data-item"><dt>継続</dt><dd>焔ターン+1</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用Lv1</th><td>物理攻撃の回数が10回。</td></tr><tr><th>専用Lv3</th><td>物理攻撃が380%</td></tr></table></div>
+        </div>
+      </article>
+    
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S2</span>
+            <span class="tag">アクティブ</span>
+            <span class="tag major">攻撃</span>
+            <span class="tag">CT 4</span>
+          </div>
+          <h2>炎龍の慟哭</h2>
+          <p class="summary">弱った敵を仕留めると5体への追撃が走る連鎖砲。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>HP割合が最も低い敵に物理<span class="ratio">620%</span>×3回</li><li>最初の3回で倒せなければ、同じ敵にさらに物理<span class="ratio">620%</span>×3回(倒れた時点で終了)</li><li>戦闘不能にした場合、ランダムな敵5体に物理<span class="ratio">620%</span></li><li>このスキルで敵を戦闘不能にするたび、自身の焔のターン数+1</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>HP割合が最も低い敵 / ランダム敵5体</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 1860% / 最大 4960%</dd></dl><dl class="data-item"><dt>継続</dt><dd>焔ターン+1</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用</th><td>専用武器効果なし</td></tr></table></div>
+        </div>
+      </article>
+    
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S3</span>
+            <span class="tag">パッシブ</span>
+            <span class="tag major">味方強化</span>
+            
+          </div>
+          <h2>闘志の焔</h2>
+          <p class="summary">健康なほど攻撃力が上がり、「焔」で被ダメも軽減。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>毎ターン開始時・被攻撃時・アクティブスキルで回復を受けたとき、自身のHP割合が高いほど攻撃力増加(最大+70%、解除不可)</li><li>バトル開始時、焔を2ターン付与(被ダメージ15%減少、解除不可)</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>自身</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>攻撃力最大+70% / 焔2T</dd></dl><dl class="data-item"><dt>継続</dt><dd>解除不可</dd></dl></div>
+          <div><h3 class="block-title">かみ合わせ</h3><ul class="verification-list synergy-list">
+        <li>
+          S1・S2の撃破で焔が延び、焔で耐えて高HPを維持するほど①の攻撃力も保てる自己完結の循環。根拠: 焔の延長条件が撃破、攻撃力の参照がHP割合のため
+          
+        </li>
+      </ul></div>
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用Lv2</th><td>焔の被ダメージ減少量が60%になる</td></tr></table></div>
+        </div>
+      </article>
+    
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S4</span>
+            <span class="tag">パッシブ</span>
+            <span class="tag major">防御</span>
+            
+          </div>
+          <h2>劫火の魔女</h2>
+          <p class="summary">削られたら再生で立て直し、回復しきったら攻めに戻る。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>被攻撃時、HP割合が40%以下なら被ダメージ10%減少と<details class="term"><summary>再生</summary><span class="term-box">ターン開始時などにHPを回復する継続回復効果。回復量や継続ターンは付与した効果ごとに異なる。</span></details>を4ターン付与(解除不可)</li><li>再生は行動開始時に最大HP20%分回復する</li><li>毎ターン開始時、HP割合が90%以上なら被ダメージ減少と再生を解除する</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>自身</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>被ダメージ10%減少 / 再生</dd></dl><dl class="data-item"><dt>継続</dt><dd>4T</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用</th><td>専用武器効果なし</td></tr></table></div>
+        </div>
+      </article>
+    </section>
   </main>
 
   <footer>

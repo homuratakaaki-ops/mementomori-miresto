@@ -4,19 +4,20 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>ルナリンド | ミレストのメメントモリ分析データ室</title>
-  <meta name="description" content="ルナリンドのスキルを、効果の順番・対象・火力・検証情報に分けて確認するためのデータページです。">
+  <meta name="description" content="ルナリンド(冥属性・ソーサラー)のスキル4種を効果の順番・対象・倍率で分解。S1 アイスコフィン、S2 ディスペアードほか。">
   <link rel="canonical" href="https://memento.musoudc.com/pages/characters/lunalynn.html">
   <link rel="stylesheet" href="../../assets/character-page.css">
+  <script src="../../js/render-character.js" defer></script>
   <script src="../../js/character-page.js" defer></script>
 </head>
-<body data-character-page data-character-id="lunalynn">
+<body data-character-page data-character-id="lunalynn" data-attribute="冥" data-prerendered>
   <header class="page-header">
     <div class="header-inner">
       <a class="top-link" href="./index.html">キャラ一覧へ戻る</a>
       <p class="eyebrow">CHARACTER SKILL DATA</p>
       <h1 id="characterName">ルナリンド</h1>
-      <p class="role" id="roleMemo"></p>
-      <div class="meta-row" id="characterMeta"></div>
+      <p class="role" id="roleMemo">沈黙と毒で妨害しながら味方物防を支える冥属性ソーサラー</p>
+      <div class="meta-row" id="characterMeta"><span class="badge attribute">冥</span><span class="badge">ソーサラー</span><span class="badge">スピード 3304</span><span class="badge">入手 恒常</span></div>
     </div>
   </header>
 
@@ -26,7 +27,120 @@
       このページでは検証済みデータと出典整理に絞ります。評価や編成判断は外部記事で確認してください。<br>
       <a id="noteLink" href="#" target="_blank" rel="noopener">ミレストのnote記事を開く</a>
     </section>
-    <section class="skill-list" id="skillList"></section>
+    <section class="skill-list" id="skillList">
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S1</span>
+            <span class="tag">アクティブ</span>
+            <span class="tag major">攻撃</span>
+            <span class="tag">CT 7</span>
+          </div>
+          <h2>アイスコフィン</h2>
+          <p class="summary">クリティカルした相手を黙らせる全体魔法。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>ランダムな敵5体に魔法<span class="ratio">300%</span></li><li>クリティカルヒットした対象に<details class="term"><summary>沈黙</summary><span class="term-box">アクティブスキルの使用を封じる状態異常。通常攻撃やパッシブの扱いは効果内容に従う。</span></details>を1ターン付与</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>ランダム敵5体</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 1500%</dd></dl><dl class="data-item"><dt>継続</dt><dd>沈黙1T / 専用Lv2で3T</dd></dl></div>
+          <div><h3 class="block-title">かみ合わせ</h3><ul class="verification-list synergy-list">
+        <li>
+          沈黙の条件がクリティカルのため、クリ率を上げる支援の隣で真価が出る。根拠: 付与条件が「クリティカルヒット時」のため
+          
+        </li>
+      </ul></div>
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用Lv1</th><td>魔法攻撃前、自身のクリティカル率25%増加。</td></tr><tr><th>専用Lv2</th><td>沈黙のターン数が3ターン。</td></tr><tr><th>専用Lv3</th><td>クリティカル率増加量40%</td></tr></table></div>
+        </div>
+      </article>
+    
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S2</span>
+            <span class="tag">アクティブ</span>
+            <span class="tag major">攻撃</span>
+            <span class="tag">CT 4</span>
+          </div>
+          <h2>ディスペアード</h2>
+          <p class="summary">格下に重い毒を撒く全体魔法。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>ランダムな敵5体に魔法<span class="ratio">285%</span></li><li>対象の魔力が自身より低い場合、<details class="term"><summary>毒</summary><span class="term-box">行動開始時に現在HPに応じたダメージを受ける状態異常。</span></details>を3ターン付与(行動開始時に現在HP15%ダメージ)</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>ランダム敵5体</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 1425%</dd></dl><dl class="data-item"><dt>継続</dt><dd>毒3T</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用</th><td>専用武器効果なし</td></tr></table></div>
+        </div>
+      </article>
+    
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S3</span>
+            <span class="tag">パッシブ</span>
+            <span class="tag major">防御</span>
+            
+          </div>
+          <h2>姉妹の絆</h2>
+          <p class="summary">生きている限り全員の物防を底上げ。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>自身が生存している間、味方全体の物理防御力+20%(解除不可)</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>味方全体</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>物理防御力+20%</dd></dl><dl class="data-item"><dt>継続</dt><dd>解除不可</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用</th><td>専用武器効果なし</td></tr></table></div>
+        </div>
+      </article>
+    
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S4</span>
+            <span class="tag">パッシブ</span>
+            <span class="tag major">防御</span>
+            
+          </div>
+          <h2>凍てついた心</h2>
+          <p class="summary">被ダメカットと吸血の常時装甲。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>自身の被ダメージを40%減少、HPドレイン+25%(解除不可)</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>自身</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>被ダメージ40%減少 / HPドレイン+25%</dd></dl><dl class="data-item"><dt>継続</dt><dd>解除不可</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用</th><td>専用武器効果なし</td></tr></table></div>
+        </div>
+      </article>
+    </section>
   </main>
 
   <footer>

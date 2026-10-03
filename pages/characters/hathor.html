@@ -4,19 +4,20 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>ハトホル | ミレストのメメントモリ分析データ室</title>
-  <meta name="description" content="ハトホルのスキルを、効果の順番・対象・火力・検証情報に分けて確認するためのデータページです。">
+  <meta name="description" content="ハトホル(黄属性・スナイパー)のスキル4種を効果の順番・対象・倍率で分解。S1 胡蝶の舞、S2 黄泉への誘いほか。">
   <link rel="canonical" href="https://memento.musoudc.com/pages/characters/hathor.html">
   <link rel="stylesheet" href="../../assets/character-page.css">
+  <script src="../../js/render-character.js" defer></script>
   <script src="../../js/character-page.js" defer></script>
 </head>
-<body data-character-page data-character-id="hathor">
+<body data-character-page data-character-id="hathor" data-attribute="黄" data-prerendered>
   <header class="page-header">
     <div class="header-inner">
       <a class="top-link" href="./index.html">キャラ一覧へ戻る</a>
       <p class="eyebrow">CHARACTER SKILL DATA</p>
       <h1 id="characterName">ハトホル</h1>
-      <p class="role" id="roleMemo"></p>
-      <div class="meta-row" id="characterMeta"></div>
+      <p class="role" id="roleMemo">高倍率攻撃と弱体付与を扱う黄スナイパー</p>
+      <div class="meta-row" id="characterMeta"><span class="badge attribute">黄</span><span class="badge">スナイパー</span><span class="badge">スピード 3334</span><span class="badge">入手 恒常</span></div>
     </div>
   </header>
 
@@ -26,7 +27,120 @@
       このページでは検証済みデータと出典整理に絞ります。評価や編成判断は外部記事で確認してください。<br>
       <a id="noteLink" href="#" target="_blank" rel="noopener">ミレストのnote記事を開く</a>
     </section>
-    <section class="skill-list" id="skillList"></section>
+    <section class="skill-list" id="skillList">
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S1</span>
+            <span class="tag">アクティブ</span>
+            <span class="tag major">攻撃</span>
+            <span class="tag">CT 4</span>
+          </div>
+          <h2>胡蝶の舞</h2>
+          <p class="summary">一番元気な敵の攻撃力を半減させにいく高倍率。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>現在HPが高い敵2体に物理<span class="ratio">720%</span></li><li>50%の確率で攻撃力50%減少を2ターン付与</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>現在HPが高い敵</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 1440% / 最大 2160%</dd></dl><dl class="data-item"><dt>継続</dt><dd>攻撃力減少2T</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用Lv1</th><td>攻撃力減少確率70%。</td></tr><tr><th>専用Lv3</th><td>対象3体</td></tr></table></div>
+        </div>
+      </article>
+    
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S2</span>
+            <span class="tag">アクティブ</span>
+            <span class="tag major">攻撃</span>
+            <span class="tag">CT 4</span>
+          </div>
+          <h2>黄泉への誘い</h2>
+          <p class="summary">弱体持ちは気絶、無傷には浸食を配る全体攻撃。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>ランダムな敵5体に物理<span class="ratio">500%</span></li><li>対象が弱体効果中なら40%の確率で<details class="term"><summary>気絶</summary><span class="term-box">行動できなくなる状態異常。効果中は通常の行動順が来てもスキルを使えない。</span></details>を1ターン付与</li><li>自身のHPを総与ダメージ15%分回復する</li><li>弱体効果を付帯していない対象には浸食を2ターン付与(行動開始時にこのスキルの総与ダメージ20%ダメージ)</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>ランダム敵5体</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 2500%</dd></dl><dl class="data-item"><dt>継続</dt><dd>気絶1T / 浸食2T</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用Lv2</th><td>気絶確率70%</td></tr></table></div>
+        </div>
+      </article>
+    
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S3</span>
+            <span class="tag">パッシブ</span>
+            <span class="tag major">味方強化</span>
+            
+          </div>
+          <h2>夢舞う踊り子</h2>
+          <p class="summary">被弾しない限り攻撃力8割増しで舞い続ける。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>3ターン目以降の毎ターン開始時、直近2ターンにダメージを受けていなければ攻撃力+80%(2ターン、解除不可)</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>自身</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>攻撃力+80%</dd></dl><dl class="data-item"><dt>継続</dt><dd>2T</dd></dl></div>
+          <div><h3 class="block-title">かみ合わせ</h3><ul class="verification-list synergy-list">
+        <li>
+          ステルス・透明・挑発持ちの味方で被弾を避けるほど条件を維持しやすい。根拠: 条件が「2ターン以内に被弾なし」のため
+          
+        </li>
+      </ul></div>
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用</th><td>専用武器効果なし</td></tr></table></div>
+        </div>
+      </article>
+    
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S4</span>
+            <span class="tag">パッシブ</span>
+            <span class="tag major">攻撃</span>
+            
+          </div>
+          <h2>黄砂の舞</h2>
+          <p class="summary">通常攻撃でクリティカルすると、デバフが当てやすくなる。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>通常攻撃を強化</li><li>通常攻撃がクリティカルヒットしたとき、自身の弱体効果命中率+50%(1ターン、解除不可)</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>自身</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常攻撃強化 / 弱体命中+50%</dd></dl><dl class="data-item"><dt>継続</dt><dd>1T</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用</th><td>専用武器効果なし</td></tr></table></div>
+        </div>
+      </article>
+    </section>
   </main>
 
   <footer>

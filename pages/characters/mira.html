@@ -4,29 +4,143 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>ミラ | ミレストのメメントモリ分析データ室</title>
-  <meta name="description" content="ミラのスキルを、効果の順番・対象・火力・検証情報に分けて確認するためのデータページです。">
+  <meta name="description" content="ミラ(翠属性・ソーサラー)のスキル4種を効果の順番・対象・倍率で分解。S1 決意のロンド、S2 とっておきのおやつほか。">
   <link rel="canonical" href="https://memento.musoudc.com/pages/characters/mira.html">
   <link rel="stylesheet" href="../../assets/character-page.css">
+  <script src="../../js/render-character.js" defer></script>
   <script src="../../js/character-page.js" defer></script>
 </head>
-<body data-character-page data-character-id="mira">
+<body data-character-page data-character-id="mira" data-attribute="翠" data-prerendered>
   <header class="page-header">
     <div class="header-inner">
       <a class="top-link" href="./index.html">キャラ一覧へ戻る</a>
       <p class="eyebrow">CHARACTER SKILL DATA</p>
       <h1 id="characterName">ミラ</h1>
-      <p class="role" id="roleMemo"></p>
-      <div class="meta-row" id="characterMeta"></div>
+      <p class="role" id="roleMemo">開幕HP増加と再生、遅延で翠属性の耐久戦を支える置き物サポーター</p>
+      <div class="meta-row" id="characterMeta"><span class="badge attribute">翠</span><span class="badge">ソーサラー</span><span class="badge">スピード 3158</span><span class="badge">入手 星の導き</span></div>
     </div>
   </header>
 
   <main>
-    <section class="note-panel" id="notePanel" hidden>
+    <section class="note-panel" id="notePanel">
       <strong>評価・運用メモはnoteへ</strong><br>
       このページでは検証済みデータと出典整理に絞ります。評価や編成判断は外部記事で確認してください。<br>
-      <a id="noteLink" href="#" target="_blank" rel="noopener">ミレストのnote記事を開く</a>
+      <a id="noteLink" href="https://note.com/musoudc/n/n74f4731f707e" target="_blank" rel="noopener">ミレストのnote記事を開く</a>
     </section>
-    <section class="skill-list" id="skillList"></section>
+    <section class="skill-list" id="skillList">
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S1</span>
+            <span class="tag">アクティブ</span>
+            <span class="tag major">攻撃</span>
+            <span class="tag">CT 4</span>
+          </div>
+          <h2>決意のロンド</h2>
+          <p class="summary">遅延を狙いつつ自分も回復する小技。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>ランダムな敵2体に魔法<span class="ratio">180%</span></li><li>70%の確率で遅延を1ターン付与</li><li>判定後、自身のHPを最大HP10%回復</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>ランダム敵2体</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 360%</dd></dl><dl class="data-item"><dt>継続</dt><dd>遅延1ターン</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用Lv1</th><td>対象3体</td></tr></table></div>
+        </div>
+      </article>
+    
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S2</span>
+            <span class="tag">アクティブ</span>
+            <span class="tag major">攻撃</span>
+            <span class="tag">CT 4</span>
+          </div>
+          <h2>とっておきのおやつ</h2>
+          <p class="summary">回復を受けた回数で4倍に化けるアタック。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>自身のHPを最大HP10%回復</li><li>ランダムな敵に魔法<span class="ratio">440%</span>×4回</li><li>自身がアクティブスキルで回復を受けた回数が6以上なら魔法<span class="ratio">1760%</span>×4回</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>ランダム敵</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 1760% / 最大 7040%</dd></dl></div>
+          <div><h3 class="block-title">かみ合わせ</h3><ul class="verification-list synergy-list">
+        <li>
+          ミラにアクティブ回復を多く当てられる味方(例: コベルの3回連続回復)がいると条件解禁が早い。
+          <br><span class="reason">根拠: 条件がアクティブスキルで回復を受けた回数のため</span>
+        </li>
+      </ul></div>
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用Lv3</th><td>魔法<span class="ratio">480%</span>、条件時1920%</td></tr></table></div>
+        </div>
+      </article>
+    
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S3</span>
+            <span class="tag">パッシブ</span>
+            <span class="tag major">防御</span>
+            
+          </div>
+          <h2>空腹ダメぜったい！</h2>
+          <p class="summary">味方全員の最大HPを底上げする、置物性能の核。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>味方全体の最大HPを15%増加(解除不可)</li><li>対象が翠属性なら、ミラの攻撃力100%分をさらに追加</li><li>自身は最大HP500%増加</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>自身以外の味方全体 / 自身</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>最大HP増加</dd></dl><dl class="data-item"><dt>継続</dt><dd>解除不可</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用Lv2</th><td>味方全体25%、翠属性は攻撃力200%分追加</td></tr></table></div>
+        </div>
+      </article>
+    
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S4</span>
+            <span class="tag">パッシブ</span>
+            <span class="tag major">防御</span>
+            
+          </div>
+          <h2>いのちの旋律</h2>
+          <p class="summary">全員に再生を配り続ける自動ヒール。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>ターン開始時、味方全体に<details class="term"><summary>再生</summary><span class="term-box">ターン開始時などにHPを回復する継続回復効果。回復量や継続ターンは付与した効果ごとに異なる。</span></details>を4ターン付与(最大HP5%回復、翠属性なら10%)</li><li>解除不可。発動後4回行動まで再発動しない</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>味方全体</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>再生</dd></dl><dl class="data-item"><dt>継続</dt><dd>再生4ターン・解除不可</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用</th><td>専用武器効果なし</td></tr></table></div>
+        </div>
+      </article>
+    </section>
   </main>
 
   <footer>

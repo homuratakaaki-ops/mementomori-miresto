@@ -4,29 +4,143 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>[雪花の誓い]シズ | ミレストのメメントモリ分析データ室</title>
-  <meta name="description" content="[雪花の誓い]シズのスキルを、効果の順番・対象・火力・検証情報に分けて確認するためのデータページです。">
+  <meta name="description" content="[雪花の誓い]シズ(紅属性・ウォーリア)のスキル4種を効果の順番・対象・倍率で分解。S1 一閃・白羽衣、S2 玉水割りほか。">
   <link rel="canonical" href="https://memento.musoudc.com/pages/characters/shizu_snow.html">
   <link rel="stylesheet" href="../../assets/character-page.css">
+  <script src="../../js/render-character.js" defer></script>
   <script src="../../js/character-page.js" defer></script>
 </head>
-<body data-character-page data-character-id="shizu_snow">
+<body data-character-page data-character-id="shizu_snow" data-attribute="紅" data-prerendered>
   <header class="page-header">
     <div class="header-inner">
       <a class="top-link" href="./index.html">キャラ一覧へ戻る</a>
       <p class="eyebrow">CHARACTER SKILL DATA</p>
       <h1 id="characterName">[雪花の誓い]シズ</h1>
-      <p class="role" id="roleMemo"></p>
-      <div class="meta-row" id="characterMeta"></div>
+      <p class="role" id="roleMemo">防御力依存の攻撃力増加と高速自傷連撃で速攻紅パを支える紅属性ウォーリア</p>
+      <div class="meta-row" id="characterMeta"><span class="badge attribute">紅</span><span class="badge">ウォーリア</span><span class="badge">スピード 3582</span><span class="badge">入手 星の導き</span></div>
     </div>
   </header>
 
   <main>
-    <section class="note-panel" id="notePanel" hidden>
+    <section class="note-panel" id="notePanel">
       <strong>評価・運用メモはnoteへ</strong><br>
       このページでは検証済みデータと出典整理に絞ります。評価や編成判断は外部記事で確認してください。<br>
-      <a id="noteLink" href="#" target="_blank" rel="noopener">ミレストのnote記事を開く</a>
+      <a id="noteLink" href="https://note.com/musoudc/n/n23691a6537e3" target="_blank" rel="noopener">ミレストのnote記事を開く</a>
     </section>
-    <section class="skill-list" id="skillList"></section>
+    <section class="skill-list" id="skillList">
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S1</span>
+            <span class="tag">アクティブ</span>
+            <span class="tag major">攻撃</span>
+            <span class="tag">CT 4</span>
+          </div>
+          <h2>一閃・白羽衣</h2>
+          <p class="summary">自傷から6連撃、敵を遅くする。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>自身に現在HP20%の自傷ダメージ</li><li>ランダムな敵に物理<span class="ratio">520%</span>×6回</li><li>70%の確率で対象のスピードを30%減少(2ターン)</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>ランダム敵</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 3120% / 最大 4640%</dd></dl><dl class="data-item"><dt>継続</dt><dd>スピード-30% 2T</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用Lv1</th><td>8回攻撃。</td></tr><tr><th>専用Lv3</th><td>580%</td></tr></table></div>
+        </div>
+      </article>
+    
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S2</span>
+            <span class="tag">アクティブ</span>
+            <span class="tag major">攻撃</span>
+            <span class="tag">CT 4</span>
+          </div>
+          <h2>玉水割り</h2>
+          <p class="summary">自分よりHPの多い敵に1.5倍で刺さる高倍率。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>自身に現在HP20%の自傷ダメージ</li><li>ランダムな敵3体に物理<span class="ratio">1120%</span></li><li>対象の現在HPが自身より高い場合は1680%</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>ランダム敵3体</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 3360% / 最大 6840%</dd></dl></div>
+          <div><h3 class="block-title">かみ合わせ</h3><ul class="verification-list synergy-list">
+        <li>
+          S1の自傷で自分のHPが下がるほど③の条件を満たしやすくなる自己完結型。根拠: 条件が「対象の現在HP＞自身の現在HP」のため
+          
+        </li>
+      </ul></div>
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用Lv2</th><td>1520%、対象HP条件時2280%</td></tr></table></div>
+        </div>
+      </article>
+    
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S3</span>
+            <span class="tag">パッシブ</span>
+            <span class="tag major">味方強化</span>
+            
+          </div>
+          <h2>月照の構え</h2>
+          <p class="summary">防御の2倍ぶんを攻撃力に上乗せする開幕ブースト。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>バトル開始時、攻撃力を防御力200%分増加(解除不可)</li><li>多重バリア1層を付与(最大HP20%以上のダメージを1回無効化)</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>自身</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>防御力200%分攻撃力増加 / 多重バリア1層</dd></dl><dl class="data-item"><dt>継続</dt><dd>解除不可</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用</th><td>専用武器効果なし</td></tr></table></div>
+        </div>
+      </article>
+    
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S4</span>
+            <span class="tag">パッシブ</span>
+            <span class="tag major">敵弱体</span>
+            
+          </div>
+          <h2>一花冬至為誰開</h2>
+          <p class="summary">カウンタの高い敵を狙って弱体化させる対タンク性能。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>行動開始時、カウンタが最も高い敵の被ダメージを10%増加(2ターン)</li><li>対象の防御力が自身より低ければカウンタを40%減少</li><li>発動後4回行動まで再発動しない</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>自身 / 敵</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>被ダメ+10% / カウンタ-40%</dd></dl><dl class="data-item"><dt>継続</dt><dd>1T</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用</th><td>専用武器効果なし</td></tr></table></div>
+        </div>
+      </article>
+    </section>
   </main>
 
   <footer>

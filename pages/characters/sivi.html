@@ -4,19 +4,20 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>シヴィ | ミレストのメメントモリ分析データ室</title>
-  <meta name="description" content="シヴィのスキルを、効果の順番・対象・火力・検証情報に分けて確認するためのデータページです。">
+  <meta name="description" content="シヴィ(藍属性・ウォーリア)のスキル4種を効果の順番・対象・倍率で分解。S1 リアクティブブレイド、S2 アブソーブブレイドほか。">
   <link rel="canonical" href="https://memento.musoudc.com/pages/characters/sivi.html">
   <link rel="stylesheet" href="../../assets/character-page.css">
+  <script src="../../js/render-character.js" defer></script>
   <script src="../../js/character-page.js" defer></script>
 </head>
-<body data-character-page data-character-id="sivi">
+<body data-character-page data-character-id="sivi" data-attribute="藍" data-prerendered>
   <header class="page-header">
     <div class="header-inner">
       <a class="top-link" href="./index.html">キャラ一覧へ戻る</a>
       <p class="eyebrow">CHARACTER SKILL DATA</p>
       <h1 id="characterName">シヴィ</h1>
-      <p class="role" id="roleMemo"></p>
-      <div class="meta-row" id="characterMeta"></div>
+      <p class="role" id="roleMemo">与ダメージ増加で味方アタッカーの火力を伸ばす藍属性ウォーリア。</p>
+      <div class="meta-row" id="characterMeta"><span class="badge attribute">藍</span><span class="badge">ウォーリア</span><span class="badge">スピード 2855</span><span class="badge">入手 星の導き</span></div>
     </div>
   </header>
 
@@ -26,7 +27,120 @@
       このページでは検証済みデータと出典整理に絞ります。評価や編成判断は外部記事で確認してください。<br>
       <a id="noteLink" href="#" target="_blank" rel="noopener">ミレストのnote記事を開く</a>
     </section>
-    <section class="skill-list" id="skillList"></section>
+    <section class="skill-list" id="skillList">
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S1</span>
+            <span class="tag">アクティブ</span>
+            <span class="tag major">味方強化</span>
+            <span class="tag">CT 4</span>
+          </div>
+          <h2>リアクティブブレイド</h2>
+          <p class="summary">遅い味方たちの与ダメージを、被弾回数に応じて底上げする。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>自身とスピードが低い味方2体に与ダメージ25%増加を付与(4ターン)</li><li>このターン中に対象が攻撃を受けた回数に応じて増加量が45%・60%・70%・75%へ上昇(最大4回)</li><li>攻撃力が最も高い敵に物理<span class="ratio">980%</span></li><li>自身のHPを総与ダメージ30%分回復する</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>自身と低スピード味方2体 / 攻撃力最高の敵</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 980% / 最大 1170%</dd></dl><dl class="data-item"><dt>継続</dt><dd>与ダメ増加4T</dd></dl></div>
+          <div><h3 class="block-title">かみ合わせ</h3><ul class="verification-list synergy-list">
+        <li>
+          被弾回数参照はミナシュマリS2・フィアーS2と同族で、受けの多いタンク編成ほど支援量が伸びる。根拠: 増加量の参照が「被攻撃回数」のため
+          
+        </li>
+      </ul></div>
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用Lv1</th><td>物理<span class="ratio">1170%</span>。</td></tr><tr><th>専用Lv2</th><td>与ダメ25→30%、最大75→90%</td></tr></table></div>
+        </div>
+      </article>
+    
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S2</span>
+            <span class="tag">アクティブ</span>
+            <span class="tag major">回復・復活</span>
+            <span class="tag">CT 4</span>
+          </div>
+          <h2>アブソーブブレイド</h2>
+          <p class="summary">殴った分で、遅い味方3人を回復して弱体も全部剥がす。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>ランダムな敵3体に物理<span class="ratio">530%</span></li><li>スピードが低い味方3体を総与ダメージの15%分回復する</li><li>同じ対象の弱体効果を全て解除する</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>ランダム敵3体 / 低スピード味方3体</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 1590% / 最大 2120%</dd></dl><dl class="data-item"><dt>継続</dt><dd>弱体全解除</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用Lv3</th><td>対象が敵4体に増加</td></tr></table></div>
+        </div>
+      </article>
+    
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S3</span>
+            <span class="tag">パッシブ</span>
+            <span class="tag major">防御</span>
+            
+          </div>
+          <h2>みんな頑張るっす！</h2>
+          <p class="summary">自分と隣の防御を常時底上げ。自分は特に硬い。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>自身と隣接する味方2体の防御力・物理防御力を25%増加(解除不可)</li><li>自身のみ、防御力・物理防御力の増加量が100%になる</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>自身と隣接味方2体</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>防御力・物防+25% / 自身のみ+100%</dd></dl><dl class="data-item"><dt>継続</dt><dd>永続</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用</th><td>専用武器効果なし</td></tr></table></div>
+        </div>
+      </article>
+    
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S4</span>
+            <span class="tag">パッシブ</span>
+            <span class="tag major">解除・操作</span>
+            
+          </div>
+          <h2>魔剣の守護</h2>
+          <p class="summary">弱体が溜まったら自分でまとめて掃除し、被ダメも軽減。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>アクティブスキルで弱体を受け、自身の弱体効果が2個以上なら全解除</li><li>発動後4回行動まで再発動しない</li><li>発動時、自身の被ダメージを30%減少(3ターン)</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>自身</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>被ダメ30%減少</dd></dl><dl class="data-item"><dt>継続</dt><dd>3T</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用</th><td>専用武器効果なし</td></tr></table></div>
+        </div>
+      </article>
+    </section>
   </main>
 
   <footer>

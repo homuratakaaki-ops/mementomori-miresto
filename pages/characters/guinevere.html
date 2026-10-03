@@ -4,19 +4,20 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>グィネヴィア | ミレストのメメントモリ分析データ室</title>
-  <meta name="description" content="グィネヴィアのスキルを、効果の順番・対象・火力・検証情報に分けて確認するためのデータページです。">
+  <meta name="description" content="グィネヴィア(紅属性・スナイパー)のスキル4種を効果の順番・対象・倍率で分解。S1 ハートフェルト、S2 メルティハグほか。">
   <link rel="canonical" href="https://memento.musoudc.com/pages/characters/guinevere.html">
   <link rel="stylesheet" href="../../assets/character-page.css">
+  <script src="../../js/render-character.js" defer></script>
   <script src="../../js/character-page.js" defer></script>
 </head>
-<body data-character-page data-character-id="guinevere">
+<body data-character-page data-character-id="guinevere" data-attribute="紅" data-prerendered>
   <header class="page-header">
     <div class="header-inner">
       <a class="top-link" href="./index.html">キャラ一覧へ戻る</a>
       <p class="eyebrow">CHARACTER SKILL DATA</p>
       <h1 id="characterName">グィネヴィア</h1>
-      <p class="role" id="roleMemo"></p>
-      <div class="meta-row" id="characterMeta"></div>
+      <p class="role" id="roleMemo">自傷を起点に攻撃力を伸ばす紅スナイパー</p>
+      <div class="meta-row" id="characterMeta"><span class="badge attribute">紅</span><span class="badge">スナイパー</span><span class="badge">スピード 3091</span><span class="badge">入手 PU・運命</span></div>
     </div>
   </header>
 
@@ -26,7 +27,120 @@
       このページでは検証済みデータと出典整理に絞ります。評価や編成判断は外部記事で確認してください。<br>
       <a id="noteLink" href="#" target="_blank" rel="noopener">ミレストのnote記事を開く</a>
     </section>
-    <section class="skill-list" id="skillList"></section>
+    <section class="skill-list" id="skillList">
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S1</span>
+            <span class="tag">アクティブ</span>
+            <span class="tag major">攻撃</span>
+            <span class="tag">CT 4</span>
+          </div>
+          <h2>ハートフェルト</h2>
+          <p class="summary">自分を傷つけてから撃つ、捨て身の5連撃。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>自身に現在HP20%の自傷ダメージを2回</li><li>攻撃前に70%で被ダメージ増加を付与(2ターン)</li><li>ランダムな敵に物理<span class="ratio">280%</span>×5回</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>ランダム敵に5回</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 1400% / 最大 3600%</dd></dl><dl class="data-item"><dt>継続</dt><dd>被ダメージ増加2T / 専用Lv1で脱力2T</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用Lv1</th><td>攻撃後70%で脱力。</td></tr><tr><th>専用Lv3</th><td>物理<span class="ratio">720%</span></td></tr></table></div>
+        </div>
+      </article>
+    
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S2</span>
+            <span class="tag">アクティブ</span>
+            <span class="tag major">攻撃</span>
+            <span class="tag">CT 4</span>
+          </div>
+          <h2>メルティハグ</h2>
+          <p class="summary">自傷で貯めた攻撃力スタックを火力に変える連撃。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>自身に現在HP20%の自傷ダメージを2回</li><li>ランダムな敵に物理<span class="ratio">170%</span>×3回</li><li>S3「ハートフルラヴァー」のスタック数に応じて倍率・回数が上昇(最大740%×5回)</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>ランダム敵に3-5回</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 510% / 最大 3700%</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用</th><td>専用武器での直接強化なし</td></tr></table></div>
+        </div>
+      </article>
+    
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S3</span>
+            <span class="tag">パッシブ</span>
+            <span class="tag major">味方強化</span>
+            
+          </div>
+          <h2>ハートフルラヴァー</h2>
+          <p class="summary">自傷するほど攻撃力が積み上がるエンジン。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>自身か味方が自傷ダメージを受けた回数に応じて、攻撃力増加をスタック(最大8スタック、解除不可)</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>自身 / Lv3で攻撃力が高い味方2体も対象</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>攻撃力+3-6%×最大8</dd></dl><dl class="data-item"><dt>継続</dt><dd>解除不可</dd></dl></div>
+          <div><h3 class="block-title">かみ合わせ</h3><ul class="verification-list synergy-list">
+        <li>
+          自傷スキルを持つ味方がいるとスタックが早く貯まる。
+          <br><span class="reason">根拠: カウント対象が自身か味方の自傷回数のため</span>
+        </li>
+      </ul></div>
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用</th><td>専用武器での直接強化なし</td></tr></table></div>
+        </div>
+      </article>
+    
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S4</span>
+            <span class="tag">パッシブ</span>
+            <span class="tag major">味方強化</span>
+            
+          </div>
+          <h2>人の心を温める力</h2>
+          <p class="summary">開幕のスピードアップと気絶ガード。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>バトル開始時、自身のスピードを増加(4ターン)</li><li>紅属性の味方が2体以上なら、1ターン目の行動開始時に<details class="term"><summary>気絶</summary><span class="term-box">行動できなくなる状態異常。効果中は通常の行動順が来てもスキルを使えない。</span></details>無効を付与(2ターン)</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>自身 / 専用Lv2で攻撃力が高い味方2体</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>スピード+15-30%</dd></dl><dl class="data-item"><dt>継続</dt><dd>スピード増加4T / 気絶無効2T</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用Lv2</th><td>気絶無効の対象が自身と攻撃力が高い味方2体</td></tr></table></div>
+        </div>
+      </article>
+    </section>
   </main>
 
   <footer>

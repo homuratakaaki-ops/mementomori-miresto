@@ -4,19 +4,20 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>[聖なる漆黒の輝く星]ステラ | ミレストのメメントモリ分析データ室</title>
-  <meta name="description" content="[聖なる漆黒の輝く星]ステラのスキルを、効果の順番・対象・火力・検証情報に分けて確認するためのデータページです。">
+  <meta name="description" content="[聖なる漆黒の輝く星]ステラ(翠属性・ソーサラー)のスキル4種を効果の順番・対象・倍率で分解。S1 聖なる星の鼓動、S2 ファイナルステラほか。">
   <link rel="canonical" href="https://memento.musoudc.com/pages/characters/stella_holy_dark_star.html">
   <link rel="stylesheet" href="../../assets/character-page.css">
+  <script src="../../js/render-character.js" defer></script>
   <script src="../../js/character-page.js" defer></script>
 </head>
-<body data-character-page data-character-id="stella_holy_dark_star">
+<body data-character-page data-character-id="stella_holy_dark_star" data-attribute="翠" data-prerendered>
   <header class="page-header">
     <div class="header-inner">
       <a class="top-link" href="./index.html">キャラ一覧へ戻る</a>
       <p class="eyebrow">CHARACTER SKILL DATA</p>
       <h1 id="characterName">[聖なる漆黒の輝く星]ステラ</h1>
-      <p class="role" id="roleMemo"></p>
-      <div class="meta-row" id="characterMeta"></div>
+      <p class="role" id="roleMemo">7ターン目以降に攻撃性能が上がる聖夜ステラ</p>
+      <div class="meta-row" id="characterMeta"><span class="badge attribute">翠</span><span class="badge">ソーサラー</span><span class="badge">スピード 2968</span><span class="badge">入手 PU・運命</span></div>
     </div>
   </header>
 
@@ -26,7 +27,120 @@
       このページでは検証済みデータと出典整理に絞ります。評価や編成判断は外部記事で確認してください。<br>
       <a id="noteLink" href="#" target="_blank" rel="noopener">ミレストのnote記事を開く</a>
     </section>
-    <section class="skill-list" id="skillList"></section>
+    <section class="skill-list" id="skillList">
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S1</span>
+            <span class="tag">アクティブ</span>
+            <span class="tag major">攻撃</span>
+            <span class="tag">CT 4</span>
+          </div>
+          <h2>聖なる星の鼓動</h2>
+          <p class="summary">回復と敵の柔らかくなるデバフを両方こなす前半の仕事役。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>自身のHPを最大HP10%回復(7ターン目以降は回復なし)</li><li>攻撃前に被ダメージ増加と魔法防御力減少を4ターン付与</li><li>ランダムな敵3体に魔法<span class="ratio">320%</span></li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>ランダム敵3体</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 960%</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用Lv1</th><td>対象5体、魔法<span class="ratio">720%</span></td></tr></table></div>
+        </div>
+      </article>
+    
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S2</span>
+            <span class="tag">アクティブ</span>
+            <span class="tag major">攻撃</span>
+            <span class="tag">CT 4</span>
+          </div>
+          <h2>ファイナルステラ</h2>
+          <p class="summary">味方も回復する主砲。7ターン目からは沈黙付きに変わる。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>自身と攻撃力が最も高い味方のHPを、自身最大HP7%回復(7ターン目以降は回復なし)</li><li>ランダムな敵に魔法<span class="ratio">710%</span>×4回</li><li>7ターン目以降は最終攻撃後、70%の確率で攻撃力が高い敵2体に<details class="term"><summary>沈黙</summary><span class="term-box">アクティブスキルの使用を封じる状態異常。通常攻撃やパッシブの扱いは効果内容に従う。</span></details>を2ターン付与</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>ランダム敵</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 2840%</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用Lv3</th><td>魔法<span class="ratio">780%</span></td></tr></table></div>
+        </div>
+      </article>
+    
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S3</span>
+            <span class="tag">パッシブ</span>
+            <span class="tag major">味方強化</span>
+            
+          </div>
+          <h2>聖夜のおまじない</h2>
+          <p class="summary">前半を生き延びる耐久と、7ターン目のCTリセット。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>バトル開始時、被ダメージ減少・最大HP増加・防御力+150%(解除不可)</li><li>7ターン目開始時、自身のスキルCTを0にする</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>自身</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>被ダメージ-10% / 最大HP+20% / 防御力+150%</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用Lv2</th><td>被ダメージ減少40%、最大HP増加100%</td></tr></table></div>
+        </div>
+      </article>
+    
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S4</span>
+            <span class="tag">パッシブ</span>
+            <span class="tag major">防御</span>
+            
+          </div>
+          <h2>聖なる漆黒の輝く星</h2>
+          <p class="summary">味方の回復のたびに攻守が積み上がるスタックエンジン。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>自身か味方のアクティブスキルでHP回復効果が発動するたび、攻撃力+10%・物理防御力+6%を各1スタック付与(最大10スタック、解除不可)</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>自身</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>攻撃力+10% / 物理防御力+6%</dd></dl></div>
+          <div><h3 class="block-title">かみ合わせ</h3><ul class="verification-list synergy-list">
+        <li>
+          アクティブ回復を多発する編成(コベル・イディーネ・ポーラ等)でスタックが早く貯まる。
+          <br><span class="reason">根拠: カウント対象がアクティブスキルによる回復の発動回数のため</span>
+        </li>
+      </ul></div>
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用</th><td>専用武器効果なし</td></tr></table></div>
+        </div>
+      </article>
+    </section>
   </main>
 
   <footer>

@@ -4,19 +4,20 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>アームストロング | ミレストのメメントモリ分析データ室</title>
-  <meta name="description" content="アームストロングのスキルを、効果の順番・対象・火力・検証情報に分けて確認するためのデータページです。">
+  <meta name="description" content="アームストロング(冥属性・スナイパー)のスキル4種を効果の順番・対象・倍率で分解。S1 電撃作戦、S2 一斉射撃ほか。">
   <link rel="canonical" href="https://memento.musoudc.com/pages/characters/armstrong.html">
   <link rel="stylesheet" href="../../assets/character-page.css">
+  <script src="../../js/render-character.js" defer></script>
   <script src="../../js/character-page.js" defer></script>
 </head>
-<body data-character-page data-character-id="armstrong">
+<body data-character-page data-character-id="armstrong" data-attribute="冥" data-prerendered>
   <header class="page-header">
     <div class="header-inner">
       <a class="top-link" href="./index.html">キャラ一覧へ戻る</a>
       <p class="eyebrow">CHARACTER SKILL DATA</p>
       <h1 id="characterName">アームストロング</h1>
-      <p class="role" id="roleMemo"></p>
-      <div class="meta-row" id="characterMeta"></div>
+      <p class="role" id="roleMemo">高倍率連撃とクリティカル支援を持つ冥属性スナイパー</p>
+      <div class="meta-row" id="characterMeta"><span class="badge attribute">冥</span><span class="badge">スナイパー</span><span class="badge">スピード 3047</span><span class="badge">入手 星の導き</span></div>
     </div>
   </header>
 
@@ -26,7 +27,120 @@
       このページでは検証済みデータと出典整理に絞ります。評価や編成判断は外部記事で確認してください。<br>
       <a id="noteLink" href="#" target="_blank" rel="noopener">ミレストのnote記事を開く</a>
     </section>
-    <section class="skill-list" id="skillList"></section>
+    <section class="skill-list" id="skillList">
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S1</span>
+            <span class="tag">アクティブ</span>
+            <span class="tag major">攻撃</span>
+            <span class="tag">CT 4</span>
+          </div>
+          <h2>電撃作戦</h2>
+          <p class="summary">敵エース2体を撃ち、倒し損ねたらもう一度。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>攻撃力が高い敵2体に物理<span class="ratio">600%</span></li><li>敵を戦闘不能にできなければ、このスキルを1回再発動する</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>攻撃力が高い敵</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 1200% / 最大 3600%</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用Lv1</th><td>対象が攻撃力が高い敵3体になる</td></tr></table></div>
+        </div>
+      </article>
+    
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S2</span>
+            <span class="tag">アクティブ</span>
+            <span class="tag major">攻撃</span>
+            <span class="tag">CT 4</span>
+          </div>
+          <h2>一斉射撃</h2>
+          <p class="summary">元気な敵には2倍、弱った敵には必中の8連撃。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>ランダムな敵に物理<span class="ratio">250%</span>×8回</li><li>対象のHP割合が50%以上ならダメージ2倍</li><li>対象のHP割合が50%未満なら必ず命中</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>ランダム敵</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 2000% / 最大 4800%</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用Lv3</th><td>物理攻撃が300%になる</td></tr></table></div>
+        </div>
+      </article>
+    
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S3</span>
+            <span class="tag">パッシブ</span>
+            <span class="tag major">味方強化</span>
+            
+          </div>
+          <h2>パラ・ベラム</h2>
+          <p class="summary">自分と最速の味方のクリティカルを支える。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>自身のクリダメ強化+40%(解除不可)</li><li>ターン開始時、自身と自身以外でスピードが最も高い味方のクリティカル率+40%(2ターン)</li><li>クリティカル率増加は発動後4回行動まで再発動しない</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>自身 / スピードが最も高い味方</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>クリダメ強化+40% / クリティカル率+40%</dd></dl><dl class="data-item"><dt>継続</dt><dd>2T</dd></dl></div>
+          <div><h3 class="block-title">かみ合わせ</h3><ul class="verification-list synergy-list">
+        <li>
+          クリ率支援はクリティカル依存のアタッカーやクリティカル率増加を条件に持つ味方の発動条件に直結する。根拠: バフの内容がクリティカル率のため
+          
+        </li>
+      </ul></div>
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用</th><td>専用武器効果なし</td></tr></table></div>
+        </div>
+      </article>
+    
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S4</span>
+            <span class="tag">パッシブ</span>
+            <span class="tag major">防御</span>
+            
+          </div>
+          <h2>弾性防御</h2>
+          <p class="summary">5割遮断。自分のクリティカルが攻撃力を上げる代わり、遮断は緩む。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>攻撃を受けたとき、ダメージを50%遮断</li><li>自身の攻撃がクリティカルヒットした場合、クリティカル回数1回につき遮断効果が2%減少(最小30%)</li><li>毎ターン開始時、前のターンに自身の攻撃がクリティカルしていれば、クリティカル回数1回につき攻撃力+3%(最大30%、解除不可)</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>自身</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>ダメージ50%遮断 / 攻撃力最大30%</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用Lv2</th><td>ダメージ60%遮断、遮断効果は最小40%、攻撃力増加がクリティカルヒット回数1回につき4%、最大40%</td></tr></table></div>
+        </div>
+      </article>
+    </section>
   </main>
 
   <footer>

@@ -4,19 +4,20 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>ミフリ | ミレストのメメントモリ分析データ室</title>
-  <meta name="description" content="ミフリのスキルを、効果の順番・対象・火力・検証情報に分けて確認するためのデータページです。">
+  <meta name="description" content="ミフリ(黄属性・ソーサラー)のスキル4種を効果の順番・対象・倍率で分解。S1 継がれた灯火、S2 アレヴ・セラーフほか。">
   <link rel="canonical" href="https://memento.musoudc.com/pages/characters/mifuri.html">
   <link rel="stylesheet" href="../../assets/character-page.css">
+  <script src="../../js/render-character.js" defer></script>
   <script src="../../js/character-page.js" defer></script>
 </head>
-<body data-character-page data-character-id="mifuri">
+<body data-character-page data-character-id="mifuri" data-attribute="黄" data-prerendered>
   <header class="page-header">
     <div class="header-inner">
       <a class="top-link" href="./index.html">キャラ一覧へ戻る</a>
       <p class="eyebrow">CHARACTER SKILL DATA</p>
       <h1 id="characterName">ミフリ</h1>
-      <p class="role" id="roleMemo"></p>
-      <div class="meta-row" id="characterMeta"></div>
+      <p class="role" id="roleMemo">陽炎の灯と高倍率魔法を扱う黄ソーサラー</p>
+      <div class="meta-row" id="characterMeta"><span class="badge attribute">黄</span><span class="badge">ソーサラー</span><span class="badge">スピード 3136</span><span class="badge">入手 PU・運命</span></div>
     </div>
   </header>
 
@@ -26,7 +27,115 @@
       このページでは検証済みデータと出典整理に絞ります。評価や編成判断は外部記事で確認してください。<br>
       <a id="noteLink" href="#" target="_blank" rel="noopener">ミレストのnote記事を開く</a>
     </section>
-    <section class="skill-list" id="skillList"></section>
+    <section class="skill-list" id="skillList">
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S1</span>
+            <span class="tag">アクティブ</span>
+            <span class="tag major">攻撃</span>
+            <span class="tag">CT 4</span>
+          </div>
+          <h2>継がれた灯火</h2>
+          <p class="summary">全員にシールドを配ってから撃つ。3回目からはシールドをやめて4倍砲に。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>味方全体に最大HP10%のシールドを4ターン付与(黄属性の対象には自身の攻撃力100%分を上乗せ)</li><li>ランダムな敵4体に魔法<span class="ratio">410%</span></li><li>このスキルの3回目以降はシールドなし、魔法<span class="ratio">1640%</span></li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>味方全体 / ランダム敵4体</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 1640%</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用Lv1</th><td>シールド最大HP30%、黄属性シールド攻撃力400%</td></tr></table></div>
+        </div>
+      </article>
+    
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S2</span>
+            <span class="tag">アクティブ</span>
+            <span class="tag major">攻撃</span>
+            <span class="tag">CT 4</span>
+          </div>
+          <h2>アレヴ・セラーフ</h2>
+          <p class="summary">使い込むと4倍になる連撃。撃つたび自分が軽くなる。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>ランダムな敵に魔法<span class="ratio">260%</span>×4回(このスキルの3回目以降は1040%)</li><li>最後の攻撃後、自身に「軽快」を付与</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>ランダム敵</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 1040%</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用Lv3</th><td>魔法<span class="ratio">280%</span>、3回目以降1120%</td></tr></table></div>
+        </div>
+      </article>
+    
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S3</span>
+            <span class="tag">パッシブ</span>
+            <span class="tag major">味方強化</span>
+            
+          </div>
+          <h2>炎の申し子</h2>
+          <p class="summary">毎ターン「陽炎の灯」が積もり、育つとエースにも配り始める。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>行動開始時、陽炎の灯を1スタック付与(1スタックにつき攻撃力+5%、最大15スタック)</li><li>バフを4つ以上付帯している味方がいる場合、付与数が2になる</li><li>対象は自身と、自身以外で攻撃力が最も高い味方</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>自身</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>陽炎の灯スタック</dd></dl><dl class="data-item"><dt>継続</dt><dd>条件参照</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用</th><td>専用武器効果なし</td></tr></table></div>
+        </div>
+      </article>
+    
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S4</span>
+            <span class="tag">パッシブ</span>
+            <span class="tag major">味方強化</span>
+            
+          </div>
+          <h2>陽炎の抱擁</h2>
+          <p class="summary">常時の被ダメージカットとクリダメ緩和。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>自身の被ダメージを20%減少、物理クリダメ緩和+30%(解除不可)</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>自身</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>被ダメージ20%減少 / 物理クリダメ緩和+30%</dd></dl><dl class="data-item"><dt>継続</dt><dd>条件参照</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用Lv2</th><td>被ダメージ減少75%</td></tr></table></div>
+        </div>
+      </article>
+    </section>
   </main>
 
   <footer>

@@ -4,19 +4,20 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>カグヤ | ミレストのメメントモリ分析データ室</title>
-  <meta name="description" content="カグヤのスキルを、効果の順番・対象・火力・検証情報に分けて確認するためのデータページです。">
+  <meta name="description" content="カグヤ(冥属性・ソーサラー)のスキル4種を効果の順番・対象・倍率で分解。S1 鏡花水月、S2 胡蝶之夢ほか。">
   <link rel="canonical" href="https://memento.musoudc.com/pages/characters/kaguya.html">
   <link rel="stylesheet" href="../../assets/character-page.css">
+  <script src="../../js/render-character.js" defer></script>
   <script src="../../js/character-page.js" defer></script>
 </head>
-<body data-character-page data-character-id="kaguya">
+<body data-character-page data-character-id="kaguya" data-attribute="冥" data-prerendered>
   <header class="page-header">
     <div class="header-inner">
       <a class="top-link" href="./index.html">キャラ一覧へ戻る</a>
       <p class="eyebrow">CHARACTER SKILL DATA</p>
       <h1 id="characterName">カグヤ</h1>
-      <p class="role" id="roleMemo"></p>
-      <div class="meta-row" id="characterMeta"></div>
+      <p class="role" id="roleMemo">シールドとカウンタ変更で戦う冥属性ソーサラー</p>
+      <div class="meta-row" id="characterMeta"><span class="badge attribute">冥</span><span class="badge">ソーサラー</span><span class="badge">スピード 2872</span><span class="badge">入手 星の導き</span></div>
     </div>
   </header>
 
@@ -26,7 +27,120 @@
       このページでは検証済みデータと出典整理に絞ります。評価や編成判断は外部記事で確認してください。<br>
       <a id="noteLink" href="#" target="_blank" rel="noopener">ミレストのnote記事を開く</a>
     </section>
-    <section class="skill-list" id="skillList"></section>
+    <section class="skill-list" id="skillList">
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S1</span>
+            <span class="tag">アクティブ</span>
+            <span class="tag major">攻撃</span>
+            <span class="tag">CT 4</span>
+          </div>
+          <h2>鏡花水月</h2>
+          <p class="summary">全員のクリティカルを底上げしてから撃つ支援魔法。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>味方全体のクリティカル率+20%・クリダメ強化+20%(2ターン)</li><li>ランダムな敵5体に魔法<span class="ratio">380%</span></li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>ランダム敵5体</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 1900%</dd></dl><dl class="data-item"><dt>継続</dt><dd>2T / 専用Lv1で4T</dd></dl></div>
+          <div><h3 class="block-title">かみ合わせ</h3><ul class="verification-list synergy-list">
+        <li>
+          クリティカル依存のアタッカーや、クリ回数を条件に持つ味方と噛み合う。根拠: バフの内容がクリティカル率・クリダメ強化のため
+          
+        </li>
+      </ul></div>
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用Lv1</th><td>クリティカル率増加とクリダメ強化増加が4ターンになる</td></tr></table></div>
+        </div>
+      </article>
+    
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S2</span>
+            <span class="tag">アクティブ</span>
+            <span class="tag major">攻撃</span>
+            <span class="tag">CT 4</span>
+          </div>
+          <h2>胡蝶之夢</h2>
+          <p class="summary">弱体持ちの敵に1.5倍で刺さる全体魔法。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>ランダムな敵5体に魔法<span class="ratio">560%</span></li><li>攻撃前、対象が弱体効果中なら1.5倍</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>ランダム敵5体</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 2800% / 最大 4650%</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用Lv3</th><td>魔法攻撃が620%になる</td></tr></table></div>
+        </div>
+      </article>
+    
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S3</span>
+            <span class="tag">パッシブ</span>
+            <span class="tag major">防御</span>
+            
+          </div>
+          <h2>孤高の月</h2>
+          <p class="summary">無傷の間だけ、反撃が魔力参照の高倍率になる。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>バトル開始時、自身にカウンタ変更を4ターン付与(カウンタダメージが魔力300%、解除不可)</li><li>毎ターン開始時または被攻撃時、HP割合が100%未満ならカウンタ変更は解除</li><li>1ターン目開始時、攻撃力400%のシールドを4ターン付与</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>自身 / 味方</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>カウンタダメージ魔力300% / シールド攻撃力400%</dd></dl><dl class="data-item"><dt>継続</dt><dd>4T</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用Lv2</th><td>カウンタダメージ魔力600%、シールド攻撃力1000%、自身以外のソーサラー味方1体以上ならカウンタダメージ魔力900%</td></tr></table></div>
+        </div>
+      </article>
+    
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S4</span>
+            <span class="tag">パッシブ</span>
+            <span class="tag major">敵弱体</span>
+            
+          </div>
+          <h2>夢幻の姫</h2>
+          <p class="summary">弱体を撃ってきた敵に貫通・攻撃力ダウンで反撃する。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>自身がアクティブスキルで弱体を受けたとき、70%の確率で発動</li><li>弱体を付与してきた敵の物魔防御貫通を50%減少・攻撃力を20%減少(4ターン)</li><li>バトル開始時、自身の被ダメージを40%減少(解除不可)</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>敵 / 自身</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>物魔防御貫通50%減少 / 攻撃力20%減少 / 被ダメージ40%減少</dd></dl><dl class="data-item"><dt>継続</dt><dd>4T / 解除不可</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用</th><td>専用武器効果なし</td></tr></table></div>
+        </div>
+      </article>
+    </section>
   </main>
 
   <footer>

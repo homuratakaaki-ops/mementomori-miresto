@@ -4,29 +4,143 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>セルリア | ミレストのメメントモリ分析データ室</title>
-  <meta name="description" content="セルリアのスキルを、効果の順番・対象・火力・検証情報に分けて確認するためのデータページです。">
+  <meta name="description" content="セルリア(藍属性・スナイパー)のスキル4種を効果の順番・対象・倍率で分解。S1 エンシェントスペル、S2 ミスティックコードほか。">
   <link rel="canonical" href="https://memento.musoudc.com/pages/characters/serruria.html">
   <link rel="stylesheet" href="../../assets/character-page.css">
+  <script src="../../js/render-character.js" defer></script>
   <script src="../../js/character-page.js" defer></script>
 </head>
-<body data-character-page data-character-id="serruria">
+<body data-character-page data-character-id="serruria" data-attribute="藍" data-prerendered>
   <header class="page-header">
     <div class="header-inner">
       <a class="top-link" href="./index.html">キャラ一覧へ戻る</a>
       <p class="eyebrow">CHARACTER SKILL DATA</p>
       <h1 id="characterName">セルリア</h1>
-      <p class="role" id="roleMemo"></p>
-      <div class="meta-row" id="characterMeta"></div>
+      <p class="role" id="roleMemo">制限解除と高倍率シールドで耐えるスナイパー</p>
+      <div class="meta-row" id="characterMeta"><span class="badge attribute">藍</span><span class="badge">スナイパー</span><span class="badge">スピード 2632</span><span class="badge">入手 星の導き</span></div>
     </div>
   </header>
 
   <main>
-    <section class="note-panel" id="notePanel" hidden>
+    <section class="note-panel" id="notePanel">
       <strong>評価・運用メモはnoteへ</strong><br>
       このページでは検証済みデータと出典整理に絞ります。評価や編成判断は外部記事で確認してください。<br>
-      <a id="noteLink" href="#" target="_blank" rel="noopener">ミレストのnote記事を開く</a>
+      <a id="noteLink" href="https://note.com/musoudc/n/n42c9f2bc9bc2" target="_blank" rel="noopener">ミレストのnote記事を開く</a>
     </section>
-    <section class="skill-list" id="skillList"></section>
+    <section class="skill-list" id="skillList">
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S1</span>
+            <span class="tag">アクティブ</span>
+            <span class="tag major">攻撃</span>
+            <span class="tag">CT 4</span>
+          </div>
+          <h2>エンシェントスペル</h2>
+          <p class="summary">味方が倒れるほど連撃が増える逆境スキル。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>ランダムな敵に物理<span class="ratio">480%</span>×3回</li><li>戦闘不能の味方1体につき攻撃回数+1(最大7回)</li><li>制限解除中なら戦闘不能数に関わらず7回</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>ランダム敵</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 1440%</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用</th><td>Lv1: 物理<span class="ratio">240%</span>→440% / Lv3: 物理<span class="ratio">440%</span>→480%</td></tr></table></div>
+        </div>
+      </article>
+    
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S2</span>
+            <span class="tag">アクティブ</span>
+            <span class="tag major">攻撃</span>
+            <span class="tag">CT 4</span>
+          </div>
+          <h2>ミスティックコード</h2>
+          <p class="summary">味方が倒れるほど倍率が跳ねる逆境砲。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>ランダムな敵3体に物理<span class="ratio">480%</span></li><li>戦闘不能の味方1体につき+200%(最大1280%)</li><li>制限解除中なら常に1280%</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>ランダム敵3体</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 1440% / 最大 3840%</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用</th><td>専用武器効果なし</td></tr></table></div>
+        </div>
+      </article>
+    
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S3</span>
+            <span class="tag">パッシブ</span>
+            <span class="tag major">味方強化</span>
+            
+          </div>
+          <h2>ロストテクノロジー</h2>
+          <p class="summary">バフを剥がされたら「制限解除」で反撃モードに入る。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>自身が敵からバフを解除されたとき、味方全体の命中率を50%増加(6ターン)し、自身に制限解除を付与</li><li>制限解除中は自身の攻撃力+30%</li><li>バトル開始時、自身の命中率+10%(6ターン)</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>自身 / 味方全体</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>攻撃力30%</dd></dl><dl class="data-item"><dt>継続</dt><dd>自身が敵からバフを解除された時、6ターン味方全体の命中率50%増加 / バトル開始時6ターン自身の命中率10%増加</dd></dl></div>
+          <div><h3 class="block-title">かみ合わせ</h3><ul class="verification-list synergy-list">
+        <li>
+          バフ解除を多用してくる敵に対してこそ本領が出る逆用設計。S1・S2の制限解除条件もここで解禁される。根拠: 発動条件が「敵にバフを解除されたとき」のため
+          
+        </li>
+      </ul></div>
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用</th><td>Lv2: 味方全体の命中率30%→50%</td></tr></table></div>
+        </div>
+      </article>
+    
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S4</span>
+            <span class="tag">パッシブ</span>
+            <span class="tag major">防御</span>
+            
+          </div>
+          <h2>人見知りな努力家</h2>
+          <p class="summary">開幕の大型シールド。序盤は被弾でも張り直される。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>1ターン目開始時、自身に攻撃力800%のシールドを6ターン付与(解除不可)</li><li>被攻撃回数5/10/15/20回でシールドを再付与</li><li>再付与は3ターン目以降は発動しない</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>1ターン目開始時、自身</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>攻撃力800%</dd></dl><dl class="data-item"><dt>継続</dt><dd>1ターン目開始時、自身に6ターン攻撃力800%のシールド / 再付与は3ターン目以降は発動しない</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用</th><td>専用武器効果なし</td></tr></table></div>
+        </div>
+      </article>
+    </section>
   </main>
 
   <footer>

@@ -4,29 +4,143 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>フレイシア | ミレストのメメントモリ分析データ室</title>
-  <meta name="description" content="フレイシアのスキルを、効果の順番・対象・火力・検証情報に分けて確認するためのデータページです。">
+  <meta name="description" content="フレイシア(紅属性・ソーサラー)のスキル4種を効果の順番・対象・倍率で分解。S1 ファイナルテンペスト、S2 エデンフラワーほか。">
   <link rel="canonical" href="https://memento.musoudc.com/pages/characters/freycia.html">
   <link rel="stylesheet" href="../../assets/character-page.css">
+  <script src="../../js/render-character.js" defer></script>
   <script src="../../js/character-page.js" defer></script>
 </head>
-<body data-character-page data-character-id="freycia">
+<body data-character-page data-character-id="freycia" data-attribute="紅" data-prerendered>
   <header class="page-header">
     <div class="header-inner">
       <a class="top-link" href="./index.html">キャラ一覧へ戻る</a>
       <p class="eyebrow">CHARACTER SKILL DATA</p>
       <h1 id="characterName">フレイシア</h1>
-      <p class="role" id="roleMemo"></p>
-      <div class="meta-row" id="characterMeta"></div>
+      <p class="role" id="roleMemo">回復と被ダメージ減少で支える紅属性ソーサラー</p>
+      <div class="meta-row" id="characterMeta"><span class="badge attribute">紅</span><span class="badge">ソーサラー</span><span class="badge">スピード 2680</span><span class="badge">入手 恒常</span></div>
     </div>
   </header>
 
   <main>
-    <section class="note-panel" id="notePanel" hidden>
+    <section class="note-panel" id="notePanel">
       <strong>評価・運用メモはnoteへ</strong><br>
       このページでは検証済みデータと出典整理に絞ります。評価や編成判断は外部記事で確認してください。<br>
-      <a id="noteLink" href="#" target="_blank" rel="noopener">ミレストのnote記事を開く</a>
+      <a id="noteLink" href="https://note.com/musoudc/n/na66efd3932c2" target="_blank" rel="noopener">ミレストのnote記事を開く</a>
     </section>
-    <section class="skill-list" id="skillList"></section>
+    <section class="skill-list" id="skillList">
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S1</span>
+            <span class="tag">アクティブ</span>
+            <span class="tag major">攻撃</span>
+            <span class="tag">CT 4</span>
+          </div>
+          <h2>ファイナルテンペスト</h2>
+          <p class="summary">3体攻撃と、弱った敵への追い打ち。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>ランダムな敵3体に魔法<span class="ratio">280%</span></li><li>HP割合が最も低い敵に、総与ダメージ20%の直接攻撃を追加</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>ランダム敵3体 / HP割合最低敵</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 840% / 最大 1400%</dd></dl><dl class="data-item"><dt>継続</dt><dd>専用Lv1で1ターンクリダメ強化15%減少</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用Lv1</th><td>魔力が低い対象にクリダメ強化15%減少。</td></tr><tr><th>専用Lv2</th><td>対象5体。</td></tr><tr><th>専用Lv3</th><td>直接攻撃25%</td></tr></table></div>
+        </div>
+      </article>
+    
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S2</span>
+            <span class="tag">アクティブ</span>
+            <span class="tag major">回復・復活</span>
+            <span class="tag">CT 4</span>
+          </div>
+          <h2>エデンフラワー</h2>
+          <p class="summary">傷ついた味方3人を回復。瀕死なら1.5倍と防御バフ。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>HP割合が低い味方3体を魔力270%分回復</li><li>対象のHP割合が15%以下なら回復量1.5倍</li><li>対象のHP割合が15%以下なら、さらに防御力+20%(2ターン)</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>HP割合が低い味方3体</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>魔力270%回復</dd></dl><dl class="data-item"><dt>継続</dt><dd>防御力増加2T</dd></dl></div>
+          <div><h3 class="block-title">かみ合わせ</h3><ul class="verification-list synergy-list">
+        <li>
+          アクティブスキルの回復のため、アクティブ回復回数を参照する味方のスタック源になる。根拠: アクティブスキルによる回復のため
+          
+        </li>
+      </ul></div>
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用</th><td>専用武器効果なし</td></tr></table></div>
+        </div>
+      </article>
+    
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S3</span>
+            <span class="tag">パッシブ</span>
+            <span class="tag major">防御</span>
+            
+          </div>
+          <h2>虹色の光風</h2>
+          <p class="summary">生きている限り、全員の被ダメと回避を底上げ。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>自身が生存している間、味方全体の被ダメージ15%減少・回避率+15%(解除不可)</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>味方全体</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>被ダメージ15%減少 / 回避率+15%</dd></dl><dl class="data-item"><dt>継続</dt><dd>解除不可</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用</th><td>専用武器効果なし</td></tr></table></div>
+        </div>
+      </article>
+    
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S4</span>
+            <span class="tag">パッシブ</span>
+            <span class="tag major">攻撃</span>
+            
+          </div>
+          <h2>ココロのタネ</h2>
+          <p class="summary">通常攻撃のついでに回復が飛ぶことがある。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>通常攻撃時、30%の確率で自身とHP割合が最も低い味方を攻撃力20%分回復</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>自身 / HP割合最低味方</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常攻撃強化 / 攻撃力20%回復</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用</th><td>専用武器効果なし</td></tr></table></div>
+        </div>
+      </article>
+    </section>
   </main>
 
   <footer>

@@ -4,19 +4,20 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>ポプリ | ミレストのメメントモリ分析データ室</title>
-  <meta name="description" content="ポプリのスキルを、効果の順番・対象・火力・検証情報に分けて確認するためのデータページです。">
+  <meta name="description" content="ポプリ(黄属性・スナイパー)のスキル4種を効果の順番・対象・倍率で分解。S1 言ノ葉の風、S2 凍える声ほか。">
   <link rel="canonical" href="https://memento.musoudc.com/pages/characters/potpourri.html">
   <link rel="stylesheet" href="../../assets/character-page.css">
+  <script src="../../js/render-character.js" defer></script>
   <script src="../../js/character-page.js" defer></script>
 </head>
-<body data-character-page data-character-id="potpourri">
+<body data-character-page data-character-id="potpourri" data-attribute="黄" data-prerendered>
   <header class="page-header">
     <div class="header-inner">
       <a class="top-link" href="./index.html">キャラ一覧へ戻る</a>
       <p class="eyebrow">CHARACTER SKILL DATA</p>
       <h1 id="characterName">ポプリ</h1>
-      <p class="role" id="roleMemo"></p>
-      <div class="meta-row" id="characterMeta"></div>
+      <p class="role" id="roleMemo">言霊スタックで後半火力を跳ね上げる黄のスナイパー</p>
+      <div class="meta-row" id="characterMeta"><span class="badge attribute">黄</span><span class="badge">スナイパー</span><span class="badge">スピード 3036</span><span class="badge">入手 PU・運命</span></div>
     </div>
   </header>
 
@@ -26,7 +27,120 @@
       このページでは検証済みデータと出典整理に絞ります。評価や編成判断は外部記事で確認してください。<br>
       <a id="noteLink" href="#" target="_blank" rel="noopener">ミレストのnote記事を開く</a>
     </section>
-    <section class="skill-list" id="skillList"></section>
+    <section class="skill-list" id="skillList">
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S1</span>
+            <span class="tag">アクティブ</span>
+            <span class="tag major">攻撃</span>
+            <span class="tag">CT 4</span>
+          </div>
+          <h2>言ノ葉の風</h2>
+          <p class="summary">「言霊」を貯めながら撃つ準備スキル。3スタックから3倍に。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>自身に「言霊のおまじない」を1スタック付与(最大5スタック、解除不可)</li><li>スピードが最も高い敵に物理<span class="ratio">210%</span>×4回</li><li>言霊3スタック以上なら倍率630%</li><li>黄属性の味方の数に応じて付与スタック数が増える</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>スピードが最も高い敵</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 840% / 最大 3780%</dd></dl><dl class="data-item"><dt>継続</dt><dd>言霊スタック付与</dd></dl></div>
+          <div><h3 class="block-title">かみ合わせ</h3><ul class="verification-list synergy-list">
+        <li>
+          黄属性で染めるほど言霊が早く貯まる。
+          <br><span class="reason">根拠: スタック付与数の条件が黄属性味方の数のため</span>
+        </li>
+      </ul></div>
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用Lv1</th><td>攻撃回数4→6回。</td></tr><tr><th>専用Lv3</th><td>命中率増加4→5%</td></tr></table></div>
+        </div>
+      </article>
+    
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S2</span>
+            <span class="tag">アクティブ</span>
+            <span class="tag major">攻撃</span>
+            <span class="tag">CT 4</span>
+          </div>
+          <h2>凍える声</h2>
+          <p class="summary">言霊5スタックで8倍に跳ねる大砲。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>スピードが最も高い敵に物理<span class="ratio">340%</span>×4回</li><li>言霊3スタック以上で1020%、5スタックで2720%</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>スピードが最も高い敵</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 1360% / 最大 10880%</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用</th><td>専用武器効果なし</td></tr></table></div>
+        </div>
+      </article>
+    
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S3</span>
+            <span class="tag">パッシブ</span>
+            <span class="tag major">防御</span>
+            
+          </div>
+          <h2>先生の教え</h2>
+          <p class="summary">スタックを貯める時間を稼ぐ自己耐久。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>ターン開始時、クリティカル耐性+40%・防御力と物理防御力+100%(4ターン)</li><li>発動後4回行動まで再発動しない</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>自身</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>クリ耐性+40% / 防御・物防+100%</dd></dl><dl class="data-item"><dt>継続</dt><dd>4T</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用Lv2</th><td>クリ耐性60%</td></tr></table></div>
+        </div>
+      </article>
+    
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S4</span>
+            <span class="tag">パッシブ</span>
+            <span class="tag major">味方強化</span>
+            
+          </div>
+          <h2>言霊の魔法</h2>
+          <p class="summary">味方のバフを守るカバーと、自分の6割カット。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>ターン開始時、味方全体にバフカバーを付与(4ターン)</li><li>自身の被ダメージを60%減少(解除不可)</li><li>発動後4回行動まで再発動しない</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>味方全体 / 自身</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>バフカバー / 被ダメ60%減少</dd></dl><dl class="data-item"><dt>継続</dt><dd>4T</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用</th><td>専用武器効果なし</td></tr></table></div>
+        </div>
+      </article>
+    </section>
   </main>
 
   <footer>

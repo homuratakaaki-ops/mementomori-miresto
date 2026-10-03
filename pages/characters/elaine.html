@@ -4,19 +4,20 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>エレイン | ミレストのメメントモリ分析データ室</title>
-  <meta name="description" content="エレインのスキルを、効果の順番・対象・火力・検証情報に分けて確認するためのデータページです。">
+  <meta name="description" content="エレイン(冥属性・スナイパー)のスキル4種を効果の順番・対象・倍率で分解。S1 ソウルウィスパー、S2 魂剥ぎほか。">
   <link rel="canonical" href="https://memento.musoudc.com/pages/characters/elaine.html">
   <link rel="stylesheet" href="../../assets/character-page.css">
+  <script src="../../js/render-character.js" defer></script>
   <script src="../../js/character-page.js" defer></script>
 </head>
-<body data-character-page data-character-id="elaine">
+<body data-character-page data-character-id="elaine" data-attribute="冥" data-prerendered>
   <header class="page-header">
     <div class="header-inner">
       <a class="top-link" href="./index.html">キャラ一覧へ戻る</a>
       <p class="eyebrow">CHARACTER SKILL DATA</p>
       <h1 id="characterName">エレイン</h1>
-      <p class="role" id="roleMemo"></p>
-      <div class="meta-row" id="characterMeta"></div>
+      <p class="role" id="roleMemo">霊痕で弱体解除と回復を支える冥スナイパー</p>
+      <div class="meta-row" id="characterMeta"><span class="badge attribute">冥</span><span class="badge">スナイパー</span><span class="badge">スピード 2843</span><span class="badge">入手 PU・運命</span></div>
     </div>
   </header>
 
@@ -26,7 +27,120 @@
       このページでは検証済みデータと出典整理に絞ります。評価や編成判断は外部記事で確認してください。<br>
       <a id="noteLink" href="#" target="_blank" rel="noopener">ミレストのnote記事を開く</a>
     </section>
-    <section class="skill-list" id="skillList"></section>
+    <section class="skill-list" id="skillList">
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S1</span>
+            <span class="tag">アクティブ</span>
+            <span class="tag major">敵弱体</span>
+            <span class="tag">CT 4</span>
+          </div>
+          <h2>ソウルウィスパー</h2>
+          <p class="summary">敵のデバフ命中を下げて、味方を状態異常から守る先制妨害。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>ランダムな敵3体に物理<span class="ratio">220%</span></li><li>70%の確率で弱体効果命中率減少を4ターン付与</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>ランダム敵3-5体</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 660% / 最大 1200%</dd></dl><dl class="data-item"><dt>継続</dt><dd>弱体効果命中率減少4T</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用Lv1</th><td>対象5体。</td></tr><tr><th>専用Lv3</th><td>物理<span class="ratio">240%</span></td></tr></table></div>
+        </div>
+      </article>
+    
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S2</span>
+            <span class="tag">アクティブ</span>
+            <span class="tag major">攻撃</span>
+            <span class="tag">CT 4</span>
+          </div>
+          <h2>魂剥ぎ</h2>
+          <p class="summary">霊痕をまとうと化ける本命アタック。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>ランダムな敵2体に物理<span class="ratio">720%</span></li><li>自身が霊痕を付帯していると倍率・回数が上がる(最大1980%×3回)</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>ランダム敵2-3体</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 1440% / 最大 5940%</dd></dl></div>
+          <div><h3 class="block-title">かみ合わせ</h3><ul class="verification-list synergy-list">
+        <li>
+          霊痕はS3(味方がHP30%以下まで削られたとき)で付くため、まったく被弾しない試合では強化が発動しない。
+          <br><span class="reason">根拠: 霊痕の付与条件がS3の発動条件のため</span>
+        </li>
+      </ul></div>
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用</th><td>専用武器での直接強化なし</td></tr></table></div>
+        </div>
+      </article>
+    
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S3</span>
+            <span class="tag">パッシブ</span>
+            <span class="tag major">解除・操作</span>
+            
+          </div>
+          <h2>堕ちた天使の神官</h2>
+          <p class="summary">瀕死の味方を自動で治し、霊痕を宿す救護パッシブ。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>味方が攻撃を受け、HP30%以下で生き残り、霊痕を持たない場合に発動</li><li>その味方の弱体を解除し、HPを回復(攻撃力100〜400%)し、霊痕を付与(解除不可)</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>HP30%以下で生存する味方 / 霊痕味方全体</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>攻撃力100-400%回復</dd></dl><dl class="data-item"><dt>継続</dt><dd>霊痕解除不可</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用</th><td>専用武器での直接強化なし</td></tr></table></div>
+        </div>
+      </article>
+    
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S4</span>
+            <span class="tag">パッシブ</span>
+            <span class="tag major">防御</span>
+            
+          </div>
+          <h2>霊魂の魔女</h2>
+          <p class="summary">開幕から自分とエースを硬くする常時の守り。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>バトル開始時、自身と攻撃力が最も高い味方の防御力・魔法防御力を増加(6ターン・解除不可)</li><li>自身にはさらに被ダメージ減少を付与</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>自身と攻撃力が最も高い味方</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>防御力+10-80% / 魔法防御力+10-40%</dd></dl><dl class="data-item"><dt>継続</dt><dd>6T / 解除不可</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用Lv2</th><td>防御力80%、魔法防御力40%、魔法クリダメ緩和20%</td></tr></table></div>
+        </div>
+      </article>
+    </section>
   </main>
 
   <footer>

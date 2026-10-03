@@ -8,6 +8,21 @@
   例：`speed-calc.html`
 - リポジトリルート直下のHTMLファイルは、Git管理下の本番ファイルです。
 - 共有データは `data/` 配下で管理します。
+
+## キャラページの生成（必須）
+
+- キャラページ（`pages/characters/*.html`）とキャラ一覧（`pages/characters/index.html`）は
+  **公開前にHTMLへ本文を書き込む事前生成方式**です。JSを無効にしても本文が全部読める状態を保ちます。
+- **`data/` 配下のJSON（`mementomori-skills.json` / `terms.json` / `news.json`）を変更したら、
+  必ず `node scripts/build-character-pages.mjs` を実行してHTMLを再生成し、
+  JSONと生成されたHTMLを同じコミットに含めること。**
+  再生成を忘れると、サイトの表示がJSONと食い違ったまま公開されます。
+- 描画のHTML組み立ては `js/render-character.js` と `js/render-character-index.js` に集約します。
+  ビルドスクリプトとブラウザ側の両方がこのモジュールを使うため、
+  **描画ロジックをビルド側とブラウザ側で二重に書かないこと。**
+- キャラデータの唯一の正は `data/mementomori-skills.json` です。
+  `data/*-overlay.json` は参照しません（2026-10-03に参照を廃止）。
+  キャラやスキルの追加・修正はすべて `mementomori-skills.json` に対して行うこと。
 - 指示書に記載されたパスと実ファイルの場所が食い違う場合は、
   作業を進めず、その旨を報告してください。
 

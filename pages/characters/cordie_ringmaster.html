@@ -4,29 +4,138 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>[サーカスの団長]コルディ | ミレストのメメントモリ分析データ室</title>
-  <meta name="description" content="[サーカスの団長]コルディのスキルを、効果の順番・対象・火力・検証情報に分けて確認するためのデータページです。">
+  <meta name="description" content="[サーカスの団長]コルディ(藍属性・ウォーリア)のスキル4種を効果の順番・対象・倍率で分解。S1 ファンファーレ!!、S2 クイック&amp;スターほか。">
   <link rel="canonical" href="https://memento.musoudc.com/pages/characters/cordie_ringmaster.html">
   <link rel="stylesheet" href="../../assets/character-page.css">
+  <script src="../../js/render-character.js" defer></script>
   <script src="../../js/character-page.js" defer></script>
 </head>
-<body data-character-page data-character-id="cordie_ringmaster">
+<body data-character-page data-character-id="cordie_ringmaster" data-attribute="藍" data-prerendered>
   <header class="page-header">
     <div class="header-inner">
       <a class="top-link" href="./index.html">キャラ一覧へ戻る</a>
       <p class="eyebrow">CHARACTER SKILL DATA</p>
       <h1 id="characterName">[サーカスの団長]コルディ</h1>
-      <p class="role" id="roleMemo"></p>
-      <div class="meta-row" id="characterMeta"></div>
+      <p class="role" id="roleMemo">笑顔喝采で火力を伸ばす藍属性ウォーリア</p>
+      <div class="meta-row" id="characterMeta"><span class="badge attribute">藍</span><span class="badge">ウォーリア</span><span class="badge">スピード 2662</span><span class="badge">入手 PU・運命</span><span class="badge">PU履歴：1回目 2026/8/6〜8/24（終了）</span></div>
     </div>
   </header>
 
   <main>
-    <section class="note-panel" id="notePanel" hidden>
+    <section class="note-panel" id="notePanel">
       <strong>評価・運用メモはnoteへ</strong><br>
       このページでは検証済みデータと出典整理に絞ります。評価や編成判断は外部記事で確認してください。<br>
-      <a id="noteLink" href="#" target="_blank" rel="noopener">ミレストのnote記事を開く</a>
+      <a id="noteLink" href="https://note.com/musoudc/n/n7c24b65e7afc" target="_blank" rel="noopener">ミレストのnote記事を開く</a>
     </section>
-    <section class="skill-list" id="skillList"></section>
+    <section class="skill-list" id="skillList">
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S1</span>
+            <span class="tag">アクティブ</span>
+            <span class="tag major">攻撃</span>
+            <span class="tag">CT 4</span>
+          </div>
+          <h2>ファンファーレ!!</h2>
+          <p class="summary">高倍率で3体を殴る主砲。代償に自分がわずかに遅くなる。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>ランダムな敵3体に物理<span class="ratio">880%</span></li><li>攻撃前に自身の笑顔喝采が5スタックなら物理<span class="ratio">1320%</span></li><li>自身のスピードを1ターン5%減少(この付与は命中率・耐性率を無視)</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>ランダム敵3体</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 2640% / 最大 3960%</dd></dl><dl class="data-item"><dt>継続</dt><dd>1ターン自身のスピード5%減少（弱体効果命中率・弱体効果耐性率を無視）</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用</th><td>Lv1: 対象が敵3体に増加</td></tr></table></div>
+        </div>
+      </article>
+    
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S2</span>
+            <span class="tag">アクティブ</span>
+            <span class="tag major">攻撃</span>
+            <span class="tag">CT 4</span>
+          </div>
+          <h2>クイック&amp;スター</h2>
+          <p class="summary">敵が残り1体になると連打に変わる、詰めの一撃。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>ランダムな敵3体に物理<span class="ratio">1180%</span></li><li>敵の生存が1体なら攻撃回数3回</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>ランダム敵3体</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 3540%</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用</th><td>Lv3: 物理<span class="ratio">1080%</span>→1180%</td></tr></table></div>
+        </div>
+      </article>
+    
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S3</span>
+            <span class="tag">パッシブ</span>
+            <span class="tag major">解除・操作</span>
+            
+          </div>
+          <h2>みんなの笑顔のために</h2>
+          <p class="summary">弱体を受けるほど強くなり、自分で解除もする逆転パッシブ。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>アクティブスキルで弱体を受けると笑顔喝采1スタック(行動阻害なら5スタック)</li><li>1スタックごとに攻撃力+10%(最大5スタック)</li><li>行動開始時、自身の弱体効果を3つ解除</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>自身</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>攻撃力10%</dd></dl><dl class="data-item"><dt>継続</dt><dd>解除不可</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用</th><td>専用武器効果なし</td></tr></table></div>
+        </div>
+      </article>
+    
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S4</span>
+            <span class="tag">パッシブ</span>
+            <span class="tag major">防御</span>
+            
+          </div>
+          <h2>フランサーカス団団長</h2>
+          <p class="summary">常時6割カットと開幕シールドの守り。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>自身の被ダメージを60%減少(解除不可)</li><li>1ターン目開始時、攻撃力500%のシールドを4ターン付与</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>自身 / 専用Lv2で藍属性味方全体</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>攻撃力500%</dd></dl><dl class="data-item"><dt>継続</dt><dd>1ターン目開始時、4ターン自身に攻撃力500%のシールド</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用</th><td>Lv2: バトル開始時、藍属性味方全体に多重バリア2層（最大HP10%以上の被ダメ時に1層消費）</td></tr></table></div>
+        </div>
+      </article>
+    </section>
   </main>
 
   <footer>

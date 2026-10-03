@@ -4,19 +4,20 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>[錆鉄の空]A.A. | ミレストのメメントモリ分析データ室</title>
-  <meta name="description" content="[錆鉄の空]A.A.のスキルを、効果の順番・対象・火力・検証情報に分けて確認するためのデータページです。">
+  <meta name="description" content="[錆鉄の空]A.A.(天属性・ソーサラー)のスキル4種を効果の順番・対象・倍率で分解。S1 ラスト・レクイエム、S2 錆鉄の崩翼ほか。">
   <link rel="canonical" href="https://memento.musoudc.com/pages/characters/aa_rusted_sky.html">
   <link rel="stylesheet" href="../../assets/character-page.css">
+  <script src="../../js/render-character.js" defer></script>
   <script src="../../js/character-page.js" defer></script>
 </head>
-<body data-character-page data-character-id="aa_rusted_sky">
+<body data-character-page data-character-id="aa_rusted_sky" data-attribute="天" data-prerendered>
   <header class="page-header">
     <div class="header-inner">
       <a class="top-link" href="./index.html">キャラ一覧へ戻る</a>
       <p class="eyebrow">CHARACTER SKILL DATA</p>
       <h1 id="characterName">[錆鉄の空]A.A.</h1>
-      <p class="role" id="roleMemo"></p>
-      <div class="meta-row" id="characterMeta"></div>
+      <p class="role" id="roleMemo">沈黙無効と解除不可シールドで味方を守る天属性サポート</p>
+      <div class="meta-row" id="characterMeta"><span class="badge attribute">天</span><span class="badge">ソーサラー</span><span class="badge">スピード 2607</span><span class="badge">入手 PU・運命</span></div>
     </div>
   </header>
 
@@ -26,7 +27,120 @@
       このページでは検証済みデータと出典整理に絞ります。評価や編成判断は外部記事で確認してください。<br>
       <a id="noteLink" href="#" target="_blank" rel="noopener">ミレストのnote記事を開く</a>
     </section>
-    <section class="skill-list" id="skillList"></section>
+    <section class="skill-list" id="skillList">
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S1</span>
+            <span class="tag">アクティブ</span>
+            <span class="tag major">攻撃</span>
+            <span class="tag">CT 4</span>
+          </div>
+          <h2>ラスト・レクイエム</h2>
+          <p class="summary">多重バリアで防がれたら、もう一発同じ威力で撃ち直す。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>ランダムな敵3体に魔法<span class="ratio">680%</span></li><li>多重バリアで無効化された場合、同じ対象に魔法<span class="ratio">680%</span>の追加攻撃(最大1回)</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>ランダム敵</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 2040% / 最大 6800%</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用Lv1</th><td>対象が敵3体→5体</td></tr></table></div>
+        </div>
+      </article>
+    
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S2</span>
+            <span class="tag">アクティブ</span>
+            <span class="tag major">攻撃</span>
+            <span class="tag">CT 4</span>
+          </div>
+          <h2>錆鉄の崩翼</h2>
+          <p class="summary">S1の大型版。バリア持ちには実質2連発。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>ランダムな敵3体に魔法<span class="ratio">1640%</span></li><li>多重バリアで無効化された場合、同じ対象に魔法<span class="ratio">1640%</span>の追加攻撃(最大1回)</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>ランダム敵3体</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 4920% / 最大 10740%</dd></dl></div>
+          <div><h3 class="block-title">かみ合わせ</h3><ul class="verification-list synergy-list">
+        <li>
+          多重バリアで守る敵への対策枠。ルミカ(無視型)とはアプローチ違いの同役割。根拠: 追加攻撃の条件が「多重バリアによる無効化」のため
+          
+        </li>
+      </ul></div>
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用Lv3</th><td>最初と追加攻撃が各1640%→1790%</td></tr></table></div>
+        </div>
+      </article>
+    
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S3</span>
+            <span class="tag">パッシブ</span>
+            <span class="tag major">防御</span>
+            
+          </div>
+          <h2>天使の残光</h2>
+          <p class="summary">沈黙ガードと、定期的に来る大型シールド。自分が倒れても働く。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>開始時、攻撃力が高い味方3体に<details class="term"><summary>沈黙</summary><span class="term-box">アクティブスキルの使用を封じる状態異常。通常攻撃やパッシブの扱いは効果内容に従う。</span></details>無効を1ターン付与</li><li>1・11・21・31ターン開始時、攻撃力が最も高い味方に最大HP30%の解除不可シールドを1ターン付与</li><li>味方編成内で同じ属性の味方が3体以上なら、シールド対象が攻撃力が高い味方3体になる</li><li>自身が戦闘不能でも発動する</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>攻撃力が高い味方3体 / 攻撃力最高味方</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>沈黙無効1T / 最大HP30%解除不可シールド</dd></dl><dl class="data-item"><dt>継続</dt><dd>1T</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用Lv2</th><td>シールド量30%→100%</td></tr></table></div>
+        </div>
+      </article>
+    
+      <article class="skill-card">
+        <header class="skill-head">
+          <div class="tag-row">
+            <span class="tag">S4</span>
+            <span class="tag">パッシブ</span>
+            <span class="tag major">防御</span>
+            
+          </div>
+          <h2>星に願いを</h2>
+          <p class="summary">6割遮断、序盤はさらに硬い。</p>
+        </header>
+        <div class="skill-body">
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>攻撃を受けたとき、ダメージを60%遮断</li><li>4ターン目のターン終了時までは遮断量80%</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>自身</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>ダメージ60%遮断 / 4ターン目終了時まで80%</dd></dl></div>
+          
+          
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用</th><td>専用武器効果なし</td></tr></table></div>
+        </div>
+      </article>
+    </section>
   </main>
 
   <footer>
