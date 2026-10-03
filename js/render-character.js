@@ -247,18 +247,22 @@
   }
 
   /**
-   * ゲーム内のスキル説明（原文）。スキルカードの最後に折りたたんで置く（初期は閉じた状態）。
-   * 中身はデータの condition（出典の効果説明を比較用に要約したもの）をそのまま出す。
-   * 公式テキストの全文転載は行わない方針のため、要約である旨を添える。
+   * スキル説明（出典と照合済み）。スキルカードの最後に折りたたんで置く（初期は閉じた状態）。
+   * 中身はデータの condition（出典の効果説明を比較用に要約したもの）で、
+   * 公式テキストの全文転載は行わない。照合先の出典ページへのリンクを添える。
    */
   function renderOriginalText(skill) {
     if (!skill.condition) return "";
+    const source = skill.sourceUrl
+      ? `<p class="original-text-source"><a href="${escapeHtml(skill.sourceUrl)}" target="_blank" rel="noopener">照合した出典ページを開く</a></p>`
+      : "";
     return `
         <details class="original-text">
-          <summary>ゲーム内のスキル説明（原文）</summary>
+          <summary>スキル説明（出典と照合済み）</summary>
           <div class="original-text-body">
             <p class="original-text-main">${highlightRatios(skill.condition)}</p>
-            <p class="original-text-note">出典の効果説明を比較用に要約したものです（全文転載ではありません）。</p>
+            <p class="original-text-note">出典の効果説明を比較用に要約したものです（全文転載ではありません）。数値は専用武器なし・スキルLv最大の値です。</p>
+            ${source}
           </div>
         </details>
       `;

@@ -427,6 +427,13 @@ main {
   line-height: 1.7;
 }
 
+.original-text-source {
+  margin: 8px 0 0;
+  font-size: 13px;
+}
+
+.original-text-source a { color: var(--accent-strong); }
+
 .data-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));

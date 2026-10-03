@@ -247,20 +247,75 @@ function validateRenderedCard(skill, html, errors) {
     errors.push(`${skill.id}: 生成HTMLに「いつ・誰に・何が起きる？」が含まれていない`);
   }
 }
-/** 1ファイルも書き出す前に flow を点検する（検証に落ちたら出力を残さない）。 */
+/**
+ * steps / multiplierText に書いた倍率・回数と damage の数値が食い違っていないかを点検する。
+ * 数値の正は sourceUrl の原文（専用武器なし・スキルLv最大）で、ここはその転記ミスを拾う網。
+ */
+function damageTexts(skill) {
+  return [skill.multiplierText, ...(skill.steps || []).map((step) => step.text)].join(" ");
+}
+
+/** 本文に出てくる倍率（攻撃力×N% / 物理N% / 魔法N%）。 */
+function textMultipliers(text) {
+  return [...new Set([...text.matchAll(/(?:攻撃力×|物理|魔法)([0-9]+(?:\.[0-9]+)?)%/g)].map((m) => Number(m[1])))];
+}
+
+/**
+ * 本文から読み取れるヒット数の候補。
+ * 「×N回」「N体」のほか、「正面の敵と隣接する敵N体」は N+1 体、
+ * 「再発動(最大N回)」があるスキルは発動回数ぶん掛けた数も候補に入れる。
+ */
+function textHitCounts(text) {
+  const perCast = new Set();
+  for (const m of text.matchAll(/×([0-9]+)回/g)) perCast.add(Number(m[1]));
+  for (const m of text.matchAll(/([0-9]+)回攻撃/g)) perCast.add(Number(m[1]));
+  for (const m of text.matchAll(/([0-9]+)体/g)) perCast.add(Number(m[1]));
+  for (const m of text.matchAll(/隣接する敵([0-9]+)体/g)) perCast.add(Number(m[1]) + 1);
+  const casts = new Set([1]);
+  for (const m of text.matchAll(/再発動[^。]{0,12}?([0-9]+)回/g)) casts.add(Number(m[1]) + 1);
+  const all = new Set();
+  for (const hits of perCast) for (const cast of casts) all.add(hits * cast);
+  return [...all];
+}
+
+function validateDamageNumbers(skill, errors) {
+  const damage = skill.damage;
+  if (!damage) return;
+  const label = `${skill.id} (S${skill.number} ${skill.name})`;
+  const { singleMultiplier, hitCount, baseTotal } = damage;
+
+  // 倍率が混在するスキル（初撃だけ倍率が違う等）は single×hit で表せないので mixedMultiplier を立てる
+  if (!damage.mixedMultiplier && singleMultiplier && hitCount && baseTotal && singleMultiplier * hitCount !== baseTotal) {
+    errors.push(`${label}: singleMultiplier ${singleMultiplier}% × hitCount ${hitCount} = ${singleMultiplier * hitCount} が baseTotal ${baseTotal} と合わない`);
+  }
+  if (damage.nonAttackMultiplier) return;
+
+  const text = damageTexts(skill);
+  const multipliers = textMultipliers(text);
+  if (singleMultiplier && multipliers.length && !multipliers.includes(singleMultiplier)) {
+    errors.push(`${label}: singleMultiplier ${singleMultiplier}% が steps/multiplierText の倍率[${multipliers.join(", ")}]%に無い`);
+  }
+  const counts = textHitCounts(text);
+  if (hitCount > 1 && counts.length && !counts.includes(hitCount)) {
+    errors.push(`${label}: hitCount ${hitCount} が steps/multiplierText から読み取れる回数[${counts.join(", ")}]に無い`);
+  }
+}
+
+/** 1ファイルも書き出す前にデータを点検する（検証に落ちたら出力を残さない）。 */
 function validateAll({ baseData, terms }) {
   const errors = [];
   let flowSkills = 0;
   for (const skill of baseData.skills || []) {
     validateFlow(skill, errors);
+    validateDamageNumbers(skill, errors);
     if (Array.isArray(skill.flow) && skill.flow.length > 0) {
       flowSkills += 1;
       validateRenderedCard(skill, renderer.renderSkillCard(skill, terms), errors);
     }
   }
   if (errors.length) {
-    for (const message of errors) console.error(`flow検証NG: ${message}`);
-    throw new Error(`flow の検証に失敗しました（${errors.length}件）。上のログを確認してください。`);
+    for (const message of errors) console.error(`検証NG: ${message}`);
+    throw new Error(`データ検証に失敗しました（${errors.length}件）。上のログを確認してください。`);
   }
   return flowSkills;
 }

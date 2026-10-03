@@ -2067,8 +2067,8 @@
         "exclusiveLv1Total": 1260,
         "exclusiveLv2Total": 1260,
         "exclusiveLv3Total": 1260,
-        "conditionMaxTotal": 2860,
-        "conditionMaxNote": "初撃330% + 2-4撃目310% + 追加攻撃400%×4回",
+        "conditionMaxTotal": 2780,
+        "conditionMaxNote": "初撃330% + 2〜4撃目310%×3 + 追加攻撃380%×4回=2780（専用武器なし・スキルLv最大。専用Lv2なら追加攻撃400%で2860）",
         "powerType": "追加攻撃 / 撃破回復",
         "maxStacks": 4,
         "realityRank": "中",
@@ -4880,12 +4880,12 @@
       "majorCategory": "攻撃",
       "subCategory": "純火力",
       "target": "ランダム敵",
-      "multiplierText": "物理480%",
+      "multiplierText": "物理240%×3回 / 専用Lv3で480%",
       "duration": "",
       "ct": 4,
-      "condition": "戦闘不能味方1体につき攻撃回数+1 / 最大7回 / 制限解除中なら戦闘不能数に関わらず7回",
-      "exclusiveWeapon": "Lv1: 物理240%→440% / Lv3: 物理440%→480%",
-      "compareMemo": "ランダム敵に3回物理480% / 戦闘不能味方1体につき攻撃回数+1 / 最大7回 / 制限解除中なら戦闘不能数に関わらず7回",
+      "condition": "ランダムな敵に3回物理240%。戦闘不能の味方1体につき攻撃回数+1（最大7回）。自身が制限解除中なら戦闘不能数に関わらず攻撃回数7回",
+      "exclusiveWeapon": "専用Lv1: 物理攻撃が攻撃力×440%になる。専用Lv3: 物理攻撃が攻撃力×480%になる",
+      "compareMemo": "ランダム敵に3回物理240% / 戦闘不能味方1体につき攻撃回数+1 / 最大7回 / 制限解除中なら戦闘不能数に関わらず7回",
       "noteUrl": "",
       "imageUrl": "",
       "sourceUrl": "https://ichigogames.net/mementomori/serruria/",
@@ -4896,8 +4896,8 @@
         "exclusiveLv1Total": 1320,
         "exclusiveLv2Total": 1320,
         "exclusiveLv3Total": 1440,
-        "conditionMaxTotal": 3360,
-        "conditionMaxNote": "両データとも single=480(専用Lv3値)。原文の無条件は240%×3回=720。専用Lv1で440%、専用Lv3で480%。制限解除時7回で3360。base の baseTotal=1440・条件MAX=1440 も誤り",
+        "conditionMaxTotal": 1680,
+        "conditionMaxNote": "制限解除中または戦闘不能の味方4体以上で7回。240%×7回=1680（専用武器なし・スキルLv最大）",
         "powerType": "攻撃回数条件火力",
         "maxStacks": null,
         "realityRank": "中",
@@ -4907,7 +4907,7 @@
       "plainSummary": "味方が倒れるほど連撃が増える逆境スキル。",
       "steps": [
         {
-          "text": "ランダムな敵に物理480%×3回"
+          "text": "ランダムな敵に物理240%×3回"
         },
         {
           "text": "戦闘不能の味方1体につき攻撃回数+1(最大7回)"
@@ -5199,13 +5199,13 @@
       "category": "火力",
       "majorCategory": "攻撃",
       "subCategory": "条件火力",
-      "target": "ランダム敵3体",
+      "target": "ランダム敵2体",
       "multiplierText": "物理880% / 物理1320%",
       "duration": "1ターン自身のスピード5%減少（弱体効果命中率・弱体効果耐性率を無視）",
       "ct": 4,
-      "condition": "1ターン自身のスピード5%減少（弱体効果命中率・弱体効果耐性率を無視）",
-      "exclusiveWeapon": "Lv1: 対象が敵3体に増加",
-      "compareMemo": "1ターン自身のスピード5%減少（弱体効果命中率・弱体効果耐性率を無視） / ランダム敵3体に物理880% / 笑顔喝采5スタックなら物理1320%",
+      "condition": "1ターン自身のスピード5%減少（弱体効果命中率・弱体効果耐性率を無視）。その後ランダムな敵2体に物理880%。物理攻撃の前に自身の笑顔喝采が5スタックなら物理1320%",
+      "exclusiveWeapon": "専用Lv1: 対象がランダムな敵3体になる",
+      "compareMemo": "1ターン自身のスピード5%減少（弱体効果命中率・弱体効果耐性率を無視） / ランダム敵2体に物理880% / 笑顔喝采5スタックなら物理1320%",
       "noteUrl": "",
       "imageUrl": "",
       "sourceUrl": "https://ichigogames.net/mementomori/cordie_ringmaster/",
@@ -5216,18 +5216,18 @@
         "exclusiveLv1Total": 2640,
         "exclusiveLv2Total": 2640,
         "exclusiveLv3Total": 2640,
-        "conditionMaxTotal": 3960,
-        "conditionMaxNote": "原文は基本ランダム敵2体。両データとも hitCount=3(専用Lv1の値)。base の baseTotal=2640 も誤り",
+        "conditionMaxTotal": 2640,
+        "conditionMaxNote": "笑顔喝采5スタック時に1320%×2体=2640（専用武器なし・スキルLv最大）",
         "powerType": "笑顔喝采",
         "maxStacks": 5,
         "realityRank": "中",
         "rankingTarget": "条件MAX",
         "damageMemo": "自身へのスピード減少を伴う主力攻撃。最大火力は笑顔喝采5スタック前提"
       },
-      "plainSummary": "高倍率で3体を殴る主砲。代償に自分がわずかに遅くなる。",
+      "plainSummary": "高倍率で2体を殴る主砲。代償に自分がわずかに遅くなる。",
       "steps": [
         {
-          "text": "ランダムな敵3体に物理880%"
+          "text": "ランダムな敵2体に物理880%"
         },
         {
           "text": "攻撃前に自身の笑顔喝采が5スタックなら物理1320%"
@@ -5247,12 +5247,12 @@
       "majorCategory": "攻撃",
       "subCategory": "純火力",
       "target": "ランダム敵3体",
-      "multiplierText": "物理1180%",
+      "multiplierText": "物理1080% / 専用Lv3で1180%",
       "duration": "",
       "ct": 4,
-      "condition": "敵生存数1体なら攻撃回数3回",
-      "exclusiveWeapon": "Lv3: 物理1080%→1180%",
-      "compareMemo": "ランダム敵3体に物理1180% / 敵生存数1体なら攻撃回数3回",
+      "condition": "ランダムな敵3体に物理1080%。物理攻撃の前に敵の生存数が1体なら物理攻撃の回数が3回になる",
+      "exclusiveWeapon": "専用Lv3: 物理攻撃が攻撃力×1180%になる",
+      "compareMemo": "ランダム敵3体に物理1080% / 敵生存数1体なら攻撃回数3回",
       "noteUrl": "",
       "imageUrl": "",
       "sourceUrl": "https://ichigogames.net/mementomori/cordie_ringmaster/",
@@ -5263,8 +5263,8 @@
         "exclusiveLv1Total": 3240,
         "exclusiveLv2Total": 3240,
         "exclusiveLv3Total": 3540,
-        "conditionMaxTotal": 3540,
-        "conditionMaxNote": "原文は最大スキルLv4で1080%×3体。両データとも singleMultiplier=1180(専用Lv3値)。base の baseTotal=3540 も誤り",
+        "conditionMaxTotal": 3240,
+        "conditionMaxNote": "敵の生存数1体なら攻撃回数3回。1080%×3回=3240で合計は変わらない（専用武器なし・スキルLv最大）",
         "powerType": "純火力",
         "maxStacks": null,
         "realityRank": "高",
@@ -5274,7 +5274,7 @@
       "plainSummary": "敵が残り1体になると連打に変わる、詰めの一撃。",
       "steps": [
         {
-          "text": "ランダムな敵3体に物理1180%"
+          "text": "ランダムな敵3体に物理1080%"
         },
         {
           "text": "敵の生存が1体なら攻撃回数3回"
@@ -6803,13 +6803,13 @@
       "sourceUrl": "https://ichigogames.net/mementomori/aine/",
       "damage": {
         "singleMultiplier": 350,
-        "hitCount": 4,
-        "baseTotal": 1400,
-        "exclusiveLv1Total": 1400,
-        "exclusiveLv2Total": 1400,
-        "exclusiveLv3Total": 1520,
-        "conditionMaxTotal": 13680,
-        "conditionMaxNote": "専用Lv3で380%×4回。悪魔の誘いなしで3倍、初回+再発動2回まで含めた理論値",
+        "hitCount": 6,
+        "baseTotal": 2100,
+        "exclusiveLv1Total": 2100,
+        "exclusiveLv2Total": 2100,
+        "exclusiveLv3Total": 2280,
+        "conditionMaxTotal": 6300,
+        "conditionMaxNote": "ランダムな敵2体×（初回＋再発動2回）=6ヒットで350%×6=2100。悪魔の誘い非付帯なら3倍で6300（専用武器なし・スキルLv最大）",
         "powerType": "条件倍率 / 再発動",
         "realityRank": "低",
         "rankingTarget": "条件込み",
@@ -8879,13 +8879,13 @@
       "sourceUrl": "https://ichigogames.net/mementomori/natasha_blossoms/",
       "damage": {
         "singleMultiplier": 380,
-        "hitCount": 3,
+        "hitCount": 6,
         "baseTotal": 2280,
         "exclusiveLv1Total": 4080,
         "exclusiveLv2Total": 4080,
         "exclusiveLv3Total": 4080,
-        "conditionMaxTotal": 6120,
-        "conditionMaxNote": "通常は再発動1回込み。花5以上で再発動2回まで。専用Lv1で680%",
+        "conditionMaxTotal": 3420,
+        "conditionMaxNote": "ランダムな敵3体×（初回＋再発動1回）=6ヒットで380%×6=2280。心に咲く花5スタック以上なら再発動2回まで=9ヒットで3420（専用武器なし・スキルLv最大）",
         "powerType": "再発動 / スタック消費",
         "maxStacks": 10,
         "realityRank": "低",
@@ -9632,11 +9632,11 @@
       "majorCategory": "攻撃",
       "subCategory": "回数増加 / 段階強化",
       "target": "ランダム敵",
-      "multiplierText": "物理360%×2回 / 専用Lv3 590%",
+      "multiplierText": "物理590%×4回",
       "duration": "",
       "ct": 4,
-      "condition": "2回目以降は攻撃力増加量40%。専用Lv1で3回目以降80%、専用Lv2で4回攻撃",
-      "exclusiveWeapon": "専用Lv1: 3回目以降80%。専用Lv2: 4回攻撃。専用Lv3: 590%",
+      "condition": "4ターン自身の攻撃力20%増加。その後ランダムな敵に物理590%×4回。バトル中このスキルを発動するのが2回目以降なら攻撃力の増加量が40%になる",
+      "exclusiveWeapon": "専用Lv1: 3回目以降の発動で攻撃力の増加量が80%になる",
       "compareMemo": "攻撃力+18% / 弱体効果耐性+10% / 命中+10%",
       "noteUrl": "",
       "imageUrl": "",
@@ -9649,7 +9649,7 @@
         "exclusiveLv2Total": 2360,
         "exclusiveLv3Total": 2360,
         "conditionMaxTotal": 2360,
-        "conditionMaxNote": "最大スキルLv3で590%×4回=2360。専用武器に倍率変化はない(Lv1は攻撃力増加量のみ、Lv2/Lv3は記載なし)。2回目以降は攻撃力増加量40%、専用Lv1で3回目以降80%になるが、ステータスバフのため倍率換算しない",
+        "conditionMaxNote": "スキルLv最大で590%×4回=2360。専用武器に倍率変化はない（専用Lv1は3回目以降の攻撃力増加量80%のみ）。攻撃力増加はステータスバフのため倍率換算しない",
         "powerType": "段階強化 / 攻撃回数増加",
         "maxStacks": null,
         "realityRank": "中",
@@ -9662,7 +9662,7 @@
           "text": "自身の攻撃力を20%増加(4ターン)"
         },
         {
-          "text": "ランダムな敵に物理360%×2回"
+          "text": "ランダムな敵に物理590%×4回"
         },
         {
           "text": "このスキルの2回目以降は攻撃力増加量が40%になる"
@@ -17585,8 +17585,8 @@
         "exclusiveLv1Total": 1760,
         "exclusiveLv2Total": 1760,
         "exclusiveLv3Total": 1920,
-        "conditionMaxTotal": 7680,
-        "conditionMaxNote": "原文『回復6回以上なら魔法攻撃のダメージが攻撃力×1920%になる』は1ヒットあたりの値で4回攻撃。条件MAXは1920×4=7680。overlay の3840・base の7040 はいずれも誤り",
+        "conditionMaxTotal": 7040,
+        "conditionMaxNote": "スキルLv最大で通常440%・条件時1760%。1760%×4回=7040（専用武器なし）。専用Lv3なら1920%×4回=7680",
         "powerType": "複数魔法 / 条件追加攻撃",
         "maxStacks": null,
         "realityRank": "中",
