@@ -256,6 +256,24 @@
     return [base, max].filter(Boolean).join(" / ");
   }
 
+  /**
+   * ゲーム内の説明文（折りたたみ・初期は閉じた状態）。
+   * 中身はデータの condition（出典の効果説明を比較用に要約したもの）をそのまま出す。
+   * 公式テキストの全文転載は行わない方針のため、要約である旨を添える。
+   */
+  function renderOriginalText(skill) {
+    if (!skill.condition) return "";
+    return `
+        <details class="original-text">
+          <summary>ゲーム内の説明文を見る</summary>
+          <div class="original-text-body">
+            <p class="original-text-main">${highlightRatios(skill.condition)}</p>
+            <p class="original-text-note">出典の効果説明を比較用に要約したものです（全文転載ではありません）。</p>
+          </div>
+        </details>
+      `;
+  }
+
   function renderDataRows(skill) {
     const rows = [
       skill.target ? `<dl class="data-item"><dt>対象</dt><dd>${escapeHtml(skill.target)}</dd></dl>` : "",
@@ -321,6 +339,7 @@
         </header>
         <div class="skill-body">
           ${renderSteps(skill, terms)}
+          ${renderOriginalText(skill)}
           ${hasFlow(skill) ? "" : renderDataRows(skill)}
           ${renderSynergyNotes(skill)}
           ${renderVerifications(skill)}
@@ -373,6 +392,7 @@
     renderMetaHtml,
     renderTermText,
     renderFlow,
+    renderOriginalText,
     renderSteps,
     totalDamageText,
     renderDataRows,

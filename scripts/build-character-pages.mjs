@@ -143,14 +143,104 @@ function patchIndexHtml(html, { gridHtml, countText }) {
   return output;
 }
 
+/**
+ * flow（いつ・誰に・何が起きる？）の生成時アサーション。
+ * AGENTS.md「flow の分解ルール」を機械的に点検できる範囲で検査し、違反があれば生成を止める。
+ */
+const FLOW_WHEN_PATTERNS = [
+  /^バトル開始時$/,
+  /^[0-9]+(?:[・,、][0-9]+)*ターン目(?:の)?開始時$/,
+  /^ターン開始時$/,
+  /^行動開始時$/,
+  /^攻撃前$/,
+  /^攻撃時$/,
+  /^攻撃後$/,
+  /^最後の攻撃後$/,
+  /攻撃を受けたとき$/,
+  /戦闘不能になったとき$/,
+  /^常時$/,
+  /^[0-9]+ターン目以降$/
+];
+
+// 倍率チップは「チップ単独で意味が通るダメージ倍率」だけに使う（回復量・バフ量は text 側）。
+const FLOW_MULTIPLIER_PATTERN = /^(?:攻撃力×|物理|魔法|腕力×|魔力×|技力×)[0-9]+(?:\.[0-9]+)?%(?:×[0-9]+回)?$/;
+
+/** 旧「継続」カードの継続ターンを取り出す（例: "睡眠1T / 再生4ターン" → ["1", "4"]。「Nターン目」は時点なので除く）。 */
+function durationTurns(duration) {
+  return [...String(duration || "").matchAll(/([0-9]+)\s*(?:T(?![a-zA-Z])|ターン(?!目))/g)].map((match) => match[1]);
+}
+
+function validateFlow(skill, errors) {
+  if (!Array.isArray(skill.flow) || skill.flow.length === 0) return;
+  const label = `${skill.id} (S${skill.number} ${skill.name})`;
+  const frames = new Set();
+
+  for (const block of skill.flow) {
+    if (!block.when || !block.target) {
+      errors.push(`${label}: flow の枠に when / target が無い`);
+      continue;
+    }
+    // ルール2: 同じ「いつ」＋同じ「誰に」の効果は1枠にまとめる
+    const frame = `${block.when}|${block.target}`;
+    if (frames.has(frame)) errors.push(`${label}: 「${block.when}＋${block.target}」の枠が重複している`);
+    frames.add(frame);
+
+    // ルール6: when の語彙
+    if (!FLOW_WHEN_PATTERNS.some((pattern) => pattern.test(block.when))) {
+      errors.push(`${label}: when「${block.when}」が語彙リストにも複合形にも合致しない`);
+    }
+
+    if (!Array.isArray(block.effects) || block.effects.length === 0) {
+      errors.push(`${label}: 「${block.when}」の枠に効果が無い`);
+      continue;
+    }
+    // ルール5: 倍率チップはダメージ倍率のみ
+    for (const effect of block.effects) {
+      if (effect.multiplier && !FLOW_MULTIPLIER_PATTERN.test(effect.multiplier)) {
+        errors.push(`${label}: multiplier「${effect.multiplier}」はダメージ倍率の形ではない`);
+      }
+    }
+  }
+
+  // 旧「継続」カードにあった継続ターンが、flow の継続チップに必ず現れること
+  const chips = skill.flow
+    .flatMap((block) => (block.effects || []).map((effect) => effect.duration || ""))
+    .join(" ");
+  for (const turns of durationTurns(skill.duration)) {
+    if (!chips.includes(`${turns}ターン`)) {
+      errors.push(`${label}: 継続「${skill.duration}」の${turns}ターンが flow の継続チップに無い`);
+    }
+  }
+}
+
+/** flow を持つスキルのカードに旧「対象／倍率・火力／継続」が残っていないか（ルール10）。 */
+function validateRenderedCard(skill, html, errors) {
+  if (/<dt>(?:対象|倍率・火力|継続)<\/dt>/.test(html)) {
+    errors.push(`${skill.id}: flow があるのに旧カード（対象／倍率・火力／継続）が出ている`);
+  }
+  if (!html.includes("いつ・誰に・何が起きる？")) {
+    errors.push(`${skill.id}: 生成HTMLに「いつ・誰に・何が起きる？」が含まれていない`);
+  }
+}
+
 function buildCharacterPages({ baseData, newsData, terms }) {
   const written = [];
   const unchanged = [];
   const slugs = [];
+  const errors = [];
+  let flowSkills = 0;
 
   for (const character of baseData.characters || []) {
     const skills = renderer.selectSkills(baseData, character.id);
     if (skills.length === 0) throw new Error(`スキルが0件です: ${character.id}`);
+
+    for (const skill of skills) {
+      validateFlow(skill, errors);
+      if (Array.isArray(skill.flow) && skill.flow.length > 0) {
+        flowSkills += 1;
+        validateRenderedCard(skill, renderer.renderSkillCard(skill, terms), errors);
+      }
+    }
 
     // ページのファイル名は既存ページと同じ pageSlug を使う。
     const slug = character.pageSlug || character.id;
@@ -166,7 +256,12 @@ function buildCharacterPages({ baseData, newsData, terms }) {
     (writeIfChanged(path, html) ? written : unchanged).push(slug);
   }
 
-  return { written, unchanged, slugs };
+  if (errors.length) {
+    for (const message of errors) console.error(`flow検証NG: ${message}`);
+    throw new Error(`flow の検証に失敗しました（${errors.length}件）。上のログを確認してください。`);
+  }
+
+  return { written, unchanged, slugs, flowSkills };
 }
 
 function buildIndexPage({ baseData }) {
@@ -188,6 +283,7 @@ function main() {
   const index = buildIndexPage({ baseData });
 
   console.log(`キャラページ: ${pages.slugs.length}件 (更新 ${pages.written.length} / 変更なし ${pages.unchanged.length})`);
+  console.log(`flow 付きスキル: ${pages.flowSkills}件（検証OK）`);
   console.log(`キャラ一覧: ${index.total}件のカードを生成${index.changed ? " (更新)" : " (変更なし)"}`);
 }
 

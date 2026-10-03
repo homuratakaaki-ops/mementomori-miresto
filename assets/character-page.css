@@ -376,6 +376,37 @@ main {
   line-height: 1.7;
 }
 
+/* ゲーム内の説明文（折りたたみ・初期は閉じる） */
+.original-text {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+}
+
+.original-text summary {
+  padding: 10px 12px;
+  color: var(--accent-strong);
+  font-size: 13px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.original-text[open] summary { border-bottom: 1px solid var(--line); }
+
+.original-text-body { padding: 10px 12px; }
+
+.original-text-main {
+  margin: 0;
+  line-height: 1.75;
+}
+
+.original-text-note {
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.7;
+}
+
 .data-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
