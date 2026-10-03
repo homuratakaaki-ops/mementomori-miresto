@@ -42,13 +42,16 @@
         <div class="skill-body">
           
         <div>
-          <h3 class="block-title">順番に何が起きる？</h3>
-          <ol class="steps">
-            <li>ランダムな敵3体に物理<span class="ratio">220%</span></li><li>70%の確率で弱体効果命中率減少を4ターン付与</li>
-          </ol>
+          <h3 class="block-title">いつ・誰に・何が起きる？</h3>
+          <ol class="flow">
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">攻撃時</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>ランダムな敵3体</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>物理攻撃<span class="flow-chip num">物理<span class="ratio">220%</span></span><span class="flow-total">倍率合計 660%（3体分）</span></li><li><span class="flow-chip">確率70%</span>弱体効果命中率減少を付与<span class="flow-chip">4ターン</span></li></ul></div>
+          </li>
+        </ol>
         </div>
       
-          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>ランダム敵3-5体</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 660% / 最大 1200%</dd></dl><dl class="data-item"><dt>継続</dt><dd>弱体効果命中率減少4T</dd></dl></div>
+          
           
           
           <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用Lv1</th><td>対象5体。</td></tr><tr><th>専用Lv3</th><td>物理<span class="ratio">240%</span></td></tr></table></div>
@@ -79,13 +82,16 @@
         <div class="skill-body">
           
         <div>
-          <h3 class="block-title">順番に何が起きる？</h3>
-          <ol class="steps">
-            <li>ランダムな敵2体に物理<span class="ratio">720%</span></li><li>自身が霊痕を付帯していると倍率・回数が上がる(最大1980%×3回)</li>
-          </ol>
+          <h3 class="block-title">いつ・誰に・何が起きる？</h3>
+          <ol class="flow">
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">攻撃時</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>ランダムな敵2体</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>物理攻撃<span class="flow-chip num">物理<span class="ratio">720%</span></span><span class="flow-total">倍率合計 1440%（2体分）</span></li><li class="flow-cond-line"><span class="flow-chip cond">自身が霊痕を付帯していると</span>倍率と回数が上がり、最大でこの倍率に変わる<span class="flow-chip num">物理<span class="ratio">1980%</span>×3回</span><span class="flow-total">条件時：倍率合計 5940%</span></li></ul></div>
+          </li>
+        </ol>
         </div>
       
-          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>ランダム敵2-3体</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 1440% / 最大 5940%</dd></dl></div>
+          
           <div><h3 class="block-title">かみ合わせ</h3><ul class="verification-list synergy-list">
         <li>
           霊痕はS3(味方がHP30%以下まで削られたとき)で付くため、まったく被弾しない試合では強化が発動しない。
@@ -121,13 +127,16 @@
         <div class="skill-body">
           
         <div>
-          <h3 class="block-title">順番に何が起きる？</h3>
-          <ol class="steps">
-            <li>味方が攻撃を受け、HP30%以下で生き残り、霊痕を持たない場合に発動</li><li>その味方の弱体を解除し、HPを回復(攻撃力100〜400%)し、霊痕を付与(解除不可)</li>
-          </ol>
+          <h3 class="block-title">いつ・誰に・何が起きる？</h3>
+          <ol class="flow">
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">味方が攻撃を受け、HP30%以下で生き残り、霊痕を持たないとき</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>その味方</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>弱体を解除</li><li>HPを回復<span class="flow-note">回復量はエレインの攻撃力100〜400%分</span></li><li>霊痕を付与<span class="flow-note">解除不可</span></li></ul></div>
+          </li>
+        </ol>
         </div>
       
-          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>HP30%以下で生存する味方 / 霊痕味方全体</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>攻撃力100-400%回復</dd></dl><dl class="data-item"><dt>継続</dt><dd>霊痕解除不可</dd></dl></div>
+          
           
           
           <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用</th><td>専用武器での直接強化なし</td></tr></table></div>
@@ -158,13 +167,21 @@
         <div class="skill-body">
           
         <div>
-          <h3 class="block-title">順番に何が起きる？</h3>
-          <ol class="steps">
-            <li>バトル開始時、自身と攻撃力が最も高い味方の防御力・魔法防御力を増加(6ターン・解除不可)</li><li>自身にはさらに被ダメージ減少を付与</li>
-          </ol>
+          <h3 class="block-title">いつ・誰に・何が起きる？</h3>
+          <ol class="flow">
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">バトル開始時</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>自身と攻撃力が最も高い味方</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>防御力・魔法防御力を増加<span class="flow-chip">6ターン</span><span class="flow-note">解除不可</span></li></ul></div>
+          </li>
+        
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">バトル開始時</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>自身</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>さらに被ダメージ減少を付与</li></ul></div>
+          </li>
+        </ol>
         </div>
       
-          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>自身と攻撃力が最も高い味方</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>防御力+10-80% / 魔法防御力+10-40%</dd></dl><dl class="data-item"><dt>継続</dt><dd>6T / 解除不可</dd></dl></div>
+          
           
           
           <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用Lv2</th><td>防御力80%、魔法防御力40%、魔法クリダメ緩和20%</td></tr></table></div>

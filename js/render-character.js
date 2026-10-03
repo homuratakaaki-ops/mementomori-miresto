@@ -131,8 +131,9 @@
 
   const CIRCLED = ["", "①", "②", "③", "④", "⑤", "⑥", "⑦", "⑧", "⑨"];
 
-  function flowOrderMark(block) {
-    if (block.mode !== "sequence" || !block.order) return "";
+  /** 順番の番号。順番の枠が1つしかないスキルでは番号を出さない（①だけが残るのを避ける）。 */
+  function flowOrderMark(block, numbered) {
+    if (!numbered || block.mode !== "sequence" || !block.order) return "";
     return `${CIRCLED[block.order] || block.order} `;
   }
 
@@ -189,12 +190,12 @@
    * 1枠。帯の見出しに「いつ」と「誰に」を並べて出す（対象は毎枠出す）。
    * 効果が1つだけの枠では「同時に発動」ラベルを出さない。
    */
-  function renderFlowBlock(skill, block, terms) {
+  function renderFlowBlock(skill, block, terms, numbered) {
     const effects = block.effects || [];
     const mode = block.mode === "simultaneous" && effects.length < 2 ? "" : (FLOW_MODE_LABEL[block.mode] || "");
     return `
           <li class="flow-block">
-            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">${escapeHtml(flowOrderMark(block))}${escapeHtml(block.when)}</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>${escapeHtml(block.target)}</span></span>${mode ? `<span class="flow-mode">${escapeHtml(mode)}</span>` : ""}</p>
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">${escapeHtml(flowOrderMark(block, numbered))}${escapeHtml(block.when)}</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>${escapeHtml(block.target)}</span></span>${mode ? `<span class="flow-mode">${escapeHtml(mode)}</span>` : ""}</p>
             <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects">${effects.map((effect) => renderFlowEffect(skill, block, effect, terms)).join("")}</ul></div>
           </li>
         `;
@@ -204,7 +205,8 @@
   function renderFlow(skill, terms) {
     if (!Array.isArray(skill.flow) || skill.flow.length === 0) return "";
     const dict = terms || defaultTerms;
-    const blocks = skill.flow.map((block) => renderFlowBlock(skill, block, dict)).join("");
+    const numbered = skill.flow.filter((block) => block.mode === "sequence").length > 1;
+    const blocks = skill.flow.map((block) => renderFlowBlock(skill, block, dict, numbered)).join("");
     return `
         <div>
           <h3 class="block-title">いつ・誰に・何が起きる？</h3>

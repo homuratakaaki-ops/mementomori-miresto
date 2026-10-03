@@ -149,7 +149,7 @@ function patchIndexHtml(html, { gridHtml, countText }) {
  */
 const FLOW_WHEN_PATTERNS = [
   /^バトル開始時$/,
-  /^[0-9]+(?:[・,、][0-9]+)*ターン目(?:の)?開始時$/,
+  /^[0-9]+(?:[・,、][0-9]+)*ターン目(?:の)?(?:ターン|行動)?(?:開始時|終了時)$/,
   /^ターン開始時$/,
   /^ターン終了時$/,
   /^行動開始時$/,
@@ -158,8 +158,7 @@ const FLOW_WHEN_PATTERNS = [
   /^攻撃時$/,
   /^攻撃後$/,
   /^最後の攻撃後$/,
-  /を受けたとき$/,
-  /戦闘不能になったとき$/,
+  /とき$/, // 帯そのものが条件の形（〜を受けたとき / 〜を付与したとき / 〜になったとき など）
   /^常時$/,
   /^[0-9]+ターン目以降$/
 ];
@@ -169,9 +168,12 @@ const FLOW_MODES = new Set(["sequence", "simultaneous", "passive", "conditional"
 // 倍率チップは「チップ単独で意味が通るダメージ倍率」だけに使う（回復量・バフ量は text 側）。
 const FLOW_MULTIPLIER_PATTERN = /^(?:攻撃力×|物理|魔法|腕力×|魔力×|技力×)[0-9]+(?:\.[0-9]+)?%(?:×[0-9]+回)?$/;
 
-/** 旧「継続」カードの継続ターンを取り出す（例: "睡眠1T / 再生4ターン" → ["1", "4"]。「Nターン目」は時点なので除く）。 */
+/**
+ * 旧「継続」カードの継続ターンを取り出す（例: "睡眠1T / 再生4ターン" → ["1", "4"]）。
+ * 「Nターン目」「N T 終了時」「Nターンまで」は継続ではなく時点なので数えない。
+ */
 function durationTurns(duration) {
-  return [...String(duration || "").matchAll(/([0-9]+)\s*(?:T(?![a-zA-Z])|ターン(?!目))/g)].map((match) => match[1]);
+  return [...String(duration || "").matchAll(/([0-9]+)\s*(?:T(?![a-zA-Z])|ターン)(?!目|終了時|開始時|まで)/g)].map((match) => match[1]);
 }
 
 function validateFlow(skill, errors) {

@@ -42,13 +42,21 @@
         <div class="skill-body">
           
         <div>
-          <h3 class="block-title">順番に何が起きる？</h3>
-          <ol class="steps">
-            <li>正面の敵に物理<span class="ratio">140%</span>×10回</li><li>このスキルの3回目以降は連撃ダメージ3倍</li><li>命中率増加を1ターン付与</li>
-          </ol>
+          <h3 class="block-title">いつ・誰に・何が起きる？</h3>
+          <ol class="flow">
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">① 攻撃時</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>正面の敵</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>物理攻撃<span class="flow-chip num">物理<span class="ratio">140%</span>×10回</span><span class="flow-total">倍率合計 1400%（10回分）</span></li><li class="flow-cond-line"><span class="flow-chip cond">このスキルの3回目以降は</span>連撃のダメージが3倍になる</li></ul></div>
+          </li>
+        
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">② 攻撃後</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>自身</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>命中率増加を付与<span class="flow-chip">1ターン</span></li></ul></div>
+          </li>
+        </ol>
         </div>
       
-          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>正面の敵</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 1400% / 最大 7780%</dd></dl><dl class="data-item"><dt>継続</dt><dd>命中率増加1T</dd></dl></div>
+          
           
           
           <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用Lv1</th><td>連撃240%。</td></tr><tr><th>専用Lv3</th><td>冥属性味方3体以上で防御貫通+40%</td></tr></table></div>
@@ -79,13 +87,16 @@
         <div class="skill-body">
           
         <div>
-          <h3 class="block-title">順番に何が起きる？</h3>
-          <ol class="steps">
-            <li>自身が神呪解放を付帯している場合に発動</li><li>ランダムな敵に物理<span class="ratio">340%</span>×4回</li><li>弱体効果が付いた対象にはダメージ1.5倍(最大440%×5回)</li>
-          </ol>
+          <h3 class="block-title">いつ・誰に・何が起きる？</h3>
+          <ol class="flow">
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">攻撃時</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>ランダムな敵</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li class="flow-cond-line"><span class="flow-chip cond">自身が神呪解放を付帯している場合に発動</span>物理攻撃<span class="flow-chip num">物理<span class="ratio">340%</span>×4回</span><span class="flow-total">倍率合計 1360%（4回分）</span></li><li class="flow-cond-line"><span class="flow-chip cond">弱体効果が付いた対象には</span>ダメージが1.5倍になる<span class="flow-note">倍率と回数は最大で物理440%×5回</span></li></ul></div>
+          </li>
+        </ol>
         </div>
       
-          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>ランダム敵に4-5回</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 1360% / 最大 3300%</dd></dl></div>
+          
           
           
           <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用</th><td>専用武器での直接強化なし</td></tr></table></div>
@@ -116,13 +127,21 @@
         <div class="skill-body">
           
         <div>
-          <h3 class="block-title">順番に何が起きる？</h3>
-          <ol class="steps">
-            <li>バトル開始時、献身を付与(被ダメージの20%を肩代わり)</li><li>被攻撃回数または味方全滅の条件で献身を解除し、神呪解放へ移行(2〜8ターン)</li>
-          </ol>
+          <h3 class="block-title">いつ・誰に・何が起きる？</h3>
+          <ol class="flow">
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">バトル開始時</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>自身</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>献身を付与<span class="flow-note">被ダメージの20%を肩代わりする</span></li></ul></div>
+          </li>
+        
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">被攻撃回数または味方全滅の条件を満たしたとき</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>自身</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>献身を解除し、神呪解放へ移行<span class="flow-chip">2〜8ターン</span></li></ul></div>
+          </li>
+        </ol>
         </div>
       
-          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>自身</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>被ダメージ肩代わり20%</dd></dl><dl class="data-item"><dt>継続</dt><dd>献身 / 神呪解放2-8T</dd></dl></div>
+          
           
           
           <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用</th><td>専用武器での直接強化なし</td></tr></table></div>
@@ -153,13 +172,21 @@
         <div class="skill-body">
           
         <div>
-          <h3 class="block-title">順番に何が起きる？</h3>
-          <ol class="steps">
-            <li>同一の敵からの2回目以降のダメージを遮断(70%)</li><li>致命ダメージ時、HP1で耐えてHPを回復(100%)</li><li>多重バリアも付与</li>
-          </ol>
+          <h3 class="block-title">いつ・誰に・何が起きる？</h3>
+          <ol class="flow">
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">常時</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>自身</span></span><span class="flow-mode">常時</span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>同一の敵からの2回目以降のダメージを70%遮断</li><li>多重バリアを付与</li></ul></div>
+          </li>
+        
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">致命的なダメージを受けたとき</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>自身</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>HP1で耐えてHPを100%回復</li></ul></div>
+          </li>
+        </ol>
         </div>
       
-          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>自身</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>遮断30-70% / HP回復20-100%</dd></dl><dl class="data-item"><dt>継続</dt><dd>HP1耐え / 多重バリア1-3層</dd></dl></div>
+          
           
           
           <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用Lv2</th><td>多重バリア3層、HP回復量100%</td></tr></table></div>
