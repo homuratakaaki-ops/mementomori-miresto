@@ -47,19 +47,13 @@
           <li class="flow-block">
             <p class="flow-when"><span class="flow-when-text">① 攻撃前</span></p>
             <div class="flow-row"><span class="flow-label">誰に</span><span class="flow-value">ランダムな敵</span></div>
-            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li><span class="flow-chip">70%</span>砂塵を1スタック付与<span class="flow-chip">2ターン</span><span class="flow-note">1スタックにつき被ダメージ5%増加、最大4スタック</span></li></ul></div>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li><span class="flow-chip">70%</span>砂塵を1スタック付与<span class="flow-chip">2ターン</span><span class="flow-note">1スタックにつき被ダメージ5%増加、最大4スタック</span></li><li><span class="flow-chip cond">砂塵付与後、対象のHP割合が70%以上なら</span>砂塵をさらに1スタック追加</li></ul></div>
           </li>
         
           <li class="flow-block">
-            <p class="flow-when"><span class="flow-when-text">② 攻撃前</span></p>
-            <div class="flow-row"><span class="flow-label">誰に</span><span class="flow-value">ランダムな敵</span></div>
-            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li><span class="flow-chip cond">砂塵付与後、対象のHP割合が70%以上なら</span>砂塵をさらに1スタック追加</li></ul></div>
-          </li>
-        
-          <li class="flow-block">
-            <p class="flow-when"><span class="flow-when-text">③ 攻撃時</span></p>
-            <div class="flow-row"><span class="flow-label">誰に</span><span class="flow-value">ランダムな敵</span></div>
-            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>物理攻撃<span class="flow-chip num">物理<span class="ratio">480%</span>×5回</span></li></ul></div>
+            <p class="flow-when"><span class="flow-when-text">② 攻撃時</span></p>
+            
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li><span class="flow-chip num">物理<span class="ratio">480%</span>×5回</span></li></ul></div>
           </li>
         </ol>
         </div>
@@ -95,8 +89,8 @@
         
           <li class="flow-block">
             <p class="flow-when"><span class="flow-when-text">② 攻撃時</span></p>
-            <div class="flow-row"><span class="flow-label">誰に</span><span class="flow-value">ランダムな敵</span></div>
-            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>物理攻撃<span class="flow-chip num">物理<span class="ratio">710%</span>×5回</span></li></ul></div>
+            
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li><span class="flow-chip num">物理<span class="ratio">710%</span>×5回</span></li></ul></div>
           </li>
         
           <li class="flow-block">
@@ -136,9 +130,9 @@
           <h3 class="block-title">いつ・誰に・何が起きる？</h3>
           <ol class="flow">
           <li class="flow-block">
-            <p class="flow-when"><span class="flow-when-text">バトル開始時</span><span class="flow-mode">同時に発動</span></p>
+            <p class="flow-when"><span class="flow-when-text">バトル開始時</span></p>
             <div class="flow-row"><span class="flow-label">誰に</span><span class="flow-value">攻撃力が最も高い味方</span></div>
-            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>攻撃力を増加<span class="flow-chip num">対象の防御力200%分</span><span class="flow-chip">4ターン</span><span class="flow-note">解除不可</span></li></ul></div>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>攻撃力を対象の防御力200%分増加<span class="flow-chip">4ターン</span><span class="flow-note">解除不可</span></li></ul></div>
           </li>
         </ol>
         </div>
@@ -167,14 +161,14 @@
           <h3 class="block-title">いつ・誰に・何が起きる？</h3>
           <ol class="flow">
           <li class="flow-block">
-            <p class="flow-when"><span class="flow-when-text">バトル開始時</span><span class="flow-mode">同時に発動</span></p>
+            <p class="flow-when"><span class="flow-when-text">バトル開始時</span></p>
             <div class="flow-row"><span class="flow-label">誰に</span><span class="flow-value">自身</span></div>
             <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>命中率を50%増加<span class="flow-chip">2ターン</span><span class="flow-note">解除不可</span></li></ul></div>
           </li>
         
           <li class="flow-block">
-            <p class="flow-when"><span class="flow-when-text">1・2ターン目の開始時</span><span class="flow-mode">同時に発動</span></p>
-            <div class="flow-row"><span class="flow-label">誰に</span><span class="flow-value">自身</span></div>
+            <p class="flow-when"><span class="flow-when-text">1・2ターン目の開始時</span></p>
+            
             <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>多重バリア1層を付与<span class="flow-note">最大HP10%以上のダメージを1回無効化</span></li></ul></div>
           </li>
         </ol>

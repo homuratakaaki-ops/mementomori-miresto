@@ -1,6 +1,6 @@
 {
   "schema": "mementomori_skill_compare_v1",
-  "updatedAt": "2026-10-03T00:00:00.000+09:00",
+  "updatedAt": "2026-10-04T00:00:00.000+09:00",
   "gachaStatusUpdatedAt": "2026-10-03",
   "notes": [
     "Skill effects are summarized for comparison and are not copied as full official text.",
@@ -7581,15 +7581,7 @@
               "chance": "70%",
               "duration": "2ターン",
               "note": "1スタックにつき被ダメージ5%増加、最大4スタック"
-            }
-          ]
-        },
-        {
-          "when": "攻撃前",
-          "mode": "sequence",
-          "order": 2,
-          "target": "ランダムな敵",
-          "effects": [
+            },
             {
               "text": "砂塵をさらに1スタック追加",
               "condition": "砂塵付与後、対象のHP割合が70%以上なら"
@@ -7599,7 +7591,7 @@
         {
           "when": "攻撃時",
           "mode": "sequence",
-          "order": 3,
+          "order": 2,
           "target": "ランダムな敵",
           "effects": [
             {
@@ -7734,8 +7726,7 @@
           "target": "攻撃力が最も高い味方",
           "effects": [
             {
-              "text": "攻撃力を増加",
-              "multiplier": "対象の防御力200%分",
+              "text": "攻撃力を対象の防御力200%分増加",
               "duration": "4ターン",
               "note": "解除不可"
             }
@@ -18670,8 +18661,7 @@
           "target": "自身",
           "effects": [
             {
-              "text": "自分のHPを少し回復する",
-              "multiplier": "最大HPの5%"
+              "text": "自分のHPを最大HPの5%回復する"
             }
           ]
         },
@@ -18760,8 +18750,7 @@
           "target": "HP割合が最も低い味方",
           "effects": [
             {
-              "text": "HPを回復する。これを3回くり返す",
-              "multiplier": "攻撃力の30%"
+              "text": "HPを攻撃力の30%回復する。これを3回くり返す"
             }
           ]
         },
@@ -18780,14 +18769,7 @@
               "term": "毒",
               "chance": "70%",
               "duration": "2ターン"
-            }
-          ]
-        },
-        {
-          "when": "攻撃時",
-          "mode": "conditional",
-          "target": "HP割合が高い敵3体",
-          "effects": [
+            },
             {
               "text": "物理攻撃のダメージが上がる",
               "condition": "バトル中のHP回復効果の発動回数が15以上なら",
@@ -18847,7 +18829,7 @@
         {
           "when": "コベルが戦闘不能になったとき",
           "mode": "conditional",
-          "target": "上記の味方2体",
+          "target": "隣接する味方2体",
           "effects": [
             {
               "text": "被回復量の増加だけ解除"

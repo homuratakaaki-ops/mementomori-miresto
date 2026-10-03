@@ -324,6 +324,8 @@ main {
 
 .flow-effects li .flow-chip:not(.cond):not(.num) { margin: 0 6px; }
 .flow-effects li .flow-chip:first-child { margin-left: 0; }
+/* 本文を省略して倍率チップだけを出す行 */
+.flow-effects li .flow-chip.num:first-child { margin-left: 0; }
 
 .flow-note {
   margin-left: 6px;

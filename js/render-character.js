@@ -135,28 +135,37 @@
     return `${CIRCLED[block.order] || block.order} `;
   }
 
-  /** flow の1効果。確率・倍率・継続・条件・補足は、その効果と同じ行に添える。 */
+  /**
+   * flow の1効果。確率・倍率・継続・条件・補足は、その効果と同じ行に添える。
+   * 倍率チップがある効果は本文を省略し、チップだけを出す。
+   */
   function renderFlowEffect(effect, terms) {
     const before = [
       effect.chance ? `<span class="flow-chip">${escapeHtml(effect.chance)}</span>` : "",
       effect.condition ? `<span class="flow-chip cond">${highlightRatios(effect.condition)}</span>` : ""
     ].filter(Boolean).join("");
+    const body = effect.multiplier ? "" : renderTermText(effect, terms);
     const after = [
       effect.multiplier ? `<span class="flow-chip num">${highlightRatios(effect.multiplier)}</span>` : "",
       effect.duration ? `<span class="flow-chip">${escapeHtml(effect.duration)}</span>` : "",
       effect.note ? `<span class="flow-note">${escapeHtml(effect.note)}</span>` : ""
     ].filter(Boolean).join("");
-    return `<li>${before}${renderTermText(effect, terms)}${after}</li>`;
+    return `<li>${before}${body}${after}</li>`;
   }
 
-  function renderFlowBlock(block, terms) {
-    const mode = FLOW_MODE_LABEL[block.mode];
-    const effects = (block.effects || []).map((effect) => renderFlowEffect(effect, terms)).join("");
+  /**
+   * 1枠。「誰に」は直前の枠と対象が変わるときだけ出す（同じ対象の繰り返しを避ける）。
+   * 効果が1つだけの枠では「同時に発動」ラベルを出さない。
+   */
+  function renderFlowBlock(block, terms, previousTarget) {
+    const effects = block.effects || [];
+    const mode = block.mode === "simultaneous" && effects.length < 2 ? "" : FLOW_MODE_LABEL[block.mode];
+    const showTarget = block.target !== previousTarget;
     return `
           <li class="flow-block">
             <p class="flow-when"><span class="flow-when-text">${escapeHtml(flowOrderMark(block))}${escapeHtml(block.when)}</span>${mode ? `<span class="flow-mode">${escapeHtml(mode)}</span>` : ""}</p>
-            <div class="flow-row"><span class="flow-label">誰に</span><span class="flow-value">${escapeHtml(block.target)}</span></div>
-            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects">${effects}</ul></div>
+            ${showTarget ? `<div class="flow-row"><span class="flow-label">誰に</span><span class="flow-value">${escapeHtml(block.target)}</span></div>` : ""}
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects">${effects.map((effect) => renderFlowEffect(effect, terms)).join("")}</ul></div>
           </li>
         `;
   }
@@ -164,10 +173,14 @@
   /** 「いつ・誰に・何が起きる？」。flow を持つスキルだけ表示し、steps の代わりになる。 */
   function renderFlow(skill, terms) {
     if (!Array.isArray(skill.flow) || skill.flow.length === 0) return "";
+    const dict = terms || defaultTerms;
+    const blocks = skill.flow
+      .map((block, index) => renderFlowBlock(block, dict, index === 0 ? null : skill.flow[index - 1].target))
+      .join("");
     return `
         <div>
           <h3 class="block-title">いつ・誰に・何が起きる？</h3>
-          <ol class="flow">${skill.flow.map((block) => renderFlowBlock(block, terms || defaultTerms)).join("")}</ol>
+          <ol class="flow">${blocks}</ol>
         </div>
       `;
   }
