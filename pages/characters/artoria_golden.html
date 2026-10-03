@@ -16,7 +16,7 @@
       <a class="top-link" href="./index.html">キャラ一覧へ戻る</a>
       <p class="eyebrow">CHARACTER SKILL DATA</p>
       <h1 id="characterName">[黄金色の聖剣使い]アルトリア</h1>
-      <p class="role" id="roleMemo">回復回数を火力と被弾回復に変える翠属性ウォーリア</p>
+      <p class="role" id="roleMemo">味方の回復回数を火力に変え、「聖剣の光」で魔法被弾を回復に変える翠属性ウォーリア</p>
       <div class="meta-row" id="characterMeta"><span class="badge attribute">翠</span><span class="badge">ウォーリア</span><span class="badge">スピード 3272</span><span class="badge">入手 PU・運命</span><span class="badge">PU履歴：1回目 2026/9/30</span></div>
     </div>
   </header>
@@ -37,12 +37,24 @@
             <span class="tag">CT 4</span>
           </div>
           <h2>モルデュール</h2>
-          
+          <p class="summary">一番傷ついた味方を回復し、全員の弱体耐性を上げてから殴る。</p>
         </header>
         <div class="skill-body">
-          <div><h3 class="block-title">効果条件</h3><div class="fallback-condition">HP割合が最も低い味方のHPを自身の攻撃力×<span class="ratio">30%</span>回復。物理攻撃の前、2ターン味方全体の弱体効果耐性率を15%増加</div></div>
-          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>ランダム敵3体 / HP割合が最も低い味方</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>物理<span class="ratio">660%</span> / 攻撃力30%回復</dd></dl><dl class="data-item"><dt>継続</dt><dd>弱体効果耐性率増加2T</dd></dl></div>
           
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>HP割合が最も低い味方を自身の攻撃力30%分回復</li><li>攻撃前、味方全体の弱体効果耐性率を15%増加(2ターン)</li><li>ランダムな敵3体に物理<span class="ratio">660%</span></li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>ランダム敵3体 / HP割合が最も低い味方</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 1980% / 最大 2160%</dd></dl><dl class="data-item"><dt>継続</dt><dd>弱体効果耐性率増加2T</dd></dl></div>
+          <div><h3 class="block-title">かみ合わせ</h3><ul class="verification-list synergy-list">
+        <li>
+          ①の回復はアクティブスキル由来のため「回復回数カウント族」(ポーラS3・漆黒ステラS4・黄昏フローレンスS3)のスタック源になり、自身のS2・S3の条件も進める。
+          <br><span class="reason">根拠: アクティブスキルによるHP回復のため</span>
+        </li>
+      </ul></div>
           
           <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用Lv1</th><td>弱体効果耐性率の増加量が30%。</td></tr><tr><th>専用Lv3</th><td>物理攻撃のダメージが攻撃力×<span class="ratio">720%</span></td></tr></table></div>
         </div>
@@ -57,12 +69,24 @@
             <span class="tag">CT 4</span>
           </div>
           <h2>シャスティフォル</h2>
-          
+          <p class="summary">回復しつつ4連撃。バトル中の回復回数が15に達すると4倍に化ける。</p>
         </header>
         <div class="skill-body">
-          <div><h3 class="block-title">効果条件</h3><div class="fallback-condition">HP割合が最も低い味方のHPを自身の攻撃力×<span class="ratio">30%</span>回復。物理攻撃の前、バトル中に自身か味方のアクティブスキルによるHP回復の発動回数が15以上なら物理攻撃のダメージが攻撃力×<span class="ratio">2160%</span></div></div>
-          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>ランダム敵 / HP割合が最も低い味方</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>物理<span class="ratio">540%</span>×4回 / 回復15回以上で2160%</dd></dl></div>
           
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>HP割合が最も低い味方を自身の攻撃力30%分回復</li><li>攻撃前、自身か味方のアクティブスキルによる回復の発動回数が15以上なら物理<span class="ratio">2160%</span>(通常540%)×4回、ランダムな敵へ</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>ランダム敵 / HP割合が最も低い味方</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 2160% / 最大 8640%</dd></dl></div>
+          <div><h3 class="block-title">かみ合わせ</h3><ul class="verification-list synergy-list">
+        <li>
+          アクティブ回復を多発する味方(コベルS2・イディーネS2がそれぞれ3回、ポーラS3・ユニS2等)がいるほど15回に早く届く。コベルS2は同じ「15回」を参照する。
+          <br><span class="reason">根拠: 倍率条件が「自身か味方のアクティブスキルによるHP回復の発動回数」のため</span>
+        </li>
+      </ul></div>
           
           <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用</th><td>専用武器効果なし</td></tr></table></div>
         </div>
@@ -77,12 +101,24 @@
             
           </div>
           <h2>黄金色の聖剣使い</h2>
-          
+          <p class="summary">味方が回復するたび「聖剣の光」が灯り、魔法を食らった分を回復に変える。</p>
         </header>
         <div class="skill-body">
-          <div><h3 class="block-title">効果条件</h3><div class="fallback-condition">自身か味方のアクティブスキルがHP回復を発動したとき、自身と自身以外の攻撃力が高い味方2体に聖剣の光を3スタック付与(最大3スタック、解除不可)。付帯者が魔法攻撃を受けて生存していた場合、スタックを1消費してその味方のHPを被ダメージ×80%回復(最大で付帯者の最大HP×20%まで)。自身が戦闘不能になった場合、回復の前に自身と味方の聖剣の光を解除</div></div>
-          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>自身と攻撃力が高い味方2体</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>聖剣の光3スタック / 被ダメ80%回復</dd></dl><dl class="data-item"><dt>継続</dt><dd>解除不可</dd></dl></div>
           
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>自身か味方のアクティブスキルがHP回復を発動したとき、自身と攻撃力が高い味方2体に聖剣の光を3スタック付与(最大3、解除不可)</li><li>付帯者が魔法攻撃を受けて生存していた場合、1スタック消費して被ダメージの80%を回復(上限は付帯者の最大HP20%)</li><li>自身が戦闘不能になると、回復の前に自身と味方の聖剣の光を解除</li>
+          </ol>
+        </div>
+      
+          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>自身と攻撃力が高い味方2体</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>聖剣の光3スタック / 被ダメ80%回復</dd></dl><dl class="data-item"><dt>継続</dt><dd>解除不可</dd></dl></div>
+          <div><h3 class="block-title">かみ合わせ</h3><ul class="verification-list synergy-list">
+        <li>
+          魔法攻撃主体の敵に対して特に働く(物理被弾では消費されない)。
+          <br><span class="reason">根拠: 消費条件が「魔法攻撃を受けたとき」のため</span>
+        </li>
+      </ul></div>
           
           <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用Lv2</th><td>聖剣の光を付与する対象が味方全体</td></tr></table></div>
         </div>
@@ -97,10 +133,17 @@
             
           </div>
           <h2>仲間との絆</h2>
-          
+          <p class="summary">開幕の自己耐久と、翠・天の頭数で増えるエースのHP。</p>
         </header>
         <div class="skill-body">
-          <div><h3 class="block-title">効果条件</h3><div class="fallback-condition">1ターン目の自身の行動開始時、自身と自身以外の攻撃力が最も高い味方の魔法防御力を30%増加(解除不可)。その後、自身以外で自身と同じ属性もしくは天属性の味方の生存数が2体以上なら、自身と自身以外の攻撃力が最も高い味方の最大HPを30%増加(解除不可)。バトル開始時、自身の最大HPが100%増加し被ダメージが60%減少(解除不可)</div></div>
+          
+        <div>
+          <h3 class="block-title">順番に何が起きる？</h3>
+          <ol class="steps">
+            <li>バトル開始時、自身の最大HP+100%・被ダメージ60%減少(解除不可)</li><li>1ターン目の行動開始時、自身と攻撃力が最も高い味方の魔法防御力+30%(解除不可)</li><li>自身以外で翠属性または天属性の味方が2体以上なら、同じ対象の最大HPも30%増加(解除不可)</li>
+          </ol>
+        </div>
+      
           <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>自身と攻撃力が最も高い味方</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>魔法防御力30%増加 / 最大HP30%増加</dd></dl><dl class="data-item"><dt>継続</dt><dd>解除不可</dd></dl></div>
           
           

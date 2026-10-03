@@ -1771,7 +1771,7 @@
       "speed": 2810,
       "availability": "PU・運命",
       "gachaStatus": "",
-      "roleMemo": "味方全体シールドとHPドレイン減少で守る藍属性ウォーリア",
+      "roleMemo": "味方全体に藍特効の大型シールドを配り、敵の吸血も封じる藍属性ウォーリア",
       "noteUrl": "",
       "imageUrl": "",
       "sourceUrl": "https://ichigogames.net/mementomori/cusith/",
@@ -1793,7 +1793,7 @@
       "speed": 3272,
       "availability": "PU・運命",
       "gachaStatus": "",
-      "roleMemo": "回復回数を火力と被弾回復に変える翠属性ウォーリア",
+      "roleMemo": "味方の回復回数を火力に変え、「聖剣の光」で魔法被弾を回復に変える翠属性ウォーリア",
       "noteUrl": "",
       "imageUrl": "",
       "sourceUrl": "https://ichigogames.net/mementomori/artoria_golden/",
@@ -1815,7 +1815,7 @@
       "speed": 3423,
       "availability": "PU・運命",
       "gachaStatus": "",
-      "roleMemo": "防御支援と被弾肩代わりで味方を守る天属性スナイパー",
+      "roleMemo": "速い味方の防御を底上げし、「献身」で味方の被ダメージを肩代わりする天属性スナイパー",
       "noteUrl": "",
       "imageUrl": "",
       "sourceUrl": "https://ichigogames.net/mementomori/fortina_twilight/",
@@ -19957,8 +19957,36 @@
       "noteUrl": "",
       "imageUrl": "",
       "sourceUrl": "https://ichigogames.net/mementomori/cusith/",
-      "plainSummary": "",
-      "steps": []
+      "plainSummary": "殴ったあと、敵の吸血を4ターン封じる。味方側にも同じ減少がかかる点に注意。",
+      "steps": [
+        {
+          "text": "ランダムな敵3体に物理380%"
+        },
+        {
+          "text": "攻撃後、自身以外の味方全体とランダムな敵5体のHPドレインを50%減少(4ターン)"
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "吸血で粘る敵(ルナリンドS4・聖夜ルナリンドS4等)への対策になる一方、味方の吸血アタッカー(フィアーS1・ルスティカS1等)の回復も同じだけ削る。",
+          "reason": "減少対象に「自身以外の味方全体」も含まれるため"
+        }
+      ],
+      "damage": {
+        "singleMultiplier": 380,
+        "hitCount": 3,
+        "baseTotal": 1140,
+        "exclusiveLv1Total": 1900,
+        "exclusiveLv2Total": 1900,
+        "exclusiveLv3Total": 2100,
+        "conditionMaxTotal": 2100,
+        "conditionMaxNote": "専用Lv1で対象がランダム敵5体(380%×5)、専用Lv3で420%×5体。倍率を伸ばす条件は専用武器のみ",
+        "powerType": "複数物理攻撃 / HPドレイン減少",
+        "maxStacks": null,
+        "realityRank": "高",
+        "rankingTarget": "専用Lv",
+        "damageMemo": "条件なしで最大値が出る。HPドレイン減少は倍率欄には含めない"
+      }
     },
     {
       "id": "cusith-s2",
@@ -19979,8 +20007,36 @@
       "noteUrl": "",
       "imageUrl": "",
       "sourceUrl": "https://ichigogames.net/mementomori/cusith/",
-      "plainSummary": "",
-      "steps": []
+      "plainSummary": "味方の弱体解除が5回に達すると1.5倍になる主砲。",
+      "steps": [
+        {
+          "text": "バトル中に自身と味方がスキルで解除した弱体効果の合計が5以上なら、物理870%"
+        },
+        {
+          "text": "それ以外は物理580%、ランダムな敵3体へ"
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "弱体解除を多く行う味方と好相性。冬マーリンS2は同じ「合計5個以上」を参照し、夏プリマS2は合計10個を参照する。自身のS3の解除もカウントに入る。",
+          "reason": "倍率条件が「自身と味方がスキルで解除した弱体効果の累計」のため"
+        }
+      ],
+      "damage": {
+        "singleMultiplier": 580,
+        "hitCount": 3,
+        "baseTotal": 1740,
+        "exclusiveLv1Total": 1740,
+        "exclusiveLv2Total": 1740,
+        "exclusiveLv3Total": 1740,
+        "conditionMaxTotal": 2610,
+        "conditionMaxNote": "弱体解除の累計が5以上で870%×3体。専用武器に倍率変化はない",
+        "powerType": "単発高倍率 / 弱体解除数条件",
+        "maxStacks": null,
+        "realityRank": "中",
+        "rankingTarget": "条件込み",
+        "damageMemo": "自身S3の解除もカウント源になるため、解除持ちを並べれば達成しやすい"
+      }
     },
     {
       "id": "cusith-s3",
@@ -20001,8 +20057,15 @@
       "noteUrl": "",
       "imageUrl": "",
       "sourceUrl": "https://ichigogames.net/mementomori/cusith/",
-      "plainSummary": "",
-      "steps": []
+      "plainSummary": "被弾して耐えるたび、味方の弱体を掃除するか、エース2人を強化する。",
+      "steps": [
+        {
+          "text": "敵の攻撃を受けて戦闘不能にならなかったとき、30%の確率で弱体効果が最も多い味方の弱体を1つ解除"
+        },
+        {
+          "text": "判定の前に弱体を持つ味方がいなければ、代わりに攻撃力が高い味方2体の攻撃力を30%増加(1ターン、解除不可)"
+        }
+      ]
     },
     {
       "id": "cusith-s4",
@@ -20023,8 +20086,24 @@
       "noteUrl": "",
       "imageUrl": "",
       "sourceUrl": "https://ichigogames.net/mementomori/cusith/",
-      "plainSummary": "",
-      "steps": []
+      "plainSummary": "開幕、味方全員にシールド。藍属性なら5倍の大きさ。自分は常時4割カット。",
+      "steps": [
+        {
+          "text": "1ターン目開始時、味方全体に自身の攻撃力40%のシールドを6ターン付与(解除不可)"
+        },
+        {
+          "text": "対象が藍属性ならシールドは攻撃力200%"
+        },
+        {
+          "text": "バトル開始時、自身の被ダメージを40%減少(解除不可)"
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "藍染め編成でシールド量が5倍になるため、藍パの開幕耐久の核になる。",
+          "reason": "増量条件が「対象が藍属性」のため"
+        }
+      ]
     },
     {
       "id": "artoria_golden-s1",
@@ -20045,8 +20124,39 @@
       "noteUrl": "",
       "imageUrl": "",
       "sourceUrl": "https://ichigogames.net/mementomori/artoria_golden/",
-      "plainSummary": "",
-      "steps": []
+      "plainSummary": "一番傷ついた味方を回復し、全員の弱体耐性を上げてから殴る。",
+      "steps": [
+        {
+          "text": "HP割合が最も低い味方を自身の攻撃力30%分回復"
+        },
+        {
+          "text": "攻撃前、味方全体の弱体効果耐性率を15%増加(2ターン)"
+        },
+        {
+          "text": "ランダムな敵3体に物理660%"
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "①の回復はアクティブスキル由来のため「回復回数カウント族」(ポーラS3・漆黒ステラS4・黄昏フローレンスS3)のスタック源になり、自身のS2・S3の条件も進める。",
+          "reason": "アクティブスキルによるHP回復のため"
+        }
+      ],
+      "damage": {
+        "singleMultiplier": 660,
+        "hitCount": 3,
+        "baseTotal": 1980,
+        "exclusiveLv1Total": 1980,
+        "exclusiveLv2Total": 1980,
+        "exclusiveLv3Total": 2160,
+        "conditionMaxTotal": 2160,
+        "conditionMaxNote": "専用Lv3で720%×3体。専用Lv1は弱体効果耐性率の増加量のみで倍率は変わらない",
+        "powerType": "複数物理攻撃 / 回復",
+        "maxStacks": null,
+        "realityRank": "高",
+        "rankingTarget": "専用Lv",
+        "damageMemo": "攻撃力30%の回復と弱体耐性付与は倍率欄には含めない"
+      }
     },
     {
       "id": "artoria_golden-s2",
@@ -20067,8 +20177,36 @@
       "noteUrl": "",
       "imageUrl": "",
       "sourceUrl": "https://ichigogames.net/mementomori/artoria_golden/",
-      "plainSummary": "",
-      "steps": []
+      "plainSummary": "回復しつつ4連撃。バトル中の回復回数が15に達すると4倍に化ける。",
+      "steps": [
+        {
+          "text": "HP割合が最も低い味方を自身の攻撃力30%分回復"
+        },
+        {
+          "text": "攻撃前、自身か味方のアクティブスキルによる回復の発動回数が15以上なら物理2160%(通常540%)×4回、ランダムな敵へ"
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "アクティブ回復を多発する味方(コベルS2・イディーネS2がそれぞれ3回、ポーラS3・ユニS2等)がいるほど15回に早く届く。コベルS2は同じ「15回」を参照する。",
+          "reason": "倍率条件が「自身か味方のアクティブスキルによるHP回復の発動回数」のため"
+        }
+      ],
+      "damage": {
+        "singleMultiplier": 540,
+        "hitCount": 4,
+        "baseTotal": 2160,
+        "exclusiveLv1Total": 2160,
+        "exclusiveLv2Total": 2160,
+        "exclusiveLv3Total": 2160,
+        "conditionMaxTotal": 8640,
+        "conditionMaxNote": "回復の発動回数が15以上で2160%×4回。専用武器に倍率変化はない",
+        "powerType": "連撃 / 回復回数条件",
+        "maxStacks": null,
+        "realityRank": "中",
+        "rankingTarget": "条件MAX",
+        "damageMemo": "回復回数15は編成依存が強い。達成前は540%×4回として読む"
+      }
     },
     {
       "id": "artoria_golden-s3",
@@ -20089,8 +20227,24 @@
       "noteUrl": "",
       "imageUrl": "",
       "sourceUrl": "https://ichigogames.net/mementomori/artoria_golden/",
-      "plainSummary": "",
-      "steps": []
+      "plainSummary": "味方が回復するたび「聖剣の光」が灯り、魔法を食らった分を回復に変える。",
+      "steps": [
+        {
+          "text": "自身か味方のアクティブスキルがHP回復を発動したとき、自身と攻撃力が高い味方2体に聖剣の光を3スタック付与(最大3、解除不可)"
+        },
+        {
+          "text": "付帯者が魔法攻撃を受けて生存していた場合、1スタック消費して被ダメージの80%を回復(上限は付帯者の最大HP20%)"
+        },
+        {
+          "text": "自身が戦闘不能になると、回復の前に自身と味方の聖剣の光を解除"
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "魔法攻撃主体の敵に対して特に働く(物理被弾では消費されない)。",
+          "reason": "消費条件が「魔法攻撃を受けたとき」のため"
+        }
+      ]
     },
     {
       "id": "artoria_golden-s4",
@@ -20111,8 +20265,18 @@
       "noteUrl": "",
       "imageUrl": "",
       "sourceUrl": "https://ichigogames.net/mementomori/artoria_golden/",
-      "plainSummary": "",
-      "steps": []
+      "plainSummary": "開幕の自己耐久と、翠・天の頭数で増えるエースのHP。",
+      "steps": [
+        {
+          "text": "バトル開始時、自身の最大HP+100%・被ダメージ60%減少(解除不可)"
+        },
+        {
+          "text": "1ターン目の行動開始時、自身と攻撃力が最も高い味方の魔法防御力+30%(解除不可)"
+        },
+        {
+          "text": "自身以外で翠属性または天属性の味方が2体以上なら、同じ対象の最大HPも30%増加(解除不可)"
+        }
+      ]
     },
     {
       "id": "fortina_twilight-s1",
@@ -20133,8 +20297,39 @@
       "noteUrl": "",
       "imageUrl": "",
       "sourceUrl": "https://ichigogames.net/mementomori/fortina_twilight/",
-      "plainSummary": "",
-      "steps": []
+      "plainSummary": "自分より速い味方の防御・物防・魔防を、フォルティナの数値基準で底上げしてから撃つ。",
+      "steps": [
+        {
+          "text": "自身と、自身よりスピードが高い味方全体の防御力を自身の防御力25%分増加(3ターン、解除不可)"
+        },
+        {
+          "text": "攻撃前、同じ対象の物理防御力・魔法防御力も自身の該当値25%分増加(3ターン、解除不可)"
+        },
+        {
+          "text": "ランダムな敵5体に物理480%"
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "フォルティナより速いアタッカーを並べるほど支援が広く届く。スピード計算ツールで並び順を確認すると設計しやすい。",
+          "reason": "対象条件が「自身よりスピードが高い味方」のため"
+        }
+      ],
+      "damage": {
+        "singleMultiplier": 480,
+        "hitCount": 5,
+        "baseTotal": 2400,
+        "exclusiveLv1Total": 2400,
+        "exclusiveLv2Total": 2400,
+        "exclusiveLv3Total": 2400,
+        "conditionMaxTotal": 2400,
+        "conditionMaxNote": "専用Lv1は防御力・物理防御力・魔法防御力の増加量のみで倍率は変わらない。倍率を伸ばす条件はない",
+        "powerType": "複数物理攻撃 / 防御支援",
+        "maxStacks": null,
+        "realityRank": "高",
+        "rankingTarget": "基本",
+        "damageMemo": "防御3種の支援は倍率欄には含めない"
+      }
     },
     {
       "id": "fortina_twilight-s2",
@@ -20155,8 +20350,36 @@
       "noteUrl": "",
       "imageUrl": "",
       "sourceUrl": "https://ichigogames.net/mementomori/fortina_twilight/",
-      "plainSummary": "",
-      "steps": []
+      "plainSummary": "5連撃の2割を自分の回復に回す自己完結アタック。",
+      "steps": [
+        {
+          "text": "ランダムな敵に物理560%×5回"
+        },
+        {
+          "text": "最後の攻撃後、総与ダメージの20%を自身のHP回復"
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "S4の献身で肩代わりした被ダメージをここで取り戻す設計。回復回数カウント族のスタック源にもなる。",
+          "reason": "回復がアクティブスキルの総与ダメージ参照のため"
+        }
+      ],
+      "damage": {
+        "singleMultiplier": 560,
+        "hitCount": 5,
+        "baseTotal": 2800,
+        "exclusiveLv1Total": 2800,
+        "exclusiveLv2Total": 2800,
+        "exclusiveLv3Total": 3050,
+        "conditionMaxTotal": 3050,
+        "conditionMaxNote": "専用Lv3で610%×5回。倍率を伸ばす条件は専用武器のみ",
+        "powerType": "連撃 / 自己回復",
+        "maxStacks": null,
+        "realityRank": "高",
+        "rankingTarget": "専用Lv",
+        "damageMemo": "総与ダメージ20%の自己回復は倍率欄には含めない"
+      }
     },
     {
       "id": "fortina_twilight-s3",
@@ -20177,8 +20400,21 @@
       "noteUrl": "",
       "imageUrl": "",
       "sourceUrl": "https://ichigogames.net/mementomori/fortina_twilight/",
-      "plainSummary": "",
-      "steps": []
+      "plainSummary": "属性を絞った編成なら全員が速くなり、2ターン目からエース2人の攻撃力を上乗せ。",
+      "steps": [
+        {
+          "text": "バトル開始時、味方編成内の属性が2種類以下なら味方全体のスピード+10%(解除不可)"
+        },
+        {
+          "text": "2ターン目開始時、自身と攻撃力が高い味方2体の攻撃力を自身の攻撃力30%分増加(3ターン、解除不可)"
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "天属性＋1属性までの編成で先手を取りやすくなる。",
+          "reason": "条件が「味方編成内の属性が2種類以下」のため"
+        }
+      ]
     },
     {
       "id": "fortina_twilight-s4",
@@ -20199,8 +20435,24 @@
       "noteUrl": "",
       "imageUrl": "",
       "sourceUrl": "https://ichigogames.net/mementomori/fortina_twilight/",
-      "plainSummary": "",
-      "steps": []
+      "plainSummary": "開幕3ターン、味方の被ダメージの半分を自分が引き受け、その間は6.5割カット。",
+      "steps": [
+        {
+          "text": "1ターン目の行動開始時、自身に献身を3ターン付与(解除不可)"
+        },
+        {
+          "text": "献身中、自身以外の味方が受けるダメージの50%を自身が代わりに受ける"
+        },
+        {
+          "text": "献身中に自身が攻撃を受けたとき、ダメージを65%遮断"
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "神呪イリアS3と同じ肩代わり機構で、序盤のバースト対策になる。肩代わりの割合はイリアが20%、こちらが50%。",
+          "reason": "肩代わりが「自身以外の味方が受けるダメージ」を参照するため"
+        }
+      ]
     }
   ],
   "tags": [
