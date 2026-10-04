@@ -291,10 +291,26 @@
     return entry && Number.isFinite(Number(entry.speed)) ? Number(entry.speed) : 0;
   }
 
+  /**
+   * スピードの計算は js/speed-model.js に任せる（speed-calc.html と同じ式）。
+   * v1はルーン・バフの入力UIを作らないので、ここでは手入力だけを渡す。
+   * ルーン・装備からの算出を足すときは rune / speedBuffRate を埋めればよい。
+   */
+  function speedInput(id) {
+    const manual = state.speed[id];
+    return {
+      rune: [0, 0, 0],
+      manualSpeed: Number.isFinite(manual) ? manual : "",
+      manualSpeedEnabled: true,
+      speedBuffRate: ""
+    };
+  }
+
   /** 設定値（手入力）。未入力なら基礎値を使う。 */
   function effectiveSpeed(id) {
-    const manual = state.speed[id];
-    return Number.isFinite(manual) && manual > 0 ? manual : baseSpeed(id);
+    const model = window.MirestoSpeedModel;
+    if (!model) return Number.isFinite(state.speed[id]) ? state.speed[id] : baseSpeed(id);
+    return model.finalSpeed(baseSpeed(id), speedInput(id));
   }
 
   /** 配置順（index付き）。 */
@@ -392,11 +408,38 @@
   }
 
   /* ------------------------------------------------------------------
-   * ② スピード順の目安（段階3で実装）
+   * ② スピード順の目安
+   *
+   * 並びは設定値の降順（同値は配置順）。配置順とは別物なので、
+   * ここを変えてもPTの配置は動かさない。
    * ------------------------------------------------------------------ */
   function renderSpeed() {
-    el.speedCount.textContent = "";
-    el.speedList.innerHTML = `<div class="pb-empty">この区画は準備中です。</div>`;
+    const members = membersBySpeed();
+    el.speedCount.textContent = members.length ? `${members.length}体` : "";
+    if (!members.length) {
+      el.speedList.innerHTML = `<div class="pb-empty">PTにキャラを入れると、ここに並びます。</div>`;
+      return;
+    }
+    el.speedList.innerHTML = `<div class="pb-speed-list">${members.map(({ id, index }, rank) => {
+      const entry = character(id);
+      const manual = state.speed[id];
+      return `
+        <div class="pb-speed-item" data-pb-attr="${escapeHtml(entry.attribute)}">
+          <span class="pb-speed-rank">${rank + 1}</span>
+          <span>
+            <span class="pb-speed-name">${escapeHtml(entry.name)}</span>
+            <br><span class="pb-note">配置${index + 1}・基礎スピード ${formatSpeedNumber(entry.speed)}</span>
+          </span>
+          <span class="pb-speed-input">
+            <label for="pb-speed-${escapeHtml(id)}">設定値（未入力なら基礎値）</label>
+            <input id="pb-speed-${escapeHtml(id)}" type="number" inputmode="numeric" min="1" max="99999" step="1"
+                   data-speed-input data-id="${escapeHtml(id)}"
+                   value="${Number.isFinite(manual) ? manual : ""}"
+                   placeholder="${escapeHtml(entry.speed)}">
+          </span>
+        </div>
+      `;
+    }).join("")}</div>`;
   }
 
   /* ------------------------------------------------------------------
@@ -726,6 +769,27 @@
     renderPartySkills();
   }
 
+  /**
+   * 設定スピードの手入力。空欄なら基礎値に戻す。
+   * 速度を変えても配置（state.party）は動かさない。
+   */
+  function setSpeed(id, raw) {
+    if (!byId.has(id)) return;
+    const text = String(raw).replace(/,/g, "").trim();
+    if (!text) delete state.speed[id];
+    else {
+      const value = Number(text);
+      if (!Number.isFinite(value) || value < 1 || value > 99999) {
+        renderSpeed();
+        return;
+      }
+      state.speed[id] = Math.round(value);
+    }
+    save();
+    renderSpeed();
+    renderPartySkills();
+  }
+
   function setPartyOrder(value) {
     state.partyOrder = value === "speed" ? "speed" : "slot";
     save();
@@ -738,6 +802,7 @@
     main.addEventListener("change", (event) => {
       const target = event.target;
       if (target.id === "partyOrder") setPartyOrder(target.value);
+      else if (target.hasAttribute("data-speed-input")) setSpeed(target.dataset.id, target.value);
       else if (target.hasAttribute("data-skill-check")) {
         togglePartySkill(target.dataset.id, target.dataset.skill, target.checked);
       }

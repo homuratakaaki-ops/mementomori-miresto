@@ -649,32 +649,20 @@
   </div>
 </div>
 
+<!-- スピードの計算式は js/speed-model.js に集約（party-builder.html と共有）。
+     計算式をこのページに書き足さないこと。 -->
+<script src="./js/speed-model.js"></script>
 <script>
-const RUNE_TABLE = [
-  { lv: 0, speed: 0, label: 'なし' },
-  { lv: 1, speed: 10, label: 'Lv1' },
-  { lv: 2, speed: 18, label: 'Lv2' },
-  { lv: 3, speed: 33, label: 'Lv3' },
-  { lv: 4, speed: 53, label: 'Lv4' },
-  { lv: 5, speed: 80, label: 'Lv5' },
-  { lv: 6, speed: 110, label: 'Lv6' },
-  { lv: 7, speed: 150, label: 'Lv7' },
-  { lv: 8, speed: 195, label: 'Lv8' },
-  { lv: 9, speed: 240, label: 'Lv9' },
-  { lv: 10, speed: 300, label: 'Lv10' },
-  { lv: 11, speed: 360, label: 'Lv11' },
-  { lv: 12, speed: 425, label: 'Lv12' },
-  { lv: 13, speed: 500, label: 'Lv13' },
-  { lv: 14, speed: 575, label: 'Lv14' },
-  { lv: 15, speed: 660, label: 'Lv15' },
-];
+const speedModel = window.MirestoSpeedModel;
+if (!speedModel) throw new Error('js/speed-model.js が読み込まれていません');
+const RUNE_TABLE = speedModel.RUNE_TABLE;
 
 const SIDES = [
   { id: 'ally', label: '自軍', target: 'allyList' },
   { id: 'enemy', label: '敵軍', target: 'enemyList' },
 ];
 const PRESET_STORAGE_KEY = 'speed-calc-presets';
-const SPEED_BUFF_PRESETS = [0, 5, 10, 15, 20, 30];
+const SPEED_BUFF_PRESETS = speedModel.SPEED_BUFF_PRESETS;
 
 let characters = [];
 let skills = [];
@@ -831,51 +819,42 @@ function escapeHtml(value) {
 }
 
 function runeSpeed(level) {
-  return RUNE_TABLE.find((rune) => rune.lv === level)?.speed || 0;
+  return speedModel.runeSpeed(level);
 }
 
 function runeSum(data) {
-  return data.rune.reduce((sum, level) => sum + runeSpeed(level), 0);
+  return speedModel.runeSum(data.rune);
 }
 
 function manualSpeedValue(data) {
-  const raw = String(data?.manualSpeed ?? '').replaceAll(',', '').trim();
-  if (!raw) return null;
-  const value = Number(raw);
-  return Number.isFinite(value) && value >= 0 ? Math.floor(value) : null;
+  return speedModel.manualSpeedValue(data);
 }
 
 function usesManualSpeed(data) {
-  return Boolean(data?.manualSpeedEnabled) && manualSpeedValue(data) !== null;
+  return speedModel.usesManualSpeed(data);
 }
 
 function calculatedSpeed(data) {
   const character = getCharacter(data.charaId);
-  return character ? (character.speed || 0) + runeSum(data) : null;
+  return character ? speedModel.calculatedSpeed(character.speed || 0, data) : null;
 }
 
 function speedBuffRateValue(data) {
-  const raw = String(data?.speedBuffRate ?? '').replaceAll(',', '').trim();
-  if (!raw) return 0;
-  const value = Number(raw);
-  return Number.isFinite(value) && value >= 0 ? value : 0;
+  return speedModel.speedBuffRateValue(data);
 }
 
 function buffedSpeed(data) {
-  const runeIncluded = calculatedSpeed(data);
-  if (runeIncluded === null) return null;
-  return Math.floor((runeIncluded * (100 + speedBuffRateValue(data)) / 100) + 1e-9);
+  const character = getCharacter(data.charaId);
+  return character ? speedModel.buffedSpeed(character.speed || 0, data) : null;
 }
 
 function finalSpeed(data) {
   const character = getCharacter(data.charaId);
-  if (!character) return null;
-  const manual = usesManualSpeed(data) ? manualSpeedValue(data) : null;
-  return manual !== null ? manual : buffedSpeed(data);
+  return character ? speedModel.finalSpeed(character.speed || 0, data) : null;
 }
 
 function formatSpeed(value) {
-  return value === null ? '-' : value.toLocaleString();
+  return speedModel.formatSpeed(value);
 }
 
 function getSkillName(characterId, number) {
