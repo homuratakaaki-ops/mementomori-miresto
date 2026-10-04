@@ -419,8 +419,14 @@ main {
 
 .term[open] { display: block; }
 
+/*
+ * 用語の折りたたみ見出し。文中に出る語なので行の高さは変えずに、
+ * 上下パディングと同じだけ負のマージンを当ててタップ領域だけ44pxに広げる。
+ */
 .term summary {
-  display: inline;
+  display: inline-block;
+  padding: 11px 4px;
+  margin: -11px -4px;
   color: var(--accent-strong);
   font-weight: 900;
   cursor: pointer;
@@ -449,7 +455,11 @@ main {
   background: #fff;
 }
 
+/* 「スキル説明」の折りたたみ見出し。指で押す前提なので高さ44px以上。 */
 .original-text summary {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
   padding: 10px 12px;
   color: var(--accent-strong);
   font-size: 13px;

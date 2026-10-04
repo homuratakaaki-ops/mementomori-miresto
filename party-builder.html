@@ -47,18 +47,25 @@
     </div>
   </header>
 
+  <!--
+    画面上部に貼り付く編成帯。A・B・配置1〜5の7マスを1行で出し、
+    押すとその区画へ移動する。スマホでも隠れないよう高さは1行ぶんに収める。
+  -->
+  <nav class="pb-rail" aria-label="編成の現在地">
+    <div class="pb-rail-inner" id="partyRail"></div>
+  </nav>
+
   <main>
     <p class="pb-alert" id="storageNotice" hidden>この端末には保存されません。</p>
     <p class="pb-alert" id="loadError" hidden>データの読み込みに失敗しました。時間をおいて再読み込みしてください。</p>
 
     <!-- ① PTの配置（折りたたみ対象外・常時表示） -->
-    <section class="pb-section" aria-labelledby="partyHeading">
+    <section class="pb-section" id="sectionParty" aria-labelledby="partyHeading">
       <div class="pb-section-head">
         <h2 id="partyHeading">PTの配置</h2>
-        <span class="pb-note" id="slotCaption">枠を押すと入替対象になります。</span>
+        <span class="pb-note" id="slotCaption"></span>
       </div>
       <div class="pb-party" id="party"></div>
-      <div id="slotDetail"></div>
     </section>
 
     <!-- ② スピード順の目安 -->
@@ -82,6 +89,13 @@
       <div class="pb-fold-body">
         <div class="pb-filters">
           <div>
+            <label class="pb-filter-label" for="searchInput">名前で探す（ひらがな・カタカナ・大小は区別しません。肩書きでも探せます）</label>
+            <div class="pb-search">
+              <input id="searchInput" type="search" autocomplete="off" placeholder="例：フローレンス／ふろーれんす／黄昏">
+              <button type="button" class="pb-btn pb-small" data-action="clear-search">消す</button>
+            </div>
+          </div>
+          <div>
             <span class="pb-filter-label" id="sourceLabel">表示する候補</span>
             <div class="pb-row" id="sourceTabs" role="group" aria-labelledby="sourceLabel"></div>
           </div>
@@ -98,7 +112,7 @@
     </details>
 
     <!-- ④ 候補を比較して入れ替える -->
-    <details class="pb-fold" id="foldCompare" open>
+    <details class="pb-fold" id="foldCompare" open data-pb-anchor="compare">
       <summary>候補を比較して入れ替える</summary>
       <div class="pb-fold-body">
         <div class="pb-compare" id="compare" aria-live="polite"></div>
@@ -137,6 +151,12 @@
          data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
   </main>
+
+  <!-- 入替の結果を数秒だけ出す1行。元に戻すまでが1セット。 -->
+  <div class="pb-toast" id="toast" role="status" aria-live="polite" hidden>
+    <span id="toastText"></span>
+    <button type="button" class="pb-btn pb-small" data-action="undo-place">元に戻す</button>
+  </div>
 
   <footer>
     <div class="footer-inner">

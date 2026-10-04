@@ -27,9 +27,8 @@
    * ------------------------------------------------------------------ */
   const state = {
     party: new Array(SLOT_COUNT).fill(null),
-    activeSlot: null,
     favorites: [],
-    filter: { attrs: [], favoritesOnly: false },
+    filter: { attrs: [], favoritesOnly: false, search: "" },
     compare: { A: { id: null, skill: 1 }, B: { id: null, skill: 1 } },
     partySkills: {},
     partyOrder: "slot",
@@ -55,9 +54,13 @@
   function cacheDom() {
     el.storageNotice = document.getElementById("storageNotice");
     el.loadError = document.getElementById("loadError");
+    el.rail = document.getElementById("partyRail");
     el.party = document.getElementById("party");
+    el.sectionParty = document.getElementById("sectionParty");
     el.slotCaption = document.getElementById("slotCaption");
-    el.slotDetail = document.getElementById("slotDetail");
+    el.searchInput = document.getElementById("searchInput");
+    el.toast = document.getElementById("toast");
+    el.toastText = document.getElementById("toastText");
     el.speedList = document.getElementById("speedList");
     el.speedCount = document.getElementById("speedCount");
     el.sourceTabs = document.getElementById("sourceTabs");
@@ -100,6 +103,53 @@
   /** 肩書き付き（[○○]名前）かどうか。同名のときは素体を先に並べる。 */
   function hasTitle(name) {
     return /^\[[^\]]*\]/.test(String(name));
+  }
+
+  /** 肩書きだけ（括弧の中身）。素体なら空文字。 */
+  function titleOf(name) {
+    const match = String(name).match(/^\[([^\]]*)\]/);
+    return match ? match[1] : "";
+  }
+
+  /**
+   * 枠に出す短い名前。44pxのマスに入れるため、肩書きを外して先頭3文字まで。
+   * 素体と別バージョンは3文字では見分けられないので、別バージョンには
+   * 描画側で「◆」の目印を付ける（full name は title / aria-label に残す）。
+   */
+  function shortName(name) {
+    const base = sortName(name);
+    // 別バージョンは「◆」の目印ぶん幅を取るので2文字まで。
+    if (hasTitle(name)) return base.slice(0, 2);
+    return base.length <= 4 ? base : base.slice(0, 3);
+  }
+
+  /** 小書き仮名 → 大書き仮名。「大小を同一視」のため。 */
+  const LARGE_KANA = {
+    "ァ": "ア", "ィ": "イ", "ゥ": "ウ", "ェ": "エ", "ォ": "オ",
+    "ッ": "ツ", "ャ": "ヤ", "ュ": "ユ", "ョ": "ヨ", "ヮ": "ワ",
+    "ヵ": "カ", "ヶ": "ケ"
+  };
+
+  /**
+   * 検索用の正規化。ひらがな・カタカナ・英字の大小・全角半角・空白を同一視する。
+   * 濁点は落とさない（「ハ」と「バ」は別の名前なので）。
+   */
+  function normalizeText(value) {
+    return String(value === null || value === undefined ? "" : value)
+      // 全角の英数記号 → 半角
+      .replace(/[！-～]/g, (char) => String.fromCharCode(char.charCodeAt(0) - 0xFEE0))
+      .toLowerCase()
+      // ひらがな → カタカナ
+      .replace(/[ぁ-ゖ]/g, (char) => String.fromCharCode(char.charCodeAt(0) + 0x60))
+      .replace(/[ァィゥェォッャュョヮヵヶ]/g, (char) => LARGE_KANA[char] || char)
+      .replace(/[\s　]/g, "");
+  }
+
+  /** 検索対象は「表示名」「肩書きを除いた名前」「肩書き単体」の3つ。 */
+  function searchKeys(entry) {
+    return [entry.name, sortName(entry.name), titleOf(entry.name)]
+      .filter(Boolean)
+      .map(normalizeText);
   }
 
   /* ------------------------------------------------------------------
@@ -195,6 +245,7 @@
         state.filter.attrs = ATTRIBUTES.filter((attr) => saved.filter.attrs.includes(attr));
       }
       state.filter.favoritesOnly = Boolean(saved.filter.favoritesOnly);
+      if (typeof saved.filter.search === "string") state.filter.search = saved.filter.search.slice(0, 60);
     }
 
     if (saved.sections && typeof saved.sections === "object") {
@@ -332,79 +383,99 @@
   }
 
   /* ------------------------------------------------------------------
+   * 画面上部の編成帯（A・B・配置1〜5）。押すとその区画へ移動する。
+   * ------------------------------------------------------------------ */
+  function railCell(key, entry, target, label) {
+    const filled = Boolean(entry);
+    const value = filled
+      ? `<span class="pb-rail-val${hasTitle(entry.name) ? " is-alt" : ""}">${escapeHtml(shortName(entry.name))}</span>`
+      : `<span class="pb-rail-val" aria-hidden="true">＋</span>`;
+    return `
+      <button type="button" class="pb-rail-cell ${filled ? "is-filled" : "is-empty"}"
+              data-action="go-section" data-target="${target}"
+              title="${escapeHtml(filled ? `${label}：${entry.name}` : `${label}：空き`)}"
+              aria-label="${escapeHtml(filled ? `${label} ${entry.name} へ移動` : `${label} 空き へ移動`)}">
+        <span class="pb-rail-key" aria-hidden="true">${escapeHtml(key)}</span>${value}
+      </button>
+    `;
+  }
+
+  function renderRail() {
+    const cells = [
+      railCell("A", character(state.compare.A.id), "compare", "候補A"),
+      railCell("B", character(state.compare.B.id), "compare", "候補B")
+    ].concat(state.party.map((id, index) =>
+      railCell(String(index + 1), character(id), "party", `配置${index + 1}`)));
+    el.rail.innerHTML = cells.join("");
+  }
+
+  /* ------------------------------------------------------------------
    * ① PTの配置
    * ------------------------------------------------------------------ */
   function renderParty() {
     el.party.innerHTML = state.party.map((id, index) => {
       const entry = character(id);
-      const active = state.activeSlot === index;
       const body = entry
-        ? `<span class="pb-slot-name">${escapeHtml(entry.name)}</span>
+        ? `<a class="pb-slot-name" href="./pages/characters/${escapeHtml(entry.pageSlug)}.html">${escapeHtml(entry.name)}</a>
            <span class="pb-slot-sub">${escapeHtml(entry.attribute)}・${escapeHtml(entry.weaponType)}</span>`
         : `<span class="pb-slot-empty" aria-hidden="true">＋</span><span class="pb-slot-sub">空き</span>`;
       return `
-        <div class="pb-slot${active ? " is-active" : ""}"${entry ? ` data-pb-attr="${escapeHtml(entry.attribute)}"` : ""}>
-          <button type="button" class="pb-slot-button" data-action="select-slot" data-slot="${index}" aria-pressed="${active}">
-            <span class="pb-slot-no">配置${index + 1}${active ? "・入替対象" : ""}</span>
-            ${body}
-          </button>
-        </div>
-      `;
-    }).join("");
-
-    const active = state.activeSlot;
-    if (active === null) {
-      el.slotCaption.textContent = "枠を押すと入替対象になります。";
-    } else {
-      const entry = character(state.party[active]);
-      el.slotCaption.textContent = `入替対象：配置${active + 1}${entry ? `・${entry.name}` : "（空き）"}`;
-    }
-  }
-
-  function renderSlotDetail() {
-    const index = state.activeSlot;
-    if (index === null) {
-      el.slotDetail.innerHTML = `<p class="pb-note">同じキャラは1体まで。素体と肩書き付き（例：アルトリアと[黄金色の聖剣使い]アルトリア）は別キャラとして同時に編成できる扱いにしています（ゲーム内仕様は未確認）。</p>`;
-      return;
-    }
-    const id = state.party[index];
-    const entry = character(id);
-    if (!entry) {
-      el.slotDetail.innerHTML = `
-        <div class="pb-slot-detail">
-          <h3>配置${index + 1}：空き</h3>
-          <p class="pb-note">「候補を探す・お気に入り」または「候補を比較して入れ替える」から、この枠にキャラを入れられます。</p>
-          <div class="pb-row">
-            ${moveButtons(index)}
+        <div class="pb-slot" id="pb-slot-${index}"${entry ? ` data-pb-attr="${escapeHtml(entry.attribute)}"` : ""}>
+          <span class="pb-slot-no">配置${index + 1}</span>
+          ${body}
+          <div class="pb-slot-actions">
+            <button type="button" class="pb-btn pb-small" data-action="move-member" data-slot="${index}" data-step="-1" ${index === 0 || !entry ? "disabled" : ""} aria-label="配置${index + 1}を1つ前へ">←</button>
+            <button type="button" class="pb-btn pb-small" data-action="move-member" data-slot="${index}" data-step="1" ${index === SLOT_COUNT - 1 || !entry ? "disabled" : ""} aria-label="配置${index + 1}を1つ後へ">→</button>
+            <button type="button" class="pb-btn pb-small pb-wide" data-action="remove-member" data-slot="${index}" ${entry ? "" : "disabled"}>外す</button>
           </div>
         </div>
       `;
-      return;
-    }
-    el.slotDetail.innerHTML = `
-      <div class="pb-slot-detail" data-pb-attr="${escapeHtml(entry.attribute)}">
-        <h3>配置${index + 1}：${escapeHtml(entry.name)}</h3>
-        <div class="meta-row">
-          <span class="badge attribute">${escapeHtml(entry.attribute)}</span>
-          <span class="badge">${escapeHtml(entry.weaponType)}</span>
-          <span class="badge">基礎スピード ${formatSpeedNumber(entry.speed)}</span>
-          <span class="badge">入手 ${escapeHtml(entry.availability)}</span>
-        </div>
-        <div class="pb-row">
-          <button type="button" class="pb-btn pb-small" data-action="remove-member" data-slot="${index}">外す</button>
-          ${moveButtons(index)}
-          <a class="pb-btn pb-small" href="./pages/characters/${escapeHtml(entry.pageSlug)}.html">キャラ詳細</a>
-        </div>
-        <p class="pb-note">「←」「→」は配置順の入れ替えです。スピード順は別に表示します。</p>
-      </div>
-    `;
+    }).join("");
+    el.slotCaption.textContent = `編成 ${partyIds().length} / ${SLOT_COUNT}体。候補の「1〜5」を押すとその枠に入ります。`;
   }
 
-  function moveButtons(index) {
-    return `
-      <button type="button" class="pb-btn pb-small" data-action="move-member" data-slot="${index}" data-step="-1" ${index === 0 ? "disabled" : ""} aria-label="配置を1つ前へ">←</button>
-      <button type="button" class="pb-btn pb-small" data-action="move-member" data-slot="${index}" data-step="1" ${index === SLOT_COUNT - 1 ? "disabled" : ""} aria-label="配置を1つ後へ">→</button>
-    `;
+  /**
+   * 候補の行き先ボタン列「A ｜ B ｜ 1 2 3 4 5」。
+   * 空枠は「＋」、埋まっている枠はそのキャラの短い名前、
+   * この候補が入っている枠は「登録済み」として強調する。
+   */
+  function placeRow(entry, skillNumber) {
+    const cells = ["A", "B"].map((side) => {
+      const current = character(state.compare[side].id);
+      const chosen = state.compare[side].id === entry.id;
+      const value = chosen
+        ? "選択中"
+        : (current ? shortName(current.name) : "＋");
+      return `
+        <button type="button" class="pb-place${current || chosen ? "" : " is-empty"}"
+                data-action="send-compare" data-side="${side}" data-id="${escapeHtml(entry.id)}"
+                aria-pressed="${chosen}"
+                title="${escapeHtml(`候補${side}へ${current ? `（いま ${current.name}）` : ""}`)}">
+          <span class="pb-place-key" aria-hidden="true">${side}</span>
+          <span class="pb-place-val${!chosen && current && hasTitle(current.name) ? " is-alt" : ""}">${escapeHtml(value)}</span>
+        </button>
+      `;
+    });
+
+    const slots = state.party.map((id, index) => {
+      const current = character(id);
+      const here = id === entry.id;
+      const value = here ? "登録済み" : (current ? shortName(current.name) : "＋");
+      const hint = here
+        ? `配置${index + 1}に登録済み`
+        : (current ? `配置${index + 1}の${current.name}を${entry.name}に入れ替える` : `配置${index + 1}に${entry.name}を入れる`);
+      return `
+        <button type="button" class="pb-place${current ? "" : " is-empty"}"
+                data-action="place-member" data-id="${escapeHtml(entry.id)}" data-slot="${index}"${skillNumber ? ` data-skill="${skillNumber}"` : ""}
+                aria-pressed="${here}" ${here ? "disabled" : ""}
+                title="${escapeHtml(hint)}" aria-label="${escapeHtml(hint)}">
+          <span class="pb-place-key" aria-hidden="true">${index + 1}</span>
+          <span class="pb-place-val${!here && current && hasTitle(current.name) ? " is-alt" : ""}">${escapeHtml(value)}</span>
+        </button>
+      `;
+    });
+
+    return `<div class="pb-place-row" role="group" aria-label="${escapeHtml(`${entry.name}の行き先`)}">${cells.concat(slots).join("")}</div>`;
   }
 
   /* ------------------------------------------------------------------
@@ -467,16 +538,19 @@
   }
 
   function filteredCandidates() {
+    const query = normalizeText(state.filter.search);
     return characters.filter((entry) => {
       if (state.filter.favoritesOnly && !isFavorite(entry.id)) return false;
-      // 複数属性はOR。お気に入り条件とはANDで併用する。
+      // 複数属性はOR。お気に入り・検索の条件とはANDで併用する。
       if (state.filter.attrs.length && !state.filter.attrs.includes(entry.attribute)) return false;
+      if (query && !entry.searchKeys.some((key) => key.includes(query))) return false;
       return true;
     });
   }
 
   function conditionText() {
     const parts = [];
+    if (state.filter.search.trim()) parts.push(`「${state.filter.search.trim()}」`);
     if (state.filter.attrs.length) parts.push(state.filter.attrs.join("＋"));
     if (state.filter.favoritesOnly) parts.push("お気に入りのみ");
     return parts.join("／");
@@ -492,11 +566,6 @@
   }
 
   function renderRosterCard(entry) {
-    const inParty = partyIds().includes(entry.id);
-    const canPlace = state.activeSlot !== null && (!inParty || slotOf(entry.id) === state.activeSlot);
-    const placeLabel = state.activeSlot === null
-      ? "枠を選ぶと入れられます"
-      : (inParty && slotOf(entry.id) !== state.activeSlot ? "PTに編成済み" : `配置${state.activeSlot + 1}に入れる`);
     return `
       <article class="pb-roster-card" data-pb-attr="${escapeHtml(entry.attribute)}">
         <div class="pb-roster-head">
@@ -509,11 +578,7 @@
           <span class="badge">スピード ${formatSpeedNumber(entry.speed)}</span>
           <span class="badge">入手 ${escapeHtml(entry.availability)}</span>
         </div>
-        <div class="pb-roster-actions">
-          <button type="button" class="pb-btn pb-small" data-action="send-compare" data-id="${escapeHtml(entry.id)}" data-side="A" aria-pressed="${state.compare.A.id === entry.id}">Aへ</button>
-          <button type="button" class="pb-btn pb-small" data-action="send-compare" data-id="${escapeHtml(entry.id)}" data-side="B" aria-pressed="${state.compare.B.id === entry.id}">Bへ</button>
-          <button type="button" class="pb-btn pb-small pb-primary pb-btn-wide" data-action="place-member" data-id="${escapeHtml(entry.id)}" ${canPlace ? "" : "disabled"}>${escapeHtml(placeLabel)}</button>
-        </div>
+        ${placeRow(entry, null)}
       </article>
     `;
   }
@@ -548,11 +613,6 @@
       `;
     }
     const number = SKILL_NUMBERS.includes(Number(slot.skill)) ? Number(slot.skill) : 1;
-    const inOtherSlot = partyIds().includes(entry.id) && slotOf(entry.id) !== state.activeSlot;
-    const canPlace = state.activeSlot !== null && !inOtherSlot;
-    const placeLabel = state.activeSlot === null
-      ? "枠を選ぶと入れられます"
-      : (inOtherSlot ? "PTに編成済み" : `${side}を配置${state.activeSlot + 1}へ入れる`);
 
     return `
       <div class="pb-compare-col" data-pb-attr="${escapeHtml(entry.attribute)}">
@@ -574,7 +634,7 @@
               </button>
             `).join("")}
           </div>
-          <button type="button" class="pb-btn pb-primary" data-action="place-member" data-id="${escapeHtml(entry.id)}" data-skill="${number}" ${canPlace ? "" : "disabled"}>${escapeHtml(placeLabel)}</button>
+          ${placeRow(entry, number)}
         </div>
         ${renderSkillCardHtml(entry.id, number)}
       </div>
@@ -655,8 +715,8 @@
    * 描画のまとめ
    * ------------------------------------------------------------------ */
   function renderAll() {
+    renderRail();
     renderParty();
-    renderSlotDetail();
     renderSpeed();
     renderFinder();
     renderCompare();
@@ -665,34 +725,90 @@
   }
 
   /* ------------------------------------------------------------------
-   * 操作
+   * 入替のお知らせ（元に戻す付き）
    * ------------------------------------------------------------------ */
-  function selectSlot(index) {
-    state.activeSlot = state.activeSlot === index ? null : index;
-    renderParty();
-    renderSlotDetail();
-    renderFinder();
-    renderCompare();
+  const TOAST_MS = 7000;
+  let undoSnapshot = null;
+  let toastTimer = null;
+
+  function hideToast() {
+    if (toastTimer) { clearTimeout(toastTimer); toastTimer = null; }
+    undoSnapshot = null;
+    if (el.toast) el.toast.hidden = true;
   }
 
-  function placeMember(id, skillNumber) {
-    const index = state.activeSlot;
-    if (index === null || !byId.has(id)) return;
-    const existing = slotOf(id);
-    if (existing !== -1 && existing !== index) return; // 同一idの重複編成は不可
+  function showToast(message, snapshot) {
+    if (!el.toast) return;
+    if (toastTimer) clearTimeout(toastTimer);
+    undoSnapshot = snapshot;
+    el.toastText.textContent = message;
+    el.toast.hidden = false;
+    toastTimer = setTimeout(hideToast, TOAST_MS);
+  }
+
+  function undoPlace() {
+    if (!undoSnapshot) { hideToast(); return; }
+    state.party = undoSnapshot.party.slice();
+    state.partySkills = undoSnapshot.partySkills;
+    hideToast();
+    save();
+    renderAll();
+  }
+
+  function snapshot() {
+    const skills = {};
+    Object.keys(state.partySkills).forEach((id) => { skills[id] = state.partySkills[id].slice(); });
+    return { party: state.party.slice(), partySkills: skills };
+  }
+
+  /* ------------------------------------------------------------------
+   * 操作
+   * ------------------------------------------------------------------ */
+  /**
+   * 候補を枠へ入れる。枠が埋まっていれば即時入替し、画面下に1行出す。
+   * 同じid（全く同じキャラ）だけが重複不可。別バージョンは同時に編成できる。
+   * すでにPTにいる候補を別の枠へ入れたときは、2つの枠を入れ替える。
+   */
+  function placeMember(id, index, skillNumber) {
+    if (!byId.has(id)) return;
+    if (!Number.isInteger(index) || index < 0 || index >= SLOT_COUNT) return;
+    if (state.party[index] === id) return;
+
+    const before = snapshot();
+    const replaced = character(state.party[index]);
+    const from = slotOf(id);
+    if (from !== -1) state.party[from] = state.party[index]; // PT内の移動は入れ替え
     state.party[index] = id;
-    // 入ったメンバーの初期表示スキル（デモ準拠：比較枠から入れたときはその番号）。
+
+    // 入ったメンバーの初期表示スキル（比較枠から入れたときはその番号、それ以外はS1）。
     const initial = SKILL_NUMBERS.includes(Number(skillNumber)) ? Number(skillNumber) : 1;
     if (!state.partySkills[id] || !state.partySkills[id].length) {
       state.partySkills[id] = [initial];
     }
+
+    const entry = character(id);
+    let message;
+    if (replaced && from !== -1) {
+      message = `配置${index + 1}を${replaced.name}から${entry.name}へ入替（${replaced.name}は配置${from + 1}へ）`;
+    } else if (replaced) {
+      message = `配置${index + 1}を${replaced.name}から${entry.name}へ入替`;
+    } else if (from !== -1) {
+      message = `${entry.name}を配置${from + 1}から配置${index + 1}へ移動`;
+    } else {
+      message = `配置${index + 1}に${entry.name}を入れました`;
+    }
+    showToast(message, before);
     save();
     renderAll();
   }
 
   function removeMember(index) {
+    const entry = character(state.party[index]);
+    if (!entry) return;
+    const before = snapshot();
     // 外したメンバーの表示スキル選択・設定スピードは残す（再編成で戻す手間を省く）。
     state.party[index] = null;
+    showToast(`配置${index + 1}の${entry.name}を外しました`, before);
     save();
     renderAll();
   }
@@ -703,7 +819,6 @@
     const current = state.party[index];
     state.party[index] = state.party[target];
     state.party[target] = current;
-    state.activeSlot = target;
     save();
     renderAll();
   }
@@ -722,6 +837,27 @@
     state.filter.favoritesOnly = source === "favorites";
     save();
     renderFinder();
+  }
+
+  function setSearch(value) {
+    state.filter.search = String(value).slice(0, 60);
+    save();
+    renderFinder();
+  }
+
+  /**
+   * 編成帯から該当区画へ移動する。閉じている区画は開いてから運ぶ。
+   * スクロールは即時（behavior は指定しない）。なめらかスクロールは
+   * 動きを減らす設定の端末で無視され、押しても動かないボタンになるため。
+   */
+  function goSection(target) {
+    if (target === "compare") {
+      state.sections.compare = true;
+      el.folds.compare.open = true;
+      el.folds.compare.scrollIntoView({ block: "start" });
+    } else {
+      el.sectionParty.scrollIntoView({ block: "start" });
+    }
   }
 
   function toggleAttr(attr) {
@@ -746,6 +882,7 @@
     state.sections.compare = true;
     el.folds.compare.open = true;
     save();
+    renderRail();
     renderFinder();
     renderCompare();
   }
@@ -797,9 +934,10 @@
   }
 
   function bindEvents() {
-    const main = document.querySelector("main");
+    // 編成帯と入替のお知らせは <main> の外にあるので body でまとめて拾う。
+    const root = document.body;
 
-    main.addEventListener("change", (event) => {
+    root.addEventListener("change", (event) => {
       const target = event.target;
       if (target.id === "partyOrder") setPartyOrder(target.value);
       else if (target.hasAttribute("data-speed-input")) setSpeed(target.dataset.id, target.value);
@@ -808,20 +946,31 @@
       }
     });
 
-    main.addEventListener("click", (event) => {
+    // 検索は打つたびに絞る。入力欄は再描画しないので、文字が消えることはない。
+    if (el.searchInput) {
+      el.searchInput.addEventListener("input", (event) => setSearch(event.target.value));
+    }
+
+    root.addEventListener("click", (event) => {
       const button = event.target.closest("button[data-action]");
       if (!button || button.disabled) return;
       const action = button.dataset.action;
-      if (action === "select-slot") selectSlot(Number(button.dataset.slot));
-      else if (action === "remove-member") removeMember(Number(button.dataset.slot));
+      if (action === "remove-member") removeMember(Number(button.dataset.slot));
       else if (action === "move-member") moveMember(Number(button.dataset.slot), Number(button.dataset.step));
       else if (action === "toggle-favorite") toggleFavorite(button.dataset.id);
       else if (action === "set-source") setSource(button.dataset.source);
       else if (action === "toggle-attr") toggleAttr(button.dataset.attr);
       else if (action === "clear-attrs") clearAttrs();
-      else if (action === "send-compare") sendToCompare(button.dataset.side, button.dataset.id);
+      else if (action === "clear-search") {
+        el.searchInput.value = "";
+        setSearch("");
+        el.searchInput.focus();
+      } else if (action === "send-compare") sendToCompare(button.dataset.side, button.dataset.id);
       else if (action === "set-compare-skill") setCompareSkill(button.dataset.side, button.dataset.skill);
-      else if (action === "place-member") placeMember(button.dataset.id, button.dataset.skill);
+      else if (action === "place-member") {
+        placeMember(button.dataset.id, Number(button.dataset.slot), button.dataset.skill);
+      } else if (action === "undo-place") undoPlace();
+      else if (action === "go-section") goSection(button.dataset.target);
     });
 
     // 折りたたみの開閉だけを保存する。他の操作で開閉を勝手に戻さない。
@@ -864,11 +1013,15 @@
       el.loadError.hidden = false;
       return;
     }
-    characters.forEach((entry) => byId.set(entry.id, entry));
+    characters.forEach((entry) => {
+      entry.searchKeys = searchKeys(entry); // 検索のたびに作り直さない
+      byId.set(entry.id, entry);
+    });
 
     applySaved(readSaved());
     applySections();
     if (el.partyOrder) el.partyOrder.value = state.partyOrder;
+    if (el.searchInput) el.searchInput.value = state.filter.search;
     bindEvents();
     renderAll();
   }

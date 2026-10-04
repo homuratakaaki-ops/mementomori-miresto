@@ -99,6 +99,10 @@
   line-height: 1.4;
 }
 
+/* 編成帯が貼り付くぶん、移動先の見出しが隠れないように余白を取る */
+.pb-section,
+.pb-fold { scroll-margin-top: 52px; }
+
 .pb-section { margin-bottom: 8px; }
 
 /* 保存できない環境・読み込み失敗の1行通知 */
@@ -151,6 +155,53 @@
 .pb-fold-body { padding: 2px 0 20px; }
 
 /* ------------------------------------------------------------------
+ * 画面上部に貼り付く編成帯（A・B・配置1〜5の7マス）
+ * スマホでも隠れないよう、1行44pxに収める。
+ * ------------------------------------------------------------------ */
+.pb-rail {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  border-bottom: 1px solid var(--line);
+  background: var(--panel);
+}
+
+.pb-rail-inner {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 3px;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 0 clamp(6px, 2vw, 16px);
+}
+
+.pb-rail-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  min-width: 0;
+  height: 44px;
+  padding: 2px 3px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  font-size: 11px;
+  font-weight: 900;
+  line-height: 1.2;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.pb-rail-cell:hover { background: #eef2f8; }
+.pb-rail-key { flex: none; color: var(--muted); font-size: 10px; }
+.pb-rail-val { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.pb-rail-cell.is-empty .pb-rail-val { color: var(--muted); font-size: 14px; }
+.pb-rail-cell.is-filled { color: var(--accent-strong); }
+
+/* ------------------------------------------------------------------
  * ① PTの配置
  * ------------------------------------------------------------------ */
 .pb-party {
@@ -161,6 +212,7 @@
 
 .pb-slot {
   display: grid;
+  align-content: start;
   gap: 6px;
   min-width: 0;
   padding: 10px;
@@ -168,28 +220,6 @@
   border-radius: 10px;
   background: var(--panel);
 }
-
-.pb-slot.is-active {
-  border-color: var(--navy);
-  box-shadow: inset 0 0 0 1px var(--navy);
-}
-
-.pb-slot-button {
-  display: grid;
-  gap: 4px;
-  width: 100%;
-  min-height: 72px;
-  padding: 6px;
-  border: 0;
-  border-radius: 8px;
-  background: transparent;
-  color: inherit;
-  font: inherit;
-  text-align: left;
-  cursor: pointer;
-}
-
-.pb-slot-button:hover { background: #f2f5fa; }
 
 .pb-slot-no {
   color: var(--muted);
@@ -204,21 +234,105 @@
   overflow-wrap: anywhere;
 }
 
+a.pb-slot-name { color: var(--accent-strong); text-decoration: underline; }
+
 .pb-slot-empty { color: var(--muted); font-size: 22px; font-weight: 900; }
 .pb-slot-sub { color: var(--muted); font-size: 12px; line-height: 1.5; }
 
-.pb-slot-detail {
+.pb-slot-actions {
   display: grid;
-  gap: 10px;
-  margin-top: 12px;
-  padding: 14px;
-  border: 1px solid var(--line);
-  border-left: 4px solid var(--navy);
-  border-radius: 8px;
-  background: var(--panel);
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
+  margin-top: 2px;
 }
 
-.pb-slot-detail h3 { margin: 0; font-size: 17px; }
+.pb-slot-actions .pb-wide { grid-column: 1 / -1; }
+
+/* ------------------------------------------------------------------
+ * 候補の行き先ボタン列（A ｜ B ｜ 1 2 3 4 5）
+ * ------------------------------------------------------------------ */
+.pb-place-row {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 3px;
+}
+
+.pb-place {
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  gap: 1px;
+  min-width: 0;
+  min-height: 44px;
+  padding: 3px 2px;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: var(--panel);
+  color: var(--ink);
+  font: inherit;
+  font-size: 11px;
+  font-weight: 900;
+  line-height: 1.15;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.pb-place:hover { background: #eef2f8; }
+.pb-place-key { color: var(--muted); font-size: 10px; font-weight: 800; }
+.pb-place-val { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.pb-place.is-empty .pb-place-val { color: var(--muted); font-size: 13px; }
+
+/* この候補が入っている枠 */
+.pb-place[aria-pressed="true"] {
+  border-color: var(--navy);
+  background: var(--navy);
+  color: #fff;
+}
+
+.pb-place[aria-pressed="true"] .pb-place-key { color: #c9d9f0; }
+
+/* 「登録済み」は4文字あるので、このマスだけ字を詰めて省略させない */
+.pb-place[aria-pressed="true"] .pb-place-val {
+  font-size: 9px;
+  letter-spacing: -0.5px;
+}
+
+/* 別バージョン（肩書き付き）の目印。短い名前だけでは見分けづらいため。 */
+.pb-place-val.is-alt::before,
+.pb-rail-val.is-alt::before {
+  content: "◆";
+  margin-right: 1px;
+  font-size: 8px;
+  vertical-align: 2px;
+}
+
+/* ------------------------------------------------------------------
+ * 入替のお知らせ（元に戻す付き）
+ * ------------------------------------------------------------------ */
+.pb-toast {
+  position: fixed;
+  left: 50%;
+  bottom: 12px;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: min(560px, calc(100vw - 24px));
+  transform: translateX(-50%);
+  padding: 10px 12px;
+  border: 1px solid var(--navy);
+  border-radius: 10px;
+  background: #0b2a57;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 800;
+  line-height: 1.5;
+  box-shadow: var(--shadow);
+}
+
+.pb-toast[hidden] { display: none; }
+.pb-toast > span { flex: 1 1 auto; min-width: 0; overflow-wrap: anywhere; }
+.pb-toast .pb-btn { flex: none; background: #fff; }
 
 /* ------------------------------------------------------------------
  * ② スピード順の目安
@@ -331,8 +445,23 @@
 
 .pb-star[aria-pressed="true"] { border-color: var(--accent); color: #d9a300; }
 
-.pb-roster-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
-.pb-roster-actions .pb-btn-wide { grid-column: 1 / -1; }
+.pb-search {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 6px;
+}
+
+.pb-search input {
+  width: 100%;
+  min-height: 44px;
+  padding: 8px 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--ink);
+  font: inherit;
+  font-size: 16px;
+}
 
 .pb-count { color: var(--muted); font-size: 13px; font-weight: 800; }
 
@@ -523,7 +652,13 @@
   .pb-party { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .pb-roster { grid-template-columns: 1fr; }
   .pb-picker-body { grid-template-columns: 1fr; }
-  .pb-roster-actions { grid-template-columns: 1fr; }
+  .pb-place { font-size: 10px; padding: 3px 1px; }
+  .pb-place-key { font-size: 9px; }
+  /* ◆の目印ぶん狭くなるので、別バージョンの名前だけ字を詰める */
+  .pb-place-val.is-alt { font-size: 9px; letter-spacing: -0.5px; }
+  .pb-rail-inner { gap: 2px; padding: 0 4px; }
+  .pb-rail-cell { font-size: 10px; gap: 2px; }
+  .pb-rail-key { font-size: 9px; }
   .pb-speed-item { grid-template-columns: 2em minmax(0, 1fr); }
   .pb-speed-input { grid-column: 1 / -1; justify-items: stretch; }
   .pb-speed-input input { width: 100%; text-align: left; }
