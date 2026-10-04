@@ -273,7 +273,7 @@ function exclusiveMultiplierTotal(skill, item) {
   const match = String(item.multiplier || "").match(/(?:攻撃力×|物理|魔法)([0-9]+(?:\.[0-9]+)?)%(?:×([0-9]+)回)?/);
   if (!match) return null;
   const single = Number(match[1]);
-  const hits = match[2] ? Number(match[2]) : (skill.damage && skill.damage.hitCount) || 1;
+  const hits = match[2] ? Number(match[2]) : item.hits || (skill.damage && skill.damage.hitCount) || 1;
   return Math.round(single * hits * 100) / 100;
 }
 
