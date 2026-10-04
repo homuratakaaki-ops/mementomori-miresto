@@ -41,6 +41,12 @@
   let characters = [];
   const byId = new Map();
 
+  // スキル本文（1.3MB）は④⑤で初めて必要になった時点で1回だけ読む。
+  const skillsByCharacter = new Map();
+  let terms = {};
+  let skillsState = "idle"; // idle / loading / ready / error
+  let skillsPromise = null;
+
   /* ------------------------------------------------------------------
    * DOM
    * ------------------------------------------------------------------ */
@@ -209,6 +215,61 @@
   /* ------------------------------------------------------------------
    * 参照ヘルパ
    * ------------------------------------------------------------------ */
+  /**
+   * スキル本文の遅延読み込み。読み終わったら④⑤だけ描き直す。
+   * 初期表示（PTも比較枠も空）では呼ばれないので、1.3MBを最初に読むことはない。
+   */
+  function ensureSkills() {
+    // 失敗後は再描画のたびに取り直さない（描画→失敗→再描画の無限ループを避ける）。
+    if (skillsState !== "idle") return skillsPromise;
+    skillsState = "loading";
+    skillsPromise = Promise.all([
+      fetch("./data/mementomori-skills.json", { cache: "no-store" }).then((r) => {
+        if (!r.ok) throw new Error(`mementomori-skills.json: ${r.status}`);
+        return r.json();
+      }),
+      fetch("./data/terms.json", { cache: "no-store" })
+        .then((r) => (r.ok ? r.json() : { terms: {} }))
+        .catch(() => ({ terms: {} }))
+    ]).then(([data, termsData]) => {
+      terms = termsData.terms || {};
+      (data.skills || []).forEach((skill) => {
+        if (!skill.characterId) return;
+        if (!skillsByCharacter.has(skill.characterId)) skillsByCharacter.set(skill.characterId, []);
+        skillsByCharacter.get(skill.characterId).push(skill);
+      });
+      skillsByCharacter.forEach((list) => list.sort((a, b) => Number(a.number) - Number(b.number)));
+      skillsState = "ready";
+      renderCompare();
+      renderPicker();
+      renderPartySkills();
+    }).catch((error) => {
+      console.error(error);
+      skillsState = "error";
+      renderCompare();
+      renderPicker();
+      renderPartySkills();
+    });
+    return skillsPromise;
+  }
+
+  function skillOf(id, number) {
+    const list = skillsByCharacter.get(id) || [];
+    return list.find((skill) => Number(skill.number) === Number(number)) || null;
+  }
+
+  /** ④⑤に出すものがあるかどうか。あるときだけスキル本文を読む。 */
+  function needsSkills() {
+    return Boolean(state.compare.A.id || state.compare.B.id || partyIds().length);
+  }
+
+  function skillStatusHtml() {
+    if (skillsState === "error") {
+      return `<div class="pb-empty">スキルデータの読み込みに失敗しました。時間をおいて再読み込みしてください。</div>`;
+    }
+    return `<div class="pb-loading">スキルデータを読み込んでいます…</div>`;
+  }
+
   function character(id) {
     return id ? byId.get(id) || null : null;
   }
@@ -420,22 +481,131 @@
   }
 
   /* ------------------------------------------------------------------
-   * ④ 候補を比較して入れ替える（段階2で実装）
+   * ④ 候補を比較して入れ替える
+   *
+   * スキルカードは js/render-character.js の renderSkillCard をそのまま呼ぶ。
+   * キャラ詳細と同じHTMLになるので、専用武器・条件・倍率の表示が食い違わない。
    * ------------------------------------------------------------------ */
   function renderCompare() {
-    el.compare.innerHTML = `<div class="pb-empty">この区画は準備中です。</div>`;
+    if (needsSkills()) ensureSkills();
+    el.compare.innerHTML = ["A", "B"].map(renderCompareColumn).join("");
+  }
+
+  function renderCompareColumn(side) {
+    const slot = state.compare[side];
+    const entry = character(slot.id);
+    if (!entry) {
+      return `
+        <div class="pb-compare-col">
+          <div class="pb-compare-head">
+            <span class="pb-compare-side">候補${side}</span>
+            <p class="pb-note">「候補を探す・お気に入り」の「${side}へ」で候補を入れると、ここにスキルが出ます。</p>
+          </div>
+        </div>
+      `;
+    }
+    const number = SKILL_NUMBERS.includes(Number(slot.skill)) ? Number(slot.skill) : 1;
+    const inOtherSlot = partyIds().includes(entry.id) && slotOf(entry.id) !== state.activeSlot;
+    const canPlace = state.activeSlot !== null && !inOtherSlot;
+    const placeLabel = state.activeSlot === null
+      ? "枠を選ぶと入れられます"
+      : (inOtherSlot ? "PTに編成済み" : `${side}を配置${state.activeSlot + 1}へ入れる`);
+
+    return `
+      <div class="pb-compare-col" data-pb-attr="${escapeHtml(entry.attribute)}">
+        <div class="pb-compare-head">
+          <span class="pb-compare-side">候補${side}</span>
+          <div class="pb-compare-name">
+            <h3>${escapeHtml(entry.name)}</h3>
+            ${starButton(entry)}
+          </div>
+          <div class="meta-row">
+            <span class="badge attribute">${escapeHtml(entry.attribute)}</span>
+            <span class="badge">${escapeHtml(entry.weaponType)}</span>
+            <span class="badge">基礎スピード ${formatSpeedNumber(entry.speed)}</span>
+          </div>
+          <div class="pb-skill-tabs" role="group" aria-label="${escapeHtml(entry.name)}の見たいスキル">
+            ${SKILL_NUMBERS.map((n) => `
+              <button type="button" class="pb-skill-tab" data-action="set-compare-skill" data-side="${side}" data-skill="${n}" aria-pressed="${n === number}">
+                S${n}<span>${skillKindLabel(n)}</span>
+              </button>
+            `).join("")}
+          </div>
+          <button type="button" class="pb-btn pb-primary" data-action="place-member" data-id="${escapeHtml(entry.id)}" data-skill="${number}" ${canPlace ? "" : "disabled"}>${escapeHtml(placeLabel)}</button>
+        </div>
+        ${renderSkillCardHtml(entry.id, number)}
+      </div>
+    `;
+  }
+
+  /** スキルカード1枚。HTMLの組み立ては共通モジュールに任せる。 */
+  function renderSkillCardHtml(id, number) {
+    if (skillsState !== "ready") return skillStatusHtml();
+    const skill = skillOf(id, number);
+    if (!skill) return `<div class="pb-empty">S${number}のデータが見つかりません。</div>`;
+    const renderer = window.MirestoRenderCharacter;
+    if (!renderer) return `<div class="pb-empty">描画モジュール（js/render-character.js）が読み込まれていません。</div>`;
+    return `<div class="skill-list">${renderer.renderSkillCard(skill, terms)}</div>`;
   }
 
   /* ------------------------------------------------------------------
-   * ⑤ PTの関連スキルを見比べる（段階2で実装）
+   * ⑤ PTの関連スキルを見比べる
    * ------------------------------------------------------------------ */
   function renderPicker() {
-    el.pickerBody.innerHTML = `<div class="pb-empty">この区画は準備中です。</div>`;
+    const members = membersBySlot();
+    if (!members.length) {
+      el.pickerBody.innerHTML = `<div class="pb-empty">PTにキャラを入れると、ここで見たいスキルを選べます。</div>`;
+      return;
+    }
+    if (needsSkills()) ensureSkills();
+    el.pickerBody.innerHTML = members.map(({ id, index }) => {
+      const entry = character(id);
+      const chosen = state.partySkills[id] || [];
+      return `
+        <div class="pb-picker-group" data-pb-attr="${escapeHtml(entry.attribute)}">
+          <h3>配置${index + 1}　${escapeHtml(entry.name)}</h3>
+          ${SKILL_NUMBERS.map((n) => {
+            const skill = skillsState === "ready" ? skillOf(id, n) : null;
+            const name = skill ? skill.name : (skillsState === "ready" ? "（データなし）" : "読み込み中…");
+            return `
+              <label class="pb-check">
+                <input type="checkbox" data-skill-check data-id="${escapeHtml(id)}" data-skill="${n}" ${chosen.includes(n) ? "checked" : ""}>
+                <span>S${n} ${skillKindLabel(n)}<br><span class="pb-check-name">${escapeHtml(name)}</span></span>
+              </label>
+            `;
+          }).join("")}
+        </div>
+      `;
+    }).join("");
+  }
+
+  function selectedSkillItems() {
+    return orderedMembers().flatMap(({ id, index }) =>
+      SKILL_NUMBERS
+        .filter((n) => (state.partySkills[id] || []).includes(n))
+        .map((n) => ({ id, index, number: n })));
   }
 
   function renderPartySkills() {
-    el.selectedCount.textContent = "";
-    el.partySkills.innerHTML = "";
+    const items = selectedSkillItems();
+    el.selectedCount.textContent = `${items.length}スキル表示`;
+    if (!items.length) {
+      el.partySkills.innerHTML = `<div class="pb-empty">「表示するスキルを選ぶ」から、見たいスキルにチェックを入れてください。</div>`;
+      return;
+    }
+    if (needsSkills()) ensureSkills();
+    el.partySkills.innerHTML = items.map(({ id, index, number }) => {
+      const entry = character(id);
+      return `
+        <div class="pb-skill-cell" data-pb-attr="${escapeHtml(entry.attribute)}">
+          <div class="pb-skill-owner">
+            <strong>${escapeHtml(entry.name)}</strong>
+            <span class="pb-note">配置${index + 1}・設定スピード ${formatSpeedNumber(effectiveSpeed(id))}・S${number} ${skillKindLabel(number)}</span>
+          </div>
+          ${renderSkillCardHtml(id, number)}
+        </div>
+      `;
+    }).join("");
   }
 
   /* ------------------------------------------------------------------
@@ -537,8 +707,43 @@
     renderCompare();
   }
 
+  function setCompareSkill(side, number) {
+    if (side !== "A" && side !== "B") return;
+    if (!SKILL_NUMBERS.includes(Number(number))) return;
+    state.compare[side].skill = Number(number);
+    renderCompare();
+  }
+
+  function togglePartySkill(id, number, checked) {
+    if (!byId.has(id) || !SKILL_NUMBERS.includes(Number(number))) return;
+    const current = state.partySkills[id] || [];
+    const next = checked
+      ? SKILL_NUMBERS.filter((n) => current.includes(n) || n === Number(number))
+      : current.filter((n) => n !== Number(number));
+    if (next.length) state.partySkills[id] = next;
+    else delete state.partySkills[id];
+    save();
+    renderPartySkills();
+  }
+
+  function setPartyOrder(value) {
+    state.partyOrder = value === "speed" ? "speed" : "slot";
+    save();
+    renderPartySkills();
+  }
+
   function bindEvents() {
-    document.querySelector("main").addEventListener("click", (event) => {
+    const main = document.querySelector("main");
+
+    main.addEventListener("change", (event) => {
+      const target = event.target;
+      if (target.id === "partyOrder") setPartyOrder(target.value);
+      else if (target.hasAttribute("data-skill-check")) {
+        togglePartySkill(target.dataset.id, target.dataset.skill, target.checked);
+      }
+    });
+
+    main.addEventListener("click", (event) => {
       const button = event.target.closest("button[data-action]");
       if (!button || button.disabled) return;
       const action = button.dataset.action;
@@ -550,6 +755,7 @@
       else if (action === "toggle-attr") toggleAttr(button.dataset.attr);
       else if (action === "clear-attrs") clearAttrs();
       else if (action === "send-compare") sendToCompare(button.dataset.side, button.dataset.id);
+      else if (action === "set-compare-skill") setCompareSkill(button.dataset.side, button.dataset.skill);
       else if (action === "place-member") placeMember(button.dataset.id, button.dataset.skill);
     });
 
