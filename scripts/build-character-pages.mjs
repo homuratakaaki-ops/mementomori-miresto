@@ -28,6 +28,18 @@ const PAGES_DIR = join(ROOT, "pages", "characters");
 
 const renderer = require(join(ROOT, "js", "render-character.js"));
 const indexRenderer = require(join(ROOT, "js", "render-character-index.js"));
+const gachaStatus = require(join(ROOT, "js", "gacha-status.js"));
+
+// 開催状況の判定に使う「今日」。1回のビルド内で全ページ同じ日付になるように
+// ここで1度だけ決める（日付が変わる瞬間にビルドが走っても食い違わないため）。
+// MIRESTO_TODAY で差し替えられる（検証用。YYYY-MM-DD）。
+const TODAY = (() => {
+  const override = (process.env.MIRESTO_TODAY || "").trim();
+  if (!override) return gachaStatus.jstToday();
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(override)) throw new Error(`MIRESTO_TODAY は YYYY-MM-DD で指定すること: ${override}`);
+  return override;
+})();
+const GENERATED_AT = new Date(Date.now() + 9 * 60 * 60 * 1000).toISOString().replace("Z", "+09:00");
 
 function readJson(path, fallback) {
   if (!existsSync(path)) return fallback;
@@ -74,6 +86,7 @@ function characterPageHtml({ character, metaHtml, skillListHtml, description }) 
   <meta name="description" content="${renderer.escapeHtml(description)}">
   <link rel="canonical" href="${renderer.escapeHtml(renderer.canonicalUrl(character))}">
   <link rel="stylesheet" href="../../assets/character-page.css">
+  <script src="../../js/gacha-status.js" defer></script>
   <script src="../../js/render-character.js" defer></script>
   <script src="../../js/character-page.js" defer></script>
 </head>
@@ -565,7 +578,7 @@ function buildCharacterPages({ baseData, newsData, terms }) {
     const slug = character.pageSlug || character.id;
     const html = characterPageHtml({
       character: { ...character, pageSlug: slug },
-      metaHtml: renderer.renderMetaHtml(character, newsData),
+      metaHtml: renderer.renderMetaHtml(character, newsData, TODAY),
       skillListHtml: renderer.renderSkillList(skills, terms),
       description: renderer.pageDescription(character, skills)
     });
@@ -601,23 +614,37 @@ function buildCharacterIndex({ baseData }) {
     .sort((a, b) => a.id.localeCompare(b.id, "en"));
 
   const path = join(DATA_DIR, "character-index.json");
-  const content = `${JSON.stringify({
+  const payload = {
     schema: "character-index/1",
     note: "data/mementomori-skills.json の characters から自動生成。直接編集しないこと（scripts/build-character-pages.mjs が上書きする）。",
     generatedFrom: "data/mementomori-skills.json",
     updatedAt: baseData.updatedAt || null,
+    generatedAt: GENERATED_AT,
+    statusDate: TODAY,
     characters
-  }, null, 2)}
-`;
+  };
 
-  return { changed: writeIfChanged(path, content), total: characters.length };
+  // 生成時刻は毎回変わるので、そのまま書くと中身が同じでも毎日差分が出て
+  // 日次ビルドが空コミットを積む。生成時刻と判定日**以外**が前回と同じなら
+  // 前回の値を残し、ファイルを書き換えない。
+  // （中身が変わらない日は判定結果も変わらないため、古い判定日のままでも表示は正しい）
+  const previous = existsSync(path) ? JSON.parse(readFileSync(path, "utf8")) : null;
+  if (previous) {
+    const strip = (o) => JSON.stringify({ ...o, generatedAt: null, statusDate: null });
+    if (strip(previous) === strip(payload)) {
+      payload.generatedAt = previous.generatedAt;
+      payload.statusDate = previous.statusDate;
+    }
+  }
+
+  return { changed: writeIfChanged(path, `${JSON.stringify(payload, null, 2)}\n`), total: characters.length };
 }
 
 function buildIndexPage({ baseData }) {
   const characters = baseData.characters || [];
   const path = join(PAGES_DIR, "index.html");
   const html = patchIndexHtml(readFileSync(path, "utf8"), {
-    gridHtml: indexRenderer.renderGrid(characters, "all"),
+    gridHtml: indexRenderer.renderGrid(characters, "all", TODAY),
     countText: indexRenderer.countText(characters.length, characters.length)
   });
   return { changed: writeIfChanged(path, html), total: characters.length };
@@ -637,6 +664,9 @@ function main() {
   console.log(`flow 付きスキル: ${flowSkills}件（検証OK）`);
   console.log(`キャラ一覧: ${index.total}件のカードを生成${index.changed ? " (更新)" : " (変更なし)"}`);
   console.log(`ツール用キャラ索引: ${charIndex.total}件${charIndex.changed ? " (更新)" : " (変更なし)"}`);
+  console.log(`開催状況の判定日(JST): ${TODAY} / 生成時刻: ${GENERATED_AT}`);
+  const ongoing = (baseData.characters || []).filter((character) => gachaStatus.ongoingEntry(character, TODAY));
+  console.log(`開催中と判定: ${ongoing.length}体${ongoing.length ? ` (${ongoing.map((c) => `${c.name}=${gachaStatus.gachaStatusText(c, TODAY)}`).join(" / ")})` : ""}`);
 }
 
 main();

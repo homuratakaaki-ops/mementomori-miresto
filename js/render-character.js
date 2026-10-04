@@ -10,13 +10,17 @@
  * DOMに触る処理は js/character-page.js 側に置く。
  */
 (function (root, factory) {
-  const api = factory();
+  const gachaStatusApi = (typeof module === "object" && module !== null && module.exports)
+    ? require("./gacha-status.js")
+    : root.MirestoGachaStatus;
+  if (!gachaStatusApi) throw new Error("js/gacha-status.js が読み込まれていません");
+  const api = factory(gachaStatusApi);
   if (typeof module === "object" && module !== null && module.exports) {
     module.exports = api;
   } else {
     root.MirestoRenderCharacter = api;
   }
-}(typeof globalThis === "undefined" ? this : globalThis, function () {
+}(typeof globalThis === "undefined" ? this : globalThis, function (gachaStatus) {
   "use strict";
 
   const TITLE_SUFFIX = "ミレストのメメントモリ分析データ室";
@@ -59,13 +63,7 @@
     return withYear ? `${year}/${month}/${day}` : `${month}/${day}`;
   }
 
-  function isFutureDate(value) {
-    if (!value) return false;
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    const target = new Date(`${value}T00:00:00`);
-    return !Number.isNaN(target.getTime()) && target >= today;
-  }
+  // 「開催中／終了」の判定は js/gacha-status.js に集約してある（JSTで判定）。
 
   function mergePickupHistory(character, newsData) {
     const baseItems = (Array.isArray(character.pickupHistory) ? character.pickupHistory : [])
@@ -92,16 +90,14 @@
    * 総回数は `pickupCount`（出典のPU回数）を出し、日付が揃っていない場合は
    * 「日付収録N回」を併記して、未収録であることが分かるようにする。
    */
-  function formatPickupHistory(history, pickupCount) {
+  function formatPickupHistory(history, pickupCount, today) {
     if (!history.length) return "";
     let numberedCount = 0;
     const items = history.map((item) => {
       const period = item.endDate
         ? `${formatDate(item.date)}〜${formatDate(item.endDate, false)}`
         : formatDate(item.date);
-      const status = item.endDate
-        ? (isFutureDate(item.endDate) ? `（開催中〜${formatDate(item.endDate, false)}）` : "（終了）")
-        : "";
+      const status = gachaStatus.periodSuffix(item, today);
       if (Number.isFinite(item.round) && item.round > 0) {
         numberedCount += 1;
         return `${item.round}回目 ${period}${status}`;
@@ -118,8 +114,9 @@
     return `${head}：${items.join(" / ")}`;
   }
 
-  function renderMetaHtml(character, newsData) {
-    const historyText = formatPickupHistory(mergePickupHistory(character, newsData), character.pickupCount);
+  function renderMetaHtml(character, newsData, today) {
+    const day = today || gachaStatus.jstToday();
+    const historyText = formatPickupHistory(mergePickupHistory(character, newsData), character.pickupCount, day);
     return [
       character.attribute ? `<span class="badge attribute">${escapeHtml(character.attribute)}</span>` : "",
       character.weaponType ? `<span class="badge">${escapeHtml(character.weaponType)}</span>` : "",
@@ -517,7 +514,6 @@
     highlightRatios,
     selectSkills,
     formatDate,
-    isFutureDate,
     mergePickupHistory,
     formatPickupHistory,
     renderMetaHtml,

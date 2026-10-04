@@ -7,13 +7,17 @@
  *           公開前のHTML生成に使う。
  */
 (function (root, factory) {
-  const api = factory();
+  const gachaStatusApi = (typeof module === "object" && module !== null && module.exports)
+    ? require("./gacha-status.js")
+    : root.MirestoGachaStatus;
+  if (!gachaStatusApi) throw new Error("js/gacha-status.js が読み込まれていません");
+  const api = factory(gachaStatusApi);
   if (typeof module === "object" && module !== null && module.exports) {
     module.exports = api;
   } else {
     root.MirestoRenderCharacterIndex = api;
   }
-}(typeof globalThis === "undefined" ? this : globalThis, function () {
+}(typeof globalThis === "undefined" ? this : globalThis, function (gachaStatus) {
   "use strict";
 
   /** 詳細ページが存在する pageSlug。ここに無いキャラは「準備中」表示になる。 */
@@ -21,14 +25,22 @@
 
   const existingPages = new Set(EXISTING_PAGES);
 
+  /**
+   * 開催状況はキャラの pickupHistory と availability から計算する（手入力しない）。
+   * 判定そのものは js/gacha-status.js に置いてあり、ここでは見た目だけを決める。
+   */
+  function statusOf(character, today) {
+    return gachaStatus.gachaStatus(character, today);
+  }
+
   function statusClass(status) {
-    if (status === "PU中") return "pickup";
-    if (!status || status === "復刻待ち") return "waiting";
+    if (status.state === "ongoing") return "pickup";
+    if (status.state === "waiting") return "waiting";
     return "";
   }
 
   function displayGachaStatus(status) {
-    return status || "復刻待ち";
+    return status.text;
   }
 
   function hasPage(character) {
@@ -47,13 +59,14 @@
     return `${filteredLength}件表示 / 全${totalLength}キャラ`;
   }
 
-  function renderCard(character) {
+  function renderCard(character, today) {
     const linked = hasPage(character);
+    const status = statusOf(character, today);
     return `
           <article class="card">
             <div class="badge-row">
               <span class="badge">${character.attribute}</span>
-              <span class="badge ${statusClass(character.gachaStatus)}">${displayGachaStatus(character.gachaStatus)}</span>
+              <span class="badge ${statusClass(status)}">${displayGachaStatus(status)}</span>
             </div>
             <div>
               <h2>${character.name}</h2>
@@ -64,16 +77,18 @@
         `;
   }
 
-  function renderGrid(characters, activeAttribute) {
+  function renderGrid(characters, activeAttribute, today) {
     const filtered = filterCharacters(characters, activeAttribute || "all");
     if (filtered.length === 0) {
       return `<div class="empty">該当するキャラがありません。</div>`;
     }
-    return filtered.map(renderCard).join("");
+    const day = today || gachaStatus.jstToday();
+    return filtered.map((character) => renderCard(character, day)).join("");
   }
 
   return {
     EXISTING_PAGES,
+    statusOf,
     statusClass,
     displayGachaStatus,
     hasPage,

@@ -1,0 +1,77 @@
+# キャラページの日次再生成。
+#
+# 開催状況（PU中・復刻待ちなど）は data/mementomori-skills.json の pickupHistory から
+# 生成時に計算している。日付が変わると結果が変わるため、毎日生成し直して公開物を追従させる。
+#
+# 失敗したときの見方:
+#   Actions タブ →「キャラページの日次再生成」→ 赤いジョブ → "ページを再生成" のログ。
+#   「検証NG:」の行が出ていればデータ側の不備で、HTMLは commit されていない（公開物は前日のまま）。
+name: キャラページの日次再生成
+
+on:
+  schedule:
+    # 毎日 JST 06:00（UTC 21:00）。cron はUTCで書く。
+    - cron: "0 21 * * *"
+  # 手でビルドし忘れたときの保険。生成物に影響する入力が変わった push で走らせる。
+  push:
+    branches: [main]
+    paths:
+      - "data/**"
+      - "js/render-character.js"
+      - "js/render-character-index.js"
+      - "js/gacha-status.js"
+      - "scripts/**"
+      - ".github/workflows/daily-build.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-build
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    # bot 自身の commit で再発火させない（無限ループ防止）。
+    # GITHUB_TOKEN による push はそもそもワークフローを再発火させない仕様だが、
+    # 名義でも弾いて二重に止める。push 以外（schedule / 手動）は常に走らせる。
+    if: >-
+      github.event_name != 'push' ||
+      github.event.head_commit.author.name != 'ミコト（自動ビルド）'
+    steps:
+      - name: チェックアウト
+        uses: actions/checkout@v4
+
+      - name: Node を用意
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      # 生成時の検証（flow・PU履歴・専用武器・倍率など）が失敗したらここでジョブが落ちる。
+      # 後続の commit ステップは実行されないので、壊れたHTMLは公開されない。
+      - name: ページを再生成
+        run: node scripts/build-character-pages.mjs
+
+      - name: 差分があれば commit & push
+        env:
+          EVENT: ${{ github.event_name }}
+        run: |
+          set -euo pipefail
+          git config user.name "ミコト（自動ビルド）"
+          git config user.email "homuratakaaki@gmail.com"
+          git add -- data pages
+          if git diff --cached --quiet; then
+            echo "差分なし。何もしない。"
+            exit 0
+          fi
+          echo "--- 差分 ---"
+          git diff --cached --stat
+          STATUS_DATE="$(node -e 'process.stdout.write(require("./data/character-index.json").statusDate || "")')"
+          git commit \
+            -m "chore(characters): 開催状況を再生成する（判定日 ${STATUS_DATE} / ${EVENT}）" \
+            -m "日次の自動ビルドによる再生成。開催状況は pickupHistory から計算しているため、日付が変わると表示が変わる。手入力はしていない。" \
+            -m "Co-Authored-By: Claude Opus 5 (1M context) <noreply@anthropic.com>"
+          git push
+          echo "commit して push した。"

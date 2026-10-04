@@ -3,6 +3,8 @@
   "note": "data/mementomori-skills.json の characters から自動生成。直接編集しないこと（scripts/build-character-pages.mjs が上書きする）。",
   "generatedFrom": "data/mementomori-skills.json",
   "updatedAt": "2026-10-04T00:00:00.000+09:00",
+  "generatedAt": "2026-10-04T19:06:34.766+09:00",
+  "statusDate": "2026-10-04",
   "characters": [
     {
       "id": "aa_dark",
