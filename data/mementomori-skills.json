@@ -11668,6 +11668,37 @@
         {
           "text": "敵を戦闘不能にするたび、自身の焔のターン数+1"
         }
+      ],
+      "flow": [
+        {
+          "when": "攻撃時",
+          "mode": "sequence",
+          "order": 1,
+          "target": "ランダムな敵1体",
+          "effects": [
+            {
+              "text": "物理攻撃",
+              "multiplier": "物理340%×8回",
+              "damageTotal": "base",
+              "note": "対象が戦闘不能・透明・ステルスなら選び直す"
+            }
+          ]
+        },
+        {
+          "when": "攻撃後",
+          "mode": "sequence",
+          "order": 2,
+          "target": "自身",
+          "effects": [
+            {
+              "text": "総与ダメージ25%分のHPを回復する"
+            },
+            {
+              "text": "焔のターン数が1増える",
+              "condition": "敵を戦闘不能にするたび"
+            }
+          ]
+        }
       ]
     },
     {
@@ -11717,6 +11748,53 @@
         {
           "text": "このスキルで敵を戦闘不能にするたび、自身の焔のターン数+1"
         }
+      ],
+      "flow": [
+        {
+          "when": "攻撃時",
+          "mode": "sequence",
+          "order": 1,
+          "target": "HP割合が最も低い敵",
+          "effects": [
+            {
+              "text": "物理攻撃",
+              "multiplier": "物理620%×3回",
+              "damageTotal": "base"
+            },
+            {
+              "text": "同じ敵にさらに物理620%×3回",
+              "condition": "最初の3回で倒せなければ",
+              "note": "倒れた時点で終了"
+            }
+          ]
+        },
+        {
+          "when": "攻撃後",
+          "mode": "sequence",
+          "order": 2,
+          "target": "ランダムな敵5体",
+          "effects": [
+            {
+              "text": "追加で物理攻撃",
+              "condition": "戦闘不能にした場合",
+              "multiplier": "物理620%×5回",
+              "damageTotal": "conditionMax",
+              "note": "最初の3回と合わせて最大8ヒット"
+            }
+          ]
+        },
+        {
+          "when": "攻撃後",
+          "mode": "sequence",
+          "order": 3,
+          "target": "自身",
+          "effects": [
+            {
+              "text": "焔のターン数が1増える",
+              "condition": "このスキルで敵を戦闘不能にするたび"
+            }
+          ]
+        }
       ]
     },
     {
@@ -11745,6 +11823,31 @@
         },
         {
           "text": "バトル開始時、焔を2ターン付与(被ダメージ15%減少、解除不可)"
+        }
+      ],
+      "flow": [
+        {
+          "when": "バトル開始時",
+          "mode": "simultaneous",
+          "target": "自身",
+          "effects": [
+            {
+              "text": "焔を付与",
+              "duration": "2ターン",
+              "note": "被ダメージ15%減少、解除不可"
+            }
+          ]
+        },
+        {
+          "when": "ターン開始時または攻撃を受けたとき",
+          "mode": "conditional",
+          "target": "自身",
+          "effects": [
+            {
+              "text": "自身のHP割合が高いほど攻撃力が増加",
+              "note": "アクティブスキルで回復を受けたときも判定。最大+70%、解除不可"
+            }
+          ]
         }
       ],
       "synergyNotes": [
@@ -11783,6 +11886,33 @@
         },
         {
           "text": "毎ターン開始時、HP割合が90%以上なら被ダメージ減少と再生を解除する"
+        }
+      ],
+      "flow": [
+        {
+          "when": "攻撃を受けたとき",
+          "mode": "conditional",
+          "target": "自身",
+          "effects": [
+            {
+              "text": "被ダメージ10%減少と再生を付与",
+              "term": "再生",
+              "condition": "HP割合が40%以下なら",
+              "duration": "4ターン",
+              "note": "解除不可。再生は行動開始時に最大HP20%分回復する"
+            }
+          ]
+        },
+        {
+          "when": "ターン開始時",
+          "mode": "release",
+          "target": "自身",
+          "effects": [
+            {
+              "text": "被ダメージ減少と再生を解除する",
+              "condition": "HP割合が90%以上なら"
+            }
+          ]
         }
       ]
     },
@@ -11824,6 +11954,21 @@
       "steps": [
         {
           "text": "ランダムな敵に魔法710%×4回"
+        }
+      ],
+      "flow": [
+        {
+          "when": "攻撃時",
+          "mode": "sequence",
+          "order": 1,
+          "target": "ランダムな敵",
+          "effects": [
+            {
+              "text": "魔法攻撃",
+              "multiplier": "魔法710%×4回",
+              "damageTotal": "base"
+            }
+          ]
         }
       ]
     },
@@ -11869,6 +12014,30 @@
         {
           "text": "総与ダメージの20%をHP回復する"
         }
+      ],
+      "flow": [
+        {
+          "when": "攻撃時",
+          "mode": "sequence",
+          "order": 1,
+          "target": "ランダムな敵4体",
+          "effects": [
+            {
+              "text": "自身の魔力890%分の直接攻撃"
+            }
+          ]
+        },
+        {
+          "when": "攻撃後",
+          "mode": "sequence",
+          "order": 2,
+          "target": "自身",
+          "effects": [
+            {
+              "text": "総与ダメージの20%をHP回復する"
+            }
+          ]
+        }
       ]
     },
     {
@@ -11898,6 +12067,19 @@
         {
           "text": "通常攻撃時、ランダムな敵3体に自身の魔力330%の直接攻撃"
         }
+      ],
+      "flow": [
+        {
+          "when": "攻撃時",
+          "mode": "sequence",
+          "order": 1,
+          "target": "ランダムな敵3体",
+          "effects": [
+            {
+              "text": "強化した通常攻撃で、自身の魔力330%分の直接攻撃"
+            }
+          ]
+        }
       ]
     },
     {
@@ -11923,6 +12105,18 @@
       "steps": [
         {
           "text": "攻撃を受けたとき、ダメージを60%遮断"
+        }
+      ],
+      "flow": [
+        {
+          "when": "攻撃を受けたとき",
+          "mode": "conditional",
+          "target": "自身",
+          "effects": [
+            {
+              "text": "ダメージを60%遮断"
+            }
+          ]
         }
       ]
     },
@@ -11952,8 +12146,8 @@
         "exclusiveLv1Total": 1800,
         "exclusiveLv2Total": 1800,
         "exclusiveLv3Total": 1800,
-        "conditionMaxTotal": 3600,
-        "conditionMaxNote": "専用Lv1で3体対象。倒せない場合の再発動1回込み",
+        "conditionMaxTotal": 2400,
+        "conditionMaxNote": "撃破できなければ1回再発動。600%×2体×2発動=2400（専用武器なし・スキルLv最大。専用Lv1の3体込みなら3600）",
         "powerType": "複数攻撃 / 再発動",
         "realityRank": "中",
         "rankingTarget": "条件込み",
@@ -11966,6 +12160,36 @@
         },
         {
           "text": "敵を戦闘不能にできなければ、このスキルを1回再発動する"
+        }
+      ],
+      "flow": [
+        {
+          "when": "攻撃時",
+          "mode": "sequence",
+          "order": 1,
+          "target": "攻撃力が高い敵2体",
+          "effects": [
+            {
+              "text": "物理攻撃",
+              "multiplier": "物理600%",
+              "damageTotal": "base"
+            }
+          ]
+        },
+        {
+          "when": "攻撃後",
+          "mode": "sequence",
+          "order": 2,
+          "target": "自身",
+          "effects": [
+            {
+              "text": "このスキルを1回再発動する",
+              "condition": "敵を戦闘不能にできなければ",
+              "multiplier": "物理600%×4回",
+              "damageTotal": "conditionMax",
+              "note": "2体×（初回＋再発動1回）＝4ヒット"
+            }
+          ]
         }
       ]
     },
@@ -11995,8 +12219,8 @@
         "exclusiveLv1Total": 2000,
         "exclusiveLv2Total": 2000,
         "exclusiveLv3Total": 2400,
-        "conditionMaxTotal": 4800,
-        "conditionMaxNote": "専用Lv3で300%×8回。対象HP50%以上なら2倍",
+        "conditionMaxTotal": 4000,
+        "conditionMaxNote": "対象のHP割合が50%以上ならダメージ2倍。2000%×2倍=4000（専用武器なし・スキルLv最大。専用Lv3の300%込みなら4800）",
         "powerType": "連撃 / HP条件2倍",
         "realityRank": "中",
         "rankingTarget": "条件込み",
@@ -12012,6 +12236,31 @@
         },
         {
           "text": "対象のHP割合が50%未満なら必ず命中"
+        }
+      ],
+      "flow": [
+        {
+          "when": "攻撃時",
+          "mode": "sequence",
+          "order": 1,
+          "target": "ランダムな敵",
+          "effects": [
+            {
+              "text": "物理攻撃",
+              "multiplier": "物理250%×8回",
+              "damageTotal": "base"
+            },
+            {
+              "text": "ダメージが2倍になる",
+              "condition": "対象のHP割合が50%以上なら",
+              "multiplier": "物理500%×8回（250%×2）",
+              "damageTotal": "conditionMax"
+            },
+            {
+              "text": "必ず命中する",
+              "condition": "対象のHP割合が50%未満なら"
+            }
+          ]
         }
       ]
     },
@@ -12044,6 +12293,31 @@
         },
         {
           "text": "クリティカル率増加は発動後4回行動まで再発動しない"
+        }
+      ],
+      "flow": [
+        {
+          "when": "常時",
+          "mode": "passive",
+          "target": "自身",
+          "effects": [
+            {
+              "text": "クリダメ強化を40%増加",
+              "note": "解除不可"
+            }
+          ]
+        },
+        {
+          "when": "ターン開始時",
+          "mode": "simultaneous",
+          "target": "自身と自身以外でスピードが最も高い味方",
+          "effects": [
+            {
+              "text": "クリティカル率を40%増加",
+              "duration": "2ターン",
+              "note": "発動後、4回行動が終わるまで再発動しない"
+            }
+          ]
         }
       ],
       "synergyNotes": [
@@ -12081,6 +12355,35 @@
         },
         {
           "text": "毎ターン開始時、前のターンに自身の攻撃がクリティカルしていれば、クリティカル回数1回につき攻撃力+3%(最大30%、解除不可)"
+        }
+      ],
+      "flow": [
+        {
+          "when": "攻撃を受けたとき",
+          "mode": "conditional",
+          "target": "自身",
+          "effects": [
+            {
+              "text": "ダメージを50%遮断"
+            },
+            {
+              "text": "クリティカル回数1回につき遮断効果が2%減少",
+              "condition": "自身の攻撃がクリティカルヒットした場合",
+              "note": "最小30%"
+            }
+          ]
+        },
+        {
+          "when": "ターン開始時",
+          "mode": "conditional",
+          "target": "自身",
+          "effects": [
+            {
+              "text": "クリティカル回数1回につき攻撃力を3%増加",
+              "condition": "前のターンに自身の攻撃がクリティカルしていれば",
+              "note": "最大30%、解除不可"
+            }
+          ]
         }
       ]
     },
@@ -12376,6 +12679,32 @@
         {
           "text": "自身のHPを最大HP20%分回復する"
         }
+      ],
+      "flow": [
+        {
+          "when": "攻撃時",
+          "mode": "sequence",
+          "order": 1,
+          "target": "ランダムな敵5体",
+          "effects": [
+            {
+              "text": "物理攻撃",
+              "multiplier": "物理380%",
+              "damageTotal": "base"
+            }
+          ]
+        },
+        {
+          "when": "攻撃後",
+          "mode": "sequence",
+          "order": 2,
+          "target": "自身",
+          "effects": [
+            {
+              "text": "HPを最大HP20%分回復する"
+            }
+          ]
+        }
       ]
     },
     {
@@ -12419,6 +12748,25 @@
         {
           "text": "対象の攻撃力を40%減少(3ターン)"
         }
+      ],
+      "flow": [
+        {
+          "when": "攻撃時",
+          "mode": "sequence",
+          "order": 1,
+          "target": "ランダムな敵1体",
+          "effects": [
+            {
+              "text": "物理攻撃",
+              "multiplier": "物理760%",
+              "damageTotal": "base"
+            },
+            {
+              "text": "攻撃力を40%減少",
+              "duration": "3ターン"
+            }
+          ]
+        }
       ]
     },
     {
@@ -12450,6 +12798,24 @@
         },
         {
           "text": "発動後4回行動まで再発動しない"
+        }
+      ],
+      "flow": [
+        {
+          "when": "ターン開始時",
+          "mode": "conditional",
+          "target": "自身",
+          "effects": [
+            {
+              "text": "挑発を付与し、回避率を50%減少",
+              "condition": "自身のHP割合が60%以上なら",
+              "duration": "3ターン",
+              "note": "発動後、4回行動が終わるまで再発動しない"
+            },
+            {
+              "text": "同時に被ダメージ30%減少・カウンタ50%増加"
+            }
+          ]
         }
       ],
       "synergyNotes": [
@@ -12487,6 +12853,45 @@
         },
         {
           "text": "発動時、自身の物理防御力+40%(2ターン)、自身以外の味方全体にも物理防御力+40%(1ターン)"
+        }
+      ],
+      "flow": [
+        {
+          "when": "常時",
+          "mode": "passive",
+          "target": "自身",
+          "effects": [
+            {
+              "text": "最大HP40%増加・クリティカル耐性率40%増加",
+              "note": "解除不可"
+            }
+          ]
+        },
+        {
+          "when": "致命的なダメージを受けたとき",
+          "mode": "conditional",
+          "target": "自身",
+          "effects": [
+            {
+              "text": "HP1で耐える",
+              "note": "バトル中1回"
+            },
+            {
+              "text": "発動時、物理防御力を40%増加",
+              "duration": "2ターン"
+            }
+          ]
+        },
+        {
+          "when": "致命的なダメージを受けたとき",
+          "mode": "conditional",
+          "target": "自身以外の味方全体",
+          "effects": [
+            {
+              "text": "物理防御力を40%増加",
+              "duration": "1ターン"
+            }
+          ]
         }
       ]
     },
@@ -14325,6 +14730,28 @@
         {
           "text": "敵を戦闘不能にするたび攻撃回数+1(最大9回)"
         }
+      ],
+      "flow": [
+        {
+          "when": "攻撃時",
+          "mode": "sequence",
+          "order": 1,
+          "target": "ランダムな敵",
+          "effects": [
+            {
+              "text": "物理攻撃",
+              "multiplier": "物理315%×5回",
+              "damageTotal": "base"
+            },
+            {
+              "text": "攻撃回数が1回増え、最大でこの倍率に変わる",
+              "condition": "敵を戦闘不能にするたび",
+              "multiplier": "物理315%×9回",
+              "damageTotal": "conditionMax",
+              "note": "最大9回"
+            }
+          ]
+        }
       ]
     },
     {
@@ -14372,6 +14799,39 @@
         {
           "text": "総与ダメージ20%のシールドを自身に4ターン付与"
         }
+      ],
+      "flow": [
+        {
+          "when": "攻撃時",
+          "mode": "sequence",
+          "order": 1,
+          "target": "ランダムな敵5体",
+          "effects": [
+            {
+              "text": "物理攻撃",
+              "multiplier": "物理350%",
+              "damageTotal": "base"
+            },
+            {
+              "text": "ダメージが+60%され、最大でこの倍率に変わる",
+              "condition": "自身のバフ1つにつき",
+              "multiplier": "物理590%",
+              "damageTotal": "conditionMax"
+            }
+          ]
+        },
+        {
+          "when": "攻撃後",
+          "mode": "sequence",
+          "order": 2,
+          "target": "自身",
+          "effects": [
+            {
+              "text": "総与ダメージ20%分のシールドを付与",
+              "duration": "4ターン"
+            }
+          ]
+        }
       ]
     },
     {
@@ -14397,6 +14857,21 @@
       "steps": [
         {
           "text": "3ターン目以降の毎ターン開始時、直近2ターンにダメージを受けていなければ攻撃力+80%(3ターン、解除不可)"
+        }
+      ],
+      "flow": [
+        {
+          "when": "3ターン目以降",
+          "mode": "conditional",
+          "target": "自身",
+          "effects": [
+            {
+              "text": "毎ターン開始時、攻撃力を80%増加",
+              "condition": "直近2ターンにダメージを受けていなければ",
+              "duration": "3ターン",
+              "note": "解除不可"
+            }
+          ]
         }
       ]
     },
@@ -14429,6 +14904,32 @@
         },
         {
           "text": "どちらかが戦闘不能になると解除される"
+        }
+      ],
+      "flow": [
+        {
+          "when": "バトル開始時",
+          "mode": "simultaneous",
+          "target": "防御力が最も高い敵と最も低い敵",
+          "effects": [
+            {
+              "text": "共鳴を付与",
+              "note": "解除不可"
+            },
+            {
+              "text": "共鳴対象が受けたダメージの80%を、もう一方も受ける"
+            }
+          ]
+        },
+        {
+          "when": "共鳴対象のどちらかが戦闘不能になったとき",
+          "mode": "release",
+          "target": "防御力が最も高い敵と最も低い敵",
+          "effects": [
+            {
+              "text": "共鳴が解除される"
+            }
+          ]
         }
       ],
       "synergyNotes": [
@@ -14482,6 +14983,36 @@
         {
           "text": "総与ダメージの20%をHP回復する"
         }
+      ],
+      "flow": [
+        {
+          "when": "攻撃時",
+          "mode": "sequence",
+          "order": 1,
+          "target": "ランダムな敵5体",
+          "effects": [
+            {
+              "text": "魔法攻撃",
+              "multiplier": "魔法310%",
+              "damageTotal": "base"
+            },
+            {
+              "text": "ダメージが+70%される",
+              "condition": "このスキルを使うたび"
+            }
+          ]
+        },
+        {
+          "when": "攻撃後",
+          "mode": "sequence",
+          "order": 2,
+          "target": "自身",
+          "effects": [
+            {
+              "text": "総与ダメージの20%をHP回復する"
+            }
+          ]
+        }
       ]
     },
     {
@@ -14529,6 +15060,44 @@
         {
           "text": "敵を戦闘不能にした場合、自身の全バフのターン数+2"
         }
+      ],
+      "flow": [
+        {
+          "when": "攻撃時",
+          "mode": "sequence",
+          "order": 1,
+          "target": "ランダムな敵5体",
+          "effects": [
+            {
+              "text": "魔法攻撃",
+              "multiplier": "魔法350%",
+              "damageTotal": "base"
+            }
+          ]
+        },
+        {
+          "when": "攻撃後",
+          "mode": "sequence",
+          "order": 2,
+          "target": "ランダムな敵1体",
+          "effects": [
+            {
+              "text": "自身の魔力320%分の直接攻撃"
+            }
+          ]
+        },
+        {
+          "when": "攻撃後",
+          "mode": "sequence",
+          "order": 3,
+          "target": "自身",
+          "effects": [
+            {
+              "text": "自身の全バフのターン数を2増やす",
+              "condition": "敵を戦闘不能にした場合"
+            }
+          ]
+        }
       ]
     },
     {
@@ -14554,6 +15123,19 @@
       "steps": [
         {
           "text": "自身の最大HP+40%・スピード+20%(解除不可)"
+        }
+      ],
+      "flow": [
+        {
+          "when": "常時",
+          "mode": "passive",
+          "target": "自身",
+          "effects": [
+            {
+              "text": "最大HP40%増加・スピード20%増加",
+              "note": "解除不可"
+            }
+          ]
         }
       ]
     },
@@ -14584,6 +15166,30 @@
         {
           "text": "クリティカル以外の被弾時は、自身の弱体を1つ解除して攻撃者に付与(100%)"
         }
+      ],
+      "flow": [
+        {
+          "when": "クリティカルヒットを受けたとき",
+          "mode": "conditional",
+          "target": "攻撃してきた敵",
+          "effects": [
+            {
+              "text": "バフを1つ解除して自身に付与",
+              "chance": "100%"
+            }
+          ]
+        },
+        {
+          "when": "クリティカル以外の攻撃を受けたとき",
+          "mode": "conditional",
+          "target": "攻撃してきた敵",
+          "effects": [
+            {
+              "text": "自身の弱体を1つ解除して攻撃者に付与",
+              "chance": "100%"
+            }
+          ]
+        }
       ]
     },
     {
@@ -14612,8 +15218,8 @@
         "exclusiveLv1Total": 1440,
         "exclusiveLv2Total": 1440,
         "exclusiveLv3Total": 2160,
-        "conditionMaxTotal": 2160,
-        "conditionMaxNote": "専用Lv3で3体対象",
+        "conditionMaxTotal": 1440,
+        "conditionMaxNote": "専用武器以外に倍率を伸ばす条件が無いため基本と同値（旧値 2160 は専用Lv3の3体対象）。攻撃力減少は火力外評価",
         "powerType": "対象数増加",
         "maxStacks": null,
         "realityRank": "高",
@@ -14627,6 +15233,26 @@
         },
         {
           "text": "50%の確率で攻撃力50%減少を2ターン付与"
+        }
+      ],
+      "flow": [
+        {
+          "when": "攻撃時",
+          "mode": "sequence",
+          "order": 1,
+          "target": "現在HPが高い敵2体",
+          "effects": [
+            {
+              "text": "物理攻撃",
+              "multiplier": "物理720%",
+              "damageTotal": "base"
+            },
+            {
+              "text": "攻撃力50%減少を付与",
+              "chance": "50%",
+              "duration": "2ターン"
+            }
+          ]
         }
       ]
     },
@@ -14679,6 +15305,45 @@
         {
           "text": "弱体効果を付帯していない対象には浸食を2ターン付与(行動開始時にこのスキルの総与ダメージ20%ダメージ)"
         }
+      ],
+      "flow": [
+        {
+          "when": "攻撃時",
+          "mode": "sequence",
+          "order": 1,
+          "target": "ランダムな敵5体",
+          "effects": [
+            {
+              "text": "物理攻撃",
+              "multiplier": "物理500%",
+              "damageTotal": "base"
+            },
+            {
+              "text": "気絶を付与",
+              "term": "気絶",
+              "condition": "対象が弱体効果中なら",
+              "chance": "40%",
+              "duration": "1ターン"
+            },
+            {
+              "text": "浸食を付与",
+              "condition": "弱体効果を付帯していない対象には",
+              "duration": "2ターン",
+              "note": "行動開始時にこのスキルの総与ダメージ20%分のダメージ"
+            }
+          ]
+        },
+        {
+          "when": "攻撃後",
+          "mode": "sequence",
+          "order": 2,
+          "target": "自身",
+          "effects": [
+            {
+              "text": "総与ダメージ15%分のHPを回復する"
+            }
+          ]
+        }
       ]
     },
     {
@@ -14704,6 +15369,21 @@
       "steps": [
         {
           "text": "3ターン目以降の毎ターン開始時、直近2ターンにダメージを受けていなければ攻撃力+80%(2ターン、解除不可)"
+        }
+      ],
+      "flow": [
+        {
+          "when": "3ターン目以降",
+          "mode": "conditional",
+          "target": "自身",
+          "effects": [
+            {
+              "text": "毎ターン開始時、攻撃力を80%増加",
+              "condition": "直近2ターンにダメージを受けていなければ",
+              "duration": "2ターン",
+              "note": "解除不可"
+            }
+          ]
         }
       ],
       "synergyNotes": [
@@ -14739,6 +15419,21 @@
         {
           "text": "通常攻撃がクリティカルヒットしたとき、自身の弱体効果命中率+50%(1ターン、解除不可)"
         }
+      ],
+      "flow": [
+        {
+          "when": "攻撃時",
+          "mode": "sequence",
+          "order": 1,
+          "target": "自身",
+          "effects": [
+            {
+              "text": "強化した通常攻撃がクリティカルヒットしたとき、弱体効果命中率を50%増加",
+              "duration": "1ターン",
+              "note": "解除不可"
+            }
+          ]
+        }
       ]
     },
     {
@@ -14764,6 +15459,20 @@
       "steps": [
         {
           "text": "味方全体の攻撃力・防御力を、自身の攻撃力・防御力30%分増加(2ターン)"
+        }
+      ],
+      "flow": [
+        {
+          "when": "スキル発動時",
+          "mode": "sequence",
+          "order": 1,
+          "target": "味方全体",
+          "effects": [
+            {
+              "text": "攻撃力・防御力を、自身の攻撃力・防御力30%分増加",
+              "duration": "2ターン"
+            }
+          ]
         }
       ]
     },
@@ -14812,6 +15521,46 @@
         {
           "text": "敵を戦闘不能にした場合、攻撃力が最も高い味方のクリダメ強化+30%(2ターン)"
         }
+      ],
+      "flow": [
+        {
+          "when": "攻撃時",
+          "mode": "sequence",
+          "order": 1,
+          "target": "ランダムな敵",
+          "effects": [
+            {
+              "text": "物理攻撃",
+              "multiplier": "物理390%×5回",
+              "damageTotal": "base"
+            }
+          ]
+        },
+        {
+          "when": "攻撃後",
+          "mode": "sequence",
+          "order": 2,
+          "target": "味方全体",
+          "effects": [
+            {
+              "text": "総与ダメージ40%分のシールドを付与",
+              "duration": "2ターン"
+            }
+          ]
+        },
+        {
+          "when": "攻撃後",
+          "mode": "sequence",
+          "order": 3,
+          "target": "攻撃力が最も高い味方",
+          "effects": [
+            {
+              "text": "クリダメ強化を30%増加",
+              "condition": "敵を戦闘不能にした場合",
+              "duration": "2ターン"
+            }
+          ]
+        }
       ]
     },
     {
@@ -14838,6 +15587,19 @@
         {
           "text": "自身の最大HP+30%・防御力+50%(解除不可)"
         }
+      ],
+      "flow": [
+        {
+          "when": "常時",
+          "mode": "passive",
+          "target": "自身",
+          "effects": [
+            {
+              "text": "最大HP30%増加・防御力50%増加",
+              "note": "解除不可"
+            }
+          ]
+        }
       ]
     },
     {
@@ -14863,6 +15625,19 @@
       "steps": [
         {
           "text": "自身がクリティカルヒットを受けたとき、攻撃してきた敵の攻撃力を40%減少(1ターン)"
+        }
+      ],
+      "flow": [
+        {
+          "when": "クリティカルヒットを受けたとき",
+          "mode": "conditional",
+          "target": "攻撃してきた敵",
+          "effects": [
+            {
+              "text": "攻撃力を40%減少",
+              "duration": "1ターン"
+            }
+          ]
         }
       ]
     },
@@ -14909,6 +15684,28 @@
           "text": "対象のスピードが自身より低い場合、15%の確率で気絶を1ターン付与",
           "term": "気絶"
         }
+      ],
+      "flow": [
+        {
+          "when": "攻撃時",
+          "mode": "sequence",
+          "order": 1,
+          "target": "正面の敵",
+          "effects": [
+            {
+              "text": "物理攻撃",
+              "multiplier": "物理410%×4回",
+              "damageTotal": "base"
+            },
+            {
+              "text": "気絶を付与",
+              "term": "気絶",
+              "condition": "対象のスピードが自身より低い場合",
+              "chance": "15%",
+              "duration": "1ターン"
+            }
+          ]
+        }
       ]
     },
     {
@@ -14953,6 +15750,26 @@
         {
           "text": "クリティカル時、対象にバフ無効と防御力20%減少を3ターン付与"
         }
+      ],
+      "flow": [
+        {
+          "when": "攻撃時",
+          "mode": "sequence",
+          "order": 1,
+          "target": "正面の敵と隣接する敵2体",
+          "effects": [
+            {
+              "text": "物理攻撃",
+              "multiplier": "物理520%",
+              "damageTotal": "base"
+            },
+            {
+              "text": "バフ無効と防御力20%減少を付与",
+              "condition": "クリティカルヒットした対象に",
+              "duration": "3ターン"
+            }
+          ]
+        }
       ]
     },
     {
@@ -14978,6 +15795,19 @@
       "steps": [
         {
           "text": "味方全体の攻撃力・スピードを増加(バトル開始時の自身以外の味方生存1体につき+3%、解除不可)"
+        }
+      ],
+      "flow": [
+        {
+          "when": "常時",
+          "mode": "passive",
+          "target": "味方全体",
+          "effects": [
+            {
+              "text": "攻撃力・スピードを増加",
+              "note": "バトル開始時の自身以外の味方生存1体につき+3%、解除不可"
+            }
+          ]
         }
       ],
       "synergyNotes": [
@@ -15009,6 +15839,19 @@
       "steps": [
         {
           "text": "自身の攻撃力+35%・弱体効果耐性率+100%(解除不可)"
+        }
+      ],
+      "flow": [
+        {
+          "when": "常時",
+          "mode": "passive",
+          "target": "自身",
+          "effects": [
+            {
+              "text": "攻撃力35%増加・弱体効果耐性率100%増加",
+              "note": "解除不可"
+            }
+          ]
         }
       ]
     },
@@ -15054,6 +15897,27 @@
         {
           "text": "20%の確率で沈黙を1ターン付与",
           "term": "沈黙"
+        }
+      ],
+      "flow": [
+        {
+          "when": "攻撃時",
+          "mode": "sequence",
+          "order": 1,
+          "target": "ランダムな敵3体",
+          "effects": [
+            {
+              "text": "魔法攻撃",
+              "multiplier": "魔法540%",
+              "damageTotal": "base"
+            },
+            {
+              "text": "沈黙を付与",
+              "term": "沈黙",
+              "chance": "20%",
+              "duration": "1ターン"
+            }
+          ]
         }
       ]
     },
@@ -15102,6 +15966,38 @@
         {
           "text": "対象に魔法480%"
         }
+      ],
+      "flow": [
+        {
+          "when": "攻撃前",
+          "mode": "sequence",
+          "order": 1,
+          "target": "ランダムな敵5体",
+          "effects": [
+            {
+              "text": "バフを2つ解除",
+              "note": "弱体効果命中の判定は1度のみ"
+            },
+            {
+              "text": "防御力40%減少を付与",
+              "condition": "解除前にバフがなかった対象には",
+              "duration": "2ターン"
+            }
+          ]
+        },
+        {
+          "when": "攻撃時",
+          "mode": "sequence",
+          "order": 2,
+          "target": "ランダムな敵5体",
+          "effects": [
+            {
+              "text": "魔法攻撃",
+              "multiplier": "魔法480%",
+              "damageTotal": "base"
+            }
+          ]
+        }
       ]
     },
     {
@@ -15128,6 +16024,18 @@
         {
           "text": "味方が攻撃を受けるか回避したとき、自身の失ったHPの7%を回復"
         }
+      ],
+      "flow": [
+        {
+          "when": "味方が攻撃を受けるか回避したとき",
+          "mode": "conditional",
+          "target": "自身",
+          "effects": [
+            {
+              "text": "失ったHPの7%を回復"
+            }
+          ]
+        }
       ]
     },
     {
@@ -15153,6 +16061,21 @@
       "steps": [
         {
           "text": "バトル開始時、味方全体の防御力+25%(自身のみ+120%)"
+        }
+      ],
+      "flow": [
+        {
+          "when": "バトル開始時",
+          "mode": "simultaneous",
+          "target": "味方全体",
+          "effects": [
+            {
+              "text": "防御力を25%増加"
+            },
+            {
+              "text": "自身のみ120%増加"
+            }
+          ]
         }
       ]
     },
@@ -15200,6 +16123,31 @@
         },
         {
           "text": "対象の魔力が自身より低ければ攻撃力減少は2ターンになる"
+        }
+      ],
+      "flow": [
+        {
+          "when": "攻撃時",
+          "mode": "sequence",
+          "order": 1,
+          "target": "ランダムな敵3体",
+          "effects": [
+            {
+              "text": "魔法攻撃",
+              "multiplier": "魔法430%",
+              "damageTotal": "base"
+            },
+            {
+              "text": "攻撃力35%減少を付与",
+              "chance": "100%",
+              "duration": "1ターン"
+            },
+            {
+              "text": "攻撃力減少の継続が長くなる",
+              "condition": "対象の魔力が自身より低ければ",
+              "duration": "2ターン"
+            }
+          ]
         }
       ]
     },
@@ -15251,6 +16199,43 @@
         {
           "text": "総与ダメージの30%をHP回復する"
         }
+      ],
+      "flow": [
+        {
+          "when": "攻撃時",
+          "mode": "sequence",
+          "order": 1,
+          "target": "ランダムな敵",
+          "effects": [
+            {
+              "text": "魔法攻撃",
+              "multiplier": "魔法380%×4回",
+              "damageTotal": "base"
+            },
+            {
+              "text": "ダメージが1.5倍になる",
+              "condition": "対象がスピード減少中なら",
+              "multiplier": "魔法570%×4回（380%×1.5）",
+              "damageTotal": "conditionMax"
+            },
+            {
+              "text": "スピードを15%減少",
+              "duration": "5ターン",
+              "note": "最大4スタック"
+            }
+          ]
+        },
+        {
+          "when": "攻撃後",
+          "mode": "sequence",
+          "order": 2,
+          "target": "自身",
+          "effects": [
+            {
+              "text": "総与ダメージの30%をHP回復する"
+            }
+          ]
+        }
       ]
     },
     {
@@ -15276,6 +16261,19 @@
       "steps": [
         {
           "text": "自身の命中率+40%・弱体効果命中率+40%(解除不可)"
+        }
+      ],
+      "flow": [
+        {
+          "when": "常時",
+          "mode": "passive",
+          "target": "自身",
+          "effects": [
+            {
+              "text": "命中率40%増加・弱体効果命中率40%増加",
+              "note": "解除不可"
+            }
+          ]
         }
       ]
     },
@@ -15308,6 +16306,23 @@
         },
         {
           "text": "発動後4回行動まで再発動しない"
+        }
+      ],
+      "flow": [
+        {
+          "when": "攻撃を受けてHP割合が40%未満になったとき",
+          "mode": "conditional",
+          "target": "自身",
+          "effects": [
+            {
+              "text": "自身の弱体効果を全解除"
+            },
+            {
+              "text": "攻撃力300%分のシールドを付与",
+              "duration": "3ターン",
+              "note": "発動後、4回行動が終わるまで再発動しない"
+            }
+          ]
         }
       ]
     },
@@ -18386,6 +19401,32 @@
         {
           "text": "HP割合が最も低い敵に、総与ダメージ20%の直接攻撃を追加"
         }
+      ],
+      "flow": [
+        {
+          "when": "攻撃時",
+          "mode": "sequence",
+          "order": 1,
+          "target": "ランダムな敵3体",
+          "effects": [
+            {
+              "text": "魔法攻撃",
+              "multiplier": "魔法280%",
+              "damageTotal": "base"
+            }
+          ]
+        },
+        {
+          "when": "攻撃後",
+          "mode": "sequence",
+          "order": 2,
+          "target": "HP割合が最も低い敵",
+          "effects": [
+            {
+              "text": "総与ダメージ20%分の直接攻撃を追加"
+            }
+          ]
+        }
       ]
     },
     {
@@ -18417,6 +19458,28 @@
         },
         {
           "text": "対象のHP割合が15%以下なら、さらに防御力+20%(2ターン)"
+        }
+      ],
+      "flow": [
+        {
+          "when": "スキル発動時",
+          "mode": "sequence",
+          "order": 1,
+          "target": "HP割合が低い味方3体",
+          "effects": [
+            {
+              "text": "魔力270%分回復"
+            },
+            {
+              "text": "回復量が1.5倍になる",
+              "condition": "対象のHP割合が15%以下なら"
+            },
+            {
+              "text": "さらに防御力を20%増加",
+              "condition": "対象のHP割合が15%以下なら",
+              "duration": "2ターン"
+            }
+          ]
         }
       ],
       "synergyNotes": [
@@ -18465,6 +19528,19 @@
         {
           "text": "自身が生存している間、味方全体の被ダメージ15%減少・回避率+15%(解除不可)"
         }
+      ],
+      "flow": [
+        {
+          "when": "常時",
+          "mode": "passive",
+          "target": "味方全体",
+          "effects": [
+            {
+              "text": "自身が生存している間、被ダメージ15%減少・回避率15%増加",
+              "note": "解除不可"
+            }
+          ]
+        }
       ]
     },
     {
@@ -18490,6 +19566,20 @@
       "steps": [
         {
           "text": "通常攻撃時、30%の確率で自身とHP割合が最も低い味方を攻撃力20%分回復"
+        }
+      ],
+      "flow": [
+        {
+          "when": "攻撃時",
+          "mode": "sequence",
+          "order": 1,
+          "target": "自身とHP割合が最も低い味方",
+          "effects": [
+            {
+              "text": "強化した通常攻撃のとき、攻撃力20%分回復",
+              "chance": "30%"
+            }
+          ]
         }
       ]
     },

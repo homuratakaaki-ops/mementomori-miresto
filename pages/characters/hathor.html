@@ -42,13 +42,16 @@
         <div class="skill-body">
           
         <div>
-          <h3 class="block-title">順番に何が起きる？</h3>
-          <ol class="steps">
-            <li>現在HPが高い敵2体に物理<span class="ratio">720%</span></li><li>50%の確率で攻撃力50%減少を2ターン付与</li>
-          </ol>
+          <h3 class="block-title">いつ・誰に・何が起きる？</h3>
+          <ol class="flow">
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">攻撃時</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>現在HPが高い敵2体</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>物理攻撃<span class="flow-chip num">物理<span class="ratio">720%</span></span><span class="flow-total">倍率合計 1440%（2体分）</span></li><li><span class="flow-chip">確率50%</span>攻撃力50%減少を付与<span class="flow-chip">2ターン</span></li></ul></div>
+          </li>
+        </ol>
         </div>
       
-          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>現在HPが高い敵</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 1440% / 最大 2160%</dd></dl><dl class="data-item"><dt>継続</dt><dd>攻撃力減少2T</dd></dl></div>
+          
           
           
           <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用Lv1</th><td>攻撃力減少確率70%。</td></tr><tr><th>専用Lv3</th><td>対象3体</td></tr></table></div>
@@ -79,13 +82,21 @@
         <div class="skill-body">
           
         <div>
-          <h3 class="block-title">順番に何が起きる？</h3>
-          <ol class="steps">
-            <li>ランダムな敵5体に物理<span class="ratio">500%</span></li><li>対象が弱体効果中なら40%の確率で<details class="term"><summary>気絶</summary><span class="term-box">行動できなくなる状態異常。効果中は通常の行動順が来てもスキルを使えない。</span></details>を1ターン付与</li><li>自身のHPを総与ダメージ15%分回復する</li><li>弱体効果を付帯していない対象には浸食を2ターン付与(行動開始時にこのスキルの総与ダメージ20%ダメージ)</li>
-          </ol>
+          <h3 class="block-title">いつ・誰に・何が起きる？</h3>
+          <ol class="flow">
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">① 攻撃時</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>ランダムな敵5体</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>物理攻撃<span class="flow-chip num">物理<span class="ratio">500%</span></span><span class="flow-total">倍率合計 2500%（5体分）</span></li><li class="flow-cond-line"><span class="flow-chip cond">対象が弱体効果中なら</span><span class="flow-chip">確率40%</span><details class="term"><summary>気絶</summary><span class="term-box">行動できなくなる状態異常。効果中は通常の行動順が来てもスキルを使えない。</span></details>を付与<span class="flow-chip">1ターン</span></li><li class="flow-cond-line"><span class="flow-chip cond">弱体効果を付帯していない対象には</span>浸食を付与<span class="flow-chip">2ターン</span><span class="flow-note">行動開始時にこのスキルの総与ダメージ20%分のダメージ</span></li></ul></div>
+          </li>
+        
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">② 攻撃後</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>自身</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>総与ダメージ15%分のHPを回復する</li></ul></div>
+          </li>
+        </ol>
         </div>
       
-          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>ランダム敵5体</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 2500%</dd></dl><dl class="data-item"><dt>継続</dt><dd>気絶1T / 浸食2T</dd></dl></div>
+          
           
           
           <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用Lv2</th><td>気絶確率70%</td></tr></table></div>
@@ -116,13 +127,16 @@
         <div class="skill-body">
           
         <div>
-          <h3 class="block-title">順番に何が起きる？</h3>
-          <ol class="steps">
-            <li>3ターン目以降の毎ターン開始時、直近2ターンにダメージを受けていなければ攻撃力+80%(2ターン、解除不可)</li>
-          </ol>
+          <h3 class="block-title">いつ・誰に・何が起きる？</h3>
+          <ol class="flow">
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">3ターン目以降</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>自身</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li class="flow-cond-line"><span class="flow-chip cond">直近2ターンにダメージを受けていなければ</span>毎ターン開始時、攻撃力を80%増加<span class="flow-chip">2ターン</span><span class="flow-note">解除不可</span></li></ul></div>
+          </li>
+        </ol>
         </div>
       
-          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>自身</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>攻撃力+80%</dd></dl><dl class="data-item"><dt>継続</dt><dd>2T</dd></dl></div>
+          
           <div><h3 class="block-title">かみ合わせ</h3><ul class="verification-list synergy-list">
         <li>
           ステルス・透明・挑発持ちの味方で被弾を避けるほど条件を維持しやすい。根拠: 条件が「2ターン以内に被弾なし」のため
@@ -158,13 +172,16 @@
         <div class="skill-body">
           
         <div>
-          <h3 class="block-title">順番に何が起きる？</h3>
-          <ol class="steps">
-            <li>通常攻撃を強化</li><li>通常攻撃がクリティカルヒットしたとき、自身の弱体効果命中率+50%(1ターン、解除不可)</li>
-          </ol>
+          <h3 class="block-title">いつ・誰に・何が起きる？</h3>
+          <ol class="flow">
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">攻撃時</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>自身</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>強化した通常攻撃がクリティカルヒットしたとき、弱体効果命中率を50%増加<span class="flow-chip">1ターン</span><span class="flow-note">解除不可</span></li></ul></div>
+          </li>
+        </ol>
         </div>
       
-          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>自身</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常攻撃強化 / 弱体命中+50%</dd></dl><dl class="data-item"><dt>継続</dt><dd>1T</dd></dl></div>
+          
           
           
           <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用</th><td>専用武器効果なし</td></tr></table></div>
