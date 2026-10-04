@@ -1,0 +1,1079 @@
+{
+  "schema": "character-index/1",
+  "note": "data/mementomori-skills.json の characters から自動生成。直接編集しないこと（scripts/build-character-pages.mjs が上書きする）。",
+  "generatedFrom": "data/mementomori-skills.json",
+  "updatedAt": "2026-10-04T00:00:00.000+09:00",
+  "characters": [
+    {
+      "id": "aa_dark",
+      "pageSlug": "aa_dark",
+      "name": "A.A.",
+      "attribute": "冥",
+      "weaponType": "ソーサラー",
+      "speed": 2687,
+      "availability": "星の導き"
+    },
+    {
+      "id": "aa_rusted_sky",
+      "pageSlug": "aa_rusted_sky",
+      "name": "[錆鉄の空]A.A.",
+      "attribute": "天",
+      "weaponType": "ソーサラー",
+      "speed": 2607,
+      "availability": "PU・運命"
+    },
+    {
+      "id": "aine",
+      "pageSlug": "aine",
+      "name": "アイネ",
+      "attribute": "天",
+      "weaponType": "スナイパー",
+      "speed": 3165,
+      "availability": "星の導き"
+    },
+    {
+      "id": "aishe",
+      "pageSlug": "aishe",
+      "name": "アイシェ",
+      "attribute": "紅",
+      "weaponType": "スナイパー",
+      "speed": 3424,
+      "availability": "PU・運命"
+    },
+    {
+      "id": "alexandra",
+      "pageSlug": "alexandra",
+      "name": "アレクサンドラ",
+      "attribute": "翠",
+      "weaponType": "ウォーリア",
+      "speed": 3051,
+      "availability": "星の導き"
+    },
+    {
+      "id": "amleth",
+      "pageSlug": "amleth",
+      "name": "アムレート",
+      "attribute": "藍",
+      "weaponType": "ウォーリア",
+      "speed": 2766,
+      "availability": "恒常"
+    },
+    {
+      "id": "amleth_summer",
+      "pageSlug": "amleth_summer",
+      "name": "[夏の日の夢]アムレート",
+      "attribute": "黄",
+      "weaponType": "ウォーリア",
+      "speed": 3089,
+      "availability": "PU・運命"
+    },
+    {
+      "id": "amour",
+      "pageSlug": "amour",
+      "name": "アモール",
+      "attribute": "紅",
+      "weaponType": "スナイパー",
+      "speed": 2550,
+      "availability": "恒常"
+    },
+    {
+      "id": "amour_holy_night",
+      "pageSlug": "amour_holy_night",
+      "name": "[聖夜の贈り物]アモール",
+      "attribute": "黄",
+      "weaponType": "スナイパー",
+      "speed": 3450,
+      "availability": "星の導き"
+    },
+    {
+      "id": "armstrong",
+      "pageSlug": "armstrong",
+      "name": "アームストロング",
+      "attribute": "冥",
+      "weaponType": "スナイパー",
+      "speed": 3047,
+      "availability": "星の導き"
+    },
+    {
+      "id": "artie",
+      "pageSlug": "artie",
+      "name": "アーティ",
+      "attribute": "紅",
+      "weaponType": "ソーサラー",
+      "speed": 2734,
+      "availability": "星の導き"
+    },
+    {
+      "id": "artoria",
+      "pageSlug": "artoria",
+      "name": "アルトリア",
+      "attribute": "紅",
+      "weaponType": "ウォーリア",
+      "speed": 3572,
+      "availability": "星の導き"
+    },
+    {
+      "id": "artoria_golden",
+      "pageSlug": "artoria_golden",
+      "name": "[黄金色の聖剣使い]アルトリア",
+      "attribute": "翠",
+      "weaponType": "ウォーリア",
+      "speed": 3272,
+      "availability": "PU・運命"
+    },
+    {
+      "id": "asahi",
+      "pageSlug": "asahi",
+      "name": "アサヒ",
+      "attribute": "黄",
+      "weaponType": "スナイパー",
+      "speed": 3044,
+      "availability": "星の導き"
+    },
+    {
+      "id": "belle",
+      "pageSlug": "belle",
+      "name": "ベル",
+      "attribute": "紅",
+      "weaponType": "ソーサラー",
+      "speed": 3217,
+      "availability": "星の導き"
+    },
+    {
+      "id": "carmilla",
+      "pageSlug": "carmilla",
+      "name": "カーミラ",
+      "attribute": "冥",
+      "weaponType": "ウォーリア",
+      "speed": 2672,
+      "availability": "PU・運命"
+    },
+    {
+      "id": "cattleya",
+      "pageSlug": "cattleya",
+      "name": "カトレア",
+      "attribute": "黄",
+      "weaponType": "ウォーリア",
+      "speed": 2984,
+      "availability": "PU・運命"
+    },
+    {
+      "id": "cerberus",
+      "pageSlug": "cerberus",
+      "name": "ケルベロス",
+      "attribute": "天",
+      "weaponType": "ウォーリア",
+      "speed": 3363,
+      "availability": "星の導き"
+    },
+    {
+      "id": "cerberus_candy",
+      "pageSlug": "cerberus_candy",
+      "name": "[魔法のキャンディ]ケルベロス",
+      "attribute": "冥",
+      "weaponType": "ソーサラー",
+      "speed": 2563,
+      "availability": "PU・運命"
+    },
+    {
+      "id": "chiffon",
+      "pageSlug": "chiffon",
+      "name": "シフォン",
+      "attribute": "紅",
+      "weaponType": "ソーサラー",
+      "speed": 2783,
+      "availability": "星の導き"
+    },
+    {
+      "id": "claudia",
+      "pageSlug": "claudia",
+      "name": "クラウディア",
+      "attribute": "翠",
+      "weaponType": "ウォーリア",
+      "speed": 3056,
+      "availability": "星の導き"
+    },
+    {
+      "id": "cordie",
+      "pageSlug": "cordie",
+      "name": "コルディ",
+      "attribute": "翠",
+      "weaponType": "スナイパー",
+      "speed": 3562,
+      "availability": "恒常"
+    },
+    {
+      "id": "cordie_ringmaster",
+      "pageSlug": "cordie_ringmaster",
+      "name": "[サーカスの団長]コルディ",
+      "attribute": "藍",
+      "weaponType": "ウォーリア",
+      "speed": 2662,
+      "availability": "PU・運命"
+    },
+    {
+      "id": "cordie_summer",
+      "pageSlug": "cordie_summer",
+      "name": "[夏の残響]コルディ",
+      "attribute": "紅",
+      "weaponType": "スナイパー",
+      "speed": 3575,
+      "availability": "星の導き"
+    },
+    {
+      "id": "cusith",
+      "pageSlug": "cusith",
+      "name": "クーシー",
+      "attribute": "藍",
+      "weaponType": "ウォーリア",
+      "speed": 2810,
+      "availability": "PU・運命"
+    },
+    {
+      "id": "dd",
+      "pageSlug": "dd",
+      "name": "D.D.",
+      "attribute": "翠",
+      "weaponType": "ソーサラー",
+      "speed": 3075,
+      "availability": "星の導き"
+    },
+    {
+      "id": "dian",
+      "pageSlug": "dian",
+      "name": "ディアン",
+      "attribute": "紅",
+      "weaponType": "スナイパー",
+      "speed": 3080,
+      "availability": "恒常"
+    },
+    {
+      "id": "eir",
+      "pageSlug": "eir",
+      "name": "エイル",
+      "attribute": "藍",
+      "weaponType": "スナイパー",
+      "speed": 2892,
+      "availability": "星の導き"
+    },
+    {
+      "id": "elaine",
+      "pageSlug": "elaine",
+      "name": "エレイン",
+      "attribute": "冥",
+      "weaponType": "スナイパー",
+      "speed": 2843,
+      "availability": "PU・運命"
+    },
+    {
+      "id": "elfriede",
+      "pageSlug": "elfriede",
+      "name": "エルフリンデ",
+      "attribute": "天",
+      "weaponType": "ウォーリア",
+      "speed": 3049,
+      "availability": "星の導き"
+    },
+    {
+      "id": "eureka",
+      "pageSlug": "eureka",
+      "name": "ユリーカ",
+      "attribute": "藍",
+      "weaponType": "ソーサラー",
+      "speed": 2895,
+      "availability": "星の導き"
+    },
+    {
+      "id": "evelyn",
+      "pageSlug": "evelyn",
+      "name": "エヴリン",
+      "attribute": "藍",
+      "weaponType": "ソーサラー",
+      "speed": 2819,
+      "availability": "PU・運命"
+    },
+    {
+      "id": "fenny",
+      "pageSlug": "fenny",
+      "name": "フェーネ",
+      "attribute": "藍",
+      "weaponType": "スナイパー",
+      "speed": 2853,
+      "availability": "星の導き"
+    },
+    {
+      "id": "fenrir",
+      "pageSlug": "fenrir",
+      "name": "フェンリル",
+      "attribute": "藍",
+      "weaponType": "ソーサラー",
+      "speed": 2894,
+      "availability": "恒常"
+    },
+    {
+      "id": "fenrir_treasure",
+      "pageSlug": "fenrir_treasure",
+      "name": "[二人だけの宝物]フェンリル",
+      "attribute": "黄",
+      "weaponType": "ウォーリア",
+      "speed": 3294,
+      "availability": "PU・運命"
+    },
+    {
+      "id": "fia",
+      "pageSlug": "fia",
+      "name": "フィアー",
+      "attribute": "翠",
+      "weaponType": "ウォーリア",
+      "speed": 2645,
+      "availability": "星の導き"
+    },
+    {
+      "id": "fia_trace",
+      "pageSlug": "fia_trace",
+      "name": "[在りし日の面影]フィアー",
+      "attribute": "藍",
+      "weaponType": "ウォーリア",
+      "speed": 2785,
+      "availability": "PU・運命"
+    },
+    {
+      "id": "flack",
+      "pageSlug": "flack",
+      "name": "フラック",
+      "attribute": "紅",
+      "weaponType": "スナイパー",
+      "speed": 3048,
+      "availability": "星の導き"
+    },
+    {
+      "id": "florence",
+      "pageSlug": "florence",
+      "name": "フローレンス",
+      "attribute": "藍",
+      "weaponType": "ウォーリア",
+      "speed": 3022,
+      "availability": "恒常"
+    },
+    {
+      "id": "florence_twilight",
+      "pageSlug": "florence_twilight",
+      "name": "[黄昏の誓い]フローレンス",
+      "attribute": "翠",
+      "weaponType": "ウォーリア",
+      "speed": 3077,
+      "availability": "PU・運命"
+    },
+    {
+      "id": "fortina",
+      "pageSlug": "fortina",
+      "name": "フォルティナ",
+      "attribute": "天",
+      "weaponType": "ウォーリア",
+      "speed": 3059,
+      "availability": "星の導き"
+    },
+    {
+      "id": "fortina_twilight",
+      "pageSlug": "fortina_twilight",
+      "name": "[黄昏の約束]フォルティナ",
+      "attribute": "天",
+      "weaponType": "スナイパー",
+      "speed": 3423,
+      "availability": "PU・運命"
+    },
+    {
+      "id": "freycia",
+      "pageSlug": "freycia",
+      "name": "フレイシア",
+      "attribute": "紅",
+      "weaponType": "ソーサラー",
+      "speed": 2680,
+      "availability": "恒常"
+    },
+    {
+      "id": "giluial",
+      "pageSlug": "giluial",
+      "name": "ギルウィアル",
+      "attribute": "藍",
+      "weaponType": "ソーサラー",
+      "speed": 3269,
+      "availability": "星の導き"
+    },
+    {
+      "id": "guinevere",
+      "pageSlug": "guinevere",
+      "name": "グィネヴィア",
+      "attribute": "紅",
+      "weaponType": "スナイパー",
+      "speed": 3091,
+      "availability": "PU・運命"
+    },
+    {
+      "id": "hathor",
+      "pageSlug": "hathor",
+      "name": "ハトホル",
+      "attribute": "黄",
+      "weaponType": "スナイパー",
+      "speed": 3334,
+      "availability": "恒常"
+    },
+    {
+      "id": "idyne",
+      "pageSlug": "idyne",
+      "name": "イディーネ",
+      "attribute": "翠",
+      "weaponType": "ソーサラー",
+      "speed": 3261,
+      "availability": "ピックアップ"
+    },
+    {
+      "id": "illya_gods_curse",
+      "pageSlug": "illya_gods_curse",
+      "name": "[神呪の魔女]イリア",
+      "attribute": "冥",
+      "weaponType": "ウォーリア",
+      "speed": 2703,
+      "availability": "星の導き"
+    },
+    {
+      "id": "irene",
+      "pageSlug": "irene",
+      "name": "アイリーン",
+      "attribute": "天",
+      "weaponType": "スナイパー",
+      "speed": 3148,
+      "availability": "星の導き"
+    },
+    {
+      "id": "iris_black",
+      "pageSlug": "iris_black",
+      "name": "[黒鎧の従者]アイリス",
+      "attribute": "黄",
+      "weaponType": "ウォーリア",
+      "speed": 2933,
+      "availability": "星の導き"
+    },
+    {
+      "id": "ivy",
+      "pageSlug": "ivy",
+      "name": "アイビー",
+      "attribute": "翠",
+      "weaponType": "スナイパー",
+      "speed": 2790,
+      "availability": "恒常"
+    },
+    {
+      "id": "kaguya",
+      "pageSlug": "kaguya",
+      "name": "カグヤ",
+      "attribute": "冥",
+      "weaponType": "ソーサラー",
+      "speed": 2872,
+      "availability": "星の導き"
+    },
+    {
+      "id": "karol",
+      "pageSlug": "karol",
+      "name": "カロル",
+      "attribute": "黄",
+      "weaponType": "ソーサラー",
+      "speed": 3452,
+      "availability": "星の導き"
+    },
+    {
+      "id": "kobell",
+      "pageSlug": "kobell",
+      "name": "コベル",
+      "attribute": "翠",
+      "weaponType": "スナイパー",
+      "speed": 3179,
+      "availability": "PU・運命"
+    },
+    {
+      "id": "lean",
+      "pageSlug": "lean",
+      "name": "リーン",
+      "attribute": "紅",
+      "weaponType": "ウォーリア",
+      "speed": 2813,
+      "availability": "恒常"
+    },
+    {
+      "id": "liebe",
+      "pageSlug": "liebe",
+      "name": "リーベ",
+      "attribute": "紅",
+      "weaponType": "ウォーリア",
+      "speed": 3592,
+      "availability": "星の導き"
+    },
+    {
+      "id": "lilicotte",
+      "pageSlug": "lilicotte",
+      "name": "リリコット",
+      "attribute": "紅",
+      "weaponType": "スナイパー",
+      "speed": 3064,
+      "availability": "PU・運命"
+    },
+    {
+      "id": "lily",
+      "pageSlug": "lily",
+      "name": "リリー",
+      "attribute": "天",
+      "weaponType": "ソーサラー",
+      "speed": 3058,
+      "availability": "PU・運命"
+    },
+    {
+      "id": "liselotte",
+      "pageSlug": "liselotte",
+      "name": "リズ",
+      "attribute": "藍",
+      "weaponType": "ソーサラー",
+      "speed": 2999,
+      "availability": "星の導き"
+    },
+    {
+      "id": "lucile",
+      "pageSlug": "lucile",
+      "name": "ルシール",
+      "attribute": "紅",
+      "weaponType": "ウォーリア",
+      "speed": 3525,
+      "availability": "星の導き"
+    },
+    {
+      "id": "luke",
+      "pageSlug": "luke",
+      "name": "ルーク",
+      "attribute": "翠",
+      "weaponType": "ウォーリア",
+      "speed": 3093,
+      "availability": "星の導き"
+    },
+    {
+      "id": "lumika",
+      "pageSlug": "lumika",
+      "name": "ルミカ",
+      "attribute": "天",
+      "weaponType": "ウォーリア",
+      "speed": 3046,
+      "availability": "PU・運命"
+    },
+    {
+      "id": "lunalynn",
+      "pageSlug": "lunalynn",
+      "name": "ルナリンド",
+      "attribute": "冥",
+      "weaponType": "ソーサラー",
+      "speed": 3304,
+      "availability": "恒常"
+    },
+    {
+      "id": "lunalynn_holy_night",
+      "pageSlug": "lunalynn_holy_night",
+      "name": "[聖夜の妖精]ルナリンド",
+      "attribute": "翠",
+      "weaponType": "スナイパー",
+      "speed": 3037,
+      "availability": "冬イベント"
+    },
+    {
+      "id": "matilda",
+      "pageSlug": "matilda",
+      "name": "マチルダ",
+      "attribute": "紅",
+      "weaponType": "ソーサラー",
+      "speed": 3181,
+      "availability": "星の導き"
+    },
+    {
+      "id": "meria",
+      "pageSlug": "meria",
+      "name": "メリア",
+      "attribute": "天",
+      "weaponType": "ウォーリア",
+      "speed": 3094,
+      "availability": "星の導き"
+    },
+    {
+      "id": "merlin",
+      "pageSlug": "merlin",
+      "name": "マーリン",
+      "attribute": "翠",
+      "weaponType": "ソーサラー",
+      "speed": 2888,
+      "availability": "恒常"
+    },
+    {
+      "id": "merlyn",
+      "pageSlug": "merlyn",
+      "name": "メルラン",
+      "attribute": "黄",
+      "weaponType": "ソーサラー",
+      "speed": 3018,
+      "availability": "PU・運命"
+    },
+    {
+      "id": "merlyn_winter",
+      "pageSlug": "merlyn_winter",
+      "name": "[深き森の賢者]マーリン",
+      "attribute": "藍",
+      "weaponType": "ソーサラー",
+      "speed": 2688,
+      "availability": "PU・運命"
+    },
+    {
+      "id": "mertillier",
+      "pageSlug": "mertillier",
+      "name": "メルティーユ",
+      "attribute": "翠",
+      "weaponType": "ソーサラー",
+      "speed": 2796,
+      "availability": "恒常"
+    },
+    {
+      "id": "mifuri",
+      "pageSlug": "mifuri",
+      "name": "ミフリ",
+      "attribute": "黄",
+      "weaponType": "ソーサラー",
+      "speed": 3136,
+      "availability": "PU・運命"
+    },
+    {
+      "id": "mimi",
+      "pageSlug": "mimi",
+      "name": "ミミ",
+      "attribute": "黄",
+      "weaponType": "ウォーリア",
+      "speed": 3328,
+      "availability": "恒常"
+    },
+    {
+      "id": "minasumari",
+      "pageSlug": "minasumari",
+      "name": "ミナシュマリ",
+      "attribute": "藍",
+      "weaponType": "ウォーリア",
+      "speed": 2792,
+      "availability": "星の導き"
+    },
+    {
+      "id": "mira",
+      "pageSlug": "mira",
+      "name": "ミラ",
+      "attribute": "翠",
+      "weaponType": "ソーサラー",
+      "speed": 3158,
+      "availability": "星の導き"
+    },
+    {
+      "id": "moddey",
+      "pageSlug": "moddey",
+      "name": "モーザ",
+      "attribute": "藍",
+      "weaponType": "ソーサラー",
+      "speed": 2826,
+      "availability": "恒常"
+    },
+    {
+      "id": "moddey_summer",
+      "pageSlug": "moddey_summer",
+      "name": "[墓守の夏休み]モーザ",
+      "attribute": "黄",
+      "weaponType": "ソーサラー",
+      "speed": 3245,
+      "availability": "夏イベント"
+    },
+    {
+      "id": "moineau",
+      "pageSlug": "moineau",
+      "name": "モワノー",
+      "attribute": "黄",
+      "weaponType": "スナイパー",
+      "speed": 3145,
+      "availability": "PU・運命"
+    },
+    {
+      "id": "morgana",
+      "pageSlug": "morgana",
+      "name": "モルガナ",
+      "attribute": "紅",
+      "weaponType": "ソーサラー",
+      "speed": 2715,
+      "availability": "星の導き"
+    },
+    {
+      "id": "natasha",
+      "pageSlug": "natasha",
+      "name": "ナターシャ",
+      "attribute": "天",
+      "weaponType": "ウォーリア",
+      "speed": 2926,
+      "availability": "恒常"
+    },
+    {
+      "id": "natasha_bouquet",
+      "pageSlug": "natasha_bouquet",
+      "name": "[花束の魔女]ナターシャ",
+      "attribute": "冥",
+      "weaponType": "スナイパー",
+      "speed": 2601,
+      "availability": "星の導き"
+    },
+    {
+      "id": "nebra",
+      "pageSlug": "nebra",
+      "name": "ネブラ",
+      "attribute": "冥",
+      "weaponType": "ソーサラー",
+      "speed": 2834,
+      "availability": "PU・運命"
+    },
+    {
+      "id": "nina",
+      "pageSlug": "nina",
+      "name": "ニーナ",
+      "attribute": "翠",
+      "weaponType": "スナイパー",
+      "speed": 2839,
+      "availability": "恒常"
+    },
+    {
+      "id": "nina_summer",
+      "pageSlug": "nina_summer",
+      "name": "[小さな大冒険]ニーナ",
+      "attribute": "藍",
+      "weaponType": "スナイパー",
+      "speed": 2793,
+      "availability": "PU・運命"
+    },
+    {
+      "id": "olivia",
+      "pageSlug": "olivia",
+      "name": "オリヴィエ",
+      "attribute": "黄",
+      "weaponType": "ウォーリア",
+      "speed": 3120,
+      "availability": "恒常"
+    },
+    {
+      "id": "ophelia",
+      "pageSlug": "ophelia",
+      "name": "オフィーリア",
+      "attribute": "冥",
+      "weaponType": "ウォーリア",
+      "speed": 3007,
+      "availability": "星の導き"
+    },
+    {
+      "id": "paladea",
+      "pageSlug": "paladea",
+      "name": "パラデア",
+      "attribute": "冥",
+      "weaponType": "スナイパー",
+      "speed": 3065,
+      "availability": "星の導き"
+    },
+    {
+      "id": "paula",
+      "pageSlug": "paula",
+      "name": "ポーラ",
+      "attribute": "翠",
+      "weaponType": "スナイパー",
+      "speed": 2956,
+      "availability": "星の導き"
+    },
+    {
+      "id": "potpourri",
+      "pageSlug": "potpourri",
+      "name": "ポプリ",
+      "attribute": "黄",
+      "weaponType": "スナイパー",
+      "speed": 3036,
+      "availability": "PU・運命"
+    },
+    {
+      "id": "primavera",
+      "pageSlug": "primavera",
+      "name": "プリマヴェーラ",
+      "attribute": "黄",
+      "weaponType": "スナイパー",
+      "speed": 3268,
+      "availability": "恒常"
+    },
+    {
+      "id": "primavera_summer",
+      "pageSlug": "primavera_summer",
+      "name": "[湖畔の歌姫]プリマヴェーラ",
+      "attribute": "藍",
+      "weaponType": "スナイパー",
+      "speed": 2678,
+      "availability": "夏イベント"
+    },
+    {
+      "id": "priscilla",
+      "pageSlug": "priscilla",
+      "name": "プリシラ",
+      "attribute": "紅",
+      "weaponType": "ソーサラー",
+      "speed": 3167,
+      "availability": "星の導き"
+    },
+    {
+      "id": "rea",
+      "pageSlug": "rea",
+      "name": "レア",
+      "attribute": "翠",
+      "weaponType": "スナイパー",
+      "speed": 3571,
+      "availability": "星の導き"
+    },
+    {
+      "id": "regina",
+      "pageSlug": "regina",
+      "name": "レジーナ",
+      "attribute": "冥",
+      "weaponType": "スナイパー",
+      "speed": 2856,
+      "availability": "PU・運命"
+    },
+    {
+      "id": "rishess",
+      "pageSlug": "rishess",
+      "name": "リシェス",
+      "attribute": "黄",
+      "weaponType": "ウォーリア",
+      "speed": 3596,
+      "availability": "星の導き"
+    },
+    {
+      "id": "rivelia",
+      "pageSlug": "rivelia",
+      "name": "リヴェリア",
+      "attribute": "天",
+      "weaponType": "スナイパー",
+      "speed": 3597,
+      "availability": "PU・運命"
+    },
+    {
+      "id": "rosalie_caritas",
+      "pageSlug": "rosalie_caritas",
+      "name": "[カリタスの使徒]ロザリー",
+      "attribute": "天",
+      "weaponType": "ソーサラー",
+      "speed": 2646,
+      "availability": "星の導き"
+    },
+    {
+      "id": "rusalka",
+      "pageSlug": "rusalka",
+      "name": "ルサールカ",
+      "attribute": "天",
+      "weaponType": "ソーサラー",
+      "speed": 2972,
+      "availability": "星の導き"
+    },
+    {
+      "id": "rustica",
+      "pageSlug": "rustica",
+      "name": "ルスティカ",
+      "attribute": "黄",
+      "weaponType": "ウォーリア",
+      "speed": 3187,
+      "availability": "星の導き"
+    },
+    {
+      "id": "sabrina",
+      "pageSlug": "sabrina",
+      "name": "サブリナ",
+      "attribute": "紅",
+      "weaponType": "ウォーリア",
+      "speed": 2966,
+      "availability": "恒常"
+    },
+    {
+      "id": "sabrina_cool_breeze",
+      "pageSlug": "sabrina_cool_breeze",
+      "name": "[涼風の軍神]サブリナ",
+      "attribute": "翠",
+      "weaponType": "ウォーリア",
+      "speed": 3418,
+      "availability": "夏イベント"
+    },
+    {
+      "id": "serruria",
+      "pageSlug": "serruria",
+      "name": "セルリア",
+      "attribute": "藍",
+      "weaponType": "スナイパー",
+      "speed": 2632,
+      "availability": "星の導き"
+    },
+    {
+      "id": "shiloh",
+      "pageSlug": "shiloh",
+      "name": "シロ",
+      "attribute": "黄",
+      "weaponType": "スナイパー",
+      "speed": 3229,
+      "availability": "にじさんじコラボ"
+    },
+    {
+      "id": "shizu_snow",
+      "pageSlug": "shizu_snow",
+      "name": "[雪花の誓い]シズ",
+      "attribute": "紅",
+      "weaponType": "ウォーリア",
+      "speed": 3582,
+      "availability": "星の導き"
+    },
+    {
+      "id": "sivi",
+      "pageSlug": "sivi",
+      "name": "シヴィ",
+      "attribute": "藍",
+      "weaponType": "ウォーリア",
+      "speed": 2855,
+      "availability": "星の導き"
+    },
+    {
+      "id": "soltina",
+      "pageSlug": "soltina",
+      "name": "ソルティーナ",
+      "attribute": "藍",
+      "weaponType": "ソーサラー",
+      "speed": 3302,
+      "availability": "恒常"
+    },
+    {
+      "id": "soltina_warm_memory",
+      "pageSlug": "soltina_warm_memory",
+      "name": "[温かな記憶]ソルティーナ",
+      "attribute": "紅",
+      "weaponType": "ウォーリア",
+      "speed": 3073,
+      "availability": "星の導き"
+    },
+    {
+      "id": "sonya",
+      "pageSlug": "sonya",
+      "name": "ソーニャ",
+      "attribute": "藍",
+      "weaponType": "スナイパー",
+      "speed": 3376,
+      "availability": "星の導き"
+    },
+    {
+      "id": "sophia",
+      "pageSlug": "sophia",
+      "name": "ソフィア",
+      "attribute": "紅",
+      "weaponType": "ウォーリア",
+      "speed": 2935,
+      "availability": "星の導き"
+    },
+    {
+      "id": "stella",
+      "pageSlug": "stella",
+      "name": "ステラ",
+      "attribute": "藍",
+      "weaponType": "ウォーリア",
+      "speed": 2698,
+      "availability": "PU・星の導き"
+    },
+    {
+      "id": "stella_holy_dark_star",
+      "pageSlug": "stella_holy_dark_star",
+      "name": "[聖なる漆黒の輝く星]ステラ",
+      "attribute": "翠",
+      "weaponType": "ソーサラー",
+      "speed": 2968,
+      "availability": "PU・運命"
+    },
+    {
+      "id": "tama",
+      "pageSlug": "tama",
+      "name": "タマ",
+      "attribute": "黄",
+      "weaponType": "スナイパー",
+      "speed": 3286,
+      "availability": "星の導き"
+    },
+    {
+      "id": "tilly",
+      "pageSlug": "tilly",
+      "name": "ティリー",
+      "attribute": "翠",
+      "weaponType": "ソーサラー",
+      "speed": 3074,
+      "availability": "星の導き"
+    },
+    {
+      "id": "tricksy",
+      "pageSlug": "tricksy",
+      "name": "トリクシー",
+      "attribute": "黄",
+      "weaponType": "ソーサラー",
+      "speed": 3178,
+      "availability": "PU・運命"
+    },
+    {
+      "id": "tropon",
+      "pageSlug": "tropon",
+      "name": "トロポン",
+      "attribute": "黄",
+      "weaponType": "ソーサラー",
+      "speed": 2657,
+      "availability": "恒常"
+    },
+    {
+      "id": "tropon_holy_night",
+      "pageSlug": "tropon_holy_night",
+      "name": "[聖夜の祈り]トロポン",
+      "attribute": "藍",
+      "weaponType": "ソーサラー",
+      "speed": 3057,
+      "availability": "星の導き"
+    },
+    {
+      "id": "valriede",
+      "pageSlug": "valriede",
+      "name": "ヴァルリーデ",
+      "attribute": "冥",
+      "weaponType": "ウォーリア",
+      "speed": 2883,
+      "availability": "星の導き"
+    },
+    {
+      "id": "wheeler",
+      "pageSlug": "wheeler",
+      "name": "ウィーラ",
+      "attribute": "黄",
+      "weaponType": "ソーサラー",
+      "speed": 3654,
+      "availability": "星の導き"
+    },
+    {
+      "id": "yuni",
+      "pageSlug": "yuni",
+      "name": "ユニ",
+      "attribute": "翠",
+      "weaponType": "ソーサラー",
+      "speed": 2889,
+      "availability": "星の導き"
+    },
+    {
+      "id": "yurdiz",
+      "pageSlug": "yurdiz",
+      "name": "ユルディズ",
+      "attribute": "翠",
+      "weaponType": "ウォーリア",
+      "speed": 3146,
+      "availability": "PU・運命"
+    }
+  ]
+}

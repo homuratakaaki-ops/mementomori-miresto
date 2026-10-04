@@ -609,6 +609,21 @@
       yellow: "黄属性"
     };
 
+    // キャラの表示名・属性の正は data/mementomori-skills.json。
+    // このページは軽量化のため、そこから生成された data/character-index.json を読む。
+    // characters.json はセレクトプールの所属（属性ごとに8体）だけを持つ。
+    const characterIndex = new Map();
+
+    /** プール／天冥の1件から表示名を引く。索引に無いキャラだけ JSON 側の name を使う。 */
+    function characterName(entry) {
+      return characterIndex.get(entry.id)?.name || entry.name || entry.id;
+    }
+
+    /** 天冥キャラの属性ラベル。索引の属性（天/冥）をそのまま使う。 */
+    function characterAttrLabel(entry) {
+      return characterIndex.get(entry.id)?.attribute || entry.attr_label || "";
+    }
+
     const state = {
       config: null,
       characters: null,
@@ -712,7 +727,7 @@
           const isSelected = selected.includes(ch.id);
           table.push({
             id: ch.id,
-            name: ch.name,
+            name: characterName(ch),
             rate: isSelected ? cfg.select_rate_per_char : unselectedRate,
             rarity: "SR",
             type: isSelected ? "selected" : "unselected"
@@ -723,11 +738,11 @@
       for (const sp of cfg.special_chars) {
         table.push({
           id: sp.id,
-          name: sp.name,
+          name: characterName(sp),
           rate: sp.rate,
           rarity: "SR",
           type: "special",
-          attr_label: sp.attr_label
+          attr_label: characterAttrLabel(sp)
         });
       }
 
@@ -922,7 +937,20 @@
         }
       }
 
-      const placeholders = characters.chars.filter((c) => c.name.startsWith("【"));
+      const unresolved = [];
+      for (const entry of characters.chars) {
+        if (!characterIndex.has(entry.id) && !entry.name) unresolved.push(entry.id);
+      }
+      for (const cfg of Object.values(config.gacha_types)) {
+        for (const sp of cfg.special_chars) {
+          if (!characterIndex.has(sp.id) && !sp.name) unresolved.push(sp.id);
+        }
+      }
+      if (unresolved.length > 0) {
+        errors.push(`キャラ索引(data/character-index.json)に無いIDがあります: ${[...new Set(unresolved)].join(", ")}`);
+      }
+
+      const placeholders = characters.chars.filter((c) => characterName(c).startsWith("【"));
       if (placeholders.length > 0) {
         warnings.push(`プレースホルダーキャラが${placeholders.length}体残っています。本番公開前に実名へ差し替えてください。`);
         warnings._hasPlaceholder = true;
@@ -1068,7 +1096,7 @@
           const label = document.createElement("label");
           label.className = `char-option${disabled ? " disabled" : ""}`;
           label.title = disabled ? `1属性あたり最大${cfg.max_select_per_attr}体まで選択できます。` : "";
-          label.innerHTML = `<input type="checkbox" value="${escapeHtml(ch.id)}" ${selected ? "checked" : ""} ${disabled ? "disabled" : ""}> <span>${escapeHtml(ch.name)}</span>`;
+          label.innerHTML = `<input type="checkbox" value="${escapeHtml(ch.id)}" ${selected ? "checked" : ""} ${disabled ? "disabled" : ""}> <span>${escapeHtml(characterName(ch))}</span>`;
           const input = label.querySelector("input");
           input.addEventListener("change", () => {
             const current = state.selectState[attr] || [];
@@ -1294,12 +1322,15 @@
     }
 
     async function init() {
-      const [config, characters] = await Promise.all([
+      const [config, characters, index] = await Promise.all([
         fetch("./data/gacha_config.json").then((res) => res.json()),
-        fetch("./data/characters.json").then((res) => res.json())
+        fetch("./data/characters.json").then((res) => res.json()),
+        fetch("./data/character-index.json").then((res) => res.json())
       ]);
       state.config = config;
       state.characters = characters;
+      characterIndex.clear();
+      for (const character of index.characters || []) characterIndex.set(character.id, character);
 
       const validation = validateOnLoad(config, characters);
       setErrors("#fatalErrors", validation.errors);

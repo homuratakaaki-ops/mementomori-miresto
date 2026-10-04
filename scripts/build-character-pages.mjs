@@ -518,6 +518,41 @@ function buildCharacterPages({ baseData, newsData, terms }) {
   return { written, unchanged, slugs };
 }
 
+/**
+ * ツール用のキャラ索引を data/mementomori-skills.json から生成する。
+ * スピード計算・キャラページは skills.json を直接読むが、
+ * ガチャシミュレーターのような軽量ページに1.3MBを読ませたくないため、
+ * 必要な項目（表示名・属性・スピード）だけを射影した小さなJSONを置く。
+ * キャラ一覧を自前で持つツールはこのファイル（または skills.json）を参照し、
+ * 名前や属性を二重管理しないこと。
+ */
+function buildCharacterIndex({ baseData }) {
+  const characters = (baseData.characters || [])
+    .filter((character) => character.id && character.name)
+    .map((character) => ({
+      id: character.id,
+      pageSlug: character.pageSlug || character.id,
+      name: character.name,
+      attribute: character.attribute,
+      weaponType: character.weaponType,
+      speed: character.speed,
+      availability: character.availability
+    }))
+    .sort((a, b) => a.id.localeCompare(b.id, "en"));
+
+  const path = join(DATA_DIR, "character-index.json");
+  const content = `${JSON.stringify({
+    schema: "character-index/1",
+    note: "data/mementomori-skills.json の characters から自動生成。直接編集しないこと（scripts/build-character-pages.mjs が上書きする）。",
+    generatedFrom: "data/mementomori-skills.json",
+    updatedAt: baseData.updatedAt || null,
+    characters
+  }, null, 2)}
+`;
+
+  return { changed: writeIfChanged(path, content), total: characters.length };
+}
+
 function buildIndexPage({ baseData }) {
   const characters = baseData.characters || [];
   const path = join(PAGES_DIR, "index.html");
@@ -536,10 +571,12 @@ function main() {
   const flowSkills = validateAll({ baseData, terms });
   const pages = buildCharacterPages({ baseData, newsData, terms });
   const index = buildIndexPage({ baseData });
+  const charIndex = buildCharacterIndex({ baseData });
 
   console.log(`キャラページ: ${pages.slugs.length}件 (更新 ${pages.written.length} / 変更なし ${pages.unchanged.length})`);
   console.log(`flow 付きスキル: ${flowSkills}件（検証OK）`);
   console.log(`キャラ一覧: ${index.total}件のカードを生成${index.changed ? " (更新)" : " (変更なし)"}`);
+  console.log(`ツール用キャラ索引: ${charIndex.total}件${charIndex.changed ? " (更新)" : " (変更なし)"}`);
 }
 
 main();
