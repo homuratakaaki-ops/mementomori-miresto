@@ -20,8 +20,11 @@ on:
       # 描画モジュールを個別に並べると追加時に漏れるので js 配下をまとめて見る
       - "js/**"
       - "scripts/**"
-      # index.html は buildTopPage の入力でもある（ニュース欄の雛形）
+      # 生成物でもあるが、手で直す雛形部分があるので入力として見る。
+      # index.html = ニュース欄の雛形 / pages/characters/index.html = 一覧の枠とナビ。
+      # pages/** 全体は入れない（キャラ詳細ページは生成物だけなので循環する）。
       - "index.html"
+      - "pages/characters/index.html"
       - ".github/workflows/daily-build.yml"
   workflow_dispatch:
 
