@@ -95,6 +95,9 @@ function characterPageHtml({ character, metaHtml, skillListHtml, description }) 
   <title>${renderer.escapeHtml(renderer.pageTitle(character))}</title>
   <meta name="description" content="${renderer.escapeHtml(description)}">
   <link rel="canonical" href="${renderer.escapeHtml(renderer.canonicalUrl(character))}">
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <link rel="icon" type="image/png" href="../../assets/miresto/miresto-icon-32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="../../assets/miresto/miresto-icon-180.png">
   <link rel="stylesheet" href="../../assets/character-page.css">
   <script src="../../js/gacha-status.js" defer></script>
   <script src="../../js/render-character.js" defer></script>
