@@ -365,17 +365,12 @@
           <article class="news-item">
             <time class="news-date" datetime="2026-10-04">2026/10/4</time>
             <span class="badge pickup">サイト更新</span>
-            <span class="news-text">全スキルの説明を「いつ・誰に・何が起きる？」の形式に統一し、スキル説明の折りたたみを追加</span>
+            <span class="news-text">ガチャの開催状況を履歴から自動更新する仕組みを導入。「PU中」「復刻待ち」などをPU履歴から毎日計算し直すため、開催終了後も古い表示が残らない</span>
           </article>
           <article class="news-item">
             <time class="news-date" datetime="2026-10-04">2026/10/4</time>
             <span class="badge pickup">サイト更新</span>
-            <span class="news-text">キャラページで専用武器の効果を「いつ・誰に・何が起きる？」に統合表示（第1便60体137スキル）</span>
-          </article>
-          <article class="news-item">
-            <time class="news-date" datetime="2026-10-04">2026/10/4</time>
-            <span class="badge pickup">サイト更新</span>
-            <span class="news-text">専用武器の効果の統合表示を残り59体117スキルへ広げ、全キャラで対応完了</span>
+            <span class="news-text">全119キャラにPU履歴を追加。実装日とピックアップ回数を出典と照合し、日付が分かる回だけを「全N回（日付収録N回）」の形で掲載</span>
           </article>
           <article class="news-item">
             <time class="news-date" datetime="2026-10-04">2026/10/4</time>
@@ -385,7 +380,12 @@
           <article class="news-item">
             <time class="news-date" datetime="2026-10-04">2026/10/4</time>
             <span class="badge pickup">サイト更新</span>
-            <span class="news-text">全119キャラにPU履歴を追加。実装日とピックアップ回数を出典と照合し、日付が分かる回だけを「全N回（日付収録N回）」の形で掲載</span>
+            <span class="news-text">専用武器の効果の統合表示を残り59体117スキルへ広げ、全キャラで対応完了</span>
+          </article>
+          <article class="news-item">
+            <time class="news-date" datetime="2026-10-04">2026/10/4</time>
+            <span class="badge pickup">サイト更新</span>
+            <span class="news-text">キャラページで専用武器の効果を「いつ・誰に・何が起きる？」に統合表示（第1便60体137スキル）</span>
           </article>
       </div>
     </section>
@@ -407,43 +407,7 @@
 
   <script src="./js/render-news.js"></script>
   <script>
-    const existingPages = new Set(["aa_dark","aa_rusted_sky","aine","aishe","alexandra","amleth","amleth_summer","amour","amour_holy_night","armstrong","artie","artoria","asahi","belle","carmilla","cattleya","cerberus","cerberus_candy","chiffon","claudia","cordie","cordie_ringmaster","cordie_summer","dd","dian","eir","elaine","elfriede","eureka","evelyn","fenny","fenrir","fenrir_treasure","fia","fia_trace","flack","florence","florence_twilight","fortina","freycia","giluial","guinevere","hathor","idyne","illya_gods_curse","irene","iris_black","ivy","kaguya","karol","kobell","lean","liebe","lilicotte","lily","liselotte","lucile","luke","lumika","lunalynn","lunalynn_holy_night","matilda","meria","merlin","merlyn","merlyn_winter","mertillier","mifuri","mimi","minasumari","mira","moddey","moddey_summer","moineau","morgana","natasha","natasha_bouquet","nebra","nina","nina_summer","olivia","ophelia","paladea","paula","potpourri","primavera","primavera_summer","priscilla","rea","regina","rishess","rivelia","rosalie_caritas","rusalka","rustica","sabrina","sabrina_cool_breeze","serruria","shiloh","shizu_snow","sivi","soltina","soltina_warm_memory","sonya","sophia","stella","stella_holy_dark_star","tama","tilly","tricksy","tropon","tropon_holy_night","valriede","wheeler","yuni","yurdiz"]);
-    function detailHref(character) {
-      return existingPages.has(character.pageSlug)
-        ? `./pages/characters/${character.pageSlug}.html`
-        : "#";
-    }
-
-    function displayGachaStatus(status) {
-      return status || "復刻待ち";
-    }
-
-    function renderPickup(characters) {
-      const grid = document.querySelector("#pickupGrid");
-      const pickups = characters.filter((character) => ["PU中", "PU予定"].includes(character.gachaStatus));
-
-      if (pickups.length === 0) {
-        grid.innerHTML = `<div class="empty">現在PU中として登録されているキャラはありません。ガチャ情報の更新日を確認してください。</div>`;
-        return;
-      }
-
-      grid.innerHTML = pickups.map((character) => {
-        const hasPage = existingPages.has(character.pageSlug);
-        return `
-          <article class="character-card">
-            <div class="badge-row">
-              <span class="badge">${character.attribute}</span>
-              <span class="badge pickup">${displayGachaStatus(character.gachaStatus)}</span>
-            </div>
-            <div>
-              <h3>${character.name}</h3>
-              <p>${character.catchcopy || character.roleMemo}</p>
-            </div>
-            <a class="button ${hasPage ? "primary" : "disabled"}" href="${detailHref(character)}">${hasPage ? "詳細を見る" : "準備中"}</a>
-          </article>
-        `;
-      }).join("");
-    }
+    // PU中キャラの一覧欄は未実装（復活させるときは開催状況の判定を js/gacha-status.js から取る）。
 
     // 描画の組み立ては js/render-news.js に集約してある（二重管理の禁止）。
     function renderNews(newsData) {

@@ -43,16 +43,17 @@
   }
 
   /**
-   * 表示するニュースを選ぶ。日付の新しい順で、**同じ日付の中は news.json の並び
-   * （作業順）をそのまま保つ**（AGENTS.md「同じ日付の中は作業順に並べる」）。
-   * Array.prototype.sort は安定なので、日付だけで比べれば作業順が崩れない。
+   * 表示するニュースを選ぶ。日付の新しい順で、**同じ日付の中は作業順の逆**
+   * （news.json に後から追記したものが上）にする。
+   * 同じ日に何件も追記した日でも、最後に入れた1件がトップから押し出されないため。
    */
   function selectNews(newsData, limit) {
     return ((newsData && newsData.items) || [])
       .filter((item) => newsKinds.has(item.kind) && item.date && item.text)
-      .slice()
-      .sort((a, b) => String(b.date).localeCompare(String(a.date)))
-      .slice(0, limit === undefined ? NEWS_LIMIT : limit);
+      .map((item, index) => ({ item, index }))
+      .sort((a, b) => String(b.item.date).localeCompare(String(a.item.date)) || b.index - a.index)
+      .slice(0, limit === undefined ? NEWS_LIMIT : limit)
+      .map((entry) => entry.item);
   }
 
   function renderNewsItem(item) {
