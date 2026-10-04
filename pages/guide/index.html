@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="canonical" href="https://memento.musoudc.com/pages/guide/">
   <title>このサイトでできること｜ミレストのメメントモリ攻略・分析DB</title>
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <link rel="apple-touch-icon" href="../../assets/miresto/miresto-icon-180.png">
   <style>
     :root {
       color-scheme: light;
@@ -87,6 +89,32 @@
       line-height: 1.7;
     }
 
+    /* 案内役のミレスト。装飾なので、無くても本文の意味は変わらない。 */
+    .guide-head {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .guide-head > div {
+      flex: 1 1 320px;
+      min-width: 0;
+    }
+
+    .guide-chip {
+      flex: none;
+      width: 96px;
+      height: 96px;
+    }
+
+    @media (max-width: 600px) {
+      .guide-chip {
+        width: 72px;
+        height: 72px;
+      }
+    }
+
     .top-nav,
     .footer-links {
       display: flex;
@@ -150,8 +178,16 @@
   <header>
     <div class="inner">
       <p class="eyebrow">GUIDE</p>
-      <h1>このサイトでできること</h1>
-      <p class="lead">キャラ比較、育成判断、編成検討に使える攻略・分析サイトとしての使い方をまとめます。</p>
+      <div class="guide-head">
+        <div>
+          <h1>このサイトでできること</h1>
+          <p class="lead">キャラ比較、育成判断、編成検討に使える攻略・分析サイトとしての使い方をまとめます。</p>
+        </div>
+        <picture>
+          <source type="image/webp" srcset="../../assets/miresto/miresto-collecting-192.webp">
+          <img class="guide-chip" src="../../assets/miresto/miresto-collecting.png" width="96" height="96" alt="データ収集中" loading="lazy" decoding="async">
+        </picture>
+      </div>
       <nav class="top-nav" aria-label="主要ページ">
         <a class="button" href="/">トップ</a>
         <a class="button" href="../characters/index.html">キャラ一覧</a>

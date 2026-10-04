@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="キャラ比較・ガチャ・育成を数字で分析。メメントモリの無料計算ツールを公開中。">
   <link rel="canonical" href="https://memento.musoudc.com/">
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <link rel="icon" type="image/png" href="./assets/miresto/miresto-icon-32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="./assets/miresto/miresto-icon-180.png">
   <title>ミレストのメメントモリ分析データ室</title>
   <!-- OGP -->
   <meta property="og:type" content="website">
@@ -51,10 +54,46 @@
       align-items: center;
       padding: 34px clamp(16px, 5vw, 64px);
       border-bottom: 1px solid var(--line);
-      background:
-        linear-gradient(90deg, rgba(251, 250, 247, 0.97) 0%, rgba(251, 250, 247, 0.9) 44%, rgba(251, 250, 247, 0.56) 100%),
-        url("./aa_uniform_skill_card.png") right center / auto 96% no-repeat,
-        #f5efe3;
+      background: linear-gradient(180deg, #fbfaf7 0%, #f5efe3 100%);
+    }
+
+    /* 左に見出し、右にミレスト。画像は width/height 属性で場所を先に取るのでCLSが出ない。 */
+    .hero-inner {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: center;
+      gap: clamp(20px, 4vw, 48px);
+    }
+
+    .hero-figure {
+      margin: 0;
+      display: grid;
+      justify-items: center;
+      gap: 10px;
+    }
+
+    .hero-figure img {
+      display: block;
+      width: clamp(400px, 30vw, 440px);
+      height: auto;
+    }
+
+    .hero-caption {
+      text-align: center;
+      line-height: 1.5;
+    }
+
+    .hero-caption b {
+      display: block;
+      color: var(--ink);
+      font-size: 17px;
+      letter-spacing: 0.08em;
+    }
+
+    .hero-caption span {
+      display: block;
+      color: var(--muted);
+      font-size: 13px;
     }
 
     .hero-inner,
@@ -179,6 +218,37 @@
       gap: 8px;
     }
 
+    /* 見出しの右に表情チップ。装飾なので、無くても文章の意味は変わらない。 */
+    .feature-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .feature-head h3 {
+      margin-bottom: 0;
+    }
+
+    .chip {
+      flex: none;
+      width: 72px;
+      height: 72px;
+      margin-top: -4px;
+    }
+
+    .section-head .chip {
+      width: 64px;
+      height: 64px;
+      margin: 0;
+    }
+
+    .section-head .title-with-chip {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
     .feature h3,
     .character-card h3 {
       margin-bottom: 6px;
@@ -280,11 +350,16 @@
 
     @media (max-width: 900px) {
       .hero {
-        min-height: 76vh;
-        background:
-          linear-gradient(180deg, rgba(251, 250, 247, 0.98) 0%, rgba(251, 250, 247, 0.82) 100%),
-          url("./aa_uniform_skill_card.png") right bottom / min(78vw, 520px) auto no-repeat,
-          #f5efe3;
+        min-height: auto;
+      }
+
+      /* 縦に積む。ミレストは見出しの下に回す。 */
+      .hero-inner {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-figure img {
+        width: clamp(240px, 56vw, 280px);
       }
 
       .feature-grid,
@@ -307,18 +382,33 @@
 <body data-prerendered>
   <header class="hero">
     <div class="hero-inner">
-      <p class="eyebrow">MEMENTOMORI FAN DATA ROOM</p>
-      <h1>ミレストのメメントモリ分析データ室</h1>
-      <p class="hero-copy">火力・シールド・行動阻害を数字で比べ、スキルの仕組みを順番どおりに読める非公式データ室です。使う・引くの判断はnoteの評価記事にまとめています。</p>
-      <nav class="actions" aria-label="メインナビ">
-        <a class="button primary" href="./pages/characters/index.html">キャラ一覧</a>
-        <a class="button" href="./compare-prototype.html">スキル比較DB</a>
-        <a class="button" href="./gacha-calc.html">ガチャ計算ツール</a>
-        <a class="button" href="./gacha-simulator.html">ガチャシミュレーター</a>
-        <a class="button" href="./evolution-calc.html">進化必要枚数ツール</a>
-        <a class="button" href="./dedicated-weapon-calc.html">魔水晶・専用武器ツール</a>
-        <a class="button" href="./speed-calc.html">スピード計算ツール</a>
-      </nav>
+      <div class="hero-text">
+        <p class="eyebrow">MEMENTOMORI FAN DATA ROOM</p>
+        <h1>ミレストのメメントモリ分析データ室</h1>
+        <p class="hero-copy">火力・シールド・行動阻害を数字で比べ、スキルの仕組みを順番どおりに読める非公式データ室です。使う・引くの判断はnoteの評価記事にまとめています。</p>
+        <nav class="actions" aria-label="メインナビ">
+          <a class="button primary" href="./pages/characters/index.html">キャラ一覧</a>
+          <a class="button" href="./compare-prototype.html">スキル比較DB</a>
+          <a class="button" href="./gacha-calc.html">ガチャ計算ツール</a>
+          <a class="button" href="./gacha-simulator.html">ガチャシミュレーター</a>
+          <a class="button" href="./evolution-calc.html">進化必要枚数ツール</a>
+          <a class="button" href="./dedicated-weapon-calc.html">魔水晶・専用武器ツール</a>
+          <a class="button" href="./speed-calc.html">スピード計算ツール</a>
+        </nav>
+      </div>
+      <figure class="hero-figure">
+        <picture>
+          <source media="(max-width: 600px)" type="image/webp" srcset="./assets/miresto/miresto-hero-640.webp">
+          <source type="image/webp" srcset="./assets/miresto/miresto-hero.webp">
+          <img src="./assets/miresto/miresto-hero.png" width="1200" height="1492"
+               alt="ミレスト（データと効率が大好きな魔女）"
+               loading="eager" fetchpriority="high" decoding="async">
+        </picture>
+        <figcaption class="hero-caption">
+          <b>ミレスト</b>
+          <span>数字で紐解く、魔女たちの真実。</span>
+        </figcaption>
+      </figure>
     </div>
   </header>
 
@@ -332,17 +422,35 @@
       </div>
       <div class="feature-grid">
         <article class="feature">
-          <h3>スキル比較DB</h3>
+          <div class="feature-head">
+            <h3>スキル比較DB</h3>
+            <picture>
+              <source type="image/webp" srcset="./assets/miresto/miresto-analyzing-192.webp">
+              <img class="chip" src="./assets/miresto/miresto-analyzing.png" width="72" height="72" alt="分析中…" loading="lazy" decoding="async">
+            </picture>
+          </div>
           <p>火力・シールド・行動阻害を横断比較。基本火力と条件MAX火力を分けて、誤解しにくい形で見られます。</p>
           <a class="button primary" href="./compare-prototype.html">比較DBへ</a>
         </article>
         <article class="feature">
-          <h3>キャラ詳細</h3>
+          <div class="feature-head">
+            <h3>キャラ詳細</h3>
+            <picture>
+              <source type="image/webp" srcset="./assets/miresto/miresto-found-192.webp">
+              <img class="chip" src="./assets/miresto/miresto-found.png" width="72" height="72" alt="データ発見！" loading="lazy" decoding="async">
+            </picture>
+          </div>
           <p>全119キャラのスキルを「ひとことで」「いつ・誰に・何が起きる？」「かみ合わせ」の3段で分解。数値と条件はゲーム内の説明文と照合済み。専用武器の変化も同じ画面で確認できます</p>
           <a class="button" href="./pages/characters/index.html">キャラ一覧へ</a>
         </article>
         <article class="feature">
-          <h3>進化必要枚数</h3>
+          <div class="feature-head">
+            <h3>進化必要枚数</h3>
+            <picture>
+              <source type="image/webp" srcset="./assets/miresto/miresto-plan-192.webp">
+              <img class="chip" src="./assets/miresto/miresto-plan.png" width="72" height="72" alt="育成計画大事！" loading="lazy" decoding="async">
+            </picture>
+          </div>
           <p>SRから目標レアリティまでに必要な同名キャラと同属性素材を分けて確認できます。</p>
           <a class="button" href="./evolution-calc.html">進化ツールへ</a>
         </article>
@@ -358,10 +466,21 @@
       <div class="section-head">
         <div>
           <p class="eyebrow">NEWS</p>
-          <h2 id="news-title">ニュース</h2>
+          <div class="title-with-chip">
+            <h2 id="news-title">ニュース</h2>
+            <picture>
+              <source type="image/webp" srcset="./assets/miresto/miresto-efficient-192.webp">
+              <img class="chip" src="./assets/miresto/miresto-efficient.png" width="64" height="64" alt="よし、効率最高！" loading="lazy" decoding="async">
+            </picture>
+          </div>
         </div>
       </div>
       <div class="news-list" id="newsList">
+          <article class="news-item">
+            <time class="news-date" datetime="2026-10-04">2026/10/4</time>
+            <span class="badge pickup">サイト更新</span>
+            <span class="news-text">サイトの顔にミレストを採用。トップの看板と各ページの表情チップ、OGP画像とアイコンを差し替えた</span>
+          </article>
           <article class="news-item">
             <time class="news-date" datetime="2026-10-04">2026/10/4</time>
             <span class="badge pickup">サイト更新</span>
@@ -381,11 +500,6 @@
             <time class="news-date" datetime="2026-10-04">2026/10/4</time>
             <span class="badge pickup">サイト更新</span>
             <span class="news-text">専用武器の効果の統合表示を残り59体117スキルへ広げ、全キャラで対応完了</span>
-          </article>
-          <article class="news-item">
-            <time class="news-date" datetime="2026-10-04">2026/10/4</time>
-            <span class="badge pickup">サイト更新</span>
-            <span class="news-text">キャラページで専用武器の効果を「いつ・誰に・何が起きる？」に統合表示（第1便60体137スキル）</span>
           </article>
       </div>
     </section>
