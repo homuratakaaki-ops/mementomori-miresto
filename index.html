@@ -304,12 +304,12 @@
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6389066329814944"
      crossorigin="anonymous"></script>
 </head>
-<body>
+<body data-prerendered>
   <header class="hero">
     <div class="hero-inner">
       <p class="eyebrow">MEMENTOMORI FAN DATA ROOM</p>
       <h1>ミレストのメメントモリ分析データ室</h1>
-      <p class="hero-copy">数字と感情で、キャラを読む。火力・シールド・行動阻害を比べながら、引く理由と使う理由を整理するための非公式データ室です。</p>
+      <p class="hero-copy">火力・シールド・行動阻害を数字で比べ、スキルの仕組みを順番どおりに読める非公式データ室です。使う・引くの判断はnoteの評価記事にまとめています。</p>
       <nav class="actions" aria-label="メインナビ">
         <a class="button primary" href="./pages/characters/index.html">キャラ一覧</a>
         <a class="button" href="./compare-prototype.html">スキル比較DB</a>
@@ -318,7 +318,6 @@
         <a class="button" href="./evolution-calc.html">進化必要枚数ツール</a>
         <a class="button" href="./dedicated-weapon-calc.html">魔水晶・専用武器ツール</a>
         <a class="button" href="./speed-calc.html">スピード計算ツール</a>
-        <span class="button disabled">マイページは準備中</span>
       </nav>
     </div>
   </header>
@@ -339,7 +338,7 @@
         </article>
         <article class="feature">
           <h3>キャラ詳細</h3>
-          <p>評価、強み、弱み、YouTube評価の変化を1キャラごとに整理します。スキル情報はJSONから自動反映します。</p>
+          <p>全119キャラのスキルを「ひとことで」「いつ・誰に・何が起きる？」「かみ合わせ」の3段で分解。数値と条件はゲーム内の説明文と照合済み。専用武器の変化も同じ画面で確認できます</p>
           <a class="button" href="./pages/characters/index.html">キャラ一覧へ</a>
         </article>
         <article class="feature">
@@ -347,22 +346,48 @@
           <p>SRから目標レアリティまでに必要な同名キャラと同属性素材を分けて確認できます。</p>
           <a class="button" href="./evolution-calc.html">進化ツールへ</a>
         </article>
-        <article class="feature">
-          <h3>感情・創作</h3>
-          <p>キャラ解釈やミニ小説を置く予定の領域です。攻略データとは分けて、読み物として育てます。</p>
-          <span class="button disabled">読み物は準備中</span>
-        </article>
       </div>
     </section>
 
-    <section aria-labelledby="news-title" id="newsSection" hidden>
+    <!--
+      ニュース欄の本文は scripts/build-character-pages.mjs が公開前に書き込む。
+      JSを無効にしても読める状態を保つため、ここは空のまま置いておく。
+      hidden は生成時に外れる（ニュースが0件のときだけ hidden のまま残る）。
+    -->
+    <section aria-labelledby="news-title" id="newsSection">
       <div class="section-head">
         <div>
           <p class="eyebrow">NEWS</p>
           <h2 id="news-title">ニュース</h2>
         </div>
       </div>
-      <div class="news-list" id="newsList"></div>
+      <div class="news-list" id="newsList">
+          <article class="news-item">
+            <time class="news-date" datetime="2026-10-04">2026/10/4</time>
+            <span class="badge pickup">サイト更新</span>
+            <span class="news-text">全スキルの説明を「いつ・誰に・何が起きる？」の形式に統一し、スキル説明の折りたたみを追加</span>
+          </article>
+          <article class="news-item">
+            <time class="news-date" datetime="2026-10-04">2026/10/4</time>
+            <span class="badge pickup">サイト更新</span>
+            <span class="news-text">キャラページで専用武器の効果を「いつ・誰に・何が起きる？」に統合表示（第1便60体137スキル）</span>
+          </article>
+          <article class="news-item">
+            <time class="news-date" datetime="2026-10-04">2026/10/4</time>
+            <span class="badge pickup">サイト更新</span>
+            <span class="news-text">専用武器の効果の統合表示を残り59体117スキルへ広げ、全キャラで対応完了</span>
+          </article>
+          <article class="news-item">
+            <time class="news-date" datetime="2026-10-04">2026/10/4</time>
+            <span class="badge pickup">サイト更新</span>
+            <span class="news-text">ツールのキャラ一覧を最新データと連動。ガチャシミュレーターのキャラ名・属性をキャラページと同じデータから引くようにし、新キャラ追加時の二重管理をなくした</span>
+          </article>
+          <article class="news-item">
+            <time class="news-date" datetime="2026-10-04">2026/10/4</time>
+            <span class="badge pickup">サイト更新</span>
+            <span class="news-text">全119キャラにPU履歴を追加。実装日とピックアップ回数を出典と照合し、日付が分かる回だけを「全N回（日付収録N回）」の形で掲載</span>
+          </article>
+      </div>
     </section>
   </main>
 
@@ -380,26 +405,9 @@
     </div>
   </footer>
 
+  <script src="./js/render-news.js"></script>
   <script>
     const existingPages = new Set(["aa_dark","aa_rusted_sky","aine","aishe","alexandra","amleth","amleth_summer","amour","amour_holy_night","armstrong","artie","artoria","asahi","belle","carmilla","cattleya","cerberus","cerberus_candy","chiffon","claudia","cordie","cordie_ringmaster","cordie_summer","dd","dian","eir","elaine","elfriede","eureka","evelyn","fenny","fenrir","fenrir_treasure","fia","fia_trace","flack","florence","florence_twilight","fortina","freycia","giluial","guinevere","hathor","idyne","illya_gods_curse","irene","iris_black","ivy","kaguya","karol","kobell","lean","liebe","lilicotte","lily","liselotte","lucile","luke","lumika","lunalynn","lunalynn_holy_night","matilda","meria","merlin","merlyn","merlyn_winter","mertillier","mifuri","mimi","minasumari","mira","moddey","moddey_summer","moineau","morgana","natasha","natasha_bouquet","nebra","nina","nina_summer","olivia","ophelia","paladea","paula","potpourri","primavera","primavera_summer","priscilla","rea","regina","rishess","rivelia","rosalie_caritas","rusalka","rustica","sabrina","sabrina_cool_breeze","serruria","shiloh","shizu_snow","sivi","soltina","soltina_warm_memory","sonya","sophia","stella","stella_holy_dark_star","tama","tilly","tricksy","tropon","tropon_holy_night","valriede","wheeler","yuni","yurdiz"]);
-    const newsKinds = new Set(["新キャラ", "PU", "復刻", "星の導き", "イベント", "サイト更新"]);
-
-    function escapeHtml(value) {
-      return String(value ?? "").replace(/[&<>"']/g, (char) => ({
-        "&": "&amp;",
-        "<": "&lt;",
-        ">": "&gt;",
-        "\"": "&quot;",
-        "'": "&#39;"
-      }[char]));
-    }
-
-    function formatDate(value) {
-      const match = String(value || "").match(/^(\d{4})-(\d{2})-(\d{2})$/);
-      if (!match) return value || "";
-      return `${match[1]}/${Number(match[2])}/${Number(match[3])}`;
-    }
-
     function detailHref(character) {
       return existingPages.has(character.pageSlug)
         ? `./pages/characters/${character.pageSlug}.html`
@@ -437,22 +445,14 @@
       }).join("");
     }
 
+    // 描画の組み立ては js/render-news.js に集約してある（二重管理の禁止）。
     function renderNews(newsData) {
-      const items = (newsData.items || [])
-        .filter((item) => newsKinds.has(item.kind) && item.date && item.text)
-        .sort((a, b) => String(b.date).localeCompare(String(a.date)))
-        .slice(0, 5);
-
+      const renderer = window.MirestoRenderNews;
+      if (!renderer) throw new Error("js/render-news.jsが読み込まれていません");
+      const items = renderer.selectNews(newsData);
       if (!items.length) return;
-
       document.querySelector("#newsSection").hidden = false;
-      document.querySelector("#newsList").innerHTML = items.map((item) => `
-        <article class="news-item">
-          <time class="news-date" datetime="${escapeHtml(item.date)}">${escapeHtml(formatDate(item.date))}</time>
-          <span class="badge pickup">${escapeHtml(item.kind)}</span>
-          <span class="news-text">${escapeHtml(item.text)}</span>
-        </article>
-      `).join("");
+      document.querySelector("#newsList").innerHTML = renderer.renderNewsList(items);
     }
 
     async function fetchJson(path, optional = false) {
@@ -464,7 +464,10 @@
       return response.json();
     }
 
+    // 生成済みページ（body[data-prerendered]）では再描画しない（二重描画の防止）。
+    // HTMLに本文が無いときだけ fetch して描画するフォールバックとして働く。
     async function init() {
+      if (document.body.hasAttribute("data-prerendered")) return;
       try {
         const newsData = await fetchJson("./data/news.json", true);
         renderNews(newsData);

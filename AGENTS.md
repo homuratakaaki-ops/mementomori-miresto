@@ -13,8 +13,10 @@
 
 ## キャラページの生成（必須）
 
-- キャラページ（`pages/characters/*.html`）とキャラ一覧（`pages/characters/index.html`）は
+- キャラページ（`pages/characters/*.html`）・キャラ一覧（`pages/characters/index.html`）・
+  **トップページのニュース欄（`index.html`）**は
   **公開前にHTMLへ本文を書き込む事前生成方式**です。JSを無効にしても本文が全部読める状態を保ちます。
+  ニュース欄の選別と組み立ては `js/render-news.js` に集約し、ブラウザ側と二重管理にしません。
 - **`data/` 配下のJSON（`mementomori-skills.json` / `terms.json` / `news.json`）を変更したら、
   必ず `node scripts/build-character-pages.mjs` を実行してHTMLを再生成し、
   JSONと生成されたHTMLを同じコミットに含めること。**

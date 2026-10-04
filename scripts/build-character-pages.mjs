@@ -13,6 +13,7 @@
  * 出力:
  *   pages/characters/{pageSlug}.html  … 全キャラの詳細ページ（上書き）
  *   pages/characters/index.html       … キャラ一覧のカード部分を差し替え
+ *   index.html                        … トップページのニュース欄を差し替え
  *
  * data/*.json を変更したら必ず実行し、JSONとHTMLを同じコミットに含めること。
  */
@@ -29,6 +30,7 @@ const PAGES_DIR = join(ROOT, "pages", "characters");
 const renderer = require(join(ROOT, "js", "render-character.js"));
 const indexRenderer = require(join(ROOT, "js", "render-character-index.js"));
 const gachaStatus = require(join(ROOT, "js", "gacha-status.js"));
+const newsRenderer = require(join(ROOT, "js", "render-news.js"));
 
 // 開催状況の判定に使う「今日」。1回のビルド内で全ページ同じ日付になるように
 // ここで1度だけ決める（日付が変わる瞬間にビルドが走っても食い違わないため）。
@@ -648,6 +650,36 @@ function buildCharacterIndex({ baseData }) {
   return { changed: writeIfChanged(path, `${JSON.stringify(payload, null, 2)}\n`), total: characters.length };
 }
 
+/**
+ * トップページ（ROOT の index.html）のニュース欄を公開前に書き込む。
+ * JSを無効にしても直近のお知らせが読める状態を保つ。
+ * 選別と組み立ては js/render-news.js に集約してある（ブラウザ側と同じモジュール）。
+ */
+function buildTopPage({ newsData }) {
+  const path = join(ROOT, "index.html");
+  const html = readFileSync(path, "utf8");
+  const items = newsRenderer.selectNews(newsData);
+  const listHtml = items.length ? `${newsRenderer.renderNewsList(items)}\n      ` : "";
+
+  const listPattern = /(<div class="news-list" id="newsList">)[\s\S]*?(<\/div>)/;
+  if (!listPattern.test(html)) throw new Error("index.html の差し替え対象が見つかりません: #newsList");
+
+  let output = html.replace(listPattern, (match, open, close) => `${open}${listHtml}${close}`);
+
+  // ニュースが1件以上あるときは hidden を外す（0件なら節ごと隠したままにする）
+  const sectionPattern = /<section([^>]*)\sid="newsSection"([^>]*)>/;
+  if (!sectionPattern.test(output)) throw new Error("index.html の差し替え対象が見つかりません: #newsSection");
+  output = output.replace(sectionPattern, (match, before, after) => {
+    const attrs = `${before} id="newsSection"${after}`.replace(/\s*\bhidden\b/g, "");
+    return `<section${attrs}${items.length ? "" : " hidden"}>`;
+  });
+
+  // 本文を書き込んだ目印。ブラウザ側はこれを見て再描画しない。
+  output = output.replace(/<body(?![^>]*\sdata-prerendered)([^>]*)>/, (match, attrs) => `<body${attrs} data-prerendered>`);
+
+  return { changed: writeIfChanged(path, output), total: items.length };
+}
+
 function buildIndexPage({ baseData }) {
   const characters = baseData.characters || [];
   const path = join(PAGES_DIR, "index.html");
@@ -667,11 +699,13 @@ function main() {
   const pages = buildCharacterPages({ baseData, newsData, terms });
   const index = buildIndexPage({ baseData });
   const charIndex = buildCharacterIndex({ baseData });
+  const topPage = buildTopPage({ newsData });
 
   console.log(`キャラページ: ${pages.slugs.length}件 (更新 ${pages.written.length} / 変更なし ${pages.unchanged.length})`);
   console.log(`flow 付きスキル: ${flowSkills}件（検証OK）`);
   console.log(`キャラ一覧: ${index.total}件のカードを生成${index.changed ? " (更新)" : " (変更なし)"}`);
   console.log(`ツール用キャラ索引: ${charIndex.total}件${charIndex.changed ? " (更新)" : " (変更なし)"}`);
+  console.log(`トップのニュース欄: ${topPage.total}件${topPage.changed ? " (更新)" : " (変更なし)"}`);
   console.log(`開催状況の判定日(JST): ${TODAY} / 生成時刻: ${GENERATED_AT}`);
   const ongoing = (baseData.characters || []).filter((character) => gachaStatus.ongoingEntry(character, TODAY));
   console.log(`開催中と判定: ${ongoing.length}体${ongoing.length ? ` (${ongoing.map((c) => `${c.name}=${gachaStatus.gachaStatusText(c, TODAY)}`).join(" / ")})` : ""}`);
