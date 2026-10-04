@@ -308,8 +308,8 @@ main {
 .flow-effects {
   display: grid;
   gap: 8px;
-  margin: 0;
-  padding: 0;
+  margin: 0 -6px;
+  padding: 0 6px;
   list-style: none;
 }
 
@@ -412,7 +412,12 @@ main {
 .flow-block-excl .flow-when { background: #f3f6fb; }
 .flow-block-excl .flow-mode { color: var(--navy); }
 
-.term { display: inline; }
+.term {
+  display: inline-block;
+  vertical-align: baseline;
+}
+
+.term[open] { display: block; }
 
 .term summary {
   display: inline;
