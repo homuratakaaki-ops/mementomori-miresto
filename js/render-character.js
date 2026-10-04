@@ -193,7 +193,8 @@
    * 専用で合計倍率が変わるときの添え書き。damage.exclusiveLv{N}Total の値をそのまま出す
    * （専用の合計表示とデータを食い違わせないため、ここでは計算しない）。
    */
-  function exclusiveTotalSuffix(skill, effect, lv) {
+  function exclusiveTotalSuffix(skill, effect, lv, item) {
+    if (item && item.condition && !item.total) return "";
     if (!effect || effect.damageTotal !== "base") return "";
     const damage = skill.damage;
     if (!damage || damage.nonAttackMultiplier) return "";
@@ -211,7 +212,7 @@
   }
 
   /** 専用で増える効果の行。同じ「いつ」＋同じ「誰に」の枠の中に1行として置く。 */
-  function renderExclusiveAddLine(item, terms) {
+  function renderExclusiveAddLine(skill, item, terms) {
     const before = [
       item.condition ? `<span class="flow-chip cond">${highlightRatios(item.condition)}</span>` : "",
       item.chance ? `<span class="flow-chip">確率${escapeHtml(item.chance)}</span>` : ""
@@ -221,7 +222,9 @@
       item.duration ? `<span class="flow-chip">${escapeHtml(item.duration)}</span>` : "",
       item.note ? `<span class="flow-note">${escapeHtml(item.note)}</span>` : ""
     ].filter(Boolean).join("");
-    return `<li class="flow-excl-line">${exclusiveChip(item.lv)}<span class="flow-excl-body">${before}${renderTermText(item, terms)}${after}</span><span class="flow-excl-tail">を追加</span></li>`;
+    // 専用Lv2 で増えた効果を専用Lv3 がさらに書き換える場合は、その行の中に注記を出す
+    const nested = (item.exclusive || []).length ? exclusiveChangeNotes(skill, item, "other") + exclusiveChangeNotes(skill, item, "multiplier") : "";
+    return `<li class="flow-excl-line">${exclusiveChip(item.lv)}<span class="flow-excl-body">${before}${renderTermText(item, terms)}${after}</span><span class="flow-excl-tail">を追加</span>${nested}</li>`;
   }
 
   /** 効果の倍率・継続・確率・効果量が専用で置き換わるときの注記。 */
@@ -230,7 +233,7 @@
       .filter((item) => item.kind !== "add")
       .filter((item) => (kind === "multiplier" ? Boolean(item.multiplier) : !item.multiplier))
       .map((item) => {
-        if (item.multiplier) return exclusiveChange(item.lv, highlightRatios(item.multiplier), exclusiveTotalSuffix(skill, effect, item.lv), item.condition);
+        if (item.multiplier) return exclusiveChange(item.lv, highlightRatios(item.multiplier), exclusiveTotalSuffix(skill, effect, item.lv, item), item.condition);
         if (item.duration) return exclusiveChange(item.lv, `継続が${escapeHtml(item.duration)}`, "", item.condition);
         if (item.chance) return exclusiveChange(item.lv, `確率が${escapeHtml(item.chance)}`, "", item.condition);
         return exclusiveChange(item.lv, highlightRatios(item.text || ""), "", item.condition);
@@ -260,7 +263,7 @@
     const line = `<li${effect.condition ? " class=\"flow-cond-line\"" : ""}>${before}${renderTermText(effect, terms)}${after}</li>`;
     const adds = (effect.exclusive || [])
       .filter((item) => item.kind === "add")
-      .map((item) => renderExclusiveAddLine(item, terms))
+      .map((item) => renderExclusiveAddLine(skill, item, terms))
       .join("");
     return `${line}${adds}`;
   }

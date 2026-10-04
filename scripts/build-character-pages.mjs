@@ -262,7 +262,10 @@ function exclusiveFlowLevels(skill) {
     if (block.exclusiveLv) levels.add(Number(block.exclusiveLv));
     for (const item of block.exclusiveTarget || []) levels.add(Number(item.lv));
     for (const effect of block.effects || []) {
-      for (const item of effect.exclusive || []) levels.add(Number(item.lv));
+      for (const item of effect.exclusive || []) {
+        levels.add(Number(item.lv));
+        for (const nested of item.exclusive || []) levels.add(Number(nested.lv));
+      }
     }
   }
   return levels;
@@ -318,7 +321,8 @@ function validateExclusive(skill, errors) {
         const words = [item.text, item.multiplier, item.duration, item.chance, item.note].filter(Boolean).join(" ");
         if (/→|もし専用/.test(words)) errors.push(`${label}: 専用Lv${item.lv} の文言に矢印または「もし専用」が入っている`);
         // 専用の合計表示が damage.exclusiveLvNTotal と一致すること
-        if (item.kind === "change" && item.multiplier && effect.damageTotal === "base" && skill.damage && !skill.damage.nonAttackMultiplier) {
+        const checkTotal = !item.condition || item.total;
+        if (checkTotal && item.kind === "change" && item.multiplier && effect.damageTotal === "base" && skill.damage && !skill.damage.nonAttackMultiplier) {
           const expected = skill.damage[`exclusiveLv${item.lv}Total`];
           const computed = exclusiveMultiplierTotal(skill, item);
           if (computed !== null && expected && computed !== expected) {
