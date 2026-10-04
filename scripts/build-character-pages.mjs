@@ -167,14 +167,14 @@ const FLOW_WHEN_PATTERNS = [
 const FLOW_MODES = new Set(["sequence", "simultaneous", "passive", "conditional", "release"]);
 
 // 倍率チップは「チップ単独で意味が通るダメージ倍率」だけに使う（回復量・バフ量は text 側）。
-const FLOW_MULTIPLIER_PATTERN = /^(?:攻撃力×|物理|魔法|腕力×|魔力×|技力×)[0-9]+(?:\.[0-9]+)?%(?:×[0-9]+回)?(?:（[0-9]+(?:\.[0-9]+)?%×[0-9]+(?:回)?）)?$/;
+const FLOW_MULTIPLIER_PATTERN = /^(?:攻撃力×|物理|魔法|腕力×|魔力×|技力×)[0-9]+(?:\.[0-9]+)?%(?:×[0-9]+回)?(?:（[0-9]+(?:\.[0-9]+)?%×[0-9]+(?:\.[0-9]+)?(?:回)?）)?$/;
 
 /**
  * 旧「継続」カードの継続ターンを取り出す（例: "睡眠1T / 再生4ターン" → ["1", "4"]）。
  * 「Nターン目」「N T 終了時」「Nターンまで」は継続ではなく時点なので数えない。
  */
 function durationTurns(duration) {
-  return [...String(duration || "").matchAll(/([0-9]+)\s*(?:T(?![a-zA-Z])|ターン)(?!目|終了時|開始時|まで)/g)].map((match) => match[1]);
+  return [...String(duration || "").matchAll(/([0-9]+)\s*(?:T(?![a-zA-Z])|ターン)(?!目|終了時|開始時|まで|に[0-9]+回)/g)].map((match) => match[1]);
 }
 
 function validateFlow(skill, errors) {
@@ -326,7 +326,8 @@ function conditionMaxExplanation(skill) {
   for (const m of text.matchAll(/隣接する敵([0-9]+)体/g)) counts.add(Number(m[1]) + 1);
   for (const m of text.matchAll(/最大([0-9]+)\s*回/g)) counts.add(Number(m[1]));
   // 本体と追加攻撃が同じ倍率のスキル用に、回数どうしの和も候補に入れる
-  for (const a of [...counts]) for (const b of [...counts]) counts.add(a + b);
+  const explicit = [...counts].filter((n) => n !== 1);
+  for (const a of explicit) for (const b of explicit) counts.add(a + b);
   const casts = new Set([1]);
   for (const m of text.matchAll(/再発動[^。]{0,16}?([0-9]+)\s*回/g)) casts.add(Number(m[1]) + 1);
   for (const m of text.matchAll(/([0-9]+)\s*回(?:まで)?再発動/g)) casts.add(Number(m[1]) + 1); // 「1回再発動」の語順

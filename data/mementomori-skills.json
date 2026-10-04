@@ -4602,6 +4602,28 @@
         {
           "text": "クリティカル耐性減少と睡眠は1つの弱体扱い。対象が攻撃を受けると解除"
         }
+      ],
+      "flow": [
+        {
+          "when": "攻撃時",
+          "mode": "sequence",
+          "order": 1,
+          "target": "正面の敵と隣接する敵1体",
+          "effects": [
+            {
+              "text": "物理攻撃",
+              "multiplier": "物理880%",
+              "damageTotal": "base"
+            },
+            {
+              "text": "クリティカル耐性40%減少と睡眠を付与",
+              "term": "睡眠",
+              "chance": "70%",
+              "duration": "2ターン",
+              "note": "2つで1つの弱体扱い。対象が攻撃を受けると解除"
+            }
+          ]
+        }
       ]
     },
     {
@@ -4651,6 +4673,32 @@
           "text": "条件を満たす敵がいなければ通常攻撃になる"
         }
       ],
+      "flow": [
+        {
+          "when": "攻撃時",
+          "mode": "sequence",
+          "order": 1,
+          "target": "行動阻害中の敵全体（最大5体）",
+          "effects": [
+            {
+              "text": "物理攻撃",
+              "multiplier": "物理880%",
+              "damageTotal": "base",
+              "note": "必ず命中する"
+            },
+            {
+              "text": "出血を付与",
+              "term": "出血",
+              "duration": "1ターン",
+              "note": "行動開始時に自身の攻撃力50%のダメージ"
+            },
+            {
+              "text": "通常攻撃になる",
+              "condition": "条件を満たす敵がいなければ"
+            }
+          ]
+        }
+      ],
       "synergyNotes": [
         {
           "text": "気絶・睡眠などの行動阻害を撒く味方がいるほど対象が増える。S1の睡眠が自給源でもあるが、S1の睡眠は被弾で解除されるため攻撃順に注意。根拠: 対象条件が「行動阻害中の敵」のため"
@@ -4683,6 +4731,27 @@
         },
         {
           "text": "行動阻害中の敵がいなければ、自身に攻撃力500%のシールドを1ターン付与(解除不可)"
+        }
+      ],
+      "flow": [
+        {
+          "when": "ターン開始時",
+          "mode": "simultaneous",
+          "target": "自身",
+          "effects": [
+            {
+              "text": "スピード30%増加・攻撃力60%増加",
+              "condition": "行動阻害中の敵がいれば",
+              "duration": "1ターン",
+              "note": "解除不可"
+            },
+            {
+              "text": "攻撃力500%分のシールドを付与",
+              "condition": "行動阻害中の敵がいなければ",
+              "duration": "1ターン",
+              "note": "解除不可"
+            }
+          ]
         }
       ]
     },
@@ -4729,6 +4798,27 @@
           "text": "30%の確率で睡眠を1ターン付与",
           "term": "睡眠"
         }
+      ],
+      "flow": [
+        {
+          "when": "攻撃時",
+          "mode": "sequence",
+          "order": 1,
+          "target": "ランダムな敵2体",
+          "effects": [
+            {
+              "text": "強化した通常攻撃",
+              "multiplier": "物理200%",
+              "damageTotal": "base"
+            },
+            {
+              "text": "睡眠を付与",
+              "term": "睡眠",
+              "chance": "30%",
+              "duration": "1ターン"
+            }
+          ]
+        }
       ]
     },
     {
@@ -4757,8 +4847,8 @@
         "exclusiveLv1Total": 1800,
         "exclusiveLv2Total": 1800,
         "exclusiveLv3Total": 1800,
-        "conditionMaxTotal": 2700,
-        "conditionMaxNote": "overlay の single=600(専用Lv1値)が誤り。base の専用Lv欄未入力・条件MAX=2025 も誤り(専用Lv1込みで1800×1.5=2700)",
+        "conditionMaxTotal": 2025,
+        "conditionMaxNote": "対象がスナイパーならダメージ1.5倍。1350%×1.5倍=2025（専用武器なし・スキルLv最大。専用Lv1込みなら600%×3体×1.5倍=2700）",
         "powerType": "対スナイパー特効",
         "maxStacks": null,
         "realityRank": "中",
@@ -4775,6 +4865,33 @@
         },
         {
           "text": "スナイパー以外なら70%の確率でスピード15%減少(2ターン)"
+        }
+      ],
+      "flow": [
+        {
+          "when": "攻撃時",
+          "mode": "sequence",
+          "order": 1,
+          "target": "ランダムな敵3体",
+          "effects": [
+            {
+              "text": "物理攻撃",
+              "multiplier": "物理450%",
+              "damageTotal": "base"
+            },
+            {
+              "text": "ダメージが1.5倍になり、必ず命中する",
+              "condition": "対象がスナイパーなら",
+              "multiplier": "物理675%（450%×1.5）",
+              "damageTotal": "conditionMax"
+            },
+            {
+              "text": "スピード15%減少を付与",
+              "condition": "対象がスナイパー以外なら",
+              "chance": "70%",
+              "duration": "2ターン"
+            }
+          ]
         }
       ]
     },
@@ -4821,6 +4938,27 @@
           "text": "自身と味方が攻撃を受けた回数1回につき+20%(最大1040%)"
         }
       ],
+      "flow": [
+        {
+          "when": "攻撃時",
+          "mode": "sequence",
+          "order": 1,
+          "target": "ランダムな敵3体",
+          "effects": [
+            {
+              "text": "物理攻撃",
+              "multiplier": "物理640%",
+              "damageTotal": "base"
+            },
+            {
+              "text": "ダメージが+20%され、最大でこの倍率に変わる",
+              "condition": "自身と味方が攻撃を受けた回数1回につき",
+              "multiplier": "物理1040%",
+              "damageTotal": "conditionMax"
+            }
+          ]
+        }
+      ],
       "synergyNotes": [
         {
           "text": "被弾の多い持久戦・タンク編成ほど伸びる。根拠: 倍率の参照が「味方側の被攻撃回数」のため"
@@ -4838,7 +4976,7 @@
       "subCategory": "ステルス",
       "target": "バトル開始時、自身と攻撃力最高の味方",
       "multiplierText": "ステルス2T / 多重バリア1層",
-      "duration": "バトル開始時、自身と攻撃力最高の味方に2ターンステルス / 4ターンに1回発動",
+      "duration": "ステルス2T / 多重バリアは4ターンに1回",
       "ct": null,
       "condition": "バトル開始時、自身と攻撃力最高の味方に2ターンステルス / 被攻撃でHP50%以下または戦闘不能時にステルス解除 / 自身が攻撃を受けてHP50%以下になった時、自身に多重バリア1層 / 最大HP10%以上の被ダメ時に1層消費して無効化 / 4ターンに1回発動",
       "exclusiveWeapon": "Lv2: 多重バリア1層→3層",
@@ -4859,6 +4997,40 @@
         },
         {
           "text": "多重バリア付与は4ターンに1回発動"
+        }
+      ],
+      "flow": [
+        {
+          "when": "バトル開始時",
+          "mode": "simultaneous",
+          "target": "自身と攻撃力が最も高い味方",
+          "effects": [
+            {
+              "text": "ステルスを付与",
+              "duration": "2ターン"
+            }
+          ]
+        },
+        {
+          "when": "自身が被攻撃でHP50%以下になるか戦闘不能になったとき",
+          "mode": "release",
+          "target": "自身と攻撃力が最も高い味方",
+          "effects": [
+            {
+              "text": "付与したステルスを解除"
+            }
+          ]
+        },
+        {
+          "when": "自身が攻撃を受けてHP50%以下になったとき",
+          "mode": "conditional",
+          "target": "自身",
+          "effects": [
+            {
+              "text": "多重バリア1層を付与",
+              "note": "最大HP10%以上の被弾で1層消費。4ターンに1回発動"
+            }
+          ]
         }
       ]
     },
@@ -4885,6 +5057,19 @@
       "steps": [
         {
           "text": "自身以外の味方が戦闘不能になるたび攻撃力+50%(最大2スタック・合計100%、解除不可)"
+        }
+      ],
+      "flow": [
+        {
+          "when": "自身以外の味方が戦闘不能になったとき",
+          "mode": "conditional",
+          "target": "自身",
+          "effects": [
+            {
+              "text": "攻撃力を50%増加",
+              "note": "最大2スタック・合計100%、解除不可"
+            }
+          ]
         }
       ]
     },
@@ -21429,6 +21614,34 @@
           "text": "70%の確率で脱力を4ターン付与(攻撃力30%減少)",
           "term": "脱力"
         }
+      ],
+      "flow": [
+        {
+          "when": "攻撃時",
+          "mode": "sequence",
+          "order": 1,
+          "target": "ランダムな敵3体",
+          "effects": [
+            {
+              "text": "物理攻撃",
+              "multiplier": "物理480%",
+              "damageTotal": "base"
+            },
+            {
+              "text": "物理攻撃のダメージが変わる",
+              "condition": "7ターン目以降は",
+              "multiplier": "物理1920%",
+              "damageTotal": "conditionMax"
+            },
+            {
+              "text": "脱力を付与",
+              "term": "脱力",
+              "chance": "70%",
+              "duration": "4ターン",
+              "note": "攻撃力30%減少"
+            }
+          ]
+        }
       ]
     },
     {
@@ -21473,6 +21686,33 @@
         {
           "text": "70%の確率で浸食を2ターン付与(毎ターン行動開始時、このスキルの総与ダメージ10%のダメージ)"
         }
+      ],
+      "flow": [
+        {
+          "when": "攻撃時",
+          "mode": "sequence",
+          "order": 1,
+          "target": "ランダムな敵5体",
+          "effects": [
+            {
+              "text": "物理攻撃",
+              "multiplier": "物理520%",
+              "damageTotal": "base"
+            },
+            {
+              "text": "物理攻撃のダメージが変わる",
+              "condition": "7ターン目以降は",
+              "multiplier": "物理2080%",
+              "damageTotal": "conditionMax"
+            },
+            {
+              "text": "浸食を付与",
+              "chance": "70%",
+              "duration": "2ターン",
+              "note": "毎ターン行動開始時、このスキルの総与ダメージ10%のダメージ"
+            }
+          ]
+        }
       ]
     },
     {
@@ -21501,6 +21741,23 @@
         },
         {
           "text": "発動後8回行動まで再発動しない"
+        }
+      ],
+      "flow": [
+        {
+          "when": "ターン開始時",
+          "mode": "simultaneous",
+          "target": "スピードが最も高い味方",
+          "effects": [
+            {
+              "text": "多重バリアを1層付与",
+              "note": "解除不可。発動後、8回行動が終わるまで再発動しない"
+            },
+            {
+              "text": "4層になる",
+              "condition": "対象が紅属性または翠属性なら"
+            }
+          ]
         }
       ]
     },
@@ -21533,6 +21790,41 @@
         },
         {
           "text": "7ターン目開始時、自身のスキルCTを0にする"
+        }
+      ],
+      "flow": [
+        {
+          "when": "常時",
+          "mode": "passive",
+          "target": "自身",
+          "effects": [
+            {
+              "text": "受けるダメージを20%減少",
+              "note": "解除不可"
+            }
+          ]
+        },
+        {
+          "when": "バトル開始時",
+          "mode": "simultaneous",
+          "target": "自身",
+          "effects": [
+            {
+              "text": "HPドレインを80%増加",
+              "duration": "6ターン",
+              "note": "解除不可"
+            }
+          ]
+        },
+        {
+          "when": "7ターン目開始時",
+          "mode": "simultaneous",
+          "target": "自身",
+          "effects": [
+            {
+              "text": "自身のスキルCTを0にする"
+            }
+          ]
         }
       ],
       "synergyNotes": [
@@ -22027,6 +22319,40 @@
           "text": "70%の確率で攻撃力が最も高い敵に気絶を1ターン付与",
           "term": "気絶"
         }
+      ],
+      "flow": [
+        {
+          "when": "攻撃時",
+          "mode": "sequence",
+          "order": 1,
+          "target": "ランダムな敵3体",
+          "effects": [
+            {
+              "text": "魔法攻撃",
+              "multiplier": "魔法420%",
+              "damageTotal": "base"
+            },
+            {
+              "text": "クリティカル率30%減少を付与",
+              "chance": "70%",
+              "duration": "3ターン"
+            }
+          ]
+        },
+        {
+          "when": "攻撃時",
+          "mode": "sequence",
+          "order": 2,
+          "target": "攻撃力が最も高い敵",
+          "effects": [
+            {
+              "text": "気絶を付与",
+              "term": "気絶",
+              "chance": "70%",
+              "duration": "1ターン"
+            }
+          ]
+        }
       ]
     },
     {
@@ -22071,6 +22397,34 @@
         {
           "text": "ランダムな敵に魔法530%×4回"
         }
+      ],
+      "flow": [
+        {
+          "when": "攻撃前",
+          "mode": "sequence",
+          "order": 1,
+          "target": "攻撃力が高い味方2体",
+          "effects": [
+            {
+              "text": "攻撃力を50%増加",
+              "condition": "7ターン目以降なら",
+              "duration": "5ターン"
+            }
+          ]
+        },
+        {
+          "when": "攻撃時",
+          "mode": "sequence",
+          "order": 2,
+          "target": "ランダムな敵4体",
+          "effects": [
+            {
+              "text": "魔法攻撃",
+              "multiplier": "魔法530%",
+              "damageTotal": "base"
+            }
+          ]
+        }
       ]
     },
     {
@@ -22096,6 +22450,19 @@
       "steps": [
         {
           "text": "バトル開始時、自身と隣接する味方2体のクリティカル耐性+15%(解除不可)"
+        }
+      ],
+      "flow": [
+        {
+          "when": "バトル開始時",
+          "mode": "simultaneous",
+          "target": "自身と隣接する味方2体",
+          "effects": [
+            {
+              "text": "クリティカル耐性を15%増加",
+              "note": "解除不可"
+            }
+          ]
         }
       ]
     },
@@ -22125,6 +22492,29 @@
         },
         {
           "text": "攻撃を受けたとき、ダメージを50%遮断"
+        }
+      ],
+      "flow": [
+        {
+          "when": "バトル開始時",
+          "mode": "simultaneous",
+          "target": "自身",
+          "effects": [
+            {
+              "text": "最大HPを100%増加",
+              "note": "解除不可"
+            }
+          ]
+        },
+        {
+          "when": "攻撃を受けたとき",
+          "mode": "conditional",
+          "target": "自身",
+          "effects": [
+            {
+              "text": "ダメージを50%遮断"
+            }
+          ]
         }
       ]
     },
