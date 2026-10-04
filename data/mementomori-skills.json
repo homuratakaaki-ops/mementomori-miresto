@@ -3160,6 +3160,7 @@
       "pickupHistory": [
         {
           "date": "2026-09-15",
+          "endDate": "2026-09-30",
           "kind": "PU",
           "round": 1
         }
@@ -3183,6 +3184,7 @@
       "pickupHistory": [
         {
           "date": "2026-09-30",
+          "endDate": "2026-10-15",
           "kind": "PU",
           "round": 1
         }
@@ -3206,6 +3208,7 @@
       "pickupHistory": [
         {
           "date": "2026-08-31",
+          "endDate": "2026-09-24",
           "kind": "PU",
           "round": 1
         }
