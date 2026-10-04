@@ -2589,7 +2589,7 @@
         "hitCount": 4,
         "baseTotal": 1920,
         "exclusiveLv1Total": 1920,
-        "exclusiveLv2Total": 3150,
+        "exclusiveLv2Total": 2880,
         "exclusiveLv3Total": 3150,
         "conditionMaxTotal": 3840,
         "conditionMaxNote": "クリティカルで攻撃回数が増え最大8回。480%×8回=3840（専用武器なし・スキルLv最大）",
@@ -2610,22 +2610,54 @@
       ],
       "flow": [
         {
-          "when": "攻撃時",
+          "when": "攻撃前",
           "mode": "sequence",
           "order": 1,
+          "exclusiveLv": 1,
+          "target": "ランダムな敵",
+          "effects": [
+            {
+              "text": "クリティカル耐性率を40%減少",
+              "duration": "1ターン"
+            }
+          ]
+        },
+        {
+          "when": "攻撃時",
+          "mode": "sequence",
+          "order": 2,
           "target": "ランダムな敵",
           "effects": [
             {
               "text": "物理攻撃",
               "multiplier": "物理480%×4回",
-              "damageTotal": "base"
+              "damageTotal": "base",
+              "exclusive": [
+                {
+                  "lv": 2,
+                  "kind": "change",
+                  "multiplier": "物理480%×6回"
+                },
+                {
+                  "lv": 3,
+                  "kind": "change",
+                  "multiplier": "物理525%×6回"
+                }
+              ]
             },
             {
               "text": "攻撃回数が1回増える",
               "condition": "クリティカルが出るたび",
               "note": "最大8回",
               "multiplier": "物理480%×8回",
-              "damageTotal": "conditionMax"
+              "damageTotal": "conditionMax",
+              "exclusive": [
+                {
+                  "lv": 2,
+                  "kind": "change",
+                  "text": "合計で最大10回"
+                }
+              ]
             }
           ]
         }
@@ -2635,6 +2667,11 @@
           "text": "クリティカル率を上げる支援(シロS1、マーリンS3等)と噛み合い、クリ耐性の高い敵が相手だと伸びにくい。",
           "reason": "攻撃回数の増加条件がクリティカル発生のため"
         }
+      ],
+      "exclusiveIntegrated": [
+        1,
+        2,
+        3
       ]
     },
     {
@@ -2690,7 +2727,14 @@
             {
               "text": "物理攻撃",
               "multiplier": "物理510%",
-              "damageTotal": "base"
+              "damageTotal": "base",
+              "exclusive": [
+                {
+                  "lv": 3,
+                  "kind": "change",
+                  "multiplier": "物理525%"
+                }
+              ]
             }
           ]
         },
@@ -2708,6 +2752,9 @@
             }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        3
       ]
     },
     {
@@ -4888,7 +4935,7 @@
       "duration": "言霊スタック付与",
       "ct": 4,
       "condition": "言霊3スタック以上なら倍率630%。黄属性味方条件で付与スタック数増加",
-      "exclusiveWeapon": "専用Lv1: 攻撃回数4→6回。専用Lv3: 命中率増加4→5%",
+      "exclusiveWeapon": "専用Lv1: 物理攻撃の回数が6回になる。専用Lv3: 言霊のおまじない1スタックにつき増加する命中率が5%になる",
       "compareMemo": "スタック到達前後で火力が大きく変わる",
       "noteUrl": "",
       "imageUrl": "",
@@ -4948,7 +4995,14 @@
             {
               "text": "物理攻撃",
               "multiplier": "物理210%×4回",
-              "damageTotal": "base"
+              "damageTotal": "base",
+              "exclusive": [
+                {
+                  "lv": 1,
+                  "kind": "change",
+                  "multiplier": "物理210%×6回"
+                }
+              ]
             },
             {
               "text": "物理攻撃のダメージが変わる",
@@ -4964,6 +5018,9 @@
           "text": "黄属性で染めるほど言霊が早く貯まる。",
           "reason": "スタック付与数の条件が黄属性味方の数のため"
         }
+      ],
+      "exclusiveIntegrated": [
+        1
       ]
     },
     {
@@ -5073,10 +5130,20 @@
             {
               "text": "クリティカル耐性40%増加・防御力と物理防御力100%増加",
               "duration": "4ターン",
-              "note": "発動後、4回行動が終わるまで再発動しない"
+              "note": "発動後、4回行動が終わるまで再発動しない",
+              "exclusive": [
+                {
+                  "lv": 2,
+                  "kind": "change",
+                  "text": "クリティカル耐性の増加が60%"
+                }
+              ]
             }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        2
       ]
     },
     {
@@ -5910,7 +5977,7 @@
       "duration": "70%で2ターンクリ耐性率40%減少 / 70%で2ターン睡眠",
       "ct": 4,
       "condition": "70%で2ターンクリ耐性率40%減少 / 70%で2ターン睡眠 / クリ耐性減少と睡眠は1つの弱体扱い / 対象が攻撃を受けると解除",
-      "exclusiveWeapon": "Lv1: 対象が隣接2体に増加 / Lv3: 物理880%→980%",
+      "exclusiveWeapon": "専用Lv1: 対象が正面の敵とそれに隣接する敵2体になる。専用Lv3: 物理攻撃が攻撃力×980%になる",
       "compareMemo": "正面の敵と隣接する敵2体に物理980% / 70%で2ターンクリ耐性率40%減少 / 70%で2ターン睡眠 / クリ耐性減少と睡眠は1つの弱体扱い / 対象が攻撃を受けると解除",
       "noteUrl": "",
       "imageUrl": "",
@@ -5953,7 +6020,15 @@
             {
               "text": "物理攻撃",
               "multiplier": "物理880%",
-              "damageTotal": "base"
+              "damageTotal": "base",
+              "exclusive": [
+                {
+                  "lv": 3,
+                  "kind": "change",
+                  "multiplier": "物理980%",
+                  "hits": 3
+                }
+              ]
             },
             {
               "text": "クリティカル耐性40%減少と睡眠を付与",
@@ -5962,8 +6037,18 @@
               "duration": "2ターン",
               "note": "2つで1つの弱体扱い。対象が攻撃を受けると解除"
             }
+          ],
+          "exclusiveTarget": [
+            {
+              "lv": 1,
+              "target": "正面の敵と隣接する敵2体"
+            }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        1,
+        3
       ]
     },
     {
@@ -5980,7 +6065,7 @@
       "duration": "対象に1ターン出血",
       "ct": 4,
       "condition": "対象に1ターン出血 / 出血は行動開始時に自身攻撃力50%ダメージ / 物理攻撃は必ず命中 / 条件未達なら通常攻撃",
-      "exclusiveWeapon": "Lv2: 出血1T→2T",
+      "exclusiveWeapon": "専用Lv2: 出血のターン数が2ターンになる",
       "compareMemo": "行動阻害中の敵全体に物理880%（最大5体） / 対象に2ターン出血 / 出血は行動開始時に自身攻撃力50%ダメージ / 物理攻撃は必ず命中 / 条件未達なら通常攻撃",
       "noteUrl": "",
       "imageUrl": "",
@@ -6030,7 +6115,14 @@
               "text": "出血を付与",
               "term": "出血",
               "duration": "1ターン",
-              "note": "行動開始時に自身の攻撃力50%のダメージ"
+              "note": "行動開始時に自身の攻撃力50%のダメージ",
+              "exclusive": [
+                {
+                  "lv": 2,
+                  "kind": "change",
+                  "duration": "2ターン"
+                }
+              ]
             },
             {
               "text": "通常攻撃になる",
@@ -6043,6 +6135,9 @@
         {
           "text": "気絶・睡眠などの行動阻害を撒く味方がいるほど対象が増える。S1の睡眠が自給源でもあるが、S1の睡眠は被弾で解除されるため攻撃順に注意。根拠: 対象条件が「行動阻害中の敵」のため"
         }
+      ],
+      "exclusiveIntegrated": [
+        2
       ]
     },
     {
@@ -6175,7 +6270,7 @@
       "duration": "対象がスナイパー以外なら70%で2ターンスピード15%減少",
       "ct": 4,
       "condition": "対象がスナイパーならダメージ1.5倍・必中 / 対象がスナイパー以外なら70%で2ターンスピード15%減少",
-      "exclusiveWeapon": "Lv1: 物理450%→600%",
+      "exclusiveWeapon": "専用Lv1: 物理攻撃が攻撃力×600%になる",
       "compareMemo": "ランダム敵3体に物理600% / 対象がスナイパーならダメージ1.5倍・必中 / 対象がスナイパー以外なら70%で2ターンスピード15%減少",
       "noteUrl": "",
       "imageUrl": "",
@@ -6217,7 +6312,14 @@
             {
               "text": "物理攻撃",
               "multiplier": "物理450%",
-              "damageTotal": "base"
+              "damageTotal": "base",
+              "exclusive": [
+                {
+                  "lv": 1,
+                  "kind": "change",
+                  "multiplier": "物理600%"
+                }
+              ]
             },
             {
               "text": "ダメージが1.5倍になり、必ず命中する",
@@ -6233,6 +6335,9 @@
             }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        1
       ]
     },
     {
@@ -6249,7 +6354,7 @@
       "duration": "",
       "ct": 4,
       "condition": "自身と味方が攻撃を受けた回数1回につき物理+20%、最大1040%",
-      "exclusiveWeapon": "Lv3: 物理640%→700%、最大1040%→1100%",
+      "exclusiveWeapon": "専用Lv3: 物理攻撃が攻撃力×700%になる（最大攻撃力×1100%まで）",
       "compareMemo": "ランダム敵3体に物理700% / 自身と味方が攻撃を受けた回数1回につき物理+20% / 最大物理1100%まで",
       "noteUrl": "",
       "imageUrl": "",
@@ -6288,13 +6393,27 @@
             {
               "text": "物理攻撃",
               "multiplier": "物理640%",
-              "damageTotal": "base"
+              "damageTotal": "base",
+              "exclusive": [
+                {
+                  "lv": 3,
+                  "kind": "change",
+                  "multiplier": "物理700%"
+                }
+              ]
             },
             {
               "text": "ダメージが+20%され、最大でこの倍率に変わる",
               "condition": "自身と味方が攻撃を受けた回数1回につき",
               "multiplier": "物理1040%",
-              "damageTotal": "conditionMax"
+              "damageTotal": "conditionMax",
+              "exclusive": [
+                {
+                  "lv": 3,
+                  "kind": "change",
+                  "multiplier": "物理1100%"
+                }
+              ]
             }
           ]
         }
@@ -6303,6 +6422,9 @@
         {
           "text": "被弾の多い持久戦・タンク編成ほど伸びる。根拠: 倍率の参照が「味方側の被攻撃回数」のため"
         }
+      ],
+      "exclusiveIntegrated": [
+        3
       ]
     },
     {
@@ -6319,7 +6441,7 @@
       "duration": "ステルス2T / 多重バリアは4ターンに1回",
       "ct": null,
       "condition": "バトル開始時、自身と攻撃力最高の味方に2ターンステルス / 被攻撃でHP50%以下または戦闘不能時にステルス解除 / 自身が攻撃を受けてHP50%以下になった時、自身に多重バリア1層 / 最大HP10%以上の被ダメ時に1層消費して無効化 / 4ターンに1回発動",
-      "exclusiveWeapon": "Lv2: 多重バリア1層→3層",
+      "exclusiveWeapon": "専用Lv2: 多重バリアが3層になる",
       "compareMemo": "バトル開始時、自身と攻撃力最高の味方に2ターンステルス / 被攻撃でHP50%以下または戦闘不能時にステルス解除 / 自身が攻撃を受けてHP50%以下になった時、自身に多重バリア1層 / 最大HP10%以上の被ダメ時に1層消費して無効化 / 4ターンに1回発動",
       "noteUrl": "",
       "imageUrl": "",
@@ -6368,10 +6490,20 @@
           "effects": [
             {
               "text": "多重バリア1層を付与",
-              "note": "最大HP10%以上の被弾で1層消費。4ターンに1回発動"
+              "note": "最大HP10%以上の被弾で1層消費。4ターンに1回発動",
+              "exclusive": [
+                {
+                  "lv": 2,
+                  "kind": "change",
+                  "text": "多重バリアが3層"
+                }
+              ]
             }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        2
       ]
     },
     {
@@ -6731,7 +6863,19 @@
             {
               "text": "物理攻撃",
               "multiplier": "物理240%×3回",
-              "damageTotal": "base"
+              "damageTotal": "base",
+              "exclusive": [
+                {
+                  "lv": 1,
+                  "kind": "change",
+                  "multiplier": "物理440%×3回"
+                },
+                {
+                  "lv": 3,
+                  "kind": "change",
+                  "multiplier": "物理480%×3回"
+                }
+              ]
             },
             {
               "text": "攻撃回数が1回増え、最大でこの倍率に変わる",
@@ -6746,6 +6890,10 @@
             }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        1,
+        3
       ]
     },
     {
@@ -6834,7 +6982,7 @@
       "duration": "自身が敵からバフを解除された時、6ターン味方全体の命中率50%増加 / バトル開始時6ターン自身の命中率10%増加",
       "ct": null,
       "condition": "自身が敵からバフを解除された時、6ターン味方全体の命中率50%増加 / 自身に制限解除付与 / 制限解除中は自身の攻撃力30%増加 / バトル開始時6ターン自身の命中率10%増加",
-      "exclusiveWeapon": "Lv2: 味方全体の命中率30%→50%",
+      "exclusiveWeapon": "専用Lv2: 味方全体の命中率の増加量が50%になる",
       "compareMemo": "自身が敵からバフを解除された時、6ターン味方全体の命中率50%増加 / 自身に制限解除付与 / 制限解除中は自身の攻撃力30%増加 / バトル開始時6ターン自身の命中率10%増加",
       "noteUrl": "",
       "imageUrl": "",
@@ -6973,7 +7121,7 @@
       "duration": "70%で2ターンバッテン付与",
       "ct": 4,
       "condition": "70%で2ターンバッテン付与 / バッテンは与ダメージ10%減少",
-      "exclusiveWeapon": "Lv1: 対象が敵3体に増加",
+      "exclusiveWeapon": "専用Lv1: 対象がランダムな敵3体になる",
       "compareMemo": "ランダム敵3体に魔法180% / 70%で2ターンバッテン付与 / バッテンは与ダメージ10%減少",
       "noteUrl": "",
       "imageUrl": "",
@@ -7020,8 +7168,17 @@
               "duration": "2ターン",
               "note": "与ダメージ10%減少"
             }
+          ],
+          "exclusiveTarget": [
+            {
+              "lv": 1,
+              "target": "ランダムな敵3体"
+            }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        1
       ]
     },
     {
@@ -7038,7 +7195,7 @@
       "duration": "",
       "ct": 4,
       "condition": "対象がバッテンを付帯していれば魔法1760%",
-      "exclusiveWeapon": "Lv3: 魔法440%→480%、バッテン時1760%→1920%",
+      "exclusiveWeapon": "専用Lv3: 魔法攻撃が攻撃力×480%になる。対象がバッテンを付帯している場合は攻撃力×1920%になる",
       "compareMemo": "ランダム敵3体に魔法480% / 対象がバッテン付帯なら魔法1920%",
       "noteUrl": "",
       "imageUrl": "",
@@ -7077,13 +7234,27 @@
             {
               "text": "魔法攻撃",
               "multiplier": "魔法440%",
-              "damageTotal": "base"
+              "damageTotal": "base",
+              "exclusive": [
+                {
+                  "lv": 3,
+                  "kind": "change",
+                  "multiplier": "魔法480%"
+                }
+              ]
             },
             {
               "text": "魔法攻撃のダメージが変わる",
               "condition": "対象がバッテンを付帯していれば",
               "multiplier": "魔法1760%",
-              "damageTotal": "conditionMax"
+              "damageTotal": "conditionMax",
+              "exclusive": [
+                {
+                  "lv": 3,
+                  "kind": "change",
+                  "multiplier": "魔法1920%"
+                }
+              ]
             }
           ]
         }
@@ -7092,6 +7263,9 @@
         {
           "text": "S1・S3で自給するバッテンが②の条件そのもの。根拠: 倍率条件が「バッテン付帯」のため"
         }
+      ],
+      "exclusiveIntegrated": [
+        3
       ]
     },
     {
@@ -7168,7 +7342,7 @@
       "duration": "自身戦闘不能時、4ターン攻撃力最高の味方にシールド",
       "ct": null,
       "condition": "自身戦闘不能時、4ターン攻撃力最高の味方にシールド / 基礎シールドは自身攻撃力150% / バッテン敵1体につき+150%、最大900% / 対象が藍属性なら攻撃力50%増加",
-      "exclusiveWeapon": "Lv2: バトル開始時、自身に多重バリア1層",
+      "exclusiveWeapon": "専用Lv2: バトル開始時、自身に多重バリアを1層付与する（解除不可）",
       "compareMemo": "自身戦闘不能時、4ターン攻撃力最高の味方にシールド / 基礎シールドは自身攻撃力150% / バッテン敵1体につき+150%、最大900% / 対象が藍属性なら攻撃力50%増加",
       "noteUrl": "",
       "imageUrl": "",
@@ -7201,7 +7375,22 @@
               "condition": "対象が藍属性なら"
             }
           ]
+        },
+        {
+          "when": "バトル開始時",
+          "mode": "simultaneous",
+          "exclusiveLv": 2,
+          "target": "自身",
+          "effects": [
+            {
+              "text": "多重バリアを1層付与",
+              "note": "解除不可"
+            }
+          ]
         }
+      ],
+      "exclusiveIntegrated": [
+        2
       ]
     },
     {
@@ -7281,8 +7470,17 @@
               "multiplier": "物理1320%",
               "damageTotal": "conditionMax"
             }
+          ],
+          "exclusiveTarget": [
+            {
+              "lv": 1,
+              "target": "ランダムな敵3体"
+            }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        1
       ]
     },
     {
@@ -7338,7 +7536,14 @@
             {
               "text": "物理攻撃",
               "multiplier": "物理1080%",
-              "damageTotal": "base"
+              "damageTotal": "base",
+              "exclusive": [
+                {
+                  "lv": 3,
+                  "kind": "change",
+                  "multiplier": "物理1180%"
+                }
+              ]
             },
             {
               "text": "物理攻撃の回数が3回になる",
@@ -7347,6 +7552,9 @@
             }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        3
       ]
     },
     {
@@ -7429,7 +7637,7 @@
       "duration": "1ターン目開始時、4ターン自身に攻撃力500%のシールド",
       "ct": "",
       "condition": "自身の被ダメージ60%減少 / 1ターン目開始時、4ターン自身に攻撃力500%のシールド / 効果は解除不可",
-      "exclusiveWeapon": "Lv2: バトル開始時、藍属性味方全体に多重バリア2層（最大HP10%以上の被ダメ時に1層消費）",
+      "exclusiveWeapon": "専用Lv2: バトル開始時、藍属性の味方全体に多重バリアを2層付与する（解除不可）。自身の最大HP10%以上のダメージを受けると1層消費して無効化する",
       "compareMemo": "自身の被ダメージ60%減少 / 1ターン目開始時、4ターン自身に攻撃力500%のシールド / 効果は解除不可",
       "noteUrl": "",
       "imageUrl": "",
@@ -7466,7 +7674,22 @@
               "note": "解除不可"
             }
           ]
+        },
+        {
+          "when": "バトル開始時",
+          "mode": "simultaneous",
+          "exclusiveLv": 2,
+          "target": "藍属性の味方全体",
+          "effects": [
+            {
+              "text": "多重バリアを2層付与",
+              "note": "解除不可。最大HP10%以上のダメージを受けると1層消費して無効化"
+            }
+          ]
         }
+      ],
+      "exclusiveIntegrated": [
+        2
       ]
     },
     {
@@ -7483,7 +7706,7 @@
       "duration": "1ターン自身の防御力5%減少",
       "ct": 4,
       "condition": "1ターン自身の防御力5%減少 / 魔法攻撃後、攻撃力最高の味方の弱体効果を2つ解除",
-      "exclusiveWeapon": "Lv1: 対象が敵5体に増加 / Lv3: 魔法520%→580%",
+      "exclusiveWeapon": "専用Lv1: 対象がランダムな敵5体になる。専用Lv3: 魔法攻撃が攻撃力×580%になる",
       "compareMemo": "1ターン自身の防御力5%減少 / ランダム敵5体に魔法580% / 攻撃力最高の味方の弱体効果を2つ解除",
       "noteUrl": "",
       "imageUrl": "",
@@ -7538,7 +7761,21 @@
             {
               "text": "魔法攻撃",
               "multiplier": "魔法520%",
-              "damageTotal": "base"
+              "damageTotal": "base",
+              "exclusive": [
+                {
+                  "lv": 3,
+                  "kind": "change",
+                  "multiplier": "魔法580%",
+                  "hits": 5
+                }
+              ]
+            }
+          ],
+          "exclusiveTarget": [
+            {
+              "lv": 1,
+              "target": "ランダムな敵5体"
             }
           ]
         },
@@ -7553,6 +7790,10 @@
             }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        1,
+        3
       ]
     },
     {
@@ -7634,7 +7875,7 @@
       "duration": "1ターン藍属性の攻撃力が高い味方3体の攻撃力50%増加",
       "ct": "",
       "condition": "自身か味方がアクティブスキルで弱体を受け、全体の弱体合計5個以上なら発動 / 1ターン藍属性の攻撃力が最も高い味方の攻撃力50%増加 / 自身の弱体効果を3つ解除 / 効果は解除不可",
-      "exclusiveWeapon": "Lv2: 攻撃力増加対象が藍属性の味方3体に増加",
+      "exclusiveWeapon": "専用Lv2: 攻撃力増加の対象が藍属性のうち攻撃力が高い味方3体になる",
       "compareMemo": "自身か味方がアクティブスキルで弱体を受け、全体の弱体合計5個以上なら発動 / 1ターン藍属性の攻撃力が高い味方3体の攻撃力50%増加 / 自身の弱体効果を3つ解除 / 効果は解除不可",
       "noteUrl": "",
       "imageUrl": "",
@@ -7663,6 +7904,12 @@
               "duration": "1ターン",
               "note": "解除不可"
             }
+          ],
+          "exclusiveTarget": [
+            {
+              "lv": 2,
+              "target": "藍属性のうち攻撃力が高い味方3体"
+            }
           ]
         },
         {
@@ -7682,6 +7929,9 @@
           "text": "弱体を多用してくる敵ほど発動しやすい。自身S1の防御力減少は命中・耐性判定を無視して付与される弱体だが、同じアクティブスキル由来としてカウントされるかは実機検証対象。",
           "reason": "発動条件がアクティブスキルで弱体効果を受けたときのため"
         }
+      ],
+      "exclusiveIntegrated": [
+        2
       ]
     },
     {
@@ -7752,7 +8002,7 @@
       "duration": "4ターン攻撃力最高の味方の攻撃力・命中率50%増加",
       "ct": 4,
       "condition": "4ターン攻撃力最高の味方の攻撃力・命中率25%増加 / 攻撃力増加と命中率増加は1つのバフ扱い",
-      "exclusiveWeapon": "Lv1: 攻撃力・命中率25%→50% / Lv3: 魔法440%→480%",
+      "exclusiveWeapon": "専用Lv1: 攻撃力と命中率の増加量がそれぞれ50%になる。専用Lv3: 魔法攻撃が攻撃力×480%になる",
       "compareMemo": "4ターン攻撃力最高の味方の攻撃力・命中率50%増加 / 攻撃力増加と命中率増加は1つのバフ扱い / ランダム敵5体に魔法480%",
       "noteUrl": "",
       "imageUrl": "",
@@ -7791,7 +8041,14 @@
             {
               "text": "攻撃力・命中率を25%増加",
               "duration": "4ターン",
-              "note": "両者で1つのバフ扱い、解除不可"
+              "note": "両者で1つのバフ扱い、解除不可",
+              "exclusive": [
+                {
+                  "lv": 1,
+                  "kind": "change",
+                  "text": "攻撃力・命中率の増加が50%"
+                }
+              ]
             }
           ]
         },
@@ -7804,10 +8061,21 @@
             {
               "text": "魔法攻撃",
               "multiplier": "魔法440%",
-              "damageTotal": "base"
+              "damageTotal": "base",
+              "exclusive": [
+                {
+                  "lv": 3,
+                  "kind": "change",
+                  "multiplier": "魔法480%"
+                }
+              ]
             }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        1,
+        3
       ]
     },
     {
@@ -7905,7 +8173,7 @@
       "duration": "1ターン目開始時、自身と攻撃力最高の味方に6ターンシールド",
       "ct": "",
       "condition": "1ターン目開始時、自身と攻撃力最高の味方に3ターンシールド / シールド量はステータス増減前の対象最大HP30% / 対象が藍属性なら付与者攻撃力200%分を加算 / 効果は解除不可",
-      "exclusiveWeapon": "Lv2: シールド30%→80%、藍属性時+攻撃力200%→600%",
+      "exclusiveWeapon": "専用Lv2: シールドの大きさが対象の最大HP×80%になる。対象が藍属性の場合のシールドの増加量が付与者の攻撃力×600%になる",
       "compareMemo": "1ターン目開始時、自身と攻撃力最高の味方に6ターンシールド / シールド量はステータス増減前の対象最大HP80% / 対象が藍属性なら付与者攻撃力600%分を加算 / 効果は解除不可",
       "noteUrl": "",
       "imageUrl": "",
@@ -7928,14 +8196,31 @@
             {
               "text": "シールドを付与",
               "duration": "6ターン",
-              "note": "量は対象の最大HP30%、解除不可"
+              "note": "量は対象の最大HP30%、解除不可",
+              "exclusive": [
+                {
+                  "lv": 2,
+                  "kind": "change",
+                  "text": "シールドが対象の最大HP80%分"
+                }
+              ]
             },
             {
               "text": "付与者の攻撃力200%分を上乗せ",
-              "condition": "対象が藍属性なら"
+              "condition": "対象が藍属性なら",
+              "exclusive": [
+                {
+                  "lv": 2,
+                  "kind": "change",
+                  "text": "上乗せが付与者の攻撃力600%分"
+                }
+              ]
             }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        2
       ]
     },
     {
@@ -8026,7 +8311,7 @@
       "duration": "",
       "ct": 4,
       "condition": "物理ダメージが多重バリアで無効化された場合、対象に物理420%の追加攻撃。追加攻撃は最大1回",
-      "exclusiveWeapon": "Lv1: 対象が敵5体に増加 / Lv3: 物理420%→460%、追加攻撃も460%",
+      "exclusiveWeapon": "専用Lv1: 対象がランダムな敵5体になる。専用Lv3: 最初の物理攻撃と追加攻撃のダメージがそれぞれ攻撃力×460%になる",
       "compareMemo": "ランダム敵5体に物理460% / 多重バリアで無効化された場合、対象に追加で物理460% / 追加攻撃は最大1回",
       "noteUrl": "",
       "imageUrl": "",
@@ -8065,7 +8350,21 @@
             {
               "text": "物理攻撃",
               "multiplier": "物理420%",
-              "damageTotal": "base"
+              "damageTotal": "base",
+              "exclusive": [
+                {
+                  "lv": 3,
+                  "kind": "change",
+                  "multiplier": "物理460%",
+                  "hits": 5
+                }
+              ]
+            }
+          ],
+          "exclusiveTarget": [
+            {
+              "lv": 1,
+              "target": "ランダムな敵5体"
             }
           ]
         },
@@ -8080,10 +8379,21 @@
               "condition": "物理ダメージが多重バリアで無効化された場合",
               "multiplier": "物理420%",
               "note": "追加攻撃は最大1回",
-              "damageTotal": "conditionMax"
+              "damageTotal": "conditionMax",
+              "exclusive": [
+                {
+                  "lv": 3,
+                  "kind": "change",
+                  "multiplier": "物理460%"
+                }
+              ]
             }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        1,
+        3
       ]
     },
     {
@@ -8187,7 +8497,7 @@
       "duration": "1・5ターン目開始時、自身と攻撃力最高の味方に2ターン結界",
       "ct": "",
       "condition": "1・5ターン目開始時、自身と攻撃力最高の味方に2ターン結界 / 結界中、被攻撃時のダメージを20%遮断 / バトル開始時、自身の被ダメージ70%減少 / 効果は解除不可",
-      "exclusiveWeapon": "Lv2: 結界の遮断量20%→50%",
+      "exclusiveWeapon": "専用Lv2: 結界のダメージの遮断量が50%になる",
       "compareMemo": "1・5ターン目開始時、自身と攻撃力最高の味方に2ターン結界 / 結界中、被攻撃時のダメージを50%遮断 / バトル開始時、自身の被ダメージ70%減少 / 効果は解除不可",
       "noteUrl": "",
       "imageUrl": "",
@@ -8221,10 +8531,20 @@
             {
               "text": "結界を付与",
               "duration": "2ターン",
-              "note": "被攻撃時のダメージを20%遮断、解除不可"
+              "note": "被攻撃時のダメージを20%遮断、解除不可",
+              "exclusive": [
+                {
+                  "lv": 2,
+                  "kind": "change",
+                  "text": "結界の遮断が50%"
+                }
+              ]
             }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        2
       ]
     },
     {
@@ -9549,6 +9869,12 @@
               "chance": "70%",
               "duration": "2ターン"
             }
+          ],
+          "exclusiveTarget": [
+            {
+              "lv": 1,
+              "target": "ランダムな敵5体"
+            }
           ]
         },
         {
@@ -9562,8 +9888,17 @@
               "multiplier": "魔法240%",
               "damageTotal": "base"
             }
+          ],
+          "exclusiveTarget": [
+            {
+              "lv": 1,
+              "target": "ランダムな敵5体"
+            }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        1
       ]
     },
     {
@@ -9640,7 +9975,14 @@
               "text": "魔法攻撃",
               "multiplier": "魔法160%×10回",
               "damageTotal": "base",
-              "note": "ソウルサクリファイスでも同じ倍率"
+              "note": "ソウルサクリファイスでも同じ倍率",
+              "exclusive": [
+                {
+                  "lv": 3,
+                  "kind": "change",
+                  "multiplier": "魔法180%×10回"
+                }
+              ]
             }
           ]
         },
@@ -9662,6 +10004,9 @@
             }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        3
       ]
     },
     {
@@ -9793,10 +10138,20 @@
             {
               "text": "結界を付与",
               "duration": "2ターン",
-              "note": "付帯者の最大HP20%を超えたダメージ分を、ロザリーの最大HP20%分まで遮断する"
+              "note": "付帯者の最大HP20%を超えたダメージ分を、ロザリーの最大HP20%分まで遮断する",
+              "exclusive": [
+                {
+                  "lv": 2,
+                  "kind": "change",
+                  "text": "遮断がロザリーの最大HP50%分まで"
+                }
+              ]
             }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        2
       ]
     },
     {
@@ -9871,10 +10226,20 @@
             {
               "text": "クリティカル率を10%減少",
               "chance": "70%",
-              "duration": "2ターン"
+              "duration": "2ターン",
+              "exclusive": [
+                {
+                  "lv": 1,
+                  "kind": "change",
+                  "text": "クリティカル率の減少が30%"
+                }
+              ]
             }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        1
       ]
     },
     {
@@ -9952,7 +10317,14 @@
               "text": "物理攻撃",
               "multiplier": "物理350%",
               "damageTotal": "base",
-              "note": "ランダムな敵2体×（初回＋再発動2回）＝6ヒット"
+              "note": "ランダムな敵2体×（初回＋再発動2回）＝6ヒット",
+              "exclusive": [
+                {
+                  "lv": 3,
+                  "kind": "change",
+                  "multiplier": "物理380%"
+                }
+              ]
             },
             {
               "text": "物理ダメージが3倍になる",
@@ -9979,6 +10351,9 @@
             }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        3
       ]
     },
     {
@@ -10024,7 +10399,14 @@
             {
               "text": "シールドを付与",
               "duration": "3ターン",
-              "note": "量は対象のタイプステータス200%分。解除不可。発動後、4回行動が終わるまで再発動しない"
+              "note": "量は対象のタイプステータス200%分。解除不可。発動後、4回行動が終わるまで再発動しない",
+              "exclusive": [
+                {
+                  "lv": 2,
+                  "kind": "change",
+                  "text": "自身のシールドが対象のタイプステータス1500%分（合計で最大1700%）、自身以外の攻撃力が高い味方2体は300%分（合計で最大500%）になり、発動後1回行動が終わると再発動する"
+                }
+              ]
             },
             {
               "text": "このシールド中はクリティカル耐性率を60%増加"
@@ -10036,6 +10418,9 @@
             }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        2
       ]
     },
     {
@@ -10158,7 +10543,14 @@
             {
               "text": "物理攻撃",
               "multiplier": "物理100%×3回",
-              "damageTotal": "base"
+              "damageTotal": "base",
+              "exclusive": [
+                {
+                  "lv": 1,
+                  "kind": "change",
+                  "multiplier": "物理100%×5回"
+                }
+              ]
             },
             {
               "text": "物理ダメージが+100%され、最大でこの倍率に変わる",
@@ -10180,6 +10572,9 @@
             }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        1
       ]
     },
     {
@@ -10238,13 +10633,27 @@
             {
               "text": "物理攻撃",
               "multiplier": "物理220%×5回",
-              "damageTotal": "base"
+              "damageTotal": "base",
+              "exclusive": [
+                {
+                  "lv": 3,
+                  "kind": "change",
+                  "multiplier": "物理250%×5回"
+                }
+              ]
             },
             {
               "text": "物理ダメージが+40%され、最大でこの倍率に変わる",
               "condition": "攻撃前、成長因子1スタックにつき",
               "multiplier": "物理620%×5回",
-              "damageTotal": "conditionMax"
+              "damageTotal": "conditionMax",
+              "exclusive": [
+                {
+                  "lv": 3,
+                  "kind": "change",
+                  "multiplier": "物理750%×5回"
+                }
+              ]
             }
           ]
         },
@@ -10265,6 +10674,9 @@
         {
           "text": "③は「命中率増加を付帯している味方がいること」が条件のため、命中バフを配る味方がいると成長因子の自給が安定する。根拠: 付与条件が「命中率増加を付帯している味方がいる場合」のため"
         }
+      ],
+      "exclusiveIntegrated": [
+        3
       ]
     },
     {
@@ -10363,7 +10775,23 @@
               "note": "解除不可"
             }
           ]
+        },
+        {
+          "when": "バトル開始時",
+          "mode": "simultaneous",
+          "exclusiveLv": 2,
+          "target": "味方全体",
+          "effects": [
+            {
+              "text": "スピードを10%増加",
+              "condition": "同じ属性の味方の生存数が3体以上なら",
+              "note": "解除不可"
+            }
+          ]
         }
+      ],
+      "exclusiveIntegrated": [
+        2
       ]
     },
     {
@@ -10420,6 +10848,12 @@
               "duration": "4ターン",
               "note": "オートバトル・ボスバトルでは解除不可、無窮の塔では減少量50%"
             }
+          ],
+          "exclusiveTarget": [
+            {
+              "lv": 1,
+              "target": "ランダムな敵5体"
+            }
           ]
         },
         {
@@ -10431,10 +10865,28 @@
             {
               "text": "物理攻撃",
               "multiplier": "物理260%",
-              "damageTotal": "base"
+              "damageTotal": "base",
+              "exclusive": [
+                {
+                  "lv": 3,
+                  "kind": "change",
+                  "multiplier": "物理280%",
+                  "hits": 5
+                }
+              ]
+            }
+          ],
+          "exclusiveTarget": [
+            {
+              "lv": 1,
+              "target": "ランダムな敵5体"
             }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        1,
+        3
       ]
     },
     {
@@ -10653,10 +11105,20 @@
             {
               "text": "結界を付与",
               "duration": "4ターン",
-              "note": "被攻撃時のダメージを30%遮断、解除不可。発動後、4回行動が終わるまで再発動しない"
+              "note": "被攻撃時のダメージを30%遮断、解除不可。発動後、4回行動が終わるまで再発動しない",
+              "exclusive": [
+                {
+                  "lv": 2,
+                  "kind": "change",
+                  "text": "結界の遮断が45%"
+                }
+              ]
             }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        2
       ]
     },
     {
@@ -10713,6 +11175,12 @@
               "multiplier": "魔法680%",
               "damageTotal": "base"
             }
+          ],
+          "exclusiveTarget": [
+            {
+              "lv": 1,
+              "target": "ランダムな敵5体"
+            }
           ]
         },
         {
@@ -10730,6 +11198,9 @@
             }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        1
       ]
     },
     {
@@ -10784,7 +11255,14 @@
             {
               "text": "魔法攻撃",
               "multiplier": "魔法1640%",
-              "damageTotal": "base"
+              "damageTotal": "base",
+              "exclusive": [
+                {
+                  "lv": 3,
+                  "kind": "change",
+                  "multiplier": "魔法1790%"
+                }
+              ]
             }
           ]
         },
@@ -10799,7 +11277,14 @@
               "condition": "ダメージが多重バリアで無効化された場合",
               "multiplier": "魔法1640%",
               "note": "追加攻撃は最大1回",
-              "damageTotal": "conditionMax"
+              "damageTotal": "conditionMax",
+              "exclusive": [
+                {
+                  "lv": 3,
+                  "kind": "change",
+                  "multiplier": "魔法1790%"
+                }
+              ]
             }
           ]
         }
@@ -10808,6 +11293,9 @@
         {
           "text": "多重バリアで守る敵への対策枠。ルミカ(無視型)とはアプローチ違いの同役割。根拠: 追加攻撃の条件が「多重バリアによる無効化」のため"
         }
+      ],
+      "exclusiveIntegrated": [
+        3
       ]
     },
     {
@@ -10866,7 +11354,14 @@
             {
               "text": "最大HP30%分のシールドを付与",
               "duration": "1ターン",
-              "note": "解除不可。自身が戦闘不能でも発動する"
+              "note": "解除不可。自身が戦闘不能でも発動する",
+              "exclusive": [
+                {
+                  "lv": 2,
+                  "kind": "change",
+                  "text": "シールドが最大HP100%分"
+                }
+              ]
             },
             {
               "text": "シールド対象が攻撃力が高い味方3体になる",
@@ -10874,6 +11369,9 @@
             }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        2
       ]
     },
     {
@@ -10973,7 +11471,15 @@
             {
               "text": "物理攻撃",
               "multiplier": "物理580%×3回",
-              "damageTotal": "base"
+              "damageTotal": "base",
+              "exclusive": [
+                {
+                  "lv": 1,
+                  "kind": "change",
+                  "condition": "攻撃前に対象が多重バリアを付帯していれば",
+                  "multiplier": "物理870%×3回"
+                }
+              ]
             },
             {
               "text": "この攻撃は対象の多重バリアを無視する"
@@ -10985,6 +11491,9 @@
         {
           "text": "多重バリアで一撃を無効化する敵への対策になる。根拠: 攻撃が「多重バリアを無視」する仕様のため"
         }
+      ],
+      "exclusiveIntegrated": [
+        1
       ]
     },
     {
@@ -11039,7 +11548,14 @@
             {
               "text": "物理攻撃",
               "multiplier": "物理1240%",
-              "damageTotal": "base"
+              "damageTotal": "base",
+              "exclusive": [
+                {
+                  "lv": 3,
+                  "kind": "change",
+                  "multiplier": "物理1360%"
+                }
+              ]
             }
           ]
         },
@@ -11056,6 +11572,9 @@
             }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        3
       ]
     },
     {
@@ -11137,10 +11656,21 @@
             {
               "text": "攻撃力・命中率・スピードを30%増加",
               "duration": "2ターン",
-              "note": "解除不可"
+              "note": "解除不可",
+              "exclusive": [
+                {
+                  "lv": 2,
+                  "kind": "change",
+                  "condition": "同じ属性の味方の編成数が3体以上なら",
+                  "text": "攻撃力増加の対象が自身以外の攻撃力が高い味方2体"
+                }
+              ]
             }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        2
       ]
     },
     {
@@ -11217,10 +11747,20 @@
             {
               "text": "物理攻撃",
               "multiplier": "物理480%×5回",
-              "damageTotal": "base"
+              "damageTotal": "base",
+              "exclusive": [
+                {
+                  "lv": 1,
+                  "kind": "change",
+                  "multiplier": "物理480%×8回"
+                }
+              ]
             }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        1
       ]
     },
     {
@@ -11291,7 +11831,14 @@
             {
               "text": "物理攻撃",
               "multiplier": "物理710%×5回",
-              "damageTotal": "base"
+              "damageTotal": "base",
+              "exclusive": [
+                {
+                  "lv": 3,
+                  "kind": "change",
+                  "multiplier": "物理780%×5回"
+                }
+              ]
             }
           ]
         },
@@ -11314,6 +11861,9 @@
           "text": "S1で砂塵を積むほどS2の解除・CTリセットが働く自己完結型。",
           "reason": "S2の条件が砂塵4スタックのため"
         }
+      ],
+      "exclusiveIntegrated": [
+        3
       ]
     },
     {
@@ -11352,8 +11902,17 @@
               "duration": "4ターン",
               "note": "解除不可"
             }
+          ],
+          "exclusiveTarget": [
+            {
+              "lv": 2,
+              "target": "攻撃力が高い味方2体"
+            }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        2
       ]
     },
     {
@@ -12441,6 +13000,12 @@
               "chance": "70%",
               "duration": "2ターン"
             }
+          ],
+          "exclusiveTarget": [
+            {
+              "lv": 1,
+              "target": "ランダムな敵5体"
+            }
           ]
         },
         {
@@ -12454,8 +13019,17 @@
               "multiplier": "物理580%",
               "damageTotal": "base"
             }
+          ],
+          "exclusiveTarget": [
+            {
+              "lv": 1,
+              "target": "ランダムな敵5体"
+            }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        1
       ]
     },
     {
@@ -12526,16 +13100,33 @@
             {
               "text": "物理攻撃",
               "multiplier": "物理880%×4回",
-              "damageTotal": "base"
+              "damageTotal": "base",
+              "exclusive": [
+                {
+                  "lv": 3,
+                  "kind": "change",
+                  "multiplier": "物理980%×4回"
+                }
+              ]
             },
             {
               "text": "ブラックバレットに変わり、必ずクリティカルして攻撃前に対象のバフを2つ解除",
               "condition": "ブラックバレット発動時は",
               "multiplier": "物理1760%×4回",
-              "damageTotal": "conditionMax"
+              "damageTotal": "conditionMax",
+              "exclusive": [
+                {
+                  "lv": 3,
+                  "kind": "change",
+                  "multiplier": "物理1960%×4回"
+                }
+              ]
             }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        3
       ]
     },
     {
@@ -12596,7 +13187,7 @@
       "duration": "解除不可",
       "ct": null,
       "condition": "バトル開始時、自身に多重バリア3層。自身の最大HP20%以上のダメージを受けると1層消費して無効化。自身が攻撃してクリティカルヒットした場合、クリティカルヒット回数2回につき攻撃力が高い味方3体に多重バリア1層付与",
-      "exclusiveWeapon": "専用Lv2: バトル開始時、自身以外の冥属性味方全体に多重バリア2層。追加多重バリアは最大HP20%以上のダメージで1層消費して無効化",
+      "exclusiveWeapon": "専用Lv2: バトル開始時、さらに自身以外の冥属性の味方全体に多重バリアを2層付与する。最大HP20%以上のダメージを受けると1層消費して無効化する",
       "compareMemo": "自身と味方に多重バリアを配る耐久支援",
       "noteUrl": "",
       "imageUrl": "",
@@ -12635,7 +13226,22 @@
               "note": "最大2層、解除不可。最大HP10%以上の被弾で1層消費"
             }
           ]
+        },
+        {
+          "when": "バトル開始時",
+          "mode": "simultaneous",
+          "exclusiveLv": 2,
+          "target": "自身以外の冥属性の味方全体",
+          "effects": [
+            {
+              "text": "多重バリアを2層付与",
+              "note": "最大HP20%以上のダメージを受けると1層消費して無効化"
+            }
+          ]
         }
+      ],
+      "exclusiveIntegrated": [
+        2
       ]
     },
     {
@@ -12946,7 +13552,14 @@
           "effects": [
             {
               "text": "クリティカル率20%増加・クリダメ強化20%増加",
-              "duration": "2ターン"
+              "duration": "2ターン",
+              "exclusive": [
+                {
+                  "lv": 1,
+                  "kind": "change",
+                  "duration": "4ターン"
+                }
+              ]
             }
           ]
         },
@@ -12968,6 +13581,9 @@
         {
           "text": "クリティカル依存のアタッカーや、クリ回数を条件に持つ味方と噛み合う。根拠: バフの内容がクリティカル率・クリダメ強化のため"
         }
+      ],
+      "exclusiveIntegrated": [
+        1
       ]
     },
     {
@@ -13022,7 +13638,14 @@
             {
               "text": "魔法攻撃",
               "multiplier": "魔法560%",
-              "damageTotal": "base"
+              "damageTotal": "base",
+              "exclusive": [
+                {
+                  "lv": 3,
+                  "kind": "change",
+                  "multiplier": "魔法620%"
+                }
+              ]
             },
             {
               "text": "魔法ダメージが1.5倍になる",
@@ -13032,6 +13655,9 @@
             }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        3
       ]
     },
     {
@@ -13048,7 +13674,7 @@
       "duration": "4T",
       "ct": null,
       "condition": "バトル開始時、自身に4ターンカウンタ変更を付与。毎ターン開始時または被攻撃時、自身HP割合100%未満ならカウンタ変更を解除。1ターン目開始時、自身に4ターン攻撃力400%のシールドを付与",
-      "exclusiveWeapon": "専用Lv2: カウンタダメージ魔力600%、シールド攻撃力1000%、自身以外のソーサラー味方1体以上ならカウンタダメージ魔力900%",
+      "exclusiveWeapon": "専用Lv2: カウンタダメージが自身の魔力×600%になり、シールドの大きさが自身の攻撃力×1000%になる。自身以外のソーサラーの味方が1体以上の場合、カウンタダメージが自身の魔力×900%になる",
       "compareMemo": "カウンタ変更と高倍率シールドで耐久する",
       "noteUrl": "",
       "imageUrl": "",
@@ -13074,7 +13700,19 @@
             {
               "text": "カウンタ変更を付与",
               "duration": "4ターン",
-              "note": "カウンタダメージが魔力300%分、解除不可"
+              "note": "カウンタダメージが魔力300%分、解除不可",
+              "exclusive": [
+                {
+                  "lv": 2,
+                  "kind": "change",
+                  "text": "カウンタダメージが魔力600%分"
+                },
+                {
+                  "lv": 2,
+                  "kind": "change",
+                  "text": "自身以外のソーサラーの味方が1体以上ならカウンタダメージが魔力900%分"
+                }
+              ]
             }
           ]
         },
@@ -13085,7 +13723,14 @@
           "effects": [
             {
               "text": "攻撃力400%分のシールドを付与",
-              "duration": "4ターン"
+              "duration": "4ターン",
+              "exclusive": [
+                {
+                  "lv": 2,
+                  "kind": "change",
+                  "text": "シールドが攻撃力1000%分"
+                }
+              ]
             }
           ]
         },
@@ -13100,6 +13745,9 @@
             }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        2
       ]
     },
     {
@@ -13216,7 +13864,14 @@
               "text": "物理攻撃",
               "multiplier": "物理380%",
               "damageTotal": "base",
-              "note": "ランダムな敵3体×（初回＋再発動1回）＝6ヒット"
+              "note": "ランダムな敵3体×（初回＋再発動1回）＝6ヒット",
+              "exclusive": [
+                {
+                  "lv": 1,
+                  "kind": "change",
+                  "multiplier": "物理680%"
+                }
+              ]
             }
           ]
         },
@@ -13239,6 +13894,9 @@
             }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        1
       ]
     },
     {
@@ -13304,7 +13962,14 @@
               "text": "毒を付与",
               "term": "毒",
               "duration": "2ターン",
-              "note": "毎ターン行動開始時、現在HP4%のダメージ"
+              "note": "毎ターン行動開始時、現在HP4%のダメージ",
+              "exclusive": [
+                {
+                  "lv": 3,
+                  "kind": "change",
+                  "text": "毒のダメージが現在HP5%"
+                }
+              ]
             },
             {
               "text": "物理攻撃のダメージが変わる",
@@ -13315,6 +13980,9 @@
             }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        3
       ]
     },
     {
@@ -13424,7 +14092,7 @@
       "duration": "解除不可",
       "ct": null,
       "condition": "自身が攻撃を受けたとき、ダメージ80%遮断。攻撃を受けるたび自身に心に咲く花1スタック付与。最大10スタック。1スタックにつき自身の防御貫通3%増加",
-      "exclusiveWeapon": "専用Lv2: バトル開始時自身に多重バリア3層付与。多重バリアは解除不可。ダメージを受けると1層消費して無効化",
+      "exclusiveWeapon": "専用Lv2: バトル開始時、自身に多重バリアを3層付与する（解除不可）。ダメージを受けると1層消費して無効化する",
       "compareMemo": "高遮断とスタックで耐久しつつ火力条件を満たす",
       "noteUrl": "",
       "imageUrl": "",
@@ -13452,7 +14120,22 @@
               "note": "最大10スタック、1スタックにつき防御貫通+3%、解除不可"
             }
           ]
+        },
+        {
+          "when": "バトル開始時",
+          "mode": "simultaneous",
+          "exclusiveLv": 2,
+          "target": "自身",
+          "effects": [
+            {
+              "text": "多重バリアを3層付与",
+              "note": "解除不可。ダメージを受けると1層消費して無効化"
+            }
+          ]
         }
+      ],
+      "exclusiveIntegrated": [
+        2
       ]
     },
     {
@@ -13509,6 +14192,12 @@
               "duration": "4ターン",
               "note": "両者で1つのバフ扱い、解除不可"
             }
+          ],
+          "exclusiveTarget": [
+            {
+              "lv": 1,
+              "target": "攻撃力が高い味方3体"
+            }
           ]
         },
         {
@@ -13520,10 +14209,21 @@
             {
               "text": "魔法攻撃",
               "multiplier": "魔法560%",
-              "damageTotal": "base"
+              "damageTotal": "base",
+              "exclusive": [
+                {
+                  "lv": 3,
+                  "kind": "change",
+                  "multiplier": "魔法620%"
+                }
+              ]
             }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        1,
+        3
       ]
     },
     {
@@ -13662,7 +14362,7 @@
       "duration": "6T / 解除不可",
       "ct": null,
       "condition": "バトル開始時、6ターン自身の被ダメージ75%減少。被ダメージ減少は解除不可",
-      "exclusiveWeapon": "専用Lv2: 7ターン目開始時、自身の被ダメージ50%減少",
+      "exclusiveWeapon": "専用Lv2: 7ターン目のターン開始時、自身の被ダメージを50%減少させる（解除不可）",
       "compareMemo": "序盤耐久が非常に高い",
       "noteUrl": "",
       "imageUrl": "",
@@ -13685,7 +14385,22 @@
               "note": "解除不可"
             }
           ]
+        },
+        {
+          "when": "7ターン目のターン開始時",
+          "mode": "simultaneous",
+          "exclusiveLv": 2,
+          "target": "自身",
+          "effects": [
+            {
+              "text": "受けるダメージを50%減少",
+              "note": "解除不可"
+            }
+          ]
         }
+      ],
+      "exclusiveIntegrated": [
+        2
       ]
     },
     {
@@ -13747,10 +14462,20 @@
               "text": "出血を付与",
               "term": "出血",
               "duration": "2ターン",
-              "note": "毎ターン行動開始時、カーミラの攻撃力20%のダメージ"
+              "note": "毎ターン行動開始時、カーミラの攻撃力20%のダメージ",
+              "exclusive": [
+                {
+                  "lv": 1,
+                  "kind": "change",
+                  "text": "出血のダメージがカーミラの攻撃力50%"
+                }
+              ]
             }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        1
       ]
     },
     {
@@ -13805,13 +14530,27 @@
             {
               "text": "物理攻撃",
               "multiplier": "物理570%",
-              "damageTotal": "base"
+              "damageTotal": "base",
+              "exclusive": [
+                {
+                  "lv": 3,
+                  "kind": "change",
+                  "multiplier": "物理630%"
+                }
+              ]
             },
             {
               "text": "物理攻撃のダメージが変わる",
               "condition": "対象が弱体効果を付帯していない場合は",
               "multiplier": "物理1710%",
-              "damageTotal": "conditionMax"
+              "damageTotal": "conditionMax",
+              "exclusive": [
+                {
+                  "lv": 3,
+                  "kind": "change",
+                  "multiplier": "物理1890%"
+                }
+              ]
             }
           ]
         }
@@ -13820,6 +14559,9 @@
         {
           "text": "弱体を撒かない編成でも火力が出る逆条件型。自分のS1の出血が付いた敵には②が乗らない点に注意。根拠: 条件が「弱体効果を付帯していない場合」のため"
         }
+      ],
+      "exclusiveIntegrated": [
+        3
       ]
     },
     {
@@ -13836,7 +14578,7 @@
       "duration": "防御貫通減少1T / 4ターン目まで毎ターン",
       "ct": null,
       "condition": "4ターン目までの毎ターン開始時に発動。1ターン、スピードが最も高い敵の物魔防御貫通50%減少。対象HP割合10%以下の場合、1ターン気絶を付与",
-      "exclusiveWeapon": "専用Lv2: 1ターン目のターン開始時、攻撃力が高い敵3体に4ターン脱力を付与。脱力はバトル中ステータスの攻撃力40%減少",
+      "exclusiveWeapon": "専用Lv2: 1ターン目のターン開始時、攻撃力が高い敵3体に4ターンの間脱力を付与する。脱力はバトル中ステータスの攻撃力が40%減少する",
       "compareMemo": "序盤限定の妨害。専用Lv2で脱力付与が追加",
       "noteUrl": "",
       "imageUrl": "",
@@ -13869,7 +14611,24 @@
               "duration": "1ターン"
             }
           ]
+        },
+        {
+          "when": "1ターン目のターン開始時",
+          "mode": "simultaneous",
+          "exclusiveLv": 2,
+          "target": "攻撃力が高い敵3体",
+          "effects": [
+            {
+              "text": "脱力を付与",
+              "term": "脱力",
+              "duration": "4ターン",
+              "note": "バトル中ステータスの攻撃力が40%減少"
+            }
+          ]
         }
+      ],
+      "exclusiveIntegrated": [
+        2
       ]
     },
     {
@@ -13963,7 +14722,14 @@
             {
               "text": "魔法攻撃",
               "multiplier": "魔法340%×6回",
-              "damageTotal": "base"
+              "damageTotal": "base",
+              "exclusive": [
+                {
+                  "lv": 1,
+                  "kind": "change",
+                  "multiplier": "魔法340%×10回"
+                }
+              ]
             },
             {
               "text": "魔法攻撃のダメージが変わる",
@@ -13972,6 +14738,9 @@
             }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        1
       ]
     },
     {
@@ -14102,10 +14871,20 @@
             {
               "text": "優しい魔法を付与",
               "duration": "4ターン",
-              "note": "効果中は被ダメージ30%遮断、解除後も20%遮断"
+              "note": "効果中は被ダメージ30%遮断、解除後も20%遮断",
+              "exclusive": [
+                {
+                  "lv": 2,
+                  "kind": "change",
+                  "text": "優しい魔法の効果中は被ダメージ85%遮断、解除後は70%遮断"
+                }
+              ]
             }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        2
       ]
     },
     {
@@ -14144,7 +14923,14 @@
           "effects": [
             {
               "text": "命中率を40%増加",
-              "note": "解除不可"
+              "note": "解除不可",
+              "exclusive": [
+                {
+                  "lv": 3,
+                  "kind": "change",
+                  "text": "命中率の増加が50%"
+                }
+              ]
             }
           ]
         },
@@ -14159,6 +14945,9 @@
             }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        3
       ]
     },
     {
@@ -14218,6 +15007,12 @@
               "text": "増加量が30%になる",
               "condition": "対象の攻撃力が自身より低ければ"
             }
+          ],
+          "exclusiveTarget": [
+            {
+              "lv": 1,
+              "target": "ランダムな敵5体"
+            }
           ]
         },
         {
@@ -14229,10 +15024,28 @@
             {
               "text": "物理攻撃",
               "multiplier": "物理440%",
-              "damageTotal": "base"
+              "damageTotal": "base",
+              "exclusive": [
+                {
+                  "lv": 3,
+                  "kind": "change",
+                  "multiplier": "物理480%",
+                  "hits": 5
+                }
+              ]
+            }
+          ],
+          "exclusiveTarget": [
+            {
+              "lv": 1,
+              "target": "ランダムな敵5体"
             }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        1,
+        3
       ]
     },
     {
@@ -14408,7 +15221,14 @@
           "effects": [
             {
               "text": "最大HPを25%増加",
-              "note": "解除不可"
+              "note": "解除不可",
+              "exclusive": [
+                {
+                  "lv": 2,
+                  "kind": "change",
+                  "text": "最大HPの増加が50%"
+                }
+              ]
             }
           ]
         },
@@ -14423,6 +15243,9 @@
             }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        2
       ]
     },
     {
@@ -14484,7 +15307,14 @@
             },
             {
               "text": "攻撃力の増加量が40%になる",
-              "condition": "バトル中このスキルを発動するのが2回目以降なら"
+              "condition": "バトル中このスキルを発動するのが2回目以降なら",
+              "exclusive": [
+                {
+                  "lv": 1,
+                  "kind": "change",
+                  "text": "バトル中3回目以降は攻撃力の増加量が80%"
+                }
+              ]
             }
           ]
         },
@@ -14501,6 +15331,9 @@
             }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        1
       ]
     },
     {
@@ -14517,7 +15350,7 @@
       "duration": "",
       "ct": 4,
       "condition": "2回目以降は9回、3回目以降は12回攻撃。専用Lv3で470%",
-      "exclusiveWeapon": "専用Lv3: 470%",
+      "exclusiveWeapon": "専用Lv3: 物理攻撃が攻撃力×470%になる",
       "compareMemo": "攻撃力+18% / 弱体効果耐性+10% / 命中+10%",
       "noteUrl": "",
       "imageUrl": "",
@@ -14556,7 +15389,14 @@
             {
               "text": "物理攻撃",
               "multiplier": "物理410%×4回",
-              "damageTotal": "base"
+              "damageTotal": "base",
+              "exclusive": [
+                {
+                  "lv": 3,
+                  "kind": "change",
+                  "multiplier": "物理470%×4回"
+                }
+              ]
             },
             {
               "text": "攻撃回数が9回になる",
@@ -14570,6 +15410,9 @@
             }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        3
       ]
     },
     {
@@ -14586,7 +15429,7 @@
       "duration": "8ターン目終了時に発動",
       "ct": null,
       "condition": "8ターン目のターン終了時、自身と攻撃力が最も高い味方の弱体効果を2つ解除。自身以外の黄属性味方が2体以上なら4・12ターン目のターン終了時にも発動",
-      "exclusiveWeapon": "専用Lv2: 解除2つ。専用Lv3: 黄属性2体以上なら4・12Tにも発動",
+      "exclusiveWeapon": "専用武器効果なし",
       "compareMemo": "攻撃力+18% / 弱体効果耐性+10% / 命中+10%",
       "noteUrl": "",
       "imageUrl": "",
@@ -14638,7 +15481,7 @@
       "duration": "4T",
       "ct": null,
       "condition": "ターン開始時に自身へシールド。発動後4回行動終了まで再発動不可。バトル開始時、被ダメージ60%減少。ターン開始時、さらに防御力150%増加",
-      "exclusiveWeapon": "専用Lv2: シールド最大HP200%。専用Lv3: 防御力+150%",
+      "exclusiveWeapon": "専用Lv2: シールドの大きさがステータス増減前の自身の最大HP×200%になる",
       "compareMemo": "攻撃力+18% / 弱体効果耐性+10% / 命中+10%",
       "noteUrl": "",
       "imageUrl": "",
@@ -14677,7 +15520,14 @@
           "effects": [
             {
               "text": "最大HP50%分のシールドを付与",
-              "duration": "4ターン"
+              "duration": "4ターン",
+              "exclusive": [
+                {
+                  "lv": 2,
+                  "kind": "change",
+                  "text": "シールドが最大HP200%分"
+                }
+              ]
             },
             {
               "text": "さらに防御力を150%増加",
@@ -14686,6 +15536,9 @@
             }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        2
       ]
     },
     {
@@ -17293,7 +18146,7 @@
       "duration": "",
       "ct": 4,
       "condition": "物理攻撃が回避された場合、10ターン自身の命中率10%増加。このスキルで敵を戦闘不能にできなかった場合、10ターン自身のクリティカル率10%増加",
-      "exclusiveWeapon": "専用Lv1: 物理380%",
+      "exclusiveWeapon": "専用Lv1: 物理攻撃が攻撃力×380%になる",
       "compareMemo": "攻撃力+18% / クリティカル耐性+10% / 弱体効果耐性+10%",
       "noteUrl": "",
       "imageUrl": "",
@@ -17302,9 +18155,9 @@
         "singleMultiplier": 280,
         "hitCount": 5,
         "baseTotal": 1400,
-        "exclusiveLv1Total": 1400,
-        "exclusiveLv2Total": 1400,
-        "exclusiveLv3Total": 1400,
+        "exclusiveLv1Total": 1900,
+        "exclusiveLv2Total": 1900,
+        "exclusiveLv3Total": 1900,
         "conditionMaxTotal": 1400,
         "conditionMaxNote": "画像カード上の基本倍率で算出。条件強化はcondition参照",
         "powerType": "画像カード準拠",
@@ -17335,7 +18188,14 @@
             {
               "text": "物理攻撃",
               "multiplier": "物理280%×5回",
-              "damageTotal": "base"
+              "damageTotal": "base",
+              "exclusive": [
+                {
+                  "lv": 1,
+                  "kind": "change",
+                  "multiplier": "物理380%×5回"
+                }
+              ]
             }
           ]
         },
@@ -17357,6 +18217,9 @@
             }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        1
       ]
     },
     {
@@ -17373,7 +18236,7 @@
       "duration": "",
       "ct": 4,
       "condition": "風林火山の攻撃力増加が6スタック以上なら再発動、12スタック以上なら再発動2回まで",
-      "exclusiveWeapon": "専用Lv3: 物理380%",
+      "exclusiveWeapon": "専用Lv3: 物理攻撃が攻撃力×380%になる",
       "compareMemo": "攻撃力+18% / クリティカル耐性+10% / 弱体効果耐性+10%",
       "noteUrl": "",
       "imageUrl": "",
@@ -17384,7 +18247,7 @@
         "baseTotal": 1700,
         "exclusiveLv1Total": 1700,
         "exclusiveLv2Total": 1700,
-        "exclusiveLv3Total": 1700,
+        "exclusiveLv3Total": 1900,
         "conditionMaxTotal": 1700,
         "conditionMaxNote": "画像カード上の基本倍率で算出。条件強化はcondition参照",
         "powerType": "画像カード準拠",
@@ -17415,7 +18278,14 @@
             {
               "text": "物理攻撃",
               "multiplier": "物理340%×5回",
-              "damageTotal": "base"
+              "damageTotal": "base",
+              "exclusive": [
+                {
+                  "lv": 3,
+                  "kind": "change",
+                  "multiplier": "物理380%×5回"
+                }
+              ]
             }
           ]
         },
@@ -17436,6 +18306,9 @@
             }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        3
       ]
     },
     {
@@ -17507,7 +18380,7 @@
       "duration": "条件参照",
       "ct": null,
       "condition": "10ターン被ダメージ15%減少。黄属性味方数に応じて防御力と物防増加、シールド付与",
-      "exclusiveWeapon": "専用Lv2: 被ダメージ減少30%",
+      "exclusiveWeapon": "専用Lv2: 被ダメージの減少量が30%になる",
       "compareMemo": "攻撃力+18% / クリティカル耐性+10% / 弱体効果耐性+10%",
       "noteUrl": "",
       "imageUrl": "",
@@ -17532,7 +18405,14 @@
           "effects": [
             {
               "text": "受けるダメージを15%減少",
-              "duration": "10ターン"
+              "duration": "10ターン",
+              "exclusive": [
+                {
+                  "lv": 2,
+                  "kind": "change",
+                  "text": "受けるダメージの減少が30%"
+                }
+              ]
             },
             {
               "text": "防御力150%増加・物理防御力100%増加",
@@ -17553,6 +18433,9 @@
             }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        2
       ]
     },
     {
@@ -17569,7 +18452,7 @@
       "duration": "",
       "ct": 4,
       "condition": "4ターン、攻撃力が最も高い味方の命中率20%増加。バトル中3回目以降なら命中率増加量80%",
-      "exclusiveWeapon": "専用Lv1: 命中増加対象が攻撃力高い味方2体",
+      "exclusiveWeapon": "専用Lv1: 命中率増加の対象が攻撃力が高い味方2体になる",
       "compareMemo": "攻撃力+18% / クリティカル耐性+10% / 魔法クリダメ緩和+35%",
       "noteUrl": "",
       "imageUrl": "",
@@ -17616,6 +18499,12 @@
               "text": "増加量が80%になる",
               "condition": "バトル中3回目以降は"
             }
+          ],
+          "exclusiveTarget": [
+            {
+              "lv": 1,
+              "target": "攻撃力が高い味方2体"
+            }
           ]
         },
         {
@@ -17631,6 +18520,9 @@
             }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        1
       ]
     },
     {
@@ -17647,7 +18539,7 @@
       "duration": "",
       "ct": 4,
       "condition": "攻撃前に防御力と物理防御力を4ターン50%減少。バトル中3回目以降なら物理1040%",
-      "exclusiveWeapon": "専用Lv3: 物理280%、3回目以降1120%",
+      "exclusiveWeapon": "専用Lv3: 物理攻撃が攻撃力×280%になる。バトル中3回目以降は攻撃力×1120%になる",
       "compareMemo": "攻撃力+18% / クリティカル耐性+10% / 魔法クリダメ緩和+35%",
       "noteUrl": "",
       "imageUrl": "",
@@ -17658,7 +18550,7 @@
         "baseTotal": 1040,
         "exclusiveLv1Total": 1040,
         "exclusiveLv2Total": 1040,
-        "exclusiveLv3Total": 1040,
+        "exclusiveLv3Total": 1120,
         "conditionMaxTotal": 1040,
         "conditionMaxNote": "画像カード上の基本倍率で算出。条件強化はcondition参照",
         "powerType": "画像カード準拠",
@@ -17698,15 +18590,32 @@
             {
               "text": "物理攻撃",
               "multiplier": "物理260%×4回",
-              "damageTotal": "base"
+              "damageTotal": "base",
+              "exclusive": [
+                {
+                  "lv": 3,
+                  "kind": "change",
+                  "multiplier": "物理280%"
+                }
+              ]
             },
             {
               "text": "物理攻撃のダメージが変わる",
               "condition": "バトル中3回目以降は",
-              "multiplier": "物理1040%"
+              "multiplier": "物理1040%",
+              "exclusive": [
+                {
+                  "lv": 3,
+                  "kind": "change",
+                  "multiplier": "物理1120%"
+                }
+              ]
             }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        3
       ]
     },
     {
@@ -17723,7 +18632,7 @@
       "duration": "条件参照",
       "ct": null,
       "condition": "8ターンシールド、キセキマ人形3つを付与。発動後8回行動終了まで再発動不可",
-      "exclusiveWeapon": "専用Lv2: シールド最大HP80%、黄属性対象は攻撃力600%",
+      "exclusiveWeapon": "専用Lv2: シールドの大きさが対象の最大HP×80%になる。対象が黄属性の場合のシールドの増加量が自身の攻撃力×600%になる",
       "compareMemo": "攻撃力+18% / クリティカル耐性+10% / 魔法クリダメ緩和+35%",
       "noteUrl": "",
       "imageUrl": "",
@@ -17749,14 +18658,31 @@
             {
               "text": "最大HP30%分のシールドとチビタマ人形3つを付与",
               "duration": "8ターン",
-              "note": "発動後、8回行動が終わるまで再発動しない"
+              "note": "発動後、8回行動が終わるまで再発動しない",
+              "exclusive": [
+                {
+                  "lv": 2,
+                  "kind": "change",
+                  "text": "シールドが最大HP80%分"
+                }
+              ]
             },
             {
               "text": "シールド量にタマの攻撃力200%分を上乗せ",
-              "condition": "対象が黄属性なら"
+              "condition": "対象が黄属性なら",
+              "exclusive": [
+                {
+                  "lv": 2,
+                  "kind": "change",
+                  "text": "上乗せがタマの攻撃力600%分"
+                }
+              ]
             }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        2
       ]
     },
     {
@@ -17814,7 +18740,7 @@
       "duration": "",
       "ct": 4,
       "condition": "4ターン、バフ数が最も多い味方のHPドレイン30%増加",
-      "exclusiveWeapon": "専用Lv1: 5回攻撃。専用Lv3: 物理640%",
+      "exclusiveWeapon": "専用Lv1: 物理攻撃の回数が5回になる。専用Lv3: 物理攻撃が攻撃力×640%になる",
       "compareMemo": "攻撃力+18% / 防御力+5% / 物理クリダメ緩和+35%",
       "noteUrl": "",
       "imageUrl": "",
@@ -17823,9 +18749,9 @@
         "singleMultiplier": 580,
         "hitCount": 3,
         "baseTotal": 1740,
-        "exclusiveLv1Total": 1740,
-        "exclusiveLv2Total": 1740,
-        "exclusiveLv3Total": 1740,
+        "exclusiveLv1Total": 2900,
+        "exclusiveLv2Total": 2900,
+        "exclusiveLv3Total": 3200,
         "conditionMaxTotal": 1740,
         "conditionMaxNote": "画像カード上の基本倍率で算出。条件強化はcondition参照",
         "powerType": "画像カード準拠",
@@ -17865,10 +18791,26 @@
             {
               "text": "物理攻撃",
               "multiplier": "物理580%×3回",
-              "damageTotal": "base"
+              "damageTotal": "base",
+              "exclusive": [
+                {
+                  "lv": 1,
+                  "kind": "change",
+                  "multiplier": "物理580%×5回"
+                },
+                {
+                  "lv": 3,
+                  "kind": "change",
+                  "multiplier": "物理640%×5回"
+                }
+              ]
             }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        1,
+        3
       ]
     },
     {
@@ -17964,7 +18906,7 @@
       "duration": "条件参照",
       "ct": null,
       "condition": "行動終了時8ターンシールド。対象が黄属性なら150%。解除不可。発動後8回行動終了まで再発動不可",
-      "exclusiveWeapon": "専用Lv2: シールド400%、黄属性なら800%",
+      "exclusiveWeapon": "専用Lv2: シールドの大きさが自身の攻撃力×400%になる。対象が黄属性の場合は自身の攻撃力×800%になる",
       "compareMemo": "攻撃力+18% / 防御力+5% / 物理クリダメ緩和+35%",
       "noteUrl": "",
       "imageUrl": "",
@@ -17987,7 +18929,14 @@
             {
               "text": "攻撃力75%分のシールドを付与",
               "duration": "8ターン",
-              "note": "対象が黄属性なら150%分。解除不可。発動後、8回行動が終わるまで再発動しない"
+              "note": "対象が黄属性なら150%分。解除不可。発動後、8回行動が終わるまで再発動しない",
+              "exclusive": [
+                {
+                  "lv": 2,
+                  "kind": "change",
+                  "text": "シールドが攻撃力400%分、対象が黄属性なら攻撃力800%分"
+                }
+              ]
             }
           ]
         }
@@ -17996,6 +18945,9 @@
         {
           "text": "バフを積み上げる味方を対象にしやすく、黄染めでシールド量が倍になる。根拠: 対象条件が「バフ数最多」、増量条件が「黄属性」のため"
         }
+      ],
+      "exclusiveIntegrated": [
+        2
       ]
     },
     {
@@ -18082,7 +19034,7 @@
       "duration": "",
       "ct": 4,
       "condition": "味方全体に4ターン、最大HP10%のシールド。黄属性対象ならシールド量に自身の攻撃力100%分を加算。3回目以降はシールドなし、魔法1640%",
-      "exclusiveWeapon": "専用Lv1: シールド最大HP30%、黄属性シールド攻撃力400%",
+      "exclusiveWeapon": "専用Lv1: シールドの大きさが対象の最大HP×30%になる。対象が黄属性の場合のシールドの増加量が自身の攻撃力×400%になる",
       "compareMemo": "攻撃力+18% / 防御力+5% / クリティカル耐性+10%",
       "noteUrl": "",
       "imageUrl": "",
@@ -18124,7 +19076,14 @@
             {
               "text": "最大HP10%分のシールドを付与",
               "duration": "4ターン",
-              "note": "黄属性の対象には自身の攻撃力100%分を上乗せ"
+              "note": "黄属性の対象には自身の攻撃力100%分を上乗せ",
+              "exclusive": [
+                {
+                  "lv": 1,
+                  "kind": "change",
+                  "text": "シールドが最大HP30%分、黄属性の対象への上乗せが攻撃力400%分"
+                }
+              ]
             },
             {
               "text": "シールドを付与しない",
@@ -18150,6 +19109,9 @@
             }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        1
       ]
     },
     {
@@ -18166,7 +19128,7 @@
       "duration": "",
       "ct": 4,
       "condition": "最後の魔法攻撃後、自身に軽快を付与。3回目以降なら魔法1040%",
-      "exclusiveWeapon": "専用Lv3: 魔法280%、3回目以降1120%",
+      "exclusiveWeapon": "専用Lv3: 魔法攻撃が攻撃力×280%になる。バトル中3回目以降は攻撃力×1120%になる",
       "compareMemo": "攻撃力+18% / 防御力+5% / クリティカル耐性+10%",
       "noteUrl": "",
       "imageUrl": "",
@@ -18177,7 +19139,7 @@
         "baseTotal": 1040,
         "exclusiveLv1Total": 1040,
         "exclusiveLv2Total": 1040,
-        "exclusiveLv3Total": 1040,
+        "exclusiveLv3Total": 1120,
         "conditionMaxTotal": 1040,
         "conditionMaxNote": "画像カード上の基本倍率で算出。条件強化はcondition参照",
         "powerType": "画像カード準拠",
@@ -18205,12 +19167,26 @@
             {
               "text": "魔法攻撃",
               "multiplier": "魔法260%×4回",
-              "damageTotal": "base"
+              "damageTotal": "base",
+              "exclusive": [
+                {
+                  "lv": 3,
+                  "kind": "change",
+                  "multiplier": "魔法280%"
+                }
+              ]
             },
             {
               "text": "魔法攻撃のダメージが変わる",
               "condition": "このスキルの3回目以降は",
-              "multiplier": "魔法1040%"
+              "multiplier": "魔法1040%",
+              "exclusive": [
+                {
+                  "lv": 3,
+                  "kind": "change",
+                  "multiplier": "魔法1120%"
+                }
+              ]
             }
           ]
         },
@@ -18225,6 +19201,9 @@
             }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        3
       ]
     },
     {
@@ -18290,7 +19269,7 @@
       "duration": "条件参照",
       "ct": null,
       "condition": "被ダメージ減少と物理クリダメ緩和増加。解除不可",
-      "exclusiveWeapon": "専用Lv2: 被ダメージ減少75%",
+      "exclusiveWeapon": "専用Lv2: 被ダメージの減少量が75%になる",
       "compareMemo": "攻撃力+18% / 防御力+5% / クリティカル耐性+10%",
       "noteUrl": "",
       "imageUrl": "",
@@ -18309,10 +19288,20 @@
           "effects": [
             {
               "text": "被ダメージを20%減少、物理クリティカルダメージ緩和を30%増加",
-              "note": "解除不可"
+              "note": "解除不可",
+              "exclusive": [
+                {
+                  "lv": 2,
+                  "kind": "change",
+                  "text": "被ダメージの減少が75%"
+                }
+              ]
             }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        2
       ]
     },
     {
@@ -18329,7 +19318,7 @@
       "duration": "",
       "ct": 4,
       "condition": "4ターン脱力付与。攻撃前に物理防御力25%減少",
-      "exclusiveWeapon": "専用Lv1: 対象5体。専用Lv3: 物理590%",
+      "exclusiveWeapon": "専用Lv1: 対象がランダムな敵5体になる。専用Lv3: 物理攻撃が攻撃力×590%になる",
       "compareMemo": "攻撃力+18% / 弱体効果耐性+10% / 弱体効果命中+10%",
       "noteUrl": "",
       "imageUrl": "",
@@ -18338,9 +19327,9 @@
         "singleMultiplier": 540,
         "hitCount": 3,
         "baseTotal": 1620,
-        "exclusiveLv1Total": 1620,
-        "exclusiveLv2Total": 1620,
-        "exclusiveLv3Total": 1620,
+        "exclusiveLv1Total": 2700,
+        "exclusiveLv2Total": 2700,
+        "exclusiveLv3Total": 2950,
         "conditionMaxTotal": 1620,
         "conditionMaxNote": "画像カード上の基本倍率で算出。条件強化はcondition参照",
         "powerType": "画像カード準拠",
@@ -18372,6 +19361,12 @@
             {
               "text": "物理防御力を25%減少"
             }
+          ],
+          "exclusiveTarget": [
+            {
+              "lv": 1,
+              "target": "ランダムな敵5体"
+            }
           ]
         },
         {
@@ -18383,7 +19378,15 @@
             {
               "text": "物理攻撃",
               "multiplier": "物理540%",
-              "damageTotal": "base"
+              "damageTotal": "base",
+              "exclusive": [
+                {
+                  "lv": 3,
+                  "kind": "change",
+                  "multiplier": "物理590%",
+                  "hits": 5
+                }
+              ]
             },
             {
               "text": "脱力を付与",
@@ -18391,8 +19394,18 @@
               "duration": "4ターン",
               "note": "攻撃力40%減少"
             }
+          ],
+          "exclusiveTarget": [
+            {
+              "lv": 1,
+              "target": "ランダムな敵5体"
+            }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        1,
+        3
       ]
     },
     {
@@ -18409,7 +19422,7 @@
       "duration": "",
       "ct": 4,
       "condition": "70%で1ターン遅延。3回目以降は物理1960%",
-      "exclusiveWeapon": "専用Lv2: 3回目以降2450%",
+      "exclusiveWeapon": "専用Lv2: バトル中3回目以降は物理攻撃が攻撃力×2450%になる",
       "compareMemo": "攻撃力+18% / 弱体効果耐性+10% / 弱体効果命中+10%",
       "noteUrl": "",
       "imageUrl": "",
@@ -18453,7 +19466,14 @@
             {
               "text": "物理攻撃のダメージが変わる",
               "condition": "このスキルの3回目以降は",
-              "multiplier": "物理1960%"
+              "multiplier": "物理1960%",
+              "exclusive": [
+                {
+                  "lv": 2,
+                  "kind": "change",
+                  "multiplier": "物理2450%"
+                }
+              ]
             },
             {
               "text": "遅延を付与",
@@ -18462,6 +19482,9 @@
             }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        2
       ]
     },
     {
@@ -18565,7 +19588,7 @@
       "duration": "",
       "ct": 4,
       "condition": "攻撃力最高味方に隠し味1スタック。1スタックにつき攻撃力6%増加。7ターン目以降なら付与スタック3",
-      "exclusiveWeapon": "専用Lv1: 対象5体",
+      "exclusiveWeapon": "専用Lv1: 物理攻撃の対象がランダムな敵5体になる",
       "compareMemo": "腕力+8% / 攻撃力+18% / HPドレイン+15%",
       "noteUrl": "",
       "imageUrl": "",
@@ -18574,9 +19597,9 @@
         "singleMultiplier": 280,
         "hitCount": 3,
         "baseTotal": 840,
-        "exclusiveLv1Total": 840,
-        "exclusiveLv2Total": 840,
-        "exclusiveLv3Total": 840,
+        "exclusiveLv1Total": 1400,
+        "exclusiveLv2Total": 1400,
+        "exclusiveLv3Total": 1400,
         "conditionMaxTotal": 840,
         "conditionMaxNote": "画像カード上の基本倍率で算出。条件強化はcondition参照",
         "powerType": "画像カード準拠",
@@ -18609,6 +19632,12 @@
               "multiplier": "物理280%",
               "damageTotal": "base"
             }
+          ],
+          "exclusiveTarget": [
+            {
+              "lv": 1,
+              "target": "ランダムな敵5体"
+            }
           ]
         },
         {
@@ -18627,6 +19656,9 @@
             }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        1
       ]
     },
     {
@@ -18643,7 +19675,7 @@
       "duration": "",
       "ct": 5,
       "condition": "最後の攻撃後、攻撃力最高味方に隠し味1スタック。7ターン目以降なら付与後自身のスキルCT-5",
-      "exclusiveWeapon": "専用Lv3: 物理320%",
+      "exclusiveWeapon": "専用Lv3: 物理攻撃が攻撃力×320%になる",
       "compareMemo": "腕力+8% / 攻撃力+18% / HPドレイン+15%",
       "noteUrl": "",
       "imageUrl": "",
@@ -18685,7 +19717,14 @@
             {
               "text": "物理攻撃",
               "multiplier": "物理290%×5回",
-              "damageTotal": "base"
+              "damageTotal": "base",
+              "exclusive": [
+                {
+                  "lv": 3,
+                  "kind": "change",
+                  "multiplier": "物理320%×5回"
+                }
+              ]
             }
           ]
         },
@@ -18717,6 +19756,9 @@
         {
           "text": "7ターン目以降は③のCT短縮量がこのスキルのCTと同じになり、エースの隠し味を高頻度で積み直せる。"
         }
+      ],
+      "exclusiveIntegrated": [
+        3
       ]
     },
     {
@@ -18733,7 +19775,7 @@
       "duration": "条件参照",
       "ct": null,
       "condition": "被攻撃時にダメージ60%遮断。ターン開始時、隣接味方2体に4ターン結界を付与。結界は最大HP10%を超えた分のダメージを20%遮断。発動後4回行動終了まで再発動不可",
-      "exclusiveWeapon": "専用Lv2: 結界の遮断量50%",
+      "exclusiveWeapon": "専用Lv2: 結界のダメージの遮断量が50%になる",
       "compareMemo": "腕力+8% / 攻撃力+18% / HPドレイン+15%",
       "noteUrl": "",
       "imageUrl": "",
@@ -18769,10 +19811,20 @@
             {
               "text": "結界を付与",
               "duration": "4ターン",
-              "note": "最大HP10%を超えた分のダメージを20%遮断、解除不可。発動後、4回行動が終わるまで再発動しない"
+              "note": "最大HP10%を超えた分のダメージを20%遮断、解除不可。発動後、4回行動が終わるまで再発動しない",
+              "exclusive": [
+                {
+                  "lv": 2,
+                  "kind": "change",
+                  "text": "結界の遮断が50%"
+                }
+              ]
             }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        2
       ]
     },
     {
@@ -18842,7 +19894,7 @@
       "duration": "",
       "ct": 4,
       "condition": "攻撃前、魔法防御力5%減少を付与。3回目以降は減少スタック+2",
-      "exclusiveWeapon": "専用Lv1: 対象5体。専用Lv3: 魔法440%",
+      "exclusiveWeapon": "専用Lv1: 魔法攻撃の対象がランダムな敵5体になる。専用Lv3: 魔法攻撃が攻撃力×440%になる",
       "compareMemo": "攻撃力+18% / クリティカル耐性+10% / クリティカル+10%",
       "noteUrl": "",
       "imageUrl": "",
@@ -18851,9 +19903,9 @@
         "singleMultiplier": 400,
         "hitCount": 3,
         "baseTotal": 1200,
-        "exclusiveLv1Total": 1200,
-        "exclusiveLv2Total": 1200,
-        "exclusiveLv3Total": 1200,
+        "exclusiveLv1Total": 2000,
+        "exclusiveLv2Total": 2000,
+        "exclusiveLv3Total": 2200,
         "conditionMaxTotal": 1200,
         "conditionMaxNote": "画像カード上の基本倍率で算出。条件強化はcondition参照",
         "powerType": "画像カード準拠",
@@ -18890,6 +19942,12 @@
               "text": "付与後にスタックをさらに2つ増やす",
               "condition": "このスキルの3回目以降は"
             }
+          ],
+          "exclusiveTarget": [
+            {
+              "lv": 1,
+              "target": "ランダムな敵5体"
+            }
           ]
         },
         {
@@ -18901,10 +19959,28 @@
             {
               "text": "魔法攻撃",
               "multiplier": "魔法400%",
-              "damageTotal": "base"
+              "damageTotal": "base",
+              "exclusive": [
+                {
+                  "lv": 3,
+                  "kind": "change",
+                  "multiplier": "魔法440%",
+                  "hits": 5
+                }
+              ]
+            }
+          ],
+          "exclusiveTarget": [
+            {
+              "lv": 1,
+              "target": "ランダムな敵5体"
             }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        1,
+        3
       ]
     },
     {
@@ -18997,7 +20073,7 @@
       "duration": "条件参照",
       "ct": null,
       "condition": "毎ターン開始時に妖精さん1スタック。1スタックにつき攻撃力3%、物理防御5%増加。シールド付与は13ターン目以降なし。黄属性味方条件で妖精さん付与数2",
-      "exclusiveWeapon": "専用Lv2: シールド攻撃力1000%",
+      "exclusiveWeapon": "専用Lv2: シールドの大きさが自身の攻撃力×1000%になる",
       "compareMemo": "攻撃力+18% / クリティカル耐性+10% / クリティカル+10%",
       "noteUrl": "",
       "imageUrl": "",
@@ -19034,10 +20110,20 @@
             {
               "text": "攻撃力200%分のシールドを付与",
               "duration": "4ターン",
-              "note": "発動後、4回行動が終わるまで再発動せず、13ターン目以降は発動しない"
+              "note": "発動後、4回行動が終わるまで再発動せず、13ターン目以降は発動しない",
+              "exclusive": [
+                {
+                  "lv": 2,
+                  "kind": "change",
+                  "text": "シールドが攻撃力1000%分"
+                }
+              ]
             }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        2
       ]
     },
     {
@@ -19097,7 +20183,7 @@
       "duration": "",
       "ct": 4,
       "condition": "70%で2ターンスピード20%減少。対象の魔力が自身より低い場合5ターン",
-      "exclusiveWeapon": "専用Lv1: 対象5体。専用Lv3: 魔法360%",
+      "exclusiveWeapon": "専用Lv1: 対象がランダムな敵5体になる。専用Lv3: 魔法攻撃が攻撃力×360%になる",
       "compareMemo": "攻撃力+18% / 弱体効果命中+10% / 弱体効果耐性+10%",
       "noteUrl": "",
       "imageUrl": "",
@@ -19106,9 +20192,9 @@
         "singleMultiplier": 330,
         "hitCount": 3,
         "baseTotal": 990,
-        "exclusiveLv1Total": 990,
-        "exclusiveLv2Total": 990,
-        "exclusiveLv3Total": 990,
+        "exclusiveLv1Total": 1650,
+        "exclusiveLv2Total": 1650,
+        "exclusiveLv3Total": 1800,
         "conditionMaxTotal": 990,
         "conditionMaxNote": "画像カード上の基本倍率で算出。条件強化はcondition参照",
         "powerType": "画像カード準拠",
@@ -19139,7 +20225,15 @@
             {
               "text": "魔法攻撃",
               "multiplier": "魔法330%",
-              "damageTotal": "base"
+              "damageTotal": "base",
+              "exclusive": [
+                {
+                  "lv": 3,
+                  "kind": "change",
+                  "multiplier": "魔法360%",
+                  "hits": 5
+                }
+              ]
             },
             {
               "text": "スピード20%減少を付与",
@@ -19150,8 +20244,18 @@
               "text": "継続が5ターンになる",
               "condition": "対象の魔力が自身より低い場合は"
             }
+          ],
+          "exclusiveTarget": [
+            {
+              "lv": 1,
+              "target": "ランダムな敵5体"
+            }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        1,
+        3
       ]
     },
     {
@@ -19255,7 +20359,7 @@
       "duration": "条件参照",
       "ct": null,
       "condition": "1ターン目開始時、10ターン自身に攻撃力200%のシールド。対象が黄属性なら500%。弱体効果無効または行動阻害無効を持つ敵がいれば対象が味方全体。バトル開始時、自身の被ダメージ10%減少。解除不可",
-      "exclusiveWeapon": "専用Lv2: 被ダメージ減少70%",
+      "exclusiveWeapon": "専用Lv2: 被ダメージの減少量が70%になる",
       "compareMemo": "攻撃力+18% / 弱体効果命中+10% / 弱体効果耐性+10%",
       "noteUrl": "",
       "imageUrl": "",
@@ -19283,7 +20387,14 @@
           "effects": [
             {
               "text": "受けるダメージを10%減少",
-              "note": "解除不可"
+              "note": "解除不可",
+              "exclusive": [
+                {
+                  "lv": 2,
+                  "kind": "change",
+                  "text": "受けるダメージの減少が70%"
+                }
+              ]
             }
           ]
         },
@@ -19307,6 +20418,9 @@
             }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        2
       ]
     },
     {
@@ -22208,7 +23322,7 @@
       "duration": "被回復量減少2ターン",
       "ct": 4,
       "condition": "自身に現在HP20%の自傷。攻撃力増加2スタック以上ならHPを総ダメージ10%回復。攻撃ごと50%で被回復量20%減少",
-      "exclusiveWeapon": "専用Lv1: 魔法420%",
+      "exclusiveWeapon": "専用Lv1: 魔法攻撃が攻撃力×420%になる",
       "compareMemo": "魔力+8% / 攻撃力+18% / 命中+10%",
       "noteUrl": "",
       "imageUrl": "",
@@ -22264,7 +23378,14 @@
             {
               "text": "魔法攻撃",
               "multiplier": "魔法320%×5回",
-              "damageTotal": "base"
+              "damageTotal": "base",
+              "exclusive": [
+                {
+                  "lv": 1,
+                  "kind": "change",
+                  "multiplier": "魔法420%×5回"
+                }
+              ]
             },
             {
               "text": "被回復量20%減少を付与",
@@ -22286,6 +23407,9 @@
             }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        1
       ]
     },
     {
@@ -22302,7 +23426,7 @@
       "duration": "",
       "ct": 4,
       "condition": "自身に現在HP20%の自傷。攻撃力増加1スタックごと攻撃回数+1、最大7回",
-      "exclusiveWeapon": "専用Lv3: 魔法580%",
+      "exclusiveWeapon": "専用Lv3: 魔法攻撃が攻撃力×580%になる",
       "compareMemo": "魔力+8% / 攻撃力+18% / 命中+10%",
       "noteUrl": "",
       "imageUrl": "",
@@ -22355,7 +23479,14 @@
             {
               "text": "魔法攻撃",
               "multiplier": "魔法520%×3回",
-              "damageTotal": "base"
+              "damageTotal": "base",
+              "exclusive": [
+                {
+                  "lv": 3,
+                  "kind": "change",
+                  "multiplier": "魔法580%×3回"
+                }
+              ]
             },
             {
               "text": "攻撃回数が1回増え、最大でこの倍率に変わる",
@@ -22366,6 +23497,9 @@
             }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        3
       ]
     },
     {
@@ -22439,7 +23573,7 @@
       "duration": "6T / 解除不可",
       "ct": null,
       "condition": "バトル開始時に自身攻撃力増加。紅属性味方数に応じて増加。1ターン目開始時、自身に6ターンシールド",
-      "exclusiveWeapon": "専用Lv2: シールド攻撃力200%、紅属性1体ごと200%、合計最大1000%",
+      "exclusiveWeapon": "専用Lv2: シールドの大きさが自身の攻撃力×200%になる。自身以外の紅属性の味方の生存数1体につき自身の攻撃力×200%大きくなる（合計で最大1000%まで）",
       "compareMemo": "魔力+8% / 攻撃力+18% / 命中+10%",
       "noteUrl": "",
       "imageUrl": "",
@@ -22475,15 +23609,32 @@
           "effects": [
             {
               "text": "攻撃力100%分のシールドを付与",
-              "duration": "6ターン"
+              "duration": "6ターン",
+              "exclusive": [
+                {
+                  "lv": 2,
+                  "kind": "change",
+                  "text": "シールドが攻撃力200%分"
+                }
+              ]
             },
             {
               "text": "シールド量が+100%分増える",
               "condition": "自身以外の紅属性の味方1体ごとに",
-              "note": "最大500%分"
+              "note": "最大500%分",
+              "exclusive": [
+                {
+                  "lv": 2,
+                  "kind": "change",
+                  "text": "増える量が攻撃力200%分（合計で最大1000%分）"
+                }
+              ]
             }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        2
       ]
     },
     {
@@ -22500,7 +23651,7 @@
       "duration": "攻撃力・命中率増加4T",
       "ct": 4,
       "condition": "4ターン、攻撃力最高味方1体に攻撃力15%、命中率30%増加。紅・翠属性ならバフターン数32ターン、攻撃力30%。その後敵5体に攻撃",
-      "exclusiveWeapon": "専用Lv1: 攻撃力増加30%、紅翠なら60%。専用Lv2: 命中率50%。専用Lv3: 480%",
+      "exclusiveWeapon": "専用Lv1: 攻撃力の増加量が30%になる。対象が紅属性または翠属性の場合は60%になる。専用Lv2: 命中率の増加量が50%になる。専用Lv3: 物理攻撃が攻撃力×480%になる",
       "compareMemo": "腕力+8% / 攻撃力+18% / 弱体効果命中+10%",
       "noteUrl": "",
       "imageUrl": "",
@@ -22542,11 +23693,30 @@
             {
               "text": "攻撃力15%増加・命中率30%増加",
               "duration": "4ターン",
-              "note": "解除不可。両者で1つのバフ扱い"
+              "note": "解除不可。両者で1つのバフ扱い",
+              "exclusive": [
+                {
+                  "lv": 1,
+                  "kind": "change",
+                  "text": "攻撃力の増加が30%"
+                },
+                {
+                  "lv": 2,
+                  "kind": "change",
+                  "text": "命中率の増加が50%"
+                }
+              ]
             },
             {
               "text": "継続が32ターンになり、攻撃力の増加量が30%になる",
-              "condition": "対象が紅属性または翠属性なら"
+              "condition": "対象が紅属性または翠属性なら",
+              "exclusive": [
+                {
+                  "lv": 1,
+                  "kind": "change",
+                  "text": "攻撃力の増加が60%"
+                }
+              ]
             }
           ]
         },
@@ -22559,10 +23729,22 @@
             {
               "text": "物理攻撃",
               "multiplier": "物理440%",
-              "damageTotal": "base"
+              "damageTotal": "base",
+              "exclusive": [
+                {
+                  "lv": 3,
+                  "kind": "change",
+                  "multiplier": "物理480%"
+                }
+              ]
             }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        1,
+        2,
+        3
       ]
     },
     {
@@ -22725,7 +23907,7 @@
       "duration": "気絶1ターン",
       "ct": 4,
       "condition": "自身に現在HP20%の自傷。対象が翠属性なら攻撃するたび70%で1ターン気絶",
-      "exclusiveWeapon": "専用Lv1: 6回攻撃。専用Lv3: 520%",
+      "exclusiveWeapon": "専用Lv1: 物理攻撃の回数が6回になる。専用Lv3: 物理攻撃が攻撃力×520%になる",
       "compareMemo": "攻撃力+18% / クリティカル+10% / 命中+10%",
       "noteUrl": "",
       "imageUrl": "",
@@ -22779,7 +23961,19 @@
             {
               "text": "物理攻撃",
               "multiplier": "物理480%×3回",
-              "damageTotal": "base"
+              "damageTotal": "base",
+              "exclusive": [
+                {
+                  "lv": 1,
+                  "kind": "change",
+                  "multiplier": "物理480%×6回"
+                },
+                {
+                  "lv": 3,
+                  "kind": "change",
+                  "multiplier": "物理520%×6回"
+                }
+              ]
             },
             {
               "text": "気絶を付与",
@@ -22790,6 +23984,10 @@
             }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        1,
+        3
       ]
     },
     {
@@ -22942,7 +24140,7 @@
       "duration": "2T / 解除不可",
       "ct": null,
       "condition": "バトル開始時、2ターン自身以外でスピードが最も低い味方の攻撃力を増加",
-      "exclusiveWeapon": "専用Lv2: 対象が紅属性ならスピード+20%",
+      "exclusiveWeapon": "専用Lv2: 対象が紅属性の場合、さらに2ターンの間対象のスピードを20%増加させる（解除不可）",
       "compareMemo": "攻撃力+18% / クリティカル+10% / 命中+10%",
       "noteUrl": "",
       "imageUrl": "",
@@ -22962,10 +24160,23 @@
             {
               "text": "攻撃力を50%増加",
               "duration": "2ターン",
-              "note": "解除不可"
+              "note": "解除不可",
+              "exclusive": [
+                {
+                  "lv": 2,
+                  "kind": "add",
+                  "condition": "対象が紅属性なら",
+                  "text": "スピードを20%増加",
+                  "duration": "2ターン",
+                  "note": "解除不可"
+                }
+              ]
             }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        2
       ]
     },
     {
@@ -22982,7 +24193,7 @@
       "duration": "スピード-30% 2T",
       "ct": 4,
       "condition": "自身に現在HP20%の自傷。70%で2ターン対象のスピード30%減少",
-      "exclusiveWeapon": "専用Lv1: 8回攻撃。専用Lv3: 580%",
+      "exclusiveWeapon": "専用Lv1: 物理攻撃の回数が8回になる。専用Lv3: 物理攻撃が攻撃力×580%になる",
       "compareMemo": "攻撃力+18% / 防御力+5% / クリティカル+10%",
       "noteUrl": "",
       "imageUrl": "",
@@ -23035,7 +24246,19 @@
             {
               "text": "物理攻撃",
               "multiplier": "物理520%×6回",
-              "damageTotal": "base"
+              "damageTotal": "base",
+              "exclusive": [
+                {
+                  "lv": 1,
+                  "kind": "change",
+                  "multiplier": "物理520%×8回"
+                },
+                {
+                  "lv": 3,
+                  "kind": "change",
+                  "multiplier": "物理580%×8回"
+                }
+              ]
             },
             {
               "text": "対象のスピードを30%減少",
@@ -23044,6 +24267,10 @@
             }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        1,
+        3
       ]
     },
     {
@@ -23060,7 +24287,7 @@
       "duration": "",
       "ct": 4,
       "condition": "自身に現在HP20%の自傷。対象の現在HPが自身より高い場合1680%",
-      "exclusiveWeapon": "専用Lv2: 1520%、対象HP条件時2280%",
+      "exclusiveWeapon": "専用Lv2: 物理攻撃が攻撃力×1520%になる。対象の現在HPが自身よりも高い場合は攻撃力×2280%になる",
       "compareMemo": "攻撃力+18% / 防御力+5% / クリティカル+10%",
       "noteUrl": "",
       "imageUrl": "",
@@ -23113,13 +24340,27 @@
             {
               "text": "物理攻撃",
               "multiplier": "物理1120%",
-              "damageTotal": "base"
+              "damageTotal": "base",
+              "exclusive": [
+                {
+                  "lv": 2,
+                  "kind": "change",
+                  "multiplier": "物理1520%"
+                }
+              ]
             },
             {
               "text": "物理攻撃のダメージが変わる",
               "condition": "対象の現在HPが自身より高い場合は",
               "multiplier": "物理1680%",
-              "damageTotal": "conditionMax"
+              "damageTotal": "conditionMax",
+              "exclusive": [
+                {
+                  "lv": 2,
+                  "kind": "change",
+                  "multiplier": "物理2280%"
+                }
+              ]
             }
           ]
         }
@@ -23128,6 +24369,9 @@
         {
           "text": "S1の自傷で自分のHPが下がるほど③の条件を満たしやすくなる自己完結型。根拠: 条件が「対象の現在HP＞自身の現在HP」のため"
         }
+      ],
+      "exclusiveIntegrated": [
+        2
       ]
     },
     {
@@ -23240,7 +24484,7 @@
       "duration": "",
       "ct": 4,
       "condition": "自身に現在HP20%の自傷。対象が弱体中なら530%、弱体が2個以上なら730%",
-      "exclusiveWeapon": "専用Lv1: 5回攻撃",
+      "exclusiveWeapon": "専用Lv1: 物理攻撃の回数が5回になる",
       "compareMemo": "攻撃力+18% / クリティカル+10% / HP+22%",
       "noteUrl": "",
       "imageUrl": "",
@@ -23293,7 +24537,14 @@
             {
               "text": "物理攻撃",
               "multiplier": "物理330%×3回",
-              "damageTotal": "base"
+              "damageTotal": "base",
+              "exclusive": [
+                {
+                  "lv": 1,
+                  "kind": "change",
+                  "multiplier": "物理330%×5回"
+                }
+              ]
             },
             {
               "text": "物理攻撃のダメージが変わる",
@@ -23308,6 +24559,9 @@
             }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        1
       ]
     },
     {
@@ -23324,7 +24578,7 @@
       "duration": "CT短縮はバトル中1回のみ",
       "ct": 4,
       "condition": "自身に現在HP20%の自傷。最後の攻撃後、彩光5スタックの敵がいる場合、攻撃力最高味方のスキルCT-2。バトル中1回",
-      "exclusiveWeapon": "専用Lv3: 物理580%",
+      "exclusiveWeapon": "専用Lv3: 物理攻撃が攻撃力×580%になる",
       "compareMemo": "攻撃力+18% / クリティカル+10% / HP+22%",
       "noteUrl": "",
       "imageUrl": "",
@@ -23377,7 +24631,14 @@
             {
               "text": "物理攻撃",
               "multiplier": "物理520%×5回",
-              "damageTotal": "base"
+              "damageTotal": "base",
+              "exclusive": [
+                {
+                  "lv": 3,
+                  "kind": "change",
+                  "multiplier": "物理580%×5回"
+                }
+              ]
             }
           ]
         },
@@ -23394,6 +24655,9 @@
             }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        3
       ]
     },
     {
@@ -23410,7 +24674,7 @@
       "duration": "解除不可",
       "ct": null,
       "condition": "バトル開始時、味方全体の攻撃力を自身の攻撃力25%分増加。紅属性味方はスピード+5%",
-      "exclusiveWeapon": "専用Lv2: 紅属性味方のスピード+20%",
+      "exclusiveWeapon": "専用Lv2: スピードの増加量が20%になる",
       "compareMemo": "攻撃力+18% / クリティカル+10% / HP+22%",
       "noteUrl": "",
       "imageUrl": "",
@@ -23436,10 +24700,20 @@
             },
             {
               "text": "スピード+5%も付与",
-              "condition": "紅属性の味方は"
+              "condition": "紅属性の味方は",
+              "exclusive": [
+                {
+                  "lv": 2,
+                  "kind": "change",
+                  "text": "スピードの増加が20%"
+                }
+              ]
             }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        2
       ]
     },
     {
@@ -23501,7 +24775,7 @@
       "duration": "回避率・被回復量減少1T",
       "ct": 4,
       "condition": "自身に現在HP20%の自傷。攻撃前に1ターン、対象の回避率・被回復量20%減少。自身以外の紅属性味方1体以上なら減少量50%",
-      "exclusiveWeapon": "専用Lv1: 対象5体。専用Lv2: 減少ターン4T。専用Lv3: 790%",
+      "exclusiveWeapon": "専用Lv1: 対象がランダムな敵5体になる。専用Lv2: 回避率減少と被回復量減少のターン数がそれぞれ4ターンになる。専用Lv3: 物理攻撃が攻撃力×790%になる",
       "compareMemo": "攻撃力+18% / 弱体効果命中+10% / クリティカル+10%",
       "noteUrl": "",
       "imageUrl": "",
@@ -23553,11 +24827,24 @@
           "effects": [
             {
               "text": "回避率・被回復量を20%減少",
-              "duration": "1ターン"
+              "duration": "1ターン",
+              "exclusive": [
+                {
+                  "lv": 2,
+                  "kind": "change",
+                  "duration": "4ターン"
+                }
+              ]
             },
             {
               "text": "減少量が50%になる",
               "condition": "自身以外の紅属性の味方が1体以上なら"
+            }
+          ],
+          "exclusiveTarget": [
+            {
+              "lv": 1,
+              "target": "ランダムな敵5体"
             }
           ]
         },
@@ -23570,10 +24857,29 @@
             {
               "text": "物理攻撃",
               "multiplier": "物理740%",
-              "damageTotal": "base"
+              "damageTotal": "base",
+              "exclusive": [
+                {
+                  "lv": 3,
+                  "kind": "change",
+                  "multiplier": "物理790%",
+                  "hits": 5
+                }
+              ]
+            }
+          ],
+          "exclusiveTarget": [
+            {
+              "lv": 1,
+              "target": "ランダムな敵5体"
             }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        1,
+        2,
+        3
       ]
     },
     {
@@ -23778,7 +25084,7 @@
       "duration": "防御・物防-10% 2T / 気絶1T",
       "ct": 4,
       "condition": "自身に現在HP20%の自傷。攻撃前に防御と物防を10%減少。その後70%で攻撃力最高敵を気絶",
-      "exclusiveWeapon": "専用Lv1: 360%。専用Lv2: 紅属性味方4体以上なら気絶対象が攻撃力高い敵2体。専用Lv3: 390%",
+      "exclusiveWeapon": "専用Lv1: 物理攻撃が攻撃力×360%になる。専用Lv2: 自身以外の紅属性の味方の編成数が4体以上の場合、気絶の対象が攻撃力が高い敵2体になる。専用Lv3: 物理攻撃が攻撃力×390%になる",
       "compareMemo": "攻撃力+18% / 弱体効果命中+10% / 命中+10%",
       "noteUrl": "",
       "imageUrl": "",
@@ -23847,7 +25153,19 @@
             {
               "text": "物理攻撃",
               "multiplier": "物理210%×5回",
-              "damageTotal": "base"
+              "damageTotal": "base",
+              "exclusive": [
+                {
+                  "lv": 1,
+                  "kind": "change",
+                  "multiplier": "物理360%×5回"
+                },
+                {
+                  "lv": 3,
+                  "kind": "change",
+                  "multiplier": "物理390%×5回"
+                }
+              ]
             }
           ]
         },
@@ -23861,10 +25179,22 @@
               "text": "気絶を付与",
               "term": "気絶",
               "chance": "70%",
-              "duration": "1ターン"
+              "duration": "1ターン",
+              "exclusive": [
+                {
+                  "lv": 2,
+                  "kind": "change",
+                  "text": "自身以外の紅属性の味方が4体以上なら対象が攻撃力が高い敵2体"
+                }
+              ]
             }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        1,
+        2,
+        3
       ]
     },
     {
@@ -24068,7 +25398,7 @@
       "duration": "",
       "ct": 4,
       "condition": "自身に現在HP10%の自傷。最後の攻撃後、解析3スタック以上で1回まで再発動",
-      "exclusiveWeapon": "専用Lv1: 4回攻撃。専用Lv3: 670%",
+      "exclusiveWeapon": "専用Lv1: 物理攻撃の回数が4回になる。専用Lv3: 物理攻撃が攻撃力×670%になる",
       "compareMemo": "攻撃力+18% / 命中+10% / 物理クリダメ緩和+35%",
       "noteUrl": "",
       "imageUrl": "",
@@ -24121,7 +25451,19 @@
             {
               "text": "物理攻撃",
               "multiplier": "物理610%×3回",
-              "damageTotal": "base"
+              "damageTotal": "base",
+              "exclusive": [
+                {
+                  "lv": 1,
+                  "kind": "change",
+                  "multiplier": "物理610%×4回"
+                },
+                {
+                  "lv": 3,
+                  "kind": "change",
+                  "multiplier": "物理670%×4回"
+                }
+              ]
             }
           ]
         },
@@ -24137,6 +25479,10 @@
             }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        1,
+        3
       ]
     },
     {
@@ -24233,7 +25579,7 @@
       "duration": "解除不可",
       "ct": null,
       "condition": "自身か味方が自傷ダメージを受けるたび解析1スタック付与。最大6スタック。1スタックにつき攻撃力+3%、6スタックでスピード+30%",
-      "exclusiveWeapon": "専用Lv2: 解析1スタックごとの攻撃力増加10%",
+      "exclusiveWeapon": "専用Lv2: 解析1スタックにつき攻撃力の増加量が10%になる",
       "compareMemo": "攻撃力+18% / 命中+10% / 物理クリダメ緩和+35%",
       "noteUrl": "",
       "imageUrl": "",
@@ -24265,7 +25611,14 @@
           "target": "自身",
           "effects": [
             {
-              "text": "解析1スタックにつき攻撃力+3%、6スタックでスピード+30%"
+              "text": "解析1スタックにつき攻撃力+3%、6スタックでスピード+30%",
+              "exclusive": [
+                {
+                  "lv": 2,
+                  "kind": "change",
+                  "text": "解析1スタックにつき攻撃力+10%"
+                }
+              ]
             }
           ]
         }
@@ -24275,6 +25628,9 @@
           "text": "自傷スキルを持つ味方(グィネヴィア・リリコット等)がいるとスタックが早く貯まり、S1の再発動条件にも早く届く。",
           "reason": "カウント対象が自身か味方の自傷回数のため"
         }
+      ],
+      "exclusiveIntegrated": [
+        2
       ]
     },
     {
@@ -24346,7 +25702,7 @@
       "duration": "",
       "ct": 4,
       "condition": "自身に2回、現在HP20%の自傷。70%でバフ最多敵のバフ2つ解除後、ランダム敵に6回攻撃",
-      "exclusiveWeapon": "専用Lv1: 紅属性味方3体以上ならバフ解除数6。専用Lv3: 630%",
+      "exclusiveWeapon": "専用Lv1: 自身以外の紅属性の味方の編成数が3体以上の場合、バフの解除数が6になる。専用Lv3: 物理攻撃が攻撃力×630%になる",
       "compareMemo": "攻撃力+18% / 命中+10% / クリティカル+10%",
       "noteUrl": "",
       "imageUrl": "",
@@ -24398,7 +25754,14 @@
           "effects": [
             {
               "text": "バフを2つ解除",
-              "chance": "70%"
+              "chance": "70%",
+              "exclusive": [
+                {
+                  "lv": 1,
+                  "kind": "change",
+                  "text": "自身以外の紅属性の味方が3体以上ならバフの解除数が6つ"
+                }
+              ]
             }
           ]
         },
@@ -24411,10 +25774,21 @@
             {
               "text": "物理攻撃",
               "multiplier": "物理580%×6回",
-              "damageTotal": "base"
+              "damageTotal": "base",
+              "exclusive": [
+                {
+                  "lv": 3,
+                  "kind": "change",
+                  "multiplier": "物理630%×6回"
+                }
+              ]
             }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        1,
+        3
       ]
     },
     {
@@ -24431,7 +25805,7 @@
       "duration": "沈黙1T",
       "ct": 4,
       "condition": "自身に2回、現在HP20%の自傷。70%でバフ最多敵のバフ2つ解除後、攻撃力が高い敵3体に攻撃。70%で1T沈黙付与",
-      "exclusiveWeapon": "専用Lv2: 沈黙2T",
+      "exclusiveWeapon": "専用Lv2: 沈黙のターン数が2ターンになる",
       "compareMemo": "攻撃力+18% / 命中+10% / クリティカル+10%",
       "noteUrl": "",
       "imageUrl": "",
@@ -24506,10 +25880,20 @@
               "text": "沈黙を付与",
               "term": "沈黙",
               "chance": "70%",
-              "duration": "1ターン"
+              "duration": "1ターン",
+              "exclusive": [
+                {
+                  "lv": 2,
+                  "kind": "change",
+                  "duration": "2ターン"
+                }
+              ]
             }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        2
       ]
     },
     {
@@ -24648,7 +26032,7 @@
       "duration": "攻撃力増加2T",
       "ct": 4,
       "condition": "対象に弱体効果がない場合は2ターン攻撃力40%増加",
-      "exclusiveWeapon": "専用Lv1: HP条件で回復またはクリダメ強化。専用Lv2: 対象2体・解除2つ。専用Lv3: クリダメ強化40%",
+      "exclusiveWeapon": "専用Lv1: 対象のHP割合が50%未満の場合、対象のHPを自身の攻撃力×350%回復する。対象のHP割合が50%以上の場合、2ターンの間対象のクリダメ強化を20%増加させる。専用Lv2: 対象が攻撃力が高い味方2体になり、弱体効果の解除数が2つになる。専用Lv3: クリダメ強化の増加量が40%になる",
       "compareMemo": "攻撃力+18% / 命中+10% / 防御力+5%",
       "noteUrl": "",
       "imageUrl": "",
@@ -24670,12 +26054,38 @@
           "target": "攻撃力が最も高い味方",
           "effects": [
             {
-              "text": "弱体効果を1つ解除"
+              "text": "弱体効果を1つ解除",
+              "exclusive": [
+                {
+                  "lv": 2,
+                  "kind": "change",
+                  "text": "弱体効果の解除数が2つ"
+                },
+                {
+                  "lv": 1,
+                  "kind": "add",
+                  "condition": "対象のHP割合が50%未満なら",
+                  "text": "HPをマーリンの攻撃力350%分回復"
+                },
+                {
+                  "lv": 1,
+                  "kind": "add",
+                  "condition": "対象のHP割合が50%以上なら",
+                  "text": "クリダメ強化を20%増加",
+                  "duration": "2ターン"
+                }
+              ]
             },
             {
               "text": "攻撃力を40%増加",
               "condition": "対象に弱体効果がない場合は",
               "duration": "2ターン"
+            }
+          ],
+          "exclusiveTarget": [
+            {
+              "lv": 2,
+              "target": "攻撃力が高い味方2体"
             }
           ]
         }
@@ -24694,7 +26104,11 @@
         "realityRank": "高",
         "rankingTarget": "対象外",
         "damageMemo": "専用Lv2の対象2体・解除2つが実用性の分岐点。火力ランキングには混ぜない"
-      }
+      },
+      "exclusiveIntegrated": [
+        1,
+        2
+      ]
     },
     {
       "id": "merlin-s2",
@@ -24878,7 +26292,7 @@
       "duration": "攻撃力増加1T",
       "ct": 4,
       "condition": "敵を戦闘不能にすると自身の攻撃力50%増加",
-      "exclusiveWeapon": "専用Lv1: 攻撃前に防御力80%減少。専用Lv2: 防御力減少と攻撃力増加が2T。専用Lv3: 5回攻撃",
+      "exclusiveWeapon": "専用Lv1: 物理攻撃の前に1ターンの間対象の防御力を80%減少させる。専用Lv2: 防御力減少と攻撃力増加のターン数がそれぞれ2ターンになる。専用Lv3: 物理攻撃の回数が5回になる",
       "compareMemo": "攻撃力+18% / 命中+10% / クリダメ強化+35%",
       "noteUrl": "",
       "imageUrl": "",
@@ -24909,31 +26323,70 @@
       ],
       "flow": [
         {
-          "when": "攻撃時",
+          "when": "攻撃前",
           "mode": "sequence",
           "order": 1,
+          "exclusiveLv": 1,
+          "target": "ランダムな敵",
+          "effects": [
+            {
+              "text": "防御力を80%減少",
+              "duration": "1ターン",
+              "exclusive": [
+                {
+                  "lv": 2,
+                  "kind": "change",
+                  "duration": "2ターン"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "when": "攻撃時",
+          "mode": "sequence",
+          "order": 2,
           "target": "ランダムな敵",
           "effects": [
             {
               "text": "物理攻撃",
               "multiplier": "物理570%×4回",
-              "damageTotal": "base"
+              "damageTotal": "base",
+              "exclusive": [
+                {
+                  "lv": 3,
+                  "kind": "change",
+                  "multiplier": "物理570%×5回"
+                }
+              ]
             }
           ]
         },
         {
           "when": "攻撃後",
           "mode": "sequence",
-          "order": 2,
+          "order": 3,
           "target": "自身",
           "effects": [
             {
               "text": "攻撃力を50%増加",
               "condition": "このスキルで敵を戦闘不能にすると",
-              "duration": "1ターン"
+              "duration": "1ターン",
+              "exclusive": [
+                {
+                  "lv": 2,
+                  "kind": "change",
+                  "duration": "2ターン"
+                }
+              ]
             }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        1,
+        2,
+        3
       ]
     },
     {
@@ -26417,7 +27870,7 @@
       "duration": "HPドレイン増加4ターン",
       "ct": 4,
       "condition": "自身に4T HPドレイン40%増加を付与",
-      "exclusiveWeapon": "専用Lv1: 対象5体",
+      "exclusiveWeapon": "専用Lv1: 対象がランダムな敵5体になる",
       "compareMemo": "耐久力+8% / 攻撃力+18% / 防御力+5%",
       "noteUrl": "",
       "imageUrl": "",
@@ -26458,6 +27911,12 @@
               "multiplier": "物理480%",
               "damageTotal": "base"
             }
+          ],
+          "exclusiveTarget": [
+            {
+              "lv": 1,
+              "target": "ランダムな敵5体"
+            }
           ]
         },
         {
@@ -26472,6 +27931,9 @@
             }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        1
       ]
     },
     {
@@ -26549,7 +28011,7 @@
       "duration": "解除不可",
       "ct": null,
       "condition": "隣接味方2体の最大HPを自身最大HP20%増加し、自身の最大HP100%増加。解除不可",
-      "exclusiveWeapon": "専用Lv2: 隣接味方2体の最大HP増加が自身最大HP50%",
+      "exclusiveWeapon": "専用Lv2: 隣接する味方の最大HPの増加量が自身の最大HP×50%になる",
       "compareMemo": "耐久力+8% / 攻撃力+18% / 防御力+5%",
       "noteUrl": "",
       "imageUrl": "",
@@ -26581,10 +28043,20 @@
           "target": "隣接する味方2体",
           "effects": [
             {
-              "text": "最大HPを、フィアー自身の最大HP20%分増加"
+              "text": "最大HPを、フィアー自身の最大HP20%分増加",
+              "exclusive": [
+                {
+                  "lv": 2,
+                  "kind": "change",
+                  "text": "フィアー自身の最大HP50%分"
+                }
+              ]
             }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        2
       ]
     },
     {
@@ -26601,7 +28073,7 @@
       "duration": "カウンタ増加2ターン",
       "ct": null,
       "condition": "ターン開始時、スピード最低の味方のカウンタを10%増加。攻撃を受けた時、被ダメージ20%回復(最大で自身最大HP10%まで)。再発動制限4回行動",
-      "exclusiveWeapon": "専用Lv3: 回復30%、回復上限15%",
+      "exclusiveWeapon": "専用Lv3: HP回復量が受けたダメージ×30%になり、回復量の上限が自身の最大HP×15%になる",
       "compareMemo": "耐久力+8% / 攻撃力+18% / 防御力+5%",
       "noteUrl": "",
       "imageUrl": "",
@@ -26638,10 +28110,20 @@
           "effects": [
             {
               "text": "被ダメージの20%をHP回復",
-              "note": "最大で自身の最大HP10%まで"
+              "note": "最大で自身の最大HP10%まで",
+              "exclusive": [
+                {
+                  "lv": 3,
+                  "kind": "change",
+                  "text": "被ダメージの30%をHP回復し、上限が自身の最大HP15%"
+                }
+              ]
             }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        3
       ]
     },
     {
@@ -26954,7 +28436,7 @@
       "duration": "",
       "ct": 4,
       "condition": "自身以外の攻撃力最高の味方HPを対象最大HP10%回復。対象が弱体効果中なら弱体効果2つ解除",
-      "exclusiveWeapon": "専用Lv1: HP回復量が対象最大HP15%",
+      "exclusiveWeapon": "専用Lv1: HPの回復量が対象の最大HP×15%になる",
       "compareMemo": "耐久力+8% / HP+22% / 弱体効果耐性+10%",
       "noteUrl": "",
       "imageUrl": "",
@@ -27007,7 +28489,14 @@
           "target": "自身以外で攻撃力が最も高い味方",
           "effects": [
             {
-              "text": "HPを対象の最大HP10%回復"
+              "text": "HPを対象の最大HP10%回復",
+              "exclusive": [
+                {
+                  "lv": 1,
+                  "kind": "change",
+                  "text": "対象の最大HP15%回復"
+                }
+              ]
             },
             {
               "text": "弱体を2つ解除",
@@ -27015,6 +28504,9 @@
             }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        1
       ]
     },
     {
@@ -27031,7 +28523,7 @@
       "duration": "",
       "ct": 4,
       "condition": "対象が弱体効果中なら弱体効果1つ解除。このスキルを最大3回再発動",
-      "exclusiveWeapon": "専用Lv3: HP回復量が自身最大HP4%",
+      "exclusiveWeapon": "専用Lv3: HPの回復量が自身の最大HP×4%になる",
       "compareMemo": "耐久力+8% / HP+22% / 弱体効果耐性+10%",
       "noteUrl": "",
       "imageUrl": "",
@@ -27056,7 +28548,14 @@
           "target": "HP割合が最も低い味方",
           "effects": [
             {
-              "text": "HPをユニの最大HP3%回復"
+              "text": "HPをユニの最大HP3%回復",
+              "exclusive": [
+                {
+                  "lv": 3,
+                  "kind": "change",
+                  "text": "ユニの最大HP4%回復"
+                }
+              ]
             },
             {
               "text": "弱体を1つ解除",
@@ -27068,6 +28567,9 @@
             }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        3
       ]
     },
     {
@@ -27084,7 +28586,7 @@
       "duration": "最大HP増加は解除不可",
       "ct": null,
       "condition": "攻撃力最高味方やHP割合最低味方の最大HPを増加。最大9スタック、解除不可。最大HP増加後に対象のHPを自身の攻撃力10%回復",
-      "exclusiveWeapon": "専用Lv2: 攻撃力最高味方の最大HP増加が自身最大HP50%",
+      "exclusiveWeapon": "専用Lv2: 自身以外の攻撃力が最も高い味方の最大HPの増加量が自身の最大HP×50%になる",
       "compareMemo": "耐久力+8% / HP+22% / 弱体効果耐性+10%",
       "noteUrl": "",
       "imageUrl": "",
@@ -27106,13 +28608,23 @@
           "effects": [
             {
               "text": "最大HPを増加",
-              "note": "最大9スタック、解除不可"
+              "note": "最大9スタック、解除不可",
+              "exclusive": [
+                {
+                  "lv": 2,
+                  "kind": "change",
+                  "text": "攻撃力が最も高い味方の最大HPの増加がユニの最大HP50%分"
+                }
+              ]
             },
             {
               "text": "最大HP増加後、対象のHPをユニの攻撃力10%分回復"
             }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        2
       ]
     },
     {
@@ -27425,7 +28937,7 @@
       "duration": "遅延1ターン",
       "ct": 4,
       "condition": "70%で1T遅延を付与。遅延判定後、自身HPを最大HP10%回復",
-      "exclusiveWeapon": "専用Lv1: 対象3体",
+      "exclusiveWeapon": "専用Lv1: 魔法攻撃の対象がランダムな敵3体になる",
       "compareMemo": "攻撃力+18% / 弱体効果命中+10% / HP+22%",
       "noteUrl": "",
       "imageUrl": "",
@@ -27474,6 +28986,12 @@
               "chance": "70%",
               "duration": "1ターン"
             }
+          ],
+          "exclusiveTarget": [
+            {
+              "lv": 1,
+              "target": "ランダムな敵3体"
+            }
           ]
         },
         {
@@ -27488,6 +29006,9 @@
             }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        1
       ]
     },
     {
@@ -27504,7 +29025,7 @@
       "duration": "",
       "ct": 4,
       "condition": "自身HPを最大HP10%回復。自身がアクティブスキルで回復を受けた回数6以上なら魔法1760%×4回",
-      "exclusiveWeapon": "専用Lv3: 魔法480%、条件時1920%",
+      "exclusiveWeapon": "専用Lv3: 魔法攻撃が攻撃力×480%になる。回復を受けた回数が6回以上の場合は攻撃力×1920%になる",
       "compareMemo": "攻撃力+18% / 弱体効果命中+10% / HP+22%",
       "noteUrl": "",
       "imageUrl": "",
@@ -27557,13 +29078,27 @@
             {
               "text": "魔法攻撃",
               "multiplier": "魔法440%×4回",
-              "damageTotal": "base"
+              "damageTotal": "base",
+              "exclusive": [
+                {
+                  "lv": 3,
+                  "kind": "change",
+                  "multiplier": "魔法480%"
+                }
+              ]
             },
             {
               "text": "魔法攻撃のダメージが変わる",
               "condition": "自身がアクティブスキルで回復を受けた回数が6以上なら",
               "multiplier": "魔法1760%×4回",
-              "damageTotal": "conditionMax"
+              "damageTotal": "conditionMax",
+              "exclusive": [
+                {
+                  "lv": 3,
+                  "kind": "change",
+                  "multiplier": "魔法1920%×4回"
+                }
+              ]
             }
           ]
         }
@@ -27573,6 +29108,9 @@
           "text": "ミラにアクティブ回復を多く当てられる味方(例: コベルの3回連続回復)がいると条件解禁が早い。",
           "reason": "条件がアクティブスキルで回復を受けた回数のため"
         }
+      ],
+      "exclusiveIntegrated": [
+        3
       ]
     },
     {
@@ -27589,7 +29127,7 @@
       "duration": "解除不可",
       "ct": null,
       "condition": "味方全体の最大HP15%増加。対象が翠属性なら自身攻撃力100%分追加。自身最大HP500%増加。解除不可",
-      "exclusiveWeapon": "専用Lv2: 味方全体25%、翠属性は攻撃力200%分追加",
+      "exclusiveWeapon": "専用Lv2: 味方全体の最大HPの増加量が25%になり、対象が翠属性の場合は自身の攻撃力×200%分を追加する",
       "compareMemo": "攻撃力+18% / 弱体効果命中+10% / HP+22%",
       "noteUrl": "",
       "imageUrl": "",
@@ -27614,11 +29152,25 @@
           "effects": [
             {
               "text": "最大HPを15%増加",
-              "note": "解除不可"
+              "note": "解除不可",
+              "exclusive": [
+                {
+                  "lv": 2,
+                  "kind": "change",
+                  "text": "最大HPの増加が25%"
+                }
+              ]
             },
             {
               "text": "ミラの攻撃力100%分をさらに追加",
-              "condition": "対象が翠属性なら"
+              "condition": "対象が翠属性なら",
+              "exclusive": [
+                {
+                  "lv": 2,
+                  "kind": "change",
+                  "text": "追加がミラの攻撃力200%分"
+                }
+              ]
             }
           ]
         },
@@ -27633,6 +29185,9 @@
             }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        2
       ]
     },
     {
@@ -27694,7 +29249,7 @@
       "duration": "脱力4ターン",
       "ct": 4,
       "condition": "70%で4T脱力を付与。7T目以降なら物理1920%",
-      "exclusiveWeapon": "専用Lv1: 対象5体",
+      "exclusiveWeapon": "専用Lv1: 対象がランダムな敵5体になる",
       "compareMemo": "技力+8% / 攻撃力+18% / HP+22%",
       "noteUrl": "",
       "imageUrl": "",
@@ -27749,8 +29304,17 @@
               "duration": "4ターン",
               "note": "攻撃力30%減少"
             }
+          ],
+          "exclusiveTarget": [
+            {
+              "lv": 1,
+              "target": "ランダムな敵5体"
+            }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        1
       ]
     },
     {
@@ -27767,7 +29331,7 @@
       "duration": "浸食2ターン",
       "ct": 4,
       "condition": "70%で2T浸食を付与。7T目以降なら物理2080%",
-      "exclusiveWeapon": "専用Lv3: 物理580%、7T目以降2320%",
+      "exclusiveWeapon": "専用Lv3: 物理攻撃が攻撃力×580%になる。7ターン目以降は攻撃力×2320%になる",
       "compareMemo": "技力+8% / 攻撃力+18% / HP+22%",
       "noteUrl": "",
       "imageUrl": "",
@@ -27806,13 +29370,27 @@
             {
               "text": "物理攻撃",
               "multiplier": "物理520%",
-              "damageTotal": "base"
+              "damageTotal": "base",
+              "exclusive": [
+                {
+                  "lv": 3,
+                  "kind": "change",
+                  "multiplier": "物理580%"
+                }
+              ]
             },
             {
               "text": "物理攻撃のダメージが変わる",
               "condition": "7ターン目以降は",
               "multiplier": "物理2080%",
-              "damageTotal": "conditionMax"
+              "damageTotal": "conditionMax",
+              "exclusive": [
+                {
+                  "lv": 3,
+                  "kind": "change",
+                  "multiplier": "物理2320%"
+                }
+              ]
             },
             {
               "text": "浸食を付与",
@@ -27822,6 +29400,9 @@
             }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        3
       ]
     },
     {
@@ -27884,7 +29465,7 @@
       "duration": "HPドレイン6ターン / 解除不可",
       "ct": null,
       "condition": "被ダメージ減少は解除不可。バトル開始時6T自身のHPドレイン増加。7T目開始時に自身のスキルCTを0にする",
-      "exclusiveWeapon": "専用Lv2: 被ダメージ減少60%",
+      "exclusiveWeapon": "専用Lv2: 被ダメージの減少量が60%になる",
       "compareMemo": "技力+8% / 攻撃力+18% / HP+22%",
       "noteUrl": "",
       "imageUrl": "",
@@ -27909,7 +29490,14 @@
           "effects": [
             {
               "text": "受けるダメージを20%減少",
-              "note": "解除不可"
+              "note": "解除不可",
+              "exclusive": [
+                {
+                  "lv": 2,
+                  "kind": "change",
+                  "text": "受けるダメージの減少が60%"
+                }
+              ]
             }
           ]
         },
@@ -27940,6 +29528,9 @@
         {
           "text": "7ターン目のCTリセットとS1・S2の後半強化が同時に噛み合う、後半特化の自己完結設計。根拠: いずれも発動条件が「7ターン目開始時」のため"
         }
+      ],
+      "exclusiveIntegrated": [
+        2
       ]
     },
     {
@@ -28208,7 +29799,7 @@
       "duration": "",
       "ct": 4,
       "condition": "自身HPを最大HP10%回復。7T目以降ならHP回復せず物理ダメージ2倍",
-      "exclusiveWeapon": "専用Lv1: 対象5体。専用Lv3: 物理590%",
+      "exclusiveWeapon": "専用Lv1: 物理攻撃の対象がランダムな敵5体になる。専用Lv3: 物理攻撃が攻撃力×590%になる",
       "compareMemo": "攻撃力+18% / HP+22% / クリティカル+10%",
       "noteUrl": "",
       "imageUrl": "",
@@ -28265,7 +29856,15 @@
             {
               "text": "物理攻撃",
               "multiplier": "物理540%",
-              "damageTotal": "base"
+              "damageTotal": "base",
+              "exclusive": [
+                {
+                  "lv": 3,
+                  "kind": "change",
+                  "multiplier": "物理590%",
+                  "hits": 5
+                }
+              ]
             },
             {
               "text": "物理ダメージが2倍になる",
@@ -28273,8 +29872,18 @@
               "multiplier": "物理1080%（540%×2）",
               "damageTotal": "conditionMax"
             }
+          ],
+          "exclusiveTarget": [
+            {
+              "lv": 1,
+              "target": "ランダムな敵5体"
+            }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        1,
+        3
       ]
     },
     {
@@ -28436,7 +30045,7 @@
       "duration": "解除不可",
       "ct": null,
       "condition": "バトル開始時最大HPと被ダメージ減少。7T開始時にスキルCTを0にしスピード増加。解除不可",
-      "exclusiveWeapon": "専用Lv2: 最大HP増加100%",
+      "exclusiveWeapon": "専用Lv2: 最大HPの増加量が100%になる",
       "compareMemo": "攻撃力+18% / HP+22% / クリティカル+10%",
       "noteUrl": "",
       "imageUrl": "",
@@ -28458,7 +30067,14 @@
           "effects": [
             {
               "text": "最大HP40%増加・被ダメージ65%減少",
-              "note": "解除不可"
+              "note": "解除不可",
+              "exclusive": [
+                {
+                  "lv": 2,
+                  "kind": "change",
+                  "text": "最大HPの増加が100%"
+                }
+              ]
             }
           ]
         },
@@ -28475,6 +30091,9 @@
             }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        2
       ]
     },
     {
@@ -28491,7 +30110,7 @@
       "duration": "クリティカル率減少3ターン / 気絶1ターン",
       "ct": 5,
       "condition": "70%で3Tクリティカル率30%減少、70%で攻撃力最高の敵に1T気絶",
-      "exclusiveWeapon": "専用Lv1: 気絶2T。専用Lv3: 魔法470%",
+      "exclusiveWeapon": "専用Lv1: 気絶のターン数が2ターンになる。専用Lv3: 魔法攻撃が攻撃力×470%になる",
       "compareMemo": "魔力+8% / 攻撃力+18% / 弱体効果命中+10%",
       "noteUrl": "",
       "imageUrl": "",
@@ -28534,7 +30153,14 @@
             {
               "text": "魔法攻撃",
               "multiplier": "魔法420%",
-              "damageTotal": "base"
+              "damageTotal": "base",
+              "exclusive": [
+                {
+                  "lv": 3,
+                  "kind": "change",
+                  "multiplier": "魔法470%"
+                }
+              ]
             },
             {
               "text": "クリティカル率30%減少を付与",
@@ -28553,10 +30179,21 @@
               "text": "気絶を付与",
               "term": "気絶",
               "chance": "70%",
-              "duration": "1ターン"
+              "duration": "1ターン",
+              "exclusive": [
+                {
+                  "lv": 1,
+                  "kind": "change",
+                  "duration": "2ターン"
+                }
+              ]
             }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        1,
+        3
       ]
     },
     {
@@ -28684,7 +30321,7 @@
       "duration": "解除不可",
       "ct": null,
       "condition": "最大HP増加は解除不可。攻撃を受けたときダメージを遮断",
-      "exclusiveWeapon": "専用Lv2: 条件時の遮断量70%",
+      "exclusiveWeapon": "専用Lv2: 攻撃してきた敵のスピードが自身より低い場合、もしくはカウンタダメージを受けたとき、遮断量が70%になる",
       "compareMemo": "魔力+8% / 攻撃力+18% / 弱体効果命中+10%",
       "noteUrl": "",
       "imageUrl": "",
@@ -28716,10 +30353,20 @@
           "target": "自身",
           "effects": [
             {
-              "text": "ダメージを50%遮断"
+              "text": "ダメージを50%遮断",
+              "exclusive": [
+                {
+                  "lv": 2,
+                  "kind": "change",
+                  "text": "攻撃してきた敵のスピードが自身より低い場合とカウンタダメージを受けたときの遮断が70%"
+                }
+              ]
             }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        2
       ]
     },
     {
@@ -28736,7 +30383,7 @@
       "duration": "",
       "ct": 4,
       "condition": "自身HPを最大HP5%回復。70%で6Tバフ無効を付与",
-      "exclusiveWeapon": "専用Lv1: 対象3体。専用Lv3: 物理680%",
+      "exclusiveWeapon": "専用Lv1: 物理攻撃の対象が攻撃力が高い敵3体になる。専用Lv3: 物理攻撃が攻撃力×680%になる",
       "compareMemo": "攻撃力+18% / HP+22% / 弱体効果命中+10%",
       "noteUrl": "",
       "imageUrl": "",
@@ -28745,9 +30392,9 @@
         "singleMultiplier": 620,
         "hitCount": 2,
         "baseTotal": 1240,
-        "exclusiveLv1Total": 1240,
-        "exclusiveLv2Total": 1240,
-        "exclusiveLv3Total": 1240,
+        "exclusiveLv1Total": 1860,
+        "exclusiveLv2Total": 1860,
+        "exclusiveLv3Total": 2040,
         "conditionMaxTotal": 1240,
         "conditionMaxNote": "",
         "powerType": "通常攻撃倍率",
@@ -28789,15 +30436,33 @@
             {
               "text": "物理攻撃",
               "multiplier": "物理620%",
-              "damageTotal": "base"
+              "damageTotal": "base",
+              "exclusive": [
+                {
+                  "lv": 3,
+                  "kind": "change",
+                  "multiplier": "物理680%",
+                  "hits": 3
+                }
+              ]
             },
             {
               "text": "バフ無効を付与",
               "chance": "70%",
               "duration": "6ターン"
             }
+          ],
+          "exclusiveTarget": [
+            {
+              "lv": 1,
+              "target": "攻撃力が高い敵3体"
+            }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        1,
+        3
       ]
     },
     {
@@ -29003,7 +30668,7 @@
       "duration": "",
       "ct": 4,
       "condition": "自身HPを最大HP10%回復。7T目以降HP回復なし。攻撃前4T被ダメージ増加と魔法防御力減少を付与",
-      "exclusiveWeapon": "専用Lv1: 対象5体、魔法720%",
+      "exclusiveWeapon": "専用Lv1: 魔法攻撃の対象がランダムな敵5体になり、魔法攻撃が攻撃力×720%になる",
       "compareMemo": "魔力+8% / 攻撃力+18% / 弱体効果耐性+10%",
       "noteUrl": "",
       "imageUrl": "",
@@ -29012,9 +30677,9 @@
         "singleMultiplier": 320,
         "hitCount": 3,
         "baseTotal": 960,
-        "exclusiveLv1Total": 960,
-        "exclusiveLv2Total": 960,
-        "exclusiveLv3Total": 960,
+        "exclusiveLv1Total": 3600,
+        "exclusiveLv2Total": 3600,
+        "exclusiveLv3Total": 3600,
         "conditionMaxTotal": 960,
         "conditionMaxNote": "",
         "powerType": "通常攻撃倍率",
@@ -29061,6 +30726,12 @@
               "text": "被ダメージ増加と魔法防御力減少を付与",
               "duration": "4ターン"
             }
+          ],
+          "exclusiveTarget": [
+            {
+              "lv": 1,
+              "target": "ランダムな敵5体"
+            }
           ]
         },
         {
@@ -29072,10 +30743,27 @@
             {
               "text": "魔法攻撃",
               "multiplier": "魔法320%",
-              "damageTotal": "base"
+              "damageTotal": "base",
+              "exclusive": [
+                {
+                  "lv": 1,
+                  "kind": "change",
+                  "multiplier": "魔法720%",
+                  "hits": 5
+                }
+              ]
+            }
+          ],
+          "exclusiveTarget": [
+            {
+              "lv": 1,
+              "target": "ランダムな敵5体"
             }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        1
       ]
     },
     {
@@ -29092,7 +30780,7 @@
       "duration": "",
       "ct": 4,
       "condition": "自身と攻撃力最高の味方HPを自身最大HP7%回復。7T目以降HP回復なし。7T目以降は最終攻撃後70%で攻撃力が高い敵2体に2T沈黙",
-      "exclusiveWeapon": "専用Lv3: 魔法780%",
+      "exclusiveWeapon": "専用Lv3: 魔法攻撃が攻撃力×780%になる",
       "compareMemo": "魔力+8% / 攻撃力+18% / 弱体効果耐性+10%",
       "noteUrl": "",
       "imageUrl": "",
@@ -29103,7 +30791,7 @@
         "baseTotal": 2840,
         "exclusiveLv1Total": 2840,
         "exclusiveLv2Total": 2840,
-        "exclusiveLv3Total": 2840,
+        "exclusiveLv3Total": 3120,
         "conditionMaxTotal": 2840,
         "conditionMaxNote": "",
         "powerType": "通常攻撃倍率",
@@ -29150,7 +30838,14 @@
             {
               "text": "魔法攻撃",
               "multiplier": "魔法710%×4回",
-              "damageTotal": "base"
+              "damageTotal": "base",
+              "exclusive": [
+                {
+                  "lv": 3,
+                  "kind": "change",
+                  "multiplier": "魔法780%×4回"
+                }
+              ]
             }
           ]
         },
@@ -29169,6 +30864,9 @@
             }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        3
       ]
     },
     {
@@ -29185,7 +30883,7 @@
       "duration": "",
       "ct": null,
       "condition": "バトル開始時に付与、解除不可。7T目開始時、自身のスキルCTを0にする",
-      "exclusiveWeapon": "専用Lv2: 被ダメージ減少40%、最大HP増加100%",
+      "exclusiveWeapon": "専用Lv2: 被ダメージの減少量が40%、最大HPの増加量が100%になる",
       "compareMemo": "魔力+8% / 攻撃力+18% / 弱体効果耐性+10%",
       "noteUrl": "",
       "imageUrl": "",
@@ -29207,7 +30905,14 @@
           "effects": [
             {
               "text": "被ダメージ減少・最大HP増加・防御力150%増加",
-              "note": "解除不可"
+              "note": "解除不可",
+              "exclusive": [
+                {
+                  "lv": 2,
+                  "kind": "change",
+                  "text": "被ダメージの減少が40%、最大HPの増加が100%"
+                }
+              ]
             }
           ]
         },
@@ -29221,6 +30926,9 @@
             }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        2
       ]
     },
     {
@@ -29598,7 +31306,7 @@
       "duration": "",
       "ct": 4,
       "condition": "自身に4T再生を付与し毎ターン最大HP10%回復。再生前に自身の最大HP10%増加、最大2スタック。魔法攻撃",
-      "exclusiveWeapon": "専用Lv1: 最大HP増加と再生の対象が味方全体。専用Lv2: 最大HP40%。専用Lv3: 魔法480%",
+      "exclusiveWeapon": "専用Lv1: 最大HP増加と再生を付与する対象が味方全体になる。専用Lv2: 最大HPの増加量が40%になる。専用Lv3: 魔法攻撃が攻撃力×480%になる",
       "compareMemo": "攻撃力+18% / HP+22% / 弱体効果耐性+10%",
       "noteUrl": "",
       "imageUrl": "",
@@ -29609,7 +31317,7 @@
         "baseTotal": 1760,
         "exclusiveLv1Total": 1760,
         "exclusiveLv2Total": 1760,
-        "exclusiveLv3Total": 1760,
+        "exclusiveLv3Total": 1920,
         "conditionMaxTotal": 1760,
         "conditionMaxNote": "",
         "powerType": "通常攻撃倍率",
@@ -29640,13 +31348,26 @@
           "effects": [
             {
               "text": "最大HPを10%増加",
-              "note": "最大2スタック、解除不可"
+              "note": "最大2スタック、解除不可",
+              "exclusive": [
+                {
+                  "lv": 2,
+                  "kind": "change",
+                  "text": "最大HPの増加が40%"
+                }
+              ]
             },
             {
               "text": "再生を付与",
               "term": "再生",
               "duration": "4ターン",
               "note": "毎ターン最大HP10%回復、解除不可"
+            }
+          ],
+          "exclusiveTarget": [
+            {
+              "lv": 1,
+              "target": "味方全体"
             }
           ]
         },
@@ -29659,10 +31380,22 @@
             {
               "text": "魔法攻撃",
               "multiplier": "魔法440%×4回",
-              "damageTotal": "base"
+              "damageTotal": "base",
+              "exclusive": [
+                {
+                  "lv": 3,
+                  "kind": "change",
+                  "multiplier": "魔法480%×4回"
+                }
+              ]
             }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        1,
+        2,
+        3
       ]
     },
     {
@@ -30145,8 +31878,17 @@
               "condition": "紅属性の味方が2体以上なら",
               "duration": "2ターン"
             }
+          ],
+          "exclusiveTarget": [
+            {
+              "lv": 2,
+              "target": "自身と攻撃力が高い味方2体"
+            }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        2
       ]
     },
     {
@@ -30163,7 +31905,7 @@
       "duration": "クリティカル率・クリダメ強化4T",
       "ct": 4,
       "condition": "Lv2で攻撃前に攻撃力が高い味方2体のクリティカル率とクリダメ強化を増加。メインクエストまたは9ターン目以降は増加量上昇",
-      "exclusiveWeapon": "専用Lv1: 対象5体。専用Lv3: 物理580%",
+      "exclusiveWeapon": "専用Lv1: 物理攻撃の対象がランダムな敵5体になる。専用Lv3: 物理攻撃が攻撃力×580%になる",
       "compareMemo": "味方火力支援と範囲攻撃を兼ねるコラボキャラ",
       "noteUrl": "",
       "imageUrl": "",
@@ -30221,7 +31963,21 @@
             {
               "text": "物理攻撃",
               "multiplier": "物理530%",
-              "damageTotal": "base"
+              "damageTotal": "base",
+              "exclusive": [
+                {
+                  "lv": 3,
+                  "kind": "change",
+                  "multiplier": "物理580%",
+                  "hits": 5
+                }
+              ]
+            }
+          ],
+          "exclusiveTarget": [
+            {
+              "lv": 1,
+              "target": "ランダムな敵5体"
             }
           ]
         }
@@ -30231,6 +31987,10 @@
           "text": "クリティカル依存で火力が伸びる味方(クリティカルで攻撃回数や倍率が増えるスキル持ち)と噛み合う。",
           "reason": "クリ率・クリダメ強化が相手の発動条件を満たしやすくするため"
         }
+      ],
+      "exclusiveIntegrated": [
+        1,
+        3
       ]
     },
     {
@@ -30318,7 +32078,7 @@
       "duration": "2-4T",
       "ct": null,
       "condition": "ターン開始時に攻撃力が最も高い味方へ攻撃力増加。発動後4回行動終了まで再発動しない",
-      "exclusiveWeapon": "専用Lv2: 対象が攻撃力が高い味方2体",
+      "exclusiveWeapon": "専用Lv2: 攻撃力増加の対象が攻撃力が高い味方2体になる",
       "compareMemo": "メインクエストまたは9ターン目以降に支援量が大きくなる",
       "noteUrl": "",
       "imageUrl": "",
@@ -30352,8 +32112,17 @@
               "text": "増加量が50%になる",
               "condition": "オートバトル・ボスバトル、または9ターン目以降の発動なら"
             }
+          ],
+          "exclusiveTarget": [
+            {
+              "lv": 2,
+              "target": "攻撃力が高い味方2体"
+            }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        2
       ]
     },
     {
@@ -30428,7 +32197,7 @@
       "duration": "気絶1T",
       "ct": 4,
       "condition": "30-70%で気絶を付与",
-      "exclusiveWeapon": "専用Lv1: 対象3体。専用Lv3: 魔法240%",
+      "exclusiveWeapon": "専用Lv1: 対象が攻撃力が高い敵3体になる。専用Lv3: 魔法攻撃が攻撃力×240%になる",
       "compareMemo": "高攻撃力対象へ気絶を狙う妨害スキル",
       "noteUrl": "",
       "imageUrl": "",
@@ -30468,7 +32237,15 @@
             {
               "text": "魔法攻撃",
               "multiplier": "魔法160%",
-              "damageTotal": "base"
+              "damageTotal": "base",
+              "exclusive": [
+                {
+                  "lv": 3,
+                  "kind": "change",
+                  "multiplier": "魔法240%",
+                  "hits": 3
+                }
+              ]
             },
             {
               "text": "気絶を付与",
@@ -30476,8 +32253,18 @@
               "chance": "70%",
               "duration": "1ターン"
             }
+          ],
+          "exclusiveTarget": [
+            {
+              "lv": 1,
+              "target": "攻撃力が高い敵3体"
+            }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        1,
+        3
       ]
     },
     {
@@ -30580,7 +32367,7 @@
       "duration": "2T / 解除不可",
       "ct": null,
       "condition": "バトル開始時に弱体効果命中率を増加。同属性3体以上でスピード増加も付与",
-      "exclusiveWeapon": "専用Lv2: スピード増加量30%",
+      "exclusiveWeapon": "専用Lv2: スピードの増加量が30%になる",
       "compareMemo": "短期の弱体命中補助",
       "noteUrl": "",
       "imageUrl": "",
@@ -30608,10 +32395,20 @@
             {
               "text": "スピード増加も付与",
               "condition": "同属性の味方が3体以上なら",
-              "duration": "2ターン"
+              "duration": "2ターン",
+              "exclusive": [
+                {
+                  "lv": 2,
+                  "kind": "change",
+                  "text": "スピードの増加が30%"
+                }
+              ]
             }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        2
       ]
     },
     {
@@ -30681,7 +32478,7 @@
       "duration": "命中率増加1T",
       "ct": 4,
       "condition": "3回目以降は連撃ダメージ3倍。Lv2で戦闘不能にできなかった場合にバフ解除と追加攻撃",
-      "exclusiveWeapon": "専用Lv1: 連撃240%。専用Lv3: 冥属性味方3体以上で防御貫通+40%",
+      "exclusiveWeapon": "専用Lv1: 最初の連撃のダメージが攻撃力×240%になる",
       "compareMemo": "長期戦で大きく伸びる正面単体連撃",
       "noteUrl": "",
       "imageUrl": "",
@@ -30723,7 +32520,14 @@
             {
               "text": "物理攻撃",
               "multiplier": "物理140%×10回",
-              "damageTotal": "base"
+              "damageTotal": "base",
+              "exclusive": [
+                {
+                  "lv": 1,
+                  "kind": "change",
+                  "multiplier": "物理240%×10回"
+                }
+              ]
             },
             {
               "text": "連撃のダメージが3倍になる",
@@ -30745,6 +32549,9 @@
             }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        1
       ]
     },
     {
@@ -30883,7 +32690,7 @@
       "duration": "HP1耐え / 多重バリア1-3層",
       "ct": null,
       "condition": "同一敵からの2回目以降の自身へのダメージを遮断。致命ダメージ時にHP1で耐えて回復",
-      "exclusiveWeapon": "専用Lv2: 多重バリア3層、HP回復量100%",
+      "exclusiveWeapon": "専用Lv2: 多重バリアが3層になり、致命的なダメージを受けたときのHP回復量が最大HP×100%になる。専用Lv3: 冥属性の味方が3体以上の場合、防御貫通を40%増加させる",
       "compareMemo": "献身で受ける被弾を支える耐久パッシブ",
       "noteUrl": "",
       "imageUrl": "",
@@ -30911,7 +32718,14 @@
               "text": "同一の敵からの2回目以降のダメージを70%遮断"
             },
             {
-              "text": "多重バリアを付与"
+              "text": "多重バリアを付与",
+              "exclusive": [
+                {
+                  "lv": 2,
+                  "kind": "change",
+                  "text": "多重バリアが3層"
+                }
+              ]
             }
           ]
         },
@@ -30925,6 +32739,12 @@
             }
           ]
         }
+      ],
+      "exclusiveRest": {
+        "2": "致命的なダメージを受けたときのHP回復量が最大HP×100%になる"
+      },
+      "exclusiveIntegrated": [
+        2
       ]
     },
     {
@@ -30941,7 +32761,7 @@
       "duration": "弱体効果命中率減少4T",
       "ct": 4,
       "condition": "40-70%で弱体効果命中率減少を付与",
-      "exclusiveWeapon": "専用Lv1: 対象5体。専用Lv3: 物理240%",
+      "exclusiveWeapon": "専用Lv1: 物理攻撃の対象がランダムな敵5体になる。専用Lv3: 物理攻撃が攻撃力×240%になる",
       "compareMemo": "弱体命中を下げる範囲妨害",
       "noteUrl": "",
       "imageUrl": "",
@@ -30980,15 +32800,33 @@
             {
               "text": "物理攻撃",
               "multiplier": "物理220%",
-              "damageTotal": "base"
+              "damageTotal": "base",
+              "exclusive": [
+                {
+                  "lv": 3,
+                  "kind": "change",
+                  "multiplier": "物理240%",
+                  "hits": 5
+                }
+              ]
             },
             {
               "text": "弱体効果命中率減少を付与",
               "chance": "70%",
               "duration": "4ターン"
             }
+          ],
+          "exclusiveTarget": [
+            {
+              "lv": 1,
+              "target": "ランダムな敵5体"
+            }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        1,
+        3
       ]
     },
     {
@@ -31136,7 +32974,7 @@
       "duration": "6T / 解除不可",
       "ct": null,
       "condition": "バトル開始時に防御系ステータスを増加。自身には被ダメージ減少も付与",
-      "exclusiveWeapon": "専用Lv2: 防御力80%、魔法防御力40%、魔法クリダメ緩和20%",
+      "exclusiveWeapon": "専用Lv2: 防御力の増加量が80%、魔法防御力の増加量が40%、魔法クリダメ緩和が20%になる",
       "compareMemo": "高攻撃力味方を魔法耐久面から支える",
       "noteUrl": "",
       "imageUrl": "",
@@ -31160,7 +32998,14 @@
             {
               "text": "防御力・魔法防御力を増加",
               "duration": "6ターン",
-              "note": "解除不可"
+              "note": "解除不可",
+              "exclusive": [
+                {
+                  "lv": 2,
+                  "kind": "change",
+                  "text": "防御力の増加が80%、魔法防御力の増加が40%、魔法クリダメ緩和が20%"
+                }
+              ]
             }
           ]
         },
@@ -31174,6 +33019,9 @@
             }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        2
       ]
     },
     {
@@ -31190,7 +33038,7 @@
       "duration": "金縛り1T",
       "ct": 4,
       "condition": "自身と攻撃力が最も高い味方に金縛りを付与してから攻撃。金縛り付与は弱体命中率と耐性率を無視",
-      "exclusiveWeapon": "専用Lv1: 攻撃対象5体",
+      "exclusiveWeapon": "専用Lv1: 物理攻撃の対象がランダムな敵5体になる",
       "compareMemo": "自分側への金縛りを起点にパッシブを動かす特殊な攻撃スキル",
       "noteUrl": "",
       "imageUrl": "",
@@ -31262,7 +33110,7 @@
       "duration": "",
       "ct": 4,
       "condition": "味方側がスキルで解除した弱体効果合計10以上で攻撃回数が増加",
-      "exclusiveWeapon": "専用Lv3: 物理940%",
+      "exclusiveWeapon": "専用Lv3: 物理攻撃が攻撃力×940%になる",
       "compareMemo": "弱体解除回数を稼ぐと伸びる連撃",
       "noteUrl": "",
       "imageUrl": "",
@@ -31273,7 +33121,7 @@
         "baseTotal": 960,
         "exclusiveLv1Total": 960,
         "exclusiveLv2Total": 960,
-        "exclusiveLv3Total": 960,
+        "exclusiveLv3Total": 1880,
         "conditionMaxTotal": 2400,
         "conditionMaxNote": "味方側がスキルで解除した弱体効果の合計が10以上で攻撃回数が最大5回。480%×5回=2400（専用武器なし・スキルLv最大）",
         "powerType": "解除数参照",
@@ -31301,7 +33149,14 @@
             {
               "text": "物理攻撃",
               "multiplier": "物理480%×2回",
-              "damageTotal": "base"
+              "damageTotal": "base",
+              "exclusive": [
+                {
+                  "lv": 3,
+                  "kind": "change",
+                  "multiplier": "物理940%×2回"
+                }
+              ]
             },
             {
               "text": "攻撃回数が増え、最大でこの倍率に変わる",
@@ -31318,6 +33173,9 @@
           "text": "弱体解除を多く行う味方(解除持ちヒーラー等)と噛み合う。",
           "reason": "攻撃回数の増加条件が味方側の弱体解除の累計のため"
         }
+      ],
+      "exclusiveIntegrated": [
+        3
       ]
     },
     {
@@ -31380,7 +33238,7 @@
       "duration": "解除不可 / 防御力増加6T",
       "ct": null,
       "condition": "自身の被ダメージを減少。バトル開始時に防御力増加、同属性または天属性味方数で増加量上昇",
-      "exclusiveWeapon": "専用Lv2: 被ダメージ減少量70%",
+      "exclusiveWeapon": "専用Lv2: 被ダメージの減少量が70%になる",
       "compareMemo": "自前の金縛りを受ける運用を支える耐久パッシブ",
       "noteUrl": "",
       "imageUrl": "",
@@ -31403,7 +33261,14 @@
           "effects": [
             {
               "text": "受けるダメージを減少",
-              "note": "解除不可"
+              "note": "解除不可",
+              "exclusive": [
+                {
+                  "lv": 2,
+                  "kind": "change",
+                  "text": "受けるダメージの減少が70%"
+                }
+              ]
             }
           ]
         },
@@ -31419,6 +33284,9 @@
             }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        2
       ]
     },
     {
@@ -31435,7 +33303,7 @@
       "duration": "HP回復",
       "ct": 4,
       "condition": "HP割合が最も低い味方のHPを自身の攻撃力15%回復。その後ランダムな敵に物理890%×2回。7ターン目以降に発動した場合は回復効果が発動せず、物理攻撃が1780%になる",
-      "exclusiveWeapon": "専用Lv1: 物理攻撃の回数が3回になる。専用Lv3: 物理攻撃が攻撃力×980%、7ターン目以降は攻撃力×1960%になる",
+      "exclusiveWeapon": "専用Lv1: 物理攻撃の回数が3回になる。専用Lv3: 物理攻撃が攻撃力×980%になる。7ターン目以降に発動した場合は攻撃力×1960%になる",
       "compareMemo": "序盤は回復回数を稼ぎ、後半は高倍率攻撃へ変化する",
       "noteUrl": "",
       "imageUrl": "",
@@ -31489,16 +33357,39 @@
             {
               "text": "物理攻撃",
               "multiplier": "物理890%×2回",
-              "damageTotal": "base"
+              "damageTotal": "base",
+              "exclusive": [
+                {
+                  "lv": 1,
+                  "kind": "change",
+                  "multiplier": "物理890%×3回"
+                },
+                {
+                  "lv": 3,
+                  "kind": "change",
+                  "multiplier": "物理980%×3回"
+                }
+              ]
             },
             {
               "text": "物理攻撃のダメージが変わる",
               "condition": "7ターン目以降は",
               "multiplier": "物理1780%×2回",
-              "damageTotal": "conditionMax"
+              "damageTotal": "conditionMax",
+              "exclusive": [
+                {
+                  "lv": 3,
+                  "kind": "change",
+                  "multiplier": "物理1960%×3回"
+                }
+              ]
             }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        1,
+        3
       ]
     },
     {
@@ -31650,7 +33541,7 @@
       "duration": "通常攻撃強化10T / HP回復 / 行動阻害解除",
       "ct": null,
       "condition": "バトル開始時に通常攻撃を強化。通常攻撃後に味方3体を回復し、条件を満たすと行動阻害を解除",
-      "exclusiveWeapon": "専用Lv2: 被ダメージ減少40%、最大HP増加100%",
+      "exclusiveWeapon": "専用Lv2: 被ダメージの減少量が40%、最大HPの増加量が100%になる",
       "compareMemo": "通常攻撃でも回復回数を稼ぎ、後半条件を支える",
       "noteUrl": "",
       "imageUrl": "",

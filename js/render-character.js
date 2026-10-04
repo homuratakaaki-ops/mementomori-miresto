@@ -175,12 +175,13 @@
    * 専用武器ぶんの注記。語形は「専用Lv○：〜に変更」「専用Lv○：〜を追加」の2つだけ。
    * 矢印だけの表現は使わない（置き換えなのか追加なのかが読み取れないため）。
    */
-  function exclusiveNote(lv, bodyHtml, tail) {
-    return `<span class="flow-excl">${exclusiveChip(lv)}<span class="flow-excl-text">${bodyHtml}${escapeHtml(tail)}</span></span>`;
+  function exclusiveNote(lv, bodyHtml, tail, condition) {
+    const cond = condition ? `<span class="flow-chip cond">${highlightRatios(condition)}</span>` : "";
+    return `<span class="flow-excl">${exclusiveChip(lv)}${cond}<span class="flow-excl-text">${bodyHtml}${escapeHtml(tail)}</span></span>`;
   }
 
-  function exclusiveChange(lv, bodyHtml, suffix) {
-    return exclusiveNote(lv, bodyHtml, `に変更${suffix || ""}`);
+  function exclusiveChange(lv, bodyHtml, suffix, condition) {
+    return exclusiveNote(lv, bodyHtml, `に変更${suffix || ""}`, condition);
   }
 
   /** 枠の中で damage の合計を出している攻撃の効果。枠の対象が専用で変わると合計も変わる。 */
@@ -211,7 +212,10 @@
 
   /** 専用で増える効果の行。同じ「いつ」＋同じ「誰に」の枠の中に1行として置く。 */
   function renderExclusiveAddLine(item, terms) {
-    const before = item.chance ? `<span class="flow-chip">確率${escapeHtml(item.chance)}</span>` : "";
+    const before = [
+      item.condition ? `<span class="flow-chip cond">${highlightRatios(item.condition)}</span>` : "",
+      item.chance ? `<span class="flow-chip">確率${escapeHtml(item.chance)}</span>` : ""
+    ].filter(Boolean).join("");
     const after = [
       item.multiplier ? `<span class="flow-chip num">${highlightRatios(item.multiplier)}</span>` : "",
       item.duration ? `<span class="flow-chip">${escapeHtml(item.duration)}</span>` : "",
@@ -226,10 +230,10 @@
       .filter((item) => item.kind !== "add")
       .filter((item) => (kind === "multiplier" ? Boolean(item.multiplier) : !item.multiplier))
       .map((item) => {
-        if (item.multiplier) return exclusiveChange(item.lv, highlightRatios(item.multiplier), exclusiveTotalSuffix(skill, effect, item.lv));
-        if (item.duration) return exclusiveChange(item.lv, `継続が${escapeHtml(item.duration)}`);
-        if (item.chance) return exclusiveChange(item.lv, `確率が${escapeHtml(item.chance)}`);
-        return exclusiveChange(item.lv, highlightRatios(item.text || ""));
+        if (item.multiplier) return exclusiveChange(item.lv, highlightRatios(item.multiplier), exclusiveTotalSuffix(skill, effect, item.lv), item.condition);
+        if (item.duration) return exclusiveChange(item.lv, `継続が${escapeHtml(item.duration)}`, "", item.condition);
+        if (item.chance) return exclusiveChange(item.lv, `確率が${escapeHtml(item.chance)}`, "", item.condition);
+        return exclusiveChange(item.lv, highlightRatios(item.text || ""), "", item.condition);
       })
       .join("");
   }

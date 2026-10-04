@@ -45,12 +45,12 @@
           <h3 class="block-title">いつ・誰に・何が起きる？</h3>
           <ol class="flow">
           <li class="flow-block">
-            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">① 攻撃前</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>ランダムな敵4体</span></span></p>
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">① 攻撃前</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>ランダムな敵4体<span class="flow-excl"><span class="flow-chip excl">専用Lv1</span><span class="flow-excl-text">ランダムな敵5体に変更</span></span></span></span></p>
             <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li><span class="flow-chip">確率70%</span>クリティカル耐性率を40%減少<span class="flow-chip">2ターン</span></li></ul></div>
           </li>
         
           <li class="flow-block">
-            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">② 攻撃時</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>ランダムな敵4体</span></span></p>
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">② 攻撃時</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>ランダムな敵4体<span class="flow-excl"><span class="flow-chip excl">専用Lv1</span><span class="flow-excl-text">ランダムな敵5体に変更（倍率合計 2900%）</span></span></span></span></p>
             <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>物理攻撃<span class="flow-chip num">物理<span class="ratio">580%</span></span><span class="flow-total">倍率合計 2320%（4体分）</span></li></ul></div>
           </li>
         </ol>
@@ -59,7 +59,7 @@
           
           
           
-          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用Lv1</th><td>対象がランダム敵5体になる</td></tr></table></div>
+          
           
         <details class="original-text">
           <summary>スキル説明</summary>
@@ -96,7 +96,7 @@
         
           <li class="flow-block">
             <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">② 攻撃時</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>ランダムな敵</span></span></p>
-            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>物理攻撃<span class="flow-chip num">物理<span class="ratio">880%</span>×4回</span><span class="flow-total">倍率合計 3520%（4回分）</span></li><li class="flow-cond-line"><span class="flow-chip cond">ブラックバレット発動時は</span>ブラックバレットに変わり、必ずクリティカルして攻撃前に対象のバフを2つ解除<span class="flow-chip num">物理<span class="ratio">1760%</span>×4回</span><span class="flow-total">条件時：倍率合計 7040%</span></li></ul></div>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>物理攻撃<span class="flow-chip num">物理<span class="ratio">880%</span>×4回</span><span class="flow-total">倍率合計 3520%（4回分）</span><span class="flow-excl"><span class="flow-chip excl">専用Lv3</span><span class="flow-excl-text">物理<span class="ratio">980%</span>×4回に変更（倍率合計 3920%）</span></span></li><li class="flow-cond-line"><span class="flow-chip cond">ブラックバレット発動時は</span>ブラックバレットに変わり、必ずクリティカルして攻撃前に対象のバフを2つ解除<span class="flow-chip num">物理<span class="ratio">1760%</span>×4回</span><span class="flow-total">条件時：倍率合計 7040%</span><span class="flow-excl"><span class="flow-chip excl">専用Lv3</span><span class="flow-excl-text">物理<span class="ratio">1960%</span>×4回に変更</span></span></li></ul></div>
           </li>
         </ol>
         </div>
@@ -104,7 +104,7 @@
           
           
           
-          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用Lv3</th><td>バレットストーム980%、ブラックバレット1960%</td></tr></table></div>
+          
           
         <details class="original-text">
           <summary>スキル説明</summary>
@@ -188,13 +188,18 @@
             <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">自身の攻撃がクリティカルヒットしたとき</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>冥属性のうち攻撃力が高い味方3体</span></span></p>
             <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>クリティカルヒット2回ごとに多重バリアを1層付与<span class="flow-note">最大2層、解除不可。最大HP10%以上の被弾で1層消費</span></li></ul></div>
           </li>
+        
+          <li class="flow-block flow-block-excl">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">バトル開始時</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>自身以外の冥属性の味方全体</span></span><span class="flow-mode"><span class="flow-chip excl">専用Lv2</span>この枠ごと追加</span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>多重バリアを2層付与<span class="flow-note">最大HP20%以上のダメージを受けると1層消費して無効化</span></li></ul></div>
+          </li>
         </ol>
         </div>
       
           
           
           
-          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用Lv2</th><td>バトル開始時、自身以外の冥属性味方全体に多重バリア2層。追加多重バリアは最大HP20%以上のダメージで1層消費して無効化</td></tr></table></div>
+          
           
         <details class="original-text">
           <summary>スキル説明</summary>

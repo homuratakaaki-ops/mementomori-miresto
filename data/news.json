@@ -8,6 +8,12 @@
       "kind": "復刻",
       "characterId": "cordie_ringmaster",
       "text": "コルディ(団長)のPU復刻が開始"
+    },
+    {
+      "id": "2026-10-04-exclusive-weapon-flow-1",
+      "date": "2026-10-04",
+      "kind": "サイト更新",
+      "text": "キャラページで専用武器の効果を「いつ・誰に・何が起きる？」に統合表示（第1便60体137スキル）"
     }
   ]
 }
