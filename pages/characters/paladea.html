@@ -42,13 +42,21 @@
         <div class="skill-body">
           
         <div>
-          <h3 class="block-title">順番に何が起きる？</h3>
-          <ol class="steps">
-            <li>攻撃前、70%の確率で対象のクリティカル耐性率を40%減少(2ターン)</li><li>ランダムな敵4体に物理<span class="ratio">580%</span></li>
-          </ol>
+          <h3 class="block-title">いつ・誰に・何が起きる？</h3>
+          <ol class="flow">
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">① 攻撃前</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>ランダムな敵4体</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li><span class="flow-chip">確率70%</span>クリティカル耐性率を40%減少<span class="flow-chip">2ターン</span></li></ul></div>
+          </li>
+        
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">② 攻撃時</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>ランダムな敵4体</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>物理攻撃<span class="flow-chip num">物理<span class="ratio">580%</span></span><span class="flow-total">倍率合計 2320%（4体分）</span></li></ul></div>
+          </li>
+        </ol>
         </div>
       
-          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>ランダム敵4体</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 2320%</dd></dl><dl class="data-item"><dt>継続</dt><dd>2T</dd></dl></div>
+          
           
           
           <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用Lv1</th><td>対象がランダム敵5体になる</td></tr></table></div>
@@ -79,13 +87,21 @@
         <div class="skill-body">
           
         <div>
-          <h3 class="block-title">順番に何が起きる？</h3>
-          <ol class="steps">
-            <li>正義の魔女のクリティカル率増加が20スタック以上なら、スタックを0にしてブラックバレットを発動</li><li>ブラックバレットはランダムな敵に物理<span class="ratio">1760%</span>×4回、必ずクリティカルし、攻撃前に対象のバフを2つ解除</li><li>通常時はランダムな敵に物理<span class="ratio">880%</span>×4回</li>
-          </ol>
+          <h3 class="block-title">いつ・誰に・何が起きる？</h3>
+          <ol class="flow">
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">① 攻撃前</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>自身</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li class="flow-cond-line"><span class="flow-chip cond">正義の魔女のクリティカル率増加が20スタック以上なら</span>スタックを0にしてブラックバレットを発動</li></ul></div>
+          </li>
+        
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">② 攻撃時</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>ランダムな敵</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>物理攻撃<span class="flow-chip num">物理<span class="ratio">880%</span>×4回</span><span class="flow-total">倍率合計 3520%（4回分）</span></li><li class="flow-cond-line"><span class="flow-chip cond">ブラックバレット発動時は</span>ブラックバレットに変わり、必ずクリティカルして攻撃前に対象のバフを2つ解除<span class="flow-chip num">物理<span class="ratio">1760%</span>×4回</span><span class="flow-total">条件時：倍率合計 7040%</span></li></ul></div>
+          </li>
+        </ol>
         </div>
       
-          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>ランダム敵</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 3520% / 最大 7040%</dd></dl></div>
+          
           
           
           <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用Lv3</th><td>バレットストーム980%、ブラックバレット1960%</td></tr></table></div>
@@ -116,13 +132,16 @@
         <div class="skill-body">
           
         <div>
-          <h3 class="block-title">順番に何が起きる？</h3>
-          <ol class="steps">
-            <li>自身か味方の攻撃がクリティカルヒットするたび、クリティカル率+2%を1スタック付与(最大20スタック=+40%、解除不可)</li>
-          </ol>
+          <h3 class="block-title">いつ・誰に・何が起きる？</h3>
+          <ol class="flow">
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">自身か味方の攻撃がクリティカルヒットしたとき</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>自身</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>クリティカル率+2%を1スタック付与<span class="flow-note">最大20スタック＝+40%、解除不可</span></li></ul></div>
+          </li>
+        </ol>
         </div>
       
-          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>自身</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>クリティカル率最大+40%</dd></dl><dl class="data-item"><dt>継続</dt><dd>解除不可</dd></dl></div>
+          
           <div><h3 class="block-title">かみ合わせ</h3><ul class="verification-list synergy-list">
         <li>
           クリティカル率を上げる支援と組むと味方全体のクリ回数が増え、S2のブラックバレット解禁(20スタック)が早まる。根拠: スタック条件が「味方側のクリティカルヒット回数」のため
@@ -158,13 +177,21 @@
         <div class="skill-body">
           
         <div>
-          <h3 class="block-title">順番に何が起きる？</h3>
-          <ol class="steps">
-            <li>バトル開始時、自身に多重バリア3層(最大HP20%以上の被弾で1層消費、解除不可)</li><li>自身の攻撃がクリティカルヒット2回するごとに、冥属性のうち攻撃力が高い味方3体に多重バリアを1層付与(最大2層、解除不可)</li><li>味方側の多重バリアは最大HP10%以上の被弾で1層消費</li>
-          </ol>
+          <h3 class="block-title">いつ・誰に・何が起きる？</h3>
+          <ol class="flow">
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">バトル開始時</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>自身</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>多重バリアを3層付与<span class="flow-note">最大HP20%以上の被弾で1層消費、解除不可</span></li></ul></div>
+          </li>
+        
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">自身の攻撃がクリティカルヒットしたとき</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>冥属性のうち攻撃力が高い味方3体</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>クリティカルヒット2回ごとに多重バリアを1層付与<span class="flow-note">最大2層、解除不可。最大HP10%以上の被弾で1層消費</span></li></ul></div>
+          </li>
+        </ol>
         </div>
       
-          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>自身 / 味方</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>多重バリア3層 / 追加2層</dd></dl><dl class="data-item"><dt>継続</dt><dd>解除不可</dd></dl></div>
+          
           
           
           <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用Lv2</th><td>バトル開始時、自身以外の冥属性味方全体に多重バリア2層。追加多重バリアは最大HP20%以上のダメージで1層消費して無効化</td></tr></table></div>

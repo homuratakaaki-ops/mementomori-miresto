@@ -5278,6 +5278,32 @@
         {
           "text": "制限解除中なら戦闘不能数に関わらず7回"
         }
+      ],
+      "flow": [
+        {
+          "when": "攻撃時",
+          "mode": "sequence",
+          "order": 1,
+          "target": "ランダムな敵",
+          "effects": [
+            {
+              "text": "物理攻撃",
+              "multiplier": "物理240%×3回",
+              "damageTotal": "base"
+            },
+            {
+              "text": "攻撃回数が1回増え、最大でこの倍率に変わる",
+              "condition": "戦闘不能の味方1体につき",
+              "multiplier": "物理240%×7回",
+              "damageTotal": "conditionMax",
+              "note": "最大7回"
+            },
+            {
+              "text": "戦闘不能数に関わらず攻撃回数が7回になる",
+              "condition": "自身が制限解除中なら"
+            }
+          ]
+        }
       ]
     },
     {
@@ -5325,6 +5351,31 @@
         {
           "text": "制限解除中なら常に1280%"
         }
+      ],
+      "flow": [
+        {
+          "when": "攻撃時",
+          "mode": "sequence",
+          "order": 1,
+          "target": "ランダムな敵3体",
+          "effects": [
+            {
+              "text": "物理攻撃",
+              "multiplier": "物理480%",
+              "damageTotal": "base"
+            },
+            {
+              "text": "ダメージが+200%され、最大でこの倍率に変わる",
+              "condition": "戦闘不能の味方1体につき",
+              "multiplier": "物理1280%",
+              "damageTotal": "conditionMax"
+            },
+            {
+              "text": "常に最大倍率になる",
+              "condition": "制限解除中なら"
+            }
+          ]
+        }
       ]
     },
     {
@@ -5356,6 +5407,50 @@
         },
         {
           "text": "バトル開始時、自身の命中率+10%(6ターン)"
+        }
+      ],
+      "flow": [
+        {
+          "when": "バトル開始時",
+          "mode": "simultaneous",
+          "target": "自身",
+          "effects": [
+            {
+              "text": "命中率を10%増加",
+              "duration": "6ターン"
+            }
+          ]
+        },
+        {
+          "when": "自身が敵からバフを解除されたとき",
+          "mode": "conditional",
+          "target": "味方全体",
+          "effects": [
+            {
+              "text": "命中率を50%増加",
+              "duration": "6ターン"
+            }
+          ]
+        },
+        {
+          "when": "自身が敵からバフを解除されたとき",
+          "mode": "conditional",
+          "target": "自身",
+          "effects": [
+            {
+              "text": "制限解除を付与"
+            }
+          ]
+        },
+        {
+          "when": "常時",
+          "mode": "passive",
+          "target": "自身",
+          "effects": [
+            {
+              "text": "制限解除中は攻撃力を30%増加"
+            }
+          ]
         }
       ],
       "synergyNotes": [
@@ -5393,6 +5488,32 @@
         },
         {
           "text": "再付与は3ターン目以降は発動しない"
+        }
+      ],
+      "flow": [
+        {
+          "when": "1ターン目開始時",
+          "mode": "simultaneous",
+          "target": "自身",
+          "effects": [
+            {
+              "text": "攻撃力800%分のシールドを付与",
+              "duration": "6ターン",
+              "note": "解除不可"
+            }
+          ]
+        },
+        {
+          "when": "攻撃を受けたとき",
+          "mode": "conditional",
+          "target": "自身",
+          "effects": [
+            {
+              "text": "シールドを再付与",
+              "condition": "被攻撃回数が5/10/15/20回になったら",
+              "note": "再付与は3ターン目以降は発動しない"
+            }
+          ]
         }
       ]
     },
@@ -7521,6 +7642,34 @@
         {
           "text": "ランダムな敵4体に魔法240%"
         }
+      ],
+      "flow": [
+        {
+          "when": "攻撃前",
+          "mode": "sequence",
+          "order": 1,
+          "target": "ランダムな敵4体",
+          "effects": [
+            {
+              "text": "被ダメージを10%増加",
+              "chance": "70%",
+              "duration": "2ターン"
+            }
+          ]
+        },
+        {
+          "when": "攻撃時",
+          "mode": "sequence",
+          "order": 2,
+          "target": "ランダムな敵4体",
+          "effects": [
+            {
+              "text": "魔法攻撃",
+              "multiplier": "魔法240%",
+              "damageTotal": "base"
+            }
+          ]
+        }
       ]
     },
     {
@@ -7573,6 +7722,52 @@
         {
           "text": "さらに隣接する味方2体の攻撃力を自身の最大HP10%分増加(2ターン、解除不可)"
         }
+      ],
+      "flow": [
+        {
+          "when": "攻撃前",
+          "mode": "sequence",
+          "order": 1,
+          "target": "自身",
+          "effects": [
+            {
+              "text": "記憶を解除し、エンジェルレイの代わりにソウルサクリファイスを発動",
+              "condition": "自身の記憶が15スタックなら"
+            }
+          ]
+        },
+        {
+          "when": "攻撃時",
+          "mode": "sequence",
+          "order": 2,
+          "target": "ランダムな敵",
+          "effects": [
+            {
+              "text": "魔法攻撃",
+              "multiplier": "魔法160%×10回",
+              "damageTotal": "base",
+              "note": "ソウルサクリファイスでも同じ倍率"
+            }
+          ]
+        },
+        {
+          "when": "攻撃後",
+          "mode": "sequence",
+          "order": 3,
+          "target": "隣接する味方2体",
+          "effects": [
+            {
+              "text": "スキルCTを2減少",
+              "condition": "ソウルサクリファイスだった場合"
+            },
+            {
+              "text": "攻撃力をロザリーの最大HP10%分増加",
+              "condition": "ソウルサクリファイスだった場合",
+              "duration": "2ターン",
+              "note": "解除不可"
+            }
+          ]
+        }
       ]
     },
     {
@@ -7612,6 +7807,55 @@
           "text": "S2で記憶を解除した後は、新たに記憶を付与しない"
         }
       ],
+      "flow": [
+        {
+          "when": "バトル開始時",
+          "mode": "simultaneous",
+          "target": "自身",
+          "effects": [
+            {
+              "text": "記憶を1スタック付与",
+              "note": "解除不可"
+            }
+          ]
+        },
+        {
+          "when": "自身か味方がアクティブスキルで弱体を受けたとき",
+          "mode": "conditional",
+          "target": "自身",
+          "effects": [
+            {
+              "text": "味方側の弱体効果の合計数ぶん記憶が増える",
+              "note": "最大15スタック"
+            }
+          ]
+        },
+        {
+          "when": "2ターン目以降",
+          "mode": "conditional",
+          "target": "自身",
+          "effects": [
+            {
+              "text": "毎ターン開始時、記憶を3スタック増やす"
+            }
+          ]
+        },
+        {
+          "when": "常時",
+          "mode": "passive",
+          "target": "自身",
+          "effects": [
+            {
+              "text": "攻撃力を最大HP10%分増加し、弱体効果を2つ解除して最大HP80%分のシールドを付与",
+              "condition": "記憶が15スタックなら",
+              "duration": "2ターン"
+            },
+            {
+              "text": "S2で記憶を解除した後は、新たに記憶を付与しない"
+            }
+          ]
+        }
+      ],
       "synergyNotes": [
         {
           "text": "弱体を多用してくる敵ほど記憶が貯まり、S2の大技解禁が早まる。根拠: スタック条件が「味方側が弱体を受けたとき」のため"
@@ -7644,6 +7888,20 @@
         },
         {
           "text": "結界は、付帯者の最大HP20%を超えたダメージ分を、付与者の最大HP20%分まで遮断する"
+        }
+      ],
+      "flow": [
+        {
+          "when": "バトル開始時",
+          "mode": "simultaneous",
+          "target": "自身と隣接する味方2体",
+          "effects": [
+            {
+              "text": "結界を付与",
+              "duration": "2ターン",
+              "note": "付帯者の最大HP20%を超えたダメージ分を、ロザリーの最大HP20%分まで遮断する"
+            }
+          ]
         }
       ]
     },
@@ -7690,6 +7948,38 @@
         },
         {
           "text": "70%の確率で対象のクリティカル率を10%減少(2ターン)"
+        }
+      ],
+      "flow": [
+        {
+          "when": "攻撃前",
+          "mode": "sequence",
+          "order": 1,
+          "target": "自身",
+          "effects": [
+            {
+              "text": "弱体効果命中率を50%増加",
+              "duration": "2ターン"
+            }
+          ]
+        },
+        {
+          "when": "攻撃時",
+          "mode": "sequence",
+          "order": 2,
+          "target": "攻撃力が高い敵3体",
+          "effects": [
+            {
+              "text": "物理攻撃",
+              "multiplier": "物理380%",
+              "damageTotal": "base"
+            },
+            {
+              "text": "クリティカル率を10%減少",
+              "chance": "70%",
+              "duration": "2ターン"
+            }
+          ]
         }
       ]
     },
@@ -7743,6 +8033,58 @@
         {
           "text": "攻撃前、自身が悪魔の誘いを付帯していない場合は物理ダメージ3倍"
         }
+      ],
+      "flow": [
+        {
+          "when": "攻撃前",
+          "mode": "sequence",
+          "order": 1,
+          "target": "自身",
+          "effects": [
+            {
+              "text": "スピード5%減少を1スタック付与",
+              "duration": "2ターン",
+              "note": "最大3スタック"
+            }
+          ]
+        },
+        {
+          "when": "攻撃時",
+          "mode": "sequence",
+          "order": 2,
+          "target": "ランダムな敵2体",
+          "effects": [
+            {
+              "text": "物理攻撃",
+              "multiplier": "物理350%",
+              "damageTotal": "base",
+              "note": "ランダムな敵2体×（初回＋再発動2回）＝6ヒット"
+            },
+            {
+              "text": "物理ダメージが3倍になる",
+              "condition": "攻撃前、自身が悪魔の誘いを付帯していない場合は",
+              "multiplier": "物理1050%（350%×3）",
+              "damageTotal": "conditionMax"
+            },
+            {
+              "text": "防御力15%減少を1スタック付与",
+              "duration": "2ターン",
+              "note": "最大3スタック"
+            }
+          ]
+        },
+        {
+          "when": "攻撃後",
+          "mode": "sequence",
+          "order": 3,
+          "target": "自身",
+          "effects": [
+            {
+              "text": "このスキルを再発動",
+              "note": "再発動は2回まで"
+            }
+          ]
+        }
       ]
     },
     {
@@ -7778,6 +8120,28 @@
         {
           "text": "発動後4回行動まで再発動しない"
         }
+      ],
+      "flow": [
+        {
+          "when": "ターン開始時",
+          "mode": "simultaneous",
+          "target": "自身と攻撃力が高い味方2体",
+          "effects": [
+            {
+              "text": "シールドを付与",
+              "duration": "3ターン",
+              "note": "量は対象のタイプステータス200%分。解除不可。発動後、4回行動が終わるまで再発動しない"
+            },
+            {
+              "text": "このシールド中はクリティカル耐性率を60%増加"
+            },
+            {
+              "text": "シールド量が増える",
+              "condition": "悪魔の誘いの減少数に応じて",
+              "note": "最大400%分"
+            }
+          ]
+        }
       ]
     },
     {
@@ -7809,6 +8173,33 @@
         },
         {
           "text": "スタックが減るたび自身の攻撃力+3%(最大30%)"
+        }
+      ],
+      "flow": [
+        {
+          "when": "バトル開始時",
+          "mode": "simultaneous",
+          "target": "自身",
+          "effects": [
+            {
+              "text": "悪魔の誘いを10スタック付与",
+              "note": "解除不可"
+            }
+          ]
+        },
+        {
+          "when": "行動開始時",
+          "mode": "simultaneous",
+          "target": "自身",
+          "effects": [
+            {
+              "text": "S3のシールドを持つ味方1体につき悪魔の誘いを1減少"
+            },
+            {
+              "text": "スタックが減るたび攻撃力を3%増加",
+              "note": "最大30%"
+            }
+          ]
         }
       ],
       "synergyNotes": [
@@ -9771,6 +10162,34 @@
         {
           "text": "ランダムな敵4体に物理580%"
         }
+      ],
+      "flow": [
+        {
+          "when": "攻撃前",
+          "mode": "sequence",
+          "order": 1,
+          "target": "ランダムな敵4体",
+          "effects": [
+            {
+              "text": "クリティカル耐性率を40%減少",
+              "chance": "70%",
+              "duration": "2ターン"
+            }
+          ]
+        },
+        {
+          "when": "攻撃時",
+          "mode": "sequence",
+          "order": 2,
+          "target": "ランダムな敵4体",
+          "effects": [
+            {
+              "text": "物理攻撃",
+              "multiplier": "物理580%",
+              "damageTotal": "base"
+            }
+          ]
+        }
       ]
     },
     {
@@ -9818,6 +10237,39 @@
         {
           "text": "通常時はランダムな敵に物理880%×4回"
         }
+      ],
+      "flow": [
+        {
+          "when": "攻撃前",
+          "mode": "sequence",
+          "order": 1,
+          "target": "自身",
+          "effects": [
+            {
+              "text": "スタックを0にしてブラックバレットを発動",
+              "condition": "正義の魔女のクリティカル率増加が20スタック以上なら"
+            }
+          ]
+        },
+        {
+          "when": "攻撃時",
+          "mode": "sequence",
+          "order": 2,
+          "target": "ランダムな敵",
+          "effects": [
+            {
+              "text": "物理攻撃",
+              "multiplier": "物理880%×4回",
+              "damageTotal": "base"
+            },
+            {
+              "text": "ブラックバレットに変わり、必ずクリティカルして攻撃前に対象のバフを2つ解除",
+              "condition": "ブラックバレット発動時は",
+              "multiplier": "物理1760%×4回",
+              "damageTotal": "conditionMax"
+            }
+          ]
+        }
       ]
     },
     {
@@ -9843,6 +10295,19 @@
       "steps": [
         {
           "text": "自身か味方の攻撃がクリティカルヒットするたび、クリティカル率+2%を1スタック付与(最大20スタック=+40%、解除不可)"
+        }
+      ],
+      "flow": [
+        {
+          "when": "自身か味方の攻撃がクリティカルヒットしたとき",
+          "mode": "conditional",
+          "target": "自身",
+          "effects": [
+            {
+              "text": "クリティカル率+2%を1スタック付与",
+              "note": "最大20スタック＝+40%、解除不可"
+            }
+          ]
         }
       ],
       "synergyNotes": [
@@ -9880,6 +10345,30 @@
         },
         {
           "text": "味方側の多重バリアは最大HP10%以上の被弾で1層消費"
+        }
+      ],
+      "flow": [
+        {
+          "when": "バトル開始時",
+          "mode": "simultaneous",
+          "target": "自身",
+          "effects": [
+            {
+              "text": "多重バリアを3層付与",
+              "note": "最大HP20%以上の被弾で1層消費、解除不可"
+            }
+          ]
+        },
+        {
+          "when": "自身の攻撃がクリティカルヒットしたとき",
+          "mode": "conditional",
+          "target": "冥属性のうち攻撃力が高い味方3体",
+          "effects": [
+            {
+              "text": "クリティカルヒット2回ごとに多重バリアを1層付与",
+              "note": "最大2層、解除不可。最大HP10%以上の被弾で1層消費"
+            }
+          ]
         }
       ]
     },
