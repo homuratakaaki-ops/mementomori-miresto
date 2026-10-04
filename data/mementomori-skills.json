@@ -5253,6 +5253,27 @@
         {
           "text": "70%の確率でバッテンを2ターン付与(与ダメージ10%減少)"
         }
+      ],
+      "flow": [
+        {
+          "when": "攻撃時",
+          "mode": "sequence",
+          "order": 1,
+          "target": "ランダムな敵2体",
+          "effects": [
+            {
+              "text": "魔法攻撃",
+              "multiplier": "魔法180%",
+              "damageTotal": "base"
+            },
+            {
+              "text": "バッテンを付与",
+              "chance": "70%",
+              "duration": "2ターン",
+              "note": "与ダメージ10%減少"
+            }
+          ]
+        }
       ]
     },
     {
@@ -5298,6 +5319,27 @@
           "text": "対象がバッテンを付帯していれば魔法1760%"
         }
       ],
+      "flow": [
+        {
+          "when": "攻撃時",
+          "mode": "sequence",
+          "order": 1,
+          "target": "ランダムな敵3体",
+          "effects": [
+            {
+              "text": "魔法攻撃",
+              "multiplier": "魔法440%",
+              "damageTotal": "base"
+            },
+            {
+              "text": "魔法攻撃のダメージが変わる",
+              "condition": "対象がバッテンを付帯していれば",
+              "multiplier": "魔法1760%",
+              "damageTotal": "conditionMax"
+            }
+          ]
+        }
+      ],
       "synergyNotes": [
         {
           "text": "S1・S3で自給するバッテンが②の条件そのもの。根拠: 倍率条件が「バッテン付帯」のため"
@@ -5334,6 +5376,34 @@
         {
           "text": "自身と攻撃力が高い味方2体の弱体効果を1つ解除"
         }
+      ],
+      "flow": [
+        {
+          "when": "自身がアクティブスキルで弱体を受けたとき",
+          "mode": "conditional",
+          "target": "ランダムな敵3体",
+          "effects": [
+            {
+              "text": "バッテンを付与",
+              "chance": "70%",
+              "duration": "2ターン"
+            },
+            {
+              "text": "付与の対象がランダムな敵5体になる",
+              "condition": "受けた弱体が行動阻害なら"
+            }
+          ]
+        },
+        {
+          "when": "自身がアクティブスキルで弱体を受けたとき",
+          "mode": "conditional",
+          "target": "自身と攻撃力が高い味方2体",
+          "effects": [
+            {
+              "text": "弱体効果を1つ解除"
+            }
+          ]
+        }
       ]
     },
     {
@@ -5365,6 +5435,24 @@
         },
         {
           "text": "対象が藍属性なら攻撃力も50%増加"
+        }
+      ],
+      "flow": [
+        {
+          "when": "自身が戦闘不能になったとき",
+          "mode": "conditional",
+          "target": "攻撃力が最も高い味方",
+          "effects": [
+            {
+              "text": "シールドを付与",
+              "duration": "4ターン",
+              "note": "量は自身の攻撃力150%に、バッテンの敵1体につき150%を加算（最大900%）"
+            },
+            {
+              "text": "攻撃力も50%増加",
+              "condition": "対象が藍属性なら"
+            }
+          ]
         }
       ]
     },
@@ -6897,7 +6985,7 @@
       "subCategory": "与ダメ減少 / 魔力条件",
       "target": "ランダム敵5体",
       "multiplierText": "魔法480%",
-      "duration": "与ダメージ減少1T / 専用Lv1で2T",
+      "duration": "与ダメージ減少1T",
       "ct": 4,
       "condition": "50%の確率で対象の与ダメージ15%減少。対象の魔力が自身より低い場合、付与確率100%",
       "exclusiveWeapon": "専用Lv1: 与ダメージ減少が2ターンになる。専用Lv2: 魔法ダメージが攻撃力580%になる",
@@ -7026,7 +7114,7 @@
       "subCategory": "物防貫通 / クリ耐性 / スピード",
       "target": "自身",
       "multiplierText": "物魔防御貫通+50% / クリ耐性+50%",
-      "duration": "3T / 専用Lv3で1T追加",
+      "duration": "3T",
       "ct": null,
       "condition": "バトル開始時または被攻撃時、HP50%未満なら3ターン物魔防御貫通50%増加、HP50%以上なら3ターンクリティカル耐性率50%増加。次に攻撃を受けた時に解除され再判定。スピード増加は専用Lv3効果",
       "exclusiveWeapon": "専用Lv3: バトル開始時1ターン自身のスピード30%増加",
@@ -7589,6 +7677,39 @@
         {
           "text": "攻撃後、自身に成長因子を2スタック付与(最大10、解除不可)"
         }
+      ],
+      "flow": [
+        {
+          "when": "攻撃時",
+          "mode": "sequence",
+          "order": 1,
+          "target": "ランダムな敵",
+          "effects": [
+            {
+              "text": "物理攻撃",
+              "multiplier": "物理100%×3回",
+              "damageTotal": "base"
+            },
+            {
+              "text": "物理ダメージが+100%され、最大でこの倍率に変わる",
+              "condition": "攻撃前、成長因子1スタックにつき",
+              "multiplier": "物理1100%×3回",
+              "damageTotal": "conditionMax"
+            }
+          ]
+        },
+        {
+          "when": "攻撃後",
+          "mode": "sequence",
+          "order": 2,
+          "target": "自身",
+          "effects": [
+            {
+              "text": "成長因子を2スタック付与",
+              "note": "最大10スタック、解除不可"
+            }
+          ]
+        }
       ]
     },
     {
@@ -7637,6 +7758,39 @@
           "text": "最後の攻撃後、命中率増加を付帯している味方がいれば成長因子を3スタック付与"
         }
       ],
+      "flow": [
+        {
+          "when": "攻撃時",
+          "mode": "sequence",
+          "order": 1,
+          "target": "ランダムな敵",
+          "effects": [
+            {
+              "text": "物理攻撃",
+              "multiplier": "物理220%×5回",
+              "damageTotal": "base"
+            },
+            {
+              "text": "物理ダメージが+40%され、最大でこの倍率に変わる",
+              "condition": "攻撃前、成長因子1スタックにつき",
+              "multiplier": "物理620%×5回",
+              "damageTotal": "conditionMax"
+            }
+          ]
+        },
+        {
+          "when": "最後の攻撃後",
+          "mode": "sequence",
+          "order": 2,
+          "target": "自身",
+          "effects": [
+            {
+              "text": "成長因子を3スタック付与",
+              "condition": "命中率増加を付帯している味方がいれば"
+            }
+          ]
+        }
+      ],
       "synergyNotes": [
         {
           "text": "③は「命中率増加を付帯している味方がいること」が条件のため、命中バフを配る味方がいると成長因子の自給が安定する。根拠: 付与条件が「命中率増加を付帯している味方がいる場合」のため"
@@ -7670,6 +7824,23 @@
         {
           "text": "自身が4層のときは、自身以外で攻撃力が最も高い味方に付与"
         }
+      ],
+      "flow": [
+        {
+          "when": "自身の攻撃で対象を戦闘不能にできなかったとき",
+          "mode": "conditional",
+          "target": "自身",
+          "effects": [
+            {
+              "text": "多重バリアを1層付与",
+              "note": "最大4層、最大HP10%以上の被弾で1層消費、解除不可"
+            },
+            {
+              "text": "自身以外で攻撃力が最も高い味方に付与される",
+              "condition": "自身がすでに4層なら"
+            }
+          ]
+        }
       ]
     },
     {
@@ -7683,7 +7854,7 @@
       "subCategory": "スピード / 命中率",
       "target": "自身 / 味方全体",
       "multiplierText": "スピード+20% / 命中率+50%",
-      "duration": "1T / 5T",
+      "duration": "スピード増加1T / 命中率増加は解除不可",
       "ct": null,
       "condition": "バトル開始時1ターン自身のスピード20%増加。5ターン目のターン開始時、自身の命中率50%増加",
       "exclusiveWeapon": "専用Lv2: バトル開始時、同じ属性の味方生存数3体以上なら味方全体のスピード10%増加。スピード増加は解除不可",
@@ -7698,6 +7869,30 @@
         },
         {
           "text": "5ターン目開始時、自身の命中率+50%(解除不可)"
+        }
+      ],
+      "flow": [
+        {
+          "when": "バトル開始時",
+          "mode": "simultaneous",
+          "target": "自身",
+          "effects": [
+            {
+              "text": "スピードを20%増加",
+              "duration": "1ターン"
+            }
+          ]
+        },
+        {
+          "when": "5ターン目開始時",
+          "mode": "simultaneous",
+          "target": "自身",
+          "effects": [
+            {
+              "text": "命中率を50%増加",
+              "note": "解除不可"
+            }
+          ]
         }
       ]
     },
@@ -7741,6 +7936,34 @@
         },
         {
           "text": "ランダムな敵4体に物理260%"
+        }
+      ],
+      "flow": [
+        {
+          "when": "攻撃前",
+          "mode": "sequence",
+          "order": 1,
+          "target": "ランダムな敵4体",
+          "effects": [
+            {
+              "text": "防御力を25%減少",
+              "duration": "4ターン",
+              "note": "オートバトル・ボスバトルでは解除不可、無窮の塔では減少量50%"
+            }
+          ]
+        },
+        {
+          "when": "攻撃時",
+          "mode": "sequence",
+          "order": 2,
+          "target": "ランダムな敵4体",
+          "effects": [
+            {
+              "text": "物理攻撃",
+              "multiplier": "物理260%",
+              "damageTotal": "base"
+            }
+          ]
         }
       ]
     },
@@ -7788,6 +8011,48 @@
         {
           "text": "アストルム・ナタリスの最初の攻撃前、自身の命中率を50%増加(1ターン)"
         }
+      ],
+      "flow": [
+        {
+          "when": "攻撃前",
+          "mode": "sequence",
+          "order": 1,
+          "target": "自身",
+          "effects": [
+            {
+              "text": "最初の攻撃前に命中率を50%増加",
+              "condition": "アストルム・ナタリスのとき",
+              "duration": "1ターン"
+            }
+          ]
+        },
+        {
+          "when": "攻撃時",
+          "mode": "sequence",
+          "order": 2,
+          "target": "ランダムな敵",
+          "effects": [
+            {
+              "text": "物理攻撃",
+              "multiplier": "物理380%×4回",
+              "damageTotal": "base"
+            }
+          ]
+        },
+        {
+          "when": "攻撃時",
+          "mode": "sequence",
+          "order": 3,
+          "target": "攻撃力が最も高い敵",
+          "effects": [
+            {
+              "text": "アストルム・ナタリスに変わる",
+              "condition": "バトル中3回目以降は",
+              "multiplier": "物理760%×8回",
+              "damageTotal": "conditionMax"
+            }
+          ]
+        }
       ]
     },
     {
@@ -7822,6 +8087,44 @@
         },
         {
           "text": "発動後3回行動まで再発動しない"
+        }
+      ],
+      "flow": [
+        {
+          "when": "ターン開始時",
+          "mode": "simultaneous",
+          "target": "自身と自身以外でスピードが最も低い味方",
+          "effects": [
+            {
+              "text": "通常攻撃を強化",
+              "duration": "3ターン",
+              "note": "発動後、3回行動が終わるまで再発動しない"
+            }
+          ]
+        },
+        {
+          "when": "攻撃時",
+          "mode": "sequence",
+          "order": 1,
+          "target": "通常攻撃を強化された本人",
+          "effects": [
+            {
+              "text": "付帯者自身のスキルCTを1減少"
+            },
+            {
+              "text": "弱体効果を2つ解除"
+            }
+          ]
+        },
+        {
+          "when": "攻撃後",
+          "mode": "release",
+          "target": "通常攻撃を強化された本人",
+          "effects": [
+            {
+              "text": "通常攻撃強化を解除"
+            }
+          ]
         }
       ],
       "synergyNotes": [
@@ -7859,6 +8162,30 @@
         },
         {
           "text": "結界付与は発動後4回行動まで再発動しない"
+        }
+      ],
+      "flow": [
+        {
+          "when": "攻撃を受けたとき",
+          "mode": "conditional",
+          "target": "自身",
+          "effects": [
+            {
+              "text": "自身へのダメージを70%遮断"
+            }
+          ]
+        },
+        {
+          "when": "ターン開始時",
+          "mode": "simultaneous",
+          "target": "自身以外でスピードが最も低い味方",
+          "effects": [
+            {
+              "text": "結界を付与",
+              "duration": "4ターン",
+              "note": "被攻撃時のダメージを30%遮断、解除不可。発動後、4回行動が終わるまで再発動しない"
+            }
+          ]
         }
       ]
     },
@@ -9537,7 +9864,7 @@
       "subCategory": "クリ支援 / 対象増加",
       "target": "ランダム敵5体",
       "multiplierText": "魔法380%",
-      "duration": "2T / 専用Lv1で4T",
+      "duration": "2T",
       "ct": 4,
       "condition": "2ターン味方全体のクリティカル率20%増加、クリダメ強化20%増加",
       "exclusiveWeapon": "専用Lv1: クリティカル率増加とクリダメ強化増加が4ターンになる",
@@ -9726,6 +10053,41 @@
         {
           "text": "心に咲く花5スタック以上なら再発動が2回までになり、最後の攻撃後に花を5消費"
         }
+      ],
+      "flow": [
+        {
+          "when": "攻撃時",
+          "mode": "sequence",
+          "order": 1,
+          "target": "ランダムな敵3体",
+          "effects": [
+            {
+              "text": "物理攻撃",
+              "multiplier": "物理380%",
+              "damageTotal": "base",
+              "note": "ランダムな敵3体×（初回＋再発動1回）＝6ヒット"
+            }
+          ]
+        },
+        {
+          "when": "攻撃後",
+          "mode": "sequence",
+          "order": 2,
+          "target": "自身",
+          "effects": [
+            {
+              "text": "このスキルを再発動",
+              "note": "再発動は1回まで"
+            },
+            {
+              "text": "再発動が2回までになり、最後の攻撃後に花を5消費",
+              "condition": "心に咲く花が5スタック以上なら",
+              "multiplier": "物理380%×9回",
+              "damageTotal": "conditionMax",
+              "note": "ランダムな敵3体×（初回＋再発動2回）＝9ヒット"
+            }
+          ]
+        }
       ]
     },
     {
@@ -9774,6 +10136,34 @@
         {
           "text": "心に咲く花5スタック以上なら物理1980%(攻撃後に花を5消費)"
         }
+      ],
+      "flow": [
+        {
+          "when": "攻撃時",
+          "mode": "sequence",
+          "order": 1,
+          "target": "攻撃力が高い敵3体",
+          "effects": [
+            {
+              "text": "物理攻撃",
+              "multiplier": "物理1320%",
+              "damageTotal": "base"
+            },
+            {
+              "text": "毒を付与",
+              "term": "毒",
+              "duration": "2ターン",
+              "note": "毎ターン行動開始時、現在HP4%のダメージ"
+            },
+            {
+              "text": "物理攻撃のダメージが変わる",
+              "condition": "心に咲く花が5スタック以上なら",
+              "multiplier": "物理1980%",
+              "damageTotal": "conditionMax",
+              "note": "攻撃後に花を5消費"
+            }
+          ]
+        }
       ]
     },
     {
@@ -9805,6 +10195,62 @@
         },
         {
           "text": "バトル開始時、自身の命中率+50%、味方全体の攻撃力と最大HP+10%(解除不可)"
+        }
+      ],
+      "flow": [
+        {
+          "when": "バトル開始時",
+          "mode": "simultaneous",
+          "target": "自身",
+          "effects": [
+            {
+              "text": "命中率を50%増加",
+              "note": "解除不可"
+            }
+          ]
+        },
+        {
+          "when": "バトル開始時",
+          "mode": "simultaneous",
+          "target": "味方全体",
+          "effects": [
+            {
+              "text": "攻撃力と最大HPを10%増加",
+              "note": "解除不可"
+            }
+          ]
+        },
+        {
+          "when": "ターン開始時",
+          "mode": "simultaneous",
+          "target": "自身と攻撃力が高い敵3体",
+          "effects": [
+            {
+              "text": "劇化を付与",
+              "duration": "1ターン",
+              "note": "解除不可"
+            }
+          ]
+        },
+        {
+          "when": "常時",
+          "mode": "passive",
+          "target": "自身",
+          "effects": [
+            {
+              "text": "受ける持続ダメージが100%増加"
+            }
+          ]
+        },
+        {
+          "when": "常時",
+          "mode": "passive",
+          "target": "攻撃力が高い敵3体",
+          "effects": [
+            {
+              "text": "受ける持続ダメージが50%増加"
+            }
+          ]
         }
       ],
       "synergyNotes": [
@@ -9839,6 +10285,22 @@
         },
         {
           "text": "攻撃を受けるたび心に咲く花を1スタック付与(最大10、1スタックにつき防御貫通+3%、解除不可)"
+        }
+      ],
+      "flow": [
+        {
+          "when": "攻撃を受けたとき",
+          "mode": "conditional",
+          "target": "自身",
+          "effects": [
+            {
+              "text": "ダメージを80%遮断"
+            },
+            {
+              "text": "心に咲く花を1スタック付与",
+              "note": "最大10スタック、1スタックにつき防御貫通+3%、解除不可"
+            }
+          ]
         }
       ]
     },
@@ -13064,6 +13526,33 @@
         {
           "text": "ランダムな敵に物理580%×3回"
         }
+      ],
+      "flow": [
+        {
+          "when": "攻撃前",
+          "mode": "sequence",
+          "order": 1,
+          "target": "バフ数が最も多い味方",
+          "effects": [
+            {
+              "text": "HPドレインを30%増加",
+              "duration": "4ターン"
+            }
+          ]
+        },
+        {
+          "when": "攻撃時",
+          "mode": "sequence",
+          "order": 2,
+          "target": "ランダムな敵",
+          "effects": [
+            {
+              "text": "物理攻撃",
+              "multiplier": "物理580%×3回",
+              "damageTotal": "base"
+            }
+          ]
+        }
       ]
     },
     {
@@ -13111,6 +13600,38 @@
         {
           "text": "このスキルを使うたび攻撃回数+1(最大6回)"
         }
+      ],
+      "flow": [
+        {
+          "when": "攻撃前",
+          "mode": "sequence",
+          "order": 1,
+          "target": "バフ数が最も多い味方",
+          "effects": [
+            {
+              "text": "攻撃力を30%増加",
+              "duration": "4ターン"
+            }
+          ]
+        },
+        {
+          "when": "攻撃時",
+          "mode": "sequence",
+          "order": 2,
+          "target": "攻撃力が最も高い敵",
+          "effects": [
+            {
+              "text": "物理攻撃",
+              "multiplier": "物理740%×4回",
+              "damageTotal": "base"
+            },
+            {
+              "text": "攻撃回数が1回増える",
+              "condition": "このスキルを使うたび",
+              "note": "最大6回"
+            }
+          ]
+        }
       ]
     },
     {
@@ -13139,6 +13660,20 @@
         },
         {
           "text": "発動後8回行動まで再発動しない"
+        }
+      ],
+      "flow": [
+        {
+          "when": "行動終了時",
+          "mode": "simultaneous",
+          "target": "自身とバフ数が最も多い味方",
+          "effects": [
+            {
+              "text": "攻撃力75%分のシールドを付与",
+              "duration": "8ターン",
+              "note": "対象が黄属性なら150%分。解除不可。発動後、8回行動が終わるまで再発動しない"
+            }
+          ]
         }
       ],
       "synergyNotes": [
@@ -13176,6 +13711,44 @@
         },
         {
           "text": "行動開始時、バフ4つ以上の味方がいれば攻撃力+30%(1ターン、解除不可)"
+        }
+      ],
+      "flow": [
+        {
+          "when": "バトル開始時",
+          "mode": "simultaneous",
+          "target": "自身",
+          "effects": [
+            {
+              "text": "青い鳥の守り人を付与",
+              "duration": "1ターン",
+              "note": "被ダメージ75%減少、解除不可"
+            }
+          ]
+        },
+        {
+          "when": "行動終了時",
+          "mode": "conditional",
+          "target": "自身",
+          "effects": [
+            {
+              "text": "青い鳥の守り人を再付与",
+              "condition": "バフ3つ以上の味方がいれば"
+            }
+          ]
+        },
+        {
+          "when": "行動開始時",
+          "mode": "conditional",
+          "target": "自身",
+          "effects": [
+            {
+              "text": "攻撃力を30%増加",
+              "condition": "バフ4つ以上の味方がいれば",
+              "duration": "1ターン",
+              "note": "解除不可"
+            }
+          ]
         }
       ]
     },
@@ -15964,7 +16537,7 @@
           "text": "ランダムな敵3体に魔法200%"
         },
         {
-          "text": "HP割合が低い味方3体を攻撃力50%分回復し、再生を付与",
+          "text": "HP割合が低い味方3体を攻撃力50%分回復し、再生を1ターン付与",
           "term": "再生"
         },
         {
@@ -16401,6 +16974,38 @@
         {
           "text": "ランダムな敵5体に物理440%"
         }
+      ],
+      "flow": [
+        {
+          "when": "攻撃前",
+          "mode": "sequence",
+          "order": 1,
+          "target": "攻撃力が最も高い味方",
+          "effects": [
+            {
+              "text": "攻撃力15%増加・命中率30%増加",
+              "duration": "4ターン",
+              "note": "解除不可。両者で1つのバフ扱い"
+            },
+            {
+              "text": "継続が32ターンになり、攻撃力の増加量が30%になる",
+              "condition": "対象が紅属性または翠属性なら"
+            }
+          ]
+        },
+        {
+          "when": "攻撃時",
+          "mode": "sequence",
+          "order": 2,
+          "target": "ランダムな敵5体",
+          "effects": [
+            {
+              "text": "物理攻撃",
+              "multiplier": "物理440%",
+              "damageTotal": "base"
+            }
+          ]
+        }
       ]
     },
     {
@@ -16446,6 +17051,28 @@
           "text": "攻撃するたび40%の確率で気絶を2ターン付与",
           "term": "気絶"
         }
+      ],
+      "flow": [
+        {
+          "when": "攻撃時",
+          "mode": "sequence",
+          "order": 1,
+          "target": "攻撃力が最も高い敵",
+          "effects": [
+            {
+              "text": "物理攻撃",
+              "multiplier": "物理420%×5回",
+              "damageTotal": "base"
+            },
+            {
+              "text": "気絶を付与",
+              "term": "気絶",
+              "chance": "40%",
+              "duration": "2ターン",
+              "note": "攻撃するたび判定"
+            }
+          ]
+        }
       ]
     },
     {
@@ -16472,6 +17099,19 @@
         {
           "text": "アクティブスキルで弱体を受け、自身の弱体効果が2個以上なら全解除"
         }
+      ],
+      "flow": [
+        {
+          "when": "アクティブスキルで弱体を受けたとき",
+          "mode": "conditional",
+          "target": "自身",
+          "effects": [
+            {
+              "text": "弱体効果を全解除",
+              "condition": "自身の弱体効果が2個以上なら"
+            }
+          ]
+        }
       ]
     },
     {
@@ -16497,6 +17137,20 @@
       "steps": [
         {
           "text": "バトル開始時、自身のスピード+30%(2ターン、解除不可)"
+        }
+      ],
+      "flow": [
+        {
+          "when": "バトル開始時",
+          "mode": "simultaneous",
+          "target": "自身",
+          "effects": [
+            {
+              "text": "スピードを30%増加",
+              "duration": "2ターン",
+              "note": "解除不可"
+            }
+          ]
         }
       ]
     },
@@ -16546,6 +17200,39 @@
           "text": "対象が翠属性なら、攻撃するたび70%で気絶を1ターン付与",
           "term": "気絶"
         }
+      ],
+      "flow": [
+        {
+          "when": "攻撃前",
+          "mode": "sequence",
+          "order": 1,
+          "target": "自身",
+          "effects": [
+            {
+              "text": "現在HP20%の自傷ダメージを受ける"
+            }
+          ]
+        },
+        {
+          "when": "攻撃時",
+          "mode": "sequence",
+          "order": 2,
+          "target": "ランダムな敵",
+          "effects": [
+            {
+              "text": "物理攻撃",
+              "multiplier": "物理480%×3回",
+              "damageTotal": "base"
+            },
+            {
+              "text": "気絶を付与",
+              "term": "気絶",
+              "condition": "対象が翠属性なら、攻撃するたび",
+              "chance": "70%",
+              "duration": "1ターン"
+            }
+          ]
+        }
       ]
     },
     {
@@ -16593,6 +17280,38 @@
         {
           "text": "自身の攻撃力増加1スタックにつきダメージ+150%(最大1140%)"
         }
+      ],
+      "flow": [
+        {
+          "when": "攻撃前",
+          "mode": "sequence",
+          "order": 1,
+          "target": "自身",
+          "effects": [
+            {
+              "text": "現在HP20%の自傷ダメージを受ける"
+            }
+          ]
+        },
+        {
+          "when": "攻撃時",
+          "mode": "sequence",
+          "order": 2,
+          "target": "ランダムな敵",
+          "effects": [
+            {
+              "text": "物理攻撃",
+              "multiplier": "物理540%×7回",
+              "damageTotal": "base"
+            },
+            {
+              "text": "ダメージが+150%され、最大でこの倍率に変わる",
+              "condition": "自身の攻撃力増加1スタックにつき",
+              "multiplier": "物理1140%×7回",
+              "damageTotal": "conditionMax"
+            }
+          ]
+        }
       ]
     },
     {
@@ -16621,6 +17340,29 @@
         },
         {
           "text": "バトル開始時、多重バリア1層を付与"
+        }
+      ],
+      "flow": [
+        {
+          "when": "バトル開始時",
+          "mode": "simultaneous",
+          "target": "自身",
+          "effects": [
+            {
+              "text": "多重バリア1層を付与"
+            }
+          ]
+        },
+        {
+          "when": "自身か味方が自傷ダメージを受けたとき",
+          "mode": "conditional",
+          "target": "自身",
+          "effects": [
+            {
+              "text": "攻撃力+10%をスタック",
+              "note": "最大4スタック、解除不可"
+            }
+          ]
         }
       ],
       "synergyNotes": [
@@ -16652,6 +17394,20 @@
       "steps": [
         {
           "text": "バトル開始時、自身以外でスピードが最も低い味方の攻撃力を50%増加(2ターン、解除不可)"
+        }
+      ],
+      "flow": [
+        {
+          "when": "バトル開始時",
+          "mode": "simultaneous",
+          "target": "自身以外でスピードが最も低い味方",
+          "effects": [
+            {
+              "text": "攻撃力を50%増加",
+              "duration": "2ターン",
+              "note": "解除不可"
+            }
+          ]
         }
       ]
     },
@@ -16699,6 +17455,37 @@
         },
         {
           "text": "70%の確率で対象のスピードを30%減少(2ターン)"
+        }
+      ],
+      "flow": [
+        {
+          "when": "攻撃前",
+          "mode": "sequence",
+          "order": 1,
+          "target": "自身",
+          "effects": [
+            {
+              "text": "現在HP20%の自傷ダメージを受ける"
+            }
+          ]
+        },
+        {
+          "when": "攻撃時",
+          "mode": "sequence",
+          "order": 2,
+          "target": "ランダムな敵",
+          "effects": [
+            {
+              "text": "物理攻撃",
+              "multiplier": "物理520%×6回",
+              "damageTotal": "base"
+            },
+            {
+              "text": "対象のスピードを30%減少",
+              "chance": "70%",
+              "duration": "2ターン"
+            }
+          ]
         }
       ]
     },
@@ -16748,6 +17535,38 @@
           "text": "対象の現在HPが自身より高い場合は1680%"
         }
       ],
+      "flow": [
+        {
+          "when": "攻撃前",
+          "mode": "sequence",
+          "order": 1,
+          "target": "自身",
+          "effects": [
+            {
+              "text": "現在HP20%の自傷ダメージを受ける"
+            }
+          ]
+        },
+        {
+          "when": "攻撃時",
+          "mode": "sequence",
+          "order": 2,
+          "target": "ランダムな敵3体",
+          "effects": [
+            {
+              "text": "物理攻撃",
+              "multiplier": "物理1120%",
+              "damageTotal": "base"
+            },
+            {
+              "text": "物理攻撃のダメージが変わる",
+              "condition": "対象の現在HPが自身より高い場合は",
+              "multiplier": "物理1680%",
+              "damageTotal": "conditionMax"
+            }
+          ]
+        }
+      ],
       "synergyNotes": [
         {
           "text": "S1の自傷で自分のHPが下がるほど③の条件を満たしやすくなる自己完結型。根拠: 条件が「対象の現在HP＞自身の現在HP」のため"
@@ -16781,6 +17600,23 @@
         {
           "text": "多重バリア1層を付与(最大HP20%以上のダメージを1回無効化)"
         }
+      ],
+      "flow": [
+        {
+          "when": "バトル開始時",
+          "mode": "simultaneous",
+          "target": "自身",
+          "effects": [
+            {
+              "text": "攻撃力を防御力200%分増加",
+              "note": "解除不可"
+            },
+            {
+              "text": "多重バリア1層を付与",
+              "note": "最大HP20%以上のダメージを1回無効化"
+            }
+          ]
+        }
       ]
     },
     {
@@ -16794,7 +17630,7 @@
       "subCategory": "カウンタ / 防御減少",
       "target": "自身 / 敵",
       "multiplierText": "被ダメ+10% / カウンタ-40%",
-      "duration": "1T",
+      "duration": "被ダメージ増加2T",
       "ct": null,
       "condition": "行動開始時、1ターンカウンタが最も高い敵の被ダメージを増加。対象防御力が自身より低い場合カウンタ減少。付与ターン2ターン、発動後4回行動終了まで再発動不可",
       "exclusiveWeapon": "専用武器効果なし",
@@ -16812,6 +17648,24 @@
         },
         {
           "text": "発動後4回行動まで再発動しない"
+        }
+      ],
+      "flow": [
+        {
+          "when": "行動開始時",
+          "mode": "simultaneous",
+          "target": "カウンタが最も高い敵",
+          "effects": [
+            {
+              "text": "被ダメージを10%増加",
+              "duration": "2ターン",
+              "note": "発動後、4回行動が終わるまで再発動しない"
+            },
+            {
+              "text": "カウンタを40%減少",
+              "condition": "対象の防御力が自身より低ければ"
+            }
+          ]
         }
       ]
     },

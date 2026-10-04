@@ -42,13 +42,21 @@
         <div class="skill-body">
           
         <div>
-          <h3 class="block-title">順番に何が起きる？</h3>
-          <ol class="steps">
-            <li>ランダムな敵3体に物理<span class="ratio">380%</span></li><li>このスキルを再発動(1回まで)</li><li>心に咲く花5スタック以上なら再発動が2回までになり、最後の攻撃後に花を5消費</li>
-          </ol>
+          <h3 class="block-title">いつ・誰に・何が起きる？</h3>
+          <ol class="flow">
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">① 攻撃時</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>ランダムな敵3体</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>物理攻撃<span class="flow-chip num">物理<span class="ratio">380%</span></span><span class="flow-total">倍率合計 2280%（6回分）</span><span class="flow-note">ランダムな敵3体×（初回＋再発動1回）＝6ヒット</span></li></ul></div>
+          </li>
+        
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">② 攻撃後</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>自身</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>このスキルを再発動<span class="flow-note">再発動は1回まで</span></li><li class="flow-cond-line"><span class="flow-chip cond">心に咲く花が5スタック以上なら</span>再発動が2回までになり、最後の攻撃後に花を5消費<span class="flow-chip num">物理<span class="ratio">380%</span>×9回</span><span class="flow-total">条件時：倍率合計 3420%</span><span class="flow-note">ランダムな敵3体×（初回＋再発動2回）＝9ヒット</span></li></ul></div>
+          </li>
+        </ol>
         </div>
       
-          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>ランダム敵3体</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 2280% / 最大 3420%</dd></dl></div>
+          
           
           
           <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用Lv1</th><td>物理攻撃が680%になる</td></tr></table></div>
@@ -79,13 +87,16 @@
         <div class="skill-body">
           
         <div>
-          <h3 class="block-title">順番に何が起きる？</h3>
-          <ol class="steps">
-            <li>攻撃力が高い敵3体に物理<span class="ratio">1320%</span></li><li>対象に<details class="term"><summary>毒</summary><span class="term-box">行動開始時に現在HPに応じたダメージを受ける状態異常。</span></details>を2ターン付与(毎ターン行動開始時、現在HP4%ダメージ)</li><li>心に咲く花5スタック以上なら物理<span class="ratio">1980%</span>(攻撃後に花を5消費)</li>
-          </ol>
+          <h3 class="block-title">いつ・誰に・何が起きる？</h3>
+          <ol class="flow">
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">攻撃時</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>攻撃力が高い敵3体</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>物理攻撃<span class="flow-chip num">物理<span class="ratio">1320%</span></span><span class="flow-total">倍率合計 3960%（3体分）</span></li><li><details class="term"><summary>毒</summary><span class="term-box">行動開始時に現在HPに応じたダメージを受ける状態異常。</span></details>を付与<span class="flow-chip">2ターン</span><span class="flow-note">毎ターン行動開始時、現在HP4%のダメージ</span></li><li class="flow-cond-line"><span class="flow-chip cond">心に咲く花が5スタック以上なら</span>物理攻撃のダメージが変わる<span class="flow-chip num">物理<span class="ratio">1980%</span></span><span class="flow-total">条件時：倍率合計 5940%</span><span class="flow-note">攻撃後に花を5消費</span></li></ul></div>
+          </li>
+        </ol>
         </div>
       
-          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>攻撃力が高い敵3体</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 3960% / 最大 5940%</dd></dl><dl class="data-item"><dt>継続</dt><dd>毒2T</dd></dl></div>
+          
           
           
           <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用Lv3</th><td>毒のダメージが現在HP5%になる</td></tr></table></div>
@@ -116,13 +127,36 @@
         <div class="skill-body">
           
         <div>
-          <h3 class="block-title">順番に何が起きる？</h3>
-          <ol class="steps">
-            <li>毎ターン開始時、自身と攻撃力が高い敵3体に劇化を1ターン付与(解除不可)</li><li>自身の受ける持続ダメージ+100%、敵側は+50%</li><li>バトル開始時、自身の命中率+50%、味方全体の攻撃力と最大HP+10%(解除不可)</li>
-          </ol>
+          <h3 class="block-title">いつ・誰に・何が起きる？</h3>
+          <ol class="flow">
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">バトル開始時</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>自身</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>命中率を50%増加<span class="flow-note">解除不可</span></li></ul></div>
+          </li>
+        
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">バトル開始時</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>味方全体</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>攻撃力と最大HPを10%増加<span class="flow-note">解除不可</span></li></ul></div>
+          </li>
+        
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">ターン開始時</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>自身と攻撃力が高い敵3体</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>劇化を付与<span class="flow-chip">1ターン</span><span class="flow-note">解除不可</span></li></ul></div>
+          </li>
+        
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">常時</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>自身</span></span><span class="flow-mode">常時</span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>受ける持続ダメージが100%増加</li></ul></div>
+          </li>
+        
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">常時</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>攻撃力が高い敵3体</span></span><span class="flow-mode">常時</span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>受ける持続ダメージが50%増加</li></ul></div>
+          </li>
+        </ol>
         </div>
       
-          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>敵 / 自身 / 味方全体</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>劇化 / 持続ダメージ増加 / 命中率+50%</dd></dl><dl class="data-item"><dt>継続</dt><dd>1T / 解除不可</dd></dl></div>
+          
           <div><h3 class="block-title">かみ合わせ</h3><ul class="verification-list synergy-list">
         <li>
           毒・出血など持続ダメージを撒く味方と組むと劇化の増幅が乗る。自身も持続ダメージを倍受けする点に注意。根拠: 劇化の効果が「受ける持続ダメージの増加」のため
@@ -158,13 +192,16 @@
         <div class="skill-body">
           
         <div>
-          <h3 class="block-title">順番に何が起きる？</h3>
-          <ol class="steps">
-            <li>攻撃を受けたとき、ダメージを80%遮断</li><li>攻撃を受けるたび心に咲く花を1スタック付与(最大10、1スタックにつき防御貫通+3%、解除不可)</li>
-          </ol>
+          <h3 class="block-title">いつ・誰に・何が起きる？</h3>
+          <ol class="flow">
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">攻撃を受けたとき</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>自身</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>ダメージを80%遮断</li><li>心に咲く花を1スタック付与<span class="flow-note">最大10スタック、1スタックにつき防御貫通+3%、解除不可</span></li></ul></div>
+          </li>
+        </ol>
         </div>
       
-          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>自身</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>ダメージ80%遮断 / 防御貫通+3%スタック</dd></dl><dl class="data-item"><dt>継続</dt><dd>解除不可</dd></dl></div>
+          
           
           
           <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用Lv2</th><td>バトル開始時自身に多重バリア3層付与。多重バリアは解除不可。ダメージを受けると1層消費して無効化</td></tr></table></div>

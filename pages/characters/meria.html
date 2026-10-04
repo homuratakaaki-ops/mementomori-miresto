@@ -42,13 +42,21 @@
         <div class="skill-body">
           
         <div>
-          <h3 class="block-title">順番に何が起きる？</h3>
-          <ol class="steps">
-            <li>攻撃前、成長因子1スタックにつき物理ダメージ+100%(最大1100%)</li><li>ランダムな敵に物理<span class="ratio">100%</span>×3回</li><li>攻撃後、自身に成長因子を2スタック付与(最大10、解除不可)</li>
-          </ol>
+          <h3 class="block-title">いつ・誰に・何が起きる？</h3>
+          <ol class="flow">
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">① 攻撃時</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>ランダムな敵</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>物理攻撃<span class="flow-chip num">物理<span class="ratio">100%</span>×3回</span><span class="flow-total">倍率合計 300%（3回分）</span></li><li class="flow-cond-line"><span class="flow-chip cond">攻撃前、成長因子1スタックにつき</span>物理ダメージが+100%され、最大でこの倍率に変わる<span class="flow-chip num">物理<span class="ratio">1100%</span>×3回</span><span class="flow-total">条件時：倍率合計 3300%</span></li></ul></div>
+          </li>
+        
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">② 攻撃後</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>自身</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>成長因子を2スタック付与<span class="flow-note">最大10スタック、解除不可</span></li></ul></div>
+          </li>
+        </ol>
         </div>
       
-          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>ランダム敵</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 300% / 最大 3300%</dd></dl><dl class="data-item"><dt>継続</dt><dd>成長因子2スタック</dd></dl></div>
+          
           
           
           <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用Lv1</th><td>物理攻撃の回数が5回になる</td></tr></table></div>
@@ -79,13 +87,21 @@
         <div class="skill-body">
           
         <div>
-          <h3 class="block-title">順番に何が起きる？</h3>
-          <ol class="steps">
-            <li>攻撃前、成長因子1スタックにつき物理ダメージ+40%(最大620%)</li><li>ランダムな敵に物理<span class="ratio">220%</span>×5回</li><li>最後の攻撃後、命中率増加を付帯している味方がいれば成長因子を3スタック付与</li>
-          </ol>
+          <h3 class="block-title">いつ・誰に・何が起きる？</h3>
+          <ol class="flow">
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">① 攻撃時</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>ランダムな敵</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>物理攻撃<span class="flow-chip num">物理<span class="ratio">220%</span>×5回</span><span class="flow-total">倍率合計 1100%（5回分）</span></li><li class="flow-cond-line"><span class="flow-chip cond">攻撃前、成長因子1スタックにつき</span>物理ダメージが+40%され、最大でこの倍率に変わる<span class="flow-chip num">物理<span class="ratio">620%</span>×5回</span><span class="flow-total">条件時：倍率合計 3100%</span></li></ul></div>
+          </li>
+        
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">② 最後の攻撃後</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>自身</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li class="flow-cond-line"><span class="flow-chip cond">命中率増加を付帯している味方がいれば</span>成長因子を3スタック付与</li></ul></div>
+          </li>
+        </ol>
         </div>
       
-          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>ランダム敵</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 1100% / 最大 3100%</dd></dl><dl class="data-item"><dt>継続</dt><dd>成長因子3スタック条件あり</dd></dl></div>
+          
           <div><h3 class="block-title">かみ合わせ</h3><ul class="verification-list synergy-list">
         <li>
           ③は「命中率増加を付帯している味方がいること」が条件のため、命中バフを配る味方がいると成長因子の自給が安定する。根拠: 付与条件が「命中率増加を付帯している味方がいる場合」のため
@@ -121,13 +137,16 @@
         <div class="skill-body">
           
         <div>
-          <h3 class="block-title">順番に何が起きる？</h3>
-          <ol class="steps">
-            <li>自身の攻撃で対象を戦闘不能にできなかった場合、自身に多重バリアを1層付与(最大4層、最大HP10%以上の被弾で1層消費、解除不可)</li><li>自身が4層のときは、自身以外で攻撃力が最も高い味方に付与</li>
-          </ol>
+          <h3 class="block-title">いつ・誰に・何が起きる？</h3>
+          <ol class="flow">
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">自身の攻撃で対象を戦闘不能にできなかったとき</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>自身</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>多重バリアを1層付与<span class="flow-note">最大4層、最大HP10%以上の被弾で1層消費、解除不可</span></li><li class="flow-cond-line"><span class="flow-chip cond">自身がすでに4層なら</span>自身以外で攻撃力が最も高い味方に付与される</li></ul></div>
+          </li>
+        </ol>
         </div>
       
-          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>自身 / 攻撃力が最も高い味方</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>多重バリア最大4層 / HP10%以上被弾で1層消費</dd></dl><dl class="data-item"><dt>継続</dt><dd>解除不可</dd></dl></div>
+          
           
           
           <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用</th><td>専用武器効果なし</td></tr></table></div>
@@ -158,13 +177,21 @@
         <div class="skill-body">
           
         <div>
-          <h3 class="block-title">順番に何が起きる？</h3>
-          <ol class="steps">
-            <li>バトル開始時、自身のスピード+20%(1ターン)</li><li>5ターン目開始時、自身の命中率+50%(解除不可)</li>
-          </ol>
+          <h3 class="block-title">いつ・誰に・何が起きる？</h3>
+          <ol class="flow">
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">バトル開始時</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>自身</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>スピードを20%増加<span class="flow-chip">1ターン</span></li></ul></div>
+          </li>
+        
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">5ターン目開始時</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>自身</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>命中率を50%増加<span class="flow-note">解除不可</span></li></ul></div>
+          </li>
+        </ol>
         </div>
       
-          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>自身 / 味方全体</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>スピード+20% / 命中率+50%</dd></dl><dl class="data-item"><dt>継続</dt><dd>1T / 5T</dd></dl></div>
+          
           
           
           <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用Lv2</th><td>バトル開始時、同じ属性の味方生存数3体以上なら味方全体のスピード10%増加。スピード増加は解除不可</td></tr></table></div>

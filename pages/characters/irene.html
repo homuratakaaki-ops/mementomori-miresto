@@ -42,13 +42,21 @@
         <div class="skill-body">
           
         <div>
-          <h3 class="block-title">順番に何が起きる？</h3>
-          <ol class="steps">
-            <li>攻撃前、対象の防御力を25%減少(4ターン。オートバトル・ボスバトルでは解除不可、無窮の塔では50%)</li><li>ランダムな敵4体に物理<span class="ratio">260%</span></li>
-          </ol>
+          <h3 class="block-title">いつ・誰に・何が起きる？</h3>
+          <ol class="flow">
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">① 攻撃前</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>ランダムな敵4体</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>防御力を25%減少<span class="flow-chip">4ターン</span><span class="flow-note">オートバトル・ボスバトルでは解除不可、無窮の塔では減少量50%</span></li></ul></div>
+          </li>
+        
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">② 攻撃時</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>ランダムな敵4体</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>物理攻撃<span class="flow-chip num">物理<span class="ratio">260%</span></span><span class="flow-total">倍率合計 1040%（4体分）</span></li></ul></div>
+          </li>
+        </ol>
         </div>
       
-          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>ランダム敵</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 1040%</dd></dl><dl class="data-item"><dt>継続</dt><dd>防御力減少4T</dd></dl></div>
+          
           
           
           <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用Lv1</th><td>対象がランダム敵5体。</td></tr><tr><th>専用Lv3</th><td>物理攻撃が280%</td></tr></table></div>
@@ -79,13 +87,26 @@
         <div class="skill-body">
           
         <div>
-          <h3 class="block-title">順番に何が起きる？</h3>
-          <ol class="steps">
-            <li>ランダムな敵に物理<span class="ratio">380%</span>×4回</li><li>バトル中3回目以降は、攻撃力が最も高い敵に物理<span class="ratio">760%</span>×8回へ変わる</li><li>アストルム・ナタリスの最初の攻撃前、自身の命中率を50%増加(1ターン)</li>
-          </ol>
+          <h3 class="block-title">いつ・誰に・何が起きる？</h3>
+          <ol class="flow">
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">① 攻撃前</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>自身</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li class="flow-cond-line"><span class="flow-chip cond">アストルム・ナタリスのとき</span>最初の攻撃前に命中率を50%増加<span class="flow-chip">1ターン</span></li></ul></div>
+          </li>
+        
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">② 攻撃時</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>ランダムな敵</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>物理攻撃<span class="flow-chip num">物理<span class="ratio">380%</span>×4回</span><span class="flow-total">倍率合計 1520%（4回分）</span></li></ul></div>
+          </li>
+        
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">③ 攻撃時</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>攻撃力が最も高い敵</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li class="flow-cond-line"><span class="flow-chip cond">バトル中3回目以降は</span>アストルム・ナタリスに変わる<span class="flow-chip num">物理<span class="ratio">760%</span>×8回</span><span class="flow-total">条件時：倍率合計 6080%</span></li></ul></div>
+          </li>
+        </ol>
         </div>
       
-          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>ランダム敵 / 攻撃力最高の敵</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 1520% / 最大 6080%</dd></dl><dl class="data-item"><dt>継続</dt><dd>命中率増加1T</dd></dl></div>
+          
           
           
           <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用</th><td>専用武器効果なし</td></tr></table></div>
@@ -116,13 +137,26 @@
         <div class="skill-body">
           
         <div>
-          <h3 class="block-title">順番に何が起きる？</h3>
-          <ol class="steps">
-            <li>ターン開始時、自身と自身以外でスピードが最も低い味方の通常攻撃を強化(3ターン)</li><li>強化中の通常攻撃時、付帯者自身のスキルCTを1減少し、弱体効果を2つ解除</li><li>強化通常攻撃後、通常攻撃強化を解除</li><li>発動後3回行動まで再発動しない</li>
-          </ol>
+          <h3 class="block-title">いつ・誰に・何が起きる？</h3>
+          <ol class="flow">
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">ターン開始時</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>自身と自身以外でスピードが最も低い味方</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>通常攻撃を強化<span class="flow-chip">3ターン</span><span class="flow-note">発動後、3回行動が終わるまで再発動しない</span></li></ul></div>
+          </li>
+        
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">攻撃時</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>通常攻撃を強化された本人</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>付帯者自身のスキルCTを1減少</li><li>弱体効果を2つ解除</li></ul></div>
+          </li>
+        
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">攻撃後</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>通常攻撃を強化された本人</span></span><span class="flow-mode">解除条件</span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>通常攻撃強化を解除</li></ul></div>
+          </li>
+        </ol>
         </div>
       
-          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>自身 / スピードが最も低い味方</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常攻撃強化 / スキルCT1減少 / 弱体効果2つ解除</dd></dl><dl class="data-item"><dt>継続</dt><dd>発動後3回行動終了まで再発動不可</dd></dl></div>
+          
           <div><h3 class="block-title">かみ合わせ</h3><ul class="verification-list synergy-list">
         <li>
           ②のCT短縮でS2の「3回目」到達が早まる自己完結型。根拠: 短縮対象が自身のスキルCTのため
@@ -158,13 +192,21 @@
         <div class="skill-body">
           
         <div>
-          <h3 class="block-title">順番に何が起きる？</h3>
-          <ol class="steps">
-            <li>攻撃を受けたとき、自身へのダメージを70%遮断</li><li>ターン開始時、自身以外でスピードが最も低い味方に結界を4ターン付与(被攻撃時のダメージ30%遮断、解除不可)</li><li>結界付与は発動後4回行動まで再発動しない</li>
-          </ol>
+          <h3 class="block-title">いつ・誰に・何が起きる？</h3>
+          <ol class="flow">
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">攻撃を受けたとき</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>自身</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>自身へのダメージを70%遮断</li></ul></div>
+          </li>
+        
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">ターン開始時</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>自身以外でスピードが最も低い味方</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>結界を付与<span class="flow-chip">4ターン</span><span class="flow-note">被攻撃時のダメージを30%遮断、解除不可。発動後、4回行動が終わるまで再発動しない</span></li></ul></div>
+          </li>
+        </ol>
         </div>
       
-          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>自身 / スピードが最も低い味方</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>ダメージ70%遮断 / 結界</dd></dl><dl class="data-item"><dt>継続</dt><dd>4T</dd></dl></div>
+          
           
           
           <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用Lv2</th><td>結界のダメージ遮断量が45%になる</td></tr></table></div>
