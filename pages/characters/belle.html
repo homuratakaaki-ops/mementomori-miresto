@@ -42,13 +42,16 @@
         <div class="skill-body">
           
         <div>
-          <h3 class="block-title">順番に何が起きる？</h3>
-          <ol class="steps">
-            <li>攻撃力が最も高い敵に魔法<span class="ratio">420%</span>×4回</li><li>対象のHP割合が50%より大きい場合、<details class="term"><summary>出血</summary><span class="term-box">行動開始時などにHPを失う状態異常。ダメージ量や上限は付与した効果ごとに異なる。</span></details>を2ターン付与(行動開始時に自身の攻撃力10%ダメージ)</li><li>対象のHP割合が50%以下の場合、バフを1つ解除</li>
-          </ol>
+          <h3 class="block-title">いつ・誰に・何が起きる？</h3>
+          <ol class="flow">
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">攻撃時</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>攻撃力が最も高い敵</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>魔法攻撃<span class="flow-chip num">魔法<span class="ratio">420%</span>×4回</span><span class="flow-total">倍率合計 1680%（4回分）</span></li><li class="flow-cond-line"><span class="flow-chip cond">対象のHP割合が50%より大きい場合</span><details class="term"><summary>出血</summary><span class="term-box">行動開始時などにHPを失う状態異常。ダメージ量や上限は付与した効果ごとに異なる。</span></details>を付与<span class="flow-chip">2ターン</span><span class="flow-note">行動開始時に自身の攻撃力10%のダメージ</span></li><li class="flow-cond-line"><span class="flow-chip cond">対象のHP割合が50%以下の場合</span>バフを1つ解除</li></ul></div>
+          </li>
+        </ol>
         </div>
       
-          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>攻撃力が最も高い敵</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 1680%</dd></dl><dl class="data-item"><dt>継続</dt><dd>出血2T</dd></dl></div>
+          
           
           
           <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用Lv1</th><td>攻撃前に自身のクリ耐性+50%。</td></tr><tr><th>専用Lv2</th><td>5回攻撃。</td></tr><tr><th>専用Lv3</th><td>出血4T</td></tr></table></div>
@@ -79,13 +82,16 @@
         <div class="skill-body">
           
         <div>
-          <h3 class="block-title">順番に何が起きる？</h3>
-          <ol class="steps">
-            <li>HP割合が最も低い敵に魔法<span class="ratio">280%</span>×6回(必ず命中)</li><li>このスキルで敵を戦闘不能にした場合、魔法攻撃の回数が1回増える</li><li>このスキルで敵を2体戦闘不能にした場合、増加する回数が2回になる</li>
-          </ol>
+          <h3 class="block-title">いつ・誰に・何が起きる？</h3>
+          <ol class="flow">
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">攻撃時</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>HP割合が最も低い敵</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>魔法攻撃<span class="flow-chip num">魔法<span class="ratio">280%</span>×6回</span><span class="flow-total">倍率合計 1680%（6回分）</span><span class="flow-note">必ず命中する</span></li><li class="flow-cond-line"><span class="flow-chip cond">このスキルで敵を戦闘不能にした場合</span>攻撃回数が1回増え、2体撃破なら2回増える<span class="flow-chip num">魔法<span class="ratio">280%</span>×8回</span><span class="flow-total">条件時：倍率合計 2240%</span></li></ul></div>
+          </li>
+        </ol>
         </div>
       
-          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>HP割合が最も低い敵</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 1680% / 最大 2240%</dd></dl></div>
+          
           
           
           <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用</th><td>専用武器効果なし</td></tr></table></div>
@@ -116,13 +122,16 @@
         <div class="skill-body">
           
         <div>
-          <h3 class="block-title">順番に何が起きる？</h3>
-          <ol class="steps">
-            <li>通常攻撃時、クリティカルヒットした場合、攻撃力+10%を付与(5ターン、最大5スタック、解除不可)</li>
-          </ol>
+          <h3 class="block-title">いつ・誰に・何が起きる？</h3>
+          <ol class="flow">
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">攻撃時</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>自身</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>強化した通常攻撃がクリティカルヒットした場合、攻撃力+10%を付与<span class="flow-chip">5ターン</span><span class="flow-note">最大5スタック、解除不可</span></li></ul></div>
+          </li>
+        </ol>
         </div>
       
-          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>自身</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常攻撃強化 / 攻撃力+10%×最大5</dd></dl><dl class="data-item"><dt>継続</dt><dd>解除不可</dd></dl></div>
+          
           
           
           <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用</th><td>専用武器効果なし</td></tr></table></div>
@@ -153,13 +162,16 @@
         <div class="skill-body">
           
         <div>
-          <h3 class="block-title">順番に何が起きる？</h3>
-          <ol class="steps">
-            <li>HPが50%未満のとき、最大HP20%を超えるダメージの超過分を100%遮断</li><li>さらにHP50%未満で被弾すると、シールドを3ターン付与</li><li>シールド量は、攻撃してきた敵の総与ダメージが自身の最大HP20%を超えた分</li>
-          </ol>
+          <h3 class="block-title">いつ・誰に・何が起きる？</h3>
+          <ol class="flow">
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">攻撃を受けたとき</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>自身</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li class="flow-cond-line"><span class="flow-chip cond">HPが50%未満のとき</span>最大HP20%を超えるダメージの超過分を100%遮断</li><li class="flow-cond-line"><span class="flow-chip cond">HP50%未満で被弾すると</span>さらにシールドを付与<span class="flow-chip">3ターン</span><span class="flow-note">量は、攻撃してきた敵の総与ダメージが自身の最大HP20%を超えた分</span></li></ul></div>
+          </li>
+        </ol>
         </div>
       
-          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>自身</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>最大HP20%超過遮断 / 最大HP20%超過分シールド</dd></dl><dl class="data-item"><dt>継続</dt><dd>3T</dd></dl></div>
+          
           
           
           <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用</th><td>専用武器効果なし</td></tr></table></div>

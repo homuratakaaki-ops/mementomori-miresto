@@ -42,13 +42,21 @@
         <div class="skill-body">
           
         <div>
-          <h3 class="block-title">順番に何が起きる？</h3>
-          <ol class="steps">
-            <li>自身と、自身よりスピードが高い味方全体の防御力を自身の防御力25%分増加(3ターン、解除不可)</li><li>攻撃前、同じ対象の物理防御力・魔法防御力も自身の該当値25%分増加(3ターン、解除不可)</li><li>ランダムな敵5体に物理<span class="ratio">480%</span></li>
-          </ol>
+          <h3 class="block-title">いつ・誰に・何が起きる？</h3>
+          <ol class="flow">
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">① 攻撃前</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>自身と、自身よりスピードが高い味方全体</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>防御力を自身の防御力25%分増加<span class="flow-chip">3ターン</span><span class="flow-note">解除不可</span></li><li>物理防御力・魔法防御力も自身の該当値25%分増加<span class="flow-chip">3ターン</span><span class="flow-note">解除不可</span></li></ul></div>
+          </li>
+        
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">② 攻撃時</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>ランダムな敵5体</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>物理攻撃<span class="flow-chip num">物理<span class="ratio">480%</span></span><span class="flow-total">倍率合計 2400%（5体分）</span></li></ul></div>
+          </li>
+        </ol>
         </div>
       
-          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>ランダム敵5体 / 自身と高スピード味方全体</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 2400%</dd></dl><dl class="data-item"><dt>継続</dt><dd>防御力増加3T / 解除不可</dd></dl></div>
+          
           <div><h3 class="block-title">かみ合わせ</h3><ul class="verification-list synergy-list">
         <li>
           フォルティナより速いアタッカーを並べるほど支援が広く届く。スピード計算ツールで並び順を確認すると設計しやすい。
@@ -84,13 +92,21 @@
         <div class="skill-body">
           
         <div>
-          <h3 class="block-title">順番に何が起きる？</h3>
-          <ol class="steps">
-            <li>ランダムな敵に物理<span class="ratio">560%</span>×5回</li><li>最後の攻撃後、総与ダメージの20%を自身のHP回復</li>
-          </ol>
+          <h3 class="block-title">いつ・誰に・何が起きる？</h3>
+          <ol class="flow">
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">① 攻撃時</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>ランダムな敵</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>物理攻撃<span class="flow-chip num">物理<span class="ratio">560%</span>×5回</span><span class="flow-total">倍率合計 2800%（5回分）</span></li></ul></div>
+          </li>
+        
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">② 最後の攻撃後</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>自身</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>総与ダメージの20%をHP回復</li></ul></div>
+          </li>
+        </ol>
         </div>
       
-          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>ランダム敵</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 2800%</dd></dl></div>
+          
           <div><h3 class="block-title">かみ合わせ</h3><ul class="verification-list synergy-list">
         <li>
           S4の献身で肩代わりした被ダメージをここで取り戻す設計。回復回数カウント族のスタック源にもなる。
@@ -126,13 +142,21 @@
         <div class="skill-body">
           
         <div>
-          <h3 class="block-title">順番に何が起きる？</h3>
-          <ol class="steps">
-            <li>バトル開始時、味方編成内の属性が2種類以下なら味方全体のスピード+10%(解除不可)</li><li>2ターン目開始時、自身と攻撃力が高い味方2体の攻撃力を自身の攻撃力30%分増加(3ターン、解除不可)</li>
-          </ol>
+          <h3 class="block-title">いつ・誰に・何が起きる？</h3>
+          <ol class="flow">
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">バトル開始時</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>味方全体</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li class="flow-cond-line"><span class="flow-chip cond">味方編成内の属性が2種類以下なら</span>スピードを10%増加<span class="flow-note">解除不可</span></li></ul></div>
+          </li>
+        
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">2ターン目開始時</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>自身と攻撃力が高い味方2体</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>攻撃力を自身の攻撃力30%分増加<span class="flow-chip">3ターン</span><span class="flow-note">解除不可</span></li></ul></div>
+          </li>
+        </ol>
         </div>
       
-          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>味方全体 / 自身と攻撃力が高い味方2体</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>スピード10%増加 / 自身の攻撃力×<span class="ratio">30%</span>を攻撃力に加算</dd></dl><dl class="data-item"><dt>継続</dt><dd>攻撃力増加3T / 解除不可</dd></dl></div>
+          
           <div><h3 class="block-title">かみ合わせ</h3><ul class="verification-list synergy-list">
         <li>
           天属性＋1属性までの編成で先手を取りやすくなる。
@@ -168,13 +192,21 @@
         <div class="skill-body">
           
         <div>
-          <h3 class="block-title">順番に何が起きる？</h3>
-          <ol class="steps">
-            <li>1ターン目の行動開始時、自身に献身を3ターン付与(解除不可)</li><li>献身中、自身以外の味方が受けるダメージの50%を自身が代わりに受ける</li><li>献身中に自身が攻撃を受けたとき、ダメージを65%遮断</li>
-          </ol>
+          <h3 class="block-title">いつ・誰に・何が起きる？</h3>
+          <ol class="flow">
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">1ターン目の行動開始時</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>自身</span></span><span class="flow-mode">同時に発動</span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>献身を付与<span class="flow-chip">3ターン</span><span class="flow-note">解除不可</span></li><li>献身中、自身以外の味方が受けるダメージの50%を自身が代わりに受ける</li></ul></div>
+          </li>
+        
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">攻撃を受けたとき</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>自身</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li class="flow-cond-line"><span class="flow-chip cond">献身中なら</span>ダメージを65%遮断</li></ul></div>
+          </li>
+        </ol>
         </div>
       
-          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>自身</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>被ダメ50%肩代わり / ダメージ65%遮断</dd></dl><dl class="data-item"><dt>継続</dt><dd>献身3T / 解除不可</dd></dl></div>
+          
           <div><h3 class="block-title">かみ合わせ</h3><ul class="verification-list synergy-list">
         <li>
           神呪イリアS3と同じ肩代わり機構で、序盤のバースト対策になる。肩代わりの割合はイリアが20%、こちらが50%。

@@ -42,13 +42,21 @@
         <div class="skill-body">
           
         <div>
-          <h3 class="block-title">順番に何が起きる？</h3>
-          <ol class="steps">
-            <li>HP割合が最も低い敵に物理<span class="ratio">350%</span>×3回</li><li>このターン中に自身が敵を戦闘不能にしていた場合、残りの敵4体へ物理<span class="ratio">350%</span></li>
-          </ol>
+          <h3 class="block-title">いつ・誰に・何が起きる？</h3>
+          <ol class="flow">
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">① 攻撃時</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>HP割合が最も低い敵</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>物理攻撃<span class="flow-chip num">物理<span class="ratio">350%</span>×3回</span><span class="flow-total">倍率合計 1050%（3回分）</span></li></ul></div>
+          </li>
+        
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">② 攻撃後</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>残りの敵4体</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li class="flow-cond-line"><span class="flow-chip cond">このターン中に自身が敵を戦闘不能にしていた場合</span>追加で物理攻撃<span class="flow-chip num">物理<span class="ratio">350%</span>×4回</span><span class="flow-total">条件時：倍率合計 2450%</span><span class="flow-note">最初の3回と合わせて最大7ヒット</span></li></ul></div>
+          </li>
+        </ol>
         </div>
       
-          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>HP割合が最も低い敵</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 1050% / 最大 2450%</dd></dl></div>
+          
           
           
           <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用Lv1</th><td>戦闘不能にできなかった場合、低HP敵に物理<span class="ratio">260%</span>×3回</td></tr></table></div>
@@ -79,13 +87,21 @@
         <div class="skill-body">
           
         <div>
-          <h3 class="block-title">順番に何が起きる？</h3>
-          <ol class="steps">
-            <li>ランダムな敵4体に物理<span class="ratio">510%</span></li><li>不治を3ターン付与</li><li>攻撃後、自身の被ダメージを50%減少し、カウンタを100%増加(2ターン)</li>
-          </ol>
+          <h3 class="block-title">いつ・誰に・何が起きる？</h3>
+          <ol class="flow">
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">① 攻撃時</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>ランダムな敵4体</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>物理攻撃<span class="flow-chip num">物理<span class="ratio">510%</span></span><span class="flow-total">倍率合計 2040%（4体分）</span></li><li>不治を付与<span class="flow-chip">3ターン</span></li></ul></div>
+          </li>
+        
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">② 攻撃後</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>自身</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>被ダメージを50%減少し、カウンタを100%増加<span class="flow-chip">2ターン</span></li></ul></div>
+          </li>
+        </ol>
         </div>
       
-          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>ランダム敵4体</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 2040% / 最大 4080%</dd></dl><dl class="data-item"><dt>継続</dt><dd>不治3T / 被ダメ-50%・カウンタ+100% 2T</dd></dl></div>
+          
           
           
           <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用Lv2</th><td>HP30%以下ならダメージ2倍。</td></tr><tr><th>専用Lv3</th><td>カウンタ120%</td></tr></table></div>
@@ -116,13 +132,21 @@
         <div class="skill-body">
           
         <div>
-          <h3 class="block-title">順番に何が起きる？</h3>
-          <ol class="steps">
-            <li>戦闘不能時、最大HP30%で復活(バトル中1回)</li><li>正面の敵と隣接する敵1体へ、過去20ターンの総被ダメージ15%の直接攻撃</li><li>この直接攻撃は必ず命中する</li>
-          </ol>
+          <h3 class="block-title">いつ・誰に・何が起きる？</h3>
+          <ol class="flow">
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">自身が戦闘不能になったとき</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>自身</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>最大HP30%分のHPで復活<span class="flow-note">バトル中1回</span></li></ul></div>
+          </li>
+        
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">自身が戦闘不能になったとき</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>正面の敵と隣接する敵1体</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>過去20ターンの総被ダメージ15%分の直接攻撃<span class="flow-note">この直接攻撃は必ず命中する</span></li></ul></div>
+          </li>
+        </ol>
         </div>
       
-          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>自身 / 正面と隣接敵</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>最大HP30%回復復活 / 総被ダメージ15%直接攻撃</dd></dl><dl class="data-item"><dt>継続</dt><dd>バトル中1回</dd></dl></div>
+          
           <div><h3 class="block-title">かみ合わせ</h3><ul class="verification-list synergy-list">
         <li>
           被ダメ蓄積参照はフィアーS2と同族。受けの多い試合ほど復活時の反撃が伸びる。
@@ -158,13 +182,16 @@
         <div class="skill-body">
           
         <div>
-          <h3 class="block-title">順番に何が起きる？</h3>
-          <ol class="steps">
-            <li>自身の最大HP+50%(解除不可)</li><li>復活した場合、復活後に再付与される</li>
-          </ol>
+          <h3 class="block-title">いつ・誰に・何が起きる？</h3>
+          <ol class="flow">
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">常時</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>自身</span></span><span class="flow-mode">常時</span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>最大HPを50%増加<span class="flow-note">解除不可</span></li><li>復活した場合、復活後に再付与される</li></ul></div>
+          </li>
+        </ol>
         </div>
       
-          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>自身</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>最大HP+50%</dd></dl><dl class="data-item"><dt>継続</dt><dd>解除不可</dd></dl></div>
+          
           
           
           <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用</th><td>専用武器効果なし</td></tr></table></div>

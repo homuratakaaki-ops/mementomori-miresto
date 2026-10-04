@@ -42,13 +42,26 @@
         <div class="skill-body">
           
         <div>
-          <h3 class="block-title">順番に何が起きる？</h3>
-          <ol class="steps">
-            <li>HP割合が最も低い味方を自身の攻撃力30%分回復</li><li>攻撃前、味方全体の弱体効果耐性率を15%増加(2ターン)</li><li>ランダムな敵3体に物理<span class="ratio">660%</span></li>
-          </ol>
+          <h3 class="block-title">いつ・誰に・何が起きる？</h3>
+          <ol class="flow">
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">① 攻撃前</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>HP割合が最も低い味方</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>HPを自身の攻撃力30%分回復</li></ul></div>
+          </li>
+        
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">② 攻撃前</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>味方全体</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>弱体効果耐性率を15%増加<span class="flow-chip">2ターン</span></li></ul></div>
+          </li>
+        
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">③ 攻撃時</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>ランダムな敵3体</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>物理攻撃<span class="flow-chip num">物理<span class="ratio">660%</span></span><span class="flow-total">倍率合計 1980%（3体分）</span></li></ul></div>
+          </li>
+        </ol>
         </div>
       
-          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>ランダム敵3体 / HP割合が最も低い味方</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 1980%</dd></dl><dl class="data-item"><dt>継続</dt><dd>弱体効果耐性率増加2T</dd></dl></div>
+          
           <div><h3 class="block-title">かみ合わせ</h3><ul class="verification-list synergy-list">
         <li>
           ①の回復はアクティブスキル由来のため「回復回数カウント族」(ポーラS3・漆黒ステラS4・黄昏フローレンスS3)のスタック源になり、自身のS2・S3の条件も進める。
@@ -84,13 +97,21 @@
         <div class="skill-body">
           
         <div>
-          <h3 class="block-title">順番に何が起きる？</h3>
-          <ol class="steps">
-            <li>HP割合が最も低い味方を自身の攻撃力30%分回復</li><li>攻撃前、自身か味方のアクティブスキルによる回復の発動回数が15以上なら物理<span class="ratio">2160%</span>(通常540%)×4回、ランダムな敵へ</li>
-          </ol>
+          <h3 class="block-title">いつ・誰に・何が起きる？</h3>
+          <ol class="flow">
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">① 攻撃前</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>HP割合が最も低い味方</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>HPを自身の攻撃力30%分回復</li></ul></div>
+          </li>
+        
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">② 攻撃時</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>ランダムな敵</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>物理攻撃<span class="flow-chip num">物理<span class="ratio">540%</span>×4回</span><span class="flow-total">倍率合計 2160%（4回分）</span></li><li class="flow-cond-line"><span class="flow-chip cond">攻撃前、自身か味方のアクティブスキルによる回復の発動回数が15以上なら</span>物理攻撃のダメージが変わる<span class="flow-chip num">物理<span class="ratio">2160%</span>×4回</span><span class="flow-total">条件時：倍率合計 8640%</span></li></ul></div>
+          </li>
+        </ol>
         </div>
       
-          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>ランダム敵 / HP割合が最も低い味方</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 2160% / 最大 8640%</dd></dl></div>
+          
           <div><h3 class="block-title">かみ合わせ</h3><ul class="verification-list synergy-list">
         <li>
           アクティブ回復を多発する味方(コベルS2・イディーネS2がそれぞれ3回、ポーラS3・ユニS2等)がいるほど15回に早く届く。コベルS2は同じ「15回」を参照する。
@@ -126,13 +147,26 @@
         <div class="skill-body">
           
         <div>
-          <h3 class="block-title">順番に何が起きる？</h3>
-          <ol class="steps">
-            <li>自身か味方のアクティブスキルがHP回復を発動したとき、自身と攻撃力が高い味方2体に聖剣の光を3スタック付与(最大3、解除不可)</li><li>付帯者が魔法攻撃を受けて生存していた場合、1スタック消費して被ダメージの80%を回復(上限は付帯者の最大HP20%)</li><li>自身が戦闘不能になると、回復の前に自身と味方の聖剣の光を解除</li>
-          </ol>
+          <h3 class="block-title">いつ・誰に・何が起きる？</h3>
+          <ol class="flow">
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">自身か味方のアクティブスキルがHP回復を発動したとき</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>自身と攻撃力が高い味方2体</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>聖剣の光を3スタック付与<span class="flow-note">最大3スタック、解除不可</span></li></ul></div>
+          </li>
+        
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">付帯者が魔法攻撃を受けて生存したとき</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>自身と攻撃力が高い味方2体</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>1スタック消費して被ダメージの80%を回復<span class="flow-note">上限は付帯者の最大HP20%分</span></li></ul></div>
+          </li>
+        
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">自身が戦闘不能になったとき</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>自身と攻撃力が高い味方2体</span></span><span class="flow-mode">解除条件</span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>回復の前に聖剣の光を解除</li></ul></div>
+          </li>
+        </ol>
         </div>
       
-          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>自身と攻撃力が高い味方2体</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>聖剣の光3スタック / 被ダメ80%回復</dd></dl><dl class="data-item"><dt>継続</dt><dd>解除不可</dd></dl></div>
+          
           <div><h3 class="block-title">かみ合わせ</h3><ul class="verification-list synergy-list">
         <li>
           魔法攻撃主体の敵に対して特に働く(物理被弾では消費されない)。
@@ -168,13 +202,21 @@
         <div class="skill-body">
           
         <div>
-          <h3 class="block-title">順番に何が起きる？</h3>
-          <ol class="steps">
-            <li>バトル開始時、自身の最大HP+100%・被ダメージ60%減少(解除不可)</li><li>1ターン目の行動開始時、自身と攻撃力が最も高い味方の魔法防御力+30%(解除不可)</li><li>自身以外で翠属性または天属性の味方が2体以上なら、同じ対象の最大HPも30%増加(解除不可)</li>
-          </ol>
+          <h3 class="block-title">いつ・誰に・何が起きる？</h3>
+          <ol class="flow">
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">バトル開始時</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>自身</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>最大HP100%増加・被ダメージ60%減少<span class="flow-note">解除不可</span></li></ul></div>
+          </li>
+        
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">1ターン目の行動開始時</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>自身と攻撃力が最も高い味方</span></span><span class="flow-mode">同時に発動</span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>魔法防御力を30%増加<span class="flow-note">解除不可</span></li><li class="flow-cond-line"><span class="flow-chip cond">自身以外で翠属性または天属性の味方が2体以上なら</span>同じ対象の最大HPも30%増加<span class="flow-note">解除不可</span></li></ul></div>
+          </li>
+        </ol>
         </div>
       
-          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>自身と攻撃力が最も高い味方</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>魔法防御力30%増加 / 最大HP30%増加</dd></dl><dl class="data-item"><dt>継続</dt><dd>解除不可</dd></dl></div>
+          
           
           
           <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用</th><td>専用武器効果なし</td></tr></table></div>

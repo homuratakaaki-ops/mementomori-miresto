@@ -42,13 +42,21 @@
         <div class="skill-body">
           
         <div>
-          <h3 class="block-title">順番に何が起きる？</h3>
-          <ol class="steps">
-            <li>攻撃前、攻撃力が高い味方2体に命中率+25%・回避率-25%を付与(4ターン、1つのバフ扱い)</li><li>ランダムな敵に物理<span class="ratio">330%</span>×4回</li>
-          </ol>
+          <h3 class="block-title">いつ・誰に・何が起きる？</h3>
+          <ol class="flow">
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">① 攻撃前</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>攻撃力が高い味方2体</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>命中率25%増加・回避率25%減少を付与<span class="flow-chip">4ターン</span><span class="flow-note">2つで1つのバフ扱い</span></li></ul></div>
+          </li>
+        
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">② 攻撃時</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>ランダムな敵</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>物理攻撃<span class="flow-chip num">物理<span class="ratio">330%</span>×4回</span><span class="flow-total">倍率合計 1320%（4回分）</span></li></ul></div>
+          </li>
+        </ol>
         </div>
       
-          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>攻撃力高い味方2体 / ランダム敵</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 1320%</dd></dl><dl class="data-item"><dt>継続</dt><dd>命中+25% / 回避-25% 4T</dd></dl></div>
+          
           
           
           <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用Lv1</th><td>命中率+50%、回避率-50%。</td></tr><tr><th>専用Lv3</th><td>5回攻撃</td></tr></table></div>
@@ -79,13 +87,21 @@
         <div class="skill-body">
           
         <div>
-          <h3 class="block-title">順番に何が起きる？</h3>
-          <ol class="steps">
-            <li>ランダムな敵5体に物理<span class="ratio">300%</span></li><li>自身のバフが1つ以上ならダメージ1.5倍</li><li>HP割合が最も低い味方を総与ダメージの30%分回復する</li>
-          </ol>
+          <h3 class="block-title">いつ・誰に・何が起きる？</h3>
+          <ol class="flow">
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">① 攻撃時</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>ランダムな敵5体</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>物理攻撃<span class="flow-chip num">物理<span class="ratio">300%</span></span><span class="flow-total">倍率合計 1500%（5体分）</span></li><li class="flow-cond-line"><span class="flow-chip cond">自身のバフが1つ以上なら</span>ダメージが1.5倍になる<span class="flow-chip num">物理<span class="ratio">450%</span>（300%×1.5）</span><span class="flow-total">条件時：倍率合計 2250%</span></li></ul></div>
+          </li>
+        
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">② 攻撃後</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>HP割合が最も低い味方</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>総与ダメージの30%分回復する</li></ul></div>
+          </li>
+        </ol>
         </div>
       
-          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>ランダム敵5体 / HP割合最低味方</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 1500% / 最大 2250%</dd></dl></div>
+          
           <div><h3 class="block-title">かみ合わせ</h3><ul class="verification-list synergy-list">
         <li>
           ③の回復はアクティブスキル由来のため、アクティブ回復回数を参照する味方のスタック源になる。根拠: アクティブスキルによる回復のため
@@ -121,13 +137,16 @@
         <div class="skill-body">
           
         <div>
-          <h3 class="block-title">順番に何が起きる？</h3>
-          <ol class="steps">
-            <li>ターン開始時、攻撃力が最も高い味方の攻撃力を自身の攻撃力60%分増加(2ターン)</li><li>発動後4回行動まで再発動しない</li>
-          </ol>
+          <h3 class="block-title">いつ・誰に・何が起きる？</h3>
+          <ol class="flow">
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">ターン開始時</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>攻撃力が最も高い味方</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>攻撃力を、自身の攻撃力60%分増加<span class="flow-chip">2ターン</span><span class="flow-note">発動後、4回行動が終わるまで再発動しない</span></li></ul></div>
+          </li>
+        </ol>
         </div>
       
-          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>攻撃力が最も高い味方</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>攻撃力+60%</dd></dl><dl class="data-item"><dt>継続</dt><dd>2ターン / 再発動4回行動後</dd></dl></div>
+          
           
           
           <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用Lv2</th><td>対象が攻撃力の高い味方2体</td></tr></table></div>
@@ -158,13 +177,21 @@
         <div class="skill-body">
           
         <div>
-          <h3 class="block-title">順番に何が起きる？</h3>
-          <ol class="steps">
-            <li>自身が攻撃するたび、防御力・魔法防御力+10%を1ターン付与(最大10スタック、最大100%、解除不可)</li><li>攻撃した回数1回につき、その回の増加量が+10%大きくなる</li><li>自身が攻撃を受けるたびにも発動し、被攻撃回数1回につき増加量が+10%大きくなる</li>
-          </ol>
+          <h3 class="block-title">いつ・誰に・何が起きる？</h3>
+          <ol class="flow">
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">自身が攻撃したとき</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>自身</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>防御力・魔法防御力+10%を付与<span class="flow-chip">1ターン</span><span class="flow-note">最大10スタック＝+100%、解除不可</span></li><li>攻撃した回数1回につき、その回の増加量が+10%大きくなる</li></ul></div>
+          </li>
+        
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">攻撃を受けたとき</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>自身</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>同じように発動し、被攻撃回数1回につき増加量が+10%大きくなる</li></ul></div>
+          </li>
+        </ol>
         </div>
       
-          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>自身</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>防御力・魔法防御力+10%スタック / 最大100%</dd></dl><dl class="data-item"><dt>継続</dt><dd>1T / 解除不可</dd></dl></div>
+          
           
           
           <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用</th><td>専用武器効果なし</td></tr></table></div>
