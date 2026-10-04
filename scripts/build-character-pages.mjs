@@ -166,7 +166,7 @@ const FLOW_WHEN_PATTERNS = [
 const FLOW_MODES = new Set(["sequence", "simultaneous", "passive", "conditional", "release"]);
 
 // 倍率チップは「チップ単独で意味が通るダメージ倍率」だけに使う（回復量・バフ量は text 側）。
-const FLOW_MULTIPLIER_PATTERN = /^(?:攻撃力×|物理|魔法|腕力×|魔力×|技力×)[0-9]+(?:\.[0-9]+)?%(?:×[0-9]+回)?$/;
+const FLOW_MULTIPLIER_PATTERN = /^(?:攻撃力×|物理|魔法|腕力×|魔力×|技力×)[0-9]+(?:\.[0-9]+)?%(?:×[0-9]+回)?(?:（[0-9]+(?:\.[0-9]+)?%×[0-9]+(?:回)?）)?$/;
 
 /**
  * 旧「継続」カードの継続ターンを取り出す（例: "睡眠1T / 再生4ターン" → ["1", "4"]）。
@@ -275,6 +275,7 @@ function textHitCounts(text) {
   for (const m of text.matchAll(/隣接する敵([0-9]+)体/g)) perCast.add(Number(m[1]) + 1);
   const casts = new Set([1]);
   for (const m of text.matchAll(/再発動[^。]{0,12}?([0-9]+)回/g)) casts.add(Number(m[1]) + 1);
+  for (const m of text.matchAll(/([0-9]+)\s*回(?:まで)?再発動/g)) casts.add(Number(m[1]) + 1); // 「1回再発動」の語順
   const all = new Set();
   for (const hits of perCast) for (const cast of casts) all.add(hits * cast);
   return [...all];
@@ -303,6 +304,53 @@ function validateDamageNumbers(skill, errors) {
   }
 }
 
+/**
+ * conditionMaxTotal が「原文の倍率・回数・倍加」から説明できるかを点検する。
+ * 専用武器ぶんは baseTotal / conditionMaxTotal に混ぜない決まりなので、
+ * 説明できない値は専用武器の混入か転記ミスとみなしてエラーにする。
+ */
+function conditionMaxExplanation(skill) {
+  const g = skill.damage;
+  const body = [skill.condition, ...(skill.steps || []).map((x) => x.text)].join(" ");
+  // 倍率候補: 本文は「物理N%」など接頭辞つき、multiplierText は火力欄なので素の N% も拾う
+  const nums = new Set([...body.matchAll(/(?:攻撃力×|物理|魔法)([0-9]+(?:\.[0-9]+)?)%/g)].map((m) => Number(m[1])));
+  for (const m of String(skill.multiplierText || "").matchAll(/([0-9]+(?:\.[0-9]+)?)%/g)) nums.add(Number(m[1]));
+  for (const m of body.matchAll(/最大([0-9]+(?:\.[0-9]+)?)%/g)) nums.add(Number(m[1])); // 「最大1800%」のような上限値
+  const text = `${skill.multiplierText} ${body}`;
+  const counts = new Set([1, g.hitCount].filter(Boolean)); // 追加攻撃1回ぶんも候補に入れる
+  for (const m of text.matchAll(/×\s*([0-9]+)\s*回/g)) counts.add(Number(m[1]));
+  for (const m of text.matchAll(/([0-9]+)\s*回(?:攻撃|発動)/g)) counts.add(Number(m[1]));
+  for (const m of text.matchAll(/(?:攻撃回数|回数)[^。]{0,10}?([0-9]+)\s*回/g)) counts.add(Number(m[1]));
+  for (const m of text.matchAll(/([0-9]+)\s*体/g)) counts.add(Number(m[1]));
+  for (const m of text.matchAll(/隣接する敵([0-9]+)体/g)) counts.add(Number(m[1]) + 1);
+  for (const m of text.matchAll(/最大([0-9]+)\s*回/g)) counts.add(Number(m[1]));
+  // 本体と追加攻撃が同じ倍率のスキル用に、回数どうしの和も候補に入れる
+  for (const a of [...counts]) for (const b of [...counts]) counts.add(a + b);
+  const casts = new Set([1]);
+  for (const m of text.matchAll(/再発動[^。]{0,16}?([0-9]+)\s*回/g)) casts.add(Number(m[1]) + 1);
+  for (const m of text.matchAll(/([0-9]+)\s*回(?:まで)?再発動/g)) casts.add(Number(m[1]) + 1); // 「1回再発動」の語順
+  const factors = new Set([1]);
+  for (const m of text.matchAll(/([0-9]+(?:\.[0-9]+)?)\s*倍/g)) factors.add(Number(m[1]));
+
+  const round = (n) => Math.round(n * 100) / 100;
+  const target = g.conditionMaxTotal;
+  for (const n of nums) for (const c of counts) for (const k of casts) for (const f of factors) {
+    if (round(n * c * k * f) === target) return `${n}%×${c}${k > 1 ? `×${k}発動` : ""}${f > 1 ? `×${f}倍` : ""}`;
+    if (round((g.baseTotal + n * c) * k * f) === target) return `基本${g.baseTotal}% + 追加${n}%×${c}${k > 1 ? `、×${k}発動` : ""}${f > 1 ? `、×${f}倍` : ""}`;
+  }
+  for (const f of factors) for (const k of casts) if (round(g.baseTotal * f * k) === target) return `基本${g.baseTotal}%${f > 1 ? `×${f}倍` : ""}${k > 1 ? `×${k}発動` : ""}`;
+  return null;
+}
+
+function validateConditionMax(skill, errors) {
+  const g = skill.damage;
+  if (!g || g.nonAttackMultiplier) return;
+  if (!(g.conditionMaxTotal > g.baseTotal)) return;
+  if (!conditionMaxExplanation(skill)) {
+    errors.push(`${skill.id} (S${skill.number} ${skill.name}): conditionMaxTotal ${g.conditionMaxTotal} を原文の倍率・回数・倍加から説明できない（専用武器ぶんの混入を疑う）`);
+  }
+}
+
 /** 1ファイルも書き出す前にデータを点検する（検証に落ちたら出力を残さない）。 */
 function validateAll({ baseData, terms }) {
   const errors = [];
@@ -310,6 +358,7 @@ function validateAll({ baseData, terms }) {
   for (const skill of baseData.skills || []) {
     validateFlow(skill, errors);
     validateDamageNumbers(skill, errors);
+    validateConditionMax(skill, errors);
     if (Array.isArray(skill.flow) && skill.flow.length > 0) {
       flowSkills += 1;
       validateRenderedCard(skill, renderer.renderSkillCard(skill, terms), errors);
