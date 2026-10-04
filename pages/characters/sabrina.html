@@ -42,13 +42,21 @@
         <div class="skill-body">
           
         <div>
-          <h3 class="block-title">順番に何が起きる？</h3>
-          <ol class="steps">
-            <li>ランダムな敵に物理<span class="ratio">420%</span>×5回</li><li>クリティカル発生後の連撃は必ずクリティカル</li><li>クリティカル4回以上で自身の防御力+70%(2ターン)</li>
-          </ol>
+          <h3 class="block-title">いつ・誰に・何が起きる？</h3>
+          <ol class="flow">
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">① 攻撃時</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>ランダムな敵</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>物理攻撃<span class="flow-chip num">物理<span class="ratio">420%</span>×5回</span><span class="flow-total">倍率合計 2100%（5回分）</span></li><li>クリティカル発生後の連撃は必ずクリティカルになる</li></ul></div>
+          </li>
+        
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">② 攻撃後</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>自身</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li class="flow-cond-line"><span class="flow-chip cond">クリティカルが4回以上なら</span>防御力を70%増加<span class="flow-chip">2ターン</span></li></ul></div>
+          </li>
+        </ol>
         </div>
       
-          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>ランダム敵</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 2100%</dd></dl><dl class="data-item"><dt>継続</dt><dd>防御力+70% 2T</dd></dl></div>
+          
           <div><h3 class="block-title">かみ合わせ</h3><ul class="verification-list synergy-list">
         <li>
           涼風サブリナS2と同じ連鎖クリ機構。クリ率支援やクリ耐性減少で初回クリを起こしやすくすると安定する。根拠: 連鎖の起点がクリティカル発生のため
@@ -84,13 +92,16 @@
         <div class="skill-body">
           
         <div>
-          <h3 class="block-title">順番に何が起きる？</h3>
-          <ol class="steps">
-            <li>ランダムな敵に物理<span class="ratio">520%</span>×3回</li><li>30%の確率でスピード15%減少を1ターン付与</li><li>対象がスピード減少中ならダメージ1.5倍</li>
-          </ol>
+          <h3 class="block-title">いつ・誰に・何が起きる？</h3>
+          <ol class="flow">
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">攻撃時</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>ランダムな敵</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>物理攻撃<span class="flow-chip num">物理<span class="ratio">520%</span>×3回</span><span class="flow-total">倍率合計 1560%（3回分）</span></li><li class="flow-cond-line"><span class="flow-chip cond">対象がスピード減少中なら</span>ダメージが1.5倍になる<span class="flow-chip num">物理<span class="ratio">780%</span>×3回（520%×1.5）</span><span class="flow-total">条件時：倍率合計 3120%</span></li><li><span class="flow-chip">確率30%</span>スピード15%減少を付与<span class="flow-chip">1ターン</span></li></ul></div>
+          </li>
+        </ol>
         </div>
       
-          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>ランダム敵</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 1560% / 最大 3120%</dd></dl><dl class="data-item"><dt>継続</dt><dd>スピード減少1T</dd></dl></div>
+          
           
           
           <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用Lv3</th><td>攻撃回数3→4回</td></tr></table></div>
@@ -121,13 +132,16 @@
         <div class="skill-body">
           
         <div>
-          <h3 class="block-title">順番に何が起きる？</h3>
-          <ol class="steps">
-            <li>ターン開始時、自身が弱体効果を持っていれば全解除</li><li>発動後4回行動まで再発動しない</li><li>発動時、自身に行動阻害無効を2ターン付与(解除不可)</li>
-          </ol>
+          <h3 class="block-title">いつ・誰に・何が起きる？</h3>
+          <ol class="flow">
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">ターン開始時</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>自身</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li class="flow-cond-line"><span class="flow-chip cond">自身が弱体効果を持っていれば</span>弱体効果を全解除<span class="flow-note">発動後、4回行動が終わるまで再発動しない</span></li><li>発動時、行動阻害無効を付与<span class="flow-chip">2ターン</span><span class="flow-note">解除不可</span></li></ul></div>
+          </li>
+        </ol>
         </div>
       
-          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>自身</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>弱体解除 / 行動阻害無効</dd></dl><dl class="data-item"><dt>継続</dt><dd>2T</dd></dl></div>
+          
           
           
           <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用</th><td>専用武器効果なし</td></tr></table></div>
@@ -158,13 +172,16 @@
         <div class="skill-body">
           
         <div>
-          <h3 class="block-title">順番に何が起きる？</h3>
-          <ol class="steps">
-            <li>毎ターン開始時、最大HP+7%を1スタック付与(最大20スタック=+140%、解除不可)</li>
-          </ol>
+          <h3 class="block-title">いつ・誰に・何が起きる？</h3>
+          <ol class="flow">
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">ターン開始時</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>自身</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>最大HP+7%を1スタック付与<span class="flow-note">最大20スタック＝+140%、解除不可</span></li></ul></div>
+          </li>
+        </ol>
         </div>
       
-          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>自身</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>最大HP+7% / 最大20スタック</dd></dl><dl class="data-item"><dt>継続</dt><dd>永続</dd></dl></div>
+          
           
           
           <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用</th><td>専用武器効果なし</td></tr></table></div>

@@ -42,13 +42,16 @@
         <div class="skill-body">
           
         <div>
-          <h3 class="block-title">順番に何が起きる？</h3>
-          <ol class="steps">
-            <li>ランダムな敵4体に魔法<span class="ratio">420%</span></li><li><details class="term"><summary>毒</summary><span class="term-box">行動開始時に現在HPに応じたダメージを受ける状態異常。</span></details>を2ターン付与(行動開始時に現在HP3%ダメージ)</li><li>クリティカルヒットした対象のバフを1つ解除</li>
-          </ol>
+          <h3 class="block-title">いつ・誰に・何が起きる？</h3>
+          <ol class="flow">
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">攻撃時</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>ランダムな敵4体</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>魔法攻撃<span class="flow-chip num">魔法<span class="ratio">420%</span></span><span class="flow-total">倍率合計 1680%（4体分）</span></li><li><details class="term"><summary>毒</summary><span class="term-box">行動開始時に現在HPに応じたダメージを受ける状態異常。</span></details>を付与<span class="flow-chip">2ターン</span><span class="flow-note">行動開始時に現在HP3%のダメージ</span></li><li class="flow-cond-line"><span class="flow-chip cond">クリティカルヒットした対象の</span>バフを1つ解除</li></ul></div>
+          </li>
+        </ol>
         </div>
       
-          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>ランダム敵4体</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 1680%</dd></dl><dl class="data-item"><dt>継続</dt><dd>毒2T</dd></dl></div>
+          
           
           
           <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用Lv1</th><td>毒ダメージ4%。</td></tr><tr><th>専用Lv2</th><td>毒4T。</td></tr><tr><th>専用Lv3</th><td>毒5%</td></tr></table></div>
@@ -79,13 +82,16 @@
         <div class="skill-body">
           
         <div>
-          <h3 class="block-title">順番に何が起きる？</h3>
-          <ol class="steps">
-            <li>ランダムな敵に魔法<span class="ratio">380%</span>×4回</li><li>対象が毒付帯中なら不治を4ターン付与</li>
-          </ol>
+          <h3 class="block-title">いつ・誰に・何が起きる？</h3>
+          <ol class="flow">
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">攻撃時</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>ランダムな敵</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>魔法攻撃<span class="flow-chip num">魔法<span class="ratio">380%</span>×4回</span><span class="flow-total">倍率合計 1520%（4回分）</span></li><li class="flow-cond-line"><span class="flow-chip cond">対象が毒を付帯中なら</span>不治を付与<span class="flow-chip">4ターン</span></li></ul></div>
+          </li>
+        </ol>
         </div>
       
-          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>ランダム敵</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 1520%</dd></dl><dl class="data-item"><dt>継続</dt><dd>不治4T</dd></dl></div>
+          
           <div><h3 class="block-title">かみ合わせ</h3><ul class="verification-list synergy-list">
         <li>
           S1の毒が②の条件そのもの。毒参照の味方や持続ダメージ増幅と噛み合う継続ダメージ族の始祖。根拠: 付与条件が「毒付帯中」のため
@@ -121,13 +127,16 @@
         <div class="skill-body">
           
         <div>
-          <h3 class="block-title">順番に何が起きる？</h3>
-          <ol class="steps">
-            <li>被弾でHP割合が初めて70%または40%を下回ったとき、<details class="term"><summary>再生</summary><span class="term-box">ターン開始時などにHPを回復する継続回復効果。回復量や継続ターンは付与した効果ごとに異なる。</span></details>を4ターン付与(解除不可)</li><li>再生は行動開始時に最大HP10%分回復する</li><li>同時にカウンタ変更を4ターン付与し、カウンタダメージが攻撃力200%になる</li>
-          </ol>
+          <h3 class="block-title">いつ・誰に・何が起きる？</h3>
+          <ol class="flow">
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">被弾でHP割合が初めて70%または40%を下回ったとき</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>自身</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li><details class="term"><summary>再生</summary><span class="term-box">ターン開始時などにHPを回復する継続回復効果。回復量や継続ターンは付与した効果ごとに異なる。</span></details>を付与<span class="flow-chip">4ターン</span><span class="flow-note">行動開始時に最大HP10%分回復。解除不可</span></li><li>カウンタ変更を付与<span class="flow-chip">4ターン</span><span class="flow-note">カウンタダメージが攻撃力200%分になる</span></li></ul></div>
+          </li>
+        </ol>
         </div>
       
-          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>自身</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>再生: 最大HP10%回復 / 反撃200%</dd></dl><dl class="data-item"><dt>継続</dt><dd>4T</dd></dl></div>
+          
           
           
           <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用</th><td>専用武器効果なし</td></tr></table></div>
@@ -158,13 +167,16 @@
         <div class="skill-body">
           
         <div>
-          <h3 class="block-title">順番に何が起きる？</h3>
-          <ol class="steps">
-            <li>自身の攻撃力+30%・クリティカル率+30%(解除不可)</li>
-          </ol>
+          <h3 class="block-title">いつ・誰に・何が起きる？</h3>
+          <ol class="flow">
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">常時</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>自身</span></span><span class="flow-mode">常時</span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>攻撃力30%増加・クリティカル率30%増加<span class="flow-note">解除不可</span></li></ul></div>
+          </li>
+        </ol>
         </div>
       
-          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>自身</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>攻撃力+30% / クリ率+30%</dd></dl><dl class="data-item"><dt>継続</dt><dd>永続</dd></dl></div>
+          
           
           
           <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用</th><td>専用武器効果なし</td></tr></table></div>
