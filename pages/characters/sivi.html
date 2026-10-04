@@ -42,13 +42,26 @@
         <div class="skill-body">
           
         <div>
-          <h3 class="block-title">順番に何が起きる？</h3>
-          <ol class="steps">
-            <li>自身とスピードが低い味方2体に与ダメージ25%増加を付与(4ターン)</li><li>このターン中に対象が攻撃を受けた回数に応じて増加量が45%・60%・70%・75%へ上昇(最大4回)</li><li>攻撃力が最も高い敵に物理<span class="ratio">980%</span></li><li>自身のHPを総与ダメージ30%分回復する</li>
-          </ol>
+          <h3 class="block-title">いつ・誰に・何が起きる？</h3>
+          <ol class="flow">
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">① 攻撃前</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>自身とスピードが低い味方2体</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>与ダメージ25%増加を付与<span class="flow-chip">4ターン</span></li><li class="flow-cond-line"><span class="flow-chip cond">このターン中に対象が攻撃を受けた回数に応じて</span>増加量が45%・60%・70%・75%へ上がる<span class="flow-note">最大4回</span></li></ul></div>
+          </li>
+        
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">② 攻撃時</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>攻撃力が最も高い敵</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>物理攻撃<span class="flow-chip num">物理<span class="ratio">980%</span></span><span class="flow-total">倍率合計 980%</span></li></ul></div>
+          </li>
+        
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">③ 攻撃後</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>自身</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>総与ダメージ30%分のHPを回復する</li></ul></div>
+          </li>
+        </ol>
         </div>
       
-          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>自身と低スピード味方2体 / 攻撃力最高の敵</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 980%</dd></dl><dl class="data-item"><dt>継続</dt><dd>与ダメ増加4T</dd></dl></div>
+          
           <div><h3 class="block-title">かみ合わせ</h3><ul class="verification-list synergy-list">
         <li>
           被弾回数参照はミナシュマリS2・フィアーS2と同族で、受けの多いタンク編成ほど支援量が伸びる。根拠: 増加量の参照が「被攻撃回数」のため
@@ -84,13 +97,21 @@
         <div class="skill-body">
           
         <div>
-          <h3 class="block-title">順番に何が起きる？</h3>
-          <ol class="steps">
-            <li>ランダムな敵3体に物理<span class="ratio">530%</span></li><li>スピードが低い味方3体を総与ダメージの15%分回復する</li><li>同じ対象の弱体効果を全て解除する</li>
-          </ol>
+          <h3 class="block-title">いつ・誰に・何が起きる？</h3>
+          <ol class="flow">
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">① 攻撃時</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>ランダムな敵3体</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>物理攻撃<span class="flow-chip num">物理<span class="ratio">530%</span></span><span class="flow-total">倍率合計 1590%（3体分）</span></li></ul></div>
+          </li>
+        
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">② 攻撃後</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>スピードが低い味方3体</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>総与ダメージの15%分HPを回復</li><li>同じ対象の弱体効果を全て解除</li></ul></div>
+          </li>
+        </ol>
         </div>
       
-          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>ランダム敵3体 / 低スピード味方3体</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 1590%</dd></dl><dl class="data-item"><dt>継続</dt><dd>弱体全解除</dd></dl></div>
+          
           
           
           <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用Lv3</th><td>対象が敵4体に増加</td></tr></table></div>
@@ -121,13 +142,16 @@
         <div class="skill-body">
           
         <div>
-          <h3 class="block-title">順番に何が起きる？</h3>
-          <ol class="steps">
-            <li>自身と隣接する味方2体の防御力・物理防御力を25%増加(解除不可)</li><li>自身のみ、防御力・物理防御力の増加量が100%になる</li>
-          </ol>
+          <h3 class="block-title">いつ・誰に・何が起きる？</h3>
+          <ol class="flow">
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">常時</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>自身と隣接する味方2体</span></span><span class="flow-mode">常時</span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>防御力・物理防御力を25%増加<span class="flow-note">解除不可</span></li><li>自身のみ増加量が100%になる</li></ul></div>
+          </li>
+        </ol>
         </div>
       
-          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>自身と隣接味方2体</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>防御力・物防+25% / 自身のみ+100%</dd></dl><dl class="data-item"><dt>継続</dt><dd>永続</dd></dl></div>
+          
           
           
           <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用</th><td>専用武器効果なし</td></tr></table></div>
@@ -158,13 +182,16 @@
         <div class="skill-body">
           
         <div>
-          <h3 class="block-title">順番に何が起きる？</h3>
-          <ol class="steps">
-            <li>アクティブスキルで弱体を受け、自身の弱体効果が2個以上なら全解除</li><li>発動後4回行動まで再発動しない</li><li>発動時、自身の被ダメージを30%減少(3ターン)</li>
-          </ol>
+          <h3 class="block-title">いつ・誰に・何が起きる？</h3>
+          <ol class="flow">
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">アクティブスキルで弱体を受けたとき</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>自身</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li class="flow-cond-line"><span class="flow-chip cond">自身の弱体効果が2個以上なら</span>弱体効果を全解除<span class="flow-note">発動後、4回行動が終わるまで再発動しない</span></li><li>発動時、自身の被ダメージを30%減少<span class="flow-chip">3ターン</span></li></ul></div>
+          </li>
+        </ol>
         </div>
       
-          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>自身</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>被ダメ30%減少</dd></dl><dl class="data-item"><dt>継続</dt><dd>3T</dd></dl></div>
+          
           
           
           <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用</th><td>専用武器効果なし</td></tr></table></div>
