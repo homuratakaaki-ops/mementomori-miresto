@@ -42,13 +42,26 @@
         <div class="skill-body">
           
         <div>
-          <h3 class="block-title">順番に何が起きる？</h3>
-          <ol class="steps">
-            <li>自身に現在HP20%の自傷ダメージ</li><li>ランダムな敵に魔法<span class="ratio">320%</span>×5回</li><li>攻撃力増加が2スタック以上なら総ダメージの10%をHP回復</li><li>攻撃ごとに50%の確率で被回復量20%減少を2ターン付与</li>
-          </ol>
+          <h3 class="block-title">いつ・誰に・何が起きる？</h3>
+          <ol class="flow">
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">① 攻撃前</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>自身</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>現在HP20%の自傷ダメージを受ける</li></ul></div>
+          </li>
+        
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">② 攻撃時</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>ランダムな敵</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>魔法攻撃<span class="flow-chip num">魔法<span class="ratio">320%</span>×5回</span><span class="flow-total">倍率合計 1600%（5回分）</span></li><li><span class="flow-chip">確率50%</span>被回復量20%減少を付与<span class="flow-chip">2ターン</span><span class="flow-note">攻撃ごとに判定</span></li></ul></div>
+          </li>
+        
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">③ 攻撃後</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>自身</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li class="flow-cond-line"><span class="flow-chip cond">攻撃力増加が2スタック以上なら</span>総ダメージの10%をHP回復</li></ul></div>
+          </li>
+        </ol>
         </div>
       
-          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>ランダム敵</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 1600%</dd></dl><dl class="data-item"><dt>継続</dt><dd>被回復量減少2ターン</dd></dl></div>
+          
           
           
           <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用Lv1</th><td>魔法<span class="ratio">420%</span></td></tr></table></div>
@@ -79,13 +92,21 @@
         <div class="skill-body">
           
         <div>
-          <h3 class="block-title">順番に何が起きる？</h3>
-          <ol class="steps">
-            <li>自身に現在HP20%の自傷ダメージ</li><li>ランダムな敵に魔法<span class="ratio">520%</span>×3回</li><li>攻撃力増加1スタックごとに攻撃回数+1(最大7回)</li>
-          </ol>
+          <h3 class="block-title">いつ・誰に・何が起きる？</h3>
+          <ol class="flow">
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">① 攻撃前</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>自身</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>現在HP20%の自傷ダメージを受ける</li></ul></div>
+          </li>
+        
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">② 攻撃時</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>ランダムな敵</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>魔法攻撃<span class="flow-chip num">魔法<span class="ratio">520%</span>×3回</span><span class="flow-total">倍率合計 1560%（3回分）</span></li><li class="flow-cond-line"><span class="flow-chip cond">攻撃力増加1スタックごとに</span>攻撃回数が1回増え、最大でこの倍率に変わる<span class="flow-chip num">魔法<span class="ratio">520%</span>×7回</span><span class="flow-total">条件時：倍率合計 3640%</span><span class="flow-note">最大7回</span></li></ul></div>
+          </li>
+        </ol>
         </div>
       
-          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>ランダム敵</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 1560% / 最大 3640%</dd></dl></div>
+          
           
           
           <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用Lv3</th><td>魔法<span class="ratio">580%</span></td></tr></table></div>
@@ -116,13 +137,21 @@
         <div class="skill-body">
           
         <div>
-          <h3 class="block-title">順番に何が起きる？</h3>
-          <ol class="steps">
-            <li>自身か味方が自傷ダメージを受けるたび攻撃力+10%を1スタック付与(最大4スタック、解除不可)</li><li>バトル開始時、物理防御力+50%</li>
-          </ol>
+          <h3 class="block-title">いつ・誰に・何が起きる？</h3>
+          <ol class="flow">
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">バトル開始時</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>自身</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>物理防御力を50%増加</li></ul></div>
+          </li>
+        
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">自身か味方が自傷ダメージを受けたとき</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>自身</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>攻撃力+10%を1スタック付与<span class="flow-note">最大4スタック、解除不可</span></li></ul></div>
+          </li>
+        </ol>
         </div>
       
-          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>自身</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>攻撃力+10%スタック / 物防+50%</dd></dl><dl class="data-item"><dt>継続</dt><dd>解除不可</dd></dl></div>
+          
           <div><h3 class="block-title">かみ合わせ</h3><ul class="verification-list synergy-list">
         <li>
           紅の自傷パの一員。味方の自傷でも貯まり、S1の吸血・S2の連撃増加の両条件に直結する。根拠: カウント対象が「自身か味方の自傷回数」のため
@@ -158,13 +187,21 @@
         <div class="skill-body">
           
         <div>
-          <h3 class="block-title">順番に何が起きる？</h3>
-          <ol class="steps">
-            <li>バトル開始時、自身の攻撃力+10%(自身以外の紅属性味方1体ごとにさらに+10%、最大50%、解除不可)</li><li>1ターン目開始時、攻撃力100%のシールドを6ターン付与</li><li>自身以外の紅属性味方1体ごとにシールド量+100%(最大500%)</li>
-          </ol>
+          <h3 class="block-title">いつ・誰に・何が起きる？</h3>
+          <ol class="flow">
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">バトル開始時</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>自身</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>攻撃力を10%増加<span class="flow-note">自身以外の紅属性の味方1体ごとにさらに+10%、最大50%、解除不可</span></li></ul></div>
+          </li>
+        
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">1ターン目開始時</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>自身</span></span><span class="flow-mode">同時に発動</span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>攻撃力100%分のシールドを付与<span class="flow-chip">6ターン</span></li><li class="flow-cond-line"><span class="flow-chip cond">自身以外の紅属性の味方1体ごとに</span>シールド量が+100%分増える<span class="flow-note">最大500%分</span></li></ul></div>
+          </li>
+        </ol>
         </div>
       
-          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>自身 / 紅属性味方</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>攻撃力+10% / 紅1体ごと+10% / 攻撃力100%シールド</dd></dl><dl class="data-item"><dt>継続</dt><dd>6T / 解除不可</dd></dl></div>
+          
           
           
           <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用Lv2</th><td>シールド攻撃力200%、紅属性1体ごと200%、合計最大1000%</td></tr></table></div>

@@ -310,14 +310,19 @@ function validateDamageNumbers(skill, errors) {
  * 専用武器ぶんは baseTotal / conditionMaxTotal に混ぜない決まりなので、
  * 説明できない値は専用武器の混入か転記ミスとみなしてエラーにする。
  */
+/** 「専用Lv…」に触れている文は、専用武器なしの計算に使わないので落とす。 */
+function withoutWeaponClauses(text) {
+  return String(text || "").split(/[。/／]/).filter((part) => !part.includes("専用")).join(" ");
+}
+
 function conditionMaxExplanation(skill) {
   const g = skill.damage;
-  const body = [skill.condition, ...(skill.steps || []).map((x) => x.text)].join(" ");
+  const body = withoutWeaponClauses([skill.condition, ...(skill.steps || []).map((x) => x.text)].join("。"));
   // 倍率候補: 本文は「物理N%」など接頭辞つき、multiplierText は火力欄なので素の N% も拾う
   const nums = new Set([...body.matchAll(/(?:攻撃力×|物理|魔法)([0-9]+(?:\.[0-9]+)?)%/g)].map((m) => Number(m[1])));
-  for (const m of String(skill.multiplierText || "").matchAll(/([0-9]+(?:\.[0-9]+)?)%/g)) nums.add(Number(m[1]));
+  for (const m of withoutWeaponClauses(skill.multiplierText).matchAll(/([0-9]+(?:\.[0-9]+)?)%/g)) nums.add(Number(m[1]));
   for (const m of body.matchAll(/最大([0-9]+(?:\.[0-9]+)?)%/g)) nums.add(Number(m[1])); // 「最大1800%」のような上限値
-  const text = `${skill.multiplierText} ${body}`;
+  const text = `${withoutWeaponClauses(skill.multiplierText)} ${body}`;
   const counts = new Set([1, g.hitCount].filter(Boolean)); // 追加攻撃1回ぶんも候補に入れる
   for (const m of text.matchAll(/×\s*([0-9]+)\s*回/g)) counts.add(Number(m[1]));
   for (const m of text.matchAll(/([0-9]+)\s*回(?:攻撃|発動)/g)) counts.add(Number(m[1]));
