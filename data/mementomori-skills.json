@@ -21,7 +21,13 @@
       "roleMemo": "多重バリアで耐久する妨害役",
       "noteUrl": "https://note.com/musoudc/n/nc5e94c9db338?app_launch=false",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/soltina/"
+      "sourceUrl": "https://ichigogames.net/mementomori/soltina/",
+      "pickupHistory": [
+        {
+          "date": "2022-10-18",
+          "kind": "初回実装"
+        }
+      ]
     },
     {
       "id": "amleth",
@@ -36,7 +42,13 @@
       "roleMemo": "対ソーサラー特効の物理アタッカー",
       "noteUrl": "https://note.com/musoudc/n/n3df2ca1fb4f7",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/amleth/"
+      "sourceUrl": "https://ichigogames.net/mementomori/amleth/",
+      "pickupHistory": [
+        {
+          "date": "2022-10-18",
+          "kind": "初回実装"
+        }
+      ]
     },
     {
       "id": "fenrir",
@@ -51,7 +63,13 @@
       "roleMemo": "CT短縮と弱体解除が得意な支援型ソーサラー",
       "noteUrl": "https://note.com/musoudc/n/n4e6dab1a4e38?app_launch=false",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/fenrir/"
+      "sourceUrl": "https://ichigogames.net/mementomori/fenrir/",
+      "pickupHistory": [
+        {
+          "date": "2022-10-18",
+          "kind": "初回実装"
+        }
+      ]
     },
     {
       "id": "florence",
@@ -66,7 +84,13 @@
       "roleMemo": "クリティカル連撃で火力を伸ばす物理アタッカー",
       "noteUrl": "https://note.com/musoudc/n/n989988a98712?app_launch=false",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/florence/"
+      "sourceUrl": "https://ichigogames.net/mementomori/florence/",
+      "pickupHistory": [
+        {
+          "date": "2022-10-18",
+          "kind": "初回実装"
+        }
+      ]
     },
     {
       "id": "moddey",
@@ -81,7 +105,13 @@
       "roleMemo": "毒と不治で削る継続火力型ソーサラー",
       "noteUrl": "https://note.com/musoudc/n/n53a3967efde1?app_launch=false",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/moddey/"
+      "sourceUrl": "https://ichigogames.net/mementomori/moddey/",
+      "pickupHistory": [
+        {
+          "date": "2022-10-18",
+          "kind": "初回実装"
+        }
+      ]
     },
     {
       "id": "sonya",
@@ -96,7 +126,21 @@
       "roleMemo": "高HP・低HP対象を狙う単体特化スナイパー",
       "noteUrl": "https://note.com/musoudc/n/n53a3967efde1?app_launch=false",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/sonya/"
+      "sourceUrl": "https://ichigogames.net/mementomori/sonya/",
+      "pickupHistory": [
+        {
+          "date": "2022-12-28",
+          "kind": "PU",
+          "round": 1
+        },
+        {
+          "date": "2026-03-24",
+          "endDate": "2026-04-15",
+          "kind": "星の導き",
+          "round": 9
+        }
+      ],
+      "pickupCount": 9
     },
     {
       "id": "sivi",
@@ -111,7 +155,21 @@
       "roleMemo": "与ダメ支援と弱体解除を持つ支援型ウォーリア",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/sivi/"
+      "sourceUrl": "https://ichigogames.net/mementomori/sivi/",
+      "pickupHistory": [
+        {
+          "date": "2023-05-15",
+          "kind": "PU",
+          "round": 1
+        },
+        {
+          "date": "2026-05-28",
+          "endDate": "2026-06-23",
+          "kind": "星の導き",
+          "round": 7
+        }
+      ],
+      "pickupCount": 7
     },
     {
       "id": "stella",
@@ -126,7 +184,21 @@
       "roleMemo": "沈黙と高倍率シールドで耐える妨害型ウォーリア",
       "noteUrl": "https://note.com/musoudc/n/nca30357e6aee?app_launch=false",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/stella/"
+      "sourceUrl": "https://ichigogames.net/mementomori/stella/",
+      "pickupHistory": [
+        {
+          "date": "2023-09-15",
+          "kind": "PU",
+          "round": 1
+        },
+        {
+          "date": "2026-09-24",
+          "endDate": "2026-10-15",
+          "kind": "星の導き",
+          "round": 7
+        }
+      ],
+      "pickupCount": 7
     },
     {
       "id": "fenny",
@@ -141,7 +213,21 @@
       "roleMemo": "妨害と浸食で削る支援型スナイパー",
       "noteUrl": "https://note.com/musoudc/n/n4bc27552b84f?app_launch=false",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/fenny/"
+      "sourceUrl": "https://ichigogames.net/mementomori/fenny/",
+      "pickupHistory": [
+        {
+          "date": "2023-11-15",
+          "kind": "PU",
+          "round": 1
+        },
+        {
+          "date": "2026-06-23",
+          "endDate": "2026-07-15",
+          "kind": "星の導き",
+          "round": 6
+        }
+      ],
+      "pickupCount": 6
     },
     {
       "id": "tropon_holy_night",
@@ -156,7 +242,21 @@
       "roleMemo": "攻防吸収とバフ奪取を扱う冬イベントソーサラー",
       "noteUrl": "https://note.com/musoudc/n/ne64f0f3a7978?app_launch=false",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/tropon_holy_night/"
+      "sourceUrl": "https://ichigogames.net/mementomori/tropon_holy_night/",
+      "pickupHistory": [
+        {
+          "date": "2023-12-13",
+          "kind": "PU",
+          "round": 1
+        },
+        {
+          "date": "2025-11-27",
+          "endDate": "2025-12-11",
+          "kind": "復刻",
+          "round": 3
+        }
+      ],
+      "pickupCount": 3
     },
     {
       "id": "sabrina",
@@ -171,7 +271,13 @@
       "roleMemo": "クリティカル連撃と行動阻害耐性を持つ物理アタッカー",
       "noteUrl": "https://note.com/musoudc/n/n7f10d8c7353e",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/sabrina/"
+      "sourceUrl": "https://ichigogames.net/mementomori/sabrina/",
+      "pickupHistory": [
+        {
+          "date": "2022-10-18",
+          "kind": "初回実装"
+        }
+      ]
     },
     {
       "id": "ivy",
@@ -186,7 +292,13 @@
       "roleMemo": "バフ数・味方戦闘不能で火力上限が伸びるスナイパー",
       "noteUrl": "https://note.com/musoudc/n/n5770cf1ff769",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/ivy/"
+      "sourceUrl": "https://ichigogames.net/mementomori/ivy/",
+      "pickupHistory": [
+        {
+          "date": "2022-10-18",
+          "kind": "初回実装"
+        }
+      ]
     },
     {
       "id": "potpourri",
@@ -201,7 +313,21 @@
       "roleMemo": "言霊スタックで倍率が段階上昇する支援型スナイパー",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/potpourri/"
+      "sourceUrl": "https://ichigogames.net/mementomori/potpourri/",
+      "pickupHistory": [
+        {
+          "date": "2025-03-31",
+          "kind": "PU",
+          "round": 1
+        },
+        {
+          "date": "2026-05-28",
+          "endDate": "2026-06-15",
+          "kind": "復刻",
+          "round": 3
+        }
+      ],
+      "pickupCount": 3
     },
     {
       "id": "amleth_summer",
@@ -216,7 +342,21 @@
       "roleMemo": "ターン経過と追加攻撃で伸びる長期戦型ウォーリア",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/amleth_summer/"
+      "sourceUrl": "https://ichigogames.net/mementomori/amleth_summer/",
+      "pickupHistory": [
+        {
+          "date": "2024-07-31",
+          "kind": "PU",
+          "round": 1
+        },
+        {
+          "date": "2026-07-15",
+          "endDate": "2026-07-28",
+          "kind": "復刻",
+          "round": 3
+        }
+      ],
+      "pickupCount": 3
     },
     {
       "id": "giluial",
@@ -231,7 +371,21 @@
       "roleMemo": "沈黙と多重バリアで粘る妨害型ソーサラー",
       "noteUrl": "https://note.com/musoudc/n/n0375046791aa",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/giluial/"
+      "sourceUrl": "https://ichigogames.net/mementomori/giluial/",
+      "pickupHistory": [
+        {
+          "date": "2024-01-15",
+          "kind": "PU",
+          "round": 1
+        },
+        {
+          "date": "2026-08-31",
+          "endDate": "2026-09-24",
+          "kind": "星の導き",
+          "round": 6
+        }
+      ],
+      "pickupCount": 6
     },
     {
       "id": "liselotte",
@@ -246,7 +400,21 @@
       "roleMemo": "クリ率バフ依存で火力を伸ばすコラボソーサラー",
       "noteUrl": "https://note.com/musoudc/n/n983831ba7bc2",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/liselotte/"
+      "sourceUrl": "https://ichigogames.net/mementomori/liselotte/",
+      "pickupHistory": [
+        {
+          "date": "2024-02-15",
+          "kind": "PU",
+          "round": 1
+        },
+        {
+          "date": "2026-02-26",
+          "endDate": "2026-03-16",
+          "kind": "復刻",
+          "round": 3
+        }
+      ],
+      "pickupCount": 3
     },
     {
       "id": "eir",
@@ -261,7 +429,21 @@
       "roleMemo": "睡眠と行動阻害特効を軸に攻めるスナイパー",
       "noteUrl": "https://note.com/musoudc/n/na73500f34801",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/eir/"
+      "sourceUrl": "https://ichigogames.net/mementomori/eir/",
+      "pickupHistory": [
+        {
+          "date": "2024-03-29",
+          "kind": "PU",
+          "round": 1
+        },
+        {
+          "date": "2026-04-15",
+          "endDate": "2026-05-07",
+          "kind": "星の導き",
+          "round": 5
+        }
+      ],
+      "pickupCount": 5
     },
     {
       "id": "minasumari",
@@ -276,7 +458,21 @@
       "roleMemo": "被弾回数で火力を伸ばす対スナイパー型ウォーリア",
       "noteUrl": "https://note.com/musoudc/n/nbb0b5a65be59",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/minasumari/"
+      "sourceUrl": "https://ichigogames.net/mementomori/minasumari/",
+      "pickupHistory": [
+        {
+          "date": "2024-06-14",
+          "kind": "PU",
+          "round": 1
+        },
+        {
+          "date": "2026-05-07",
+          "endDate": "2026-05-28",
+          "kind": "星の導き",
+          "round": 5
+        }
+      ],
+      "pickupCount": 5
     },
     {
       "id": "nina_summer",
@@ -291,7 +487,21 @@
       "roleMemo": "全体防御支援とシールドで守る夏イベントスナイパー",
       "noteUrl": "https://note.com/musoudc/n/nffa94a7831ec",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/nina_summer/"
+      "sourceUrl": "https://ichigogames.net/mementomori/nina_summer/",
+      "pickupHistory": [
+        {
+          "date": "2024-07-16",
+          "kind": "PU",
+          "round": 1
+        },
+        {
+          "date": "2026-07-07",
+          "endDate": "2026-07-23",
+          "kind": "復刻",
+          "round": 3
+        }
+      ],
+      "pickupCount": 3
     },
     {
       "id": "serruria",
@@ -306,7 +516,21 @@
       "roleMemo": "制限解除と高倍率シールドで耐えるスナイパー",
       "noteUrl": "https://note.com/musoudc/n/n42c9f2bc9bc2",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/serruria/"
+      "sourceUrl": "https://ichigogames.net/mementomori/serruria/",
+      "pickupHistory": [
+        {
+          "date": "2024-09-12",
+          "kind": "PU",
+          "round": 1
+        },
+        {
+          "date": "2026-07-15",
+          "endDate": "2026-08-06",
+          "kind": "星の導き",
+          "round": 4
+        }
+      ],
+      "pickupCount": 4
     },
     {
       "id": "eureka",
@@ -321,7 +545,21 @@
       "roleMemo": "バッテン付与から高倍率攻撃へつなぐソーサラー",
       "noteUrl": "https://note.com/musoudc/n/n01b8a04650a6?app_launch=false",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/eureka/"
+      "sourceUrl": "https://ichigogames.net/mementomori/eureka/",
+      "pickupHistory": [
+        {
+          "date": "2024-11-15",
+          "kind": "PU",
+          "round": 1
+        },
+        {
+          "date": "2026-08-06",
+          "endDate": "2026-08-31",
+          "kind": "星の導き",
+          "round": 4
+        }
+      ],
+      "pickupCount": 4
     },
     {
       "id": "cordie_ringmaster",
@@ -336,7 +574,21 @@
       "roleMemo": "笑顔喝采で火力を伸ばす藍属性ウォーリア",
       "noteUrl": "https://note.com/musoudc/n/n7c24b65e7afc",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/cordie_ringmaster/"
+      "sourceUrl": "https://ichigogames.net/mementomori/cordie_ringmaster/",
+      "pickupHistory": [
+        {
+          "date": "2025-07-31",
+          "kind": "PU",
+          "round": 1
+        },
+        {
+          "date": "2026-08-06",
+          "endDate": "2026-08-24",
+          "kind": "復刻",
+          "round": 3
+        }
+      ],
+      "pickupCount": 3
     },
     {
       "id": "merlyn_winter",
@@ -351,7 +603,16 @@
       "roleMemo": "弱体解除数を火力条件に変える冬イベントソーサラー",
       "noteUrl": "https://note.com/musoudc/n/n6ca44bb4f593",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/merlyn_winter/"
+      "sourceUrl": "https://ichigogames.net/mementomori/merlyn_winter/",
+      "pickupHistory": [
+        {
+          "date": "2025-11-27",
+          "endDate": "2025-12-25",
+          "kind": "PU",
+          "round": 1
+        }
+      ],
+      "pickupCount": 1
     },
     {
       "id": "evelyn",
@@ -366,7 +627,21 @@
       "roleMemo": "反照と大型シールドで支える藍属性ソーサラー",
       "noteUrl": "https://note.com/musoudc/n/n15e0345d8c96",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/evelyn/"
+      "sourceUrl": "https://ichigogames.net/mementomori/evelyn/",
+      "pickupHistory": [
+        {
+          "date": "2026-01-15",
+          "kind": "PU",
+          "round": 1
+        },
+        {
+          "date": "2026-06-30",
+          "endDate": "2026-07-15",
+          "kind": "復刻",
+          "round": 2
+        }
+      ],
+      "pickupCount": 2
     },
     {
       "id": "fia_trace",
@@ -381,7 +656,16 @@
       "roleMemo": "結界と怠惰で味方を守る藍属性ウォーリア",
       "noteUrl": "https://note.com/musoudc/n/nd314bb11a090",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/fia_trace/"
+      "sourceUrl": "https://ichigogames.net/mementomori/fia_trace/",
+      "pickupHistory": [
+        {
+          "date": "2026-04-15",
+          "endDate": "2026-05-07",
+          "kind": "PU",
+          "round": 1
+        }
+      ],
+      "pickupCount": 1
     },
     {
       "id": "natasha",
@@ -396,7 +680,13 @@
       "roleMemo": "5回攻撃と気絶付与で単体寄りに削るウォーリア",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/natasha/"
+      "sourceUrl": "https://ichigogames.net/mementomori/natasha/",
+      "pickupHistory": [
+        {
+          "date": "2022-10-18",
+          "kind": "初回実装"
+        }
+      ]
     },
     {
       "id": "fortina",
@@ -411,7 +701,21 @@
       "roleMemo": "味方全体へのシールド・再生・回復を扱う耐久支援ウォーリア",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/fortina/"
+      "sourceUrl": "https://ichigogames.net/mementomori/fortina/",
+      "pickupHistory": [
+        {
+          "date": "2022-10-21",
+          "kind": "PU",
+          "round": 1
+        },
+        {
+          "date": "2026-03-24",
+          "endDate": "2026-04-15",
+          "kind": "星の導き",
+          "round": 10
+        }
+      ],
+      "pickupCount": 10
     },
     {
       "id": "cerberus",
@@ -426,7 +730,21 @@
       "roleMemo": "高回数物理攻撃と弱体解除、即時戦闘不能条件を持つ速攻型ウォーリア",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/cerberus/"
+      "sourceUrl": "https://ichigogames.net/mementomori/cerberus/",
+      "pickupHistory": [
+        {
+          "date": "2023-01-17",
+          "kind": "PU",
+          "round": 1
+        },
+        {
+          "date": "2026-05-28",
+          "endDate": "2026-06-23",
+          "kind": "星の導き",
+          "round": 8
+        }
+      ],
+      "pickupCount": 8
     },
     {
       "id": "rusalka",
@@ -441,7 +759,21 @@
       "roleMemo": "弱体効果中の敵に火力を伸ばし、自身復帰と多重バリアで粘るソーサラー",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/rusalka/"
+      "sourceUrl": "https://ichigogames.net/mementomori/rusalka/",
+      "pickupHistory": [
+        {
+          "date": "2023-04-28",
+          "kind": "PU",
+          "round": 1
+        },
+        {
+          "date": "2026-09-24",
+          "endDate": "2026-10-15",
+          "kind": "星の導き",
+          "round": 8
+        }
+      ],
+      "pickupCount": 8
     },
     {
       "id": "elfriede",
@@ -456,7 +788,21 @@
       "roleMemo": "味方バフ数・敵弱体数を参照して火力を伸ばす物理アタッカー",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/elfriede/"
+      "sourceUrl": "https://ichigogames.net/mementomori/elfriede/",
+      "pickupHistory": [
+        {
+          "date": "2023-10-18",
+          "kind": "PU",
+          "round": 1
+        },
+        {
+          "date": "2026-06-23",
+          "endDate": "2026-07-15",
+          "kind": "星の導き",
+          "round": 6
+        }
+      ],
+      "pickupCount": 6
     },
     {
       "id": "rosalie_caritas",
@@ -471,7 +817,21 @@
       "roleMemo": "記憶スタックを溜めて攻撃・弱体解除・シールド支援へつなぐソーサラー",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/rosalie_apostle/"
+      "sourceUrl": "https://ichigogames.net/mementomori/rosalie_apostle/",
+      "pickupHistory": [
+        {
+          "date": "2024-04-26",
+          "kind": "PU",
+          "round": 1
+        },
+        {
+          "date": "2026-08-31",
+          "endDate": "2026-09-24",
+          "kind": "星の導き",
+          "round": 5
+        }
+      ],
+      "pickupCount": 5
     },
     {
       "id": "aine",
@@ -486,7 +846,21 @@
       "roleMemo": "敵弱体と味方シールドを組み合わせる支援型スナイパー",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/aine/"
+      "sourceUrl": "https://ichigogames.net/mementomori/aine/",
+      "pickupHistory": [
+        {
+          "date": "2024-08-30",
+          "kind": "PU",
+          "round": 1
+        },
+        {
+          "date": "2026-02-26",
+          "endDate": "2026-03-24",
+          "kind": "星の導き",
+          "round": 4
+        }
+      ],
+      "pickupCount": 4
     },
     {
       "id": "meria",
@@ -501,7 +875,21 @@
       "roleMemo": "成長因子スタックで物理火力を段階的に伸ばすウォーリア",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/meria/"
+      "sourceUrl": "https://ichigogames.net/mementomori/meria/",
+      "pickupHistory": [
+        {
+          "date": "2024-10-18",
+          "kind": "PU",
+          "round": 1
+        },
+        {
+          "date": "2026-07-15",
+          "endDate": "2026-08-06",
+          "kind": "星の導き",
+          "round": 4
+        }
+      ],
+      "pickupCount": 4
     },
     {
       "id": "irene",
@@ -516,7 +904,21 @@
       "roleMemo": "防御力減少、ターン経過後の高倍率攻撃、結界で戦うスナイパー",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/eirene/"
+      "sourceUrl": "https://ichigogames.net/mementomori/eirene/",
+      "pickupHistory": [
+        {
+          "date": "2024-12-25",
+          "kind": "PU",
+          "round": 1
+        },
+        {
+          "date": "2026-08-06",
+          "endDate": "2026-08-31",
+          "kind": "星の導き",
+          "round": 4
+        }
+      ],
+      "pickupCount": 4
     },
     {
       "id": "aa_rusted_sky",
@@ -531,7 +933,21 @@
       "roleMemo": "多重バリア無効時の追加攻撃と解除不可シールドを持つサポート型ソーサラー",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/aa_uniform/"
+      "sourceUrl": "https://ichigogames.net/mementomori/aa_uniform/",
+      "pickupHistory": [
+        {
+          "date": "2025-04-30",
+          "kind": "PU",
+          "round": 1
+        },
+        {
+          "date": "2026-05-21",
+          "endDate": "2026-06-08",
+          "kind": "復刻",
+          "round": 3
+        }
+      ],
+      "pickupCount": 3
     },
     {
       "id": "lumika",
@@ -546,7 +962,21 @@
       "roleMemo": "多重バリアを無視する攻撃と再発動単体火力を持つウォーリア",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/lumica/"
+      "sourceUrl": "https://ichigogames.net/mementomori/lumica/",
+      "pickupHistory": [
+        {
+          "date": "2025-06-30",
+          "kind": "PU",
+          "round": 1
+        },
+        {
+          "date": "2026-09-08",
+          "endDate": "2026-09-24",
+          "kind": "復刻",
+          "round": 3
+        }
+      ],
+      "pickupCount": 3
     },
     {
       "id": "rivelia",
@@ -561,7 +991,21 @@
       "roleMemo": "砂塵付与と高回数物理攻撃、味方攻撃力支援を扱うスナイパー",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/liberia/"
+      "sourceUrl": "https://ichigogames.net/mementomori/liberia/",
+      "pickupHistory": [
+        {
+          "date": "2025-12-25",
+          "kind": "PU",
+          "round": 1
+        },
+        {
+          "date": "2026-06-15",
+          "endDate": "2026-06-30",
+          "kind": "復刻",
+          "round": 2
+        }
+      ],
+      "pickupCount": 2
     },
     {
       "id": "lunalynn",
@@ -576,7 +1020,13 @@
       "roleMemo": "沈黙・毒・物理防御力支援を持つ妨害型ソーサラー",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/lunalynn/"
+      "sourceUrl": "https://ichigogames.net/mementomori/lunalynn/",
+      "pickupHistory": [
+        {
+          "date": "2022-10-18",
+          "kind": "初回実装"
+        }
+      ]
     },
     {
       "id": "valriede",
@@ -591,7 +1041,21 @@
       "roleMemo": "焔スタックで耐久しつつ撃破時に連鎖火力を狙うウォーリア",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/valeriede/"
+      "sourceUrl": "https://ichigogames.net/mementomori/valeriede/",
+      "pickupHistory": [
+        {
+          "date": "2022-11-15",
+          "kind": "PU",
+          "round": 1
+        },
+        {
+          "date": "2026-03-24",
+          "endDate": "2026-04-15",
+          "kind": "星の導き",
+          "round": 9
+        }
+      ],
+      "pickupCount": 9
     },
     {
       "id": "aa_dark",
@@ -606,7 +1070,21 @@
       "roleMemo": "魔力参照の直接攻撃と通常攻撃強化を持つサブアタッカー",
       "noteUrl": "https://note.com/musoudc/n/n6701e43e0e69",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/aa/"
+      "sourceUrl": "https://ichigogames.net/mementomori/aa/",
+      "pickupHistory": [
+        {
+          "date": "2023-02-15",
+          "kind": "PU",
+          "round": 1
+        },
+        {
+          "date": "2026-05-28",
+          "endDate": "2026-06-23",
+          "kind": "星の導き",
+          "round": 8
+        }
+      ],
+      "pickupCount": 8
     },
     {
       "id": "armstrong",
@@ -621,7 +1099,21 @@
       "roleMemo": "再発動火力とクリティカル率支援、遮断で戦うスナイパー",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/armstrong/"
+      "sourceUrl": "https://ichigogames.net/mementomori/armstrong/",
+      "pickupHistory": [
+        {
+          "date": "2023-08-31",
+          "kind": "PU",
+          "round": 1
+        },
+        {
+          "date": "2026-06-23",
+          "endDate": "2026-07-15",
+          "kind": "星の導き",
+          "round": 7
+        }
+      ],
+      "pickupCount": 7
     },
     {
       "id": "paladea",
@@ -636,7 +1128,21 @@
       "roleMemo": "高倍率攻撃、クリティカル率スタック、多重バリアを扱うスナイパー",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/paladea/"
+      "sourceUrl": "https://ichigogames.net/mementomori/paladea/",
+      "pickupHistory": [
+        {
+          "date": "2024-03-14",
+          "kind": "PU",
+          "round": 1
+        },
+        {
+          "date": "2026-04-15",
+          "endDate": "2026-05-07",
+          "kind": "星の導き",
+          "round": 5
+        }
+      ],
+      "pickupCount": 5
     },
     {
       "id": "ophelia",
@@ -651,7 +1157,21 @@
       "roleMemo": "挑発・カウンタ・防御支援を持つ耐久型ウォーリア",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/ophelia/"
+      "sourceUrl": "https://ichigogames.net/mementomori/ophelia/",
+      "pickupHistory": [
+        {
+          "date": "2023-02-28",
+          "kind": "PU",
+          "round": 1
+        },
+        {
+          "date": "2026-09-24",
+          "endDate": "2026-10-15",
+          "kind": "星の導き",
+          "round": 8
+        }
+      ],
+      "pickupCount": 8
     },
     {
       "id": "kaguya",
@@ -666,7 +1186,21 @@
       "roleMemo": "クリティカル支援、弱体特効、カウンタ変更で粘るソーサラー",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/kaguya/"
+      "sourceUrl": "https://ichigogames.net/mementomori/kaguya/",
+      "pickupHistory": [
+        {
+          "date": "2024-06-28",
+          "kind": "PU",
+          "round": 1
+        },
+        {
+          "date": "2026-05-07",
+          "endDate": "2026-05-28",
+          "kind": "星の導き",
+          "round": 5
+        }
+      ],
+      "pickupCount": 5
     },
     {
       "id": "natasha_bouquet",
@@ -681,7 +1215,21 @@
       "roleMemo": "再発動、毒、劇化、ダメージ遮断を組み合わせるスナイパー",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/natasha_blossoms/"
+      "sourceUrl": "https://ichigogames.net/mementomori/natasha_blossoms/",
+      "pickupHistory": [
+        {
+          "date": "2024-10-31",
+          "kind": "PU",
+          "round": 1
+        },
+        {
+          "date": "2026-08-06",
+          "endDate": "2026-08-31",
+          "kind": "星の導き",
+          "round": 4
+        }
+      ],
+      "pickupCount": 4
     },
     {
       "id": "nebra",
@@ -696,7 +1244,21 @@
       "roleMemo": "攻撃力・命中支援、弱体特効、泡沫スタックで戦うソーサラー",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/nebra/"
+      "sourceUrl": "https://ichigogames.net/mementomori/nebra/",
+      "pickupHistory": [
+        {
+          "date": "2025-07-15",
+          "kind": "PU",
+          "round": 1
+        },
+        {
+          "date": "2026-07-23",
+          "endDate": "2026-08-06",
+          "kind": "復刻",
+          "round": 3
+        }
+      ],
+      "pickupCount": 3
     },
     {
       "id": "carmilla",
@@ -711,7 +1273,21 @@
       "roleMemo": "出血、弱体なし特効、脱力付与、被ダメージ減少を持つウォーリア",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/carmilla/"
+      "sourceUrl": "https://ichigogames.net/mementomori/carmilla/",
+      "pickupHistory": [
+        {
+          "date": "2025-08-28",
+          "kind": "PU",
+          "round": 1
+        },
+        {
+          "date": "2026-03-24",
+          "endDate": "2026-04-08",
+          "kind": "復刻",
+          "round": 2
+        }
+      ],
+      "pickupCount": 2
     },
     {
       "id": "cerberus_candy",
@@ -726,7 +1302,21 @@
       "roleMemo": "優しい魔法、直接攻撃、回復、命中支援を扱うソーサラー",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/cerberus_another/"
+      "sourceUrl": "https://ichigogames.net/mementomori/cerberus_another/",
+      "pickupHistory": [
+        {
+          "date": "2025-10-30",
+          "kind": "PU",
+          "round": 1
+        },
+        {
+          "date": "2026-04-22",
+          "endDate": "2026-05-07",
+          "kind": "復刻",
+          "round": 2
+        }
+      ],
+      "pickupCount": 2
     },
     {
       "id": "regina",
@@ -741,7 +1331,21 @@
       "roleMemo": "被ダメ増加、条件火力、面影スタック、防御遮断を持つスナイパー",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/regina/"
+      "sourceUrl": "https://ichigogames.net/mementomori/regina/",
+      "pickupHistory": [
+        {
+          "date": "2026-02-26",
+          "kind": "PU",
+          "round": 1
+        },
+        {
+          "date": "2026-09-24",
+          "endDate": "2026-10-08",
+          "kind": "復刻",
+          "round": 2
+        }
+      ],
+      "pickupCount": 2
     },
     {
       "id": "cattleya",
@@ -756,7 +1360,16 @@
       "roleMemo": "攻撃回数と倍率が段階的に伸びる黄ウォーリア",
       "noteUrl": "https://note.com/musoudc/n/n470275bf0e97",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/cattleya/"
+      "sourceUrl": "https://ichigogames.net/mementomori/cattleya/",
+      "pickupHistory": [
+        {
+          "date": "2026-05-28",
+          "endDate": "2026-06-15",
+          "kind": "PU",
+          "round": 1
+        }
+      ],
+      "pickupCount": 1
     },
     {
       "id": "mimi",
@@ -771,7 +1384,13 @@
       "roleMemo": "共鳴で敵同士にダメージを通す黄ウォーリア",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/mimi/"
+      "sourceUrl": "https://ichigogames.net/mementomori/mimi/",
+      "pickupHistory": [
+        {
+          "date": "2022-10-18",
+          "kind": "初回実装"
+        }
+      ]
     },
     {
       "id": "tropon",
@@ -786,7 +1405,13 @@
       "roleMemo": "HPドレインとバフ反転を持つ黄ソーサラー",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/tropon/"
+      "sourceUrl": "https://ichigogames.net/mementomori/tropon/",
+      "pickupHistory": [
+        {
+          "date": "2022-10-18",
+          "kind": "初回実装"
+        }
+      ]
     },
     {
       "id": "hathor",
@@ -801,7 +1426,13 @@
       "roleMemo": "高倍率攻撃と弱体付与を扱う黄スナイパー",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/hathor/"
+      "sourceUrl": "https://ichigogames.net/mementomori/hathor/",
+      "pickupHistory": [
+        {
+          "date": "2022-10-18",
+          "kind": "初回実装"
+        }
+      ]
     },
     {
       "id": "olivia",
@@ -816,7 +1447,13 @@
       "roleMemo": "味方全体の攻防を底上げする黄ウォーリア",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/olivia/"
+      "sourceUrl": "https://ichigogames.net/mementomori/olivia/",
+      "pickupHistory": [
+        {
+          "date": "2022-10-18",
+          "kind": "初回実装"
+        }
+      ]
     },
     {
       "id": "primavera",
@@ -831,7 +1468,13 @@
       "roleMemo": "攻撃力とスピードを全体支援する黄スナイパー",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/primavera/"
+      "sourceUrl": "https://ichigogames.net/mementomori/primavera/",
+      "pickupHistory": [
+        {
+          "date": "2022-10-18",
+          "kind": "初回実装"
+        }
+      ]
     },
     {
       "id": "karol",
@@ -846,7 +1489,21 @@
       "roleMemo": "沈黙とバフ解除を扱う黄ソーサラー",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/carol/"
+      "sourceUrl": "https://ichigogames.net/mementomori/carol/",
+      "pickupHistory": [
+        {
+          "date": "2022-12-15",
+          "kind": "PU",
+          "round": 1
+        },
+        {
+          "date": "2026-03-24",
+          "endDate": "2026-04-15",
+          "kind": "星の導き",
+          "round": 9
+        }
+      ],
+      "pickupCount": 9
     },
     {
       "id": "wheeler",
@@ -861,7 +1518,21 @@
       "roleMemo": "高速で攻撃力減少を付与する黄ソーサラー",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/veela/"
+      "sourceUrl": "https://ichigogames.net/mementomori/veela/",
+      "pickupHistory": [
+        {
+          "date": "2023-03-16",
+          "kind": "PU",
+          "round": 1
+        },
+        {
+          "date": "2026-05-28",
+          "endDate": "2026-06-23",
+          "kind": "星の導き",
+          "round": 8
+        }
+      ],
+      "pickupCount": 8
     },
     {
       "id": "rishess",
@@ -876,7 +1547,21 @@
       "roleMemo": "低スピード味方をシールドと防御で守る黄ウォーリア",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/richesse/"
+      "sourceUrl": "https://ichigogames.net/mementomori/richesse/",
+      "pickupHistory": [
+        {
+          "date": "2023-06-14",
+          "kind": "PU",
+          "round": 1
+        },
+        {
+          "date": "2026-09-24",
+          "endDate": "2026-10-15",
+          "kind": "星の導き",
+          "round": 7
+        }
+      ],
+      "pickupCount": 7
     },
     {
       "id": "moddey_summer",
@@ -891,7 +1576,21 @@
       "roleMemo": "毒を軸に吸収と遮断を重ねる黄ソーサラー",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/moddey_swimsuit/"
+      "sourceUrl": "https://ichigogames.net/mementomori/moddey_swimsuit/",
+      "pickupHistory": [
+        {
+          "date": "2023-07-13",
+          "kind": "PU",
+          "round": 1
+        },
+        {
+          "date": "2026-07-15",
+          "endDate": "2026-08-06",
+          "kind": "星の導き",
+          "round": 4
+        }
+      ],
+      "pickupCount": 4
     },
     {
       "id": "iris_black",
@@ -906,7 +1605,21 @@
       "roleMemo": "結界とシールドで支える黄ウォーリア",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/iris_tainted/"
+      "sourceUrl": "https://ichigogames.net/mementomori/iris_tainted/",
+      "pickupHistory": [
+        {
+          "date": "2023-12-26",
+          "kind": "PU",
+          "round": 1
+        },
+        {
+          "date": "2026-08-31",
+          "endDate": "2026-09-24",
+          "kind": "星の導き",
+          "round": 6
+        }
+      ],
+      "pickupCount": 6
     },
     {
       "id": "amour_holy_night",
@@ -921,7 +1634,21 @@
       "roleMemo": "クリティカル支援と復活を持つ黄スナイパー",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/amour_holy_night/"
+      "sourceUrl": "https://ichigogames.net/mementomori/amour_holy_night/",
+      "pickupHistory": [
+        {
+          "date": "2023-11-30",
+          "kind": "PU",
+          "round": 1
+        },
+        {
+          "date": "2025-11-27",
+          "endDate": "2025-12-11",
+          "kind": "復刻",
+          "round": 3
+        }
+      ],
+      "pickupCount": 3
     },
     {
       "id": "asahi",
@@ -936,7 +1663,21 @@
       "roleMemo": "風林火山のスタックで攻防を伸ばす黄スナイパー",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/asahi/"
+      "sourceUrl": "https://ichigogames.net/mementomori/asahi/",
+      "pickupHistory": [
+        {
+          "date": "2024-05-15",
+          "kind": "PU",
+          "round": 1
+        },
+        {
+          "date": "2026-06-23",
+          "endDate": "2026-07-15",
+          "kind": "星の導き",
+          "round": 5
+        }
+      ],
+      "pickupCount": 5
     },
     {
       "id": "tama",
@@ -951,7 +1692,21 @@
       "roleMemo": "命中支援と黄属性向けシールドを持つ黄スナイパー",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/tama/"
+      "sourceUrl": "https://ichigogames.net/mementomori/tama/",
+      "pickupHistory": [
+        {
+          "date": "2024-09-30",
+          "kind": "PU",
+          "round": 1
+        },
+        {
+          "date": "2026-02-26",
+          "endDate": "2026-03-24",
+          "kind": "星の導き",
+          "round": 4
+        }
+      ],
+      "pickupCount": 4
     },
     {
       "id": "rustica",
@@ -966,7 +1721,27 @@
       "roleMemo": "バフ数参照の支援とシールドを扱う黄ウォーリア",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/rustica/"
+      "sourceUrl": "https://ichigogames.net/mementomori/rustica/",
+      "pickupHistory": [
+        {
+          "date": "2025-02-28",
+          "kind": "PU",
+          "round": 1
+        },
+        {
+          "date": "2026-04-08",
+          "endDate": "2026-04-21",
+          "kind": "復刻",
+          "round": 3
+        },
+        {
+          "date": "2026-08-06",
+          "endDate": "2026-08-31",
+          "kind": "星の導き",
+          "round": 4
+        }
+      ],
+      "pickupCount": 4
     },
     {
       "id": "mifuri",
@@ -981,7 +1756,21 @@
       "roleMemo": "陽炎の灯と高倍率魔法を扱う黄ソーサラー",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/mihri/"
+      "sourceUrl": "https://ichigogames.net/mementomori/mihri/",
+      "pickupHistory": [
+        {
+          "date": "2025-09-16",
+          "kind": "PU",
+          "round": 1
+        },
+        {
+          "date": "2026-09-30",
+          "endDate": "2026-10-15",
+          "kind": "復刻",
+          "round": 3
+        }
+      ],
+      "pickupCount": 3
     },
     {
       "id": "moineau",
@@ -996,7 +1785,21 @@
       "roleMemo": "脱力とバフコピーを扱う黄スナイパー",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/moineau/"
+      "sourceUrl": "https://ichigogames.net/mementomori/moineau/",
+      "pickupHistory": [
+        {
+          "date": "2025-05-30",
+          "kind": "PU",
+          "round": 1
+        },
+        {
+          "date": "2026-08-24",
+          "endDate": "2026-09-08",
+          "kind": "復刻",
+          "round": 3
+        }
+      ],
+      "pickupCount": 3
     },
     {
       "id": "fenrir_treasure",
@@ -1011,7 +1814,21 @@
       "roleMemo": "隠し味スタックと結界で支える黄ウォーリア",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/fenrir_another/"
+      "sourceUrl": "https://ichigogames.net/mementomori/fenrir_another/",
+      "pickupHistory": [
+        {
+          "date": "2025-10-16",
+          "kind": "PU",
+          "round": 1
+        },
+        {
+          "date": "2026-04-15",
+          "endDate": "2026-04-30",
+          "kind": "復刻",
+          "round": 2
+        }
+      ],
+      "pickupCount": 2
     },
     {
       "id": "merlyn",
@@ -1026,7 +1843,21 @@
       "roleMemo": "妖精さんスタックで攻防を支援する黄ソーサラー",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/myrlennia/"
+      "sourceUrl": "https://ichigogames.net/mementomori/myrlennia/",
+      "pickupHistory": [
+        {
+          "date": "2026-01-29",
+          "kind": "PU",
+          "round": 1
+        },
+        {
+          "date": "2026-08-13",
+          "endDate": "2026-08-31",
+          "kind": "復刻",
+          "round": 2
+        }
+      ],
+      "pickupCount": 2
     },
     {
       "id": "tricksy",
@@ -1041,7 +1872,16 @@
       "roleMemo": "気絶と防御上昇を扱う黄ソーサラー",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/trixie/"
+      "sourceUrl": "https://ichigogames.net/mementomori/trixie/",
+      "pickupHistory": [
+        {
+          "date": "2026-03-31",
+          "endDate": "2026-04-15",
+          "kind": "PU",
+          "round": 1
+        }
+      ],
+      "pickupCount": 1
     },
     {
       "id": "freycia",
@@ -1056,7 +1896,13 @@
       "roleMemo": "回復と被ダメージ減少で支える紅ソーサラー",
       "noteUrl": "https://note.com/musoudc/n/na66efd3932c2",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/freesia/"
+      "sourceUrl": "https://ichigogames.net/mementomori/freesia/",
+      "pickupHistory": [
+        {
+          "date": "2022-10-18",
+          "kind": "初回実装"
+        }
+      ]
     },
     {
       "id": "amour",
@@ -1071,7 +1917,13 @@
       "roleMemo": "復活と不治を持つ紅スナイパー",
       "noteUrl": "https://note.com/musoudc/n/n452953be0072",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/amour/"
+      "sourceUrl": "https://ichigogames.net/mementomori/amour/",
+      "pickupHistory": [
+        {
+          "date": "2022-10-18",
+          "kind": "初回実装"
+        }
+      ]
     },
     {
       "id": "lean",
@@ -1086,7 +1938,13 @@
       "roleMemo": "クリティカルで攻撃力を伸ばす紅ウォーリア",
       "noteUrl": "https://note.com/musoudc/n/n44da0b834179",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/rean/"
+      "sourceUrl": "https://ichigogames.net/mementomori/rean/",
+      "pickupHistory": [
+        {
+          "date": "2022-10-18",
+          "kind": "初回実装"
+        }
+      ]
     },
     {
       "id": "dian",
@@ -1101,7 +1959,13 @@
       "roleMemo": "出血と透明を扱う紅スナイパー",
       "noteUrl": "https://note.com/musoudc/n/n4c68d32788a6",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/dian/"
+      "sourceUrl": "https://ichigogames.net/mementomori/dian/",
+      "pickupHistory": [
+        {
+          "date": "2022-10-18",
+          "kind": "初回実装"
+        }
+      ]
     },
     {
       "id": "belle",
@@ -1116,7 +1980,21 @@
       "roleMemo": "出血とシールドで粘る紅ソーサラー",
       "noteUrl": "https://note.com/musoudc/n/n2e145afbb978?app_launch=false",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/belle/"
+      "sourceUrl": "https://ichigogames.net/mementomori/belle/",
+      "pickupHistory": [
+        {
+          "date": "2022-11-01",
+          "kind": "PU",
+          "round": 1
+        },
+        {
+          "date": "2026-03-24",
+          "endDate": "2026-04-15",
+          "kind": "星の導き",
+          "round": 10
+        }
+      ],
+      "pickupCount": 10
     },
     {
       "id": "sophia",
@@ -1131,7 +2009,21 @@
       "roleMemo": "多段物理と弱体ターン短縮を持つ紅ウォーリア",
       "noteUrl": "https://note.com/musoudc/n/n4ff2cbef61c7",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/sophia/"
+      "sourceUrl": "https://ichigogames.net/mementomori/sophia/",
+      "pickupHistory": [
+        {
+          "date": "2023-01-31",
+          "kind": "PU",
+          "round": 1
+        },
+        {
+          "date": "2026-05-28",
+          "endDate": "2026-06-23",
+          "kind": "星の導き",
+          "round": 8
+        }
+      ],
+      "pickupCount": 8
     },
     {
       "id": "chiffon",
@@ -1146,7 +2038,21 @@
       "roleMemo": "味方全体を防御とシールドで守る紅ソーサラー",
       "noteUrl": "https://note.com/musoudc/n/n18f3cdcee288?app_launch=false",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/chiffon/"
+      "sourceUrl": "https://ichigogames.net/mementomori/chiffon/",
+      "pickupHistory": [
+        {
+          "date": "2023-04-14",
+          "kind": "PU",
+          "round": 1
+        },
+        {
+          "date": "2026-09-24",
+          "endDate": "2026-10-15",
+          "kind": "星の導き",
+          "round": 8
+        }
+      ],
+      "pickupCount": 8
     },
     {
       "id": "artie",
@@ -1161,7 +2067,21 @@
       "roleMemo": "クリ耐性スタックと魔法連撃を扱う紅ソーサラー",
       "noteUrl": "https://note.com/musoudc/n/n9b7c108aaf30",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/artie/"
+      "sourceUrl": "https://ichigogames.net/mementomori/artie/",
+      "pickupHistory": [
+        {
+          "date": "2023-05-31",
+          "kind": "PU",
+          "round": 1
+        },
+        {
+          "date": "2026-06-23",
+          "endDate": "2026-07-15",
+          "kind": "星の導き",
+          "round": 7
+        }
+      ],
+      "pickupCount": 7
     },
     {
       "id": "cordie_summer",
@@ -1176,7 +2096,21 @@
       "roleMemo": "高スピードで命中回避操作と回復を行う紅スナイパー",
       "noteUrl": "https://note.com/musoudc/n/n78647426f9a6",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/cordie_yukata/"
+      "sourceUrl": "https://ichigogames.net/mementomori/cordie_yukata/",
+      "pickupHistory": [
+        {
+          "date": "2023-08-14",
+          "kind": "PU",
+          "round": 1
+        },
+        {
+          "date": "2026-07-15",
+          "endDate": "2026-08-06",
+          "kind": "星の導き",
+          "round": 4
+        }
+      ],
+      "pickupCount": 4
     },
     {
       "id": "priscilla",
@@ -1191,7 +2125,21 @@
       "roleMemo": "再生と弱体解除で味方を支える紅ソーサラー",
       "noteUrl": "https://note.com/musoudc/n/n7ea100e0ddc0",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/priscilla/"
+      "sourceUrl": "https://ichigogames.net/mementomori/priscilla/",
+      "pickupHistory": [
+        {
+          "date": "2023-09-29",
+          "kind": "PU",
+          "round": 1
+        },
+        {
+          "date": "2026-08-31",
+          "endDate": "2026-09-24",
+          "kind": "星の導き",
+          "round": 6
+        }
+      ],
+      "pickupCount": 6
     },
     {
       "id": "matilda",
@@ -1206,7 +2154,21 @@
       "roleMemo": "攻撃力最高味方を強化する紅ソーサラー",
       "noteUrl": "https://note.com/musoudc/n/n5b354302758d",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/matilda/"
+      "sourceUrl": "https://ichigogames.net/mementomori/matilda/",
+      "pickupHistory": [
+        {
+          "date": "2024-02-22",
+          "kind": "PU",
+          "round": 1
+        },
+        {
+          "date": "2026-02-26",
+          "endDate": "2026-03-16",
+          "kind": "復刻",
+          "round": 3
+        }
+      ],
+      "pickupCount": 3
     },
     {
       "id": "morgana",
@@ -1221,7 +2183,21 @@
       "roleMemo": "自傷と攻撃力増加スタックで伸びる紅ソーサラー",
       "noteUrl": "https://note.com/musoudc/n/ne1f860d79777",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/morgana/"
+      "sourceUrl": "https://ichigogames.net/mementomori/morgana/",
+      "pickupHistory": [
+        {
+          "date": "2024-04-15",
+          "kind": "PU",
+          "round": 1
+        },
+        {
+          "date": "2026-02-26",
+          "endDate": "2026-03-24",
+          "kind": "星の導き",
+          "round": 5
+        }
+      ],
+      "pickupCount": 5
     },
     {
       "id": "soltina_warm_memory",
@@ -1236,7 +2212,21 @@
       "roleMemo": "紅・翠属性支援と気絶を持つ紅ウォーリア",
       "noteUrl": "https://note.com/musoudc/n/n25025c0ae52c",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/soltina_winter/"
+      "sourceUrl": "https://ichigogames.net/mementomori/soltina_winter/",
+      "pickupHistory": [
+        {
+          "date": "2024-11-29",
+          "kind": "PU",
+          "round": 1
+        },
+        {
+          "date": "2025-12-04",
+          "endDate": "2025-12-18",
+          "kind": "復刻",
+          "round": 2
+        }
+      ],
+      "pickupCount": 2
     },
     {
       "id": "artoria",
@@ -1251,7 +2241,21 @@
       "roleMemo": "自傷物理と多重バリアで戦う紅ウォーリア",
       "noteUrl": "https://note.com/musoudc/n/n3497cc546c36",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/artoria/"
+      "sourceUrl": "https://ichigogames.net/mementomori/artoria/",
+      "pickupHistory": [
+        {
+          "date": "2025-01-15",
+          "kind": "PU",
+          "round": 1
+        },
+        {
+          "date": "2026-08-06",
+          "endDate": "2026-08-31",
+          "kind": "星の導き",
+          "round": 4
+        }
+      ],
+      "pickupCount": 4
     },
     {
       "id": "shizu_snow",
@@ -1266,7 +2270,21 @@
       "roleMemo": "高倍率物理とカウンタ弱体を持つ紅ウォーリア",
       "noteUrl": "https://note.com/musoudc/n/n23691a6537e3",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/shizu_spring/"
+      "sourceUrl": "https://ichigogames.net/mementomori/shizu_spring/",
+      "pickupHistory": [
+        {
+          "date": "2025-02-14",
+          "kind": "PU",
+          "round": 1
+        },
+        {
+          "date": "2025-12-31",
+          "endDate": "2026-01-15",
+          "kind": "復刻",
+          "round": 2
+        }
+      ],
+      "pickupCount": 2
     },
     {
       "id": "lucile",
@@ -1281,7 +2299,21 @@
       "roleMemo": "彩光スタックと紅属性速度支援を持つ紅ウォーリア",
       "noteUrl": "https://note.com/musoudc/n/n1c4ea8007658",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/lucille/"
+      "sourceUrl": "https://ichigogames.net/mementomori/lucille/",
+      "pickupHistory": [
+        {
+          "date": "2025-05-14",
+          "kind": "PU",
+          "round": 1
+        },
+        {
+          "date": "2026-06-23",
+          "endDate": "2026-07-07",
+          "kind": "復刻",
+          "round": 3
+        }
+      ],
+      "pickupCount": 3
     },
     {
       "id": "flack",
@@ -1296,7 +2328,21 @@
       "roleMemo": "回避低下と笑顔の才能を扱う紅スナイパー",
       "noteUrl": "https://note.com/musoudc/n/n85f2244dead3",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/flack/"
+      "sourceUrl": "https://ichigogames.net/mementomori/flack/",
+      "pickupHistory": [
+        {
+          "date": "2025-06-16",
+          "kind": "PU",
+          "round": 1
+        },
+        {
+          "date": "2026-07-28",
+          "endDate": "2026-08-13",
+          "kind": "復刻",
+          "round": 3
+        }
+      ],
+      "pickupCount": 3
     },
     {
       "id": "liebe",
@@ -1311,7 +2357,21 @@
       "roleMemo": "気絶と多重バリアを持つ紅ウォーリア",
       "noteUrl": "https://note.com/musoudc/n/ncd8ad310e04b",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/liebe/"
+      "sourceUrl": "https://ichigogames.net/mementomori/liebe/",
+      "pickupHistory": [
+        {
+          "date": "2025-09-30",
+          "kind": "PU",
+          "round": 1
+        },
+        {
+          "date": "2026-04-30",
+          "endDate": "2026-05-21",
+          "kind": "復刻",
+          "round": 2
+        }
+      ],
+      "pickupCount": 2
     },
     {
       "id": "aishe",
@@ -1326,7 +2386,21 @@
       "roleMemo": "解析スタックで再発動と火力を伸ばす紅スナイパー",
       "noteUrl": "https://note.com/musoudc/n/n5f1d0e419833",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/ayse/"
+      "sourceUrl": "https://ichigogames.net/mementomori/ayse/",
+      "pickupHistory": [
+        {
+          "date": "2025-11-13",
+          "kind": "PU",
+          "round": 1
+        },
+        {
+          "date": "2026-06-08",
+          "endDate": "2026-06-23",
+          "kind": "復刻",
+          "round": 2
+        }
+      ],
+      "pickupCount": 2
     },
     {
       "id": "lilicotte",
@@ -1341,7 +2415,16 @@
       "roleMemo": "バフ解除と沈黙を扱う紅スナイパー",
       "noteUrl": "https://note.com/musoudc/n/n85aa1c0058ae",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/lillicotte/"
+      "sourceUrl": "https://ichigogames.net/mementomori/lillicotte/",
+      "pickupHistory": [
+        {
+          "date": "2026-03-16",
+          "endDate": "2026-03-31",
+          "kind": "PU",
+          "round": 1
+        }
+      ],
+      "pickupCount": 1
     },
     {
       "id": "merlin",
@@ -1356,7 +2439,13 @@
       "roleMemo": "弱体解除と周辺支援を持つ翠属性バッファー",
       "noteUrl": "https://note.com/musoudc/n/n79c29726cc37",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/merlyn/"
+      "sourceUrl": "https://ichigogames.net/mementomori/merlyn/",
+      "pickupHistory": [
+        {
+          "date": "2022-10-18",
+          "kind": "初回実装"
+        }
+      ]
     },
     {
       "id": "cordie",
@@ -1371,7 +2460,13 @@
       "roleMemo": "高スピードの物理アタッカー",
       "noteUrl": "https://note.com/musoudc/n/n152d33a53453",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/cordie/"
+      "sourceUrl": "https://ichigogames.net/mementomori/cordie/",
+      "pickupHistory": [
+        {
+          "date": "2022-10-18",
+          "kind": "初回実装"
+        }
+      ]
     },
     {
       "id": "nina",
@@ -1386,7 +2481,13 @@
       "roleMemo": "バフ奪取と弱体反射を持つ妨害型スナイパー",
       "noteUrl": "https://note.com/musoudc/n/neb540b3c3faa",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/nina/"
+      "sourceUrl": "https://ichigogames.net/mementomori/nina/",
+      "pickupHistory": [
+        {
+          "date": "2022-10-18",
+          "kind": "初回実装"
+        }
+      ]
     },
     {
       "id": "mertillier",
@@ -1401,7 +2502,13 @@
       "roleMemo": "CT短縮と再生を扱う支援ソーサラー",
       "noteUrl": "https://note.com/musoudc/n/n2de3c5a26212",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/mertillier/"
+      "sourceUrl": "https://ichigogames.net/mementomori/mertillier/",
+      "pickupHistory": [
+        {
+          "date": "2022-10-18",
+          "kind": "初回実装"
+        }
+      ]
     },
     {
       "id": "luke",
@@ -1416,7 +2523,21 @@
       "roleMemo": "腕力参照の直接攻撃を持つ翠ウォーリア",
       "noteUrl": "https://note.com/musoudc/n/n95b1ba239bbd",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/luke/"
+      "sourceUrl": "https://ichigogames.net/mementomori/luke/",
+      "pickupHistory": [
+        {
+          "date": "2022-11-30",
+          "kind": "PU",
+          "round": 1
+        },
+        {
+          "date": "2026-03-24",
+          "endDate": "2026-04-15",
+          "kind": "星の導き",
+          "round": 9
+        }
+      ],
+      "pickupCount": 9
     },
     {
       "id": "rea",
@@ -1431,7 +2552,21 @@
       "roleMemo": "回避率減少と気絶で押す高火力スナイパー",
       "noteUrl": "https://note.com/musoudc/n/n99696d9f8c8c",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/lea/"
+      "sourceUrl": "https://ichigogames.net/mementomori/lea/",
+      "pickupHistory": [
+        {
+          "date": "2023-03-31",
+          "kind": "PU",
+          "round": 1
+        },
+        {
+          "date": "2026-05-28",
+          "endDate": "2026-06-23",
+          "kind": "星の導き",
+          "round": 8
+        }
+      ],
+      "pickupCount": 8
     },
     {
       "id": "sabrina_cool_breeze",
@@ -1446,7 +2581,21 @@
       "roleMemo": "気絶と連撃を持つ夏イベントの翠ウォーリア",
       "noteUrl": "https://note.com/musoudc/n/n022b38fa67a2",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/sabrina_swimsuit/"
+      "sourceUrl": "https://ichigogames.net/mementomori/sabrina_swimsuit/",
+      "pickupHistory": [
+        {
+          "date": "2023-06-30",
+          "kind": "PU",
+          "round": 1
+        },
+        {
+          "date": "2026-07-15",
+          "endDate": "2026-08-06",
+          "kind": "星の導き",
+          "round": 4
+        }
+      ],
+      "pickupCount": 4
     },
     {
       "id": "fia",
@@ -1461,7 +2610,21 @@
       "roleMemo": "HP増加と被弾回復を持つ耐久ウォーリア",
       "noteUrl": "https://note.com/musoudc/n/n6a0fd6e907c5",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/fia/"
+      "sourceUrl": "https://ichigogames.net/mementomori/fia/",
+      "pickupHistory": [
+        {
+          "date": "2023-07-31",
+          "kind": "PU",
+          "round": 1
+        },
+        {
+          "date": "2026-09-24",
+          "endDate": "2026-10-15",
+          "kind": "星の導き",
+          "round": 7
+        }
+      ],
+      "pickupCount": 7
     },
     {
       "id": "claudia",
@@ -1476,7 +2639,21 @@
       "roleMemo": "HP低下で火力と遮断が伸びる物理アタッカー",
       "noteUrl": "https://note.com/musoudc/n/n7e40800aca82",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/claudia/"
+      "sourceUrl": "https://ichigogames.net/mementomori/claudia/",
+      "pickupHistory": [
+        {
+          "date": "2024-01-31",
+          "kind": "PU",
+          "round": 1
+        },
+        {
+          "date": "2026-06-23",
+          "endDate": "2026-07-15",
+          "kind": "星の導き",
+          "round": 6
+        }
+      ],
+      "pickupCount": 6
     },
     {
       "id": "yuni",
@@ -1491,7 +2668,21 @@
       "roleMemo": "回復と最大HP増加を扱う治療支援役",
       "noteUrl": "https://note.com/musoudc/n/nf37e63297c94",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/yuni/"
+      "sourceUrl": "https://ichigogames.net/mementomori/yuni/",
+      "pickupHistory": [
+        {
+          "date": "2024-02-29",
+          "kind": "PU",
+          "round": 1
+        },
+        {
+          "date": "2026-08-31",
+          "endDate": "2026-09-24",
+          "kind": "星の導き",
+          "round": 5
+        }
+      ],
+      "pickupCount": 5
     },
     {
       "id": "alexandra",
@@ -1506,7 +2697,21 @@
       "roleMemo": "守護騎士で長期戦性能を伸ばす翠ウォーリア",
       "noteUrl": "https://note.com/musoudc/n/n71ea7c71d71e",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/alexandra/"
+      "sourceUrl": "https://ichigogames.net/mementomori/alexandra/",
+      "pickupHistory": [
+        {
+          "date": "2024-05-31",
+          "kind": "PU",
+          "round": 1
+        },
+        {
+          "date": "2026-04-15",
+          "endDate": "2026-05-07",
+          "kind": "星の導き",
+          "round": 5
+        }
+      ],
+      "pickupCount": 5
     },
     {
       "id": "mira",
@@ -1521,7 +2726,21 @@
       "roleMemo": "遅延と最大HP支援を持つソーサラー",
       "noteUrl": "https://note.com/musoudc/n/n74f4731f707e",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/milla/"
+      "sourceUrl": "https://ichigogames.net/mementomori/milla/",
+      "pickupHistory": [
+        {
+          "date": "2024-08-16",
+          "kind": "PU",
+          "round": 1
+        },
+        {
+          "date": "2026-05-07",
+          "endDate": "2026-05-28",
+          "kind": "星の導き",
+          "round": 5
+        }
+      ],
+      "pickupCount": 5
     },
     {
       "id": "lunalynn_holy_night",
@@ -1536,7 +2755,21 @@
       "roleMemo": "7ターン目以降に大きく伸びる冬イベントスナイパー",
       "noteUrl": "https://note.com/musoudc/n/nce8aaa2b22fc",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/lunalynn_winter/"
+      "sourceUrl": "https://ichigogames.net/mementomori/lunalynn_winter/",
+      "pickupHistory": [
+        {
+          "date": "2024-12-13",
+          "kind": "PU",
+          "round": 1
+        },
+        {
+          "date": "2025-12-04",
+          "endDate": "2025-12-18",
+          "kind": "復刻",
+          "round": 2
+        }
+      ],
+      "pickupCount": 2
     },
     {
       "id": "tilly",
@@ -1551,7 +2784,21 @@
       "roleMemo": "高攻撃力味方への攻撃・クリ支援を持つソーサラー",
       "noteUrl": "https://note.com/musoudc/n/nd410416480fc",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/tillie/"
+      "sourceUrl": "https://ichigogames.net/mementomori/tillie/",
+      "pickupHistory": [
+        {
+          "date": "2025-01-31",
+          "kind": "PU",
+          "round": 1
+        },
+        {
+          "date": "2026-08-06",
+          "endDate": "2026-08-31",
+          "kind": "星の導き",
+          "round": 4
+        }
+      ],
+      "pickupCount": 4
     },
     {
       "id": "paula",
@@ -1566,7 +2813,21 @@
       "roleMemo": "自己回復と7ターン目以降の強化を持つスナイパー",
       "noteUrl": "https://note.com/musoudc/n/nd87315c9fb2f",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/pola/"
+      "sourceUrl": "https://ichigogames.net/mementomori/pola/",
+      "pickupHistory": [
+        {
+          "date": "2025-03-17",
+          "kind": "PU",
+          "round": 1
+        },
+        {
+          "date": "2026-05-07",
+          "endDate": "2026-05-21",
+          "kind": "復刻",
+          "round": 3
+        }
+      ],
+      "pickupCount": 3
     },
     {
       "id": "dd",
@@ -1581,7 +2842,21 @@
       "roleMemo": "気絶と隣接支援を持つソーサラー",
       "noteUrl": "https://note.com/musoudc/n/nab6bac256375",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/dd/"
+      "sourceUrl": "https://ichigogames.net/mementomori/dd/",
+      "pickupHistory": [
+        {
+          "date": "2025-04-15",
+          "kind": "PU",
+          "round": 1
+        },
+        {
+          "date": "2026-05-14",
+          "endDate": "2026-05-28",
+          "kind": "復刻",
+          "round": 3
+        }
+      ],
+      "pickupCount": 3
     },
     {
       "id": "yurdiz",
@@ -1596,7 +2871,21 @@
       "roleMemo": "狼と人の絆で味方と自身を強化するウォーリア",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/yildiz/"
+      "sourceUrl": "https://ichigogames.net/mementomori/yildiz/",
+      "pickupHistory": [
+        {
+          "date": "2025-08-14",
+          "kind": "PU",
+          "round": 1
+        },
+        {
+          "date": "2026-08-31",
+          "endDate": "2026-09-15",
+          "kind": "復刻",
+          "round": 3
+        }
+      ],
+      "pickupCount": 3
     },
     {
       "id": "stella_holy_dark_star",
@@ -1611,7 +2900,16 @@
       "roleMemo": "7ターン目以降に攻撃性能が上がる聖夜ステラ",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/stella_winter/"
+      "sourceUrl": "https://ichigogames.net/mementomori/stella_winter/",
+      "pickupHistory": [
+        {
+          "date": "2025-12-11",
+          "endDate": "2026-01-06",
+          "kind": "PU",
+          "round": 1
+        }
+      ],
+      "pickupCount": 1
     },
     {
       "id": "kobell",
@@ -1633,8 +2931,15 @@
           "endDate": "2026-02-26",
           "kind": "PU",
           "round": 1
+        },
+        {
+          "date": "2026-09-15",
+          "endDate": "2026-09-30",
+          "kind": "復刻",
+          "round": 2
         }
-      ]
+      ],
+      "pickupCount": 2
     },
     {
       "id": "idyne",
@@ -1649,7 +2954,16 @@
       "roleMemo": "再生とHP回復連動バフを扱う翠ソーサラー",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/eidene/"
+      "sourceUrl": "https://ichigogames.net/mementomori/eidene/",
+      "pickupHistory": [
+        {
+          "date": "2026-05-14",
+          "endDate": "2026-05-28",
+          "kind": "PU",
+          "round": 1
+        }
+      ],
+      "pickupCount": 1
     },
     {
       "id": "guinevere",
@@ -1664,7 +2978,16 @@
       "roleMemo": "自傷を起点に攻撃力を伸ばす紅スナイパー",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/guinevere/"
+      "sourceUrl": "https://ichigogames.net/mementomori/guinevere/",
+      "pickupHistory": [
+        {
+          "date": "2026-06-15",
+          "endDate": "2026-06-30",
+          "kind": "PU",
+          "round": 1
+        }
+      ],
+      "pickupCount": 1
     },
     {
       "id": "shiloh",
@@ -1679,7 +3002,16 @@
       "roleMemo": "味方火力支援と9ターン目以降の強化を持つ黄スナイパー",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/shiloh/"
+      "sourceUrl": "https://ichigogames.net/mementomori/shiloh/",
+      "pickupHistory": [
+        {
+          "date": "2026-07-28",
+          "endDate": "2026-08-24",
+          "kind": "PU",
+          "round": 1
+        }
+      ],
+      "pickupCount": 1
     },
     {
       "id": "lily",
@@ -1694,7 +3026,16 @@
       "roleMemo": "気絶と残り香スタックで戦う天ソーサラー",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/lily/"
+      "sourceUrl": "https://ichigogames.net/mementomori/lily/",
+      "pickupHistory": [
+        {
+          "date": "2026-04-30",
+          "endDate": "2026-05-21",
+          "kind": "PU",
+          "round": 1
+        }
+      ],
+      "pickupCount": 1
     },
     {
       "id": "illya_gods_curse",
@@ -1709,7 +3050,21 @@
       "roleMemo": "献身と神呪解放で耐久から反撃へ移る冥ウォーリア",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/illya_gods_curse/"
+      "sourceUrl": "https://ichigogames.net/mementomori/illya_gods_curse/",
+      "pickupHistory": [
+        {
+          "date": "2023-10-31",
+          "kind": "PU",
+          "round": 1
+        },
+        {
+          "date": "2026-08-31",
+          "endDate": "2026-09-24",
+          "kind": "星の導き",
+          "round": 6
+        }
+      ],
+      "pickupCount": 6
     },
     {
       "id": "elaine",
@@ -1724,7 +3079,16 @@
       "roleMemo": "霊痕で弱体解除と回復を支える冥スナイパー",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/elaine/"
+      "sourceUrl": "https://ichigogames.net/mementomori/elaine/",
+      "pickupHistory": [
+        {
+          "date": "2026-06-30",
+          "endDate": "2026-07-15",
+          "kind": "PU",
+          "round": 1
+        }
+      ],
+      "pickupCount": 1
     },
     {
       "id": "primavera_summer",
@@ -1744,7 +3108,16 @@
       "roleMemo": "金縛りと弱体解除連動で火力を伸ばす夏イベントの藍スナイパー",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/primavera_summer/"
+      "sourceUrl": "https://ichigogames.net/mementomori/primavera_summer/",
+      "pickupHistory": [
+        {
+          "date": "2026-07-15",
+          "endDate": "2026-07-28",
+          "kind": "PU",
+          "round": 1
+        }
+      ],
+      "pickupCount": 1
     },
     {
       "id": "florence_twilight",
@@ -1759,7 +3132,16 @@
       "roleMemo": "回復回数を重ね7ターン目以降に黄昏の誓いで火力化する翠ウォーリア",
       "noteUrl": "",
       "imageUrl": "",
-      "sourceUrl": "https://ichigogames.net/mementomori/florence_twilight/"
+      "sourceUrl": "https://ichigogames.net/mementomori/florence_twilight/",
+      "pickupHistory": [
+        {
+          "date": "2026-08-13",
+          "endDate": "2026-09-08",
+          "kind": "PU",
+          "round": 1
+        }
+      ],
+      "pickupCount": 1
     },
     {
       "id": "cusith",
@@ -1781,7 +3163,8 @@
           "kind": "PU",
           "round": 1
         }
-      ]
+      ],
+      "pickupCount": 1
     },
     {
       "id": "artoria_golden",
@@ -1803,7 +3186,8 @@
           "kind": "PU",
           "round": 1
         }
-      ]
+      ],
+      "pickupCount": 1
     },
     {
       "id": "fortina_twilight",
@@ -1825,7 +3209,8 @@
           "kind": "PU",
           "round": 1
         }
-      ]
+      ],
+      "pickupCount": 1
     }
   ],
   "skills": [

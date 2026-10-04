@@ -470,9 +470,69 @@ function validateConditionMax(skill, errors) {
 }
 
 /** 1ファイルも書き出す前にデータを点検する（検証に落ちたら出力を残さない）。 */
+const RELEASE_KIND = "初回実装";
+const PICKUP_KINDS = new Set(["PU", "復刻", "星の導き", RELEASE_KIND]);
+
+/**
+ * pickupHistory の点検。
+ * 出典にある回数（pickupCount）より多い回次を作らない／回次を重複させない／
+ * 日付の形を崩さないことを機械で担保する。中間の復刻が出典に無く日付を載せられない
+ * 回があるのは想定内なので、件数が回数より少ないことはエラーにしない。
+ */
+function validatePickupHistory(character, errors) {
+  const history = character.pickupHistory;
+  if (history === undefined) return;
+  const where = `${character.id} の pickupHistory`;
+  if (!Array.isArray(history) || history.length === 0) {
+    errors.push(`${where}: 空配列・非配列は置かないこと`);
+    return;
+  }
+  const releaseOnly = history.every((item) => item.kind === RELEASE_KIND);
+  const rounds = [];
+  for (const item of history) {
+    if (!item.date) errors.push(`${where}: date が無い項目があります`);
+    else if (!/^\d{4}-\d{2}-\d{2}$/.test(item.date) && !/^\d{4}-\d{2}$/.test(item.date)) {
+      errors.push(`${where}: date の形式が不正です（${item.date}）。YYYY-MM-DD か YYYY-MM のみ`);
+    }
+    if (item.endDate !== undefined) {
+      if (!/^\d{4}-\d{2}-\d{2}$/.test(item.endDate)) errors.push(`${where}: endDate の形式が不正です（${item.endDate}）`);
+      else if (item.date && String(item.endDate) < String(item.date)) errors.push(`${where}: endDate が date より前です（${item.date} 〜 ${item.endDate}）`);
+    }
+    if (!item.kind) errors.push(`${where}: kind が無い項目があります`);
+    else if (!PICKUP_KINDS.has(item.kind)) errors.push(`${where}: kind が未定義です（${item.kind}）`);
+    if (item.round !== undefined) {
+      if (!Number.isInteger(item.round) || item.round < 1) errors.push(`${where}: round は1以上の整数にすること（${item.round}）`);
+      else rounds.push(item.round);
+    }
+    // 回次と開催ガチャの対応（出典の凡例: 1回目=PU / 2〜3回目=復刻 / 4回目以降=星の導き）
+    if (Number.isInteger(item.round) && item.kind !== RELEASE_KIND) {
+      const expected = item.round === 1 ? "PU" : item.round <= 3 ? "復刻" : "星の導き";
+      if (item.kind !== expected) errors.push(`${where}: ${item.round}回目の kind は ${expected} のはずです（${item.kind}）`);
+    }
+  }
+  if (new Set(rounds).size !== rounds.length) errors.push(`${where}: round が重複しています（${rounds.join(", ")}）`);
+  const sorted = history.map((item) => String(item.date));
+  if (sorted.join("|") !== [...sorted].sort().join("|")) errors.push(`${where}: date の昇順になっていません`);
+
+  if (releaseOnly) {
+    // リリース組は PU 実績が無い。pickupCount を付けるとPU履歴バッジが出てしまう。
+    if (character.pickupCount !== undefined) errors.push(`${where}: 初回実装のみの体に pickupCount は付けないこと`);
+    return;
+  }
+  if (character.pickupCount === undefined) { errors.push(`${where}: pickupCount（出典のPU回数）が必要です`); return; }
+  if (!Number.isInteger(character.pickupCount) || character.pickupCount < 1) {
+    errors.push(`${character.id}: pickupCount は1以上の整数にすること（${character.pickupCount}）`);
+    return;
+  }
+  const over = rounds.filter((r) => r > character.pickupCount);
+  if (over.length) errors.push(`${where}: 出典のPU回数 ${character.pickupCount} を超える回次があります（${over.join(", ")}）`);
+  if (history.length > character.pickupCount) errors.push(`${where}: 件数 ${history.length} が出典のPU回数 ${character.pickupCount} を超えています`);
+}
+
 function validateAll({ baseData, terms }) {
   const errors = [];
   let flowSkills = 0;
+  for (const character of baseData.characters || []) validatePickupHistory(character, errors);
   for (const skill of baseData.skills || []) {
     validateFlow(skill, errors);
     validateDamageNumbers(skill, errors);

@@ -22,6 +22,8 @@
   const TITLE_SUFFIX = "ミレストのメメントモリ分析データ室";
   const SITE_ORIGIN = "https://memento.musoudc.com";
   const gachaKinds = new Set(["PU", "復刻", "星の導き"]);
+  // 「初回実装」はガチャの開催ではなくリリース日の記録。PU履歴バッジには出さない。
+  const RELEASE_KIND = "初回実装";
   const defaultTerms = {};
 
   function escapeHtml(value) {
@@ -73,7 +75,7 @@
       .map((item) => ({ ...item, source: "news" }));
     const seen = new Set();
     return [...baseItems, ...newsItems]
-      .filter((item) => item.date && item.kind)
+      .filter((item) => item.date && item.kind && item.kind !== RELEASE_KIND)
       .sort((a, b) => String(a.date).localeCompare(String(b.date)))
       .filter((item) => {
         const key = [item.date, item.endDate || "", item.kind, item.characterId || character.id].join("|");
@@ -83,7 +85,14 @@
       });
   }
 
-  function formatPickupHistory(history) {
+  /**
+   * PU履歴の表示。
+   * 回次は `round` があればその値を出す（出典のPU回数は分かるが中間の復刻の日付が
+   * 出典に無い場合があり、配列の位置で数えると実際の回次とずれるため）。
+   * 総回数は `pickupCount`（出典のPU回数）を出し、日付が揃っていない場合は
+   * 「日付収録N回」を併記して、未収録であることが分かるようにする。
+   */
+  function formatPickupHistory(history, pickupCount) {
     if (!history.length) return "";
     let numberedCount = 0;
     const items = history.map((item) => {
@@ -93,15 +102,24 @@
       const status = item.endDate
         ? (isFutureDate(item.endDate) ? `（開催中〜${formatDate(item.endDate, false)}）` : "（終了）")
         : "";
+      if (Number.isFinite(item.round) && item.round > 0) {
+        numberedCount += 1;
+        return `${item.round}回目 ${period}${status}`;
+      }
+      // round を持たない項目（news由来など）は従来どおりの出し方を保つ
       if (item.kind === "星の導き") return `星の導き ${period}${status}`;
       numberedCount += 1;
       return `${numberedCount}回目 ${period}${status}`;
     });
-    return `PU履歴：${items.join(" / ")}`;
+    const total = Number.isFinite(pickupCount) && pickupCount > 0 ? pickupCount : null;
+    const head = total === null
+      ? "PU履歴"
+      : (numberedCount < total ? `PU履歴 全${total}回（日付収録${numberedCount}回）` : `PU履歴 全${total}回`);
+    return `${head}：${items.join(" / ")}`;
   }
 
   function renderMetaHtml(character, newsData) {
-    const historyText = formatPickupHistory(mergePickupHistory(character, newsData));
+    const historyText = formatPickupHistory(mergePickupHistory(character, newsData), character.pickupCount);
     return [
       character.attribute ? `<span class="badge attribute">${escapeHtml(character.attribute)}</span>` : "",
       character.weaponType ? `<span class="badge">${escapeHtml(character.weaponType)}</span>` : "",
