@@ -46,14 +46,22 @@ function readJson(path, fallback) {
   return JSON.parse(readFileSync(path, "utf8"));
 }
 
-/** 既存のHTMLに合わせて改行をCRLFへ揃える（core.autocrlf=true の作業ツリーと同じ状態にする）。 */
-function toCrlf(text) {
-  return text.replace(/\r\n|\r|\n/g, "\r\n");
+/**
+ * 改行を既存ファイルに合わせる。
+ * Windows（core.autocrlf=true）の作業ツリーはCRLF、GitHub Actions の Linux はLFになるため、
+ * 固定でCRLFにすると Linux 側で毎回「全ファイル更新」と判定されてしまう。
+ * リポジトリ内の行末は .gitattributes の `text=auto` でLFに正規化されるので、
+ * ここは手元のファイルに合わせるだけでよい（既存ファイルが無ければLF）。
+ */
+function matchEol(text, previous) {
+  const lf = text.replace(/\r\n|\r|\n/g, "\n");
+  const useCrlf = previous === null ? false : previous.includes("\r\n");
+  return useCrlf ? lf.replace(/\n/g, "\r\n") : lf;
 }
 
 function writeIfChanged(path, content) {
-  const normalized = toCrlf(content);
   const previous = existsSync(path) ? readFileSync(path, "utf8") : null;
+  const normalized = matchEol(content, previous);
   if (previous === normalized) return false;
   writeFileSync(path, normalized, "utf8");
   return true;

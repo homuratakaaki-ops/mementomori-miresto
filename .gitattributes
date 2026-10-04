@@ -1,0 +1,33 @@
+# 行末の正規化。
+#
+# 生成物（pages/characters/*.html・data/character-index.json）は
+# Windowsの手元では CRLF、GitHub Actions の Linux では LF で書き出される。
+# これを揃えないと、日次ビルドが毎回「全ファイルの行末だけ変わった」差分を
+# コミットし続ける（2026-10-04に実際に発生）。
+#
+# text=auto で **リポジトリ内は常にLF**に正規化し、チェックアウト時だけ
+# 各環境の設定（core.autocrlf）に任せる。これでどちらのOSで生成しても
+# 同じ内容なら差分が出ない。
+* text=auto
+
+# 明示しておくもの（拡張子から判定に迷わせない）
+*.html text
+*.css  text
+*.js   text
+*.mjs  text
+*.cjs  text
+*.json text
+*.md   text
+*.yml  text
+*.txt  text
+*.xml  text
+
+# バイナリ（行末変換をかけない）
+*.png  binary
+*.jpg  binary
+*.jpeg binary
+*.gif  binary
+*.webp binary
+*.ico  binary
+*.woff binary
+*.woff2 binary
