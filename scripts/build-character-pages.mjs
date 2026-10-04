@@ -564,10 +564,61 @@ function validatePickupHistory(character, errors) {
   if (history.length > character.pickupCount) errors.push(`${where}: 件数 ${history.length} が出典のPU回数 ${character.pickupCount} を超えています`);
 }
 
+/** 読みに使ってよい文字。ひらがな・長音符・中黒のみ（カタカナと全角英数は弾く）。 */
+const READING_PATTERN = /^[ぁ-ゖー・]+$/;
+
+/**
+ * 読み仮名（characters[].reading）の検査。
+ * 「編成と比較」の検索が読みで引けるかどうかはここだけが担保する。
+ * 欠落・カタカナ混入・全角英数の混入はエラーにする。
+ */
+function validateReading(character, errors) {
+  const where = `${character.id} の reading`;
+  const reading = character.reading;
+  if (!reading || typeof reading !== "object") {
+    errors.push(`${where}: 読みがありません（全キャラに reading.name が必要です）`);
+    return;
+  }
+  const hasTitle = /^\[[^\]]*\]/.test(String(character.name));
+
+  if (!reading.name) errors.push(`${where}.name: 名前の読みがありません`);
+  else if (!READING_PATTERN.test(reading.name)) {
+    errors.push(`${where}.name: ひらがな・長音符・中黒だけで書くこと（${reading.name}）`);
+  }
+
+  if (hasTitle && !reading.title) errors.push(`${where}.title: 肩書き付きなので肩書きの読みが必要です`);
+  if (!hasTitle && reading.title) errors.push(`${where}.title: 肩書きが無いので読みも置かないこと`);
+  if (reading.title && !READING_PATTERN.test(reading.title)) {
+    errors.push(`${where}.title: ひらがな・長音符・中黒だけで書くこと（${reading.title}）`);
+  }
+
+  // aliases は任意。読みの揺れ（こがねいろのせいけんづかい など）を足す欄。
+  if (reading.aliases !== undefined) {
+    if (!Array.isArray(reading.aliases) || reading.aliases.length === 0) {
+      errors.push(`${where}.aliases: 空配列・非配列は置かないこと（使わないなら項目ごと消す）`);
+    } else {
+      for (const alias of reading.aliases) {
+        if (typeof alias !== "string" || !READING_PATTERN.test(alias)) {
+          errors.push(`${where}.aliases: ひらがな・長音符・中黒だけで書くこと（${alias}）`);
+        } else if (alias === reading.name || alias === reading.title) {
+          errors.push(`${where}.aliases: name / title と同じ読みは要りません（${alias}）`);
+        }
+      }
+    }
+  }
+
+  for (const key of Object.keys(reading)) {
+    if (!["name", "title", "aliases"].includes(key)) errors.push(`${where}: 未定義の項目です（${key}）`);
+  }
+}
+
 function validateAll({ baseData, terms }) {
   const errors = [];
   let flowSkills = 0;
-  for (const character of baseData.characters || []) validatePickupHistory(character, errors);
+  for (const character of baseData.characters || []) {
+    validatePickupHistory(character, errors);
+    validateReading(character, errors);
+  }
   for (const skill of baseData.skills || []) {
     validateFlow(skill, errors);
     validateDamageNumbers(skill, errors);
@@ -628,6 +679,8 @@ function buildCharacterIndex({ baseData }) {
       id: character.id,
       pageSlug: character.pageSlug || character.id,
       name: character.name,
+      // 読みは「編成と比較」の検索が使う。正は mementomori-skills.json 側。
+      reading: character.reading,
       attribute: character.attribute,
       weaponType: character.weaponType,
       speed: character.speed,

@@ -131,25 +131,57 @@
   };
 
   /**
-   * 検索用の正規化。ひらがな・カタカナ・英字の大小・全角半角・空白を同一視する。
+   * 「ヴ」はば行と同じ音として扱う。
+   * 「ゔぁ」は変換しないと打てないので、「ばるりーで」でも
+   * 「ゔぁるりーで」でも同じ候補に行き着くようにするため。
+   * 小書き仮名を大書きに直す前に通すこと（ヴァ→ヴア になると揃わない）。
+   */
+  const VU_PAIRS = [
+    ["ヴァ", "バ"], ["ヴィ", "ビ"], ["ヴゥ", "ブ"], ["ヴェ", "ベ"], ["ヴォ", "ボ"],
+    ["ヴャ", "ビャ"], ["ヴュ", "ビュ"], ["ヴョ", "ビョ"], ["ヴ", "ブ"]
+  ];
+
+  /**
+   * 検索用の正規化。ひらがな・カタカナ・英字の大小・全角半角・空白・
+   * 小書き仮名を同一視する。`foldVu` を立てるとヴもば行に寄せる。
    * 濁点は落とさない（「ハ」と「バ」は別の名前なので）。
    */
-  function normalizeText(value) {
-    return String(value === null || value === undefined ? "" : value)
+  function normalizeText(value, foldVu) {
+    let text = String(value === null || value === undefined ? "" : value)
       // 全角の英数記号 → 半角
       .replace(/[！-～]/g, (char) => String.fromCharCode(char.charCodeAt(0) - 0xFEE0))
       .toLowerCase()
       // ひらがな → カタカナ
-      .replace(/[ぁ-ゖ]/g, (char) => String.fromCharCode(char.charCodeAt(0) + 0x60))
+      .replace(/[ぁ-ゖ]/g, (char) => String.fromCharCode(char.charCodeAt(0) + 0x60));
+    if (foldVu) for (const [from, to] of VU_PAIRS) text = text.split(from).join(to);
+    return text
       .replace(/[ァィゥェォッャュョヮヵヶ]/g, (char) => LARGE_KANA[char] || char)
       .replace(/[\s　]/g, "");
   }
 
-  /** 検索対象は「表示名」「肩書きを除いた名前」「肩書き単体」の3つ。 */
+  /**
+   * ヴのままの形と、ば行に寄せた形の両方を返す（同じになるなら1つ）。
+   * 入力と照合先の両方をこの形にして突き合わせるので、
+   * 「ばるりーで」「ゔぁるりーで」「ヴ」のどれでも取りこぼさない。
+   */
+  function normalizeVariants(value) {
+    const plain = normalizeText(value, false);
+    const folded = normalizeText(value, true);
+    return plain === folded ? [plain] : [plain, folded];
+  }
+
+  /**
+   * 検索対象は、表示名・肩書きを除いた名前・肩書き単体に加えて、
+   * 読み（reading.name / reading.title / reading.aliases）。
+   * 漢字の肩書きを変換せずに探せるようにするため。
+   */
   function searchKeys(entry) {
-    return [entry.name, sortName(entry.name), titleOf(entry.name)]
+    const reading = entry.reading || {};
+    return [entry.name, sortName(entry.name), titleOf(entry.name),
+      reading.name, reading.title]
+      .concat(Array.isArray(reading.aliases) ? reading.aliases : [])
       .filter(Boolean)
-      .map(normalizeText);
+      .flatMap(normalizeVariants);
   }
 
   /* ------------------------------------------------------------------
@@ -538,12 +570,12 @@
   }
 
   function filteredCandidates() {
-    const query = normalizeText(state.filter.search);
+    const queries = normalizeVariants(state.filter.search).filter(Boolean);
     return characters.filter((entry) => {
       if (state.filter.favoritesOnly && !isFavorite(entry.id)) return false;
       // 複数属性はOR。お気に入り・検索の条件とはANDで併用する。
       if (state.filter.attrs.length && !state.filter.attrs.includes(entry.attribute)) return false;
-      if (query && !entry.searchKeys.some((key) => key.includes(query))) return false;
+      if (queries.length && !entry.searchKeys.some((key) => queries.some((q) => key.includes(q)))) return false;
       return true;
     });
   }

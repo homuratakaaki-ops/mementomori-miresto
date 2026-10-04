@@ -3,13 +3,16 @@
   "note": "data/mementomori-skills.json の characters から自動生成。直接編集しないこと（scripts/build-character-pages.mjs が上書きする）。",
   "generatedFrom": "data/mementomori-skills.json",
   "updatedAt": "2026-10-04T00:00:00.000+09:00",
-  "generatedAt": "2026-10-04T19:06:34.766+09:00",
-  "statusDate": "2026-10-04",
+  "generatedAt": "2026-10-05T00:18:18.732+09:00",
+  "statusDate": "2026-10-05",
   "characters": [
     {
       "id": "aa_dark",
       "pageSlug": "aa_dark",
       "name": "A.A.",
+      "reading": {
+        "name": "えーえー"
+      },
       "attribute": "冥",
       "weaponType": "ソーサラー",
       "speed": 2687,
@@ -19,6 +22,10 @@
       "id": "aa_rusted_sky",
       "pageSlug": "aa_rusted_sky",
       "name": "[錆鉄の空]A.A.",
+      "reading": {
+        "name": "えーえー",
+        "title": "さびてつのそら"
+      },
       "attribute": "天",
       "weaponType": "ソーサラー",
       "speed": 2607,
@@ -28,6 +35,9 @@
       "id": "aine",
       "pageSlug": "aine",
       "name": "アイネ",
+      "reading": {
+        "name": "あいね"
+      },
       "attribute": "天",
       "weaponType": "スナイパー",
       "speed": 3165,
@@ -37,6 +47,9 @@
       "id": "aishe",
       "pageSlug": "aishe",
       "name": "アイシェ",
+      "reading": {
+        "name": "あいしぇ"
+      },
       "attribute": "紅",
       "weaponType": "スナイパー",
       "speed": 3424,
@@ -46,6 +59,9 @@
       "id": "alexandra",
       "pageSlug": "alexandra",
       "name": "アレクサンドラ",
+      "reading": {
+        "name": "あれくさんどら"
+      },
       "attribute": "翠",
       "weaponType": "ウォーリア",
       "speed": 3051,
@@ -55,6 +71,9 @@
       "id": "amleth",
       "pageSlug": "amleth",
       "name": "アムレート",
+      "reading": {
+        "name": "あむれーと"
+      },
       "attribute": "藍",
       "weaponType": "ウォーリア",
       "speed": 2766,
@@ -64,6 +83,10 @@
       "id": "amleth_summer",
       "pageSlug": "amleth_summer",
       "name": "[夏の日の夢]アムレート",
+      "reading": {
+        "name": "あむれーと",
+        "title": "なつのひのゆめ"
+      },
       "attribute": "黄",
       "weaponType": "ウォーリア",
       "speed": 3089,
@@ -73,6 +96,9 @@
       "id": "amour",
       "pageSlug": "amour",
       "name": "アモール",
+      "reading": {
+        "name": "あもーる"
+      },
       "attribute": "紅",
       "weaponType": "スナイパー",
       "speed": 2550,
@@ -82,6 +108,10 @@
       "id": "amour_holy_night",
       "pageSlug": "amour_holy_night",
       "name": "[聖夜の贈り物]アモール",
+      "reading": {
+        "name": "あもーる",
+        "title": "せいやのおくりもの"
+      },
       "attribute": "黄",
       "weaponType": "スナイパー",
       "speed": 3450,
@@ -91,6 +121,9 @@
       "id": "armstrong",
       "pageSlug": "armstrong",
       "name": "アームストロング",
+      "reading": {
+        "name": "あーむすとろんぐ"
+      },
       "attribute": "冥",
       "weaponType": "スナイパー",
       "speed": 3047,
@@ -100,6 +133,9 @@
       "id": "artie",
       "pageSlug": "artie",
       "name": "アーティ",
+      "reading": {
+        "name": "あーてぃ"
+      },
       "attribute": "紅",
       "weaponType": "ソーサラー",
       "speed": 2734,
@@ -109,6 +145,9 @@
       "id": "artoria",
       "pageSlug": "artoria",
       "name": "アルトリア",
+      "reading": {
+        "name": "あるとりあ"
+      },
       "attribute": "紅",
       "weaponType": "ウォーリア",
       "speed": 3572,
@@ -118,6 +157,13 @@
       "id": "artoria_golden",
       "pageSlug": "artoria_golden",
       "name": "[黄金色の聖剣使い]アルトリア",
+      "reading": {
+        "name": "あるとりあ",
+        "title": "こがねいろのせいけんつかい",
+        "aliases": [
+          "こがねいろのせいけんづかい"
+        ]
+      },
       "attribute": "翠",
       "weaponType": "ウォーリア",
       "speed": 3272,
@@ -127,6 +173,9 @@
       "id": "asahi",
       "pageSlug": "asahi",
       "name": "アサヒ",
+      "reading": {
+        "name": "あさひ"
+      },
       "attribute": "黄",
       "weaponType": "スナイパー",
       "speed": 3044,
@@ -136,6 +185,9 @@
       "id": "belle",
       "pageSlug": "belle",
       "name": "ベル",
+      "reading": {
+        "name": "べる"
+      },
       "attribute": "紅",
       "weaponType": "ソーサラー",
       "speed": 3217,
@@ -145,6 +197,9 @@
       "id": "carmilla",
       "pageSlug": "carmilla",
       "name": "カーミラ",
+      "reading": {
+        "name": "かーみら"
+      },
       "attribute": "冥",
       "weaponType": "ウォーリア",
       "speed": 2672,
@@ -154,6 +209,9 @@
       "id": "cattleya",
       "pageSlug": "cattleya",
       "name": "カトレア",
+      "reading": {
+        "name": "かとれあ"
+      },
       "attribute": "黄",
       "weaponType": "ウォーリア",
       "speed": 2984,
@@ -163,6 +221,9 @@
       "id": "cerberus",
       "pageSlug": "cerberus",
       "name": "ケルベロス",
+      "reading": {
+        "name": "けるべろす"
+      },
       "attribute": "天",
       "weaponType": "ウォーリア",
       "speed": 3363,
@@ -172,6 +233,10 @@
       "id": "cerberus_candy",
       "pageSlug": "cerberus_candy",
       "name": "[魔法のキャンディ]ケルベロス",
+      "reading": {
+        "name": "けるべろす",
+        "title": "まほうのきゃんでぃ"
+      },
       "attribute": "冥",
       "weaponType": "ソーサラー",
       "speed": 2563,
@@ -181,6 +246,9 @@
       "id": "chiffon",
       "pageSlug": "chiffon",
       "name": "シフォン",
+      "reading": {
+        "name": "しふぉん"
+      },
       "attribute": "紅",
       "weaponType": "ソーサラー",
       "speed": 2783,
@@ -190,6 +258,9 @@
       "id": "claudia",
       "pageSlug": "claudia",
       "name": "クラウディア",
+      "reading": {
+        "name": "くらうでぃあ"
+      },
       "attribute": "翠",
       "weaponType": "ウォーリア",
       "speed": 3056,
@@ -199,6 +270,9 @@
       "id": "cordie",
       "pageSlug": "cordie",
       "name": "コルディ",
+      "reading": {
+        "name": "こるでぃ"
+      },
       "attribute": "翠",
       "weaponType": "スナイパー",
       "speed": 3562,
@@ -208,6 +282,10 @@
       "id": "cordie_ringmaster",
       "pageSlug": "cordie_ringmaster",
       "name": "[サーカスの団長]コルディ",
+      "reading": {
+        "name": "こるでぃ",
+        "title": "さーかすのだんちょう"
+      },
       "attribute": "藍",
       "weaponType": "ウォーリア",
       "speed": 2662,
@@ -217,6 +295,10 @@
       "id": "cordie_summer",
       "pageSlug": "cordie_summer",
       "name": "[夏の残響]コルディ",
+      "reading": {
+        "name": "こるでぃ",
+        "title": "なつのざんきょう"
+      },
       "attribute": "紅",
       "weaponType": "スナイパー",
       "speed": 3575,
@@ -226,6 +308,9 @@
       "id": "cusith",
       "pageSlug": "cusith",
       "name": "クーシー",
+      "reading": {
+        "name": "くーしー"
+      },
       "attribute": "藍",
       "weaponType": "ウォーリア",
       "speed": 2810,
@@ -235,6 +320,9 @@
       "id": "dd",
       "pageSlug": "dd",
       "name": "D.D.",
+      "reading": {
+        "name": "でぃーでぃー"
+      },
       "attribute": "翠",
       "weaponType": "ソーサラー",
       "speed": 3075,
@@ -244,6 +332,9 @@
       "id": "dian",
       "pageSlug": "dian",
       "name": "ディアン",
+      "reading": {
+        "name": "でぃあん"
+      },
       "attribute": "紅",
       "weaponType": "スナイパー",
       "speed": 3080,
@@ -253,6 +344,9 @@
       "id": "eir",
       "pageSlug": "eir",
       "name": "エイル",
+      "reading": {
+        "name": "えいる"
+      },
       "attribute": "藍",
       "weaponType": "スナイパー",
       "speed": 2892,
@@ -262,6 +356,9 @@
       "id": "elaine",
       "pageSlug": "elaine",
       "name": "エレイン",
+      "reading": {
+        "name": "えれいん"
+      },
       "attribute": "冥",
       "weaponType": "スナイパー",
       "speed": 2843,
@@ -271,6 +368,9 @@
       "id": "elfriede",
       "pageSlug": "elfriede",
       "name": "エルフリンデ",
+      "reading": {
+        "name": "えるふりんで"
+      },
       "attribute": "天",
       "weaponType": "ウォーリア",
       "speed": 3049,
@@ -280,6 +380,9 @@
       "id": "eureka",
       "pageSlug": "eureka",
       "name": "ユリーカ",
+      "reading": {
+        "name": "ゆりーか"
+      },
       "attribute": "藍",
       "weaponType": "ソーサラー",
       "speed": 2895,
@@ -289,6 +392,9 @@
       "id": "evelyn",
       "pageSlug": "evelyn",
       "name": "エヴリン",
+      "reading": {
+        "name": "えゔりん"
+      },
       "attribute": "藍",
       "weaponType": "ソーサラー",
       "speed": 2819,
@@ -298,6 +404,9 @@
       "id": "fenny",
       "pageSlug": "fenny",
       "name": "フェーネ",
+      "reading": {
+        "name": "ふぇーね"
+      },
       "attribute": "藍",
       "weaponType": "スナイパー",
       "speed": 2853,
@@ -307,6 +416,9 @@
       "id": "fenrir",
       "pageSlug": "fenrir",
       "name": "フェンリル",
+      "reading": {
+        "name": "ふぇんりる"
+      },
       "attribute": "藍",
       "weaponType": "ソーサラー",
       "speed": 2894,
@@ -316,6 +428,10 @@
       "id": "fenrir_treasure",
       "pageSlug": "fenrir_treasure",
       "name": "[二人だけの宝物]フェンリル",
+      "reading": {
+        "name": "ふぇんりる",
+        "title": "ふたりだけのたからもの"
+      },
       "attribute": "黄",
       "weaponType": "ウォーリア",
       "speed": 3294,
@@ -325,6 +441,9 @@
       "id": "fia",
       "pageSlug": "fia",
       "name": "フィアー",
+      "reading": {
+        "name": "ふぃあー"
+      },
       "attribute": "翠",
       "weaponType": "ウォーリア",
       "speed": 2645,
@@ -334,6 +453,10 @@
       "id": "fia_trace",
       "pageSlug": "fia_trace",
       "name": "[在りし日の面影]フィアー",
+      "reading": {
+        "name": "ふぃあー",
+        "title": "ありしひのおもかげ"
+      },
       "attribute": "藍",
       "weaponType": "ウォーリア",
       "speed": 2785,
@@ -343,6 +466,9 @@
       "id": "flack",
       "pageSlug": "flack",
       "name": "フラック",
+      "reading": {
+        "name": "ふらっく"
+      },
       "attribute": "紅",
       "weaponType": "スナイパー",
       "speed": 3048,
@@ -352,6 +478,9 @@
       "id": "florence",
       "pageSlug": "florence",
       "name": "フローレンス",
+      "reading": {
+        "name": "ふろーれんす"
+      },
       "attribute": "藍",
       "weaponType": "ウォーリア",
       "speed": 3022,
@@ -361,6 +490,10 @@
       "id": "florence_twilight",
       "pageSlug": "florence_twilight",
       "name": "[黄昏の誓い]フローレンス",
+      "reading": {
+        "name": "ふろーれんす",
+        "title": "たそがれのちかい"
+      },
       "attribute": "翠",
       "weaponType": "ウォーリア",
       "speed": 3077,
@@ -370,6 +503,9 @@
       "id": "fortina",
       "pageSlug": "fortina",
       "name": "フォルティナ",
+      "reading": {
+        "name": "ふぉるてぃな"
+      },
       "attribute": "天",
       "weaponType": "ウォーリア",
       "speed": 3059,
@@ -379,6 +515,10 @@
       "id": "fortina_twilight",
       "pageSlug": "fortina_twilight",
       "name": "[黄昏の約束]フォルティナ",
+      "reading": {
+        "name": "ふぉるてぃな",
+        "title": "たそがれのやくそく"
+      },
       "attribute": "天",
       "weaponType": "スナイパー",
       "speed": 3423,
@@ -388,6 +528,9 @@
       "id": "freycia",
       "pageSlug": "freycia",
       "name": "フレイシア",
+      "reading": {
+        "name": "ふれいしあ"
+      },
       "attribute": "紅",
       "weaponType": "ソーサラー",
       "speed": 2680,
@@ -397,6 +540,9 @@
       "id": "giluial",
       "pageSlug": "giluial",
       "name": "ギルウィアル",
+      "reading": {
+        "name": "ぎるうぃある"
+      },
       "attribute": "藍",
       "weaponType": "ソーサラー",
       "speed": 3269,
@@ -406,6 +552,9 @@
       "id": "guinevere",
       "pageSlug": "guinevere",
       "name": "グィネヴィア",
+      "reading": {
+        "name": "ぐぃねゔぃあ"
+      },
       "attribute": "紅",
       "weaponType": "スナイパー",
       "speed": 3091,
@@ -415,6 +564,9 @@
       "id": "hathor",
       "pageSlug": "hathor",
       "name": "ハトホル",
+      "reading": {
+        "name": "はとほる"
+      },
       "attribute": "黄",
       "weaponType": "スナイパー",
       "speed": 3334,
@@ -424,6 +576,9 @@
       "id": "idyne",
       "pageSlug": "idyne",
       "name": "イディーネ",
+      "reading": {
+        "name": "いでぃーね"
+      },
       "attribute": "翠",
       "weaponType": "ソーサラー",
       "speed": 3261,
@@ -433,6 +588,13 @@
       "id": "illya_gods_curse",
       "pageSlug": "illya_gods_curse",
       "name": "[神呪の魔女]イリア",
+      "reading": {
+        "name": "いりあ",
+        "title": "しんじゅのまじょ",
+        "aliases": [
+          "じんじゅのまじょ"
+        ]
+      },
       "attribute": "冥",
       "weaponType": "ウォーリア",
       "speed": 2703,
@@ -442,6 +604,9 @@
       "id": "irene",
       "pageSlug": "irene",
       "name": "アイリーン",
+      "reading": {
+        "name": "あいりーん"
+      },
       "attribute": "天",
       "weaponType": "スナイパー",
       "speed": 3148,
@@ -451,6 +616,10 @@
       "id": "iris_black",
       "pageSlug": "iris_black",
       "name": "[黒鎧の従者]アイリス",
+      "reading": {
+        "name": "あいりす",
+        "title": "くろよろいのじゅうしゃ"
+      },
       "attribute": "黄",
       "weaponType": "ウォーリア",
       "speed": 2933,
@@ -460,6 +629,9 @@
       "id": "ivy",
       "pageSlug": "ivy",
       "name": "アイビー",
+      "reading": {
+        "name": "あいびー"
+      },
       "attribute": "翠",
       "weaponType": "スナイパー",
       "speed": 2790,
@@ -469,6 +641,9 @@
       "id": "kaguya",
       "pageSlug": "kaguya",
       "name": "カグヤ",
+      "reading": {
+        "name": "かぐや"
+      },
       "attribute": "冥",
       "weaponType": "ソーサラー",
       "speed": 2872,
@@ -478,6 +653,9 @@
       "id": "karol",
       "pageSlug": "karol",
       "name": "カロル",
+      "reading": {
+        "name": "かろる"
+      },
       "attribute": "黄",
       "weaponType": "ソーサラー",
       "speed": 3452,
@@ -487,6 +665,9 @@
       "id": "kobell",
       "pageSlug": "kobell",
       "name": "コベル",
+      "reading": {
+        "name": "こべる"
+      },
       "attribute": "翠",
       "weaponType": "スナイパー",
       "speed": 3179,
@@ -496,6 +677,9 @@
       "id": "lean",
       "pageSlug": "lean",
       "name": "リーン",
+      "reading": {
+        "name": "りーん"
+      },
       "attribute": "紅",
       "weaponType": "ウォーリア",
       "speed": 2813,
@@ -505,6 +689,9 @@
       "id": "liebe",
       "pageSlug": "liebe",
       "name": "リーベ",
+      "reading": {
+        "name": "りーべ"
+      },
       "attribute": "紅",
       "weaponType": "ウォーリア",
       "speed": 3592,
@@ -514,6 +701,9 @@
       "id": "lilicotte",
       "pageSlug": "lilicotte",
       "name": "リリコット",
+      "reading": {
+        "name": "りりこっと"
+      },
       "attribute": "紅",
       "weaponType": "スナイパー",
       "speed": 3064,
@@ -523,6 +713,9 @@
       "id": "lily",
       "pageSlug": "lily",
       "name": "リリー",
+      "reading": {
+        "name": "りりー"
+      },
       "attribute": "天",
       "weaponType": "ソーサラー",
       "speed": 3058,
@@ -532,6 +725,9 @@
       "id": "liselotte",
       "pageSlug": "liselotte",
       "name": "リズ",
+      "reading": {
+        "name": "りず"
+      },
       "attribute": "藍",
       "weaponType": "ソーサラー",
       "speed": 2999,
@@ -541,6 +737,9 @@
       "id": "lucile",
       "pageSlug": "lucile",
       "name": "ルシール",
+      "reading": {
+        "name": "るしーる"
+      },
       "attribute": "紅",
       "weaponType": "ウォーリア",
       "speed": 3525,
@@ -550,6 +749,9 @@
       "id": "luke",
       "pageSlug": "luke",
       "name": "ルーク",
+      "reading": {
+        "name": "るーく"
+      },
       "attribute": "翠",
       "weaponType": "ウォーリア",
       "speed": 3093,
@@ -559,6 +761,9 @@
       "id": "lumika",
       "pageSlug": "lumika",
       "name": "ルミカ",
+      "reading": {
+        "name": "るみか"
+      },
       "attribute": "天",
       "weaponType": "ウォーリア",
       "speed": 3046,
@@ -568,6 +773,9 @@
       "id": "lunalynn",
       "pageSlug": "lunalynn",
       "name": "ルナリンド",
+      "reading": {
+        "name": "るなりんど"
+      },
       "attribute": "冥",
       "weaponType": "ソーサラー",
       "speed": 3304,
@@ -577,6 +785,10 @@
       "id": "lunalynn_holy_night",
       "pageSlug": "lunalynn_holy_night",
       "name": "[聖夜の妖精]ルナリンド",
+      "reading": {
+        "name": "るなりんど",
+        "title": "せいやのようせい"
+      },
       "attribute": "翠",
       "weaponType": "スナイパー",
       "speed": 3037,
@@ -586,6 +798,9 @@
       "id": "matilda",
       "pageSlug": "matilda",
       "name": "マチルダ",
+      "reading": {
+        "name": "まちるだ"
+      },
       "attribute": "紅",
       "weaponType": "ソーサラー",
       "speed": 3181,
@@ -595,6 +810,9 @@
       "id": "meria",
       "pageSlug": "meria",
       "name": "メリア",
+      "reading": {
+        "name": "めりあ"
+      },
       "attribute": "天",
       "weaponType": "ウォーリア",
       "speed": 3094,
@@ -604,6 +822,9 @@
       "id": "merlin",
       "pageSlug": "merlin",
       "name": "マーリン",
+      "reading": {
+        "name": "まーりん"
+      },
       "attribute": "翠",
       "weaponType": "ソーサラー",
       "speed": 2888,
@@ -613,6 +834,9 @@
       "id": "merlyn",
       "pageSlug": "merlyn",
       "name": "メルラン",
+      "reading": {
+        "name": "めるらん"
+      },
       "attribute": "黄",
       "weaponType": "ソーサラー",
       "speed": 3018,
@@ -622,6 +846,10 @@
       "id": "merlyn_winter",
       "pageSlug": "merlyn_winter",
       "name": "[深き森の賢者]マーリン",
+      "reading": {
+        "name": "まーりん",
+        "title": "ふかきもりのけんじゃ"
+      },
       "attribute": "藍",
       "weaponType": "ソーサラー",
       "speed": 2688,
@@ -631,6 +859,9 @@
       "id": "mertillier",
       "pageSlug": "mertillier",
       "name": "メルティーユ",
+      "reading": {
+        "name": "めるてぃーゆ"
+      },
       "attribute": "翠",
       "weaponType": "ソーサラー",
       "speed": 2796,
@@ -640,6 +871,9 @@
       "id": "mifuri",
       "pageSlug": "mifuri",
       "name": "ミフリ",
+      "reading": {
+        "name": "みふり"
+      },
       "attribute": "黄",
       "weaponType": "ソーサラー",
       "speed": 3136,
@@ -649,6 +883,9 @@
       "id": "mimi",
       "pageSlug": "mimi",
       "name": "ミミ",
+      "reading": {
+        "name": "みみ"
+      },
       "attribute": "黄",
       "weaponType": "ウォーリア",
       "speed": 3328,
@@ -658,6 +895,9 @@
       "id": "minasumari",
       "pageSlug": "minasumari",
       "name": "ミナシュマリ",
+      "reading": {
+        "name": "みなしゅまり"
+      },
       "attribute": "藍",
       "weaponType": "ウォーリア",
       "speed": 2792,
@@ -667,6 +907,9 @@
       "id": "mira",
       "pageSlug": "mira",
       "name": "ミラ",
+      "reading": {
+        "name": "みら"
+      },
       "attribute": "翠",
       "weaponType": "ソーサラー",
       "speed": 3158,
@@ -676,6 +919,9 @@
       "id": "moddey",
       "pageSlug": "moddey",
       "name": "モーザ",
+      "reading": {
+        "name": "もーざ"
+      },
       "attribute": "藍",
       "weaponType": "ソーサラー",
       "speed": 2826,
@@ -685,6 +931,10 @@
       "id": "moddey_summer",
       "pageSlug": "moddey_summer",
       "name": "[墓守の夏休み]モーザ",
+      "reading": {
+        "name": "もーざ",
+        "title": "はかもりのなつやすみ"
+      },
       "attribute": "黄",
       "weaponType": "ソーサラー",
       "speed": 3245,
@@ -694,6 +944,9 @@
       "id": "moineau",
       "pageSlug": "moineau",
       "name": "モワノー",
+      "reading": {
+        "name": "もわのー"
+      },
       "attribute": "黄",
       "weaponType": "スナイパー",
       "speed": 3145,
@@ -703,6 +956,9 @@
       "id": "morgana",
       "pageSlug": "morgana",
       "name": "モルガナ",
+      "reading": {
+        "name": "もるがな"
+      },
       "attribute": "紅",
       "weaponType": "ソーサラー",
       "speed": 2715,
@@ -712,6 +968,9 @@
       "id": "natasha",
       "pageSlug": "natasha",
       "name": "ナターシャ",
+      "reading": {
+        "name": "なたーしゃ"
+      },
       "attribute": "天",
       "weaponType": "ウォーリア",
       "speed": 2926,
@@ -721,6 +980,10 @@
       "id": "natasha_bouquet",
       "pageSlug": "natasha_bouquet",
       "name": "[花束の魔女]ナターシャ",
+      "reading": {
+        "name": "なたーしゃ",
+        "title": "はなたばのまじょ"
+      },
       "attribute": "冥",
       "weaponType": "スナイパー",
       "speed": 2601,
@@ -730,6 +993,9 @@
       "id": "nebra",
       "pageSlug": "nebra",
       "name": "ネブラ",
+      "reading": {
+        "name": "ねぶら"
+      },
       "attribute": "冥",
       "weaponType": "ソーサラー",
       "speed": 2834,
@@ -739,6 +1005,9 @@
       "id": "nina",
       "pageSlug": "nina",
       "name": "ニーナ",
+      "reading": {
+        "name": "にーな"
+      },
       "attribute": "翠",
       "weaponType": "スナイパー",
       "speed": 2839,
@@ -748,6 +1017,10 @@
       "id": "nina_summer",
       "pageSlug": "nina_summer",
       "name": "[小さな大冒険]ニーナ",
+      "reading": {
+        "name": "にーな",
+        "title": "ちいさなだいぼうけん"
+      },
       "attribute": "藍",
       "weaponType": "スナイパー",
       "speed": 2793,
@@ -757,6 +1030,9 @@
       "id": "olivia",
       "pageSlug": "olivia",
       "name": "オリヴィエ",
+      "reading": {
+        "name": "おりゔぃえ"
+      },
       "attribute": "黄",
       "weaponType": "ウォーリア",
       "speed": 3120,
@@ -766,6 +1042,9 @@
       "id": "ophelia",
       "pageSlug": "ophelia",
       "name": "オフィーリア",
+      "reading": {
+        "name": "おふぃーりあ"
+      },
       "attribute": "冥",
       "weaponType": "ウォーリア",
       "speed": 3007,
@@ -775,6 +1054,9 @@
       "id": "paladea",
       "pageSlug": "paladea",
       "name": "パラデア",
+      "reading": {
+        "name": "ぱらであ"
+      },
       "attribute": "冥",
       "weaponType": "スナイパー",
       "speed": 3065,
@@ -784,6 +1066,9 @@
       "id": "paula",
       "pageSlug": "paula",
       "name": "ポーラ",
+      "reading": {
+        "name": "ぽーら"
+      },
       "attribute": "翠",
       "weaponType": "スナイパー",
       "speed": 2956,
@@ -793,6 +1078,9 @@
       "id": "potpourri",
       "pageSlug": "potpourri",
       "name": "ポプリ",
+      "reading": {
+        "name": "ぽぷり"
+      },
       "attribute": "黄",
       "weaponType": "スナイパー",
       "speed": 3036,
@@ -802,6 +1090,9 @@
       "id": "primavera",
       "pageSlug": "primavera",
       "name": "プリマヴェーラ",
+      "reading": {
+        "name": "ぷりまゔぇーら"
+      },
       "attribute": "黄",
       "weaponType": "スナイパー",
       "speed": 3268,
@@ -811,6 +1102,10 @@
       "id": "primavera_summer",
       "pageSlug": "primavera_summer",
       "name": "[湖畔の歌姫]プリマヴェーラ",
+      "reading": {
+        "name": "ぷりまゔぇーら",
+        "title": "こはんのうたひめ"
+      },
       "attribute": "藍",
       "weaponType": "スナイパー",
       "speed": 2678,
@@ -820,6 +1115,9 @@
       "id": "priscilla",
       "pageSlug": "priscilla",
       "name": "プリシラ",
+      "reading": {
+        "name": "ぷりしら"
+      },
       "attribute": "紅",
       "weaponType": "ソーサラー",
       "speed": 3167,
@@ -829,6 +1127,9 @@
       "id": "rea",
       "pageSlug": "rea",
       "name": "レア",
+      "reading": {
+        "name": "れあ"
+      },
       "attribute": "翠",
       "weaponType": "スナイパー",
       "speed": 3571,
@@ -838,6 +1139,9 @@
       "id": "regina",
       "pageSlug": "regina",
       "name": "レジーナ",
+      "reading": {
+        "name": "れじーな"
+      },
       "attribute": "冥",
       "weaponType": "スナイパー",
       "speed": 2856,
@@ -847,6 +1151,9 @@
       "id": "rishess",
       "pageSlug": "rishess",
       "name": "リシェス",
+      "reading": {
+        "name": "りしぇす"
+      },
       "attribute": "黄",
       "weaponType": "ウォーリア",
       "speed": 3596,
@@ -856,6 +1163,9 @@
       "id": "rivelia",
       "pageSlug": "rivelia",
       "name": "リヴェリア",
+      "reading": {
+        "name": "りゔぇりあ"
+      },
       "attribute": "天",
       "weaponType": "スナイパー",
       "speed": 3597,
@@ -865,6 +1175,10 @@
       "id": "rosalie_caritas",
       "pageSlug": "rosalie_caritas",
       "name": "[カリタスの使徒]ロザリー",
+      "reading": {
+        "name": "ろざりー",
+        "title": "かりたすのしと"
+      },
       "attribute": "天",
       "weaponType": "ソーサラー",
       "speed": 2646,
@@ -874,6 +1188,9 @@
       "id": "rusalka",
       "pageSlug": "rusalka",
       "name": "ルサールカ",
+      "reading": {
+        "name": "るさーるか"
+      },
       "attribute": "天",
       "weaponType": "ソーサラー",
       "speed": 2972,
@@ -883,6 +1200,9 @@
       "id": "rustica",
       "pageSlug": "rustica",
       "name": "ルスティカ",
+      "reading": {
+        "name": "るすてぃか"
+      },
       "attribute": "黄",
       "weaponType": "ウォーリア",
       "speed": 3187,
@@ -892,6 +1212,9 @@
       "id": "sabrina",
       "pageSlug": "sabrina",
       "name": "サブリナ",
+      "reading": {
+        "name": "さぶりな"
+      },
       "attribute": "紅",
       "weaponType": "ウォーリア",
       "speed": 2966,
@@ -901,6 +1224,10 @@
       "id": "sabrina_cool_breeze",
       "pageSlug": "sabrina_cool_breeze",
       "name": "[涼風の軍神]サブリナ",
+      "reading": {
+        "name": "さぶりな",
+        "title": "すずかぜのぐんしん"
+      },
       "attribute": "翠",
       "weaponType": "ウォーリア",
       "speed": 3418,
@@ -910,6 +1237,9 @@
       "id": "serruria",
       "pageSlug": "serruria",
       "name": "セルリア",
+      "reading": {
+        "name": "せるりあ"
+      },
       "attribute": "藍",
       "weaponType": "スナイパー",
       "speed": 2632,
@@ -919,6 +1249,9 @@
       "id": "shiloh",
       "pageSlug": "shiloh",
       "name": "シロ",
+      "reading": {
+        "name": "しろ"
+      },
       "attribute": "黄",
       "weaponType": "スナイパー",
       "speed": 3229,
@@ -928,6 +1261,13 @@
       "id": "shizu_snow",
       "pageSlug": "shizu_snow",
       "name": "[雪花の誓い]シズ",
+      "reading": {
+        "name": "しず",
+        "title": "せっかのちかい",
+        "aliases": [
+          "ゆきばなのちかい"
+        ]
+      },
       "attribute": "紅",
       "weaponType": "ウォーリア",
       "speed": 3582,
@@ -937,6 +1277,9 @@
       "id": "sivi",
       "pageSlug": "sivi",
       "name": "シヴィ",
+      "reading": {
+        "name": "しゔぃ"
+      },
       "attribute": "藍",
       "weaponType": "ウォーリア",
       "speed": 2855,
@@ -946,6 +1289,9 @@
       "id": "soltina",
       "pageSlug": "soltina",
       "name": "ソルティーナ",
+      "reading": {
+        "name": "そるてぃーな"
+      },
       "attribute": "藍",
       "weaponType": "ソーサラー",
       "speed": 3302,
@@ -955,6 +1301,10 @@
       "id": "soltina_warm_memory",
       "pageSlug": "soltina_warm_memory",
       "name": "[温かな記憶]ソルティーナ",
+      "reading": {
+        "name": "そるてぃーな",
+        "title": "あたたかなきおく"
+      },
       "attribute": "紅",
       "weaponType": "ウォーリア",
       "speed": 3073,
@@ -964,6 +1314,9 @@
       "id": "sonya",
       "pageSlug": "sonya",
       "name": "ソーニャ",
+      "reading": {
+        "name": "そーにゃ"
+      },
       "attribute": "藍",
       "weaponType": "スナイパー",
       "speed": 3376,
@@ -973,6 +1326,9 @@
       "id": "sophia",
       "pageSlug": "sophia",
       "name": "ソフィア",
+      "reading": {
+        "name": "そふぃあ"
+      },
       "attribute": "紅",
       "weaponType": "ウォーリア",
       "speed": 2935,
@@ -982,6 +1338,9 @@
       "id": "stella",
       "pageSlug": "stella",
       "name": "ステラ",
+      "reading": {
+        "name": "すてら"
+      },
       "attribute": "藍",
       "weaponType": "ウォーリア",
       "speed": 2698,
@@ -991,6 +1350,10 @@
       "id": "stella_holy_dark_star",
       "pageSlug": "stella_holy_dark_star",
       "name": "[聖なる漆黒の輝く星]ステラ",
+      "reading": {
+        "name": "すてら",
+        "title": "せいなるしっこくのかがやくほし"
+      },
       "attribute": "翠",
       "weaponType": "ソーサラー",
       "speed": 2968,
@@ -1000,6 +1363,9 @@
       "id": "tama",
       "pageSlug": "tama",
       "name": "タマ",
+      "reading": {
+        "name": "たま"
+      },
       "attribute": "黄",
       "weaponType": "スナイパー",
       "speed": 3286,
@@ -1009,6 +1375,9 @@
       "id": "tilly",
       "pageSlug": "tilly",
       "name": "ティリー",
+      "reading": {
+        "name": "てぃりー"
+      },
       "attribute": "翠",
       "weaponType": "ソーサラー",
       "speed": 3074,
@@ -1018,6 +1387,9 @@
       "id": "tricksy",
       "pageSlug": "tricksy",
       "name": "トリクシー",
+      "reading": {
+        "name": "とりくしー"
+      },
       "attribute": "黄",
       "weaponType": "ソーサラー",
       "speed": 3178,
@@ -1027,6 +1399,9 @@
       "id": "tropon",
       "pageSlug": "tropon",
       "name": "トロポン",
+      "reading": {
+        "name": "とろぽん"
+      },
       "attribute": "黄",
       "weaponType": "ソーサラー",
       "speed": 2657,
@@ -1036,6 +1411,10 @@
       "id": "tropon_holy_night",
       "pageSlug": "tropon_holy_night",
       "name": "[聖夜の祈り]トロポン",
+      "reading": {
+        "name": "とろぽん",
+        "title": "せいやのいのり"
+      },
       "attribute": "藍",
       "weaponType": "ソーサラー",
       "speed": 3057,
@@ -1045,6 +1424,9 @@
       "id": "valriede",
       "pageSlug": "valriede",
       "name": "ヴァルリーデ",
+      "reading": {
+        "name": "ゔぁるりーで"
+      },
       "attribute": "冥",
       "weaponType": "ウォーリア",
       "speed": 2883,
@@ -1054,6 +1436,9 @@
       "id": "wheeler",
       "pageSlug": "wheeler",
       "name": "ウィーラ",
+      "reading": {
+        "name": "うぃーら"
+      },
       "attribute": "黄",
       "weaponType": "ソーサラー",
       "speed": 3654,
@@ -1063,6 +1448,9 @@
       "id": "yuni",
       "pageSlug": "yuni",
       "name": "ユニ",
+      "reading": {
+        "name": "ゆに"
+      },
       "attribute": "翠",
       "weaponType": "ソーサラー",
       "speed": 2889,
@@ -1072,6 +1460,9 @@
       "id": "yurdiz",
       "pageSlug": "yurdiz",
       "name": "ユルディズ",
+      "reading": {
+        "name": "ゆるでぃず"
+      },
       "attribute": "翠",
       "weaponType": "ウォーリア",
       "speed": 3146,

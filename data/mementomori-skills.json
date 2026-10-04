@@ -12,6 +12,9 @@
       "id": "soltina",
       "pageSlug": "soltina",
       "name": "ソルティーナ",
+      "reading": {
+        "name": "そるてぃーな"
+      },
       "catchcopy": "多重バリアと睡眠・気絶で耐久する藍属性ソーサラー",
       "attribute": "藍",
       "weaponType": "ソーサラー",
@@ -33,6 +36,9 @@
       "id": "amleth",
       "pageSlug": "amleth",
       "name": "アムレート",
+      "reading": {
+        "name": "あむれーと"
+      },
       "catchcopy": "対ソーサラー特効とHP1耐えで粘る藍属性ウォーリア",
       "attribute": "藍",
       "weaponType": "ウォーリア",
@@ -54,6 +60,9 @@
       "id": "fenrir",
       "pageSlug": "fenrir",
       "name": "フェンリル",
+      "reading": {
+        "name": "ふぇんりる"
+      },
       "catchcopy": "CT短縮と弱体解除で味方を支える藍属性ソーサラー",
       "attribute": "藍",
       "weaponType": "ソーサラー",
@@ -75,6 +84,9 @@
       "id": "florence",
       "pageSlug": "florence",
       "name": "フローレンス",
+      "reading": {
+        "name": "ふろーれんす"
+      },
       "catchcopy": "クリティカル連撃で火力を伸ばす藍属性ウォーリア",
       "attribute": "藍",
       "weaponType": "ウォーリア",
@@ -96,6 +108,9 @@
       "id": "moddey",
       "pageSlug": "moddey",
       "name": "モーザ",
+      "reading": {
+        "name": "もーざ"
+      },
       "catchcopy": "毒と不治で削る継続火力型の藍属性ソーサラー",
       "attribute": "藍",
       "weaponType": "ソーサラー",
@@ -117,6 +132,9 @@
       "id": "sonya",
       "pageSlug": "sonya",
       "name": "ソーニャ",
+      "reading": {
+        "name": "そーにゃ"
+      },
       "catchcopy": "高HP・低HP対象を狙う単体特化の藍属性スナイパー",
       "attribute": "藍",
       "weaponType": "スナイパー",
@@ -146,6 +164,9 @@
       "id": "sivi",
       "pageSlug": "sivi",
       "name": "シヴィ",
+      "reading": {
+        "name": "しゔぃ"
+      },
       "catchcopy": "与ダメージ増加で味方アタッカーの火力を伸ばす藍属性ウォーリア。",
       "attribute": "藍",
       "weaponType": "ウォーリア",
@@ -175,6 +196,9 @@
       "id": "stella",
       "pageSlug": "stella",
       "name": "ステラ",
+      "reading": {
+        "name": "すてら"
+      },
       "catchcopy": "沈黙と高倍率シールドで耐える藍属性ウォーリア",
       "attribute": "藍",
       "weaponType": "ウォーリア",
@@ -204,6 +228,9 @@
       "id": "fenny",
       "pageSlug": "fenny",
       "name": "フェーネ",
+      "reading": {
+        "name": "ふぇーね"
+      },
       "catchcopy": "妨害と浸食で削る支援型の藍属性スナイパー",
       "attribute": "藍",
       "weaponType": "スナイパー",
@@ -233,6 +260,10 @@
       "id": "tropon_holy_night",
       "pageSlug": "tropon_holy_night",
       "name": "[聖夜の祈り]トロポン",
+      "reading": {
+        "name": "とろぽん",
+        "title": "せいやのいのり"
+      },
       "catchcopy": "攻防吸収とバフ奪取を扱う冬イベントの藍属性ソーサラー",
       "attribute": "藍",
       "weaponType": "ソーサラー",
@@ -262,6 +293,9 @@
       "id": "sabrina",
       "pageSlug": "sabrina",
       "name": "サブリナ",
+      "reading": {
+        "name": "さぶりな"
+      },
       "catchcopy": "クリティカル連撃と行動阻害耐性を持つ紅属性ウォーリア",
       "attribute": "紅",
       "weaponType": "ウォーリア",
@@ -283,6 +317,9 @@
       "id": "ivy",
       "pageSlug": "ivy",
       "name": "アイビー",
+      "reading": {
+        "name": "あいびー"
+      },
       "catchcopy": "直接攻撃と必中フィニッシュで硬い相手を抜く翠属性スナイパー",
       "attribute": "翠",
       "weaponType": "スナイパー",
@@ -304,6 +341,9 @@
       "id": "potpourri",
       "pageSlug": "potpourri",
       "name": "ポプリ",
+      "reading": {
+        "name": "ぽぷり"
+      },
       "catchcopy": "言霊スタックで後半火力を跳ね上げる黄のスナイパー",
       "attribute": "黄",
       "weaponType": "スナイパー",
@@ -333,6 +373,10 @@
       "id": "amleth_summer",
       "pageSlug": "amleth_summer",
       "name": "[夏の日の夢]アムレート",
+      "reading": {
+        "name": "あむれーと",
+        "title": "なつのひのゆめ"
+      },
       "catchcopy": "",
       "attribute": "黄",
       "weaponType": "ウォーリア",
@@ -362,6 +406,9 @@
       "id": "giluial",
       "pageSlug": "giluial",
       "name": "ギルウィアル",
+      "reading": {
+        "name": "ぎるうぃある"
+      },
       "catchcopy": "沈黙と多重バリアで粘る妨害型ソーサラー",
       "attribute": "藍",
       "weaponType": "ソーサラー",
@@ -391,6 +438,9 @@
       "id": "liselotte",
       "pageSlug": "liselotte",
       "name": "リズ",
+      "reading": {
+        "name": "りず"
+      },
       "catchcopy": "クリ率バフ依存で火力を伸ばすコラボソーサラー",
       "attribute": "藍",
       "weaponType": "ソーサラー",
@@ -420,6 +470,9 @@
       "id": "eir",
       "pageSlug": "eir",
       "name": "エイル",
+      "reading": {
+        "name": "えいる"
+      },
       "catchcopy": "睡眠と行動阻害特効を軸に攻めるスナイパー",
       "attribute": "藍",
       "weaponType": "スナイパー",
@@ -449,6 +502,9 @@
       "id": "minasumari",
       "pageSlug": "minasumari",
       "name": "ミナシュマリ",
+      "reading": {
+        "name": "みなしゅまり"
+      },
       "catchcopy": "被弾回数で火力を伸ばす対スナイパー型ウォーリア",
       "attribute": "藍",
       "weaponType": "ウォーリア",
@@ -478,6 +534,10 @@
       "id": "nina_summer",
       "pageSlug": "nina_summer",
       "name": "[小さな大冒険]ニーナ",
+      "reading": {
+        "name": "にーな",
+        "title": "ちいさなだいぼうけん"
+      },
       "catchcopy": "全体防御支援とシールドで守る夏イベントスナイパー",
       "attribute": "藍",
       "weaponType": "スナイパー",
@@ -507,6 +567,9 @@
       "id": "serruria",
       "pageSlug": "serruria",
       "name": "セルリア",
+      "reading": {
+        "name": "せるりあ"
+      },
       "catchcopy": "制限解除と高倍率シールドで耐えるスナイパー",
       "attribute": "藍",
       "weaponType": "スナイパー",
@@ -536,6 +599,9 @@
       "id": "eureka",
       "pageSlug": "eureka",
       "name": "ユリーカ",
+      "reading": {
+        "name": "ゆりーか"
+      },
       "catchcopy": "バッテン付与から高倍率攻撃へつなぐソーサラー",
       "attribute": "藍",
       "weaponType": "ソーサラー",
@@ -565,6 +631,10 @@
       "id": "cordie_ringmaster",
       "pageSlug": "cordie_ringmaster",
       "name": "[サーカスの団長]コルディ",
+      "reading": {
+        "name": "こるでぃ",
+        "title": "さーかすのだんちょう"
+      },
       "catchcopy": "笑顔喝采で火力を伸ばす藍属性ウォーリア",
       "attribute": "藍",
       "weaponType": "ウォーリア",
@@ -594,6 +664,10 @@
       "id": "merlyn_winter",
       "pageSlug": "merlyn_winter",
       "name": "[深き森の賢者]マーリン",
+      "reading": {
+        "name": "まーりん",
+        "title": "ふかきもりのけんじゃ"
+      },
       "catchcopy": "弱体解除数を火力条件に変える冬イベントソーサラー",
       "attribute": "藍",
       "weaponType": "ソーサラー",
@@ -618,6 +692,9 @@
       "id": "evelyn",
       "pageSlug": "evelyn",
       "name": "エヴリン",
+      "reading": {
+        "name": "えゔりん"
+      },
       "catchcopy": "反照と大型シールドで支える藍属性ソーサラー",
       "attribute": "藍",
       "weaponType": "ソーサラー",
@@ -647,6 +724,10 @@
       "id": "fia_trace",
       "pageSlug": "fia_trace",
       "name": "[在りし日の面影]フィアー",
+      "reading": {
+        "name": "ふぃあー",
+        "title": "ありしひのおもかげ"
+      },
       "catchcopy": "結界と怠惰で味方を守る藍属性ウォーリア",
       "attribute": "藍",
       "weaponType": "ウォーリア",
@@ -671,6 +752,9 @@
       "id": "natasha",
       "pageSlug": "natasha",
       "name": "ナターシャ",
+      "reading": {
+        "name": "なたーしゃ"
+      },
       "catchcopy": "気絶付与と腕力参照の直接攻撃を持つ天属性ウォーリア",
       "attribute": "天",
       "weaponType": "ウォーリア",
@@ -692,6 +776,9 @@
       "id": "fortina",
       "pageSlug": "fortina",
       "name": "フォルティナ",
+      "reading": {
+        "name": "ふぉるてぃな"
+      },
       "catchcopy": "全体シールドと再生で味方を守る天属性ウォーリア",
       "attribute": "天",
       "weaponType": "ウォーリア",
@@ -721,6 +808,9 @@
       "id": "cerberus",
       "pageSlug": "cerberus",
       "name": "ケルベロス",
+      "reading": {
+        "name": "けるべろす"
+      },
       "catchcopy": "高いスピードと即時戦闘不能条件を持つ天属性ウォーリア",
       "attribute": "天",
       "weaponType": "ウォーリア",
@@ -750,6 +840,9 @@
       "id": "rusalka",
       "pageSlug": "rusalka",
       "name": "ルサールカ",
+      "reading": {
+        "name": "るさーるか"
+      },
       "catchcopy": "弱体対象への魔法火力と復帰支援を持つ天属性ソーサラー",
       "attribute": "天",
       "weaponType": "ソーサラー",
@@ -779,6 +872,9 @@
       "id": "elfriede",
       "pageSlug": "elfriede",
       "name": "エルフリンデ",
+      "reading": {
+        "name": "えるふりんで"
+      },
       "catchcopy": "味方バフと敵弱体数で火力上限が伸びる天属性ウォーリア",
       "attribute": "天",
       "weaponType": "ウォーリア",
@@ -808,6 +904,10 @@
       "id": "rosalie_caritas",
       "pageSlug": "rosalie_caritas",
       "name": "[カリタスの使徒]ロザリー",
+      "reading": {
+        "name": "ろざりー",
+        "title": "かりたすのしと"
+      },
       "catchcopy": "記憶スタックと結界で支援する天属性ソーサラー",
       "attribute": "天",
       "weaponType": "ソーサラー",
@@ -837,6 +937,9 @@
       "id": "aine",
       "pageSlug": "aine",
       "name": "アイネ",
+      "reading": {
+        "name": "あいね"
+      },
       "catchcopy": "タイプステータス参照のシールドを展開する天属性スナイパー",
       "attribute": "天",
       "weaponType": "スナイパー",
@@ -866,6 +969,9 @@
       "id": "meria",
       "pageSlug": "meria",
       "name": "メリア",
+      "reading": {
+        "name": "めりあ"
+      },
       "catchcopy": "成長因子で攻撃倍率を伸ばす天属性ウォーリア",
       "attribute": "天",
       "weaponType": "ウォーリア",
@@ -895,6 +1001,9 @@
       "id": "irene",
       "pageSlug": "irene",
       "name": "アイリーン",
+      "reading": {
+        "name": "あいりーん"
+      },
       "catchcopy": "防御減少とターン条件火力を持つ天属性スナイパー",
       "attribute": "天",
       "weaponType": "スナイパー",
@@ -924,6 +1033,10 @@
       "id": "aa_rusted_sky",
       "pageSlug": "aa_rusted_sky",
       "name": "[錆鉄の空]A.A.",
+      "reading": {
+        "name": "えーえー",
+        "title": "さびてつのそら"
+      },
       "catchcopy": "沈黙無効と解除不可シールドで味方を守る天属性サポート",
       "attribute": "天",
       "weaponType": "ソーサラー",
@@ -953,6 +1066,9 @@
       "id": "lumika",
       "pageSlug": "lumika",
       "name": "ルミカ",
+      "reading": {
+        "name": "るみか"
+      },
       "catchcopy": "天音かなたさんコラボの天属性ウォーリア",
       "attribute": "天",
       "weaponType": "ウォーリア",
@@ -982,6 +1098,9 @@
       "id": "rivelia",
       "pageSlug": "rivelia",
       "name": "リヴェリア",
+      "reading": {
+        "name": "りゔぇりあ"
+      },
       "catchcopy": "砂塵スタックで被ダメージを伸ばす天属性スナイパー",
       "attribute": "天",
       "weaponType": "スナイパー",
@@ -1011,6 +1130,9 @@
       "id": "lunalynn",
       "pageSlug": "lunalynn",
       "name": "ルナリンド",
+      "reading": {
+        "name": "るなりんど"
+      },
       "catchcopy": "沈黙と毒で妨害しながら味方物防を支える冥属性ソーサラー",
       "attribute": "冥",
       "weaponType": "ソーサラー",
@@ -1032,6 +1154,9 @@
       "id": "valriede",
       "pageSlug": "valriede",
       "name": "ヴァルリーデ",
+      "reading": {
+        "name": "ゔぁるりーで"
+      },
       "catchcopy": "被ダメージ減少の焔を伸ばして戦う冥属性ウォーリア",
       "attribute": "冥",
       "weaponType": "ウォーリア",
@@ -1061,6 +1186,9 @@
       "id": "aa_dark",
       "pageSlug": "aa_dark",
       "name": "A.A.",
+      "reading": {
+        "name": "えーえー"
+      },
       "catchcopy": "直接ダメージを持つ冥属性サブアタッカー",
       "attribute": "冥",
       "weaponType": "ソーサラー",
@@ -1090,6 +1218,9 @@
       "id": "armstrong",
       "pageSlug": "armstrong",
       "name": "アームストロング",
+      "reading": {
+        "name": "あーむすとろんぐ"
+      },
       "catchcopy": "高倍率連撃とクリティカル支援を持つ冥属性スナイパー",
       "attribute": "冥",
       "weaponType": "スナイパー",
@@ -1119,6 +1250,9 @@
       "id": "paladea",
       "pageSlug": "paladea",
       "name": "パラデア",
+      "reading": {
+        "name": "ぱらであ"
+      },
       "catchcopy": "正義の魔女バフと多重バリアで攻防を支える冥属性スナイパー",
       "attribute": "冥",
       "weaponType": "スナイパー",
@@ -1148,6 +1282,9 @@
       "id": "ophelia",
       "pageSlug": "ophelia",
       "name": "オフィーリア",
+      "reading": {
+        "name": "おふぃーりあ"
+      },
       "catchcopy": "挑発とカウンタで相手を倒す冥属性ウォーリア",
       "attribute": "冥",
       "weaponType": "ウォーリア",
@@ -1177,6 +1314,9 @@
       "id": "kaguya",
       "pageSlug": "kaguya",
       "name": "カグヤ",
+      "reading": {
+        "name": "かぐや"
+      },
       "catchcopy": "シールドとカウンタ変更で戦う冥属性ソーサラー",
       "attribute": "冥",
       "weaponType": "ソーサラー",
@@ -1206,6 +1346,10 @@
       "id": "natasha_bouquet",
       "pageSlug": "natasha_bouquet",
       "name": "[花束の魔女]ナターシャ",
+      "reading": {
+        "name": "なたーしゃ",
+        "title": "はなたばのまじょ"
+      },
       "catchcopy": "心に咲く花を消費して再発動する冥属性スナイパー",
       "attribute": "冥",
       "weaponType": "スナイパー",
@@ -1235,6 +1379,9 @@
       "id": "nebra",
       "pageSlug": "nebra",
       "name": "ネブラ",
+      "reading": {
+        "name": "ねぶら"
+      },
       "catchcopy": "泡沫バフと弱体特効で支援する冥属性ソーサラー",
       "attribute": "冥",
       "weaponType": "ソーサラー",
@@ -1264,6 +1411,9 @@
       "id": "carmilla",
       "pageSlug": "carmilla",
       "name": "カーミラ",
+      "reading": {
+        "name": "かーみら"
+      },
       "catchcopy": "出血と脱力で削る冥属性ウォーリア",
       "attribute": "冥",
       "weaponType": "ウォーリア",
@@ -1293,6 +1443,10 @@
       "id": "cerberus_candy",
       "pageSlug": "cerberus_candy",
       "name": "[魔法のキャンディ]ケルベロス",
+      "reading": {
+        "name": "けるべろす",
+        "title": "まほうのきゃんでぃ"
+      },
       "catchcopy": "優しい魔法と直接攻撃を持つ冥属性ソーサラー",
       "attribute": "冥",
       "weaponType": "ソーサラー",
@@ -1322,6 +1476,9 @@
       "id": "regina",
       "pageSlug": "regina",
       "name": "レジーナ",
+      "reading": {
+        "name": "れじーな"
+      },
       "catchcopy": "面影スタックで火力と耐久を伸ばす冥属性スナイパー",
       "attribute": "冥",
       "weaponType": "スナイパー",
@@ -1351,6 +1508,9 @@
       "id": "cattleya",
       "pageSlug": "cattleya",
       "name": "カトレア",
+      "reading": {
+        "name": "かとれあ"
+      },
       "catchcopy": "ターン経過で攻撃回数と火力が伸びる黄属性ウォーリア",
       "attribute": "黄",
       "weaponType": "ウォーリア",
@@ -1375,6 +1535,9 @@
       "id": "mimi",
       "pageSlug": "mimi",
       "name": "ミミ",
+      "reading": {
+        "name": "みみ"
+      },
       "catchcopy": "",
       "attribute": "黄",
       "weaponType": "ウォーリア",
@@ -1396,6 +1559,9 @@
       "id": "tropon",
       "pageSlug": "tropon",
       "name": "トロポン",
+      "reading": {
+        "name": "とろぽん"
+      },
       "catchcopy": "",
       "attribute": "黄",
       "weaponType": "ソーサラー",
@@ -1417,6 +1583,9 @@
       "id": "hathor",
       "pageSlug": "hathor",
       "name": "ハトホル",
+      "reading": {
+        "name": "はとほる"
+      },
       "catchcopy": "",
       "attribute": "黄",
       "weaponType": "スナイパー",
@@ -1438,6 +1607,9 @@
       "id": "olivia",
       "pageSlug": "olivia",
       "name": "オリヴィエ",
+      "reading": {
+        "name": "おりゔぃえ"
+      },
       "catchcopy": "",
       "attribute": "黄",
       "weaponType": "ウォーリア",
@@ -1459,6 +1631,9 @@
       "id": "primavera",
       "pageSlug": "primavera",
       "name": "プリマヴェーラ",
+      "reading": {
+        "name": "ぷりまゔぇーら"
+      },
       "catchcopy": "",
       "attribute": "黄",
       "weaponType": "スナイパー",
@@ -1480,6 +1655,9 @@
       "id": "karol",
       "pageSlug": "karol",
       "name": "カロル",
+      "reading": {
+        "name": "かろる"
+      },
       "catchcopy": "",
       "attribute": "黄",
       "weaponType": "ソーサラー",
@@ -1509,6 +1687,9 @@
       "id": "wheeler",
       "pageSlug": "wheeler",
       "name": "ウィーラ",
+      "reading": {
+        "name": "うぃーら"
+      },
       "catchcopy": "全キャラ最速級のスピードで先手デバフを狙う黄属性ソーサラー。",
       "attribute": "黄",
       "weaponType": "ソーサラー",
@@ -1538,6 +1719,9 @@
       "id": "rishess",
       "pageSlug": "rishess",
       "name": "リシェス",
+      "reading": {
+        "name": "りしぇす"
+      },
       "catchcopy": "",
       "attribute": "黄",
       "weaponType": "ウォーリア",
@@ -1567,6 +1751,10 @@
       "id": "moddey_summer",
       "pageSlug": "moddey_summer",
       "name": "[墓守の夏休み]モーザ",
+      "reading": {
+        "name": "もーざ",
+        "title": "はかもりのなつやすみ"
+      },
       "catchcopy": "",
       "attribute": "黄",
       "weaponType": "ソーサラー",
@@ -1596,6 +1784,10 @@
       "id": "iris_black",
       "pageSlug": "iris_black",
       "name": "[黒鎧の従者]アイリス",
+      "reading": {
+        "name": "あいりす",
+        "title": "くろよろいのじゅうしゃ"
+      },
       "catchcopy": "",
       "attribute": "黄",
       "weaponType": "ウォーリア",
@@ -1625,6 +1817,10 @@
       "id": "amour_holy_night",
       "pageSlug": "amour_holy_night",
       "name": "[聖夜の贈り物]アモール",
+      "reading": {
+        "name": "あもーる",
+        "title": "せいやのおくりもの"
+      },
       "catchcopy": "",
       "attribute": "黄",
       "weaponType": "スナイパー",
@@ -1654,6 +1850,9 @@
       "id": "asahi",
       "pageSlug": "asahi",
       "name": "アサヒ",
+      "reading": {
+        "name": "あさひ"
+      },
       "catchcopy": "",
       "attribute": "黄",
       "weaponType": "スナイパー",
@@ -1683,6 +1882,9 @@
       "id": "tama",
       "pageSlug": "tama",
       "name": "タマ",
+      "reading": {
+        "name": "たま"
+      },
       "catchcopy": "",
       "attribute": "黄",
       "weaponType": "スナイパー",
@@ -1712,6 +1914,9 @@
       "id": "rustica",
       "pageSlug": "rustica",
       "name": "ルスティカ",
+      "reading": {
+        "name": "るすてぃか"
+      },
       "catchcopy": "",
       "attribute": "黄",
       "weaponType": "ウォーリア",
@@ -1747,6 +1952,9 @@
       "id": "mifuri",
       "pageSlug": "mifuri",
       "name": "ミフリ",
+      "reading": {
+        "name": "みふり"
+      },
       "catchcopy": "",
       "attribute": "黄",
       "weaponType": "ソーサラー",
@@ -1776,6 +1984,9 @@
       "id": "moineau",
       "pageSlug": "moineau",
       "name": "モワノー",
+      "reading": {
+        "name": "もわのー"
+      },
       "catchcopy": "",
       "attribute": "黄",
       "weaponType": "スナイパー",
@@ -1805,6 +2016,10 @@
       "id": "fenrir_treasure",
       "pageSlug": "fenrir_treasure",
       "name": "[二人だけの宝物]フェンリル",
+      "reading": {
+        "name": "ふぇんりる",
+        "title": "ふたりだけのたからもの"
+      },
       "catchcopy": "",
       "attribute": "黄",
       "weaponType": "ウォーリア",
@@ -1834,6 +2049,9 @@
       "id": "merlyn",
       "pageSlug": "merlyn",
       "name": "メルラン",
+      "reading": {
+        "name": "めるらん"
+      },
       "catchcopy": "",
       "attribute": "黄",
       "weaponType": "ソーサラー",
@@ -1863,6 +2081,9 @@
       "id": "tricksy",
       "pageSlug": "tricksy",
       "name": "トリクシー",
+      "reading": {
+        "name": "とりくしー"
+      },
       "catchcopy": "",
       "attribute": "黄",
       "weaponType": "ソーサラー",
@@ -1887,6 +2108,9 @@
       "id": "freycia",
       "pageSlug": "freycia",
       "name": "フレイシア",
+      "reading": {
+        "name": "ふれいしあ"
+      },
       "catchcopy": "回復と被ダメージ減少で支える紅属性ソーサラー",
       "attribute": "紅",
       "weaponType": "ソーサラー",
@@ -1908,6 +2132,9 @@
       "id": "amour",
       "pageSlug": "amour",
       "name": "アモール",
+      "reading": {
+        "name": "あもーる"
+      },
       "catchcopy": "復活と低HP狙いの分岐火力を持つ紅属性スナイパー",
       "attribute": "紅",
       "weaponType": "スナイパー",
@@ -1929,6 +2156,9 @@
       "id": "lean",
       "pageSlug": "lean",
       "name": "リーン",
+      "reading": {
+        "name": "りーん"
+      },
       "catchcopy": "クリティカルで攻撃力を伸ばす紅属性ウォーリア",
       "attribute": "紅",
       "weaponType": "ウォーリア",
@@ -1950,6 +2180,9 @@
       "id": "dian",
       "pageSlug": "dian",
       "name": "ディアン",
+      "reading": {
+        "name": "でぃあん"
+      },
       "catchcopy": "再生と透明化でHPを管理し、防御無視の直接攻撃を通す紅属性スナイパー",
       "attribute": "紅",
       "weaponType": "スナイパー",
@@ -1971,6 +2204,9 @@
       "id": "belle",
       "pageSlug": "belle",
       "name": "ベル",
+      "reading": {
+        "name": "べる"
+      },
       "catchcopy": "HP50%未満からのシールドループで粘る紅属性ソーサラー",
       "attribute": "紅",
       "weaponType": "ソーサラー",
@@ -2000,6 +2236,9 @@
       "id": "sophia",
       "pageSlug": "sophia",
       "name": "ソフィア",
+      "reading": {
+        "name": "そふぃあ"
+      },
       "catchcopy": "HP割合が低い敵を狙い、多段攻撃で仕留める紅属性ウォーリア。",
       "attribute": "紅",
       "weaponType": "ウォーリア",
@@ -2029,6 +2268,9 @@
       "id": "chiffon",
       "pageSlug": "chiffon",
       "name": "シフォン",
+      "reading": {
+        "name": "しふぉん"
+      },
       "catchcopy": "防御支援・回復・睡眠で味方を守る紅属性ソーサラー",
       "attribute": "紅",
       "weaponType": "ソーサラー",
@@ -2058,6 +2300,9 @@
       "id": "artie",
       "pageSlug": "artie",
       "name": "アーティ",
+      "reading": {
+        "name": "あーてぃ"
+      },
       "catchcopy": "攻撃前デバフと遮断ループで魔法パーティを支える紅属性ソーサラー",
       "attribute": "紅",
       "weaponType": "ソーサラー",
@@ -2087,6 +2332,10 @@
       "id": "cordie_summer",
       "pageSlug": "cordie_summer",
       "name": "[夏の残響]コルディ",
+      "reading": {
+        "name": "こるでぃ",
+        "title": "なつのざんきょう"
+      },
       "catchcopy": "命中支援・攻撃力バフ・回復をまとめて担う紅属性スナイパー",
       "attribute": "紅",
       "weaponType": "スナイパー",
@@ -2116,6 +2365,9 @@
       "id": "priscilla",
       "pageSlug": "priscilla",
       "name": "プリシラ",
+      "reading": {
+        "name": "ぷりしら"
+      },
       "catchcopy": "弱体解除・回復・再生で味方を立て直す紅属性ソーサラー",
       "attribute": "紅",
       "weaponType": "ソーサラー",
@@ -2145,6 +2397,9 @@
       "id": "matilda",
       "pageSlug": "matilda",
       "name": "マチルダ",
+      "reading": {
+        "name": "まちるだ"
+      },
       "catchcopy": "攻撃力・クリティカル率・命中率をまとめて支える紅属性ソーサラー",
       "attribute": "紅",
       "weaponType": "ソーサラー",
@@ -2174,6 +2429,9 @@
       "id": "morgana",
       "pageSlug": "morgana",
       "name": "モルガナ",
+      "reading": {
+        "name": "もるがな"
+      },
       "catchcopy": "紅染め編成で巨大シールドと自傷連撃を扱う紅属性ソーサラー",
       "attribute": "紅",
       "weaponType": "ソーサラー",
@@ -2203,6 +2461,10 @@
       "id": "soltina_warm_memory",
       "pageSlug": "soltina_warm_memory",
       "name": "[温かな記憶]ソルティーナ",
+      "reading": {
+        "name": "そるてぃーな",
+        "title": "あたたかなきおく"
+      },
       "catchcopy": "32ターンの攻撃力・命中率支援を先手で届ける紅属性ウォーリア",
       "attribute": "紅",
       "weaponType": "ウォーリア",
@@ -2232,6 +2494,9 @@
       "id": "artoria",
       "pageSlug": "artoria",
       "name": "アルトリア",
+      "reading": {
+        "name": "あるとりあ"
+      },
       "catchcopy": "爆速紅パでスピード支援と自傷高倍率連撃を担う紅属性ウォーリア",
       "attribute": "紅",
       "weaponType": "ウォーリア",
@@ -2261,6 +2526,13 @@
       "id": "shizu_snow",
       "pageSlug": "shizu_snow",
       "name": "[雪花の誓い]シズ",
+      "reading": {
+        "name": "しず",
+        "title": "せっかのちかい",
+        "aliases": [
+          "ゆきばなのちかい"
+        ]
+      },
       "catchcopy": "防御力依存の攻撃力増加と高速自傷連撃で速攻紅パを支える紅属性ウォーリア",
       "attribute": "紅",
       "weaponType": "ウォーリア",
@@ -2290,6 +2562,9 @@
       "id": "lucile",
       "pageSlug": "lucile",
       "name": "ルシール",
+      "reading": {
+        "name": "るしーる"
+      },
       "catchcopy": "紅属性全体へ解除不可のスピード支援を届ける速攻自傷紅パの中核ウォーリア",
       "attribute": "紅",
       "weaponType": "ウォーリア",
@@ -2319,6 +2594,9 @@
       "id": "flack",
       "pageSlug": "flack",
       "name": "フラック",
+      "reading": {
+        "name": "ふらっく"
+      },
       "catchcopy": "開幕の笑顔の才能と回避・被回復量減少で速攻紅パを前へ押し出す紅属性スナイパー",
       "attribute": "紅",
       "weaponType": "スナイパー",
@@ -2348,6 +2626,9 @@
       "id": "liebe",
       "pageSlug": "liebe",
       "name": "リーベ",
+      "reading": {
+        "name": "りーべ"
+      },
       "catchcopy": "先制気絶と多重バリア、自傷トリガー攻撃支援で紅速攻を支える紅属性ウォーリア",
       "attribute": "紅",
       "weaponType": "ウォーリア",
@@ -2377,6 +2658,9 @@
       "id": "aishe",
       "pageSlug": "aishe",
       "name": "アイシェ",
+      "reading": {
+        "name": "あいしぇ"
+      },
       "catchcopy": "解析スタックで加速し、高HPの敵へ大火力を狙う紅属性スナイパー",
       "attribute": "紅",
       "weaponType": "スナイパー",
@@ -2406,6 +2690,9 @@
       "id": "lilicotte",
       "pageSlug": "lilicotte",
       "name": "リリコット",
+      "reading": {
+        "name": "りりこっと"
+      },
       "catchcopy": "最大6個のバフ解除と2自傷供給で、黄属性耐久を崩す紅属性スナイパー",
       "attribute": "紅",
       "weaponType": "スナイパー",
@@ -2430,6 +2717,9 @@
       "id": "merlin",
       "pageSlug": "merlin",
       "name": "マーリン",
+      "reading": {
+        "name": "まーりん"
+      },
       "catchcopy": "弱体解除・火力支援・回復をまとめて担う翠属性サポーター",
       "attribute": "翠",
       "weaponType": "ソーサラー",
@@ -2451,6 +2741,9 @@
       "id": "cordie",
       "pageSlug": "cordie",
       "name": "コルディ",
+      "reading": {
+        "name": "こるでぃ"
+      },
       "catchcopy": "最速級の初動と防御貫通で敵を抜く翠属性スナイパー",
       "attribute": "翠",
       "weaponType": "スナイパー",
@@ -2472,6 +2765,9 @@
       "id": "nina",
       "pageSlug": "nina",
       "name": "ニーナ",
+      "reading": {
+        "name": "にーな"
+      },
       "catchcopy": "バフ奪取と弱体押しつけで相手の強みを崩す翠属性スナイパー",
       "attribute": "翠",
       "weaponType": "スナイパー",
@@ -2493,6 +2789,9 @@
       "id": "mertillier",
       "pageSlug": "mertillier",
       "name": "メルティーユ",
+      "reading": {
+        "name": "めるてぃーゆ"
+      },
       "catchcopy": "CT短縮と攻撃支援でコルディ軸を回す翠属性ソーサラー",
       "attribute": "翠",
       "weaponType": "ソーサラー",
@@ -2514,6 +2813,9 @@
       "id": "luke",
       "pageSlug": "luke",
       "name": "ルーク",
+      "reading": {
+        "name": "るーく"
+      },
       "catchcopy": "クリティカルで被ダメージ増加を積む翠属性ウォーリア",
       "attribute": "翠",
       "weaponType": "ウォーリア",
@@ -2543,6 +2845,9 @@
       "id": "rea",
       "pageSlug": "rea",
       "name": "レア",
+      "reading": {
+        "name": "れあ"
+      },
       "catchcopy": "回避率減少と気絶で高攻撃力エースを止める翠のスナイパー",
       "attribute": "翠",
       "weaponType": "スナイパー",
@@ -2572,6 +2877,10 @@
       "id": "sabrina_cool_breeze",
       "pageSlug": "sabrina_cool_breeze",
       "name": "[涼風の軍神]サブリナ",
+      "reading": {
+        "name": "さぶりな",
+        "title": "すずかぜのぐんしん"
+      },
       "catchcopy": "クリ耐性低下と連撃で翠パの火力を支える夏イベントウォーリア",
       "attribute": "翠",
       "weaponType": "ウォーリア",
@@ -2601,6 +2910,9 @@
       "id": "fia",
       "pageSlug": "fia",
       "name": "フィアー",
+      "reading": {
+        "name": "ふぃあー"
+      },
       "catchcopy": "隣接HP支援と被弾カウンターで耐久戦を作る翠属性ウォーリア",
       "attribute": "翠",
       "weaponType": "ウォーリア",
@@ -2630,6 +2942,9 @@
       "id": "claudia",
       "pageSlug": "claudia",
       "name": "クラウディア",
+      "reading": {
+        "name": "くらうでぃあ"
+      },
       "catchcopy": "HPを削って火力を引き上げ、遮断と回復で踏みとどまる翠属性アタッカー",
       "attribute": "翠",
       "weaponType": "ウォーリア",
@@ -2659,6 +2974,9 @@
       "id": "yuni",
       "pageSlug": "yuni",
       "name": "ユニ",
+      "reading": {
+        "name": "ゆに"
+      },
       "catchcopy": "4連続回復と最大HP増加で翠属性の耐久スタックを加速する支援役",
       "attribute": "翠",
       "weaponType": "ソーサラー",
@@ -2688,6 +3006,9 @@
       "id": "alexandra",
       "pageSlug": "alexandra",
       "name": "アレクサンドラ",
+      "reading": {
+        "name": "あれくさんどら"
+      },
       "catchcopy": "7ターン目の守護騎士覚醒から10連撃と出血で仕留める翠属性アタッカー",
       "attribute": "翠",
       "weaponType": "ウォーリア",
@@ -2717,6 +3038,9 @@
       "id": "mira",
       "pageSlug": "mira",
       "name": "ミラ",
+      "reading": {
+        "name": "みら"
+      },
       "catchcopy": "開幕HP増加と再生、遅延で翠属性の耐久戦を支える置き物サポーター",
       "attribute": "翠",
       "weaponType": "ソーサラー",
@@ -2746,6 +3070,10 @@
       "id": "lunalynn_holy_night",
       "pageSlug": "lunalynn_holy_night",
       "name": "[聖夜の妖精]ルナリンド",
+      "reading": {
+        "name": "るなりんど",
+        "title": "せいやのようせい"
+      },
       "catchcopy": "開幕多重バリアと脱力で耐え、7ターン目に覚醒する冬限定スナイパー",
       "attribute": "翠",
       "weaponType": "スナイパー",
@@ -2775,6 +3103,9 @@
       "id": "tilly",
       "pageSlug": "tilly",
       "name": "ティリー",
+      "reading": {
+        "name": "てぃりー"
+      },
       "catchcopy": "クリティカル耐性で初動を守り、多重バリア持ちを狙う玄人向けサポーター",
       "attribute": "翠",
       "weaponType": "ソーサラー",
@@ -2804,6 +3135,9 @@
       "id": "paula",
       "pageSlug": "paula",
       "name": "ポーラ",
+      "reading": {
+        "name": "ぽーら"
+      },
       "catchcopy": "回復連鎖で翠属性を強化し、7ターン目に覚醒する耐久アタッカー",
       "attribute": "翠",
       "weaponType": "スナイパー",
@@ -2833,6 +3167,9 @@
       "id": "dd",
       "pageSlug": "dd",
       "name": "D.D.",
+      "reading": {
+        "name": "でぃーでぃー"
+      },
       "catchcopy": "2ターン気絶と高耐久で7ターン覚醒を支える玄人向けコントローラー",
       "attribute": "翠",
       "weaponType": "ソーサラー",
@@ -2862,6 +3199,9 @@
       "id": "yurdiz",
       "pageSlug": "yurdiz",
       "name": "ユルディズ",
+      "reading": {
+        "name": "ゆるでぃず"
+      },
       "catchcopy": "",
       "attribute": "翠",
       "weaponType": "ウォーリア",
@@ -2891,6 +3231,10 @@
       "id": "stella_holy_dark_star",
       "pageSlug": "stella_holy_dark_star",
       "name": "[聖なる漆黒の輝く星]ステラ",
+      "reading": {
+        "name": "すてら",
+        "title": "せいなるしっこくのかがやくほし"
+      },
       "catchcopy": "",
       "attribute": "翠",
       "weaponType": "ソーサラー",
@@ -2915,6 +3259,9 @@
       "id": "kobell",
       "pageSlug": "kobell",
       "name": "コベル",
+      "reading": {
+        "name": "こべる"
+      },
       "catchcopy": "",
       "attribute": "翠",
       "weaponType": "スナイパー",
@@ -2945,6 +3292,9 @@
       "id": "idyne",
       "pageSlug": "idyne",
       "name": "イディーネ",
+      "reading": {
+        "name": "いでぃーね"
+      },
       "catchcopy": "",
       "attribute": "翠",
       "weaponType": "ソーサラー",
@@ -2969,6 +3319,9 @@
       "id": "guinevere",
       "pageSlug": "guinevere",
       "name": "グィネヴィア",
+      "reading": {
+        "name": "ぐぃねゔぃあ"
+      },
       "catchcopy": "",
       "attribute": "紅",
       "weaponType": "スナイパー",
@@ -2993,6 +3346,9 @@
       "id": "shiloh",
       "pageSlug": "shiloh",
       "name": "シロ",
+      "reading": {
+        "name": "しろ"
+      },
       "catchcopy": "",
       "attribute": "黄",
       "weaponType": "スナイパー",
@@ -3017,6 +3373,9 @@
       "id": "lily",
       "pageSlug": "lily",
       "name": "リリー",
+      "reading": {
+        "name": "りりー"
+      },
       "catchcopy": "",
       "attribute": "天",
       "weaponType": "ソーサラー",
@@ -3041,6 +3400,13 @@
       "id": "illya_gods_curse",
       "pageSlug": "illya_gods_curse",
       "name": "[神呪の魔女]イリア",
+      "reading": {
+        "name": "いりあ",
+        "title": "しんじゅのまじょ",
+        "aliases": [
+          "じんじゅのまじょ"
+        ]
+      },
       "catchcopy": "",
       "attribute": "冥",
       "weaponType": "ウォーリア",
@@ -3070,6 +3436,9 @@
       "id": "elaine",
       "pageSlug": "elaine",
       "name": "エレイン",
+      "reading": {
+        "name": "えれいん"
+      },
       "catchcopy": "",
       "attribute": "冥",
       "weaponType": "スナイパー",
@@ -3094,6 +3463,10 @@
       "id": "primavera_summer",
       "pageSlug": "primavera_summer",
       "name": "[湖畔の歌姫]プリマヴェーラ",
+      "reading": {
+        "name": "ぷりまゔぇーら",
+        "title": "こはんのうたひめ"
+      },
       "aliases": [
         "夏プリマヴェーラ",
         "夏プリマ",
@@ -3123,6 +3496,10 @@
       "id": "florence_twilight",
       "pageSlug": "florence_twilight",
       "name": "[黄昏の誓い]フローレンス",
+      "reading": {
+        "name": "ふろーれんす",
+        "title": "たそがれのちかい"
+      },
       "catchcopy": "",
       "attribute": "翠",
       "weaponType": "ウォーリア",
@@ -3147,6 +3524,9 @@
       "id": "cusith",
       "pageSlug": "cusith",
       "name": "クーシー",
+      "reading": {
+        "name": "くーしー"
+      },
       "catchcopy": "",
       "attribute": "藍",
       "weaponType": "ウォーリア",
@@ -3171,6 +3551,13 @@
       "id": "artoria_golden",
       "pageSlug": "artoria_golden",
       "name": "[黄金色の聖剣使い]アルトリア",
+      "reading": {
+        "name": "あるとりあ",
+        "title": "こがねいろのせいけんつかい",
+        "aliases": [
+          "こがねいろのせいけんづかい"
+        ]
+      },
       "catchcopy": "",
       "attribute": "翠",
       "weaponType": "ウォーリア",
@@ -3195,6 +3582,10 @@
       "id": "fortina_twilight",
       "pageSlug": "fortina_twilight",
       "name": "[黄昏の約束]フォルティナ",
+      "reading": {
+        "name": "ふぉるてぃな",
+        "title": "たそがれのやくそく"
+      },
       "catchcopy": "",
       "attribute": "天",
       "weaponType": "スナイパー",
