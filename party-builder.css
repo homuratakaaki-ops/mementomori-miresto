@@ -75,7 +75,8 @@
 .pb-btn.pb-primary:hover { background: #123a6f; }
 .pb-btn.pb-primary:disabled { border-color: var(--line); background: #eceff4; color: var(--muted); }
 
-.pb-btn.pb-small { min-height: 40px; padding: 6px 10px; font-size: 13px; }
+/* 指で押す前提なので、小さいボタンでも高さは44px以上を保つ */
+.pb-btn.pb-small { min-height: 44px; padding: 6px 10px; font-size: 13px; }
 
 .pb-row {
   display: flex;
