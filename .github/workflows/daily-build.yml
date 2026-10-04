@@ -17,10 +17,11 @@ on:
     branches: [main]
     paths:
       - "data/**"
-      - "js/render-character.js"
-      - "js/render-character-index.js"
-      - "js/gacha-status.js"
+      # 描画モジュールを個別に並べると追加時に漏れるので js 配下をまとめて見る
+      - "js/**"
       - "scripts/**"
+      # index.html は buildTopPage の入力でもある（ニュース欄の雛形）
+      - "index.html"
       - ".github/workflows/daily-build.yml"
   workflow_dispatch:
 
@@ -61,7 +62,8 @@ jobs:
           set -euo pipefail
           git config user.name "ミコト（自動ビルド）"
           git config user.email "homuratakaaki@gmail.com"
-          git add -- data pages
+          # 生成物は data/ ・ pages/ ・ index.html（トップのニュース欄）
+          git add -- data pages index.html
           if git diff --cached --quiet; then
             echo "差分なし。何もしない。"
             exit 0
