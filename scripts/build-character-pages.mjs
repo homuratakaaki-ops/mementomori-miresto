@@ -95,6 +95,15 @@ function characterPageHtml({ character, metaHtml, skillListHtml, description }) 
   <title>${renderer.escapeHtml(renderer.pageTitle(character))}</title>
   <meta name="description" content="${renderer.escapeHtml(description)}">
   <link rel="canonical" href="${renderer.escapeHtml(renderer.canonicalUrl(character))}">
+  <!-- OGP。画像は共通のものを使う（キャラごとの画像生成は未対応） -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="${renderer.escapeHtml(renderer.TITLE_SUFFIX)}">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="og:title" content="${renderer.escapeHtml(renderer.pageTitle(character))}">
+  <meta property="og:description" content="${renderer.escapeHtml(description)}">
+  <meta property="og:url" content="${renderer.escapeHtml(renderer.canonicalUrl(character))}">
+  <meta property="og:image" content="${renderer.escapeHtml(renderer.SITE_ORIGIN)}/assets/ogp/ogp-common.png">
+  <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="/favicon.ico" sizes="32x32">
   <link rel="icon" type="image/png" href="../../assets/miresto/miresto-icon-32.png" sizes="32x32">
   <link rel="apple-touch-icon" href="../../assets/miresto/miresto-icon-180.png">
