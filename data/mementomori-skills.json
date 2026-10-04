@@ -7441,9 +7441,9 @@
       "subCategory": "自己強化 / 味方支援",
       "target": "自身 / 味方全体",
       "multiplierText": "攻撃力30%",
-      "duration": "自身が敵からバフを解除された時、6ターン味方全体の命中率50%増加 / バトル開始時6ターン自身の命中率10%増加",
+      "duration": "自身が敵からバフを解除された時、6ターン味方全体の命中率30%増加 / バトル開始時6ターン自身の命中率10%増加",
       "ct": null,
-      "condition": "自身が敵からバフを解除された時、6ターン味方全体の命中率50%増加 / 自身に制限解除付与 / 制限解除中は自身の攻撃力30%増加 / バトル開始時6ターン自身の命中率10%増加",
+      "condition": "自身が敵からバフを解除された時、6ターン味方全体の命中率30%増加 / 自身に制限解除付与 / 制限解除中は自身の攻撃力30%増加 / バトル開始時6ターン自身の命中率10%増加",
       "exclusiveWeapon": "専用Lv2: 味方全体の命中率の増加量が50%になる",
       "compareMemo": "自身が敵からバフを解除された時、6ターン味方全体の命中率50%増加 / 自身に制限解除付与 / 制限解除中は自身の攻撃力30%増加 / バトル開始時6ターン自身の命中率10%増加",
       "noteUrl": "",
@@ -7452,7 +7452,7 @@
       "plainSummary": "バフを剥がされたら「制限解除」で反撃モードに入る。",
       "steps": [
         {
-          "text": "自身が敵からバフを解除されたとき、味方全体の命中率を50%増加(6ターン)し、自身に制限解除を付与"
+          "text": "自身が敵からバフを解除されたとき、味方全体の命中率を30%増加(6ターン)し、自身に制限解除を付与"
         },
         {
           "text": "制限解除中は自身の攻撃力+30%"
@@ -7479,8 +7479,15 @@
           "target": "味方全体",
           "effects": [
             {
-              "text": "命中率を50%増加",
-              "duration": "6ターン"
+              "text": "命中率を30%増加",
+              "duration": "6ターン",
+              "exclusive": [
+                {
+                  "lv": 2,
+                  "kind": "change",
+                  "text": "命中率の増加が50%"
+                }
+              ]
             }
           ]
         },
@@ -7509,6 +7516,9 @@
         {
           "text": "バフ解除を多用してくる敵に対してこそ本領が出る逆用設計。S1・S2の制限解除条件もここで解禁される。根拠: 発動条件が「敵にバフを解除されたとき」のため"
         }
+      ],
+      "exclusiveIntegrated": [
+        2
       ]
     },
     {
@@ -34112,24 +34122,24 @@
       "majorCategory": "攻撃",
       "subCategory": "命中率増加 / バフ解除 / 3回目以降強化",
       "target": "正面の敵",
-      "multiplierText": "物理140%×10 / 3回目以降3倍",
+      "multiplierText": "物理180%×10 / 3回目以降3倍",
       "duration": "命中率増加1T",
       "ct": 4,
-      "condition": "3回目以降は連撃ダメージ3倍。Lv2で戦闘不能にできなかった場合にバフ解除と追加攻撃",
+      "condition": "3回目以降は連撃ダメージ3倍。戦闘不能にできなかった場合、バフ1つ解除と攻撃力×580%の追加攻撃",
       "exclusiveWeapon": "専用Lv1: 最初の連撃のダメージが攻撃力×240%になる",
       "compareMemo": "長期戦で大きく伸びる正面単体連撃",
       "noteUrl": "",
       "imageUrl": "",
       "sourceUrl": "https://ichigogames.net/mementomori/illya_gods_curse/",
       "damage": {
-        "singleMultiplier": 140,
+        "singleMultiplier": 180,
         "hitCount": 10,
-        "baseTotal": 1400,
+        "baseTotal": 1800,
         "exclusiveLv1Total": 2400,
         "exclusiveLv2Total": 2400,
         "exclusiveLv3Total": 2400,
-        "conditionMaxTotal": 4200,
-        "conditionMaxNote": "3回目以降は連撃ダメージ3倍。1400%×3倍=4200（専用武器なし・スキルLv最大）",
+        "conditionMaxTotal": 5400,
+        "conditionMaxNote": "3回目以降は連撃ダメージ3倍。1800%×3倍=5400（専用武器なし・スキルLv最大）。撃破できなかった場合の追加攻撃580%は条件が別なので含めない",
         "powerType": "長期戦強化 / 追加攻撃",
         "maxStacks": null,
         "realityRank": "中",
@@ -34139,10 +34149,13 @@
       "plainSummary": "正面を10連撃。使い込むほど3倍に化ける。",
       "steps": [
         {
-          "text": "正面の敵に物理140%×10回"
+          "text": "正面の敵に物理180%×10回"
         },
         {
           "text": "このスキルの3回目以降は連撃ダメージ3倍"
+        },
+        {
+          "text": "このスキルで敵を戦闘不能にできなかった場合、対象のバフを1つ解除し物理580%の追加攻撃"
         },
         {
           "text": "命中率増加を1ターン付与"
@@ -34150,14 +34163,26 @@
       ],
       "flow": [
         {
-          "when": "攻撃時",
+          "when": "攻撃前",
           "mode": "sequence",
           "order": 1,
+          "target": "自身",
+          "effects": [
+            {
+              "text": "命中率増加を付与",
+              "duration": "1ターン"
+            }
+          ]
+        },
+        {
+          "when": "攻撃時",
+          "mode": "sequence",
+          "order": 2,
           "target": "正面の敵",
           "effects": [
             {
               "text": "物理攻撃",
-              "multiplier": "物理140%×10回",
+              "multiplier": "物理180%×10回",
               "damageTotal": "base",
               "exclusive": [
                 {
@@ -34170,7 +34195,7 @@
             {
               "text": "連撃のダメージが3倍になる",
               "condition": "このスキルの3回目以降は",
-              "multiplier": "物理420%（140%×3）",
+              "multiplier": "物理540%（180%×3）",
               "damageTotal": "conditionMax"
             }
           ]
@@ -34178,12 +34203,13 @@
         {
           "when": "攻撃後",
           "mode": "sequence",
-          "order": 2,
-          "target": "自身",
+          "order": 3,
+          "target": "正面の敵",
           "effects": [
             {
-              "text": "命中率増加を付与",
-              "duration": "1ターン"
+              "text": "バフを1つ解除してから追加で物理攻撃",
+              "condition": "このスキルで敵を戦闘不能にできなかった場合",
+              "multiplier": "物理580%"
             }
           ]
         }
@@ -34672,7 +34698,7 @@
       "majorCategory": "敵弱体",
       "subCategory": "金縛り / 命中耐性無視",
       "target": "自身と攻撃力が最も高い味方 / ランダム敵3-5体",
-      "multiplierText": "物理320%×3 / 専用Lv1 680%×5",
+      "multiplierText": "物理680%×3 / 専用Lv1 680%×5",
       "duration": "金縛り1T",
       "ct": 4,
       "condition": "自身と攻撃力が最も高い味方に金縛りを付与してから攻撃。金縛り付与は弱体命中率と耐性率を無視",
@@ -34682,14 +34708,14 @@
       "imageUrl": "",
       "sourceUrl": "https://ichigogames.net/mementomori/primavera_summer/",
       "damage": {
-        "singleMultiplier": 320,
+        "singleMultiplier": 680,
         "hitCount": 3,
-        "baseTotal": 960,
+        "baseTotal": 2040,
         "exclusiveLv1Total": 3400,
         "exclusiveLv2Total": 3400,
         "exclusiveLv3Total": 3400,
-        "conditionMaxTotal": 960,
-        "conditionMaxNote": "専用武器以外に倍率を伸ばす条件が無いため基本と同値（旧値 3400 は専用武器ぶんを含んでいた）。専用Lv1で680%×5。金縛り付与は火力外",
+        "conditionMaxTotal": 2040,
+        "conditionMaxNote": "専用武器以外に倍率を伸ばす条件が無いため基本と同値。専用Lv1で対象が5体になり680%×5=3400。金縛り付与は火力外",
         "powerType": "対象数増加 / 行動阻害連動",
         "maxStacks": null,
         "realityRank": "高",
@@ -34702,7 +34728,7 @@
           "text": "自身と攻撃力が最も高い味方に金縛りを付与(1ターン。命中率・耐性率を無視して必ず付与)"
         },
         {
-          "text": "ランダムな敵3体に物理320%"
+          "text": "ランダムな敵3体に物理680%"
         }
       ],
       "flow": [
@@ -34727,11 +34753,20 @@
           "effects": [
             {
               "text": "物理攻撃",
-              "multiplier": "物理320%",
+              "multiplier": "物理680%",
               "damageTotal": "base"
+            }
+          ],
+          "exclusiveTarget": [
+            {
+              "lv": 1,
+              "target": "ランダムな敵5体"
             }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        1
       ]
     },
     {
