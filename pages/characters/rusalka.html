@@ -42,13 +42,16 @@
         <div class="skill-body">
           
         <div>
-          <h3 class="block-title">順番に何が起きる？</h3>
-          <ol class="steps">
-            <li>ランダムな敵5体に魔法<span class="ratio">480%</span></li><li>50%の確率で与ダメージ15%減少を1ターン付与</li><li>対象の魔力が自身より低ければ付与確率100%</li>
-          </ol>
+          <h3 class="block-title">いつ・誰に・何が起きる？</h3>
+          <ol class="flow">
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">攻撃時</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>ランダムな敵5体</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>魔法攻撃<span class="flow-chip num">魔法<span class="ratio">480%</span></span><span class="flow-total">倍率合計 2400%（5体分）</span></li><li><span class="flow-chip">確率50%</span>与ダメージ15%減少を付与<span class="flow-chip">1ターン</span></li><li class="flow-cond-line"><span class="flow-chip cond">対象の魔力が自身より低ければ</span>付与確率が100%になる</li></ul></div>
+          </li>
+        </ol>
         </div>
       
-          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>ランダム敵5体</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 2400%</dd></dl><dl class="data-item"><dt>継続</dt><dd>与ダメージ減少1T</dd></dl></div>
+          
           
           
           <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用Lv1</th><td>与ダメージ減少が2ターンになる。</td></tr><tr><th>専用Lv2</th><td>魔法ダメージが攻撃力580%になる</td></tr></table></div>
@@ -79,13 +82,16 @@
         <div class="skill-body">
           
         <div>
-          <h3 class="block-title">順番に何が起きる？</h3>
-          <ol class="steps">
-            <li>ランダムな敵に魔法<span class="ratio">470%</span>×4回</li><li>対象が弱体効果中ならダメージ2倍</li>
-          </ol>
+          <h3 class="block-title">いつ・誰に・何が起きる？</h3>
+          <ol class="flow">
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">攻撃時</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>ランダムな敵</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>魔法攻撃<span class="flow-chip num">魔法<span class="ratio">470%</span>×4回</span><span class="flow-total">倍率合計 1880%（4回分）</span></li><li class="flow-cond-line"><span class="flow-chip cond">対象が弱体効果中なら</span>ダメージが2倍になる<span class="flow-chip num">魔法<span class="ratio">940%</span>×4回（470%×2）</span><span class="flow-total">条件時：倍率合計 3760%</span></li></ul></div>
+          </li>
+        </ol>
         </div>
       
-          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>ランダム敵</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>通常 1880% / 最大 3760%</dd></dl></div>
+          
           <div><h3 class="block-title">かみ合わせ</h3><ul class="verification-list synergy-list">
         <li>
           S1の与ダメージ減少が②の条件を自給する。弱体を撒く味方とも噛み合う。根拠: 倍率条件が「弱体効果中」のため
@@ -121,13 +127,21 @@
         <div class="skill-body">
           
         <div>
-          <h3 class="block-title">順番に何が起きる？</h3>
-          <ol class="steps">
-            <li>戦闘不能時に1回だけ復活(最大HP10%回復)し、自身のスキルCTを0にする</li><li>自身に多重バリア5層を付与</li><li>自身の攻撃力を70%、スピードを30%増加(1ターン)</li><li>自身以外の味方全体に多重バリア1層を付与</li>
-          </ol>
+          <h3 class="block-title">いつ・誰に・何が起きる？</h3>
+          <ol class="flow">
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">自身が戦闘不能になったとき</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>自身</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>最大HP10%回復で復活し、自身のスキルCTを0にする<span class="flow-note">バトル中1回</span></li><li>多重バリアを5層付与</li><li>攻撃力を70%、スピードを30%増加<span class="flow-chip">1ターン</span></li></ul></div>
+          </li>
+        
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">自身が戦闘不能になったとき</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>自身以外の味方全体</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>多重バリアを1層付与</li></ul></div>
+          </li>
+        </ol>
         </div>
       
-          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>自身 / 味方全体</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>最大HP10%回復 / 多重バリア5層</dd></dl><dl class="data-item"><dt>継続</dt><dd>1T</dd></dl></div>
+          
           
           
           <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用</th><td>専用武器効果なし</td></tr></table></div>
@@ -158,13 +172,16 @@
         <div class="skill-body">
           
         <div>
-          <h3 class="block-title">順番に何が起きる？</h3>
-          <ol class="steps">
-            <li>バトル開始時または被攻撃時、自身のHPが50%未満なら物魔防御貫通を50%増加(3ターン)</li><li>自身のHPが50%以上ならクリティカル耐性率を50%増加(3ターン)</li><li>次に攻撃を受けたときにこのバフは解除され、再度HP割合を判定する</li>
-          </ol>
+          <h3 class="block-title">いつ・誰に・何が起きる？</h3>
+          <ol class="flow">
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">バトル開始時または攻撃を受けたとき</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>自身</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li class="flow-cond-line"><span class="flow-chip cond">自身のHPが50%未満なら</span>物理・魔法防御貫通を50%増加<span class="flow-chip">3ターン</span></li><li class="flow-cond-line"><span class="flow-chip cond">自身のHPが50%以上なら</span>クリティカル耐性率を50%増加<span class="flow-chip">3ターン</span></li><li>次に攻撃を受けたときにこのバフは解除され、再度HP割合を判定する</li></ul></div>
+          </li>
+        </ol>
         </div>
       
-          <div class="data-grid"><dl class="data-item"><dt>対象</dt><dd>自身</dd></dl><dl class="data-item"><dt>倍率・火力</dt><dd>物魔防御貫通+50% / クリ耐性+50%</dd></dl><dl class="data-item"><dt>継続</dt><dd>3T</dd></dl></div>
+          
           
           
           <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用Lv3</th><td>バトル開始時1ターン自身のスピード30%増加</td></tr></table></div>
