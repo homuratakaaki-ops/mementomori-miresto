@@ -25445,7 +25445,20 @@
             },
             {
               "text": "攻撃力を65%増加",
-              "duration": "3ターン"
+              "duration": "3ターン",
+              "exclusive": [
+                {
+                  "lv": 2,
+                  "kind": "change",
+                  "text": "攻撃力の増加量が85%"
+                },
+                {
+                  "lv": 3,
+                  "kind": "add",
+                  "text": "防御力を65%増加",
+                  "duration": "3ターン"
+                }
+              ]
             },
             {
               "text": "弱体効果を全解除",
@@ -25473,7 +25486,11 @@
         "realityRank": "高",
         "rankingTarget": "対象外",
         "damageMemo": "コルディ軸など、攻撃力最高の主力を再行動しやすくする支援スキル。行動順調整が重要"
-      }
+      },
+      "exclusiveIntegrated": [
+        2,
+        3
+      ]
     },
     {
       "id": "mertillier-s3",
@@ -29319,16 +29336,35 @@
             {
               "text": "物理攻撃",
               "multiplier": "攻撃力×440%",
-              "damageTotal": "base"
+              "damageTotal": "base",
+              "exclusive": [
+                {
+                  "lv": 3,
+                  "kind": "change",
+                  "multiplier": "攻撃力×480%"
+                }
+              ]
             },
             {
               "text": "脱力を付与",
               "term": "脱力",
               "chance": "70%",
-              "duration": "4ターン"
+              "duration": "4ターン",
+              "note": "攻撃力20%減少",
+              "exclusive": [
+                {
+                  "lv": 1,
+                  "kind": "change",
+                  "text": "攻撃力減少が40%"
+                }
+              ]
             }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        1,
+        3
       ]
     },
     {
@@ -29472,18 +29508,27 @@
               "text": "最大HPを、コベル自身の最大HPの20%分増加",
               "note": "解除不可"
             }
+          ],
+          "exclusiveTarget": [
+            {
+              "lv": 2,
+              "target": "味方全体"
+            }
           ]
         },
         {
           "when": "コベルが戦闘不能になったとき",
           "mode": "release",
-          "target": "隣接する味方2体",
+          "target": "この効果を受けた味方",
           "effects": [
             {
               "text": "被回復量の増加だけ解除"
             }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        2
       ]
     },
     {
@@ -29889,10 +29934,37 @@
             {
               "text": "物理攻撃",
               "multiplier": "物理280%×5回",
-              "damageTotal": "base"
+              "damageTotal": "base",
+              "exclusive": [
+                {
+                  "lv": 3,
+                  "kind": "change",
+                  "multiplier": "物理720%×5回"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "when": "攻撃後",
+          "mode": "sequence",
+          "order": 4,
+          "exclusiveLv": 1,
+          "target": "攻撃した敵",
+          "effects": [
+            {
+              "text": "脱力を付与",
+              "term": "脱力",
+              "chance": "70%",
+              "duration": "2ターン",
+              "note": "攻撃力40%減少"
             }
           ]
         }
+      ],
+      "exclusiveIntegrated": [
+        1,
+        3
       ]
     },
     {
@@ -31035,6 +31107,16 @@
             {
               "text": "霊痕を付与",
               "note": "解除不可"
+            }
+          ]
+        },
+        {
+          "when": "自身が魔法攻撃を受けたとき",
+          "mode": "conditional",
+          "target": "霊痕を付帯している味方全体",
+          "effects": [
+            {
+              "text": "弱体効果を1つ解除"
             }
           ]
         }

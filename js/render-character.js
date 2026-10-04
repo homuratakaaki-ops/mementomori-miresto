@@ -166,6 +166,74 @@
     return "";
   }
 
+  /** 専用武器ぶんのラベル。色だけに頼らず「専用Lv○」の文字で見分けられるようにする。 */
+  function exclusiveChip(lv) {
+    return `<span class="flow-chip excl">${escapeHtml("専用Lv" + lv)}</span>`;
+  }
+
+  /**
+   * 専用武器ぶんの注記。語形は「専用Lv○：〜に変更」「専用Lv○：〜を追加」の2つだけ。
+   * 矢印だけの表現は使わない（置き換えなのか追加なのかが読み取れないため）。
+   */
+  function exclusiveNote(lv, bodyHtml, tail) {
+    return `<span class="flow-excl">${exclusiveChip(lv)}<span class="flow-excl-text">${bodyHtml}${escapeHtml(tail)}</span></span>`;
+  }
+
+  function exclusiveChange(lv, bodyHtml, suffix) {
+    return exclusiveNote(lv, bodyHtml, `に変更${suffix || ""}`);
+  }
+
+  /** 枠の中で damage の合計を出している攻撃の効果。枠の対象が専用で変わると合計も変わる。 */
+  function baseDamageEffect(block) {
+    return (block.effects || []).find((effect) => effect.damageTotal === "base");
+  }
+
+  /**
+   * 専用で合計倍率が変わるときの添え書き。damage.exclusiveLv{N}Total の値をそのまま出す
+   * （専用の合計表示とデータを食い違わせないため、ここでは計算しない）。
+   */
+  function exclusiveTotalSuffix(skill, effect, lv) {
+    if (!effect || effect.damageTotal !== "base") return "";
+    const damage = skill.damage;
+    if (!damage || damage.nonAttackMultiplier) return "";
+    const total = damage[`exclusiveLv${lv}Total`];
+    if (!total || total === damage.baseTotal) return "";
+    return `（倍率合計 ${total}%）`;
+  }
+
+  /** 帯の「誰に」に添える対象の変更。枠ごと対象が入れ替わる専用効果に使う。 */
+  function exclusiveTargetNotes(skill, block) {
+    const list = Array.isArray(block.exclusiveTarget) ? block.exclusiveTarget : [];
+    return list
+      .map((item) => exclusiveChange(item.lv, escapeHtml(item.target), exclusiveTotalSuffix(skill, baseDamageEffect(block), item.lv)))
+      .join("");
+  }
+
+  /** 専用で増える効果の行。同じ「いつ」＋同じ「誰に」の枠の中に1行として置く。 */
+  function renderExclusiveAddLine(item, terms) {
+    const before = item.chance ? `<span class="flow-chip">確率${escapeHtml(item.chance)}</span>` : "";
+    const after = [
+      item.multiplier ? `<span class="flow-chip num">${highlightRatios(item.multiplier)}</span>` : "",
+      item.duration ? `<span class="flow-chip">${escapeHtml(item.duration)}</span>` : "",
+      item.note ? `<span class="flow-note">${escapeHtml(item.note)}</span>` : ""
+    ].filter(Boolean).join("");
+    return `<li class="flow-excl-line">${exclusiveChip(item.lv)}<span class="flow-excl-body">${before}${renderTermText(item, terms)}${after}</span><span class="flow-excl-tail">を追加</span></li>`;
+  }
+
+  /** 効果の倍率・継続・確率・効果量が専用で置き換わるときの注記。 */
+  function exclusiveChangeNotes(skill, effect, kind) {
+    return (effect.exclusive || [])
+      .filter((item) => item.kind !== "add")
+      .filter((item) => (kind === "multiplier" ? Boolean(item.multiplier) : !item.multiplier))
+      .map((item) => {
+        if (item.multiplier) return exclusiveChange(item.lv, highlightRatios(item.multiplier), exclusiveTotalSuffix(skill, effect, item.lv));
+        if (item.duration) return exclusiveChange(item.lv, `継続が${escapeHtml(item.duration)}`);
+        if (item.chance) return exclusiveChange(item.lv, `確率が${escapeHtml(item.chance)}`);
+        return exclusiveChange(item.lv, highlightRatios(item.text || ""));
+      })
+      .join("");
+  }
+
   /**
    * flow の1効果。条件・確率は効果の前、倍率・合計・継続・補足は効果の後ろに添える。
    * 倍率チップがある効果も「何をするのか」の本文を残す。
@@ -180,10 +248,17 @@
     const after = [
       effect.multiplier ? `<span class="flow-chip num">${highlightRatios(effect.multiplier)}</span>` : "",
       total ? `<span class="flow-total">${escapeHtml(total)}</span>` : "",
+      exclusiveChangeNotes(skill, effect, "multiplier"),
       effect.duration ? `<span class="flow-chip">${escapeHtml(effect.duration)}</span>` : "",
-      effect.note ? `<span class="flow-note">${escapeHtml(effect.note)}</span>` : ""
+      effect.note ? `<span class="flow-note">${escapeHtml(effect.note)}</span>` : "",
+      exclusiveChangeNotes(skill, effect, "other")
     ].filter(Boolean).join("");
-    return `<li${effect.condition ? ' class="flow-cond-line"' : ""}>${before}${renderTermText(effect, terms)}${after}</li>`;
+    const line = `<li${effect.condition ? " class=\"flow-cond-line\"" : ""}>${before}${renderTermText(effect, terms)}${after}</li>`;
+    const adds = (effect.exclusive || [])
+      .filter((item) => item.kind === "add")
+      .map((item) => renderExclusiveAddLine(item, terms))
+      .join("");
+    return `${line}${adds}`;
   }
 
   /**
@@ -193,9 +268,14 @@
   function renderFlowBlock(skill, block, terms, numbered) {
     const effects = block.effects || [];
     const mode = block.mode === "simultaneous" && effects.length < 2 ? "" : (FLOW_MODE_LABEL[block.mode] || "");
+    // 専用武器でしか起きない枠。帯に「専用Lv○」を出し、枠ごと追加であることを明示する。
+    const exclusiveLv = block.exclusiveLv;
+    const label = exclusiveLv
+      ? `${exclusiveChip(exclusiveLv)}この枠ごと追加`
+      : (mode ? escapeHtml(mode) : "");
     return `
-          <li class="flow-block">
-            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">${escapeHtml(flowOrderMark(block, numbered))}${escapeHtml(block.when)}</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>${escapeHtml(block.target)}</span></span>${mode ? `<span class="flow-mode">${escapeHtml(mode)}</span>` : ""}</p>
+          <li class="flow-block${exclusiveLv ? " flow-block-excl" : ""}">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">${escapeHtml(flowOrderMark(block, numbered))}${escapeHtml(block.when)}</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>${escapeHtml(block.target)}${exclusiveTargetNotes(skill, block)}</span></span>${label ? `<span class="flow-mode">${label}</span>` : ""}</p>
             <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects">${effects.map((effect) => renderFlowEffect(skill, block, effect, terms)).join("")}</ul></div>
           </li>
         `;
@@ -308,15 +388,45 @@
     return items.length ? `<div><h3 class="block-title">かみ合わせ</h3><ul class="verification-list synergy-list">${items.join("")}</ul></div>` : "";
   }
 
+  // 「専用武器効果なし」だけの枠は情報が無いので出さない（表示ルール6）。
+  const WEAPON_NONE_PATTERN = /^(?:専用武器効果なし|専用武器での直接強化なし|専用武器による強化なし|専用武器での強化なし|専用効果なし)$/;
+
+  /**
+   * 専用武器欄に残す行。flow に統合できた専用Lvは重複表示しないので除く（表示ルール6）。
+   * 一部だけ統合できた専用Lvは exclusiveRest に残りの文章を書いて差し替える。
+   */
+  function weaponRows(skill) {
+    const raw = String(skill.exclusiveWeapon || "").trim();
+    if (!raw || WEAPON_NONE_PATTERN.test(raw)) return [];
+    const integrated = new Set((skill.exclusiveIntegrated || []).map(Number));
+    const rest = skill.exclusiveRest || {};
+    const parts = raw.split(/(?=専用Lv\d:)/).filter(Boolean);
+    if (!parts.length) return [{ head: "専用", body: raw }];
+    const rows = [];
+    for (const part of parts) {
+      const match = part.match(/^(専用Lv(\d)):\s*([\s\S]*)$/);
+      if (!match) {
+        rows.push({ head: "専用", body: part });
+        continue;
+      }
+      const lv = Number(match[2]);
+      if (Object.prototype.hasOwnProperty.call(rest, String(lv))) {
+        rows.push({ head: match[1], body: rest[String(lv)] });
+        continue;
+      }
+      if (integrated.has(lv)) continue;
+      rows.push({ head: match[1], body: match[3] });
+    }
+    return rows;
+  }
+
   function renderWeapon(skill) {
-    if (!skill.exclusiveWeapon) return "";
-    const parts = String(skill.exclusiveWeapon).split(/(?=専用Lv\d:)/).filter(Boolean);
-    const rows = parts.length ? parts.map((part) => {
-      const match = part.match(/^(専用Lv\d):\s*(.*)$/);
-      if (!match) return `<tr><th>専用</th><td>${highlightRatios(part)}</td></tr>`;
-      return `<tr><th>${escapeHtml(match[1])}</th><td>${highlightRatios(match[2])}</td></tr>`;
-    }) : [`<tr><th>専用</th><td>${highlightRatios(skill.exclusiveWeapon)}</td></tr>`];
-    return `<div><h3 class="block-title">専用武器</h3><table class="weapon-table">${rows.join("")}</table></div>`;
+    const rows = weaponRows(skill);
+    if (!rows.length) return "";
+    const html = rows
+      .map((row) => `<tr><th>${escapeHtml(row.head)}</th><td>${highlightRatios(row.body)}</td></tr>`)
+      .join("");
+    return `<div><h3 class="block-title">専用武器</h3><table class="weapon-table">${html}</table></div>`;
   }
 
   function renderSkillCard(skill, terms) {
@@ -394,6 +504,7 @@
     renderDataRows,
     renderVerifications,
     renderSynergyNotes,
+    weaponRows,
     renderWeapon,
     renderSkillCard,
     renderSkillList,

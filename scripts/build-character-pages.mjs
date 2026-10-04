@@ -241,6 +241,113 @@ function validateFlow(skill, errors) {
   }
 }
 
+/** exclusiveWeapon の文章を「専用LvN」ごとに分ける（renderer の weaponRows と同じ切り方）。 */
+const WEAPON_NONE_PATTERN = /^(?:専用武器効果なし|専用武器での直接強化なし|専用武器による強化なし|専用武器での強化なし|専用効果なし)$/;
+
+function exclusiveSourceLevels(skill) {
+  const raw = String(skill.exclusiveWeapon || "").trim();
+  if (!raw || WEAPON_NONE_PATTERN.test(raw)) return [];
+  return raw
+    .split(/(?=専用Lv\d:)/)
+    .filter(Boolean)
+    .map((part) => part.match(/^専用Lv(\d):/))
+    .filter(Boolean)
+    .map((match) => Number(match[1]));
+}
+
+/** flow の中で参照している専用Lv（枠の対象の変更 / 独立枠 / 効果の変更・追加）。 */
+function exclusiveFlowLevels(skill) {
+  const levels = new Set();
+  for (const block of skill.flow || []) {
+    if (block.exclusiveLv) levels.add(Number(block.exclusiveLv));
+    for (const item of block.exclusiveTarget || []) levels.add(Number(item.lv));
+    for (const effect of block.effects || []) {
+      for (const item of effect.exclusive || []) levels.add(Number(item.lv));
+    }
+  }
+  return levels;
+}
+
+/** 専用の倍率変更から合計を計算して damage.exclusiveLvNTotal と突き合わせる。 */
+function exclusiveMultiplierTotal(skill, item) {
+  const match = String(item.multiplier || "").match(/(?:攻撃力×|物理|魔法)([0-9]+(?:\.[0-9]+)?)%(?:×([0-9]+)回)?/);
+  if (!match) return null;
+  const single = Number(match[1]);
+  const hits = match[2] ? Number(match[2]) : (skill.damage && skill.damage.hitCount) || 1;
+  return Math.round(single * hits * 100) / 100;
+}
+
+/**
+ * 専用武器効果の分解（統合表示）の検証。
+ * exclusiveWeapon の各「専用LvN」は、flow へ統合したか専用武器枠に残したかの
+ * どちらかに必ず振り分けられていること（取りこぼし0）を点検する。
+ */
+function validateExclusive(skill, errors) {
+  const label = `${skill.id} (S${skill.number} ${skill.name})`;
+  const source = new Set(exclusiveSourceLevels(skill));
+  const used = exclusiveFlowLevels(skill);
+  const integrated = new Set((skill.exclusiveIntegrated || []).map(Number));
+  const rest = skill.exclusiveRest || {};
+
+  for (const lv of used) {
+    if (!source.has(lv)) errors.push(`${label}: flow が専用Lv${lv} を参照しているが exclusiveWeapon に無い`);
+    if (!integrated.has(lv) && !Object.prototype.hasOwnProperty.call(rest, String(lv))) {
+      errors.push(`${label}: 専用Lv${lv} を flow に出しているのに exclusiveIntegrated に入っていない（専用武器枠と二重表示になる）`);
+    }
+  }
+  for (const lv of integrated) {
+    if (!source.has(lv)) errors.push(`${label}: exclusiveIntegrated の専用Lv${lv} が exclusiveWeapon に無い`);
+    if (!used.has(lv)) errors.push(`${label}: 専用Lv${lv} を統合済みにしているが flow のどこにも出ていない（取りこぼし）`);
+  }
+
+  for (const block of skill.flow || []) {
+    for (const item of block.exclusiveTarget || []) {
+      if (!item.lv || !item.target) errors.push(`${label}: exclusiveTarget に lv / target が無い`);
+    }
+    for (const effect of block.effects || []) {
+      for (const item of effect.exclusive || []) {
+        if (!item.lv) errors.push(`${label}: effect.exclusive に lv が無い`);
+        if (item.kind !== "change" && item.kind !== "add") {
+          errors.push(`${label}: effect.exclusive の kind「${item.kind}」は change / add のみ`);
+        }
+        if (item.kind === "add" && !item.text) errors.push(`${label}: 専用Lv${item.lv} の追加効果に本文（text）が無い`);
+        if (item.kind === "change" && !item.multiplier && !item.duration && !item.chance && !item.text) {
+          errors.push(`${label}: 専用Lv${item.lv} の変更に multiplier / duration / chance / text のどれも無い`);
+        }
+        // 「もし専用なら」「矢印だけ」の表現は使わない（表示ルール4）
+        const words = [item.text, item.multiplier, item.duration, item.chance, item.note].filter(Boolean).join(" ");
+        if (/→|もし専用/.test(words)) errors.push(`${label}: 専用Lv${item.lv} の文言に矢印または「もし専用」が入っている`);
+        // 専用の合計表示が damage.exclusiveLvNTotal と一致すること
+        if (item.kind === "change" && item.multiplier && effect.damageTotal === "base" && skill.damage && !skill.damage.nonAttackMultiplier) {
+          const expected = skill.damage[`exclusiveLv${item.lv}Total`];
+          const computed = exclusiveMultiplierTotal(skill, item);
+          if (computed !== null && expected && computed !== expected) {
+            errors.push(`${label}: 専用Lv${item.lv} の倍率「${item.multiplier}」から出る合計 ${computed} が exclusiveLv${item.lv}Total ${expected} と合わない`);
+          }
+        }
+      }
+    }
+  }
+}
+
+/** 専用武器枠に、統合済みの効果や「専用武器効果なし」が残っていないか（表示ルール6）。 */
+function validateRenderedWeapon(skill, html, errors) {
+  const label = `${skill.id} (S${skill.number} ${skill.name})`;
+  if (/専用武器(?:効果|での直接強化|による強化|での強化)なし|専用効果なし/.test(html)) {
+    errors.push(`${label}: 生成HTMLに「専用武器効果なし」の枠が残っている`);
+  }
+  const rows = renderer.weaponRows(skill);
+  if (!rows.length && html.includes("専用武器</h3>")) {
+    errors.push(`${label}: 残す行が無いのに専用武器枠が出ている`);
+  }
+  for (const lv of (skill.exclusiveIntegrated || []).map(Number)) {
+    if (Object.prototype.hasOwnProperty.call(skill.exclusiveRest || {}, String(lv))) continue;
+    if (rows.some((row) => row.head === `専用Lv${lv}`)) {
+      errors.push(`${label}: 統合済みの専用Lv${lv} が専用武器枠に重複して出ている`);
+    }
+  }
+}
+
 /** flow を持つスキルのカードに旧「対象／倍率・火力／継続」が残っていないか（ルール10）。 */
 function validateRenderedCard(skill, html, errors) {
   if (/<dt>(?:対象|倍率・火力|継続)<\/dt>/.test(html)) {
@@ -366,9 +473,12 @@ function validateAll({ baseData, terms }) {
     validateFlow(skill, errors);
     validateDamageNumbers(skill, errors);
     validateConditionMax(skill, errors);
+    validateExclusive(skill, errors);
+    const card = renderer.renderSkillCard(skill, terms);
+    validateRenderedWeapon(skill, card, errors);
     if (Array.isArray(skill.flow) && skill.flow.length > 0) {
       flowSkills += 1;
-      validateRenderedCard(skill, renderer.renderSkillCard(skill, terms), errors);
+      validateRenderedCard(skill, card, errors);
     }
   }
   if (errors.length) {

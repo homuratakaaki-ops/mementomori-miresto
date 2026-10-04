@@ -371,6 +371,47 @@ main {
   font-size: 13px;
 }
 
+/* 専用武器ぶんの変更・追加。色だけに頼らず「専用Lv○」の文字で見分けられるようにする */
+.flow-chip.excl {
+  margin: 0 6px 0 0;
+  border-color: var(--navy);
+  background: var(--navy);
+  color: #fff;
+}
+
+.flow-excl {
+  display: inline-block;
+  margin-left: 6px;
+  color: var(--navy);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+/* 専用で増える効果の行。枠線と「専用Lv○」の文字の両方で、常時起きる行と見分けられるようにする */
+.flow-effects li.flow-excl-line {
+  margin: 0 -6px;
+  padding: 4px 6px;
+  border: 1px dashed var(--navy);
+  border-radius: 6px;
+  background: #f3f6fb;
+}
+
+.flow-effects li.flow-excl-line .flow-chip.excl { margin: 0 6px 0 0; }
+
+.flow-excl-body { color: var(--ink); font-weight: 400; }
+
+.flow-excl-tail {
+  margin-left: 4px;
+  color: var(--navy);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+/* 専用武器でしか起きない枠 */
+.flow-block-excl { border-color: var(--navy); }
+.flow-block-excl .flow-when { background: #f3f6fb; }
+.flow-block-excl .flow-mode { color: var(--navy); }
+
 .term { display: inline; }
 
 .term summary {
@@ -542,4 +583,12 @@ footer {
 @media (max-width: 760px) {
   .data-grid { grid-template-columns: 1fr; }
   .weapon-table th { width: 96px; }
+}
+
+@media (max-width: 480px) {
+  .flow-when-target .flow-excl {
+    display: block;
+    margin-left: 0;
+    margin-top: 4px;
+  }
 }
