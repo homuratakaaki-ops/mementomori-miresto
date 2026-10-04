@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>編成と比較 | ミレストのメメントモリ分析データ室</title>
+  <meta name="description" content="最大5枠のPTを仮組みし、候補キャラのスキルをキャラ詳細と同じ分解表示で見比べるツール。属性の絞り込み・お気に入り・候補A/B比較・スピード順の目安を1画面で行き来できます。">
+  <link rel="canonical" href="https://memento.musoudc.com/party-builder.html">
+  <!-- OGP -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="ミレストのメメントモリ分析データ室">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="og:title" content="編成と比較 | ミレストのメメントモリ分析データ室">
+  <meta property="og:description" content="最大5枠のPTを仮組みし、候補キャラのスキルをキャラ詳細と同じ分解表示で見比べるツール。属性の絞り込み・お気に入り・候補A/B比較・スピード順の目安を1画面で行き来できます。">
+  <meta property="og:url" content="https://memento.musoudc.com/party-builder.html">
+  <meta property="og:image" content="https://memento.musoudc.com/assets/ogp/ogp-common.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <link rel="icon" type="image/png" href="./assets/miresto/miresto-icon-32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="./assets/miresto/miresto-icon-180.png">
+  <!-- スキルカードの見た目はキャラ詳細と共有する（描画も同じモジュールを使う） -->
+  <link rel="stylesheet" href="./assets/character-page.css">
+  <link rel="stylesheet" href="./party-builder.css">
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-BHKBSRGSJF"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BHKBSRGSJF');
+  </script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6389066329814944"
+       crossorigin="anonymous"></script>
+  <script src="./js/gacha-status.js" defer></script>
+  <script src="./js/render-character.js" defer></script>
+  <script src="./party-builder.js" defer></script>
+</head>
+<body>
+  <header class="page-header">
+    <div class="header-inner">
+      <a class="top-link" href="/">トップへ戻る</a>
+      <p class="eyebrow">MEMENTO MORI · PARTY BUILDER</p>
+      <h1>編成と比較</h1>
+      <p class="role">誰を入れる？ どの順で動く？</p>
+    </div>
+  </header>
+
+  <main>
+    <p class="pb-alert" id="storageNotice" hidden>この端末には保存されません。</p>
+    <p class="pb-alert" id="loadError" hidden>データの読み込みに失敗しました。時間をおいて再読み込みしてください。</p>
+
+    <!-- ① PTの配置（折りたたみ対象外・常時表示） -->
+    <section class="pb-section" aria-labelledby="partyHeading">
+      <div class="pb-section-head">
+        <h2 id="partyHeading">PTの配置</h2>
+        <span class="pb-note" id="slotCaption">枠を押すと入替対象になります。</span>
+      </div>
+      <div class="pb-party" id="party"></div>
+      <div id="slotDetail"></div>
+    </section>
+
+    <!-- ② スピード順の目安 -->
+    <details class="pb-fold" id="foldSpeed">
+      <summary>
+        スピード順の目安
+        <span class="pb-count" id="speedCount"></span>
+      </summary>
+      <div class="pb-fold-body">
+        <p class="pb-note pb-fixed-note">入力値の降順。速度乱数・同速・戦闘中の変動は未計算。</p>
+        <div id="speedList"></div>
+      </div>
+    </details>
+
+    <!-- ③ 候補を探す・お気に入り -->
+    <details class="pb-fold" id="foldCandidates">
+      <summary>
+        候補を探す・お気に入り
+        <span class="pb-count" id="favoriteCount"></span>
+      </summary>
+      <div class="pb-fold-body">
+        <div class="pb-filters">
+          <div>
+            <span class="pb-filter-label" id="sourceLabel">表示する候補</span>
+            <div class="pb-row" id="sourceTabs" role="group" aria-labelledby="sourceLabel"></div>
+          </div>
+          <div>
+            <span class="pb-filter-label" id="attrLabel">属性（複数選択できます。選んだ属性のいずれかに当てはまる候補を出します）</span>
+            <div class="pb-row" id="attributeFilter" role="group" aria-labelledby="attrLabel"></div>
+          </div>
+        </div>
+        <div class="pb-section-head">
+          <span class="pb-count" id="rosterCount" aria-live="polite"></span>
+        </div>
+        <div class="pb-roster" id="roster"></div>
+      </div>
+    </details>
+
+    <!-- ④ 候補を比較して入れ替える -->
+    <details class="pb-fold" id="foldCompare" open>
+      <summary>候補を比較して入れ替える</summary>
+      <div class="pb-fold-body">
+        <div class="pb-compare" id="compare" aria-live="polite"></div>
+      </div>
+    </details>
+
+    <!-- ⑤ PTの関連スキルを見比べる -->
+    <details class="pb-fold" id="foldParty" open>
+      <summary>
+        PTの関連スキルを見比べる
+        <span class="pb-count" id="selectedCount"></span>
+      </summary>
+      <div class="pb-fold-body">
+        <div class="pb-section-head">
+          <span class="pb-note">チェックしたスキルだけを並べます。</span>
+          <label class="pb-sort">並び
+            <select id="partyOrder">
+              <option value="slot">配置順</option>
+              <option value="speed">スピード順</option>
+            </select>
+          </label>
+        </div>
+        <details class="pb-picker" id="skillPicker">
+          <summary>表示するスキルを選ぶ</summary>
+          <div class="pb-picker-body" id="pickerBody"></div>
+        </details>
+        <div class="pb-skill-grid" id="partySkills" aria-live="polite"></div>
+      </div>
+    </details>
+
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-6389066329814944"
+         data-ad-slot="6111654373"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <span>ミレストのメメントモリ攻略・分析データベース / 非公式ファンサイト</span>
+      <nav class="footer-links" aria-label="固定ページ">
+        <a href="./privacy.html">プライバシーポリシー</a>
+        <a href="/">トップ</a>
+        <a href="./disclaimer.html">免責事項</a>
+        <a href="./about.html">このサイトについて</a>
+        <a href="./contact.html">お問い合わせ</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>
