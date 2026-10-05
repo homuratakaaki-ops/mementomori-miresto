@@ -435,8 +435,13 @@
     }
 
     @media (max-width: 860px) {
-      .layout { grid-template-columns: 1fr; }
-      .form-grid { grid-template-columns: 1fr; }
+      /*
+       * 1列にするときは minmax(0, 1fr) にすること。
+       * 素の 1fr は minmax(auto, 1fr) と同じで、中身の最小幅より狭くできない。
+       * 幅の広い子要素が1つ入ると、その幅がそのまま外へ伝わって横あふれになる。
+       */
+      .layout { grid-template-columns: minmax(0, 1fr); }
+      .form-grid { grid-template-columns: minmax(0, 1fr); }
       .wallet-grid { grid-template-columns: 1fr; }
       .diamond-field { grid-column: auto; }
       .number-control { grid-template-columns: 1fr; }
