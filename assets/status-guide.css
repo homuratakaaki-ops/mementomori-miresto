@@ -76,12 +76,18 @@
 .oneline-text p { margin-bottom: 0; line-height: 1.9; }
 
 .oneline-figure {
-  flex: none;
-  width: 180px;
+  flex: 1 1 100%;
+  width: min(100%, 760px);
   max-width: 100%;
+  margin: 0 auto;
 }
 
-.oneline-figure img { width: 100%; height: auto; }
+.oneline-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
 
 .key-rule {
   padding: 12px;
