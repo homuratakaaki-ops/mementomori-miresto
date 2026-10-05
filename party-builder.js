@@ -878,6 +878,18 @@
     toastTimer = setTimeout(hideToast, TOAST_MS);
   }
 
+  /**
+   * 通知は出さずに取り消し地点だけ取り直す。
+   * 配置が変わらない操作（表示スキルのチェック）用。
+   * ここで古い通知を閉じないと、前の編成を指した通知が残ったままになり、
+   * 押した人の後続操作が黙って消える（2026-10-05 ネネ報告 F01）。
+   */
+  function setUndoPoint(snapshot) {
+    if (toastTimer) { clearTimeout(toastTimer); toastTimer = null; }
+    if (el.toast) el.toast.hidden = true;
+    undoSnapshot = snapshot;
+  }
+
   function undoPlace() {
     if (!undoSnapshot) { hideToast(); return; }
     state.party = undoSnapshot.party.slice();
@@ -1046,8 +1058,9 @@
   }
 
   /**
-   * 表示スキルのチェック。ここでも snapshot を取り直し、通知を出し直す。
-   * 取らないと、入替の通知が残ったまま「元に戻す」でこの選択が消える（F01）。
+   * 表示スキルのチェック。配置は変わらないので通知は出さないが、
+   * snapshot は取り直して古い通知を閉じる。
+   * 残すと、入替の通知が残ったまま「元に戻す」でこの選択が消える（F01）。
    */
   function togglePartySkill(id, number, checked) {
     if (!byId.has(id) || !SKILL_NUMBERS.includes(Number(number))) return;
@@ -1058,8 +1071,7 @@
       : current.filter((n) => n !== Number(number));
     if (next.length) state.partySkills[id] = next;
     else delete state.partySkills[id];
-    const entry = character(id);
-    showToast(`${entry.name}のS${Number(number)}を${checked ? "表示に追加しました" : "表示から外しました"}`, before);
+    setUndoPoint(before);
     save();
     renderPartySkills();
   }
