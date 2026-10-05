@@ -250,17 +250,23 @@
       box-sizing: border-box;
     }
 
+    /*
+     * 数値入力＋ステップボタンの並び。
+     * width は fit-content（中身の幅。ただし置ける幅を超えない）にすること。
+     * max-content にすると狭い画面でもボタンが1行のままになり、その幅が
+     * .form-grid → .layout → .panel を押し広げて横あふれになる。
+     */
     .pickup-hidden .number-control,
     .platinum-hidden .number-control {
       grid-template-columns: 72px auto;
-      width: max-content;
+      width: fit-content;
       max-width: 100%;
     }
 
     .diamond-field .number-control {
       grid-template-columns: 72px auto;
       align-items: center;
-      width: max-content;
+      width: fit-content;
       max-width: 100%;
     }
 
