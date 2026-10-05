@@ -145,11 +145,15 @@
    * 検索用の正規化。ひらがな・カタカナ・英字の大小・全角半角・空白・
    * 小書き仮名を同一視する。`foldVu` を立てるとヴもば行に寄せる。
    * 濁点は落とさない（「ハ」と「バ」は別の名前なので）。
+   *
+   * 最初に Unicode NFKC を通すこと。半角カタカナ（ﾌﾛｰﾚﾝｽ）と半角濁点（ｺﾍﾞﾙ）が
+   * 全角の形に揃うので、半角で打った人も全角と同じ候補に行き着く。
+   * NFKCは全角の英数記号も半角へ直すので、文字コード計算での変換は不要。
    */
   function normalizeText(value, foldVu) {
     let text = String(value === null || value === undefined ? "" : value)
-      // 全角の英数記号 → 半角
-      .replace(/[！-～]/g, (char) => String.fromCharCode(char.charCodeAt(0) - 0xFEE0))
+      // 半角カタカナ・半角濁点・全角英数記号をまとめて揃える
+      .normalize("NFKC")
       .toLowerCase()
       // ひらがな → カタカナ
       .replace(/[ぁ-ゖ]/g, (char) => String.fromCharCode(char.charCodeAt(0) + 0x60));
@@ -215,7 +219,9 @@
       speed: state.speed,
       sections: state.sections,
       filter: state.filter,
-      partyOrder: state.partyOrder
+      partyOrder: state.partyOrder,
+      // 候補A/Bも保存する（再読み込みで比較の続きが消えないため）。
+      compare: state.compare
     };
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
@@ -288,6 +294,20 @@
 
     if (saved.partyOrder === "slot" || saved.partyOrder === "speed") {
       state.partyOrder = saved.partyOrder;
+    }
+
+    // 候補A/Bの復元。現行データに無いidは空き枠へ落とす（画面を壊さないため）。
+    if (saved.compare && typeof saved.compare === "object") {
+      ["A", "B"].forEach((side) => {
+        const slot = saved.compare[side];
+        if (!slot || typeof slot !== "object") return;
+        if (!known(slot.id)) {
+          if (slot.id !== null && slot.id !== undefined) dropped += 1;
+          return;
+        }
+        state.compare[side].id = slot.id;
+        if (SKILL_NUMBERS.includes(Number(slot.skill))) state.compare[side].skill = Number(slot.skill);
+      });
     }
 
     if (dropped > 0) {
@@ -515,23 +535,52 @@
    *
    * 並びは設定値の降順（同値は配置順）。配置順とは別物なので、
    * ここを変えてもPTの配置は動かさない。
+   *
+   * 入力のたびに innerHTML を入れ替えないこと。入力欄ごと作り直すと、
+   * 次に押した欄が押す前に消えてフォーカスが外れる（2026-10-05 ネネ報告 F02）。
+   * メンバーが変わったときだけ組み直し、値の変更は既存の行を書き換える。
    * ------------------------------------------------------------------ */
+  // 入力中はCSSの order で見た目だけ入れ替え、フォーカスが外れたらDOMを揃える。
+  let speedOrderPending = false;
+
+  /** いま出ている行（id → 要素）。まだ組んでいなければ null。 */
+  function speedRows() {
+    const list = el.speedList.querySelector("[data-speed-list]");
+    if (!list) return null;
+    const rows = new Map();
+    list.querySelectorAll("[data-speed-row]").forEach((row) => rows.set(row.dataset.id, row));
+    return { list, rows };
+  }
+
+  function sameSpeedMembers(found, members) {
+    return Boolean(found) && found.rows.size === members.length
+      && members.every(({ id }) => found.rows.has(id));
+  }
+
   function renderSpeed() {
     const members = membersBySpeed();
     el.speedCount.textContent = members.length ? `${members.length}体` : "";
     if (!members.length) {
+      speedOrderPending = false;
       el.speedList.innerHTML = `<div class="pb-empty">PTにキャラを入れると、ここに並びます。</div>`;
       return;
     }
-    el.speedList.innerHTML = `<div class="pb-speed-list">${members.map(({ id, index }, rank) => {
+    const found = speedRows();
+    // メンバーが同じなら組み直さない（入力中の欄を消さないため）。
+    if (sameSpeedMembers(found, members)) {
+      syncSpeedRows(found, members);
+      return;
+    }
+    speedOrderPending = false;
+    el.speedList.innerHTML = `<div class="pb-speed-list" data-speed-list>${members.map(({ id, index }, rank) => {
       const entry = character(id);
       const manual = state.speed[id];
       return `
-        <div class="pb-speed-item" data-pb-attr="${escapeHtml(entry.attribute)}">
-          <span class="pb-speed-rank">${rank + 1}</span>
+        <div class="pb-speed-item" data-speed-row data-id="${escapeHtml(id)}" data-pb-attr="${escapeHtml(entry.attribute)}">
+          <span class="pb-speed-rank" data-speed-rank>${rank + 1}</span>
           <span>
             <span class="pb-speed-name">${escapeHtml(entry.name)}</span>
-            <br><span class="pb-note">配置${index + 1}・基礎スピード ${formatSpeedNumber(entry.speed)}</span>
+            <br><span class="pb-note" data-speed-note>配置${index + 1}・基礎スピード ${formatSpeedNumber(entry.speed)}</span>
           </span>
           <span class="pb-speed-input">
             <label for="pb-speed-${escapeHtml(id)}">設定値（未入力なら基礎値）</label>
@@ -543,6 +592,57 @@
         </div>
       `;
     }).join("")}</div>`;
+  }
+
+  /**
+   * 既存の行を更新する。順位・配置・設定値を書き換え、並びはまずCSSの order で
+   * 入れ替える。入力中の欄が残っている間はDOMを動かさない（動かすとカーソルが飛ぶ）。
+   */
+  function syncSpeedRows(found, members) {
+    members.forEach(({ id, index }, rank) => {
+      const row = found.rows.get(id);
+      const entry = character(id);
+      row.style.order = String(rank + 1);
+      const rankCell = row.querySelector("[data-speed-rank]");
+      if (rankCell) rankCell.textContent = String(rank + 1);
+      const note = row.querySelector("[data-speed-note]");
+      if (note) note.textContent = `配置${index + 1}・基礎スピード ${formatSpeedNumber(entry.speed)}`;
+      const input = row.querySelector("[data-speed-input]");
+      // 打ちかけの欄は上書きしない。
+      if (input && input !== document.activeElement) {
+        input.value = Number.isFinite(state.speed[id]) ? String(state.speed[id]) : "";
+      }
+    });
+    if (found.list.contains(document.activeElement)) {
+      speedOrderPending = true;
+      return;
+    }
+    applySpeedOrder(found, members);
+  }
+
+  /** CSSで入れ替えていた並びを、DOMの並びに揃える。 */
+  function applySpeedOrder(found, members) {
+    members.forEach(({ id }, position) => {
+      const row = found.rows.get(id);
+      if (found.list.children[position] !== row) {
+        found.list.insertBefore(row, found.list.children[position] || null);
+      }
+      row.style.order = "";
+    });
+    speedOrderPending = false;
+  }
+
+  /** 入力欄から離れたときに呼ぶ。 */
+  function settleSpeedOrder() {
+    if (!speedOrderPending) return;
+    const found = speedRows();
+    const members = membersBySpeed();
+    if (!sameSpeedMembers(found, members)) {
+      speedOrderPending = false;
+      renderSpeed();
+      return;
+    }
+    applySpeedOrder(found, members);
   }
 
   /* ------------------------------------------------------------------
@@ -812,10 +912,16 @@
     if (from !== -1) state.party[from] = state.party[index]; // PT内の移動は入れ替え
     state.party[index] = id;
 
-    // 入ったメンバーの初期表示スキル（比較枠から入れたときはその番号、それ以外はS1）。
-    const initial = SKILL_NUMBERS.includes(Number(skillNumber)) ? Number(skillNumber) : 1;
-    if (!state.partySkills[id] || !state.partySkills[id].length) {
-      state.partySkills[id] = [initial];
+    // 表示スキルの引き継ぎ。
+    // - 比較枠から入れたとき（data-skill あり）は、いま見ていたスキルを「追加」する。
+    //   既存の選択は消さず、同じ番号は増やさない。
+    // - 候補一覧から入れたときは表示スキルを増やさない（空のときだけS1）。
+    const chosen = state.partySkills[id] || [];
+    const fromCompare = SKILL_NUMBERS.includes(Number(skillNumber));
+    if (fromCompare) {
+      state.partySkills[id] = SKILL_NUMBERS.filter((n) => chosen.includes(n) || n === Number(skillNumber));
+    } else if (!chosen.length) {
+      state.partySkills[id] = [1];
     }
 
     const entry = character(id);
@@ -845,12 +951,24 @@
     renderAll();
   }
 
+  /**
+   * 矢印での移動。これも「元に戻す」の対象にする。
+   * snapshotを取らずに通知を残すと、古い通知がこの移動より前の編成を指したまま残り、
+   * 押した人の矢印操作が黙って消える（2026-10-05 ネネ報告 F01）。
+   */
   function moveMember(index, step) {
     const target = index + step;
     if (target < 0 || target >= SLOT_COUNT) return;
     const current = state.party[index];
+    if (!current) return;
+    const before = snapshot();
+    const mover = character(current);
+    const other = character(state.party[target]);
     state.party[index] = state.party[target];
     state.party[target] = current;
+    showToast(other
+      ? `配置${index + 1}の${mover.name}と配置${target + 1}の${other.name}を入れ替えました`
+      : `${mover.name}を配置${index + 1}から配置${target + 1}へ移動しました`, before);
     save();
     renderAll();
   }
@@ -923,17 +1041,25 @@
     if (side !== "A" && side !== "B") return;
     if (!SKILL_NUMBERS.includes(Number(number))) return;
     state.compare[side].skill = Number(number);
+    save();
     renderCompare();
   }
 
+  /**
+   * 表示スキルのチェック。ここでも snapshot を取り直し、通知を出し直す。
+   * 取らないと、入替の通知が残ったまま「元に戻す」でこの選択が消える（F01）。
+   */
   function togglePartySkill(id, number, checked) {
     if (!byId.has(id) || !SKILL_NUMBERS.includes(Number(number))) return;
+    const before = snapshot();
     const current = state.partySkills[id] || [];
     const next = checked
       ? SKILL_NUMBERS.filter((n) => current.includes(n) || n === Number(number))
       : current.filter((n) => n !== Number(number));
     if (next.length) state.partySkills[id] = next;
     else delete state.partySkills[id];
+    const entry = character(id);
+    showToast(`${entry.name}のS${Number(number)}を${checked ? "表示に追加しました" : "表示から外しました"}`, before);
     save();
     renderPartySkills();
   }
@@ -941,6 +1067,9 @@
   /**
    * 設定スピードの手入力。空欄なら基礎値に戻す。
    * 速度を変えても配置（state.party）は動かさない。
+   *
+   * 打っている途中（input）で受け取り、範囲外の値はその場では黙って無視する。
+   * ここで描き直すと打ちかけの欄が消えるため。しまい直しは確定（change）で行う。
    */
   function setSpeed(id, raw) {
     if (!byId.has(id)) return;
@@ -948,15 +1077,34 @@
     if (!text) delete state.speed[id];
     else {
       const value = Number(text);
-      if (!Number.isFinite(value) || value < 1 || value > 99999) {
-        renderSpeed();
-        return;
-      }
+      if (!Number.isFinite(value) || value < 1 || value > 99999) return;
       state.speed[id] = Math.round(value);
     }
     save();
     renderSpeed();
-    renderPartySkills();
+    schedulePartySkills();
+  }
+
+  /** 入力確定時に、受け付けなかった値を保存済みの値へ戻す。 */
+  function commitSpeedInput(input) {
+    const id = input.dataset.id;
+    if (!byId.has(id)) return;
+    const stored = Number.isFinite(state.speed[id]) ? String(state.speed[id]) : "";
+    if (String(input.value).replace(/,/g, "").trim() !== stored) input.value = stored;
+  }
+
+  /**
+   * ⑤の描き直しは1打ごとに走らせない（スキルカードを何枚も組み直すため）。
+   * 打ち終わりに1回だけまとめて描く。
+   */
+  let partySkillsTimer = null;
+
+  function schedulePartySkills() {
+    if (partySkillsTimer) clearTimeout(partySkillsTimer);
+    partySkillsTimer = setTimeout(() => {
+      partySkillsTimer = null;
+      renderPartySkills();
+    }, 250);
   }
 
   function setPartyOrder(value) {
@@ -972,10 +1120,29 @@
     root.addEventListener("change", (event) => {
       const target = event.target;
       if (target.id === "partyOrder") setPartyOrder(target.value);
-      else if (target.hasAttribute("data-speed-input")) setSpeed(target.dataset.id, target.value);
+      else if (target.hasAttribute("data-speed-input")) commitSpeedInput(target);
       else if (target.hasAttribute("data-skill-check")) {
         togglePartySkill(target.dataset.id, target.dataset.skill, target.checked);
       }
+    });
+
+    // スピードは打つたびに受け取る。changeだけで受けると、次の欄を押した瞬間に
+    // 入力欄を組み直すことになり、押した欄が消えてフォーカスが外れる（F02）。
+    root.addEventListener("input", (event) => {
+      const target = event.target;
+      if (target.hasAttribute && target.hasAttribute("data-speed-input")) {
+        setSpeed(target.dataset.id, target.value);
+      }
+    });
+
+    // 入力欄から離れたら、CSSで入れ替えていた並びをDOMにも反映する。
+    // 次も速度の入力欄ならまだ揃えない（Tabでの連続入力を止めないため）。
+    root.addEventListener("focusout", (event) => {
+      const target = event.target;
+      if (!target.hasAttribute || !target.hasAttribute("data-speed-input")) return;
+      const next = event.relatedTarget;
+      if (next && next.hasAttribute && next.hasAttribute("data-speed-input")) return;
+      settleSpeedOrder();
     });
 
     // 検索は打つたびに絞る。入力欄は再描画しないので、文字が消えることはない。
