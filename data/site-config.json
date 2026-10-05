@@ -1,0 +1,11 @@
+{
+  "schema": "miresto_site_config_v1",
+  "note": "サイト全体の設定。広告の出し方の正はここ1か所で、ページには手書きしない（AGENTS.md「広告（AdSense）の出し方」）。",
+  "ads": {
+    "client": "ca-pub-6389066329814944",
+    "slot": "6111654373",
+    "slotName": "共通・本文下",
+    "slotNote": "既存のレスポンシブ ディスプレイ広告ユニットを流用。全ページで同じユニットを使う。",
+    "enabled": true
+  }
+}

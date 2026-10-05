@@ -1,0 +1,31 @@
+/*
+ * 広告枠（AdSense）の見た目。1ページ1枠・本文の最後だけに出る。
+ * マークアップは js/render-ad-slot.js が組み立て、scripts/build-ads.mjs が差し込む。
+ *
+ * ここで守っていること:
+ *   - 上32px / 下24px の余白。ボタン・内部リンク・ツールの操作部と密着させない
+ *   - min-height で場所を先に取る。広告が入ってから本文が下にずれない
+ *   - 幅は親に合わせる。狭い画面で横にはみ出させない
+ */
+.ad-slot {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 970px;
+  margin: 32px auto 24px;
+  min-height: 280px;
+}
+
+.ad-slot .adsbygoogle {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  min-height: 280px;
+}
+
+@media (max-width: 480px) {
+  .ad-slot,
+  .ad-slot .adsbygoogle {
+    min-height: 250px;
+  }
+}

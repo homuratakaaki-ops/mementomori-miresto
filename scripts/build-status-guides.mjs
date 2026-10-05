@@ -32,6 +32,7 @@ const STATUS_PAGES_DIR = join(ROOT, "pages", "status");
 const CHARACTER_PAGES_DIR = join(ROOT, "pages", "characters");
 
 const renderer = require(join(ROOT, "js", "render-character.js"));
+const adRenderer = require(join(ROOT, "js", "render-ad-slot.js"));
 const escapeHtml = renderer.escapeHtml;
 
 const SITE_ORIGIN = renderer.SITE_ORIGIN;
@@ -353,7 +354,8 @@ function head(options) {
     '  <link rel="icon" type="image/png" href="../../assets/miresto/miresto-icon-32.png" sizes="32x32">',
     '  <link rel="apple-touch-icon" href="../../assets/miresto/miresto-icon-180.png">',
     '  <link rel="stylesheet" href="../../assets/character-page.css">',
-    '  <link rel="stylesheet" href="../../assets/status-guide.css">'
+    '  <link rel="stylesheet" href="../../assets/status-guide.css">',
+    adRenderer.renderAdHead(options.ads, "  ")
   ].join("\n");
 }
 
@@ -536,7 +538,7 @@ function sourcesCard(guide) {
   return card("sources", "出典", parts.join("\n"));
 }
 
-function guidePageHtml(guide, characterById, skillById) {
+function guidePageHtml(guide, characterById, skillById, ads) {
   const title = guide.name + "｜状態異常ガイド | " + TITLE_SUFFIX;
   // description は検索結果に出る1〜2行。長い本文をそのまま入れると切られるので、
   // 「何の効果か」「このページで分かること」だけに絞る。
@@ -557,7 +559,7 @@ function guidePageHtml(guide, characterById, skillById) {
     "<!doctype html>",
     '<html lang="ja">',
     "<head>",
-    head({ title, description, canonical }),
+    head({ title, description, canonical, ads }),
     "</head>",
     '<body data-status-guide="' + escapeHtml(guide.id) + '" data-prerendered>',
     '  <header class="page-header">',
@@ -576,6 +578,7 @@ function guidePageHtml(guide, characterById, skillById) {
     '    <div class="guide-list">',
     cards.join("\n"),
     "    </div>",
+    adRenderer.renderAdSlot(ads, "    "),
     "  </main>",
     "",
     footer(),
@@ -585,7 +588,7 @@ function guidePageHtml(guide, characterById, skillById) {
   ].join("\n");
 }
 
-function indexPageHtml(guides) {
+function indexPageHtml(guides, ads) {
   const canonical = SITE_ORIGIN + "/pages/status/index.html";
   const items = [];
   for (const guide of guides) {
@@ -602,7 +605,7 @@ function indexPageHtml(guides) {
     "<!doctype html>",
     '<html lang="ja">',
     "<head>",
-    head({ title: INDEX_TITLE, description: INDEX_DESCRIPTION, canonical }),
+    head({ title: INDEX_TITLE, description: INDEX_DESCRIPTION, canonical, ads }),
     "</head>",
     "<body data-status-guide-index data-prerendered>",
     '  <header class="page-header">',
@@ -619,6 +622,7 @@ function indexPageHtml(guides) {
     '    <ul class="guide-index">',
     items.join("\n"),
     "    </ul>",
+    adRenderer.renderAdSlot(ads, "    "),
     "  </main>",
     "",
     footer(),
@@ -674,6 +678,7 @@ function readGuides() {
 export function buildStatusGuides(options) {
   const baseData = options.baseData;
   const terms = options.terms;
+  const ads = options.ads;
   const writeIfChanged = options.writeIfChanged;
 
   const guides = readGuides();
@@ -704,12 +709,12 @@ export function buildStatusGuides(options) {
     links += validateLinks(guide, characterById, errors);
     if (errors.length) continue; // リンク先が怪しいままHTMLを組まない
 
-    const html = guidePageHtml(guide, characterById, skillById);
+    const html = guidePageHtml(guide, characterById, skillById, ads);
     validateWording("pages/status/" + guide.id + ".html", html, errors);
     pages.push({ path: join(STATUS_PAGES_DIR, guide.id + ".html"), html, url: "/pages/status/" + guide.id + ".html" });
   }
 
-  const indexHtml = indexPageHtml(guides);
+  const indexHtml = indexPageHtml(guides, ads);
   validateWording("pages/status/index.html", indexHtml, errors);
 
   if (errors.length) {

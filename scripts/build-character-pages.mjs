@@ -15,6 +15,7 @@
  *   pages/characters/index.html       … キャラ一覧のカード部分を差し替え
  *   index.html                        … トップページのニュース欄を差し替え
  *   pages/status/*.html               … 状態異常ガイド（scripts/build-status-guides.mjs）
+ *   広告枠                            … scripts/build-ads.mjs（目印 <!-- ad:bottom --> を置き換え）
  *
  * data/*.json を変更したら必ず実行し、JSONとHTMLを同じコミットに含めること。
  */
@@ -23,6 +24,7 @@ import { createRequire } from "node:module";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { buildStatusGuides } from "./build-status-guides.mjs";
+import { buildAds } from "./build-ads.mjs";
 
 const require = createRequire(import.meta.url);
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
@@ -33,6 +35,7 @@ const renderer = require(join(ROOT, "js", "render-character.js"));
 const indexRenderer = require(join(ROOT, "js", "render-character-index.js"));
 const gachaStatus = require(join(ROOT, "js", "gacha-status.js"));
 const newsRenderer = require(join(ROOT, "js", "render-news.js"));
+const adRenderer = require(join(ROOT, "js", "render-ad-slot.js"));
 
 // 開催状況の判定に使う「今日」。1回のビルド内で全ページ同じ日付になるように
 // ここで1度だけ決める（日付が変わる瞬間にビルドが走っても食い違わないため）。
@@ -76,7 +79,7 @@ function writeIfChanged(path, content) {
  * JSが埋めていた箇所（roleMemo / characterMeta / skillList / notePanel）を
  * 生成時に埋めてある。
  */
-function characterPageHtml({ character, metaHtml, skillListHtml, description }) {
+function characterPageHtml({ character, metaHtml, skillListHtml, description, ads }) {
   const notePanel = character.noteUrl
     ? `    <section class="note-panel" id="notePanel">
       <strong>評価・運用メモはnoteへ</strong><br>
@@ -113,6 +116,7 @@ function characterPageHtml({ character, metaHtml, skillListHtml, description }) 
   <script src="../../js/gacha-status.js" defer></script>
   <script src="../../js/render-character.js" defer></script>
   <script src="../../js/character-page.js" defer></script>
+${adRenderer.renderAdHead(ads, "  ")}
 </head>
 <body data-character-page data-character-id="${renderer.escapeHtml(character.id)}" data-attribute="${renderer.escapeHtml(character.attribute || "")}" data-prerendered>
   <header class="page-header">
@@ -128,6 +132,7 @@ function characterPageHtml({ character, metaHtml, skillListHtml, description }) 
   <main>
 ${notePanel}
     <section class="skill-list" id="skillList">${skillListHtml}</section>
+${adRenderer.renderAdSlot(ads, "    ")}
   </main>
 
   <footer>
@@ -640,7 +645,7 @@ function validateAll({ baseData, terms }) {
   return flowSkills;
 }
 
-function buildCharacterPages({ baseData, newsData, terms }) {
+function buildCharacterPages({ baseData, newsData, terms, ads }) {
   const written = [];
   const unchanged = [];
   const slugs = [];
@@ -655,7 +660,8 @@ function buildCharacterPages({ baseData, newsData, terms }) {
       character: { ...character, pageSlug: slug },
       metaHtml: renderer.renderMetaHtml(character, newsData, TODAY),
       skillListHtml: renderer.renderSkillList(skills, terms),
-      description: renderer.pageDescription(character, skills)
+      description: renderer.pageDescription(character, skills),
+      ads
     });
 
     const path = join(PAGES_DIR, `${slug}.html`);
@@ -761,14 +767,19 @@ function main() {
   const baseData = readJson(join(DATA_DIR, "mementomori-skills.json"), { characters: [], skills: [] });
   const newsData = readJson(join(DATA_DIR, "news.json"), { items: [] });
   const terms = readJson(join(DATA_DIR, "terms.json"), { terms: {} }).terms || {};
+  // 広告の設定の正は data/site-config.json。ページ種別ごとの出し分けはここで決める
+  // （characters: 出す / status: 出す / TOP: 出さない）。
+  const ads = readJson(join(DATA_DIR, "site-config.json"), { ads: {} }).ads || {};
 
   const flowSkills = validateAll({ baseData, terms });
-  const pages = buildCharacterPages({ baseData, newsData, terms });
+  const pages = buildCharacterPages({ baseData, newsData, terms, ads });
   // 状態異常ガイドはキャラページの後。直リンク先の id="skill-N" を生成済みHTMLで確かめる。
-  const status = buildStatusGuides({ baseData, terms, writeIfChanged });
+  const status = buildStatusGuides({ baseData, terms, ads, writeIfChanged });
   const index = buildIndexPage({ baseData });
   const charIndex = buildCharacterIndex({ baseData });
   const topPage = buildTopPage({ newsData });
+  // 広告枠は全ページを書き終えた最後に差し込む（手書きページの目印もここで置き換える）。
+  const ads2 = buildAds({ writeIfChanged });
 
   console.log(`キャラページ: ${pages.slugs.length}件 (更新 ${pages.written.length} / 変更なし ${pages.unchanged.length})`);
   console.log(`flow 付きスキル: ${flowSkills}件（検証OK）`);
@@ -786,6 +797,7 @@ function main() {
     console.log(`状態異常ガイド: ${status.guides.length}件（直リンク ${status.links}本・付与数値 ${status.numbers}件を照合）${status.written.length ? ` (更新 ${status.written.join(", ")})` : " (変更なし)"}`);
     console.log(`状態異常ガイドの入口: ${status.indexChanged ? "更新" : "変更なし"} / sitemap: ${status.sitemap.added.length ? `${status.sitemap.added.join(", ")} を追記` : "変更なし"}`);
   }
+  console.log(`広告枠: ${ads2.enabled ? `${ads2.shown}ページに1枠ずつ（スロット ${ads2.slot}）` : "全停止中"} / ${ads2.total}ページを点検${ads2.written.length ? ` (更新 ${ads2.written.length}件)` : " (変更なし)"}`);
   console.log(`開催状況の判定日(JST): ${TODAY} / 生成時刻: ${GENERATED_AT}`);
   const ongoing = (baseData.characters || []).filter((character) => gachaStatus.ongoingEntry(character, TODAY));
   console.log(`開催中と判定: ${ongoing.length}体${ongoing.length ? ` (${ongoing.map((c) => `${c.name}=${gachaStatus.gachaStatusText(c, TODAY)}`).join(" / ")})` : ""}`);

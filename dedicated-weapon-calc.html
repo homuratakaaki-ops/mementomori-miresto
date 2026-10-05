@@ -28,7 +28,6 @@
     .site-back { color:var(--gold); font-size:13px; font-weight:700; text-decoration:none; } .site-back:hover { text-decoration:underline; }
     .header { text-align:center; margin-bottom:28px; } .header-sub { font:11px 'Noto Serif JP',serif; letter-spacing:4px; color:var(--gold); text-transform:uppercase; margin-bottom:6px; }
     .header h1 { margin:0; font:700 clamp(20px,4vw,30px)/1.45 'Noto Serif JP',serif; color:#f0e0c0; } .header-line { width:48px; height:2px; background:linear-gradient(90deg,transparent,var(--gold),transparent); margin:10px auto 0; }
-    .ad-unit { margin:16px auto 24px; text-align:center; }
     .card { background:var(--card); border:1px solid var(--border); border-radius:14px; padding:24px 20px; margin-bottom:18px; box-shadow:0 4px 24px rgba(0,0,0,.35),inset 0 1px rgba(200,170,100,.08); }
     .section-title { margin:0 0 18px; display:flex; align-items:center; gap:8px; color:var(--gold); font-size:12px; letter-spacing:2px; } .section-title::after { content:''; height:1px; flex:1; background:var(--gold-dim); }
     .status-grid,.cost-summary,.plan-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; }
@@ -68,13 +67,15 @@
     gtag('js', new Date());
     gtag('config', 'G-BHKBSRGSJF');
   </script>
+  <!-- ad:head -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6389066329814944" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="/assets/ad-slot.css">
+  <!-- /ad:head -->
 </head>
 <body>
   <div class="container">
     <nav class="site-nav" aria-label="サイト内ナビゲーション"><a class="site-back" href="/">← サイトトップへ戻る</a></nav>
     <div class="header"><div class="header-sub">MementoMori</div><h1>魔水晶・専用武器育成管理ツール</h1><div class="header-line"></div></div>
-    <div class="ad-unit"><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6389066329814944" data-ad-slot="6111654373" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle=window.adsbygoogle||[]).push({});</script></div>
 
     <main id="app">
       <section class="card" aria-labelledby="statusTitle">
@@ -134,6 +135,18 @@
 
     <nav class="site-nav bottom" aria-label="サイト内ナビゲーション"><a class="site-back" href="/">← サイトトップへ戻る</a></nav>
     <div class="footer-note">※ Lv520超の専用武器コストは未確認のため計算対象外です。<br>※ Lv240以下からLv241以降へ進める場合は、ミカエル覚醒条件と生命樹の雫を別途確認してください。</div>
+
+    <!-- ad:bottom -->
+    <aside class="ad-slot" aria-label="広告">
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-6389066329814944"
+           data-ad-slot="6111654373"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </aside>
+    <!-- /ad:bottom -->
   </div>
   <script src="js/dedicated-weapon-costs.js"></script>
   <script src="js/dedicated-weapon-logic.js"></script>
