@@ -126,14 +126,30 @@
     ].filter(Boolean).join("");
   }
 
+  /**
+   * 用語辞書（data/terms.json）の1件を取り出す。
+   * 値は { text, guideUrl } が正だが、説明文だけの旧形式（文字列）もそのまま読める。
+   * guideUrl を持つのは状態異常ガイドのある語だけで、その語にだけガイドへのリンクが出る。
+   */
+  function termEntry(terms, name) {
+    const value = (terms || defaultTerms)[name];
+    if (!value) return null;
+    if (typeof value === "string") return { text: value, guideUrl: "" };
+    return { text: value.text || "", guideUrl: value.guideUrl || "" };
+  }
+
   function renderTermText(step, terms) {
     const raw = step.text || "";
-    if (!step.term || !terms[step.term] || !raw.includes(step.term)) {
+    const entry = step.term ? termEntry(terms, step.term) : null;
+    if (!entry || !entry.text || !raw.includes(step.term)) {
       return highlightRatios(raw);
     }
     const [before, ...rest] = raw.split(step.term);
     const after = rest.join(step.term);
-    return `${highlightRatios(before)}<details class="term"><summary>${escapeHtml(step.term)}</summary><span class="term-box">${escapeHtml(terms[step.term])}</span></details>${highlightRatios(after)}`;
+    const guide = entry.guideUrl
+      ? `<a class="term-guide" href="${escapeHtml(entry.guideUrl)}">詳しくは${escapeHtml(step.term)}ガイドへ</a>`
+      : "";
+    return `${highlightRatios(before)}<details class="term"><summary>${escapeHtml(step.term)}</summary><span class="term-box">${escapeHtml(entry.text)}${guide}</span></details>${highlightRatios(after)}`;
   }
 
   const FLOW_MODE_LABEL = {
@@ -451,10 +467,16 @@
     return `<div><h3 class="block-title">専用武器</h3><table class="weapon-table">${html}</table></div>`;
   }
 
-  function renderSkillCard(skill, terms) {
+  /**
+   * スキルカード1枚。
+   * options.anchor を立てると id="skill-N" を付ける（状態異常ガイドからの直リンク先）。
+   * 同じスキル番号のカードが1ページに複数並ぶ「編成と比較」では付けない（idを重複させない）。
+   */
+  function renderSkillCard(skill, terms, options) {
     const ct = skill.ct === null || skill.ct === undefined ? "" : skill.ct;
+    const anchor = options && options.anchor ? ` id="skill-${escapeHtml(skill.number)}"` : "";
     return `
-      <article class="skill-card">
+      <article class="skill-card"${anchor}>
         <header class="skill-head">
           <div class="tag-row">
             <span class="tag">S${escapeHtml(skill.number)}</span>
@@ -477,8 +499,9 @@
     `;
   }
 
+  /** キャラページのスキル一覧。カードには状態異常ガイドからの直リンク用 id を付ける。 */
   function renderSkillList(skills, terms) {
-    return skills.map((skill) => renderSkillCard(skill, terms || defaultTerms)).join("");
+    return skills.map((skill) => renderSkillCard(skill, terms || defaultTerms, { anchor: true })).join("");
   }
 
   function roleMemoText(character) {
@@ -517,6 +540,7 @@
     mergePickupHistory,
     formatPickupHistory,
     renderMetaHtml,
+    termEntry,
     renderTermText,
     renderFlow,
     renderOriginalText,

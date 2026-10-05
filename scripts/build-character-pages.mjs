@@ -14,6 +14,7 @@
  *   pages/characters/{pageSlug}.html  … 全キャラの詳細ページ（上書き）
  *   pages/characters/index.html       … キャラ一覧のカード部分を差し替え
  *   index.html                        … トップページのニュース欄を差し替え
+ *   pages/status/*.html               … 状態異常ガイド（scripts/build-status-guides.mjs）
  *
  * data/*.json を変更したら必ず実行し、JSONとHTMLを同じコミットに含めること。
  */
@@ -21,6 +22,7 @@ import { readFileSync, writeFileSync, existsSync } from "node:fs";
 import { createRequire } from "node:module";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { buildStatusGuides } from "./build-status-guides.mjs";
 
 const require = createRequire(import.meta.url);
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
@@ -762,6 +764,8 @@ function main() {
 
   const flowSkills = validateAll({ baseData, terms });
   const pages = buildCharacterPages({ baseData, newsData, terms });
+  // 状態異常ガイドはキャラページの後。直リンク先の id="skill-N" を生成済みHTMLで確かめる。
+  const status = buildStatusGuides({ baseData, terms, writeIfChanged });
   const index = buildIndexPage({ baseData });
   const charIndex = buildCharacterIndex({ baseData });
   const topPage = buildTopPage({ newsData });
@@ -771,6 +775,17 @@ function main() {
   console.log(`キャラ一覧: ${index.total}件のカードを生成${index.changed ? " (更新)" : " (変更なし)"}`);
   console.log(`ツール用キャラ索引: ${charIndex.total}件${charIndex.changed ? " (更新)" : " (変更なし)"}`);
   console.log(`トップのニュース欄: ${topPage.total}件${topPage.changed ? " (更新)" : " (変更なし)"}`);
+  for (const guide of status.guides) {
+    const counts = status.summary[guide.id];
+    const detail = Object.entries(counts)
+      .map(([kind, value]) => `${kind} 抽出${value.auto}/手入力${value.manual}${value.ignored ? `/除外${value.ignored}` : ""}`)
+      .join(" / ");
+    console.log(`状態異常ガイド(${guide.id}): ${detail} / 最終横断確認 ${guide.lastCrossCheck}`);
+  }
+  if (status.guides.length) {
+    console.log(`状態異常ガイド: ${status.guides.length}件（直リンク ${status.links}本・付与数値 ${status.numbers}件を照合）${status.written.length ? ` (更新 ${status.written.join(", ")})` : " (変更なし)"}`);
+    console.log(`状態異常ガイドの入口: ${status.indexChanged ? "更新" : "変更なし"} / sitemap: ${status.sitemap.added.length ? `${status.sitemap.added.join(", ")} を追記` : "変更なし"}`);
+  }
   console.log(`開催状況の判定日(JST): ${TODAY} / 生成時刻: ${GENERATED_AT}`);
   const ongoing = (baseData.characters || []).filter((character) => gachaStatus.ongoingEntry(character, TODAY));
   console.log(`開催中と判定: ${ongoing.length}体${ongoing.length ? ` (${ongoing.map((c) => `${c.name}=${gachaStatus.gachaStatusText(c, TODAY)}`).join(" / ")})` : ""}`);

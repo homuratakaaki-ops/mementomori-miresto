@@ -1,0 +1,326 @@
+/*
+ * 状態異常ガイド（pages/status/*.html）の追加スタイル。
+ * 基調は assets/character-page.css と共通で、こちらは
+ * ガイド固有の箱（ひとことで・一覧表・関連効果・出典）だけを足す。
+ * ページは scripts/build-status-guides.mjs が生成するので、ここを変えたら再生成すること。
+ */
+
+/* 見出し直下の「最終横断確認」。日付は data/status/*.json の手入力。 */
+.guide-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+  margin-bottom: 10px;
+}
+
+.guide-meta-note {
+  max-width: 760px;
+  margin-bottom: 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.guide-list {
+  display: grid;
+  gap: 16px;
+}
+
+.guide-card {
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+  box-shadow: var(--shadow);
+}
+
+.guide-card-head {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--line);
+  background: var(--accent-faint);
+}
+
+.guide-card-head h2 {
+  margin-bottom: 0;
+  font-size: clamp(20px, 2.4vw, 26px);
+  line-height: 1.3;
+}
+
+.guide-card-body {
+  display: grid;
+  gap: 14px;
+  padding: 16px;
+}
+
+.guide-card-body > p {
+  margin-bottom: 0;
+  line-height: 1.9;
+}
+
+/* 「ひとことで」。図解を入れる日は .oneline-figure に置く（今は空のまま出さない）。 */
+.oneline {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.oneline-text {
+  flex: 1 1 320px;
+  min-width: 0;
+  display: grid;
+  gap: 10px;
+}
+
+.oneline-text p { margin-bottom: 0; line-height: 1.9; }
+
+.oneline-figure {
+  flex: none;
+  width: 180px;
+  max-width: 100%;
+}
+
+.oneline-figure img { width: 100%; height: auto; }
+
+.key-rule {
+  padding: 12px;
+  border: 1px solid var(--accent-soft);
+  border-radius: 8px;
+  background: var(--accent-faint);
+  font-weight: 900;
+}
+
+/* 一覧表。6列あるので狭い画面では表だけ横スクロールさせる（本文は折り返す）。 */
+.guide-table-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.guide-table {
+  width: 100%;
+  min-width: 560px;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.guide-table th,
+.guide-table td {
+  padding: 9px 10px;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+  vertical-align: top;
+  line-height: 1.7;
+}
+
+.guide-table thead th {
+  background: var(--panel-soft);
+  color: var(--accent-strong);
+  font-size: 13px;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.guide-table tbody th {
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.guide-table tbody tr:last-child th,
+.guide-table tbody tr:last-child td { border-bottom: 0; }
+
+/* 付与確率・ダメージ・持続は短い値なので折り返さない（「2ター／ン」を作らない）。
+   折り返してよいのは最後の「特徴」だけ。 */
+.guide-table td:nth-child(2),
+.guide-table td:nth-child(3),
+.guide-table td:nth-child(4) { white-space: nowrap; }
+
+.guide-table a { color: var(--accent-strong); font-weight: 900; }
+
+/* 表やリストの下に置く注意書き。 */
+.guide-notes {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.guide-notes li { padding-left: 1em; text-indent: -1em; }
+.guide-notes li::before { content: "※"; }
+
+/* 「毒を利用するキャラ」。付与／参照／強化の3見出し。 */
+.guide-sub {
+  margin: 0 0 8px;
+  color: var(--accent-strong);
+  font-size: 15px;
+  font-weight: 900;
+}
+
+.guide-links {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.guide-links li { line-height: 1.8; }
+
+.guide-links a {
+  color: var(--accent-strong);
+  font-weight: 900;
+}
+
+.guide-link-text {
+  display: block;
+  color: var(--ink);
+  font-size: 14px;
+}
+
+/* 関連する効果（結界・劇化など）と出典。 */
+.guide-defs {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+}
+
+.guide-defs dt {
+  color: var(--accent-strong);
+  font-weight: 900;
+}
+
+.guide-defs dd {
+  margin: 4px 0 0;
+  line-height: 1.9;
+}
+
+.guide-source {
+  margin-bottom: 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+/* 入口ページ（pages/status/index.html）の一覧。 */
+.guide-index {
+  display: grid;
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.guide-index-card {
+  display: block;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+  box-shadow: var(--shadow);
+  text-decoration: none;
+}
+
+.guide-index-card strong {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--accent-strong);
+  font-size: 20px;
+}
+
+.guide-index-card span {
+  display: block;
+  color: var(--ink);
+  line-height: 1.8;
+}
+
+.guide-index-card small {
+  display: block;
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* ガイドのフッタ。キャラページのフッタはリンク1本なので、ここで並べ方だけ足す。 */
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+}
+
+/* 用語の折りたたみの中に出る「詳しくは○ガイドへ」。 */
+.term-guide {
+  display: inline-block;
+  margin-top: 6px;
+  color: var(--accent-strong);
+  font-weight: 900;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/*
+ * 狭い画面では6列の表を横スクロールさせず、1行＝1枚のまとまりに積み直す。
+ * 値の前に data-label の見出しを出すので、列見出しを見失わずに読める。
+ * 見出し行は読み上げのために残し、目には見せない。
+ */
+@media (max-width: 560px) {
+  .guide-table-wrap { overflow-x: visible; }
+
+  .guide-table {
+    display: block;
+    min-width: 0;
+  }
+
+  .guide-table thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  .guide-table tbody,
+  .guide-table tr,
+  .guide-table th,
+  .guide-table td { display: block; }
+
+  .guide-table tbody tr {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .guide-table tbody tr:first-child { padding-top: 0; }
+  .guide-table tbody tr:last-child { padding-bottom: 0; border-bottom: 0; }
+
+  .guide-table tbody th {
+    padding: 0 0 6px;
+    border-bottom: 0;
+    font-size: 15px;
+    white-space: normal;
+  }
+
+  .guide-table td,
+  .guide-table td:nth-child(2),
+  .guide-table td:nth-child(3),
+  .guide-table td:nth-child(4) {
+    padding: 2px 0;
+    border-bottom: 0;
+    white-space: normal;
+  }
+
+  .guide-table td::before {
+    content: attr(data-label) "：";
+    color: var(--muted);
+    font-weight: 800;
+  }
+
+  .guide-table td:empty { display: none; }
+}
+
+@media (max-width: 480px) {
+  .oneline-figure { width: 100%; }
+}

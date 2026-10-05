@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>毒｜状態異常ガイド | ミレストのメメントモリ分析データ室</title>
+  <meta name="description" content="毒の仕組み（発動タイミング・ダメージ計算・攻撃力の上限）と、重ねたときの扱い、毒を付与／参照／強化するキャラのスキルを、キャラページの該当スキルへのリンク付きで整理しています。">
+  <link rel="canonical" href="https://memento.musoudc.com/pages/status/poison.html">
+  <!-- OGP。画像は共通のものを使う（ガイドごとの画像生成は未対応） -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="ミレストのメメントモリ分析データ室">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="og:title" content="毒｜状態異常ガイド | ミレストのメメントモリ分析データ室">
+  <meta property="og:description" content="毒の仕組み（発動タイミング・ダメージ計算・攻撃力の上限）と、重ねたときの扱い、毒を付与／参照／強化するキャラのスキルを、キャラページの該当スキルへのリンク付きで整理しています。">
+  <meta property="og:url" content="https://memento.musoudc.com/pages/status/poison.html">
+  <meta property="og:image" content="https://memento.musoudc.com/assets/ogp/ogp-common.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <link rel="icon" type="image/png" href="../../assets/miresto/miresto-icon-32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="../../assets/miresto/miresto-icon-180.png">
+  <link rel="stylesheet" href="../../assets/character-page.css">
+  <link rel="stylesheet" href="../../assets/status-guide.css">
+</head>
+<body data-status-guide="poison" data-prerendered>
+  <header class="page-header">
+    <div class="header-inner">
+      <a class="top-link" href="./index.html">状態異常ガイドの一覧へ</a>
+      <p class="eyebrow">STATUS GUIDE</p>
+      <h1>毒｜状態異常ガイド</h1>
+      <div class="guide-meta">
+        <span class="tag">最終横断確認 2026-10-05</span>
+      </div>
+      <p class="guide-meta-note">この日までに実装済みのキャラを対象に、毒を付与・参照・強化するスキルを確認しています。</p>
+    </div>
+  </header>
+
+  <main>
+    <div class="guide-list">
+      <section class="guide-card" id="oneline" aria-labelledby="oneline-title">
+        <div class="guide-card-head">
+          <h2 id="oneline-title">ひとことで</h2>
+        </div>
+        <div class="guide-card-body">
+          <div class="oneline">
+            <div class="oneline-text">
+              <p>毒は、付帯しているキャラが毎ターン行動開始時に、現在HPに応じた持続ダメージを受ける弱体効果です。</p>
+              <p class="key-rule">毒ダメージは、毒を受けているキャラの攻撃力を超えません。</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="guide-card" id="section-1" aria-labelledby="section-1-title">
+        <div class="guide-card-head">
+          <h2 id="section-1-title">仕組み</h2>
+        </div>
+        <div class="guide-card-body">
+          <ol class="steps">
+            <li>スキルで毒を付与する。</li>
+            <li>毒を受けているキャラの行動開始時に発動する。</li>
+            <li>毒を付与したスキルごとの「現在HP×○%」でダメージ量を計算する。</li>
+            <li>計算したダメージ量が毒を受けているキャラの攻撃力を超える場合は、攻撃力の値が毒ダメージになる。</li>
+          </ol>
+        </div>
+      </section>
+      <section class="guide-card" id="section-2" aria-labelledby="section-2-title">
+        <div class="guide-card-head">
+          <h2 id="section-2-title">同じ毒を重ねたら？</h2>
+        </div>
+        <div class="guide-card-body">
+          <p>ゲーム内ヘルプでは、毒は同じ種類の効果を重ねても別々には残らず、上書きされると説明されています。</p>
+          <p>上書きされた後は、効果ターンは長い方、効果量は大きい方を引き継いだ1つの毒になります。</p>
+          <p>例として、毒A「現在HP×10%・残り2ターン」に毒B「現在HP×5%・4ターン」が重なると、「現在HP×10%・4ターン」の毒1つになります。</p>
+        </div>
+      </section>
+      <section class="guide-card" id="givers" aria-labelledby="givers-title">
+        <div class="guide-card-head">
+          <h2 id="givers-title">毒を付与するキャラ</h2>
+        </div>
+        <div class="guide-card-body">
+          <div class="guide-table-wrap">
+            <table class="guide-table">
+              <thead>
+                <tr>
+                  <th scope="col">キャラ／スキル</th>
+                  <th scope="col">付与確率</th>
+                  <th scope="col">毒ダメージ</th>
+                  <th scope="col">持続</th>
+                  <th scope="col">特徴</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row"><a href="../characters/kobell.html#skill-2">コベル S2 山の恵み…？</a></th>
+                  <td data-label="付与確率">70%</td>
+                  <td data-label="毒ダメージ">現在HP×10%</td>
+                  <td data-label="持続">2ターン</td>
+                  <td data-label="特徴">回復と条件火力を併せ持つ</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/moddey.html#skill-1">モーザ S1 レストインピース</a></th>
+                  <td data-label="付与確率">数値表記なし</td>
+                  <td data-label="毒ダメージ">現在HP×3%</td>
+                  <td data-label="持続">2ターン</td>
+                  <td data-label="特徴">専用武器で毒性能が上がる（Lv1で現在HP×4%、Lv2で4ターン、Lv3で現在HP×5%）</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/lunalynn.html#skill-2">ルナリンド S2 ディスペアード</a></th>
+                  <td data-label="付与確率">数値表記なし</td>
+                  <td data-label="毒ダメージ">現在HP×15%</td>
+                  <td data-label="持続">3ターン</td>
+                  <td data-label="特徴">対象の魔力が自身より低い場合に付与する</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/natasha_bouquet.html#skill-2">[花束の魔女]ナターシャ S2 花束をあなたに</a></th>
+                  <td data-label="付与確率">数値表記なし</td>
+                  <td data-label="毒ダメージ">現在HP×4%</td>
+                  <td data-label="持続">2ターン</td>
+                  <td data-label="特徴">専用武器Lv3で現在HP×5%になる</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/moddey_summer.html#skill-1">[墓守の夏休み]モーザ S1 レストインパラダイス</a></th>
+                  <td data-label="付与確率">数値表記なし</td>
+                  <td data-label="毒ダメージ">現在HP×3%</td>
+                  <td data-label="持続">4ターン</td>
+                  <td data-label="特徴">付与した毒を後続のスキルでも使う。専用武器Lv3で現在HP×5%になる</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <ul class="guide-notes">
+            <li>付与確率を数値で書いているのはコベルS2の70%だけです。モーザS1・ルナリンドS2・[花束の魔女]ナターシャS2・[墓守の夏休み]モーザS1は、ゲーム内のスキル説明に数値の確率がありません。</li>
+            <li>数値表記がないことは、必ず付与されることを意味しません。毒は弱体効果なので、スキル固有の付与確率だけでなく弱体効果命中率・耐性率の影響を受けます。</li>
+            <li>ルナリンドS2には「対象の魔力が自身より低い場合」という付与条件があります。</li>
+          </ul>
+        </div>
+      </section>
+      <section class="guide-card" id="users" aria-labelledby="users-title">
+        <div class="guide-card-head">
+          <h2 id="users-title">毒を利用するキャラ</h2>
+        </div>
+        <div class="guide-card-body">
+          <p>毒は「ダメージを与えるだけ」の効果ではなく、別のスキルの発動条件になる場合があります。</p>
+          <div>
+            <h3 class="guide-sub">付与する側</h3>
+            <p><a href="#givers">毒を付与するキャラ5体の表</a>にまとめています。</p>
+          </div>
+          <div>
+            <h3 class="guide-sub">参照する側</h3>
+            <ul class="guide-links">
+              <li><a href="../characters/moddey.html#skill-2">モーザ S2 葬送の合図</a><span class="guide-link-text">対象が毒を付帯中なら、不治を4ターン付与する</span></li>
+              <li><a href="../characters/moddey_summer.html#skill-1">[墓守の夏休み]モーザ S1 レストインパラダイス</a><span class="guide-link-text">毒を付与した後、毒を付帯している敵のうち攻撃力が最も高い敵の攻撃力を吸収する</span></li>
+              <li><a href="../characters/moddey_summer.html#skill-2">[墓守の夏休み]モーザ S2 水底の幽かな声</a><span class="guide-link-text">毒を付帯している敵1体につき攻撃回数が1回増える（最大9回）</span></li>
+              <li><a href="../characters/moddey_summer.html#skill-3">[墓守の夏休み]モーザ S3 それが墓守の仕事</a><span class="guide-link-text">毒を付帯している敵からの攻撃は遮断が75%になる（カウンタダメージも75%）</span></li>
+              <li><a href="../characters/moddey_summer.html#skill-4">[墓守の夏休み]モーザ S4 ライラの守り</a><span class="guide-link-text">毎ターン開始時、毒を付帯している敵1体につき自身の攻撃力の増加量が+5%大きくなる（最大20スタック）</span></li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="guide-sub">強化する側</h3>
+            <ul class="guide-links">
+              <li><a href="../characters/natasha_bouquet.html#skill-3">[花束の魔女]ナターシャ S3 消えない過去</a><span class="guide-link-text">劇化を付与し、自身の受ける持続ダメージを100%、攻撃力が高い敵3体の受ける持続ダメージを50%増加させる（毒は増加しても付帯者の攻撃力という上限を超えない）</span></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+      <section class="guide-card" id="related" aria-labelledby="related-title">
+        <div class="guide-card-head">
+          <h2 id="related-title">毒と他の効果</h2>
+        </div>
+        <div class="guide-card-body">
+          <dl class="guide-defs">
+            <dt>結界</dt>
+            <dd>毒などの持続ダメージは、結界では軽減できません。</dd>
+            <dt>劇化</dt>
+            <dd>劇化は、受ける持続ダメージを増加させます。ただし毒と火傷は、劇化で増加しても付帯者の攻撃力という上限を超えません。</dd>
+            <dt>カウンタ変更</dt>
+            <dd>毒などの持続ダメージでは、カウンタ変更は発動しません。</dd>
+            <dt>弱体効果命中率・耐性率</dt>
+            <dd>毒は弱体効果なので、スキル固有の付与確率だけでなく弱体効果命中率・耐性率の影響を受けます。「70%で毒を付与」でも、最終的な成功率が必ず70%になるとは限りません。</dd>
+          </dl>
+        </div>
+      </section>
+      <section class="guide-card" id="sources" aria-labelledby="sources-title">
+        <div class="guide-card-head">
+          <h2 id="sources-title">出典</h2>
+        </div>
+        <div class="guide-card-body">
+          <p class="guide-source">出典：ゲーム内ヘルプ／ゲーム内スキル説明</p>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <span>ミレストのメメントモリ分析データ室 / 非公式ファンサイト</span>
+      <nav class="footer-links" aria-label="関連ページ">
+        <a href="../characters/index.html">キャラ一覧</a>
+        <a href="/pages/guide/">このサイトでできること</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>
