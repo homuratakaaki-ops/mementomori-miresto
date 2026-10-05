@@ -58,28 +58,33 @@
   line-height: 1.9;
 }
 
-/* 「ひとことで」。図解を入れる日は .oneline-figure に置く（今は空のまま出さない）。 */
+/*
+ * 「ひとことで」。説明文と上限の補足を置き、その下に図解を1枚だけ中央に出す。
+ * 図解のある状態異常は data/status/*.json の illustration に書く（無いガイドでは枠ごと出ない）。
+ */
 .oneline {
-  display: flex;
+  display: grid;
   gap: 16px;
-  flex-wrap: wrap;
-  align-items: flex-start;
+  justify-items: center;
 }
 
 .oneline-text {
-  flex: 1 1 320px;
-  min-width: 0;
   display: grid;
   gap: 10px;
+  width: 100%;
 }
 
 .oneline-text p { margin-bottom: 0; line-height: 1.9; }
 
+/*
+ * 図解は中央の大きめ1枚。読むための図なので縮め過ぎない。
+ * 740px までは原寸に近い幅で出し、それより狭い画面では横幅いっぱいまで縮める。
+ * img の width / height 属性は原寸のまま残してあり、縦横比はここで height:auto に任せる。
+ */
 .oneline-figure {
-  flex: 1 1 100%;
-  width: min(100%, 400px);
-  max-width: 100%;
-  margin: 0 auto;
+  width: 100%;
+  max-width: 740px;
+  margin: 0;
 }
 
 .oneline-figure img {
@@ -327,6 +332,3 @@
   .guide-table td:empty { display: none; }
 }
 
-@media (max-width: 480px) {
-  .oneline-figure { width: 100%; }
-}

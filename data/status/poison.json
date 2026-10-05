@@ -134,9 +134,10 @@
     "verification": []
   },
   "illustration": {
-    "src": "../../assets/status/poison-guide.webp",
-    "width": 720,
-    "height": 900,
-    "alt": "毒の仕組み。毒付与から行動開始時の現在HP割合ダメージ、攻撃力上限、重ね掛け時の上書きを図解"
+    "webp": "assets/status/poison-guide.webp",
+    "src": "assets/status/poison-guide.jpg",
+    "width": 1122,
+    "height": 1402,
+    "alt": "毒の仕組み。付与から行動開始時の現在HP割合ダメージ、攻撃力上限、重ね掛け時の上書きを図解"
   }
 }

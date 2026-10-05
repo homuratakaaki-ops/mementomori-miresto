@@ -276,6 +276,31 @@ function validateLinks(guide, characterById, errors) {
   return checked;
 }
 
+/**
+ * 図解の検証。
+ * 画像の差し替え漏れ・置き場所違いをビルドで止める。
+ * webp と jpg の2枚、原寸（width / height）、alt を必須にする
+ * （原寸が無いと読み込み前に場所を取れず、本文が下にずれる）。
+ */
+function validateIllustration(guide, errors) {
+  const where = "data/status/" + guide.id + ".json";
+  const art = guide.illustration;
+  if (!art) return;
+  for (const key of ["webp", "src", "alt"]) {
+    if (!art[key]) errors.push(where + ": illustration の " + key + " が無い");
+  }
+  for (const key of ["width", "height"]) {
+    if (!Number.isInteger(art[key]) || art[key] <= 0) {
+      errors.push(where + ": illustration の " + key + " は原寸（正の整数）で書くこと");
+    }
+  }
+  for (const key of ["webp", "src"]) {
+    if (art[key] && !existsSync(join(ROOT, art[key]))) {
+      errors.push(where + ": illustration の " + key + " が見つからない（" + art[key] + "）");
+    }
+  }
+}
+
 /** 用語辞書の guideUrl がこのガイドを指しているか（キャラページ側の導線の正）。 */
 function validateTermLink(guide, terms, errors) {
   const entry = renderer.termEntry(terms, guide.term);
@@ -381,11 +406,18 @@ function onelineCard(guide) {
     '              <p class="key-rule">' + escapeHtml(guide.keyRule) + "</p>",
     "            </div>"
   ];
-  // 図解は「ひとことで」の横。置き場所だけ確保してあり、illustration が無い間は何も出さない。
-  if (guide.illustration) {
-    lines.push('            <div class="oneline-figure"><img src="' + escapeHtml(guide.illustration.src)
-      + '" width="' + escapeHtml(guide.illustration.width) + '" height="' + escapeHtml(guide.illustration.height)
-      + '" alt="' + escapeHtml(guide.illustration.alt) + '" loading="lazy" decoding="async"></div>');
+  // 図解は説明文と上限の補足の直下。illustration が無いガイドでは何も出さない。
+  // width / height は原寸のまま出し、見た目の大きさはCSSで決める（読み込みで本文がずれないため）。
+  const art = guide.illustration;
+  if (art) {
+    lines.push('            <figure class="oneline-figure">');
+    lines.push("              <picture>");
+    lines.push('                <source type="image/webp" srcset="../../' + escapeHtml(art.webp) + '">');
+    lines.push('                <img src="../../' + escapeHtml(art.src) + '" width="' + escapeHtml(art.width)
+      + '" height="' + escapeHtml(art.height) + '" alt="' + escapeHtml(art.alt)
+      + '" loading="lazy" decoding="async">');
+    lines.push("              </picture>");
+    lines.push("            </figure>");
   }
   lines.push("          </div>");
   return card("oneline", "ひとことで", lines.join("\n"));
@@ -666,6 +698,7 @@ export function buildStatusGuides(options) {
       errors.push("data/status/" + guide.id + ".json: crossCheckNote（確認範囲の1行説明）が必要です");
     }
     validateTermLink(guide, terms, errors);
+    validateIllustration(guide, errors);
     summary[guide.id] = validateLists(guide, baseData, errors);
     numbers += validateGiverNumbers(guide, skillById, errors);
     links += validateLinks(guide, characterById, errors);
