@@ -37,8 +37,8 @@ const escapeHtml = renderer.escapeHtml;
 
 const SITE_ORIGIN = renderer.SITE_ORIGIN;
 const TITLE_SUFFIX = renderer.TITLE_SUFFIX;
-const INDEX_TITLE = "状態異常ガイド｜" + TITLE_SUFFIX;
-const INDEX_DESCRIPTION = "毒などの状態異常について、効果の発動タイミング・ダメージの計算・重ねたときの扱い・付与するキャラを整理した一覧です。";
+const INDEX_TITLE = "状態異常・特殊効果ガイド｜" + TITLE_SUFFIX;
+const INDEX_DESCRIPTION = "毒などの状態異常や、カウンタ・スタックなどの特殊効果について、仕組み・発動条件・キャラごとの使い方を整理した一覧です。";
 
 /* ------------------------------------------------------------------
  * 1. 正規データからの自動抽出
@@ -557,7 +557,7 @@ function pageShell(options) {
     '<body data-status-guide="' + escapeHtml(options.id) + '" data-prerendered>',
     '  <header class="page-header">',
     '    <div class="header-inner">',
-    '      <a class="top-link" href="./index.html">状態異常ガイドの一覧へ</a>',
+    '      <a class="top-link" href="./index.html">状態異常・特殊効果ガイドの一覧へ</a>',
     '      <p class="eyebrow">STATUS GUIDE</p>',
     "      <h1>" + escapeHtml(options.heading) + "</h1>",
     '      <div class="guide-meta">',
@@ -640,13 +640,13 @@ function indexPageHtml(guides, ads) {
     '    <div class="header-inner">',
     '      <a class="top-link" href="../characters/index.html">キャラ一覧へ</a>',
     '      <p class="eyebrow">STATUS GUIDE</p>',
-    "      <h1>状態異常ガイド</h1>",
-    '      <p class="role">キャラページのスキル説明だけでは分かりにくい状態異常について、効果の発動タイミング・ダメージの計算・重ねたときの扱い・どのキャラが扱うのかを整理します。</p>',
+    "      <h1>状態異常・特殊効果ガイド</h1>",
+    '      <p class="role">毒などの状態異常や、カウンタ・スタックなどの特殊効果について、仕組み・発動条件・キャラごとの使い方を整理します。</p>',
     "    </div>",
     "  </header>",
     "",
     "  <main>",
-    '    <div class="notice">今あるのは' + guides.length + "件です。ほかの状態異常は順番に足していきます。</div>",
+    '    <div class="notice">今あるのは' + guides.length + "件です。ほかの状態異常・特殊効果も順番に足していきます。</div>",
     '    <ul class="guide-index">',
     items.join("\n"),
     "    </ul>",
