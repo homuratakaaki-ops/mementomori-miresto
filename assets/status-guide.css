@@ -328,6 +328,20 @@
   border-radius: 8px;
 }
 
+/* 静止画1枚の図解（figure）。幅の決め方はスライドと同じ。 */
+.guide-figure {
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.guide-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
 /* 操作列は本文より目立たせない。狭い画面ではドットが次の行へ回る。 */
 .guide-slides-controls {
   display: flex;
@@ -447,13 +461,15 @@
 
   /* 狭い画面では図解をカードの左右いっぱいまで広げる
      （負のマージンは .guide-card-body の padding と同じ16px）。 */
-  .guide-slides {
+  .guide-slides,
+  .guide-figure {
     width: auto;
     max-width: none;
     margin-left: -16px;
     margin-right: -16px;
   }
 
-  .guide-slide img { border-radius: 0; }
+  .guide-slide img,
+  .guide-figure img { border-radius: 0; }
 }
 

@@ -672,7 +672,7 @@ function indexPageHtml(guides, ads) {
  *
  * 「見出し付きの節（sections）×部品（blocks）」で本文を組む型。
  * 従来型（layout なし）の出力はここから一切変えないこと。
- * 部品は p / h3 / list / callout / table / skillTable / slides の7種類だけで、
+ * 部品は p / h3 / list / callout / table / skillTable / slides / figure の8種類だけで、
  * これ以上の汎用化はしない（型が増えるほど検査が効かなくなるため）。
  * ------------------------------------------------------------------ */
 
@@ -687,6 +687,21 @@ function flowStrings(skill) {
     out.push(entry.effect.text, entry.effect.condition, entry.effect.note, entry.effect.duration);
   }
   return out.map((value) => String(value || ""));
+}
+
+/**
+ * 数値検査用。flowStrings に加えて、確率（chance）と専用武器の変化（exclusive）の値も集める。
+ * 取りこぼし検査（mentionsTerm）の対象は広げない（専用武器の文だけに出る語で候補が増えないように）。
+ */
+function numberStrings(skill) {
+  const out = flowStrings(skill);
+  for (const entry of flowEffects(skill)) {
+    out.push(String(entry.effect.chance || ""));
+    for (const ex of entry.effect.exclusive || []) {
+      for (const key of ["text", "chance", "duration", "multiplier"]) out.push(String(ex[key] || ""));
+    }
+  }
+  return out;
 }
 
 /** flow のどこかにその語が出てくるスキルか（「カウンタ変更」も「カウンタ」で拾う）。 */
@@ -863,6 +878,24 @@ function articleSlides(block) {
   return lines.join("\n");
 }
 
+/**
+ * 静止画1枚の図解（スライドにしない回）。見た目の幅・狭い画面での広げ方はスライドと同じ。
+ * 本文の先頭近くに置く前提なので遅延読み込みはしない（スライド1枚目と同じ扱い）。
+ */
+function articleFigure(block) {
+  return [
+    ARTICLE_BLOCK_PAD + '<figure class="guide-figure">',
+    ARTICLE_BLOCK_PAD + "  <picture>",
+    ARTICLE_BLOCK_PAD + '    <source type="image/webp" srcset="../../' + escapeHtml(block.webpSmall)
+      + " 960w, ../../" + escapeHtml(block.webp) + " " + escapeHtml(block.width)
+      + 'w" sizes="(max-width: 960px) 100vw, 960px">',
+    ARTICLE_BLOCK_PAD + '    <img src="../../' + escapeHtml(block.src) + '" width="' + escapeHtml(block.width)
+      + '" height="' + escapeHtml(block.height) + '" alt="' + escapeHtml(block.alt) + '" decoding="async">',
+    ARTICLE_BLOCK_PAD + "  </picture>",
+    ARTICLE_BLOCK_PAD + "</figure>"
+  ].join("\n");
+}
+
 function articleBlock(block, ctx) {
   const pad = ARTICLE_BLOCK_PAD;
   switch (block.type) {
@@ -899,6 +932,8 @@ function articleBlock(block, ctx) {
       });
     case "slides":
       return articleSlides(block);
+    case "figure":
+      return articleFigure(block);
     default:
       ctx.errors.push(ctx.where + ": 知らない部品がある（type: " + block.type + "）");
       return "";
@@ -963,6 +998,16 @@ function validateArticleMentions(guide, baseData, usedSkills, errors) {
     }
   }
   const examplesOnly = Boolean(coverage && coverage.mode === "examples");
+  // related：その語は出てこないが、説明に必要な関連スキル（対策・前提になる効果など）。
+  // 理由の記入を必須にし、その語を含むスキルや本文で使っていないスキルは書けない。
+  const related = new Set();
+  for (const entry of guide.related || []) {
+    if (!entry || !entry.skillId || !String(entry.reason || "").trim()) {
+      errors.push(where + ": related には skillId / reason をそろえて書くこと");
+      continue;
+    }
+    related.add(entry.skillId);
+  }
   for (const entry of ignore) {
     if (!entry.kind || !entry.skillId || !entry.reason) {
       errors.push(where + ": ignore には kind / skillId / reason をそろえて書くこと");
@@ -982,15 +1027,19 @@ function validateArticleMentions(guide, baseData, usedSkills, errors) {
     errors.push(where + ": 「" + guide.term + "」を含むスキル " + id
       + " が本文から参照されていない。載せるか ignore に理由を書くこと");
   }
+  for (const id of related) {
+    if (auto.includes(id)) errors.push(where + ": related の " + id + " は「" + guide.term + "」を含むので related に書かない");
+    if (!manual.includes(id)) errors.push(where + ": related の " + id + " を本文が参照していない（不要な記載）");
+  }
   for (const id of manual) {
-    if (auto.includes(id)) continue;
+    if (auto.includes(id) || related.has(id)) continue;
     errors.push(where + ": 本文が参照している " + id + " の flow に「" + guide.term
       + "」が無い。スキルデータ側を確かめること");
   }
   for (const id of skipped) {
     if (!auto.includes(id)) errors.push(where + ": ignore の " + id + " は候補に出ていない（不要な除外）");
   }
-  return { auto: auto.length, manual: manual.length, ignored: skipped.size, examplesOnly };
+  return { auto: auto.length, manual: manual.length, ignored: skipped.size, examplesOnly, related: related.size };
 }
 
 /** 直リンクの先が実在するページ＋アンカーかどうか（従来型と同じ方法）。 */
@@ -1030,7 +1079,7 @@ function validateArticleNumbers(guide, skillById, errors) {
         const parts = String(row.skill || "").split(":");
         const skill = parts.length === 2 ? skillById.get(parts[0] + "-s" + parts[1]) : null;
         if (!skill) continue; // リンク検査側でエラーにしてある
-        const haystack = flowStrings(skill).join(" / ");
+        const haystack = numberStrings(skill).join(" / ");
         const found = (row.cells || []).join(" ").match(/[0-9]+(?:\.[0-9]+)?%/g) || [];
         for (const value of found) {
           checked += 1;
@@ -1056,12 +1105,29 @@ function validateArticleSources(guide, usedRefs, errors) {
   }
 }
 
-/** スライド検査。画像の置き場所・原寸・alt・表示時間をビルドで止める。 */
+/** スライド・図解の検査。画像の置き場所・原寸・alt・表示時間をビルドで止める。 */
 function validateArticleSlides(guide, errors) {
   const where = "data/status/" + guide.id + ".json";
   let checked = 0;
   for (const section of guide.sections || []) {
     for (const block of section.blocks || []) {
+      if (block.type === "figure") {
+        const label = where + ": 図解（figure）";
+        checked += 1;
+        for (const key of ["webp", "webpSmall", "src"]) {
+          if (!block[key]) { errors.push(label + " の " + key + " が無い"); continue; }
+          if (!existsSync(join(ROOT, block[key]))) {
+            errors.push(label + " の " + key + " が見つからない（" + block[key] + "）");
+          }
+        }
+        for (const key of ["width", "height"]) {
+          if (!Number.isInteger(block[key]) || block[key] <= 0) {
+            errors.push(label + " の " + key + " は原寸（正の整数）で書くこと");
+          }
+        }
+        if (!block.alt) errors.push(label + " の alt が無い");
+        continue;
+      }
       if (block.type !== "slides") continue;
       if (!block.label) errors.push(where + ": slides の label が無い");
       (block.items || []).forEach((item, index) => {

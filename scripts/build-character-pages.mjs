@@ -799,7 +799,7 @@ function main() {
   for (const guide of status.guides) {
     const counts = status.summary[guide.id];
     const detail = Object.entries(counts)
-      .map(([kind, value]) => `${kind} 抽出${value.auto}/手入力${value.manual}${value.ignored ? `/除外${value.ignored}` : ""}${value.examplesOnly ? "（例のみ・全件検査なし）" : ""}`)
+      .map(([kind, value]) => `${kind} 抽出${value.auto}/手入力${value.manual}${value.ignored ? `/除外${value.ignored}` : ""}${value.examplesOnly ? "（例のみ・全件検査なし）" : ""}${value.related ? `/関連${value.related}` : ""}`)
       .join(" / ");
     console.log(`状態異常ガイド(${guide.id}): ${detail} / 最終横断確認 ${guide.lastCrossCheck}`);
   }

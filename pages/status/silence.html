@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>沈黙｜状態異常ガイド | ミレストのメメントモリ分析データ室</title>
+  <meta name="description" content="沈黙とは何かを、リリコットS2「願い託す花傘」を例に解説します。沈黙中は通常攻撃になること、気絶との違い、「70%沈黙」でも最終成功率は70%とは限らないこと、沈黙を使うキャラと防ぐ方法を整理しています。">
+  <link rel="canonical" href="https://memento.musoudc.com/pages/status/silence.html">
+  <!-- OGP。画像は共通のものを使う（ガイドごとの画像生成は未対応） -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="ミレストのメメントモリ分析データ室">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="og:title" content="沈黙｜状態異常ガイド | ミレストのメメントモリ分析データ室">
+  <meta property="og:description" content="沈黙とは何かを、リリコットS2「願い託す花傘」を例に解説します。沈黙中は通常攻撃になること、気絶との違い、「70%沈黙」でも最終成功率は70%とは限らないこと、沈黙を使うキャラと防ぐ方法を整理しています。">
+  <meta property="og:url" content="https://memento.musoudc.com/pages/status/silence.html">
+  <meta property="og:image" content="https://memento.musoudc.com/assets/ogp/ogp-common.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <link rel="icon" type="image/png" href="../../assets/miresto/miresto-icon-32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="../../assets/miresto/miresto-icon-180.png">
+  <link rel="stylesheet" href="../../assets/character-page.css">
+  <link rel="stylesheet" href="../../assets/status-guide.css">
+  <!-- ad:head -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6389066329814944" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="/assets/ad-slot.css">
+  <!-- /ad:head -->
+</head>
+<body data-status-guide="silence" data-prerendered>
+  <header class="page-header">
+    <div class="header-inner">
+      <a class="top-link" href="/">トップ</a>
+      <a class="top-link" href="./index.html">状態異常・特殊効果ガイドの一覧へ</a>
+      <p class="eyebrow">STATUS GUIDE</p>
+      <h1>沈黙｜状態異常ガイド</h1>
+      <div class="guide-meta">
+        <span class="tag">最終横断確認 2026-10-06</span>
+      </div>
+      <p class="guide-meta-note">この日までに実装済みのキャラを対象に、沈黙を付与するスキル・沈黙を防ぐスキルを確認しています。</p>
+    </div>
+  </header>
+
+  <main>
+    <div class="guide-list">
+      <section class="guide-card" id="oneline" aria-labelledby="oneline-title">
+        <div class="guide-card-head">
+          <h2 id="oneline-title">ひとことで</h2>
+        </div>
+        <div class="guide-card-body">
+          <p><strong>沈黙</strong>は、アクティブスキルを使えなくする行動阻害です。</p>
+          <p>沈黙中のキャラは行動不能になるわけではなく、<strong>アクティブスキルの代わりに通常攻撃を行います。</strong></p>
+          <figure class="guide-figure">
+            <picture>
+              <source type="image/webp" srcset="../../assets/status/silence-guide-960.webp 960w, ../../assets/status/silence-guide.webp 1672w" sizes="(max-width: 960px) 100vw, 960px">
+              <img src="../../assets/status/silence-guide.jpg" width="1672" height="941" alt="沈黙ってなに？アクティブスキルを使えなくする行動阻害で、沈黙中は通常攻撃になる。気絶はアクティブスキルも通常攻撃もできず行動が止まる。例：リリコットS2「願い託す花傘」は攻撃力が高い敵3体に70%で沈黙、1ターン（専用Lv2で2ターン）。付与成功率は弱体効果命中率・耐性率の影響を受ける" decoding="async">
+            </picture>
+          </figure>
+          <div class="guide-callout">
+            <p class="guide-callout-title">まず覚えること</p>
+            <p>沈黙＝「何もできない」ではありません。</p>
+            <p><strong>スキルを封じて、通常攻撃に置き換える</strong>効果です。</p>
+          </div>
+        </div>
+      </section>
+      <section class="guide-card" id="effect" aria-labelledby="effect-title">
+        <div class="guide-card-head">
+          <h2 id="effect-title">沈黙すると何が起きる？</h2>
+        </div>
+        <div class="guide-card-body">
+          <p>ゲーム内ヘルプでは、沈黙は<strong>行動阻害</strong>の1つとして扱われています（行動阻害は気絶・睡眠・混乱・沈黙・金縛りの5種）。沈黙中は次の状態になります。</p>
+          <ul class="guide-bullets">
+            <li>アクティブスキルを発動できない</li>
+            <li>その行動では通常攻撃を行う</li>
+          </ul>
+          <p>ヘルプで封じると書かれているのは<strong>アクティブスキルだけ</strong>です。</p>
+          <h3 class="guide-sub">気絶との違い</h3>
+          <p>沈黙と気絶は似ていますが、止める範囲が違います。</p>
+          <div class="guide-table-wrap">
+            <table class="guide-table guide-table--wrap">
+              <thead>
+                <tr>
+                  <th scope="col">効果</th>
+                  <th scope="col">アクティブスキル</th>
+                  <th scope="col">通常攻撃</th>
+                  <th scope="col">そのキャラの行動</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">沈黙</th>
+                  <td data-label="アクティブスキル">使えない</td>
+                  <td data-label="通常攻撃">行う</td>
+                  <td data-label="そのキャラの行動">続く</td>
+                </tr>
+                <tr>
+                  <th scope="row">気絶</th>
+                  <td data-label="アクティブスキル">使えない</td>
+                  <td data-label="通常攻撃">できない</td>
+                  <td data-label="そのキャラの行動">終了</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p>つまり、<strong>完全に止めるのが気絶、スキルだけを止めるのが沈黙</strong>と考えると分かりやすいです。</p>
+        </div>
+      </section>
+      <section class="guide-card" id="lilicotte" aria-labelledby="lilicotte-title">
+        <div class="guide-card-head">
+          <h2 id="lilicotte-title">リリコットで見る沈黙</h2>
+        </div>
+        <div class="guide-card-body">
+          <p><a href="../characters/lilicotte.html#skill-2">リリコットS2「願い託す花傘」</a>は、沈黙の分かりやすい例です。攻撃時、<strong>攻撃力が高い敵3体</strong>に対して次の沈黙を付与します。</p>
+          <ul class="guide-bullets">
+            <li><strong>70%で沈黙</strong></li>
+            <li>通常は<strong>1ターン</strong></li>
+            <li>専用武器Lv2で<strong>2ターン</strong></li>
+          </ul>
+          <p>沈黙が成功すると、対象は次の行動でアクティブスキルを使えず、通常攻撃を行います。</p>
+          <h3 class="guide-sub">「70%」は最終成功率70%とは限らない</h3>
+          <p>ここは誤解しやすいポイントです。沈黙は弱体効果なので、スキルに「70%」と書かれていても、<strong>実際の付与成功率は弱体効果命中率・弱体効果耐性率の影響を受けます。</strong>ゲーム内ヘルプでも、弱体効果の付与はスキル固有の付与確率を基準に、命中率・耐性率を加減して最終確率を計算すると説明されています。</p>
+          <p>そのため、<strong>70%表記＝どんな相手にも70%で成功</strong>ではありません。</p>
+          <p><a href="https://note.com/wazu_019/n/nea5d08bf0151" target="_blank" rel="noopener">ワーズさんの弱体効果命中・耐性の検証</a>でも、スキル固有の付与確率に命中・耐性の補正が加わる挙動が確認されています。</p>
+        </div>
+      </section>
+      <section class="guide-card" id="normal" aria-labelledby="normal-title">
+        <div class="guide-card-head">
+          <h2 id="normal-title">沈黙中でも通常攻撃はできる</h2>
+        </div>
+        <div class="guide-card-body">
+          <p>沈黙は便利な妨害ですが、相手を完全に無力化する効果ではありません。沈黙中でも通常攻撃は行うため、<strong>通常攻撃を強化するキャラは沈黙中でも一定の火力を出せます。</strong></p>
+          <p>リリコット自身も<a href="../characters/lilicotte.html#skill-4">S4「想い刻む懐中時計」</a>で通常攻撃が強化されているため、沈黙を受けても、通常攻撃だけのキャラより攻撃性能が残ります。</p>
+          <div class="guide-callout">
+            <p class="guide-callout-title">沈黙＝完全停止ではない</p>
+            <p>相手が通常攻撃強化を持っている場合は、スキルを封じても攻撃そのものは脅威として残ります。</p>
+          </div>
+        </div>
+      </section>
+      <section class="guide-card" id="users" aria-labelledby="users-title">
+        <div class="guide-card-head">
+          <h2 id="users-title">沈黙を使うキャラ</h2>
+        </div>
+        <div class="guide-card-body">
+          <p>現行キャラの中で、沈黙を付与するスキルは次のとおりです。確率はスキル表記の値で、実際の成功率は弱体効果命中率・耐性率で変わります。</p>
+          <div class="guide-table-wrap">
+            <table class="guide-table guide-table--wrap">
+              <thead>
+                <tr>
+                  <th scope="col">キャラ／スキル</th>
+                  <th scope="col">対象・条件</th>
+                  <th scope="col">沈黙</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row"><a href="../characters/lilicotte.html#skill-2">リリコット S2 願い託す花傘</a></th>
+                  <td data-label="対象・条件">攻撃力が高い敵3体</td>
+                  <td data-label="沈黙">70%・1ターン。専用Lv2で2ターン</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/stella.html#skill-1">ステラ S1 カオス・スペル</a></th>
+                  <td data-label="対象・条件">HP割合が低い敵3体</td>
+                  <td data-label="沈黙">20%・1ターン。対象の腕力が自身より低ければ40%。専用Lv1で40%／80%</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/stella.html#skill-4">ステラ S4 星を統べる者</a></th>
+                  <td data-label="対象・条件">防御力増加を再付与したとき、ランダムな敵5体</td>
+                  <td data-label="沈黙">40%・2ターン。専用Lv2で80%</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/stella_holy_dark_star.html#skill-2">[聖なる漆黒の輝く星]ステラ S2 ファイナルステラ</a></th>
+                  <td data-label="対象・条件">7ターン目以降、攻撃力が高い敵2体</td>
+                  <td data-label="沈黙">70%・2ターン</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/giluial.html#skill-1">ギルウィアル S1 惑いの夕闇</a></th>
+                  <td data-label="対象・条件">攻撃力が高い敵2体（バフ解除後、対象のHPが50%以上なら）</td>
+                  <td data-label="沈黙">20%・1ターン。対象の魔力が自身より低ければ40%。専用Lv1で30%／60%</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/giluial.html#skill-2">ギルウィアル S2 スターダスト</a></th>
+                  <td data-label="対象・条件">ランダムな敵3体</td>
+                  <td data-label="沈黙">40%・1ターン。専用Lv2で50%</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/lunalynn.html#skill-1">ルナリンド S1 アイスコフィン</a></th>
+                  <td data-label="対象・条件">ランダムな敵5体のうち、クリティカルヒットした対象</td>
+                  <td data-label="沈黙">確率の記載なし・1ターン。専用Lv2で3ターン</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/karol.html#skill-1">カロル S1 忘却の翅</a></th>
+                  <td data-label="対象・条件">ランダムな敵3体</td>
+                  <td data-label="沈黙">20%・1ターン。専用Lv1で35%、Lv2で55%</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/rishess.html#skill-2">リシェス S2 突撃！とけねこ隊長</a></th>
+                  <td data-label="対象・条件">ランダムな敵3体</td>
+                  <td data-label="沈黙">55%・1ターン</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+      <section class="guide-card" id="prevent" aria-labelledby="prevent-title">
+        <div class="guide-card-head">
+          <h2 id="prevent-title">沈黙を防ぐ方法</h2>
+        </div>
+        <div class="guide-card-body">
+          <p>沈黙は弱体効果・行動阻害なので、対応する無効効果で新しい付与を防げます。</p>
+          <h3 class="guide-sub">沈黙無効</h3>
+          <p>沈黙そのものを防ぎます。例：<a href="../characters/aa_rusted_sky.html#skill-3">[錆鉄の空]A.A. S3「天使の残光」</a>は、バトル開始時に攻撃力が高い味方3体へ<strong>1ターン</strong>の沈黙無効を付与します。</p>
+          <h3 class="guide-sub">行動阻害無効</h3>
+          <p>沈黙を含む行動阻害（気絶・睡眠・混乱・沈黙・金縛り）をまとめて防ぎます。例：<a href="../characters/fortina.html#skill-3">フォルティナS3「聖剣の守護」</a>は、ターン開始時に自身へ3ターン（発動後は4回行動するまで再発動しない）、自身以外で攻撃力が最も高い味方1体へ2ターンの行動阻害無効を付与します。</p>
+          <h3 class="guide-sub">弱体効果無効</h3>
+          <p>沈黙を含め、新しい弱体効果そのものを防ぎます。</p>
+          <div class="guide-callout">
+            <p class="guide-callout-title">すでに付いている沈黙は消えない</p>
+            <p>ゲーム内ヘルプでは、これらの無効効果は<strong>新しく付く効果を防ぐもの</strong>で、すでに付帯している沈黙を解除するものではないと説明されています。</p>
+          </div>
+        </div>
+      </section>
+      <section class="guide-card" id="immunity" aria-labelledby="immunity-title">
+        <div class="guide-card-head">
+          <h2 id="immunity-title">沈黙無効と行動阻害無効は完全に同じではない</h2>
+        </div>
+        <div class="guide-card-body">
+          <p>どちらも沈黙対策として使えますが、ゲーム内部では完全に同じ効果として扱われない場合があります。</p>
+          <p>ワーズさんの検証（<a href="https://note.com/wazu_019/n/n605b9eb2e74f" target="_blank" rel="noopener">ワーズさん「キャラ性能解説 アイリーン」</a>・<a href="https://note.com/wazu_019/n/nd5e2e6544c75" target="_blank" rel="noopener">ワーズさん「キャラ性能解説 トリクシー」</a>）では、別スキルの条件判定において<strong>行動阻害無効は対象になる一方、沈黙無効は同じ扱いにならないケース</strong>が確認されています。</p>
+          <p>そのため、このページでは次のように分けて扱います。</p>
+          <ul class="guide-bullets">
+            <li>沈黙無効：沈黙に特化した無効</li>
+            <li>行動阻害無効：沈黙を含む行動阻害全体の無効</li>
+          </ul>
+        </div>
+      </section>
+      <section class="guide-card" id="loop" aria-labelledby="loop-title">
+        <div class="guide-card-head">
+          <h2 id="loop-title">沈黙を繰り返してスキルを封じる使い方</h2>
+        </div>
+        <div class="guide-card-body">
+          <p>沈黙は、長い効果ターンやスキルのクールタイム短縮と組み合わせることで、相手のアクティブスキルを長く使わせない運用もできます。</p>
+          <p>特に<a href="../characters/lunalynn.html#skill-1">ルナリンドS1「アイスコフィン」</a>は、専用武器Lv2で沈黙が3ターンになるため、クールタイム短縮役と組み合わせて沈黙を繰り返す編成が考えられます。</p>
+          <p>ワーズさんの検証・編成例（<a href="https://note.com/wazu_019/n/n605b9eb2e74f" target="_blank" rel="noopener">ワーズさん「キャラ性能解説 アイリーン」</a>・<a href="https://note.com/wazu_019/n/nd5e2e6544c75" target="_blank" rel="noopener">ワーズさん「キャラ性能解説 トリクシー」</a>）でも、ルナリンドを中心にクールタイム短縮を組み合わせて沈黙を維持する使い方が紹介されています。</p>
+          <p>ただし、これは沈黙そのものの共通仕様ではなく、<strong>キャラと編成を組み合わせた運用例</strong>です。</p>
+        </div>
+      </section>
+      <section class="guide-card" id="summary" aria-labelledby="summary-title">
+        <div class="guide-card-head">
+          <h2 id="summary-title">まとめ</h2>
+        </div>
+        <div class="guide-card-body">
+          <p>沈黙は、<strong>相手のアクティブスキルを封じて通常攻撃に置き換える行動阻害</strong>です。見るべきポイントは次の4つです。</p>
+          <ul class="guide-bullets">
+            <li><strong>何ターン沈黙するか</strong></li>
+            <li><strong>誰を対象にするか</strong></li>
+            <li><strong>付与確率はいくつか</strong></li>
+            <li><strong>弱体効果命中・耐性を含めて実際に通るか</strong></li>
+          </ul>
+          <p>リリコットなら、<strong>攻撃力が高い敵3体 → 70%で沈黙 → 通常1ターン → 専用Lv2で2ターン</strong>という分かりやすい形です。</p>
+          <p>ただし、沈黙中でも通常攻撃は行うため、<strong>「スキルは止められるが、相手そのものが完全停止するわけではない」</strong>ことは覚えておくとよいです。</p>
+          <p>リリコットの使い方は<a href="https://note.com/wazu_019/n/nb449d1930798" target="_blank" rel="noopener">ワーズさん「キャラ性能解説 リリコット」</a>でも詳しく解説されています。</p>
+        </div>
+      </section>
+      <section class="guide-card" id="sources" aria-labelledby="sources-title">
+        <div class="guide-card-head">
+          <h2 id="sources-title">出典</h2>
+        </div>
+        <div class="guide-card-body">
+          <p class="guide-source">出典：ゲーム内ヘルプ／ゲーム内スキル説明</p>
+          <p class="guide-source">ゲーム内ヘルプの「弱体効果の種類（行動阻害）」「確率増加・減少」「弱体効果無効・行動阻害無効」を一次情報とし、各キャラの数値・発動条件はゲーム内スキル説明を基準にしています。</p>
+          <p class="guide-source">検証参考：ワーズさんが公開されている検証結果を参考にさせていただきました。</p>
+          <ul class="guide-bullets guide-source">
+            <li><a href="https://note.com/wazu_019/n/nea5d08bf0151" target="_blank" rel="noopener">ワーズさん「弱体効果命中と耐性2」</a><span class="guide-link-text">スキル固有の付与確率と弱体効果命中・耐性の補正</span></li>
+            <li><a href="https://note.com/wazu_019/n/nb449d1930798" target="_blank" rel="noopener">ワーズさん「キャラ性能解説 リリコット」</a><span class="guide-link-text">リリコットの沈黙と通常攻撃強化</span></li>
+            <li><a href="https://note.com/wazu_019/n/n605b9eb2e74f" target="_blank" rel="noopener">ワーズさん「キャラ性能解説 アイリーン」</a><span class="guide-link-text">沈黙無効と行動阻害無効の扱いの違い、沈黙ループの編成例</span></li>
+            <li><a href="https://note.com/wazu_019/n/nd5e2e6544c75" target="_blank" rel="noopener">ワーズさん「キャラ性能解説 トリクシー」</a><span class="guide-link-text">沈黙無効と行動阻害無効の扱いの違い、沈黙ループの編成例</span></li>
+          </ul>
+        </div>
+      </section>
+    </div>
+    <!-- ad:bottom -->
+    <aside class="ad-slot" aria-label="広告">
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-6389066329814944"
+           data-ad-slot="6111654373"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </aside>
+    <!-- /ad:bottom -->
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <span>ミレストのメメントモリ分析データ室 / 非公式ファンサイト</span>
+      <nav class="footer-links" aria-label="サイト内のページ">
+        <a href="/">トップ</a>
+        <a href="../characters/index.html">キャラ一覧</a>
+        <a href="/pages/guide/">このサイトでできること</a>
+        <a href="/privacy.html">プライバシーポリシー</a>
+        <a href="/disclaimer.html">免責事項</a>
+        <a href="/about.html">このサイトについて</a>
+        <a href="/contact.html">お問い合わせ</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>
