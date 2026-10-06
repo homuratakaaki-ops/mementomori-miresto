@@ -114,7 +114,12 @@
     document.addEventListener("visibilitychange", function () {
       hold("tab", document.hidden);
     });
-    root.addEventListener("focusin", function () { hold("focus", true); });
+    // タップ・クリック後もボタンにはフォーカスが残る。キーボード操作時だけ
+    // 中断しないと、前後送りや再生を押した後に自動送りが止まり続ける。
+    root.addEventListener("focusin", function (event) {
+      hold("focus", event.target.matches(":focus-visible"));
+    });
+    root.addEventListener("pointerdown", function () { hold("focus", false); });
     root.addEventListener("focusout", function (event) {
       if (!root.contains(event.relatedTarget)) hold("focus", false);
     });
