@@ -538,6 +538,54 @@ function sourcesCard(guide) {
   return card("sources", "出典", parts.join("\n"));
 }
 
+/**
+ * ガイド1ページの外枠。従来型と article 型で中身（title・h1・カード）だけ差し替える
+ * （ヘッダ・フッタ・広告枠の置き方を1か所に保つため）。
+ */
+function pageShell(options) {
+  const lines = [
+    "<!doctype html>",
+    '<html lang="ja">',
+    "<head>",
+    head({
+      title: options.title,
+      description: options.description,
+      canonical: options.canonical,
+      ads: options.ads
+    }),
+    "</head>",
+    '<body data-status-guide="' + escapeHtml(options.id) + '" data-prerendered>',
+    '  <header class="page-header">',
+    '    <div class="header-inner">',
+    '      <a class="top-link" href="./index.html">状態異常ガイドの一覧へ</a>',
+    '      <p class="eyebrow">STATUS GUIDE</p>',
+    "      <h1>" + escapeHtml(options.heading) + "</h1>",
+    '      <div class="guide-meta">',
+    '        <span class="tag">最終横断確認 ' + escapeHtml(options.lastCrossCheck) + "</span>",
+    "      </div>",
+    '      <p class="guide-meta-note">' + escapeHtml(options.crossCheckNote) + "</p>",
+    "    </div>",
+    "  </header>",
+    "",
+    "  <main>",
+    '    <div class="guide-list">',
+    options.cards.join("\n"),
+    "    </div>",
+    adRenderer.renderAdSlot(options.ads, "    "),
+    "  </main>",
+    "",
+    footer()
+  ];
+  // そのページだけが必要とするスクリプトを </body> 直前に出す（slides のある回だけ）。
+  for (const src of options.scripts || []) {
+    lines.push('  <script src="' + escapeHtml(src) + '" defer></script>');
+  }
+  lines.push("</body>");
+  lines.push("</html>");
+  lines.push("");
+  return lines.join("\n");
+}
+
 function guidePageHtml(guide, characterById, skillById, ads) {
   const title = guide.name + "｜状態異常ガイド | " + TITLE_SUFFIX;
   // description は検索結果に出る1〜2行。長い本文をそのまま入れると切られるので、
@@ -555,37 +603,17 @@ function guidePageHtml(guide, characterById, skillById, ads) {
       sourcesCard(guide)
     ]);
 
-  return [
-    "<!doctype html>",
-    '<html lang="ja">',
-    "<head>",
-    head({ title, description, canonical, ads }),
-    "</head>",
-    '<body data-status-guide="' + escapeHtml(guide.id) + '" data-prerendered>',
-    '  <header class="page-header">',
-    '    <div class="header-inner">',
-    '      <a class="top-link" href="./index.html">状態異常ガイドの一覧へ</a>',
-    '      <p class="eyebrow">STATUS GUIDE</p>',
-    "      <h1>" + escapeHtml(guide.name) + "｜状態異常ガイド</h1>",
-    '      <div class="guide-meta">',
-    '        <span class="tag">最終横断確認 ' + escapeHtml(guide.lastCrossCheck) + "</span>",
-    "      </div>",
-    '      <p class="guide-meta-note">' + escapeHtml(guide.crossCheckNote) + "</p>",
-    "    </div>",
-    "  </header>",
-    "",
-    "  <main>",
-    '    <div class="guide-list">',
-    cards.join("\n"),
-    "    </div>",
-    adRenderer.renderAdSlot(ads, "    "),
-    "  </main>",
-    "",
-    footer(),
-    "</body>",
-    "</html>",
-    ""
-  ].join("\n");
+  return pageShell({
+    id: guide.id,
+    title,
+    description,
+    canonical,
+    heading: guide.name + "｜状態異常ガイド",
+    lastCrossCheck: guide.lastCrossCheck,
+    crossCheckNote: guide.crossCheckNote,
+    cards,
+    ads
+  });
 }
 
 function indexPageHtml(guides, ads) {
@@ -630,6 +658,442 @@ function indexPageHtml(guides, ads) {
     "</html>",
     ""
   ].join("\n");
+}
+
+/* ------------------------------------------------------------------
+ * 3-B. article 型（layout: "article"）
+ *
+ * 「見出し付きの節（sections）×部品（blocks）」で本文を組む型。
+ * 従来型（layout なし）の出力はここから一切変えないこと。
+ * 部品は p / h3 / list / callout / table / skillTable / slides の7種類だけで、
+ * これ以上の汎用化はしない（型が増えるほど検査が効かなくなるため）。
+ * ------------------------------------------------------------------ */
+
+/** 枠と効果の文字列を全部集める（取りこぼし検査と数値検査の土台）。 */
+function flowStrings(skill) {
+  const out = [];
+  for (const block of flowBlocks(skill)) {
+    out.push(block.when, block.target);
+    for (const item of block.exclusiveTarget || []) out.push(item.target);
+  }
+  for (const entry of flowEffects(skill)) {
+    out.push(entry.effect.text, entry.effect.condition, entry.effect.note, entry.effect.duration);
+  }
+  return out.map((value) => String(value || ""));
+}
+
+/** flow のどこかにその語が出てくるスキルか（「カウンタ変更」も「カウンタ」で拾う）。 */
+function mentionsTerm(skill, term) {
+  return flowStrings(skill).some((text) => text.includes(term));
+}
+
+const ARTICLE_BLOCK_PAD = "          ";
+const SLIDES_SCRIPT = "../../js/guide-slides.js";
+
+/**
+ * 本文の記法を1か所で処理する。
+ * 先にHTMLエスケープし、そのあと {{skill}} / {{ref}} / ** だけを置き換える。
+ * 読めない記法・閉じていない記法はビルドを止める（手入力の崩れを公開しないため）。
+ */
+function renderInline(text, ctx) {
+  const source = String(text == null ? "" : text);
+  let html = escapeHtml(source).replace(/\{\{([^{}]*)\}\}/g, (whole, inner) => {
+    const bar = inner.indexOf("|");
+    const body = bar < 0 ? inner : inner.slice(0, bar);
+    const label = bar < 0 ? null : inner.slice(bar + 1);
+    const parts = body.split(":");
+    if (parts[0] === "skill" && parts.length === 3) return ctx.skillAnchor(parts[1], parts[2], label);
+    if (parts[0] === "ref" && parts.length === 2) return ctx.refAnchor(parts[1], label);
+    ctx.errors.push(ctx.where + ": 読めない記法がある（" + whole + "）");
+    return "";
+  });
+  html = html.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
+  if (html.includes("{{") || html.includes("}}") || html.includes("*")) {
+    ctx.errors.push(ctx.where + ": 閉じていない記法が残っている（" + source + "）");
+  }
+  return html;
+}
+
+/** 本文の記法を解くための道具ひとそろい。参照したスキルと出典もここに溜める。 */
+function articleContext(guide, characterById, skillById, errors) {
+  const where = "data/status/" + guide.id + ".json";
+  const usedSkills = new Map();
+  const usedRefs = new Set();
+  const refByKey = new Map(((guide.sources || {}).verification || []).map((item) => [item.key, item]));
+
+  return {
+    where,
+    errors,
+    usedSkills,
+    usedRefs,
+    skillAnchor(characterId, number, label) {
+      const entry = { characterId, skill: String(number) };
+      const id = skillKey(entry);
+      usedSkills.set(id, entry);
+      const character = characterById.get(characterId);
+      const skill = skillById.get(id);
+      if (!character) {
+        errors.push(where + ": {{skill}} の " + characterId + " がキャラ一覧に無い");
+        return label === null ? escapeHtml(id) : label;
+      }
+      if (!skill) {
+        errors.push(where + ": {{skill}} の " + id + " に対応するスキルが無い");
+        return label === null ? escapeHtml(id) : label;
+      }
+      const slug = character.pageSlug || character.id;
+      const text = label === null
+        ? escapeHtml(character.name + " S" + entry.skill + " " + skill.name)
+        : label;
+      return '<a href="../characters/' + escapeHtml(slug) + ".html#skill-"
+        + escapeHtml(entry.skill) + '">' + text + "</a>";
+    },
+    refAnchor(key, label) {
+      usedRefs.add(key);
+      const item = refByKey.get(key);
+      if (!item) {
+        errors.push(where + ": {{ref}} のキー " + key + " が sources.verification に無い");
+        return label === null ? escapeHtml(key) : label;
+      }
+      const text = label === null
+        ? escapeHtml(item.name + "さん「" + (item.title || item.url) + "」")
+        : label;
+      return '<a href="' + escapeHtml(item.url) + '" target="_blank" rel="noopener">' + text + "</a>";
+    }
+  };
+}
+
+/**
+ * 表。1列目は行の見出し（th）、2列目以降は data-label 付きの td。
+ * 狭い画面で1行＝1まとまりに積み直すのは assets/status-guide.css 側。
+ */
+function articleTable(head, rows, ctx, firstCellHtml) {
+  const parts = [
+    ARTICLE_BLOCK_PAD + '<div class="guide-table-wrap">',
+    ARTICLE_BLOCK_PAD + '  <table class="guide-table guide-table--wrap">',
+    ARTICLE_BLOCK_PAD + "    <thead>",
+    ARTICLE_BLOCK_PAD + "      <tr>"
+  ];
+  for (const name of head || []) {
+    parts.push(ARTICLE_BLOCK_PAD + '        <th scope="col">' + renderInline(name, ctx) + "</th>");
+  }
+  parts.push(ARTICLE_BLOCK_PAD + "      </tr>");
+  parts.push(ARTICLE_BLOCK_PAD + "    </thead>");
+  parts.push(ARTICLE_BLOCK_PAD + "    <tbody>");
+  for (const row of rows || []) {
+    parts.push(ARTICLE_BLOCK_PAD + "      <tr>");
+    parts.push(ARTICLE_BLOCK_PAD + '        <th scope="row">' + firstCellHtml(row) + "</th>");
+    const cells = Array.isArray(row) ? row.slice(1) : row.cells || [];
+    cells.forEach((value, column) => {
+      const label = (head || [])[column + 1] || "";
+      parts.push(ARTICLE_BLOCK_PAD + '        <td data-label="' + escapeHtml(label) + '">'
+        + renderInline(value, ctx) + "</td>");
+    });
+    parts.push(ARTICLE_BLOCK_PAD + "      </tr>");
+  }
+  parts.push(ARTICLE_BLOCK_PAD + "    </tbody>");
+  parts.push(ARTICLE_BLOCK_PAD + "  </table>");
+  parts.push(ARTICLE_BLOCK_PAD + "</div>");
+  return parts.join("\n");
+}
+
+/**
+ * 図解スライド。JSが動かない環境でも1枚目が見える形で出す
+ * （操作列は hidden のまま＝出さない。js/guide-slides.js が外す）。
+ * width / height は原寸のまま出して読み込み前に場所を確保する（本文がずれないため）。
+ */
+function articleSlides(block) {
+  const items = block.items || [];
+  const lines = [
+    ARTICLE_BLOCK_PAD + '<div class="guide-slides" data-guide-slides role="region"'
+      + ' aria-roledescription="carousel" aria-label="' + escapeHtml(block.label) + '">',
+    ARTICLE_BLOCK_PAD + '  <div class="guide-slides-viewport" aria-live="off">'
+  ];
+  items.forEach((item, index) => {
+    const duration = Math.round(Number(item.duration) * 1000);
+    lines.push(ARTICLE_BLOCK_PAD + '    <figure class="guide-slide' + (index === 0 ? " is-active" : "")
+      + '" data-duration="' + duration + '" aria-roledescription="slide" aria-label="'
+      + (index + 1) + " / " + items.length + '">');
+    lines.push(ARTICLE_BLOCK_PAD + "      <picture>");
+    lines.push(ARTICLE_BLOCK_PAD + '        <source type="image/webp" srcset="../../'
+      + escapeHtml(item.webpSmall) + " 960w, ../../" + escapeHtml(item.webp) + " "
+      + escapeHtml(item.width) + 'w" sizes="(max-width: 880px) 100vw, 880px">');
+    lines.push(ARTICLE_BLOCK_PAD + '        <img src="../../' + escapeHtml(item.src)
+      + '" width="' + escapeHtml(item.width) + '" height="' + escapeHtml(item.height)
+      + '" alt="' + escapeHtml(item.alt) + '"'
+      + (index === 0 ? "" : ' loading="lazy"') + ' decoding="async">');
+    lines.push(ARTICLE_BLOCK_PAD + "      </picture>");
+    lines.push(ARTICLE_BLOCK_PAD + "    </figure>");
+  });
+  lines.push(ARTICLE_BLOCK_PAD + "  </div>");
+  lines.push(ARTICLE_BLOCK_PAD + '  <div class="guide-slides-controls" hidden>');
+  lines.push(ARTICLE_BLOCK_PAD + '    <button type="button" data-slides-prev aria-label="前の図へ">‹</button>');
+  lines.push(ARTICLE_BLOCK_PAD + '    <button type="button" data-slides-toggle aria-label="一時停止">❚❚</button>');
+  lines.push(ARTICLE_BLOCK_PAD + '    <button type="button" data-slides-next aria-label="次の図へ">›</button>');
+  lines.push(ARTICLE_BLOCK_PAD + '    <span class="guide-slides-dots">');
+  items.forEach((item, index) => {
+    lines.push(ARTICLE_BLOCK_PAD + '      <button type="button" data-slides-dot="' + index
+      + '" aria-label="' + (index + 1) + '枚目へ"'
+      + (index === 0 ? ' aria-current="true"' : "") + "></button>");
+  });
+  lines.push(ARTICLE_BLOCK_PAD + "    </span>");
+  lines.push(ARTICLE_BLOCK_PAD + "  </div>");
+  lines.push(ARTICLE_BLOCK_PAD + "</div>");
+  return lines.join("\n");
+}
+
+function articleBlock(block, ctx) {
+  const pad = ARTICLE_BLOCK_PAD;
+  switch (block.type) {
+    case "p":
+      return pad + "<p>" + renderInline(block.text, ctx) + "</p>";
+    case "h3":
+      return pad + '<h3 class="guide-sub">' + renderInline(block.text, ctx) + "</h3>";
+    case "list": {
+      const parts = [pad + '<ul class="guide-bullets">'];
+      for (const text of block.items || []) parts.push(pad + "  <li>" + renderInline(text, ctx) + "</li>");
+      parts.push(pad + "</ul>");
+      return parts.join("\n");
+    }
+    case "callout": {
+      const parts = [
+        pad + '<div class="guide-callout">',
+        pad + '  <p class="guide-callout-title">' + renderInline(block.title, ctx) + "</p>"
+      ];
+      for (const text of block.body || []) parts.push(pad + "  <p>" + renderInline(text, ctx) + "</p>");
+      parts.push(pad + "</div>");
+      return parts.join("\n");
+    }
+    case "table":
+      return articleTable(block.head, block.rows, ctx, (row) => renderInline(row[0], ctx));
+    case "skillTable":
+      return articleTable(block.head, block.rows, ctx, (row) => {
+        const parts = String(row.skill || "").split(":");
+        if (parts.length !== 2) {
+          ctx.errors.push(ctx.where + ": skillTable の skill は「キャラID:番号」で書くこと（"
+            + row.skill + "）");
+          return escapeHtml(row.skill);
+        }
+        return ctx.skillAnchor(parts[0], parts[1], null);
+      });
+    case "slides":
+      return articleSlides(block);
+    default:
+      ctx.errors.push(ctx.where + ": 知らない部品がある（type: " + block.type + "）");
+      return "";
+  }
+}
+
+function articleSectionCard(section, ctx) {
+  if (!section.id || !section.heading) {
+    ctx.errors.push(ctx.where + ": sections には id と heading をそろえて書くこと");
+  }
+  const body = (section.blocks || []).map((block) => articleBlock(block, ctx)).filter(Boolean);
+  return card(section.id, section.heading, body.join("\n"));
+}
+
+/**
+ * 出典（article型）。感謝文は1回だけ出す
+ * （従来型は1件ごとに繰り返す書き方のまま。出力を変えないため分けてある）。
+ */
+function articleSourcesCard(guide) {
+  const sources = guide.sources || {};
+  const official = sources.official || [];
+  const verification = sources.verification || [];
+  const parts = [
+    ARTICLE_BLOCK_PAD + '<p class="guide-source">出典：' + escapeHtml(official.join("／")) + "</p>"
+  ];
+  if (sources.officialNote) {
+    parts.push(ARTICLE_BLOCK_PAD + '<p class="guide-source">' + escapeHtml(sources.officialNote) + "</p>");
+  }
+  if (verification.length) {
+    const names = [...new Set(verification.map((item) => item.name))];
+    parts.push(ARTICLE_BLOCK_PAD + '<p class="guide-source">検証参考：'
+      + escapeHtml(names.map((name) => name + "さん").join("・"))
+      + "が公開されている検証結果を参考にさせていただきました。</p>");
+    parts.push(ARTICLE_BLOCK_PAD + '<ul class="guide-bullets guide-source">');
+    for (const item of verification) {
+      parts.push(ARTICLE_BLOCK_PAD + '  <li><a href="' + escapeHtml(item.url)
+        + '" target="_blank" rel="noopener">'
+        + escapeHtml(item.name + "さん「" + (item.title || item.url) + "」") + "</a>"
+        + (item.note ? '<span class="guide-link-text">' + escapeHtml(item.note) + "</span>" : "")
+        + "</li>");
+    }
+    parts.push(ARTICLE_BLOCK_PAD + "</ul>");
+  }
+  return card("sources", "出典", parts.join("\n"));
+}
+
+/** 取りこぼし検査。flow にその語が出てくるスキルを、本文が全部参照しているか。 */
+function validateArticleMentions(guide, baseData, usedSkills, errors) {
+  const where = "data/status/" + guide.id + ".json";
+  const ignore = guide.ignore || [];
+  for (const entry of ignore) {
+    if (!entry.kind || !entry.skillId || !entry.reason) {
+      errors.push(where + ": ignore には kind / skillId / reason をそろえて書くこと");
+    }
+    if (entry.kind && entry.kind !== "mentions") {
+      errors.push(where + ": article 型の ignore の kind は mentions だけ（" + entry.kind + "）");
+    }
+  }
+  const auto = (baseData.skills || [])
+    .filter((skill) => mentionsTerm(skill, guide.term))
+    .map((skill) => skill.id);
+  const manual = [...usedSkills.keys()];
+  const skipped = new Set(ignore.filter((item) => item.kind === "mentions").map((item) => item.skillId));
+
+  for (const id of auto) {
+    if (manual.includes(id) || skipped.has(id)) continue;
+    errors.push(where + ": 「" + guide.term + "」を含むスキル " + id
+      + " が本文から参照されていない。載せるか ignore に理由を書くこと");
+  }
+  for (const id of manual) {
+    if (auto.includes(id)) continue;
+    errors.push(where + ": 本文が参照している " + id + " の flow に「" + guide.term
+      + "」が無い。スキルデータ側を確かめること");
+  }
+  for (const id of skipped) {
+    if (!auto.includes(id)) errors.push(where + ": ignore の " + id + " は候補に出ていない（不要な除外）");
+  }
+  return { auto: auto.length, manual: manual.length, ignored: skipped.size };
+}
+
+/** 直リンクの先が実在するページ＋アンカーかどうか（従来型と同じ方法）。 */
+function validateArticleLinks(guide, usedSkills, characterById, errors) {
+  const where = "data/status/" + guide.id + ".json";
+  const cache = new Map();
+  let checked = 0;
+  for (const entry of usedSkills.values()) {
+    const character = characterById.get(entry.characterId);
+    if (!character) continue; // 記法を解いた時点でエラーにしてある
+    const slug = character.pageSlug || character.id;
+    if (!cache.has(slug)) {
+      const path = join(CHARACTER_PAGES_DIR, slug + ".html");
+      cache.set(slug, existsSync(path) ? readFileSync(path, "utf8") : null);
+    }
+    const html = cache.get(slug);
+    checked += 1;
+    if (html === null) {
+      errors.push(where + ": 直リンク先のページが無い（pages/characters/" + slug + ".html）");
+      continue;
+    }
+    if (!html.includes('id="skill-' + entry.skill + '"')) {
+      errors.push(where + ": pages/characters/" + slug + ".html に id=\"skill-" + entry.skill + "\" が無い");
+    }
+  }
+  return checked;
+}
+
+/** 数値検査。skillTable のセルに出てくる N% が、その行のスキルの flow にあるか。 */
+function validateArticleNumbers(guide, skillById, errors) {
+  const where = "data/status/" + guide.id + ".json";
+  let checked = 0;
+  for (const section of guide.sections || []) {
+    for (const block of section.blocks || []) {
+      if (block.type !== "skillTable") continue;
+      for (const row of block.rows || []) {
+        const parts = String(row.skill || "").split(":");
+        const skill = parts.length === 2 ? skillById.get(parts[0] + "-s" + parts[1]) : null;
+        if (!skill) continue; // リンク検査側でエラーにしてある
+        const haystack = flowStrings(skill).join(" / ");
+        const found = (row.cells || []).join(" ").match(/[0-9]+(?:\.[0-9]+)?%/g) || [];
+        for (const value of found) {
+          checked += 1;
+          if (!haystack.includes(value)) {
+            errors.push(where + ": " + skill.id + " の表に書いた「" + value
+              + "」がスキルデータの flow に無い");
+          }
+        }
+      }
+    }
+  }
+  return checked;
+}
+
+/** 出典検査。{{ref}} のキーが実在し、逆に本文で使われない出典が残っていないか。 */
+function validateArticleSources(guide, usedRefs, errors) {
+  const where = "data/status/" + guide.id + ".json";
+  for (const item of (guide.sources || {}).verification || []) {
+    if (!item.key) { errors.push(where + ": sources.verification に key が無い項目がある"); continue; }
+    if (!usedRefs.has(item.key)) {
+      errors.push(where + ": 本文で一度も使っていない出典がある（" + item.key + "）");
+    }
+  }
+}
+
+/** スライド検査。画像の置き場所・原寸・alt・表示時間をビルドで止める。 */
+function validateArticleSlides(guide, errors) {
+  const where = "data/status/" + guide.id + ".json";
+  let checked = 0;
+  for (const section of guide.sections || []) {
+    for (const block of section.blocks || []) {
+      if (block.type !== "slides") continue;
+      if (!block.label) errors.push(where + ": slides の label が無い");
+      (block.items || []).forEach((item, index) => {
+        const label = where + ": スライド" + (index + 1);
+        checked += 1;
+        for (const key of ["webp", "webpSmall", "src"]) {
+          if (!item[key]) { errors.push(label + " の " + key + " が無い"); continue; }
+          if (!existsSync(join(ROOT, item[key]))) {
+            errors.push(label + " の " + key + " が見つからない（" + item[key] + "）");
+          }
+        }
+        for (const key of ["width", "height"]) {
+          if (!Number.isInteger(item[key]) || item[key] <= 0) {
+            errors.push(label + " の " + key + " は原寸（正の整数）で書くこと");
+          }
+        }
+        if (!item.alt) errors.push(label + " の alt が無い");
+        const duration = Number(item.duration);
+        if (!(duration >= 0.5 && duration <= 10)) {
+          errors.push(label + " の duration は0.5〜10（秒）で書くこと");
+        }
+      });
+    }
+  }
+  return checked;
+}
+
+function hasSlides(guide) {
+  return (guide.sections || []).some((section) =>
+    (section.blocks || []).some((block) => block.type === "slides"));
+}
+
+/**
+ * article型のガイド1件を検証して組み立てる。
+ * 従来の givers / users / amplifiers の検査（validateLists・validateGiverNumbers）は
+ * かけず、取りこぼし・リンク先・数値・出典・スライドの5つで代わりに固める。
+ */
+function buildArticle(guide, options) {
+  const errors = options.errors;
+  const ctx = articleContext(guide, options.characterById, options.skillById, errors);
+  const cards = (guide.sections || []).map((section) => articleSectionCard(section, ctx));
+  cards.push(articleSourcesCard(guide));
+
+  if (!guide.label) errors.push(ctx.where + ": article 型には label（h1の「｜」の後ろ）が必要です");
+  if (!guide.description) errors.push(ctx.where + ": article 型には description（説明文）が必要です");
+  if (!guide.summary) errors.push(ctx.where + ": summary（入口ページのカード文）が必要です");
+
+  const summary = { mentions: validateArticleMentions(guide, options.baseData, ctx.usedSkills, errors) };
+  const links = validateArticleLinks(guide, ctx.usedSkills, options.characterById, errors);
+  const numbers = validateArticleNumbers(guide, options.skillById, errors);
+  validateArticleSources(guide, ctx.usedRefs, errors);
+  const slides = validateArticleSlides(guide, errors);
+
+  const html = pageShell({
+    id: guide.id,
+    title: guide.name + "｜" + guide.label + " | " + TITLE_SUFFIX,
+    description: guide.description,
+    canonical: SITE_ORIGIN + "/pages/status/" + guide.id + ".html",
+    heading: guide.name + "｜" + guide.label,
+    lastCrossCheck: guide.lastCrossCheck,
+    crossCheckNote: guide.crossCheckNote,
+    cards,
+    ads: options.ads,
+    // slides のあるページだけスクリプトを読む（無いページに増やさない）。
+    scripts: hasSlides(guide) ? [SLIDES_SCRIPT] : []
+  });
+
+  return { html, summary, links, numbers, slides };
 }
 
 /* ------------------------------------------------------------------
@@ -683,7 +1147,7 @@ export function buildStatusGuides(options) {
 
   const guides = readGuides();
   if (!guides.length) {
-    return { guides: [], links: 0, numbers: 0, summary: {}, written: [], indexChanged: false, sitemap: { changed: false, added: [] } };
+    return { guides: [], links: 0, numbers: 0, slides: 0, articleNumbers: 0, summary: {}, written: [], indexChanged: false, sitemap: { changed: false, added: [] } };
   }
 
   const characterById = new Map((baseData.characters || []).map((character) => [character.id, character]));
@@ -694,6 +1158,8 @@ export function buildStatusGuides(options) {
   const pages = [];
   let links = 0;
   let numbers = 0;
+  let slides = 0;
+  let articleNumbers = 0;
 
   for (const guide of guides) {
     if (!/^\d{4}-\d{2}-\d{2}$/.test(String(guide.lastCrossCheck || ""))) {
@@ -704,6 +1170,24 @@ export function buildStatusGuides(options) {
     }
     validateTermLink(guide, terms, errors);
     validateIllustration(guide, errors);
+
+    // layout: "article" は節×部品で本文を組む型。検査も専用のものに差し替える。
+    if (guide.layout === "article") {
+      const built = buildArticle(guide, { baseData, characterById, skillById, ads, errors });
+      summary[guide.id] = built.summary;
+      links += built.links;
+      slides += built.slides;
+      articleNumbers += built.numbers;
+      if (errors.length) continue; // 検査に引っかかったページは書かない
+      validateWording("pages/status/" + guide.id + ".html", built.html, errors);
+      pages.push({
+        path: join(STATUS_PAGES_DIR, guide.id + ".html"),
+        html: built.html,
+        url: "/pages/status/" + guide.id + ".html"
+      });
+      continue;
+    }
+
     summary[guide.id] = validateLists(guide, baseData, errors);
     numbers += validateGiverNumbers(guide, skillById, errors);
     links += validateLinks(guide, characterById, errors);
@@ -731,5 +1215,5 @@ export function buildStatusGuides(options) {
     writeIfChanged
   );
 
-  return { guides, links, numbers, summary, written, indexChanged, sitemap };
+  return { guides, links, numbers, slides, articleNumbers, summary, written, indexChanged, sitemap };
 }

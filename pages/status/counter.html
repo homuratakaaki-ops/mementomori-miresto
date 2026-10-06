@@ -1,0 +1,447 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>カウンタ・カウンタ変更｜特殊効果ガイド | ミレストのメメントモリ分析データ室</title>
+  <meta name="description" content="通常カウンタとカウンタ変更の違い（ダメージの基準・被ダメージ0・回避・戦闘不能）と、カグヤ・モーザのカウンタ変更、カウンタを持つキャラ・対策するキャラを、キャラページの該当スキルへのリンク付きで整理しています。">
+  <link rel="canonical" href="https://memento.musoudc.com/pages/status/counter.html">
+  <!-- OGP。画像は共通のものを使う（ガイドごとの画像生成は未対応） -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="ミレストのメメントモリ分析データ室">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="og:title" content="カウンタ・カウンタ変更｜特殊効果ガイド | ミレストのメメントモリ分析データ室">
+  <meta property="og:description" content="通常カウンタとカウンタ変更の違い（ダメージの基準・被ダメージ0・回避・戦闘不能）と、カグヤ・モーザのカウンタ変更、カウンタを持つキャラ・対策するキャラを、キャラページの該当スキルへのリンク付きで整理しています。">
+  <meta property="og:url" content="https://memento.musoudc.com/pages/status/counter.html">
+  <meta property="og:image" content="https://memento.musoudc.com/assets/ogp/ogp-common.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <link rel="icon" type="image/png" href="../../assets/miresto/miresto-icon-32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="../../assets/miresto/miresto-icon-180.png">
+  <link rel="stylesheet" href="../../assets/character-page.css">
+  <link rel="stylesheet" href="../../assets/status-guide.css">
+  <!-- ad:head -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6389066329814944" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="/assets/ad-slot.css">
+  <!-- /ad:head -->
+</head>
+<body data-status-guide="counter" data-prerendered>
+  <header class="page-header">
+    <div class="header-inner">
+      <a class="top-link" href="./index.html">状態異常ガイドの一覧へ</a>
+      <p class="eyebrow">STATUS GUIDE</p>
+      <h1>カウンタ・カウンタ変更｜特殊効果ガイド</h1>
+      <div class="guide-meta">
+        <span class="tag">最終横断確認 2026-10-06</span>
+      </div>
+      <p class="guide-meta-note">この日までに実装済みのキャラを対象に、カウンタ・カウンタ変更を増やす／付与する／下げる／カウンタダメージを減らすスキルを確認しています。</p>
+    </div>
+  </header>
+
+  <main>
+    <div class="guide-list">
+      <section class="guide-card" id="oneline" aria-labelledby="oneline-title">
+        <div class="guide-card-head">
+          <h2 id="oneline-title">ひとことで</h2>
+        </div>
+        <div class="guide-card-body">
+          <p><strong>カウンタ</strong>は、敵の攻撃を受けたときに相手へダメージを返す仕組みです。メメントモリでは、大きく分けて2種類あります。</p>
+          <ul class="guide-bullets">
+            <li><strong>通常カウンタ</strong>：実際に受けたダメージをもとに反撃する</li>
+            <li><strong>カウンタ変更</strong>：通常カウンタを、キャラ固有の攻撃力・魔力などを使う反撃へ置き換える</li>
+          </ul>
+          <div class="guide-callout">
+            <p class="guide-callout-title">一番大事な違い</p>
+            <p>通常カウンタは「どれだけダメージを受けたか」が重要です。</p>
+            <p>カウンタ変更は受けたダメージ量ではなく、スキルごとに決められた計算式で反撃します。</p>
+          </div>
+          <p>※「○○返し」のような別系統の反撃効果は、このページでは扱いません。</p>
+          <div class="guide-slides" data-guide-slides role="region" aria-roledescription="carousel" aria-label="カウンタとカウンタ変更の違い（5枚の図解）">
+            <div class="guide-slides-viewport" aria-live="off">
+              <figure class="guide-slide is-active" data-duration="2000" aria-roledescription="slide" aria-label="1 / 5">
+                <picture>
+                  <source type="image/webp" srcset="../../assets/status/counter-slide-1-intro-960.webp 960w, ../../assets/status/counter-slide-1-intro.webp 1672w" sizes="(max-width: 880px) 100vw, 880px">
+                  <img src="../../assets/status/counter-slide-1-intro.jpg" width="1672" height="941" alt="カウンタとカウンタ変更の違い。違いをかんたんに見ていく導入の図" decoding="async">
+                </picture>
+              </figure>
+              <figure class="guide-slide" data-duration="3000" aria-roledescription="slide" aria-label="2 / 5">
+                <picture>
+                  <source type="image/webp" srcset="../../assets/status/counter-slide-2-normal-960.webp 960w, ../../assets/status/counter-slide-2-normal.webp 1672w" sizes="(max-width: 880px) 100vw, 880px">
+                  <img src="../../assets/status/counter-slide-2-normal.jpg" width="1672" height="941" alt="通常カウンタの仕組み（アモール）。敵から攻撃を受けて10,000ダメージを受け、カウンタ50%なら5,000ダメージを返す。通常カウンタは実際に受けたダメージが基準" loading="lazy" decoding="async">
+                </picture>
+              </figure>
+              <figure class="guide-slide" data-duration="3500" aria-roledescription="slide" aria-label="3 / 5">
+                <picture>
+                  <source type="image/webp" srcset="../../assets/status/counter-slide-3-moddey-960.webp 960w, ../../assets/status/counter-slide-3-moddey.webp 1672w" sizes="(max-width: 880px) 100vw, 880px">
+                  <img src="../../assets/status/counter-slide-3-moddey.jpg" width="1672" height="941" alt="モーザのカウンタ変更。攻撃を受けてHPが70%または40%を下回るとカウンタ変更を獲得し、その後は攻撃力200%で反撃する。最初はダメージを受けたい" loading="lazy" decoding="async">
+                </picture>
+              </figure>
+              <figure class="guide-slide" data-duration="3500" aria-roledescription="slide" aria-label="4 / 5">
+                <picture>
+                  <source type="image/webp" srcset="../../assets/status/counter-slide-4-kaguya-960.webp 960w, ../../assets/status/counter-slide-4-kaguya.webp 1672w" sizes="(max-width: 880px) 100vw, 880px">
+                  <img src="../../assets/status/counter-slide-4-kaguya.jpg" width="1672" height="941" alt="カグヤのカウンタ変更。敵の攻撃が命中し、シールドでHPダメージを0にしてHP100%を保つと、カウンタ変更で反撃する。回避するとカウンタは発動しない" loading="lazy" decoding="async">
+                </picture>
+              </figure>
+              <figure class="guide-slide" data-duration="2500" aria-roledescription="slide" aria-label="5 / 5">
+                <picture>
+                  <source type="image/webp" srcset="../../assets/status/counter-slide-5-summary-960.webp 960w, ../../assets/status/counter-slide-5-summary.webp 1672w" sizes="(max-width: 880px) 100vw, 880px">
+                  <img src="../../assets/status/counter-slide-5-summary.jpg" width="1672" height="941" alt="まとめ。通常カウンタは受けたダメージが基準（被ダメージ×カウンタ%）、カウンタ変更は攻撃力・魔力などを参照するキャラ固有の計算で反撃する" loading="lazy" decoding="async">
+                </picture>
+              </figure>
+            </div>
+            <div class="guide-slides-controls" hidden>
+              <button type="button" data-slides-prev aria-label="前の図へ">‹</button>
+              <button type="button" data-slides-toggle aria-label="一時停止">❚❚</button>
+              <button type="button" data-slides-next aria-label="次の図へ">›</button>
+              <span class="guide-slides-dots">
+                <button type="button" data-slides-dot="0" aria-label="1枚目へ" aria-current="true"></button>
+                <button type="button" data-slides-dot="1" aria-label="2枚目へ"></button>
+                <button type="button" data-slides-dot="2" aria-label="3枚目へ"></button>
+                <button type="button" data-slides-dot="3" aria-label="4枚目へ"></button>
+                <button type="button" data-slides-dot="4" aria-label="5枚目へ"></button>
+              </span>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="guide-card" id="compare" aria-labelledby="compare-title">
+        <div class="guide-card-head">
+          <h2 id="compare-title">通常カウンタとカウンタ変更の違い</h2>
+        </div>
+        <div class="guide-card-body">
+          <div class="guide-table-wrap">
+            <table class="guide-table guide-table--wrap">
+              <thead>
+                <tr>
+                  <th scope="col">比較項目</th>
+                  <th scope="col">通常カウンタ</th>
+                  <th scope="col">カウンタ変更</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">ダメージの基準</th>
+                  <td data-label="通常カウンタ">実際に受けたダメージ × カウンタ%（検証）</td>
+                  <td data-label="カウンタ変更">攻撃力・魔力など、スキル固有の値</td>
+                </tr>
+                <tr>
+                  <th scope="row">カウンタ増加・減少</th>
+                  <td data-label="通常カウンタ">影響する</td>
+                  <td data-label="カウンタ変更">影響しない</td>
+                </tr>
+                <tr>
+                  <th scope="row">被ダメージ0</th>
+                  <td data-label="通常カウンタ">発動しない（検証）</td>
+                  <td data-label="カウンタ変更">元の攻撃が命中していれば発動（検証）</td>
+                </tr>
+                <tr>
+                  <th scope="row">元の攻撃を回避</th>
+                  <td data-label="通常カウンタ">発動しない（検証）</td>
+                  <td data-label="カウンタ変更">発動しない</td>
+                </tr>
+                <tr>
+                  <th scope="row">その攻撃で戦闘不能</th>
+                  <td data-label="通常カウンタ">発動しない（検証）</td>
+                  <td data-label="カウンタ変更">発動しない（検証）</td>
+                </tr>
+                <tr>
+                  <th scope="row">毒などの持続ダメージ</th>
+                  <td data-label="通常カウンタ">発動しない（検証）</td>
+                  <td data-label="カウンタ変更">発動しない</td>
+                </tr>
+                <tr>
+                  <th scope="row">共鳴・献身・パッシブ由来</th>
+                  <td data-label="通常カウンタ">発動しない（検証）</td>
+                  <td data-label="カウンタ変更">発動しない</td>
+                </tr>
+                <tr>
+                  <th scope="row">攻撃回数に含むか</th>
+                  <td data-label="通常カウンタ">含まれない（検証）</td>
+                  <td data-label="カウンタ変更">含まれない</td>
+                </tr>
+                <tr>
+                  <th scope="row">カウンタダメージの命中</th>
+                  <td data-label="通常カウンタ">必中（検証）</td>
+                  <td data-label="カウンタ変更">必中</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p>「（検証）」と書いた項目は、公式ヘルプだけでは判断できないため、<a href="https://note.com/wazu_019/n/n23ef73d20772" target="_blank" rel="noopener">ワーズさん「【メメントモリ】カウンタ」</a>の検証結果を参考にしています。それ以外はゲーム内ヘルプの記載です。</p>
+        </div>
+      </section>
+      <section class="guide-card" id="normal" aria-labelledby="normal-title">
+        <div class="guide-card-head">
+          <h2 id="normal-title">通常カウンタの仕組み</h2>
+        </div>
+        <div class="guide-card-body">
+          <p>通常カウンタは、<strong>最終的に実際に受けたダメージにカウンタ%を掛けて返す</strong>仕組みです。たとえば、</p>
+          <ul class="guide-bullets">
+            <li>カウンタ：50%</li>
+            <li>実際に受けたダメージ：10,000</li>
+          </ul>
+          <p>なら、基本となるカウンタダメージは <strong>5,000</strong> です。</p>
+          <h3 class="guide-sub">「カウンタ50%増加」は1.5倍ではない</h3>
+          <p><a href="https://note.com/wazu_019/n/n23ef73d20772" target="_blank" rel="noopener">ワーズさんの検証</a>では、カウンタ増加は倍率ではなく<strong>加算</strong>です。</p>
+          <p><strong>元のカウンタ3% + カウンタ50%増加 = 53%</strong></p>
+          <p>「3%が1.5倍になって4.5%」ではありません。アモールやオフィーリアなどの「カウンタを○%増加」を見るときは、この違いが重要です。</p>
+          <h3 class="guide-sub">どのダメージを基準にする？</h3>
+          <p>通常カウンタは、攻撃側が出した元のダメージではなく、<strong>防御側が最終的に受けたダメージ</strong>を基準にします。</p>
+          <p><a href="https://note.com/wazu_019/n/n23ef73d20772" target="_blank" rel="noopener">ワーズさんの検証</a>では、軽減・遮断・多重バリア・シールド・HP1で耐えるなどを処理した後の値が基準です。また、残りHPを超えたオーバーキル分は含まれません。</p>
+          <p>そのため通常カウンタは、受けるダメージを小さくすると、返すカウンタダメージも小さくなります。</p>
+        </div>
+      </section>
+      <section class="guide-card" id="change" aria-labelledby="change-title">
+        <div class="guide-card-head">
+          <h2 id="change-title">カウンタ変更の仕組み</h2>
+        </div>
+        <div class="guide-card-body">
+          <p>カウンタ変更は、<strong>通常カウンタをキャラ固有の反撃へ置き換える効果</strong>です。ゲーム内公式ヘルプでは、カウンタ変更について次のように説明されています。</p>
+          <ul class="guide-bullets">
+            <li>受けたダメージ量に依存しない</li>
+            <li>カウンタ増加・減少の影響を受けない</li>
+            <li>カウンタダメージは必ず命中する</li>
+            <li>攻撃回数に含まれない</li>
+            <li>元の攻撃が回避された場合は発動しない</li>
+            <li>持続ダメージ・共鳴・献身・パッシブダメージでは発動しない</li>
+          </ul>
+          <p>ここまでは共通仕様です。ただし、<strong>カウンタ変更をいつ獲得するか、どう維持するかはキャラごとに違います。</strong>この違いが大きいのが、<a href="../characters/kaguya.html#skill-3">カグヤ</a>と<a href="../characters/moddey.html#skill-3">モーザ</a>です。</p>
+        </div>
+      </section>
+      <section class="guide-card" id="characters" aria-labelledby="characters-title">
+        <div class="guide-card-head">
+          <h2 id="characters-title">キャラごとのカウンタ特性</h2>
+        </div>
+        <div class="guide-card-body">
+          <h3 class="guide-sub">シンプルに「カウンタ値を上げる」キャラ</h3>
+          <p>このタイプは、基本的には「誰のカウンタを、いつ、何%上げるか」を見れば理解できます。</p>
+          <div class="guide-table-wrap">
+            <table class="guide-table guide-table--wrap">
+              <thead>
+                <tr>
+                  <th scope="col">キャラ／スキル</th>
+                  <th scope="col">カウンタ関連効果</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row"><a href="../characters/fortina.html#skill-4">フォルティナ S4 神様からの贈り物</a></th>
+                  <td data-label="カウンタ関連効果">自身のカウンタ+20%（常時）</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/amour.html#skill-2">アモール S2 荊の抱擁</a></th>
+                  <td data-label="カウンタ関連効果">攻撃後、自身+100%を2ターン。専用Lv3で+120%</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/ophelia.html#skill-3">オフィーリア S3 誓いを守る者</a></th>
+                  <td data-label="カウンタ関連効果">条件成立時、自身+50%</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/fia.html#skill-4">フィアー S4 遺された力</a></th>
+                  <td data-label="カウンタ関連効果">スピードが最も低い味方+10%を2ターン。対象が自身なら+30%</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/idyne.html#skill-3">イディーネ S3 命溢るるカンテラ</a></th>
+                  <td data-label="カウンタ関連効果">旺花1スタックにつき+1%。翠属性なら+2%、最大15スタック</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/sophia.html#skill-3">ソフィア S3 教導の精神</a></th>
+                  <td data-label="カウンタ関連効果">専用Lv1で、自身+55%を2ターン</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p>イディーネはスタック数によって増加量が変わりますが、仕組み自体は通常カウンタを増やすタイプです。</p>
+        </div>
+      </section>
+      <section class="guide-card" id="kaguya" aria-labelledby="kaguya-title">
+        <div class="guide-card-head">
+          <h2 id="kaguya-title">カグヤ：攻撃は受けたい。でもHPは減らしたくない</h2>
+        </div>
+        <div class="guide-card-body">
+          <p><a href="../characters/kaguya.html#skill-3">カグヤ S3 孤高の月</a>は、バトル開始時に4ターンのカウンタ変更を付与します。</p>
+          <p>カウンタダメージはスキルLv最大で <strong>魔力300%</strong>。専用武器Lv2では600%になり、さらに自身以外のソーサラーの味方が1体以上いると900%になります。</p>
+          <p>ただしカグヤには重要な条件があります。<strong>HP割合が100%未満になると、カウンタ変更が解除されます。</strong></p>
+          <p>つまりカグヤは、<strong>攻撃は命中してほしい → でもHPにはダメージを通したくない</strong>という少し特殊なキャラです。</p>
+          <p>カグヤ自身は1ターン目開始時にシールドを付与します。シールドや多重バリア、ダメージ無効などでHPダメージを0にできれば、HP100%を維持したままカウンタ変更で反撃できます。</p>
+          <p>一方、<strong>回避して0ダメージにするのは別</strong>です。元の攻撃が命中していないため、カウンタ変更自体が発動しません。</p>
+          <div class="guide-callout">
+            <p class="guide-callout-title">カグヤのポイント</p>
+            <p>シールド自体がカウンタの発動条件ではありません。</p>
+            <p>重要なのは「攻撃を命中させたまま、HPを100%から減らさない」ことです。</p>
+            <p>遮断のようにダメージを減らすだけの効果は、HPダメージが残ればカウンタ変更解除を防げない点に注意が必要です。</p>
+          </div>
+          <p>この「被ダメージ0でもカウンタ変更は発動する」という仕様と、カグヤの運用については、ワーズさんの記事も参考になります。</p>
+          <ul class="guide-bullets">
+            <li><a href="https://note.com/wazu_019/n/n23ef73d20772" target="_blank" rel="noopener">ワーズさん「【メメントモリ】カウンタ」</a></li>
+            <li><a href="https://note.com/wazu_019/n/n8ef78f5584d3" target="_blank" rel="noopener">ワーズさん「スキルアップグレード３」</a></li>
+          </ul>
+        </div>
+      </section>
+      <section class="guide-card" id="moddey" aria-labelledby="moddey-title">
+        <div class="guide-card-head">
+          <h2 id="moddey-title">モーザ：まずダメージを受けて、カウンタ変更を獲得する</h2>
+        </div>
+        <div class="guide-card-body">
+          <p><a href="../characters/moddey.html#skill-3">モーザ S3 弔いの祈り</a>は、最初からカウンタ変更を持っているわけではありません。</p>
+          <p><strong>攻撃を受けてHP割合が初めて70%または40%を下回ったとき</strong>に、4ターンのカウンタ変更を獲得します。カウンタダメージは <strong>自身の攻撃力200%</strong> です。</p>
+          <p>つまりモーザは、カグヤとは逆に、<strong>まずHPを減らして条件を満たす必要があります。</strong></p>
+          <div class="guide-callout">
+            <p class="guide-callout-title">モーザのポイント</p>
+            <p>カウンタ変更を獲得するまでは、ある程度ダメージを受ける必要があります。</p>
+            <p>ただし、その一撃で戦闘不能になるとカウンタは返せません。</p>
+            <p>「生き残りながらHP条件を踏む」のが重要です。</p>
+          </div>
+          <p>カウンタ変更を獲得した後は、被ダメージ量そのものを使って反撃するわけではありません。そのため、<strong>カウンタ変更を獲得するまで</strong>と、<strong>獲得した後</strong>で守り方の考え方が変わります。</p>
+          <ul class="guide-bullets">
+            <li><strong>獲得前</strong>：ある程度ダメージを受けて、HP条件を満たしたい</li>
+            <li><strong>獲得後</strong>：元の攻撃が命中していれば被ダメージ0でも反撃できるので、できればダメージを抑えたい</li>
+          </ul>
+          <p>モーザとカグヤの違いは、<a href="https://note.com/wazu_019/n/n23ef73d20772" target="_blank" rel="noopener">ワーズさん「【メメントモリ】カウンタ」</a>でも詳しく検証されています。</p>
+        </div>
+      </section>
+      <section class="guide-card" id="conditions" aria-labelledby="conditions-title">
+        <div class="guide-card-head">
+          <h2 id="conditions-title">カウンタが発動する・しない条件</h2>
+        </div>
+        <div class="guide-card-body">
+          <h3 class="guide-sub">元の攻撃を回避した場合</h3>
+          <p>通常カウンタ・カウンタ変更ともに発動しません。</p>
+          <p>「カウンタ変更は必中」というのは、<strong>発動したカウンタダメージが必中</strong>という意味です。元の攻撃そのものを回避すると、反撃のきっかけが発生しません。</p>
+          <h3 class="guide-sub">被ダメージが0だった場合</h3>
+          <p>ここが通常カウンタとカウンタ変更の大きな違いです。</p>
+          <ul class="guide-bullets">
+            <li><strong>通常カウンタ</strong>：返す元のダメージがないため発動しない</li>
+            <li><strong>カウンタ変更</strong>：元の攻撃が命中していれば発動する</li>
+          </ul>
+          <p>この違いが、カグヤとシールドの相性につながっています。</p>
+          <h3 class="guide-sub">その攻撃で戦闘不能になった場合</h3>
+          <p><a href="https://note.com/wazu_019/n/n23ef73d20772" target="_blank" rel="noopener">ワーズさんの検証</a>では、通常カウンタ・カウンタ変更ともに発動しません。カウンタ変更中でも、その一撃で倒されれば反撃は返りません。</p>
+          <h3 class="guide-sub">毒などのダメージでは発動する？</h3>
+          <p>発動しません。公式ヘルプでは、カウンタ変更は次のダメージでは発動しないとされています。</p>
+          <ul class="guide-bullets">
+            <li>毒などの持続ダメージ</li>
+            <li>共鳴</li>
+            <li>献身</li>
+            <li>パッシブスキルによるダメージ</li>
+          </ul>
+          <p>通常カウンタについても、ワーズさんの検証では同様の挙動です。</p>
+        </div>
+      </section>
+      <section class="guide-card" id="defense" aria-labelledby="defense-title">
+        <div class="guide-card-head">
+          <h2 id="defense-title">カウンタダメージは何で防げる？</h2>
+        </div>
+        <div class="guide-card-body">
+          <p>公式ヘルプでは、カウンタ／カウンタ変更で発生するカウンタダメージは次の影響を受けます。</p>
+          <h3 class="guide-sub">影響を受けるもの</h3>
+          <ul class="guide-bullets">
+            <li>シールド</li>
+            <li>多重バリア</li>
+            <li>ダメージ無効</li>
+            <li>遮断</li>
+            <li>不死身</li>
+          </ul>
+          <h3 class="guide-sub">影響を受けないもの</h3>
+          <ul class="guide-bullets">
+            <li>与ダメージ増加・減少</li>
+            <li>被ダメージ増加・減少</li>
+            <li>防御力</li>
+            <li>物理防御力</li>
+            <li>魔法防御力</li>
+          </ul>
+          <p>普通の攻撃と同じ感覚で防御力を上げても、カウンタダメージそのものは減りません。</p>
+        </div>
+      </section>
+      <section class="guide-card" id="counters" aria-labelledby="counters-title">
+        <div class="guide-card-head">
+          <h2 id="counters-title">カウンタを下げる・カウンタダメージを対策するキャラ</h2>
+        </div>
+        <div class="guide-card-body">
+          <p>ここでは「<strong>カウンタ値そのものを下げる</strong>」のか、「<strong>返ってきたカウンタダメージを減らす</strong>」のかが別です。</p>
+          <div class="guide-table-wrap">
+            <table class="guide-table guide-table--wrap">
+              <thead>
+                <tr>
+                  <th scope="col">キャラ／スキル</th>
+                  <th scope="col">対策の種類</th>
+                  <th scope="col">内容</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row"><a href="../characters/shizu_snow.html#skill-4">[雪花の誓い]シズ S4 一花冬至為誰開</a></th>
+                  <td data-label="対策の種類">カウンタ値を下げる</td>
+                  <td data-label="内容">カウンタが最も高い敵を狙い、対象の防御力が自身より低ければカウンタを40%減少</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/moddey_summer.html#skill-3">[墓守の夏休み]モーザ S3 それが墓守の仕事</a></th>
+                  <td data-label="対策の種類">カウンタダメージを減らす</td>
+                  <td data-label="内容">カウンタダメージを受けたときも75%遮断</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/dd.html#skill-4">D.D. S4 戦闘用ホムンクルス</a></th>
+                  <td data-label="対策の種類">カウンタダメージを減らす</td>
+                  <td data-label="内容">専用武器Lv2で、カウンタダメージを受けたときの遮断が70%</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+      <section class="guide-card" id="details" aria-labelledby="details-title">
+        <div class="guide-card-head">
+          <h2 id="details-title">もう少し詳しい挙動</h2>
+        </div>
+        <div class="guide-card-body">
+          <p>ここからは、基本を理解したあとに必要になる細かい仕様です。</p>
+          <h3 class="guide-sub">カウンタとHPドレイン</h3>
+          <p><a href="https://note.com/wazu_019/n/n23ef73d20772" target="_blank" rel="noopener">ワーズさんの検証</a>では、攻撃時のHPドレイン回復と、その攻撃に対するカウンタダメージは同時処理に近い挙動になります。</p>
+          <p>そのため、現在HPを超えるカウンタダメージを受ける状況でも、同時に発生するHPドレインを含めてHPが1以上残れば、戦闘不能にならないケースがあります。</p>
+          <h3 class="guide-sub">カウンタ・遮断・シールド・多重バリアの処理順</h3>
+          <p>カウンタダメージでは、通常の攻撃と処理順が異なるケースがあります。</p>
+          <p>ワーズさんの検証では、カウンタダメージに対してはシールド・多重バリア側の判定が先に行われ、その後HPに入る部分へ遮断が作用する挙動が整理されています。この特殊な処理については、ワーズさんの記事に過去の公式FAQで仕様とされた旨も記録されています。</p>
+          <p>詳しい検証はこちらです：<a href="https://note.com/wazu_019/n/n0324b38345db" target="_blank" rel="noopener">ワーズさん「【メメントモリ】2025/9/16修正の解説２」</a></p>
+        </div>
+      </section>
+      <section class="guide-card" id="sources" aria-labelledby="sources-title">
+        <div class="guide-card-head">
+          <h2 id="sources-title">出典</h2>
+        </div>
+        <div class="guide-card-body">
+          <p class="guide-source">出典：ゲーム内ヘルプ／ゲーム内スキル説明</p>
+          <p class="guide-source">ゲーム内ヘルプの「カウンタ」「カウンタ変更」「カウンタダメージ」などを一次情報とし、キャラごとのカウンタ効果・発動条件はゲーム内スキル説明を基準にしています。</p>
+          <p class="guide-source">検証参考：ワーズさんが公開されている検証結果を参考にさせていただきました。</p>
+          <ul class="guide-bullets guide-source">
+            <li><a href="https://note.com/wazu_019/n/n23ef73d20772" target="_blank" rel="noopener">ワーズさん「【メメントモリ】カウンタ」</a><span class="guide-link-text">通常カウンタとカウンタ変更の違い、計算、0ダメージ、戦闘不能、ドレインなど</span></li>
+            <li><a href="https://note.com/wazu_019/n/n8ef78f5584d3" target="_blank" rel="noopener">ワーズさん「スキルアップグレード３」</a><span class="guide-link-text">カグヤのカウンタ変更と耐久の考え方</span></li>
+            <li><a href="https://note.com/wazu_019/n/n0324b38345db" target="_blank" rel="noopener">ワーズさん「【メメントモリ】2025/9/16修正の解説２」</a><span class="guide-link-text">カウンタダメージと遮断・多重バリア・シールドの処理順</span></li>
+          </ul>
+        </div>
+      </section>
+    </div>
+    <!-- ad:bottom -->
+    <aside class="ad-slot" aria-label="広告">
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-6389066329814944"
+           data-ad-slot="6111654373"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </aside>
+    <!-- /ad:bottom -->
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <span>ミレストのメメントモリ分析データ室 / 非公式ファンサイト</span>
+      <nav class="footer-links" aria-label="関連ページ">
+        <a href="../characters/index.html">キャラ一覧</a>
+        <a href="/pages/guide/">このサイトでできること</a>
+      </nav>
+    </div>
+  </footer>
+  <script src="../../js/guide-slides.js" defer></script>
+</body>
+</html>

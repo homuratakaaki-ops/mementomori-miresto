@@ -146,6 +146,11 @@
 .guide-table td:nth-child(3),
 .guide-table td:nth-child(4) { white-space: nowrap; }
 
+/* article型の表（比較表・キャラ表）は短い値ではなく文章が入るので折り返す。
+   上の nowrap を打ち消すため、クラスを2つ重ねて具体度を上げてある。 */
+.guide-table.guide-table--wrap th,
+.guide-table.guide-table--wrap td { white-space: normal; }
+
 .guide-table a { color: var(--accent-strong); font-weight: 900; }
 
 /* 表やリストの下に置く注意書き。 */
@@ -270,6 +275,122 @@
   font-weight: 900;
   text-decoration: underline;
   text-underline-offset: 3px;
+}
+
+/* article型の部品。箇条書きと、要点をまとめる囲み。 */
+.guide-bullets {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding-left: 1.3em;
+  line-height: 1.9;
+}
+
+.guide-callout {
+  display: grid;
+  gap: 8px;
+  padding: 12px;
+  border: 1px solid var(--accent-soft);
+  border-radius: 8px;
+  background: var(--accent-faint);
+}
+
+.guide-callout p { margin-bottom: 0; line-height: 1.9; }
+
+.guide-callout-title { font-weight: 900; }
+
+/*
+ * 図解スライド。何枚かを同じ場所に重ねて置き、フェードだけで切り替える。
+ * 高さは1枚分で、img の width / height 属性で読み込み前から場所を確保する
+ * （読み込みで本文が下にずれないため）。
+ * JSが動かない環境では1枚目（.is-active）だけが見えて、操作列は出ない。
+ */
+.guide-slides {
+  width: 100%;
+  max-width: 880px;
+  margin: 0 auto;
+}
+
+.guide-slides-viewport { display: grid; }
+
+.guide-slide {
+  grid-area: 1 / 1;
+  margin: 0;
+  opacity: 0;
+  visibility: hidden;
+  /* 消える側は visibility の切り替えを遅らせて、フェードし終わってから外す。 */
+  transition: opacity .4s ease, visibility 0s linear .4s;
+}
+
+.guide-slide.is-active {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity .4s ease, visibility 0s linear 0s;
+}
+
+.guide-slide img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+/* 操作列は本文より目立たせない。狭い画面ではドットが次の行へ回る。 */
+.guide-slides-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0 4px;
+  margin-top: 6px;
+}
+
+.guide-slides-controls[hidden] { display: none; }
+
+/* 見た目は小さくても、指で押せる44pxのタップ領域は確保する。 */
+.guide-slides-controls button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.guide-slides-controls button:hover,
+.guide-slides-controls button:focus-visible { color: var(--accent-strong); }
+
+.guide-slides-dots {
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* ドットは見た目8px。今いる位置だけアクセント色にする。 */
+.guide-slides-dots button::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--muted);
+  opacity: .35;
+}
+
+.guide-slides-dots button[aria-current="true"]::before {
+  background: var(--accent-strong);
+  opacity: 1;
+}
+
+/* 動きを減らす設定のときはフェードしない（自動送り自体も js 側で止めてある）。 */
+@media (prefers-reduced-motion: reduce) {
+  .guide-slide,
+  .guide-slide.is-active { transition: none; }
 }
 
 /*
