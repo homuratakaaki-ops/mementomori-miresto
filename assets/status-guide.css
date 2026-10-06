@@ -307,7 +307,7 @@
  */
 .guide-slides {
   width: 100%;
-  max-width: 880px;
+  max-width: 960px;
   margin: 0 auto;
 }
 
@@ -451,5 +451,16 @@
   }
 
   .guide-table td:empty { display: none; }
+
+  /* 狭い画面では図解をカードの左右いっぱいまで広げる
+     （負のマージンは .guide-card-body の padding と同じ16px）。 */
+  .guide-slides {
+    width: auto;
+    max-width: none;
+    margin-left: -16px;
+    margin-right: -16px;
+  }
+
+  .guide-slide img { border-radius: 0; }
 }
 

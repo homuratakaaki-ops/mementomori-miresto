@@ -29,11 +29,11 @@
             "alt": "カウンタとカウンタ変更の違い。違いをかんたんに見ていく導入の図" },
           { "webp": "assets/status/counter-slide-2-normal.webp", "webpSmall": "assets/status/counter-slide-2-normal-960.webp", "src": "assets/status/counter-slide-2-normal.jpg", "width": 1672, "height": 941, "duration": 3.0,
             "alt": "通常カウンタの仕組み（アモール）。敵から攻撃を受けて10,000ダメージを受け、カウンタ50%なら5,000ダメージを返す。通常カウンタは実際に受けたダメージが基準" },
-          { "webp": "assets/status/counter-slide-3-moddey.webp", "webpSmall": "assets/status/counter-slide-3-moddey-960.webp", "src": "assets/status/counter-slide-3-moddey.jpg", "width": 1672, "height": 941, "duration": 3.5,
+          { "webp": "assets/status/counter-slide-3-moddey.webp", "webpSmall": "assets/status/counter-slide-3-moddey-960.webp", "src": "assets/status/counter-slide-3-moddey.jpg", "width": 1672, "height": 941, "duration": 4.0,
             "alt": "モーザのカウンタ変更。攻撃を受けてHPが70%または40%を下回るとカウンタ変更を獲得し、その後は攻撃力200%で反撃する。最初はダメージを受けたい" },
-          { "webp": "assets/status/counter-slide-4-kaguya.webp", "webpSmall": "assets/status/counter-slide-4-kaguya-960.webp", "src": "assets/status/counter-slide-4-kaguya.jpg", "width": 1672, "height": 941, "duration": 3.5,
+          { "webp": "assets/status/counter-slide-4-kaguya.webp", "webpSmall": "assets/status/counter-slide-4-kaguya-960.webp", "src": "assets/status/counter-slide-4-kaguya.jpg", "width": 1672, "height": 941, "duration": 4.0,
             "alt": "カグヤのカウンタ変更。敵の攻撃が命中し、シールドでHPダメージを0にしてHP100%を保つと、カウンタ変更で反撃する。回避するとカウンタは発動しない" },
-          { "webp": "assets/status/counter-slide-5-summary.webp", "webpSmall": "assets/status/counter-slide-5-summary-960.webp", "src": "assets/status/counter-slide-5-summary.jpg", "width": 1672, "height": 941, "duration": 2.5,
+          { "webp": "assets/status/counter-slide-5-summary.webp", "webpSmall": "assets/status/counter-slide-5-summary-960.webp", "src": "assets/status/counter-slide-5-summary.jpg", "width": 1672, "height": 941, "duration": 3.0,
             "alt": "まとめ。通常カウンタは受けたダメージが基準（被ダメージ×カウンタ%）、カウンタ変更は攻撃力・魔力などを参照するキャラ固有の計算で反撃する" }
         ] }
       ]

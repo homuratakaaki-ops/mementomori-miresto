@@ -816,7 +816,7 @@ function articleSlides(block) {
     lines.push(ARTICLE_BLOCK_PAD + "      <picture>");
     lines.push(ARTICLE_BLOCK_PAD + '        <source type="image/webp" srcset="../../'
       + escapeHtml(item.webpSmall) + " 960w, ../../" + escapeHtml(item.webp) + " "
-      + escapeHtml(item.width) + 'w" sizes="(max-width: 880px) 100vw, 880px">');
+      + escapeHtml(item.width) + 'w" sizes="(max-width: 960px) 100vw, 960px">');
     lines.push(ARTICLE_BLOCK_PAD + '        <img src="../../' + escapeHtml(item.src)
       + '" width="' + escapeHtml(item.width) + '" height="' + escapeHtml(item.height)
       + '" alt="' + escapeHtml(item.alt) + '"'
