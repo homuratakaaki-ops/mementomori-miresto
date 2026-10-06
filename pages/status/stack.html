@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>スタック｜基礎ガイド | ミレストのメメントモリ分析データ室</title>
+  <meta name="description" content="スタックとは何かを、イディーネS3「命溢るるカンテラ」の旺花を例に初心者向けに説明します。最大数・解除・スタック増減と付与の違い・効果ターンなど、ゲーム内ヘルプの共通ルールも整理しています。">
+  <link rel="canonical" href="https://memento.musoudc.com/pages/status/stack.html">
+  <!-- OGP。画像は共通のものを使う（ガイドごとの画像生成は未対応） -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="ミレストのメメントモリ分析データ室">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="og:title" content="スタック｜基礎ガイド | ミレストのメメントモリ分析データ室">
+  <meta property="og:description" content="スタックとは何かを、イディーネS3「命溢るるカンテラ」の旺花を例に初心者向けに説明します。最大数・解除・スタック増減と付与の違い・効果ターンなど、ゲーム内ヘルプの共通ルールも整理しています。">
+  <meta property="og:url" content="https://memento.musoudc.com/pages/status/stack.html">
+  <meta property="og:image" content="https://memento.musoudc.com/assets/ogp/ogp-common.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <link rel="icon" type="image/png" href="../../assets/miresto/miresto-icon-32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="../../assets/miresto/miresto-icon-180.png">
+  <link rel="stylesheet" href="../../assets/character-page.css">
+  <link rel="stylesheet" href="../../assets/status-guide.css">
+  <!-- ad:head -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6389066329814944" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="/assets/ad-slot.css">
+  <!-- /ad:head -->
+</head>
+<body data-status-guide="stack" data-prerendered>
+  <header class="page-header">
+    <div class="header-inner">
+      <a class="top-link" href="./index.html">状態異常ガイドの一覧へ</a>
+      <p class="eyebrow">STATUS GUIDE</p>
+      <h1>スタック｜基礎ガイド</h1>
+      <div class="guide-meta">
+        <span class="tag">最終横断確認 2026-10-06</span>
+      </div>
+      <p class="guide-meta-note">この日のゲーム内ヘルプとスキル説明で、スタックの共通ルールとイディーネ「旺花」の数値を確認しています。</p>
+    </div>
+  </header>
+
+  <main>
+    <div class="guide-list">
+      <section class="guide-card" id="oneline" aria-labelledby="oneline-title">
+        <div class="guide-card-head">
+          <h2 id="oneline-title">ひとことで</h2>
+        </div>
+        <div class="guide-card-body">
+          <p><strong>スタック</strong>は、同じ効果を1個ずつ積み重ねていく仕組みです。</p>
+          <p>1スタック、2スタック、3スタック……と増えるほど、効果が大きくなったり、一定数で別の効果が発動したりします。</p>
+          <div class="guide-callout">
+            <p class="guide-callout-title">まず覚えること</p>
+            <p>スタックは「同じ効果を重ねて強くしていくもの」です。</p>
+            <p>ただし、何をすると増えるか、最大いくつか、消費するかどうかはキャラごとに違います。</p>
+          </div>
+        </div>
+      </section>
+      <section class="guide-card" id="rules" aria-labelledby="rules-title">
+        <div class="guide-card-head">
+          <h2 id="rules-title">スタックの基本ルール</h2>
+        </div>
+        <div class="guide-card-body">
+          <p>ゲーム内ヘルプでは、スタックは<strong>重ねるたびに効果が増えるバフ・弱体効果</strong>として扱われています。共通して押さえておきたいのは次の点です。</p>
+          <ul class="guide-bullets">
+            <li>スタックには<strong>最大数</strong>がある</li>
+            <li>スタック数に応じて効果が変わる</li>
+            <li>スタックしている効果が<strong>解除されると、スタック数は0になる</strong></li>
+            <li>「スタックを増やす／減らす」と「新しく付与する／解除する」は別</li>
+            <li>元の効果を持っていない場合、スタック増減だけでは新しく効果は付かない</li>
+            <li>スタックの増減は、<strong>弱体効果命中率・弱体効果耐性率の判定を受けない</strong></li>
+            <li>スタック数が変わっても、<strong>それだけでは効果ターンはリセットされない</strong></li>
+            <li>同じキャラが同じバフ・弱体効果を重ねた場合、<strong>スタック以外は新しい効果に上書きされる</strong></li>
+          </ul>
+          <p>一方で、次の点は各スキルごとの仕様です。</p>
+          <ul class="guide-bullets">
+            <li>解除できるか</li>
+            <li>何ターン続くか</li>
+            <li>何をすると増えるか</li>
+            <li>何スタックで別の効果が出るか</li>
+            <li>スタックを消費するか</li>
+          </ul>
+        </div>
+      </section>
+      <section class="guide-card" id="idyne" aria-labelledby="idyne-title">
+        <div class="guide-card-head">
+          <h2 id="idyne-title">イディーネ「旺花」で見るスタック</h2>
+        </div>
+        <div class="guide-card-body">
+          <p>スタックの基本例として、<a href="../characters/idyne.html#skill-3">イディーネS3「命溢るるカンテラ」</a>の<strong>旺花</strong>を見てみます。</p>
+          <div class="guide-slides" data-guide-slides role="region" aria-roledescription="carousel" aria-label="イディーネ「旺花」で見るスタック（3枚の図解）">
+            <div class="guide-slides-viewport" aria-live="off">
+              <figure class="guide-slide is-active" data-duration="3000" aria-roledescription="slide" aria-label="1 / 3">
+                <picture>
+                  <source type="image/webp" srcset="../../assets/status/stack-slide-1-intro-960.webp 960w, ../../assets/status/stack-slide-1-intro.webp 1672w" sizes="(max-width: 960px) 100vw, 960px">
+                  <img src="../../assets/status/stack-slide-1-intro.jpg" width="1672" height="941" alt="スタックってなに？同じ効果を1個ずつ積み重ねていく仕組み。イディーネの旺花の例：HP回復が発動すると旺花が1つ増え、効果が少し強くなる" decoding="async">
+                </picture>
+              </figure>
+              <figure class="guide-slide" data-duration="4000" aria-roledescription="slide" aria-label="2 / 3">
+                <picture>
+                  <source type="image/webp" srcset="../../assets/status/stack-slide-2-targets-960.webp 960w, ../../assets/status/stack-slide-2-targets.webp 1672w" sizes="(max-width: 960px) 100vw, 960px">
+                  <img src="../../assets/status/stack-slide-2-targets.jpg" width="1672" height="941" alt="旺花は誰に付く？HP回復が発動すると、イディーネ自身と攻撃力が高い味方2体に旺花が1つずつ付く。図のフローレンスとアルトリアは例。旺花は最大15スタック" loading="lazy" decoding="async">
+                </picture>
+              </figure>
+              <figure class="guide-slide" data-duration="4500" aria-roledescription="slide" aria-label="3 / 3">
+                <picture>
+                  <source type="image/webp" srcset="../../assets/status/stack-slide-3-growth-960.webp 960w, ../../assets/status/stack-slide-3-growth.webp 1672w" sizes="(max-width: 960px) 100vw, 960px">
+                  <img src="../../assets/status/stack-slide-3-growth.jpg" width="1672" height="941" alt="旺花が増えるとどうなる？攻撃力は1・5・10・15スタックで+5%・+25%・+50%・+75%、カウンタは+1%・+5%・+10%・+15%、翠属性ならカウンタは+2%・+10%・+20%・+30%" loading="lazy" decoding="async">
+                </picture>
+              </figure>
+            </div>
+            <div class="guide-slides-controls" hidden>
+              <button type="button" data-slides-prev aria-label="前の図へ">‹</button>
+              <button type="button" data-slides-toggle aria-label="一時停止">❚❚</button>
+              <button type="button" data-slides-next aria-label="次の図へ">›</button>
+              <span class="guide-slides-dots">
+                <button type="button" data-slides-dot="0" aria-label="1枚目へ" aria-current="true"></button>
+                <button type="button" data-slides-dot="1" aria-label="2枚目へ"></button>
+                <button type="button" data-slides-dot="2" aria-label="3枚目へ"></button>
+              </span>
+            </div>
+          </div>
+          <h3 class="guide-sub">旺花はどうやって増える？</h3>
+          <p><strong>HP回復効果が発動すると、旺花を1スタック獲得します。</strong>対象は次の3体です。</p>
+          <ul class="guide-bullets">
+            <li>イディーネ自身</li>
+            <li>攻撃力が高い味方2体</li>
+          </ul>
+          <p>図解の<a href="../characters/florence_twilight.html">[黄昏の誓い]フローレンス</a>と<a href="../characters/artoria_golden.html">[黄金色の聖剣使い]アルトリア</a>は、「攻撃力が高い味方2体」の例です。実際に付くのは、その時点で攻撃力が高い味方2体です。</p>
+          <p>旺花は<strong>最大15スタック</strong>で、解除されません。</p>
+          <h3 class="guide-sub">1スタックごとに何が増える？</h3>
+          <p>旺花1スタックにつき、次の2つが増加します。</p>
+          <ul class="guide-bullets">
+            <li><strong>攻撃力 +5%</strong></li>
+            <li><strong>カウンタ +1%</strong></li>
+          </ul>
+          <p>さらに、対象が<strong>翠属性</strong>なら、カウンタの増加量は<strong>1スタックにつき+2%</strong>になります。</p>
+          <h3 class="guide-sub">スタック数で見るとどうなる？</h3>
+          <div class="guide-table-wrap">
+            <table class="guide-table guide-table--wrap">
+              <thead>
+                <tr>
+                  <th scope="col">旺花</th>
+                  <th scope="col">攻撃力</th>
+                  <th scope="col">カウンタ</th>
+                  <th scope="col">翠属性のカウンタ</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">1スタック</th>
+                  <td data-label="攻撃力">+5%</td>
+                  <td data-label="カウンタ">+1%</td>
+                  <td data-label="翠属性のカウンタ">+2%</td>
+                </tr>
+                <tr>
+                  <th scope="row">5スタック</th>
+                  <td data-label="攻撃力">+25%</td>
+                  <td data-label="カウンタ">+5%</td>
+                  <td data-label="翠属性のカウンタ">+10%</td>
+                </tr>
+                <tr>
+                  <th scope="row">10スタック</th>
+                  <td data-label="攻撃力">+50%</td>
+                  <td data-label="カウンタ">+10%</td>
+                  <td data-label="翠属性のカウンタ">+20%</td>
+                </tr>
+                <tr>
+                  <th scope="row">15スタック</th>
+                  <td data-label="攻撃力">+75%</td>
+                  <td data-label="カウンタ">+15%</td>
+                  <td data-label="翠属性のカウンタ">+30%</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p>つまり旺花は、「回復が発動する → 旺花が1つ増える → 攻撃力とカウンタが少しずつ強くなる」という、分かりやすい積み上げ型のスタックです。</p>
+        </div>
+      </section>
+      <section class="guide-card" id="types" aria-labelledby="types-title">
+        <div class="guide-card-head">
+          <h2 id="types-title">スタックにはいくつかの型がある</h2>
+        </div>
+        <div class="guide-card-body">
+          <h3 class="guide-sub">① 積むほど強くなる</h3>
+          <p>イディーネの「旺花」のように、スタック数に応じて能力値がそのまま伸びるタイプです。</p>
+          <h3 class="guide-sub">② 一定数で性能が変わる</h3>
+          <p>スタックが一定数に達すると、スキルの倍率や回数、追加効果などが変化するタイプです。</p>
+          <h3 class="guide-sub">③ スタックを消費する</h3>
+          <p>貯めたスタックを使って、スキルを強化したり特殊効果を発動したりするタイプです。</p>
+          <h3 class="guide-sub">④ 敵にスタックを積む</h3>
+          <p>自分ではなく敵側にスタックを付け、被ダメージ増加やステータス低下などを重ねるタイプです。</p>
+          <div class="guide-callout">
+            <p class="guide-callout-title">このページで扱う範囲</p>
+            <p>このページでは「スタックそのものの基本」を説明します。</p>
+            <p>各キャラ固有のスタックの条件や使い方は、個別の解説で順次追加します。</p>
+          </div>
+        </div>
+      </section>
+      <section class="guide-card" id="summary" aria-labelledby="summary-title">
+        <div class="guide-card-head">
+          <h2 id="summary-title">まとめ</h2>
+        </div>
+        <div class="guide-card-body">
+          <p>スタックは、<strong>同じ効果を1個ずつ積み重ねていく仕組み</strong>です。まずは次の3つを見ると理解しやすくなります。</p>
+          <ul class="guide-bullets">
+            <li><strong>何をすると増えるか</strong></li>
+            <li><strong>最大何スタックか</strong></li>
+            <li><strong>1スタックごとに何が変わるか</strong></li>
+          </ul>
+          <p>イディーネの「旺花」なら、「HP回復が発動 → 旺花+1 → 攻撃力+5%・カウンタ+1% → 最大15スタック」という流れです。</p>
+          <p>この基本を押さえておくと、「貯めて使う」「一定数で変化する」「敵に積む」といった複雑なスタックも理解しやすくなります。</p>
+        </div>
+      </section>
+      <section class="guide-card" id="sources" aria-labelledby="sources-title">
+        <div class="guide-card-head">
+          <h2 id="sources-title">出典</h2>
+        </div>
+        <div class="guide-card-body">
+          <p class="guide-source">出典：ゲーム内ヘルプ／ゲーム内スキル説明</p>
+          <p class="guide-source">ゲーム内ヘルプの「バフ・弱体効果」「スタック」「スタック増加・スタック減少」を一次情報とし、イディーネ「旺花」の数値・発動条件はゲーム内スキル説明を基準にしています。</p>
+        </div>
+      </section>
+    </div>
+    <!-- ad:bottom -->
+    <aside class="ad-slot" aria-label="広告">
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-6389066329814944"
+           data-ad-slot="6111654373"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </aside>
+    <!-- /ad:bottom -->
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <span>ミレストのメメントモリ分析データ室 / 非公式ファンサイト</span>
+      <nav class="footer-links" aria-label="関連ページ">
+        <a href="../characters/index.html">キャラ一覧</a>
+        <a href="/pages/guide/">このサイトでできること</a>
+      </nav>
+    </div>
+  </footer>
+  <script src="../../js/guide-slides.js" defer></script>
+</body>
+</html>

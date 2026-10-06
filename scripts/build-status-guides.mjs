@@ -692,7 +692,7 @@ const SLIDES_SCRIPT = "../../js/guide-slides.js";
 
 /**
  * 本文の記法を1か所で処理する。
- * 先にHTMLエスケープし、そのあと {{skill}} / {{ref}} / ** だけを置き換える。
+ * 先にHTMLエスケープし、そのあと {{skill}} / {{ref}} / {{char}} / ** だけを置き換える。
  * 読めない記法・閉じていない記法はビルドを止める（手入力の崩れを公開しないため）。
  */
 function renderInline(text, ctx) {
@@ -704,6 +704,7 @@ function renderInline(text, ctx) {
     const parts = body.split(":");
     if (parts[0] === "skill" && parts.length === 3) return ctx.skillAnchor(parts[1], parts[2], label);
     if (parts[0] === "ref" && parts.length === 2) return ctx.refAnchor(parts[1], label);
+    if (parts[0] === "char" && parts.length === 2) return ctx.charAnchor(parts[1], label);
     ctx.errors.push(ctx.where + ": 読めない記法がある（" + whole + "）");
     return "";
   });
@@ -746,6 +747,20 @@ function articleContext(guide, characterById, skillById, errors) {
         : label;
       return '<a href="../characters/' + escapeHtml(slug) + ".html#skill-"
         + escapeHtml(entry.skill) + '">' + text + "</a>";
+    },
+    /** キャラページそのものへのリンク（スキルではなく「例として出すキャラ」用）。 */
+    charAnchor(characterId, label) {
+      const character = characterById.get(characterId);
+      if (!character) {
+        errors.push(where + ": {{char}} の " + characterId + " がキャラ一覧に無い");
+        return label === null ? escapeHtml(characterId) : label;
+      }
+      const slug = character.pageSlug || character.id;
+      if (!existsSync(join(ROOT, "pages", "characters", slug + ".html"))) {
+        errors.push(where + ": {{char}} の " + characterId + " のキャラページが無い（pages/characters/" + slug + ".html）");
+      }
+      const text = label === null ? escapeHtml(character.name) : label;
+      return '<a href="../characters/' + escapeHtml(slug) + '.html">' + text + "</a>";
     },
     refAnchor(key, label) {
       usedRefs.add(key);
@@ -923,10 +938,24 @@ function articleSourcesCard(guide) {
   return card("sources", "出典", parts.join("\n"));
 }
 
-/** 取りこぼし検査。flow にその語が出てくるスキルを、本文が全部参照しているか。 */
+/**
+ * 取りこぼし検査。flow にその語が出てくるスキルを、本文が全部参照しているか。
+ * coverage.mode が "examples" のガイド（基礎ガイドなど、例だけを載せる回）は
+ * 「全部参照しているか」を外し、「参照したスキルの flow にその語があるか」だけを見る。
+ * 外す理由は coverage.reason に必ず書く。ignore とは併用しない。
+ */
 function validateArticleMentions(guide, baseData, usedSkills, errors) {
   const where = "data/status/" + guide.id + ".json";
   const ignore = guide.ignore || [];
+  const coverage = guide.coverage;
+  if (coverage !== undefined) {
+    if (!coverage || coverage.mode !== "examples" || !String(coverage.reason || "").trim()) {
+      errors.push(where + ': coverage は { "mode": "examples", "reason": "理由" } の形だけ');
+    } else if (ignore.length) {
+      errors.push(where + ": coverage.mode が examples のときは ignore を書かない（全件検査をしないため）");
+    }
+  }
+  const examplesOnly = Boolean(coverage && coverage.mode === "examples");
   for (const entry of ignore) {
     if (!entry.kind || !entry.skillId || !entry.reason) {
       errors.push(where + ": ignore には kind / skillId / reason をそろえて書くこと");
@@ -941,7 +970,7 @@ function validateArticleMentions(guide, baseData, usedSkills, errors) {
   const manual = [...usedSkills.keys()];
   const skipped = new Set(ignore.filter((item) => item.kind === "mentions").map((item) => item.skillId));
 
-  for (const id of auto) {
+  for (const id of examplesOnly ? [] : auto) {
     if (manual.includes(id) || skipped.has(id)) continue;
     errors.push(where + ": 「" + guide.term + "」を含むスキル " + id
       + " が本文から参照されていない。載せるか ignore に理由を書くこと");
@@ -954,7 +983,7 @@ function validateArticleMentions(guide, baseData, usedSkills, errors) {
   for (const id of skipped) {
     if (!auto.includes(id)) errors.push(where + ": ignore の " + id + " は候補に出ていない（不要な除外）");
   }
-  return { auto: auto.length, manual: manual.length, ignored: skipped.size };
+  return { auto: auto.length, manual: manual.length, ignored: skipped.size, examplesOnly };
 }
 
 /** 直リンクの先が実在するページ＋アンカーかどうか（従来型と同じ方法）。 */
