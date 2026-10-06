@@ -21,6 +21,20 @@
 
   const DEFAULT_DURATION = 3000;
 
+  /**
+   * キーボード操作で当たったフォーカスかどうか。
+   * :focus-visible を知らない古いブラウザでは matches が例外を投げるので、
+   * そのときは「違う」側に倒して自動送りを止めない
+   * （止める側に倒すと、タップしたきり二度と動かなくなるため）。
+   */
+  function keyboardFocus(target) {
+    try {
+      return Boolean(target && target.matches(":focus-visible"));
+    } catch (error) {
+      return false;
+    }
+  }
+
   function setup(root) {
     const viewport = root.querySelector(".guide-slides-viewport");
     const controls = root.querySelector(".guide-slides-controls");
@@ -117,7 +131,7 @@
     // タップ・クリック後もボタンにはフォーカスが残る。キーボード操作時だけ
     // 中断しないと、前後送りや再生を押した後に自動送りが止まり続ける。
     root.addEventListener("focusin", function (event) {
-      hold("focus", event.target.matches(":focus-visible"));
+      hold("focus", keyboardFocus(event.target));
     });
     root.addEventListener("pointerdown", function () { hold("focus", false); });
     root.addEventListener("focusout", function (event) {
