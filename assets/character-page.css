@@ -64,6 +64,18 @@ main,
   text-decoration: none;
 }
 
+/* 「トップ」と「一覧へ戻る」を横に並べるときの間隔。 */
+.top-link + .top-link {
+  margin-left: 16px;
+}
+
+/* フッタのリンク列（キャラページ・状態異常・特殊効果ガイド共通）。 */
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+}
+
 .eyebrow {
   margin: 0 0 8px;
   color: var(--accent-strong);

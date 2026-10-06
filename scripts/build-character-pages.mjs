@@ -121,6 +121,7 @@ ${adRenderer.renderAdHead(ads, "  ")}
 <body data-character-page data-character-id="${renderer.escapeHtml(character.id)}" data-attribute="${renderer.escapeHtml(character.attribute || "")}" data-prerendered>
   <header class="page-header">
     <div class="header-inner">
+      <a class="top-link" href="/">トップ</a>
       <a class="top-link" href="./index.html">キャラ一覧へ戻る</a>
       <p class="eyebrow">CHARACTER SKILL DATA</p>
       <h1 id="characterName">${renderer.escapeHtml(character.name)}</h1>
@@ -138,7 +139,16 @@ ${adRenderer.renderAdSlot(ads, "    ")}
   <footer>
     <div class="footer-inner">
       <span>ミレストのメメントモリ分析データ室 / 非公式ファンサイト</span>
-      <a href="../../compare-prototype.html">スキル比較DB</a>
+      <nav class="footer-links" aria-label="サイト内のページ">
+        <a href="/">トップ</a>
+        <a href="./index.html">キャラ一覧</a>
+        <a href="../../compare-prototype.html">スキル比較DB</a>
+        <a href="/pages/guide/">このサイトでできること</a>
+        <a href="/privacy.html">プライバシーポリシー</a>
+        <a href="/disclaimer.html">免責事項</a>
+        <a href="/about.html">このサイトについて</a>
+        <a href="/contact.html">お問い合わせ</a>
+      </nav>
     </div>
   </footer>
   <script>

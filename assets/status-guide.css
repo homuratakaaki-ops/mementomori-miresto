@@ -260,13 +260,6 @@
   font-size: 13px;
 }
 
-/* ガイドのフッタ。キャラページのフッタはリンク1本なので、ここで並べ方だけ足す。 */
-.footer-links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px 14px;
-}
-
 /* 用語の折りたたみの中に出る「詳しくは○ガイドへ」。 */
 .term-guide {
   display: inline-block;

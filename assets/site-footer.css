@@ -1,0 +1,40 @@
+/*
+ * 手書きのツールページ・404 に置く共通フッタ（トップ・規約へのリンク）。
+ * ページごとに配色が違う（暗い背景のツール／明るい404）ため、色は文字色を引き継ぎ、
+ * 線と薄さだけで区切る。生成ページ（キャラ・ガイド）は character-page.css 側の footer を使う。
+ */
+.site-footer {
+  max-width: 960px;
+  margin: 32px auto 0;
+  padding: 16px 4px 8px;
+  border-top: 1px solid rgba(128, 128, 128, 0.35);
+  color: inherit;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.site-footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+}
+
+.site-footer-links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+  color: inherit;
+  opacity: 0.85;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.site-footer-links a:hover,
+.site-footer-links a:focus-visible {
+  opacity: 1;
+}
+
+.site-footer-note {
+  margin: 8px 0 0;
+  opacity: 0.7;
+}
