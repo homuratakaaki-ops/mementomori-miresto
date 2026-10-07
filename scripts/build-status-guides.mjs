@@ -159,6 +159,18 @@ const NO_CHANCE = "数値表記なし";
 function validateLists(guide, baseData, errors) {
   const where = "data/status/" + guide.id + ".json";
   const ignore = guide.ignore || [];
+  if (guide.prevention) {
+    const prevention = guide.prevention;
+    if (!prevention.heading || !(prevention.items || []).length) {
+      errors.push(where + ": prevention には heading と items（1件以上）を書くこと");
+    }
+    for (const item of prevention.items || []) {
+      if (!item.heading || !(item.body || []).length) errors.push(where + ": prevention.items には heading と body をそろえて書くこと");
+    }
+    if (prevention.callout && (!prevention.callout.title || !(prevention.callout.body || []).length)) {
+      errors.push(where + ": prevention.callout には title と body をそろえて書くこと");
+    }
+  }
   for (const entry of ignore) {
     if (!entry.kind || !entry.skillId || !entry.reason) {
       errors.push(where + ": ignore には kind / skillId / reason をそろえて書くこと");
@@ -515,6 +527,28 @@ function usersCard(guide, characterById, skillById) {
   return card("users", guide.name + "を利用するキャラ", parts.join("\n"));
 }
 
+/**
+ * 対策（参照型ガイド用・任意）。prevention: { heading, intro, items: [{ heading, body: [] }], callout: { title, body: [] } }。
+ * 見た目は記事型と同じ部品（guide-sub の小見出し・guide-callout の囲み）を使い、新しい見た目は足さない。
+ */
+function preventionCard(guide) {
+  const prevention = guide.prevention;
+  if (!prevention) return null;
+  const parts = [];
+  if (prevention.intro) parts.push("          <p>" + escapeHtml(prevention.intro) + "</p>");
+  for (const item of prevention.items || []) {
+    parts.push('          <h3 class="guide-sub">' + escapeHtml(item.heading) + "</h3>");
+    for (const text of item.body || []) parts.push("          <p>" + escapeHtml(text) + "</p>");
+  }
+  if (prevention.callout) {
+    parts.push('          <div class="guide-callout">');
+    parts.push('            <p class="guide-callout-title">' + escapeHtml(prevention.callout.title) + "</p>");
+    for (const text of prevention.callout.body || []) parts.push("            <p>" + escapeHtml(text) + "</p>");
+    parts.push("          </div>");
+  }
+  return card("prevention", prevention.heading, parts.join("\n"));
+}
+
 function relatedCard(guide) {
   const parts = ['          <dl class="guide-defs">'];
   for (const item of guide.related || []) {
@@ -605,9 +639,10 @@ function guidePageHtml(guide, characterById, skillById, ads) {
     .concat([
       giversCard(guide, characterById, skillById),
       usersCard(guide, characterById, skillById),
+      preventionCard(guide),
       relatedCard(guide),
       sourcesCard(guide)
-    ]);
+    ].filter(Boolean));
 
   return pageShell({
     id: guide.id,
