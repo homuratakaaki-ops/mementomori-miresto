@@ -559,4 +559,7 @@
     display: block;
     padding-top: 8px;
   }
+
+  /* リンクだけの欄なので、見出しの「○○：」は出さない（data-label を持たない）。 */
+  .cm-table td.cm-more::before { content: none; }
 }
