@@ -1,0 +1,601 @@
+{
+  "schema": "miresto_countermeasures_v1",
+  "id": "countermeasures",
+  "lastCrossCheck": "2026-10-07",
+  "crossCheckNote": "この日までに実装済みのキャラを対象に、弱体効果の無効・耐性・ターン短縮・解除を持つスキルを確認しています。",
+  "types": [
+    {
+      "key": "immune",
+      "label": "弱体効果無効",
+      "short": "付く前に防ぐ",
+      "description": "新しく付く弱体効果をすべて防ぎます。すでに付いている弱体効果は消えません。"
+    },
+    {
+      "key": "ccImmune",
+      "label": "行動阻害無効",
+      "short": "行動阻害5種をまとめて防ぐ",
+      "description": "気絶・睡眠・混乱・沈黙・金縛りの5種をまとめて防ぎます。すでに付いているものは消えません。"
+    },
+    {
+      "key": "statusImmune",
+      "label": "個別状態異常無効",
+      "short": "特定の効果だけ防ぐ",
+      "description": "沈黙無効・気絶無効など、名前の付いた1種類だけを防ぎます。"
+    },
+    {
+      "key": "resist",
+      "label": "弱体効果耐性率アップ",
+      "short": "付きにくくする",
+      "description": "弱体効果の付与成功率を下げます。スキルの付与確率に、命中率・耐性率の補正がかかって最終的な確率が決まります。"
+    },
+    {
+      "key": "shorten",
+      "label": "弱体効果ターン短縮",
+      "short": "付いた後に早く終わらせる",
+      "description": "付いている弱体効果の残りターンを短くします。効果そのものは解除しません。"
+    },
+    {
+      "key": "cleanse",
+      "label": "弱体効果解除",
+      "short": "付いた後に消す",
+      "description": "付いている弱体効果を消します。スキル側に解除不可と書かれた弱体効果は消せません。"
+    }
+  ],
+  "statuses": [
+    "毒",
+    "出血",
+    "浸食",
+    "不治",
+    "脱力",
+    "沈黙",
+    "気絶",
+    "睡眠",
+    "金縛り"
+  ],
+  "ccStatuses": [
+    "気絶",
+    "睡眠",
+    "混乱",
+    "沈黙",
+    "金縛り"
+  ],
+  "records": [
+    {
+      "skillId": "aa_rusted_sky-s3",
+      "types": [
+        "statusImmune"
+      ],
+      "timing": "バトル開始時",
+      "target": "攻撃力が高い味方3体",
+      "effect": "沈黙無効を付与（1ターン）",
+      "statuses": [
+        "沈黙"
+      ],
+      "evidence": [
+        "沈黙無効を付与"
+      ]
+    },
+    {
+      "skillId": "artoria_golden-s1",
+      "types": [
+        "resist"
+      ],
+      "timing": "攻撃前",
+      "target": "味方全体",
+      "effect": "弱体効果耐性率+15%（2ターン）",
+      "exclusive": "専用Lv1で+30%",
+      "evidence": [
+        "弱体効果耐性率を15%増加"
+      ]
+    },
+    {
+      "skillId": "cattleya-s3",
+      "types": [
+        "cleanse"
+      ],
+      "timing": "8ターン目のターン終了時",
+      "target": "自身と攻撃力が最も高い味方",
+      "effect": "弱体効果を2つ解除",
+      "condition": "自身以外の黄属性の味方が2体以上なら、4・12ターン目の終了時にも発動",
+      "evidence": [
+        "弱体効果を2つ解除"
+      ]
+    },
+    {
+      "skillId": "cerberus-s3",
+      "types": [
+        "cleanse",
+        "immune"
+      ],
+      "timing": "2ターン目開始時",
+      "target": "自身",
+      "effect": "自身の弱体効果を全解除。解除前に弱体が無ければ弱体効果無効（3ターン）",
+      "evidence": [
+        "自身の弱体効果を全解除",
+        "弱体効果無効を付与"
+      ]
+    },
+    {
+      "skillId": "cerberus_candy-s3",
+      "types": [
+        "cleanse"
+      ],
+      "timing": "致命的なダメージを受けたとき",
+      "target": "自身",
+      "effect": "回復前に弱体効果を1つ解除",
+      "evidence": [
+        "回復前に弱体効果を1つ解除"
+      ]
+    },
+    {
+      "skillId": "cordie-s4",
+      "types": [
+        "immune"
+      ],
+      "timing": "ターン開始時",
+      "target": "自身",
+      "effect": "弱体効果無効を付与（3ターン・解除不可）",
+      "condition": "発動後、3回行動が終わるまで再発動しない",
+      "evidence": [
+        "弱体効果無効を付与"
+      ]
+    },
+    {
+      "skillId": "cordie_ringmaster-s3",
+      "types": [
+        "cleanse"
+      ],
+      "timing": "行動開始時",
+      "target": "自身",
+      "effect": "自身の弱体効果を3つ解除",
+      "evidence": [
+        "自身の弱体効果を3つ解除"
+      ]
+    },
+    {
+      "skillId": "cusith-s3",
+      "types": [
+        "cleanse"
+      ],
+      "timing": "敵の攻撃で自身が戦闘不能にならなかったとき",
+      "target": "弱体効果が最も多い味方",
+      "effect": "30%で弱体効果を1つ解除",
+      "evidence": [
+        "弱体を1つ解除",
+        "30%"
+      ]
+    },
+    {
+      "skillId": "elaine-s3",
+      "types": [
+        "cleanse"
+      ],
+      "timing": "味方が攻撃を受け、HP30%以下で生き残ったとき／自身が魔法攻撃を受けたとき",
+      "target": "その味方／霊痕を付帯している味方全体",
+      "effect": "その味方の弱体効果を2つ解除（HP回復・霊痕付与）。魔法攻撃を受けたときは霊痕の味方全体の弱体効果を1つ解除",
+      "condition": "その味方が霊痕を持たないとき。魔法攻撃時の解除は7ターン目以降・自身が戦闘不能になったときは発動しない",
+      "evidence": [
+        "弱体効果を2つ解除",
+        "弱体効果を1つ解除"
+      ]
+    },
+    {
+      "skillId": "eureka-s3",
+      "types": [
+        "cleanse"
+      ],
+      "timing": "自身がアクティブスキルで弱体を受けたとき",
+      "target": "自身と攻撃力が高い味方2体",
+      "effect": "弱体効果を1つ解除",
+      "evidence": [
+        "弱体効果を1つ解除"
+      ]
+    },
+    {
+      "skillId": "evelyn-s4",
+      "types": [
+        "cleanse"
+      ],
+      "timing": "自身がアクティブスキルで弱体を受けたとき",
+      "target": "自身",
+      "effect": "自身の弱体効果を2つ解除",
+      "condition": "反照の敵が3体以上なら",
+      "evidence": [
+        "自身の弱体効果を2つ解除"
+      ]
+    },
+    {
+      "skillId": "fenrir-s2",
+      "types": [
+        "cleanse"
+      ],
+      "timing": "攻撃後",
+      "target": "自身と隣接する味方2体",
+      "effect": "弱体効果を2つずつ解除",
+      "evidence": [
+        "弱体効果を2つずつ解除"
+      ]
+    },
+    {
+      "skillId": "fia_trace-s4",
+      "types": [
+        "cleanse"
+      ],
+      "timing": "自身か味方がアクティブスキルで弱体を受けたとき",
+      "target": "自身",
+      "effect": "怠惰を付与する前に、自身の弱体効果を1つ解除",
+      "evidence": [
+        "自身の弱体効果を1つ解除"
+      ]
+    },
+    {
+      "skillId": "fortina-s3",
+      "types": [
+        "ccImmune"
+      ],
+      "timing": "ターン開始時",
+      "target": "自身／自身以外で攻撃力が最も高い味方",
+      "effect": "行動阻害無効を付与（自身3ターン・味方2ターン、解除不可）",
+      "condition": "発動後、4回行動が終わるまで再発動しない",
+      "evidence": [
+        "行動阻害無効を付与"
+      ]
+    },
+    {
+      "skillId": "guinevere-s4",
+      "types": [
+        "statusImmune"
+      ],
+      "timing": "1ターン目の行動開始時",
+      "target": "自身",
+      "effect": "気絶無効を付与（2ターン）",
+      "condition": "紅属性の味方が2体以上なら",
+      "exclusive": "専用Lv2で自身と攻撃力が高い味方2体",
+      "statuses": [
+        "気絶"
+      ],
+      "evidence": [
+        "気絶無効を付与"
+      ]
+    },
+    {
+      "skillId": "irene-s3",
+      "types": [
+        "cleanse"
+      ],
+      "timing": "通常攻撃強化を受けた本人の攻撃時",
+      "target": "通常攻撃を強化された本人（自身と、自身以外でスピードが最も低い味方）",
+      "effect": "弱体効果を2つ解除（スキルCT-1）",
+      "evidence": [
+        "弱体効果を2つ解除"
+      ]
+    },
+    {
+      "skillId": "merlin-s1",
+      "types": [
+        "cleanse"
+      ],
+      "timing": "スキル発動時",
+      "target": "攻撃力が最も高い味方",
+      "effect": "弱体効果を1つ解除",
+      "exclusive": "専用Lv2で対象が攻撃力が高い味方2体・解除数2つ",
+      "evidence": [
+        "弱体効果を1つ解除"
+      ]
+    },
+    {
+      "skillId": "merlyn_winter-s1",
+      "types": [
+        "cleanse"
+      ],
+      "timing": "攻撃後",
+      "target": "攻撃力が最も高い味方",
+      "effect": "弱体効果を2つ解除",
+      "evidence": [
+        "弱体効果を2つ解除"
+      ]
+    },
+    {
+      "skillId": "merlyn_winter-s3",
+      "types": [
+        "cleanse"
+      ],
+      "timing": "自身か味方がアクティブスキルで弱体を受けたとき",
+      "target": "自身",
+      "effect": "自身の弱体効果を3つ解除",
+      "condition": "味方全体の弱体合計が5個以上なら",
+      "evidence": [
+        "自身の弱体効果を3つ解除"
+      ]
+    },
+    {
+      "skillId": "mertillier-s2",
+      "types": [
+        "cleanse"
+      ],
+      "timing": "スキル発動時",
+      "target": "攻撃力が最も高い味方",
+      "effect": "弱体効果を全解除",
+      "condition": "対象が弱体効果中なら",
+      "evidence": [
+        "弱体効果を全解除"
+      ]
+    },
+    {
+      "skillId": "mertillier-s4",
+      "types": [
+        "resist"
+      ],
+      "timing": "常時",
+      "target": "自身",
+      "effect": "弱体効果耐性率+100%（解除不可）",
+      "evidence": [
+        "弱体効果耐性率を100%増加"
+      ]
+    },
+    {
+      "skillId": "nina-s2",
+      "types": [
+        "cleanse"
+      ],
+      "timing": "攻撃前",
+      "target": "自身",
+      "effect": "自身の弱体効果を1つ解除し、その効果を対象（ランダムな敵5体）にコピー",
+      "condition": "対象の技力が自身より低い場合",
+      "evidence": [
+        "自身の弱体効果を1つ解除"
+      ]
+    },
+    {
+      "skillId": "nina_summer-s2",
+      "types": [
+        "cleanse"
+      ],
+      "timing": "攻撃前",
+      "target": "ランダムな味方3体",
+      "effect": "弱体効果を1つ解除",
+      "evidence": [
+        "弱体効果を1つ解除"
+      ]
+    },
+    {
+      "skillId": "nina_summer-s3",
+      "types": [
+        "cleanse"
+      ],
+      "timing": "自身がアクティブスキルで行動阻害を受けたとき",
+      "target": "自身と攻撃力が高い味方2体",
+      "effect": "弱体効果を2つ解除",
+      "evidence": [
+        "対象の弱体効果を2つ解除"
+      ]
+    },
+    {
+      "skillId": "ophelia-s1",
+      "types": [
+        "resist"
+      ],
+      "timing": "攻撃後",
+      "target": "自身",
+      "effect": "弱体効果耐性率+30%（3ターン）",
+      "condition": "専用武器Lv2以上で追加される効果",
+      "exclusive": "専用Lv2で+30%、Lv3で+50%",
+      "evidence": [
+        "弱体効果耐性率を30%増加"
+      ]
+    },
+    {
+      "skillId": "primavera-s4",
+      "types": [
+        "resist"
+      ],
+      "timing": "常時",
+      "target": "自身",
+      "effect": "弱体効果耐性率+100%（解除不可）",
+      "evidence": [
+        "弱体効果耐性率100%増加"
+      ]
+    },
+    {
+      "skillId": "primavera_summer-s3",
+      "types": [
+        "cleanse"
+      ],
+      "timing": "アクティブスキルで弱体を受けたとき",
+      "target": "自身",
+      "effect": "弱体効果を1つ解除",
+      "evidence": [
+        "弱体を1つ解除"
+      ]
+    },
+    {
+      "skillId": "priscilla-s1",
+      "types": [
+        "cleanse",
+        "resist"
+      ],
+      "timing": "攻撃後",
+      "target": "攻撃力が高い味方2体",
+      "effect": "弱体効果を2つ解除し、弱体効果耐性率+40%（2ターン）",
+      "condition": "最初の魔法攻撃でクリティカルが出ていれば解除数3つ",
+      "exclusive": "専用Lv1で対象3体、Lv2で耐性率+80%",
+      "evidence": [
+        "弱体効果を2つ解除",
+        "弱体効果耐性率を40%増加"
+      ]
+    },
+    {
+      "skillId": "priscilla-s4",
+      "types": [
+        "shorten"
+      ],
+      "timing": "アクティブスキルで弱体を受けたとき",
+      "target": "自身",
+      "effect": "防御力増加のターンを1消費して、自身の全弱体効果のターン数を2短縮",
+      "evidence": [
+        "自身の全弱体効果のターン数を2ターン短縮"
+      ]
+    },
+    {
+      "skillId": "rishess-s1",
+      "types": [
+        "resist"
+      ],
+      "timing": "スキル発動時",
+      "target": "自身と自身以外でスピードが最も低い味方",
+      "effect": "弱体効果耐性率+50%（3ターン）",
+      "exclusive": "専用Lv2で+100%",
+      "evidence": [
+        "弱体効果耐性率を50%増加"
+      ]
+    },
+    {
+      "skillId": "rosalie_caritas-s3",
+      "types": [
+        "cleanse"
+      ],
+      "timing": "常時",
+      "target": "自身",
+      "effect": "弱体効果を2つ解除（攻撃力増加・シールドも付与）",
+      "condition": "記憶が15スタックなら",
+      "evidence": [
+        "弱体効果を2つ解除"
+      ]
+    },
+    {
+      "skillId": "sabrina-s3",
+      "types": [
+        "cleanse",
+        "ccImmune"
+      ],
+      "timing": "ターン開始時",
+      "target": "自身",
+      "effect": "弱体効果を全解除し、行動阻害無効を付与（2ターン・解除不可）",
+      "condition": "自身が弱体効果を持っていれば。発動後、4回行動が終わるまで再発動しない",
+      "evidence": [
+        "弱体効果を全解除",
+        "行動阻害無効を付与"
+      ]
+    },
+    {
+      "skillId": "sivi-s2",
+      "types": [
+        "cleanse"
+      ],
+      "timing": "攻撃後",
+      "target": "スピードが低い味方3体",
+      "effect": "弱体効果を全解除",
+      "evidence": [
+        "同じ対象の弱体効果を全て解除"
+      ]
+    },
+    {
+      "skillId": "sivi-s4",
+      "types": [
+        "cleanse"
+      ],
+      "timing": "アクティブスキルで弱体を受けたとき",
+      "target": "自身",
+      "effect": "弱体効果を全解除",
+      "condition": "自身の弱体効果が2個以上なら",
+      "evidence": [
+        "弱体効果を全解除"
+      ]
+    },
+    {
+      "skillId": "soltina-s3",
+      "types": [
+        "cleanse"
+      ],
+      "timing": "アクティブスキルで弱体を受けたとき",
+      "target": "自身",
+      "effect": "弱体効果を全解除",
+      "condition": "自身の弱体効果が2個以上なら",
+      "evidence": [
+        "弱体効果を全解除"
+      ]
+    },
+    {
+      "skillId": "soltina_warm_memory-s3",
+      "types": [
+        "cleanse"
+      ],
+      "timing": "アクティブスキルで弱体を受けたとき",
+      "target": "自身",
+      "effect": "弱体効果を全解除",
+      "condition": "自身の弱体効果が2個以上なら",
+      "evidence": [
+        "弱体効果を全解除"
+      ]
+    },
+    {
+      "skillId": "sophia-s3",
+      "types": [
+        "shorten"
+      ],
+      "timing": "自身がアクティブスキルで弱体効果を受けたとき",
+      "target": "自身",
+      "effect": "自身の全弱体効果のターン数を2短縮",
+      "condition": "発動後、4回行動が終わるまで再発動しない",
+      "evidence": [
+        "自身の全弱体効果のターン数を2短縮"
+      ]
+    },
+    {
+      "skillId": "tropon-s4",
+      "types": [
+        "cleanse"
+      ],
+      "timing": "クリティカル以外の攻撃を受けたとき",
+      "target": "自身",
+      "effect": "自身の弱体効果を1つ解除して、攻撃してきた敵に付与",
+      "evidence": [
+        "自身の弱体を1つ解除して攻撃者に付与"
+      ]
+    },
+    {
+      "skillId": "wheeler-s4",
+      "types": [
+        "cleanse"
+      ],
+      "timing": "攻撃を受けてHP割合が40%未満になったとき",
+      "target": "自身",
+      "effect": "自身の弱体効果を全解除",
+      "evidence": [
+        "自身の弱体効果を全解除"
+      ]
+    },
+    {
+      "skillId": "yuni-s1",
+      "types": [
+        "cleanse"
+      ],
+      "timing": "攻撃後",
+      "target": "自身以外で攻撃力が最も高い味方",
+      "effect": "弱体効果を2つ解除",
+      "condition": "対象が弱体効果中なら",
+      "evidence": [
+        "弱体を2つ解除"
+      ]
+    },
+    {
+      "skillId": "yuni-s2",
+      "types": [
+        "cleanse"
+      ],
+      "timing": "スキル発動時",
+      "target": "HP割合が最も低い味方",
+      "effect": "弱体効果を1つ解除。このスキルは最大3回再発動する",
+      "condition": "対象が弱体効果中なら",
+      "evidence": [
+        "弱体を1つ解除"
+      ]
+    }
+  ],
+  "ignore": [
+    {
+      "skillId": "luke-s2",
+      "reason": "敵のシールドを全解除する効果で、弱体効果の対策ではない"
+    }
+  ]
+}

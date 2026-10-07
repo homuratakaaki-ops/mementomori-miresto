@@ -803,6 +803,10 @@ function main() {
       .join(" / ");
     console.log(`状態異常ガイド(${guide.id}): ${detail} / 最終横断確認 ${guide.lastCrossCheck}`);
   }
+  if (status.summary && status.summary.countermeasures) {
+    const cm = status.summary.countermeasures;
+    console.log(`状態異常対策キャラ検索: ${cm.records}件 / flow から拾った候補 ${cm.detected}件（除外 ${cm.ignored}件・載せ漏れ0）`);
+  }
   if (status.guides.length) {
     console.log(`状態異常ガイド: ${status.guides.length}件（直リンク ${status.links}本・付与数値 ${status.numbers}件を照合）${status.written.length ? ` (更新 ${status.written.join(", ")})` : " (変更なし)"}`);
     console.log(`状態異常ガイドの入口: ${status.indexChanged ? "更新" : "変更なし"} / sitemap: ${status.sitemap.added.length ? `${status.sitemap.added.join(", ")} を追記` : "変更なし"}`);

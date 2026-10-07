@@ -657,9 +657,18 @@ function guidePageHtml(guide, characterById, skillById, ads) {
   });
 }
 
-function indexPageHtml(guides, ads) {
+function indexPageHtml(guides, ads, countermeasures) {
   const canonical = SITE_ORIGIN + "/pages/status/index.html";
   const items = [];
+  if (countermeasures) {
+    items.push("        <li>");
+    items.push('          <a class="guide-index-card" href="./countermeasures.html">');
+    items.push("            <strong>状態異常対策キャラ検索</strong>");
+    items.push("            <span>状態異常・対策タイプ・属性で、無効・耐性・ターン短縮・解除を持つキャラのスキルを探せる検索ツールです。</span>");
+    items.push("            <small>最終横断確認 " + escapeHtml(countermeasures.lastCrossCheck) + "</small>");
+    items.push("          </a>");
+    items.push("        </li>");
+  }
   for (const guide of guides) {
     items.push("        <li>");
     items.push('          <a class="guide-index-card" href="./' + escapeHtml(guide.id) + '.html">');
@@ -1254,6 +1263,197 @@ function patchSitemap(urlPaths, writeIfChanged) {
 }
 
 /* ------------------------------------------------------------------
+ * 4b. 状態異常対策キャラ検索（data/countermeasures.json → pages/status/countermeasures.html）
+ * 正は canonical（mementomori-skills.json）。対策の一覧は人が書くが、
+ * ①書いた根拠の文がスキルの flow に実在するか ②flow から拾える対策スキルを全部載せたか
+ * をビルドで検査し、キャラ追加時の載せ漏れを止める。
+ * ------------------------------------------------------------------ */
+
+const COUNTERMEASURES_DATA = join(ROOT, "data", "countermeasures.json");
+const COUNTERMEASURES_SCRIPT = "../../js/countermeasure-filter.js";
+const ATTRIBUTE_ORDER = ["藍", "紅", "翠", "黄", "天", "冥"];
+
+// 対策スキルを flow から拾う語。表記ゆれ（弱体／弱体効果、全解除、2つずつ解除 など）を含める。
+const COUNTERMEASURE_PATTERNS = [
+  /弱体[^。]{0,14}解除/,
+  /解除[^。]{0,6}弱体/,
+  /全解除/,
+  /(?<!バフ)無効(?!化)/,
+  /弱体効果?耐性/,
+  /弱体[^。]*ターン数[^。]*(短縮|減少)/
+];
+
+function effectTexts(skill) {
+  const out = [];
+  const walk = (effect) => {
+    if (effect.text) out.push(String(effect.text));
+    for (const ex of effect.exclusive || []) walk(ex);
+  };
+  for (const entry of flowEffects(skill)) walk(entry.effect);
+  return out;
+}
+
+function readCountermeasures() {
+  if (!existsSync(COUNTERMEASURES_DATA)) return null;
+  return JSON.parse(readFileSync(COUNTERMEASURES_DATA, "utf8"));
+}
+
+function validateCountermeasures(data, baseData, characterById, skillById, errors) {
+  const where = "data/countermeasures.json";
+  const typeKeys = new Set((data.types || []).map((type) => type.key));
+  const statuses = new Set(data.statuses || []);
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(String(data.lastCrossCheck || ""))) errors.push(where + ": lastCrossCheck は YYYY-MM-DD の手入力が必要です");
+  if (!data.crossCheckNote) errors.push(where + ": crossCheckNote（確認範囲の1行説明）が必要です");
+  const listed = new Set();
+  for (const record of data.records || []) {
+    const label = where + ": " + record.skillId;
+    const skill = skillById.get(record.skillId);
+    if (!skill) { errors.push(label + " がスキル一覧に無い"); continue; }
+    if (listed.has(record.skillId)) errors.push(label + " が2回書かれている（1スキル1件）");
+    listed.add(record.skillId);
+    if (!characterById.get(skill.characterId)) errors.push(label + " のキャラがキャラ一覧に無い");
+    if (!(record.types || []).length) errors.push(label + " の types が空");
+    for (const type of record.types || []) if (!typeKeys.has(type)) errors.push(label + " の types に未定義の " + type);
+    for (const key of ["timing", "target", "effect"]) if (!record[key]) errors.push(label + " の " + key + " が無い");
+    const isStatusImmune = (record.types || []).includes("statusImmune");
+    if (isStatusImmune && !(record.statuses || []).length) errors.push(label + " は個別状態異常無効なので statuses（防げる効果）を書くこと");
+    if (!isStatusImmune && record.statuses) errors.push(label + " の statuses は個別状態異常無効のときだけ書く");
+    for (const status of record.statuses || []) if (!statuses.has(status)) errors.push(label + " の statuses に一覧外の " + status);
+    // 根拠：書いた文がスキルの flow（専用武器の変化・確率を含む）に実在するか
+    const haystack = numberStrings(skill).join(" / ");
+    if (!(record.evidence || []).length) errors.push(label + " の evidence（flow の根拠の文）が空");
+    for (const text of record.evidence || []) {
+      if (!haystack.includes(text)) errors.push(label + " の根拠「" + text + "」がスキルの flow に無い");
+    }
+  }
+  // 載せ漏れ：flow から拾える対策スキルは、一覧か ignore（理由付き）のどちらかに必ずある
+  const ignored = new Set();
+  for (const entry of data.ignore || []) {
+    if (!entry.skillId || !entry.reason) { errors.push(where + ": ignore には skillId / reason をそろえて書くこと"); continue; }
+    if (listed.has(entry.skillId)) errors.push(where + ": " + entry.skillId + " が一覧と ignore の両方にある");
+    ignored.add(entry.skillId);
+  }
+  let detected = 0;
+  const seen = new Set();
+  for (const skill of baseData.skills || []) {
+    const texts = effectTexts(skill);
+    if (!texts.some((text) => COUNTERMEASURE_PATTERNS.some((pattern) => pattern.test(text)))) continue;
+    detected += 1;
+    seen.add(skill.id);
+    if (listed.has(skill.id) || ignored.has(skill.id)) continue;
+    errors.push(where + ": " + skill.id + "（" + skill.name + "）に対策らしい効果があるのに一覧に無い。"
+      + "載せるか、対策でなければ ignore に理由付きで書くこと");
+  }
+  for (const id of ignored) if (!seen.has(id)) errors.push(where + ": ignore の " + id + " は候補に出ていない（不要な除外）");
+  return { records: listed.size, detected, ignored: ignored.size };
+}
+
+function countermeasureRow(record, data, characterById, skillById) {
+  const skill = skillById.get(record.skillId);
+  const character = characterById.get(skill.characterId);
+  const slug = character.pageSlug || character.id;
+  const href = "../characters/" + slug + ".html#skill-" + skill.number;
+  const typeLabel = new Map(data.types.map((type) => [type.key, type.label]));
+  // 検索用の値（data-*）と表示文は分ける。対策タイプごとに「どの状態異常に効くか」を持たせ、
+  // 「解除＋行動阻害無効」のようなスキルで、毒×行動阻害無効に引っかからないようにする。
+  const coverage = (record.types || []).map((type) => {
+    if (type === "ccImmune") return type + ":" + data.ccStatuses.join(",");
+    if (type === "statusImmune") return type + ":" + (record.statuses || []).join(",");
+    return type + ":all";
+  }).join(" ");
+  const cell = (label, value) => '                  <td data-label="' + escapeHtml(label) + '">' + escapeHtml(value || "—") + "</td>";
+  return [
+    '                <tr data-cm-row data-types="' + escapeHtml(record.types.join(" ")) + '" data-coverage="' + escapeHtml(coverage)
+      + '" data-attribute="' + escapeHtml(character.attribute) + '">',
+    '                  <th scope="row"><span class="cm-attr">' + escapeHtml(character.attribute) + "</span>" + escapeHtml(character.name) + "</th>",
+    '                  <td data-label="スキル"><a href="' + escapeHtml(href) + '">S' + escapeHtml(skill.number) + " " + escapeHtml(skill.name) + "</a></td>",
+    cell("対策タイプ", record.types.map((type) => typeLabel.get(type)).join("／")),
+    cell("発動", record.timing),
+    cell("対象", record.target),
+    cell("効果", record.effect),
+    cell("条件", record.condition),
+    cell("専用武器", record.exclusive),
+    '                  <td class="cm-more"><a href="' + escapeHtml(href) + '">このスキルを見る →</a></td>',
+    "                </tr>"
+  ].join("\n");
+}
+
+function countermeasuresPageHtml(data, characterById, skillById, ads) {
+  const records = (data.records || []).slice().sort((a, b) => {
+    const ca = characterById.get(skillById.get(a.skillId).characterId);
+    const cb = characterById.get(skillById.get(b.skillId).characterId);
+    const order = ATTRIBUTE_ORDER.indexOf(ca.attribute) - ATTRIBUTE_ORDER.indexOf(cb.attribute);
+    if (order) return order;
+    return ca.name.localeCompare(cb.name, "ja") || a.skillId.localeCompare(b.skillId, "en");
+  });
+  const option = (value, label) => '                <option value="' + escapeHtml(value) + '">' + escapeHtml(label) + "</option>";
+  const select = (id, label, values) => [
+    '            <label class="cm-filter" for="' + id + '">',
+    "              <span>" + escapeHtml(label) + "</span>",
+    '              <select id="' + id + '">',
+    option("all", "すべて"),
+    values.map((value) => option(value[0], value[1])).join("\n"),
+    "              </select>",
+    "            </label>"
+  ].join("\n");
+  const tool = [
+    '          <p>状態異常や弱体効果に困ったときに、「どう対策するか」と「自分の属性で誰を使えるか」から候補を探せます。条件はすべて満たすものだけを表示します。</p>',
+    '          <div class="cm-filters" data-cm-filters hidden>',
+    select("cm-status", "状態異常", data.statuses.map((status) => [status, status])),
+    select("cm-type", "対策タイプ", data.types.map((type) => [type.key, type.label])),
+    select("cm-attribute", "属性", ATTRIBUTE_ORDER.map((attribute) => [attribute, attribute])),
+    "          </div>",
+    '          <p class="cm-count" data-cm-count aria-live="polite">該当 ' + records.length + "件</p>",
+    '          <div class="cm-empty" data-cm-empty hidden>',
+    "            <p>この条件に当てはまるスキルはありません。条件を広げてみてください。</p>",
+    '            <div class="cm-empty-actions" data-cm-hints></div>',
+    "          </div>",
+    '          <div class="guide-table-wrap">',
+    '            <table class="guide-table guide-table--wrap cm-table">',
+    "              <thead>",
+    "                <tr>",
+    ["キャラ", "スキル", "対策タイプ", "発動", "対象", "効果", "条件", "専用武器"].map((label) => '                  <th scope="col">' + label + "</th>").join("\n"),
+    '                  <th scope="col" class="cm-more">リンク</th>',
+    "                </tr>",
+    "              </thead>",
+    "              <tbody>",
+    records.map((record) => countermeasureRow(record, data, characterById, skillById)).join("\n"),
+    "              </tbody>",
+    "            </table>",
+    "          </div>"
+  ].join("\n");
+
+  const basics = ['          <p>対策は「いつ効くか」で選ぶと分かりやすくなります。</p>', "          <dl class=\"guide-defs\">"];
+  for (const type of data.types) {
+    basics.push("            <dt>" + escapeHtml(type.label) + "：" + escapeHtml(type.short) + "</dt>");
+    basics.push("            <dd>" + escapeHtml(type.description) + "</dd>");
+  }
+  basics.push("          </dl>");
+  basics.push("          <h3 class=\"guide-sub\">装備で耐性を上げる</h3>");
+  basics.push("          <p>武具は部位ごとに、基礎効果で上がるステータスが決まっています。<strong>胸アクセサリーの基礎効果は「弱体効果耐性」</strong>で、ほかの部位にはありません。弱体効果を受けにくくしたいキャラは、胸アクセサリーの強化が直接の対策になります。</p>");
+  basics.push("          <p>キャラによっては、専用武器の専用パッシブ効果でも弱体効果耐性が上がります。</p>");
+  basics.push('          <p>毒や沈黙など、効果ごとの仕組みは<a href="./index.html">状態異常・特殊効果ガイド</a>で解説しています。</p>');
+
+  const sources = card("sources", "出典", [
+    '          <p class="guide-source">出典：ゲーム内ヘルプ／ゲーム内スキル説明</p>',
+    '          <p class="guide-source">各対策の分け方はゲーム内ヘルプの「弱体効果無効・行動阻害無効」「確率増加・減少」「解除」を、各キャラの対象・条件はゲーム内スキル説明を基準にしています。</p>'
+  ].join("\n"));
+
+  return pageShell({
+    id: "countermeasures",
+    title: "状態異常対策キャラ検索｜" + TITLE_SUFFIX,
+    description: "状態異常・弱体効果の対策スキルを、状態異常・対策タイプ（無効・耐性・ターン短縮・解除）・属性で絞り込んで探せる検索ツールです。キャラページの該当スキルへ直接移動できます。",
+    canonical: SITE_ORIGIN + "/pages/status/countermeasures.html",
+    heading: "状態異常対策キャラ検索",
+    lastCrossCheck: data.lastCrossCheck,
+    crossCheckNote: data.crossCheckNote,
+    ads,
+    cards: [card("search", "対策キャラを探す", tool), card("basics", "状態異常対策の基本", basics.join("\n")), sources],
+    scripts: [COUNTERMEASURES_SCRIPT]
+  });
+}
+
+/* ------------------------------------------------------------------
  * 5. 入口
  * ------------------------------------------------------------------ */
 
@@ -1335,7 +1535,18 @@ export function buildStatusGuides(options) {
     pages.push({ path: join(STATUS_PAGES_DIR, guide.id + ".html"), html, url: "/pages/status/" + guide.id + ".html" });
   }
 
-  const indexHtml = indexPageHtml(guides, ads);
+  // 状態異常対策キャラ検索（任意。データがあるときだけ作る）
+  const countermeasures = readCountermeasures();
+  if (countermeasures) {
+    summary.countermeasures = validateCountermeasures(countermeasures, baseData, characterById, skillById, errors);
+    if (!errors.length) {
+      const html = countermeasuresPageHtml(countermeasures, characterById, skillById, ads);
+      validateWording("pages/status/countermeasures.html", html, errors);
+      pages.push({ path: join(STATUS_PAGES_DIR, "countermeasures.html"), html, url: "/pages/status/countermeasures.html" });
+    }
+  }
+
+  const indexHtml = indexPageHtml(guides, ads, countermeasures);
   validateWording("pages/status/index.html", indexHtml, errors);
 
   if (errors.length) {

@@ -1,0 +1,633 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>状態異常対策キャラ検索｜ミレストのメメントモリ分析データ室</title>
+  <meta name="description" content="状態異常・弱体効果の対策スキルを、状態異常・対策タイプ（無効・耐性・ターン短縮・解除）・属性で絞り込んで探せる検索ツールです。キャラページの該当スキルへ直接移動できます。">
+  <link rel="canonical" href="https://memento.musoudc.com/pages/status/countermeasures.html">
+  <!-- OGP。画像は共通のものを使う（ガイドごとの画像生成は未対応） -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="ミレストのメメントモリ分析データ室">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="og:title" content="状態異常対策キャラ検索｜ミレストのメメントモリ分析データ室">
+  <meta property="og:description" content="状態異常・弱体効果の対策スキルを、状態異常・対策タイプ（無効・耐性・ターン短縮・解除）・属性で絞り込んで探せる検索ツールです。キャラページの該当スキルへ直接移動できます。">
+  <meta property="og:url" content="https://memento.musoudc.com/pages/status/countermeasures.html">
+  <meta property="og:image" content="https://memento.musoudc.com/assets/ogp/ogp-common.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <link rel="icon" type="image/png" href="../../assets/miresto/miresto-icon-32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="../../assets/miresto/miresto-icon-180.png">
+  <link rel="stylesheet" href="../../assets/character-page.css">
+  <link rel="stylesheet" href="../../assets/status-guide.css">
+  <!-- ad:head -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6389066329814944" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="/assets/ad-slot.css">
+  <!-- /ad:head -->
+</head>
+<body data-status-guide="countermeasures" data-prerendered>
+  <header class="page-header">
+    <div class="header-inner">
+      <a class="top-link" href="/">トップ</a>
+      <a class="top-link" href="./index.html">状態異常・特殊効果ガイドの一覧へ</a>
+      <p class="eyebrow">STATUS GUIDE</p>
+      <h1>状態異常対策キャラ検索</h1>
+      <div class="guide-meta">
+        <span class="tag">最終横断確認 2026-10-07</span>
+      </div>
+      <p class="guide-meta-note">この日までに実装済みのキャラを対象に、弱体効果の無効・耐性・ターン短縮・解除を持つスキルを確認しています。</p>
+    </div>
+  </header>
+
+  <main>
+    <div class="guide-list">
+      <section class="guide-card" id="search" aria-labelledby="search-title">
+        <div class="guide-card-head">
+          <h2 id="search-title">対策キャラを探す</h2>
+        </div>
+        <div class="guide-card-body">
+          <p>状態異常や弱体効果に困ったときに、「どう対策するか」と「自分の属性で誰を使えるか」から候補を探せます。条件はすべて満たすものだけを表示します。</p>
+          <div class="cm-filters" data-cm-filters hidden>
+            <label class="cm-filter" for="cm-status">
+              <span>状態異常</span>
+              <select id="cm-status">
+                <option value="all">すべて</option>
+                <option value="毒">毒</option>
+                <option value="出血">出血</option>
+                <option value="浸食">浸食</option>
+                <option value="不治">不治</option>
+                <option value="脱力">脱力</option>
+                <option value="沈黙">沈黙</option>
+                <option value="気絶">気絶</option>
+                <option value="睡眠">睡眠</option>
+                <option value="金縛り">金縛り</option>
+              </select>
+            </label>
+            <label class="cm-filter" for="cm-type">
+              <span>対策タイプ</span>
+              <select id="cm-type">
+                <option value="all">すべて</option>
+                <option value="immune">弱体効果無効</option>
+                <option value="ccImmune">行動阻害無効</option>
+                <option value="statusImmune">個別状態異常無効</option>
+                <option value="resist">弱体効果耐性率アップ</option>
+                <option value="shorten">弱体効果ターン短縮</option>
+                <option value="cleanse">弱体効果解除</option>
+              </select>
+            </label>
+            <label class="cm-filter" for="cm-attribute">
+              <span>属性</span>
+              <select id="cm-attribute">
+                <option value="all">すべて</option>
+                <option value="藍">藍</option>
+                <option value="紅">紅</option>
+                <option value="翠">翠</option>
+                <option value="黄">黄</option>
+                <option value="天">天</option>
+                <option value="冥">冥</option>
+              </select>
+            </label>
+          </div>
+          <p class="cm-count" data-cm-count aria-live="polite">該当 41件</p>
+          <div class="cm-empty" data-cm-empty hidden>
+            <p>この条件に当てはまるスキルはありません。条件を広げてみてください。</p>
+            <div class="cm-empty-actions" data-cm-hints></div>
+          </div>
+          <div class="guide-table-wrap">
+            <table class="guide-table guide-table--wrap cm-table">
+              <thead>
+                <tr>
+                  <th scope="col">キャラ</th>
+                  <th scope="col">スキル</th>
+                  <th scope="col">対策タイプ</th>
+                  <th scope="col">発動</th>
+                  <th scope="col">対象</th>
+                  <th scope="col">効果</th>
+                  <th scope="col">条件</th>
+                  <th scope="col">専用武器</th>
+                  <th scope="col" class="cm-more">リンク</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr data-cm-row data-types="cleanse" data-coverage="cleanse:all" data-attribute="藍">
+                  <th scope="row"><span class="cm-attr">藍</span>[サーカスの団長]コルディ</th>
+                  <td data-label="スキル"><a href="../characters/cordie_ringmaster.html#skill-3">S3 みんなの笑顔のために</a></td>
+                  <td data-label="対策タイプ">弱体効果解除</td>
+                  <td data-label="発動">行動開始時</td>
+                  <td data-label="対象">自身</td>
+                  <td data-label="効果">自身の弱体効果を3つ解除</td>
+                  <td data-label="条件">—</td>
+                  <td data-label="専用武器">—</td>
+                  <td class="cm-more"><a href="../characters/cordie_ringmaster.html#skill-3">このスキルを見る →</a></td>
+                </tr>
+                <tr data-cm-row data-types="cleanse" data-coverage="cleanse:all" data-attribute="藍">
+                  <th scope="row"><span class="cm-attr">藍</span>[湖畔の歌姫]プリマヴェーラ</th>
+                  <td data-label="スキル"><a href="../characters/primavera_summer.html#skill-3">S3 奇跡の歌姫</a></td>
+                  <td data-label="対策タイプ">弱体効果解除</td>
+                  <td data-label="発動">アクティブスキルで弱体を受けたとき</td>
+                  <td data-label="対象">自身</td>
+                  <td data-label="効果">弱体効果を1つ解除</td>
+                  <td data-label="条件">—</td>
+                  <td data-label="専用武器">—</td>
+                  <td class="cm-more"><a href="../characters/primavera_summer.html#skill-3">このスキルを見る →</a></td>
+                </tr>
+                <tr data-cm-row data-types="cleanse" data-coverage="cleanse:all" data-attribute="藍">
+                  <th scope="row"><span class="cm-attr">藍</span>[在りし日の面影]フィアー</th>
+                  <td data-label="スキル"><a href="../characters/fia_trace.html#skill-4">S4 カウンターウィザー</a></td>
+                  <td data-label="対策タイプ">弱体効果解除</td>
+                  <td data-label="発動">自身か味方がアクティブスキルで弱体を受けたとき</td>
+                  <td data-label="対象">自身</td>
+                  <td data-label="効果">怠惰を付与する前に、自身の弱体効果を1つ解除</td>
+                  <td data-label="条件">—</td>
+                  <td data-label="専用武器">—</td>
+                  <td class="cm-more"><a href="../characters/fia_trace.html#skill-4">このスキルを見る →</a></td>
+                </tr>
+                <tr data-cm-row data-types="cleanse" data-coverage="cleanse:all" data-attribute="藍">
+                  <th scope="row"><span class="cm-attr">藍</span>[小さな大冒険]ニーナ</th>
+                  <td data-label="スキル"><a href="../characters/nina_summer.html#skill-2">S2 あっちいけー!!</a></td>
+                  <td data-label="対策タイプ">弱体効果解除</td>
+                  <td data-label="発動">攻撃前</td>
+                  <td data-label="対象">ランダムな味方3体</td>
+                  <td data-label="効果">弱体効果を1つ解除</td>
+                  <td data-label="条件">—</td>
+                  <td data-label="専用武器">—</td>
+                  <td class="cm-more"><a href="../characters/nina_summer.html#skill-2">このスキルを見る →</a></td>
+                </tr>
+                <tr data-cm-row data-types="cleanse" data-coverage="cleanse:all" data-attribute="藍">
+                  <th scope="row"><span class="cm-attr">藍</span>[小さな大冒険]ニーナ</th>
+                  <td data-label="スキル"><a href="../characters/nina_summer.html#skill-3">S3 ニーナハイタッチ</a></td>
+                  <td data-label="対策タイプ">弱体効果解除</td>
+                  <td data-label="発動">自身がアクティブスキルで行動阻害を受けたとき</td>
+                  <td data-label="対象">自身と攻撃力が高い味方2体</td>
+                  <td data-label="効果">弱体効果を2つ解除</td>
+                  <td data-label="条件">—</td>
+                  <td data-label="専用武器">—</td>
+                  <td class="cm-more"><a href="../characters/nina_summer.html#skill-3">このスキルを見る →</a></td>
+                </tr>
+                <tr data-cm-row data-types="cleanse" data-coverage="cleanse:all" data-attribute="藍">
+                  <th scope="row"><span class="cm-attr">藍</span>[深き森の賢者]マーリン</th>
+                  <td data-label="スキル"><a href="../characters/merlyn_winter.html#skill-1">S1 受け継がれた心</a></td>
+                  <td data-label="対策タイプ">弱体効果解除</td>
+                  <td data-label="発動">攻撃後</td>
+                  <td data-label="対象">攻撃力が最も高い味方</td>
+                  <td data-label="効果">弱体効果を2つ解除</td>
+                  <td data-label="条件">—</td>
+                  <td data-label="専用武器">—</td>
+                  <td class="cm-more"><a href="../characters/merlyn_winter.html#skill-1">このスキルを見る →</a></td>
+                </tr>
+                <tr data-cm-row data-types="cleanse" data-coverage="cleanse:all" data-attribute="藍">
+                  <th scope="row"><span class="cm-attr">藍</span>[深き森の賢者]マーリン</th>
+                  <td data-label="スキル"><a href="../characters/merlyn_winter.html#skill-3">S3 魔法のプレゼント</a></td>
+                  <td data-label="対策タイプ">弱体効果解除</td>
+                  <td data-label="発動">自身か味方がアクティブスキルで弱体を受けたとき</td>
+                  <td data-label="対象">自身</td>
+                  <td data-label="効果">自身の弱体効果を3つ解除</td>
+                  <td data-label="条件">味方全体の弱体合計が5個以上なら</td>
+                  <td data-label="専用武器">—</td>
+                  <td class="cm-more"><a href="../characters/merlyn_winter.html#skill-3">このスキルを見る →</a></td>
+                </tr>
+                <tr data-cm-row data-types="cleanse" data-coverage="cleanse:all" data-attribute="藍">
+                  <th scope="row"><span class="cm-attr">藍</span>エヴリン</th>
+                  <td data-label="スキル"><a href="../characters/evelyn.html#skill-4">S4 反照の理</a></td>
+                  <td data-label="対策タイプ">弱体効果解除</td>
+                  <td data-label="発動">自身がアクティブスキルで弱体を受けたとき</td>
+                  <td data-label="対象">自身</td>
+                  <td data-label="効果">自身の弱体効果を2つ解除</td>
+                  <td data-label="条件">反照の敵が3体以上なら</td>
+                  <td data-label="専用武器">—</td>
+                  <td class="cm-more"><a href="../characters/evelyn.html#skill-4">このスキルを見る →</a></td>
+                </tr>
+                <tr data-cm-row data-types="cleanse" data-coverage="cleanse:all" data-attribute="藍">
+                  <th scope="row"><span class="cm-attr">藍</span>クーシー</th>
+                  <td data-label="スキル"><a href="../characters/cusith.html#skill-3">S3 種を超えた絆</a></td>
+                  <td data-label="対策タイプ">弱体効果解除</td>
+                  <td data-label="発動">敵の攻撃で自身が戦闘不能にならなかったとき</td>
+                  <td data-label="対象">弱体効果が最も多い味方</td>
+                  <td data-label="効果">30%で弱体効果を1つ解除</td>
+                  <td data-label="条件">—</td>
+                  <td data-label="専用武器">—</td>
+                  <td class="cm-more"><a href="../characters/cusith.html#skill-3">このスキルを見る →</a></td>
+                </tr>
+                <tr data-cm-row data-types="cleanse" data-coverage="cleanse:all" data-attribute="藍">
+                  <th scope="row"><span class="cm-attr">藍</span>シヴィ</th>
+                  <td data-label="スキル"><a href="../characters/sivi.html#skill-2">S2 アブソーブブレイド</a></td>
+                  <td data-label="対策タイプ">弱体効果解除</td>
+                  <td data-label="発動">攻撃後</td>
+                  <td data-label="対象">スピードが低い味方3体</td>
+                  <td data-label="効果">弱体効果を全解除</td>
+                  <td data-label="条件">—</td>
+                  <td data-label="専用武器">—</td>
+                  <td class="cm-more"><a href="../characters/sivi.html#skill-2">このスキルを見る →</a></td>
+                </tr>
+                <tr data-cm-row data-types="cleanse" data-coverage="cleanse:all" data-attribute="藍">
+                  <th scope="row"><span class="cm-attr">藍</span>シヴィ</th>
+                  <td data-label="スキル"><a href="../characters/sivi.html#skill-4">S4 魔剣の守護</a></td>
+                  <td data-label="対策タイプ">弱体効果解除</td>
+                  <td data-label="発動">アクティブスキルで弱体を受けたとき</td>
+                  <td data-label="対象">自身</td>
+                  <td data-label="効果">弱体効果を全解除</td>
+                  <td data-label="条件">自身の弱体効果が2個以上なら</td>
+                  <td data-label="専用武器">—</td>
+                  <td class="cm-more"><a href="../characters/sivi.html#skill-4">このスキルを見る →</a></td>
+                </tr>
+                <tr data-cm-row data-types="cleanse" data-coverage="cleanse:all" data-attribute="藍">
+                  <th scope="row"><span class="cm-attr">藍</span>ソルティーナ</th>
+                  <td data-label="スキル"><a href="../characters/soltina.html#skill-3">S3 クマさんのぬいぐるみ</a></td>
+                  <td data-label="対策タイプ">弱体効果解除</td>
+                  <td data-label="発動">アクティブスキルで弱体を受けたとき</td>
+                  <td data-label="対象">自身</td>
+                  <td data-label="効果">弱体効果を全解除</td>
+                  <td data-label="条件">自身の弱体効果が2個以上なら</td>
+                  <td data-label="専用武器">—</td>
+                  <td class="cm-more"><a href="../characters/soltina.html#skill-3">このスキルを見る →</a></td>
+                </tr>
+                <tr data-cm-row data-types="cleanse" data-coverage="cleanse:all" data-attribute="藍">
+                  <th scope="row"><span class="cm-attr">藍</span>フェンリル</th>
+                  <td data-label="スキル"><a href="../characters/fenrir.html#skill-2">S2 アイシクルシャワー</a></td>
+                  <td data-label="対策タイプ">弱体効果解除</td>
+                  <td data-label="発動">攻撃後</td>
+                  <td data-label="対象">自身と隣接する味方2体</td>
+                  <td data-label="効果">弱体効果を2つずつ解除</td>
+                  <td data-label="条件">—</td>
+                  <td data-label="専用武器">—</td>
+                  <td class="cm-more"><a href="../characters/fenrir.html#skill-2">このスキルを見る →</a></td>
+                </tr>
+                <tr data-cm-row data-types="cleanse" data-coverage="cleanse:all" data-attribute="藍">
+                  <th scope="row"><span class="cm-attr">藍</span>ユリーカ</th>
+                  <td data-label="スキル"><a href="../characters/eureka.html#skill-3">S3 新天地目指して</a></td>
+                  <td data-label="対策タイプ">弱体効果解除</td>
+                  <td data-label="発動">自身がアクティブスキルで弱体を受けたとき</td>
+                  <td data-label="対象">自身と攻撃力が高い味方2体</td>
+                  <td data-label="効果">弱体効果を1つ解除</td>
+                  <td data-label="条件">—</td>
+                  <td data-label="専用武器">—</td>
+                  <td class="cm-more"><a href="../characters/eureka.html#skill-3">このスキルを見る →</a></td>
+                </tr>
+                <tr data-cm-row data-types="cleanse" data-coverage="cleanse:all" data-attribute="紅">
+                  <th scope="row"><span class="cm-attr">紅</span>[温かな記憶]ソルティーナ</th>
+                  <td data-label="スキル"><a href="../characters/soltina_warm_memory.html#skill-3">S3 妹の愛</a></td>
+                  <td data-label="対策タイプ">弱体効果解除</td>
+                  <td data-label="発動">アクティブスキルで弱体を受けたとき</td>
+                  <td data-label="対象">自身</td>
+                  <td data-label="効果">弱体効果を全解除</td>
+                  <td data-label="条件">自身の弱体効果が2個以上なら</td>
+                  <td data-label="専用武器">—</td>
+                  <td class="cm-more"><a href="../characters/soltina_warm_memory.html#skill-3">このスキルを見る →</a></td>
+                </tr>
+                <tr data-cm-row data-types="statusImmune" data-coverage="statusImmune:気絶" data-attribute="紅">
+                  <th scope="row"><span class="cm-attr">紅</span>グィネヴィア</th>
+                  <td data-label="スキル"><a href="../characters/guinevere.html#skill-4">S4 人の心を温める力</a></td>
+                  <td data-label="対策タイプ">個別状態異常無効</td>
+                  <td data-label="発動">1ターン目の行動開始時</td>
+                  <td data-label="対象">自身</td>
+                  <td data-label="効果">気絶無効を付与（2ターン）</td>
+                  <td data-label="条件">紅属性の味方が2体以上なら</td>
+                  <td data-label="専用武器">専用Lv2で自身と攻撃力が高い味方2体</td>
+                  <td class="cm-more"><a href="../characters/guinevere.html#skill-4">このスキルを見る →</a></td>
+                </tr>
+                <tr data-cm-row data-types="cleanse ccImmune" data-coverage="cleanse:all ccImmune:気絶,睡眠,混乱,沈黙,金縛り" data-attribute="紅">
+                  <th scope="row"><span class="cm-attr">紅</span>サブリナ</th>
+                  <td data-label="スキル"><a href="../characters/sabrina.html#skill-3">S3 ブレイブ・アライブ</a></td>
+                  <td data-label="対策タイプ">弱体効果解除／行動阻害無効</td>
+                  <td data-label="発動">ターン開始時</td>
+                  <td data-label="対象">自身</td>
+                  <td data-label="効果">弱体効果を全解除し、行動阻害無効を付与（2ターン・解除不可）</td>
+                  <td data-label="条件">自身が弱体効果を持っていれば。発動後、4回行動が終わるまで再発動しない</td>
+                  <td data-label="専用武器">—</td>
+                  <td class="cm-more"><a href="../characters/sabrina.html#skill-3">このスキルを見る →</a></td>
+                </tr>
+                <tr data-cm-row data-types="shorten" data-coverage="shorten:all" data-attribute="紅">
+                  <th scope="row"><span class="cm-attr">紅</span>ソフィア</th>
+                  <td data-label="スキル"><a href="../characters/sophia.html#skill-3">S3 教導の精神</a></td>
+                  <td data-label="対策タイプ">弱体効果ターン短縮</td>
+                  <td data-label="発動">自身がアクティブスキルで弱体効果を受けたとき</td>
+                  <td data-label="対象">自身</td>
+                  <td data-label="効果">自身の全弱体効果のターン数を2短縮</td>
+                  <td data-label="条件">発動後、4回行動が終わるまで再発動しない</td>
+                  <td data-label="専用武器">—</td>
+                  <td class="cm-more"><a href="../characters/sophia.html#skill-3">このスキルを見る →</a></td>
+                </tr>
+                <tr data-cm-row data-types="cleanse resist" data-coverage="cleanse:all resist:all" data-attribute="紅">
+                  <th scope="row"><span class="cm-attr">紅</span>プリシラ</th>
+                  <td data-label="スキル"><a href="../characters/priscilla.html#skill-1">S1 聖炎の灯火</a></td>
+                  <td data-label="対策タイプ">弱体効果解除／弱体効果耐性率アップ</td>
+                  <td data-label="発動">攻撃後</td>
+                  <td data-label="対象">攻撃力が高い味方2体</td>
+                  <td data-label="効果">弱体効果を2つ解除し、弱体効果耐性率+40%（2ターン）</td>
+                  <td data-label="条件">最初の魔法攻撃でクリティカルが出ていれば解除数3つ</td>
+                  <td data-label="専用武器">専用Lv1で対象3体、Lv2で耐性率+80%</td>
+                  <td class="cm-more"><a href="../characters/priscilla.html#skill-1">このスキルを見る →</a></td>
+                </tr>
+                <tr data-cm-row data-types="shorten" data-coverage="shorten:all" data-attribute="紅">
+                  <th scope="row"><span class="cm-attr">紅</span>プリシラ</th>
+                  <td data-label="スキル"><a href="../characters/priscilla.html#skill-4">S4 囚われの姫</a></td>
+                  <td data-label="対策タイプ">弱体効果ターン短縮</td>
+                  <td data-label="発動">アクティブスキルで弱体を受けたとき</td>
+                  <td data-label="対象">自身</td>
+                  <td data-label="効果">防御力増加のターンを1消費して、自身の全弱体効果のターン数を2短縮</td>
+                  <td data-label="条件">—</td>
+                  <td data-label="専用武器">—</td>
+                  <td class="cm-more"><a href="../characters/priscilla.html#skill-4">このスキルを見る →</a></td>
+                </tr>
+                <tr data-cm-row data-types="resist" data-coverage="resist:all" data-attribute="翠">
+                  <th scope="row"><span class="cm-attr">翠</span>[黄金色の聖剣使い]アルトリア</th>
+                  <td data-label="スキル"><a href="../characters/artoria_golden.html#skill-1">S1 モルデュール</a></td>
+                  <td data-label="対策タイプ">弱体効果耐性率アップ</td>
+                  <td data-label="発動">攻撃前</td>
+                  <td data-label="対象">味方全体</td>
+                  <td data-label="効果">弱体効果耐性率+15%（2ターン）</td>
+                  <td data-label="条件">—</td>
+                  <td data-label="専用武器">専用Lv1で+30%</td>
+                  <td class="cm-more"><a href="../characters/artoria_golden.html#skill-1">このスキルを見る →</a></td>
+                </tr>
+                <tr data-cm-row data-types="immune" data-coverage="immune:all" data-attribute="翠">
+                  <th scope="row"><span class="cm-attr">翠</span>コルディ</th>
+                  <td data-label="スキル"><a href="../characters/cordie.html#skill-4">S4 硝煙に巻く</a></td>
+                  <td data-label="対策タイプ">弱体効果無効</td>
+                  <td data-label="発動">ターン開始時</td>
+                  <td data-label="対象">自身</td>
+                  <td data-label="効果">弱体効果無効を付与（3ターン・解除不可）</td>
+                  <td data-label="条件">発動後、3回行動が終わるまで再発動しない</td>
+                  <td data-label="専用武器">—</td>
+                  <td class="cm-more"><a href="../characters/cordie.html#skill-4">このスキルを見る →</a></td>
+                </tr>
+                <tr data-cm-row data-types="cleanse" data-coverage="cleanse:all" data-attribute="翠">
+                  <th scope="row"><span class="cm-attr">翠</span>ニーナ</th>
+                  <td data-label="スキル"><a href="../characters/nina.html#skill-2">S2 大嫌い!!</a></td>
+                  <td data-label="対策タイプ">弱体効果解除</td>
+                  <td data-label="発動">攻撃前</td>
+                  <td data-label="対象">自身</td>
+                  <td data-label="効果">自身の弱体効果を1つ解除し、その効果を対象（ランダムな敵5体）にコピー</td>
+                  <td data-label="条件">対象の技力が自身より低い場合</td>
+                  <td data-label="専用武器">—</td>
+                  <td class="cm-more"><a href="../characters/nina.html#skill-2">このスキルを見る →</a></td>
+                </tr>
+                <tr data-cm-row data-types="cleanse" data-coverage="cleanse:all" data-attribute="翠">
+                  <th scope="row"><span class="cm-attr">翠</span>マーリン</th>
+                  <td data-label="スキル"><a href="../characters/merlin.html#skill-1">S1 お師匠さまのように</a></td>
+                  <td data-label="対策タイプ">弱体効果解除</td>
+                  <td data-label="発動">スキル発動時</td>
+                  <td data-label="対象">攻撃力が最も高い味方</td>
+                  <td data-label="効果">弱体効果を1つ解除</td>
+                  <td data-label="条件">—</td>
+                  <td data-label="専用武器">専用Lv2で対象が攻撃力が高い味方2体・解除数2つ</td>
+                  <td class="cm-more"><a href="../characters/merlin.html#skill-1">このスキルを見る →</a></td>
+                </tr>
+                <tr data-cm-row data-types="cleanse" data-coverage="cleanse:all" data-attribute="翠">
+                  <th scope="row"><span class="cm-attr">翠</span>メルティーユ</th>
+                  <td data-label="スキル"><a href="../characters/mertillier.html#skill-2">S2 メンテナンス</a></td>
+                  <td data-label="対策タイプ">弱体効果解除</td>
+                  <td data-label="発動">スキル発動時</td>
+                  <td data-label="対象">攻撃力が最も高い味方</td>
+                  <td data-label="効果">弱体効果を全解除</td>
+                  <td data-label="条件">対象が弱体効果中なら</td>
+                  <td data-label="専用武器">—</td>
+                  <td class="cm-more"><a href="../characters/mertillier.html#skill-2">このスキルを見る →</a></td>
+                </tr>
+                <tr data-cm-row data-types="resist" data-coverage="resist:all" data-attribute="翠">
+                  <th scope="row"><span class="cm-attr">翠</span>メルティーユ</th>
+                  <td data-label="スキル"><a href="../characters/mertillier.html#skill-4">S4 研究成果</a></td>
+                  <td data-label="対策タイプ">弱体効果耐性率アップ</td>
+                  <td data-label="発動">常時</td>
+                  <td data-label="対象">自身</td>
+                  <td data-label="効果">弱体効果耐性率+100%（解除不可）</td>
+                  <td data-label="条件">—</td>
+                  <td data-label="専用武器">—</td>
+                  <td class="cm-more"><a href="../characters/mertillier.html#skill-4">このスキルを見る →</a></td>
+                </tr>
+                <tr data-cm-row data-types="cleanse" data-coverage="cleanse:all" data-attribute="翠">
+                  <th scope="row"><span class="cm-attr">翠</span>ユニ</th>
+                  <td data-label="スキル"><a href="../characters/yuni.html#skill-1">S1 シルフの舞風</a></td>
+                  <td data-label="対策タイプ">弱体効果解除</td>
+                  <td data-label="発動">攻撃後</td>
+                  <td data-label="対象">自身以外で攻撃力が最も高い味方</td>
+                  <td data-label="効果">弱体効果を2つ解除</td>
+                  <td data-label="条件">対象が弱体効果中なら</td>
+                  <td data-label="専用武器">—</td>
+                  <td class="cm-more"><a href="../characters/yuni.html#skill-1">このスキルを見る →</a></td>
+                </tr>
+                <tr data-cm-row data-types="cleanse" data-coverage="cleanse:all" data-attribute="翠">
+                  <th scope="row"><span class="cm-attr">翠</span>ユニ</th>
+                  <td data-label="スキル"><a href="../characters/yuni.html#skill-2">S2 ユニコーンの息吹</a></td>
+                  <td data-label="対策タイプ">弱体効果解除</td>
+                  <td data-label="発動">スキル発動時</td>
+                  <td data-label="対象">HP割合が最も低い味方</td>
+                  <td data-label="効果">弱体効果を1つ解除。このスキルは最大3回再発動する</td>
+                  <td data-label="条件">対象が弱体効果中なら</td>
+                  <td data-label="専用武器">—</td>
+                  <td class="cm-more"><a href="../characters/yuni.html#skill-2">このスキルを見る →</a></td>
+                </tr>
+                <tr data-cm-row data-types="cleanse" data-coverage="cleanse:all" data-attribute="黄">
+                  <th scope="row"><span class="cm-attr">黄</span>ウィーラ</th>
+                  <td data-label="スキル"><a href="../characters/wheeler.html#skill-4">S4 ふたりぼっちの絆</a></td>
+                  <td data-label="対策タイプ">弱体効果解除</td>
+                  <td data-label="発動">攻撃を受けてHP割合が40%未満になったとき</td>
+                  <td data-label="対象">自身</td>
+                  <td data-label="効果">自身の弱体効果を全解除</td>
+                  <td data-label="条件">—</td>
+                  <td data-label="専用武器">—</td>
+                  <td class="cm-more"><a href="../characters/wheeler.html#skill-4">このスキルを見る →</a></td>
+                </tr>
+                <tr data-cm-row data-types="cleanse" data-coverage="cleanse:all" data-attribute="黄">
+                  <th scope="row"><span class="cm-attr">黄</span>カトレア</th>
+                  <td data-label="スキル"><a href="../characters/cattleya.html#skill-3">S3 万物の解析者</a></td>
+                  <td data-label="対策タイプ">弱体効果解除</td>
+                  <td data-label="発動">8ターン目のターン終了時</td>
+                  <td data-label="対象">自身と攻撃力が最も高い味方</td>
+                  <td data-label="効果">弱体効果を2つ解除</td>
+                  <td data-label="条件">自身以外の黄属性の味方が2体以上なら、4・12ターン目の終了時にも発動</td>
+                  <td data-label="専用武器">—</td>
+                  <td class="cm-more"><a href="../characters/cattleya.html#skill-3">このスキルを見る →</a></td>
+                </tr>
+                <tr data-cm-row data-types="cleanse" data-coverage="cleanse:all" data-attribute="黄">
+                  <th scope="row"><span class="cm-attr">黄</span>トロポン</th>
+                  <td data-label="スキル"><a href="../characters/tropon.html#skill-4">S4 イリュージョン</a></td>
+                  <td data-label="対策タイプ">弱体効果解除</td>
+                  <td data-label="発動">クリティカル以外の攻撃を受けたとき</td>
+                  <td data-label="対象">自身</td>
+                  <td data-label="効果">自身の弱体効果を1つ解除して、攻撃してきた敵に付与</td>
+                  <td data-label="条件">—</td>
+                  <td data-label="専用武器">—</td>
+                  <td class="cm-more"><a href="../characters/tropon.html#skill-4">このスキルを見る →</a></td>
+                </tr>
+                <tr data-cm-row data-types="resist" data-coverage="resist:all" data-attribute="黄">
+                  <th scope="row"><span class="cm-attr">黄</span>プリマヴェーラ</th>
+                  <td data-label="スキル"><a href="../characters/primavera.html#skill-4">S4 至高の歌姫</a></td>
+                  <td data-label="対策タイプ">弱体効果耐性率アップ</td>
+                  <td data-label="発動">常時</td>
+                  <td data-label="対象">自身</td>
+                  <td data-label="効果">弱体効果耐性率+100%（解除不可）</td>
+                  <td data-label="条件">—</td>
+                  <td data-label="専用武器">—</td>
+                  <td class="cm-more"><a href="../characters/primavera.html#skill-4">このスキルを見る →</a></td>
+                </tr>
+                <tr data-cm-row data-types="resist" data-coverage="resist:all" data-attribute="黄">
+                  <th scope="row"><span class="cm-attr">黄</span>リシェス</th>
+                  <td data-label="スキル"><a href="../characters/rishess.html#skill-1">S1 サービスタイム</a></td>
+                  <td data-label="対策タイプ">弱体効果耐性率アップ</td>
+                  <td data-label="発動">スキル発動時</td>
+                  <td data-label="対象">自身と自身以外でスピードが最も低い味方</td>
+                  <td data-label="効果">弱体効果耐性率+50%（3ターン）</td>
+                  <td data-label="条件">—</td>
+                  <td data-label="専用武器">専用Lv2で+100%</td>
+                  <td class="cm-more"><a href="../characters/rishess.html#skill-1">このスキルを見る →</a></td>
+                </tr>
+                <tr data-cm-row data-types="cleanse" data-coverage="cleanse:all" data-attribute="天">
+                  <th scope="row"><span class="cm-attr">天</span>[カリタスの使徒]ロザリー</th>
+                  <td data-label="スキル"><a href="../characters/rosalie_caritas.html#skill-3">S3 愛の使徒</a></td>
+                  <td data-label="対策タイプ">弱体効果解除</td>
+                  <td data-label="発動">常時</td>
+                  <td data-label="対象">自身</td>
+                  <td data-label="効果">弱体効果を2つ解除（攻撃力増加・シールドも付与）</td>
+                  <td data-label="条件">記憶が15スタックなら</td>
+                  <td data-label="専用武器">—</td>
+                  <td class="cm-more"><a href="../characters/rosalie_caritas.html#skill-3">このスキルを見る →</a></td>
+                </tr>
+                <tr data-cm-row data-types="statusImmune" data-coverage="statusImmune:沈黙" data-attribute="天">
+                  <th scope="row"><span class="cm-attr">天</span>[錆鉄の空]A.A.</th>
+                  <td data-label="スキル"><a href="../characters/aa_rusted_sky.html#skill-3">S3 天使の残光</a></td>
+                  <td data-label="対策タイプ">個別状態異常無効</td>
+                  <td data-label="発動">バトル開始時</td>
+                  <td data-label="対象">攻撃力が高い味方3体</td>
+                  <td data-label="効果">沈黙無効を付与（1ターン）</td>
+                  <td data-label="条件">—</td>
+                  <td data-label="専用武器">—</td>
+                  <td class="cm-more"><a href="../characters/aa_rusted_sky.html#skill-3">このスキルを見る →</a></td>
+                </tr>
+                <tr data-cm-row data-types="cleanse" data-coverage="cleanse:all" data-attribute="天">
+                  <th scope="row"><span class="cm-attr">天</span>アイリーン</th>
+                  <td data-label="スキル"><a href="../characters/irene.html#skill-3">S3 暗き夜の契約</a></td>
+                  <td data-label="対策タイプ">弱体効果解除</td>
+                  <td data-label="発動">通常攻撃強化を受けた本人の攻撃時</td>
+                  <td data-label="対象">通常攻撃を強化された本人（自身と、自身以外でスピードが最も低い味方）</td>
+                  <td data-label="効果">弱体効果を2つ解除（スキルCT-1）</td>
+                  <td data-label="条件">—</td>
+                  <td data-label="専用武器">—</td>
+                  <td class="cm-more"><a href="../characters/irene.html#skill-3">このスキルを見る →</a></td>
+                </tr>
+                <tr data-cm-row data-types="cleanse immune" data-coverage="cleanse:all immune:all" data-attribute="天">
+                  <th scope="row"><span class="cm-attr">天</span>ケルベロス</th>
+                  <td data-label="スキル"><a href="../characters/cerberus.html#skill-3">S3 魔法の言葉</a></td>
+                  <td data-label="対策タイプ">弱体効果解除／弱体効果無効</td>
+                  <td data-label="発動">2ターン目開始時</td>
+                  <td data-label="対象">自身</td>
+                  <td data-label="効果">自身の弱体効果を全解除。解除前に弱体が無ければ弱体効果無効（3ターン）</td>
+                  <td data-label="条件">—</td>
+                  <td data-label="専用武器">—</td>
+                  <td class="cm-more"><a href="../characters/cerberus.html#skill-3">このスキルを見る →</a></td>
+                </tr>
+                <tr data-cm-row data-types="ccImmune" data-coverage="ccImmune:気絶,睡眠,混乱,沈黙,金縛り" data-attribute="天">
+                  <th scope="row"><span class="cm-attr">天</span>フォルティナ</th>
+                  <td data-label="スキル"><a href="../characters/fortina.html#skill-3">S3 聖剣の守護</a></td>
+                  <td data-label="対策タイプ">行動阻害無効</td>
+                  <td data-label="発動">ターン開始時</td>
+                  <td data-label="対象">自身／自身以外で攻撃力が最も高い味方</td>
+                  <td data-label="効果">行動阻害無効を付与（自身3ターン・味方2ターン、解除不可）</td>
+                  <td data-label="条件">発動後、4回行動が終わるまで再発動しない</td>
+                  <td data-label="専用武器">—</td>
+                  <td class="cm-more"><a href="../characters/fortina.html#skill-3">このスキルを見る →</a></td>
+                </tr>
+                <tr data-cm-row data-types="cleanse" data-coverage="cleanse:all" data-attribute="冥">
+                  <th scope="row"><span class="cm-attr">冥</span>[魔法のキャンディ]ケルベロス</th>
+                  <td data-label="スキル"><a href="../characters/cerberus_candy.html#skill-3">S3 世界一幸せな魔法</a></td>
+                  <td data-label="対策タイプ">弱体効果解除</td>
+                  <td data-label="発動">致命的なダメージを受けたとき</td>
+                  <td data-label="対象">自身</td>
+                  <td data-label="効果">回復前に弱体効果を1つ解除</td>
+                  <td data-label="条件">—</td>
+                  <td data-label="専用武器">—</td>
+                  <td class="cm-more"><a href="../characters/cerberus_candy.html#skill-3">このスキルを見る →</a></td>
+                </tr>
+                <tr data-cm-row data-types="cleanse" data-coverage="cleanse:all" data-attribute="冥">
+                  <th scope="row"><span class="cm-attr">冥</span>エレイン</th>
+                  <td data-label="スキル"><a href="../characters/elaine.html#skill-3">S3 堕ちた天使の神官</a></td>
+                  <td data-label="対策タイプ">弱体効果解除</td>
+                  <td data-label="発動">味方が攻撃を受け、HP30%以下で生き残ったとき／自身が魔法攻撃を受けたとき</td>
+                  <td data-label="対象">その味方／霊痕を付帯している味方全体</td>
+                  <td data-label="効果">その味方の弱体効果を2つ解除（HP回復・霊痕付与）。魔法攻撃を受けたときは霊痕の味方全体の弱体効果を1つ解除</td>
+                  <td data-label="条件">その味方が霊痕を持たないとき。魔法攻撃時の解除は7ターン目以降・自身が戦闘不能になったときは発動しない</td>
+                  <td data-label="専用武器">—</td>
+                  <td class="cm-more"><a href="../characters/elaine.html#skill-3">このスキルを見る →</a></td>
+                </tr>
+                <tr data-cm-row data-types="resist" data-coverage="resist:all" data-attribute="冥">
+                  <th scope="row"><span class="cm-attr">冥</span>オフィーリア</th>
+                  <td data-label="スキル"><a href="../characters/ophelia.html#skill-1">S1 目を奪うは眩き刃</a></td>
+                  <td data-label="対策タイプ">弱体効果耐性率アップ</td>
+                  <td data-label="発動">攻撃後</td>
+                  <td data-label="対象">自身</td>
+                  <td data-label="効果">弱体効果耐性率+30%（3ターン）</td>
+                  <td data-label="条件">専用武器Lv2以上で追加される効果</td>
+                  <td data-label="専用武器">専用Lv2で+30%、Lv3で+50%</td>
+                  <td class="cm-more"><a href="../characters/ophelia.html#skill-1">このスキルを見る →</a></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+      <section class="guide-card" id="basics" aria-labelledby="basics-title">
+        <div class="guide-card-head">
+          <h2 id="basics-title">状態異常対策の基本</h2>
+        </div>
+        <div class="guide-card-body">
+          <p>対策は「いつ効くか」で選ぶと分かりやすくなります。</p>
+          <dl class="guide-defs">
+            <dt>弱体効果無効：付く前に防ぐ</dt>
+            <dd>新しく付く弱体効果をすべて防ぎます。すでに付いている弱体効果は消えません。</dd>
+            <dt>行動阻害無効：行動阻害5種をまとめて防ぐ</dt>
+            <dd>気絶・睡眠・混乱・沈黙・金縛りの5種をまとめて防ぎます。すでに付いているものは消えません。</dd>
+            <dt>個別状態異常無効：特定の効果だけ防ぐ</dt>
+            <dd>沈黙無効・気絶無効など、名前の付いた1種類だけを防ぎます。</dd>
+            <dt>弱体効果耐性率アップ：付きにくくする</dt>
+            <dd>弱体効果の付与成功率を下げます。スキルの付与確率に、命中率・耐性率の補正がかかって最終的な確率が決まります。</dd>
+            <dt>弱体効果ターン短縮：付いた後に早く終わらせる</dt>
+            <dd>付いている弱体効果の残りターンを短くします。効果そのものは解除しません。</dd>
+            <dt>弱体効果解除：付いた後に消す</dt>
+            <dd>付いている弱体効果を消します。スキル側に解除不可と書かれた弱体効果は消せません。</dd>
+          </dl>
+          <h3 class="guide-sub">装備で耐性を上げる</h3>
+          <p>武具は部位ごとに、基礎効果で上がるステータスが決まっています。<strong>胸アクセサリーの基礎効果は「弱体効果耐性」</strong>で、ほかの部位にはありません。弱体効果を受けにくくしたいキャラは、胸アクセサリーの強化が直接の対策になります。</p>
+          <p>キャラによっては、専用武器の専用パッシブ効果でも弱体効果耐性が上がります。</p>
+          <p>毒や沈黙など、効果ごとの仕組みは<a href="./index.html">状態異常・特殊効果ガイド</a>で解説しています。</p>
+        </div>
+      </section>
+      <section class="guide-card" id="sources" aria-labelledby="sources-title">
+        <div class="guide-card-head">
+          <h2 id="sources-title">出典</h2>
+        </div>
+        <div class="guide-card-body">
+          <p class="guide-source">出典：ゲーム内ヘルプ／ゲーム内スキル説明</p>
+          <p class="guide-source">各対策の分け方はゲーム内ヘルプの「弱体効果無効・行動阻害無効」「確率増加・減少」「解除」を、各キャラの対象・条件はゲーム内スキル説明を基準にしています。</p>
+        </div>
+      </section>
+    </div>
+    <!-- ad:bottom -->
+    <aside class="ad-slot" aria-label="広告">
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-6389066329814944"
+           data-ad-slot="6111654373"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </aside>
+    <!-- /ad:bottom -->
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <span>ミレストのメメントモリ分析データ室 / 非公式ファンサイト</span>
+      <nav class="footer-links" aria-label="サイト内のページ">
+        <a href="/">トップ</a>
+        <a href="../characters/index.html">キャラ一覧</a>
+        <a href="/pages/guide/">このサイトでできること</a>
+        <a href="/privacy.html">プライバシーポリシー</a>
+        <a href="/disclaimer.html">免責事項</a>
+        <a href="/about.html">このサイトについて</a>
+        <a href="/contact.html">お問い合わせ</a>
+      </nav>
+    </div>
+  </footer>
+  <script src="../../js/countermeasure-filter.js" defer></script>
+</body>
+</html>

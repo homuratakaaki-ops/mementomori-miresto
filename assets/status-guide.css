@@ -473,3 +473,90 @@
   .guide-figure img { border-radius: 0; }
 }
 
+
+/*
+ * 状態異常対策キャラ検索（pages/status/countermeasures.html）。
+ * 表は既存の guide-table をそのまま使い、狭い画面では1行＝1枚に積み直す。
+ */
+.cm-filters {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px 14px;
+  margin: 14px 0 6px;
+}
+
+.cm-filters[hidden] { display: none; }
+
+.cm-filter {
+  display: grid;
+  gap: 4px;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.cm-filter select {
+  min-height: 44px;
+  padding: 0 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+  color: inherit;
+  font: inherit;
+  font-weight: 700;
+}
+
+.cm-count {
+  margin: 10px 0;
+  font-weight: 900;
+}
+
+.cm-empty {
+  margin: 0 0 12px;
+  padding: 12px 14px;
+  border: 1px dashed var(--line);
+  border-radius: 8px;
+}
+
+.cm-empty[hidden] { display: none; }
+.cm-empty p { margin: 0 0 8px; }
+
+.cm-empty-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.cm-empty-actions button {
+  min-height: 44px;
+  padding: 0 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--accent-strong);
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.cm-attr {
+  display: inline-block;
+  margin-right: 6px;
+  padding: 0 6px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: 12px;
+}
+
+.cm-table tr[hidden] { display: none; }
+
+/* 「このスキルを見る →」は、積み直したカードの下にだけ出す（広い画面ではスキル名がリンク）。 */
+.cm-table .cm-more { display: none; }
+
+@media (max-width: 560px) {
+  .cm-filters { grid-template-columns: 1fr; }
+
+  .cm-table td.cm-more {
+    display: block;
+    padding-top: 8px;
+  }
+}
