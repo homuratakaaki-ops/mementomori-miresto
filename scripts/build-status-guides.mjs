@@ -697,7 +697,7 @@ function indexPageHtml(guides, ads, countermeasures) {
     "  </header>",
     "",
     "  <main>",
-    '    <div class="notice">今あるのは' + guides.length + "件です。ほかの状態異常・特殊効果も順番に足していきます。</div>",
+    '    <div class="notice">今あるのは' + (guides.length + (countermeasures ? 1 : 0)) + "件です。ほかの状態異常・特殊効果も順番に足していきます。</div>",
     '    <ul class="guide-index">',
     items.join("\n"),
     "    </ul>",
