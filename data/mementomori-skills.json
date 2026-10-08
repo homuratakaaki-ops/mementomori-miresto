@@ -3988,10 +3988,10 @@
       "majorCategory": "攻撃",
       "subCategory": "連撃 / 追加攻撃 / 撃破回復",
       "target": "ランダム敵",
-      "multiplierText": "初撃330% / 2-4撃目310% / 追加380%",
+      "multiplierText": "物理330%×4 / 追加380%",
       "duration": "撃破時HP回復",
       "ct": 4,
-      "condition": "ランダム敵に4回物理攻撃。初撃330%、2〜4撃目310%。各攻撃70%で追加攻撃、追加は最大4回・380%。このスキルで撃破時、最大HP10%回復。撃破数ごと回復量+10%",
+      "condition": "ランダム敵に物理330%×4回。各攻撃70%で追加攻撃、追加は最大4回・380%。このスキルで撃破時、最大HP10%回復。撃破数ごと回復量+10%",
       "exclusiveWeapon": "専用Lv2: 追加攻撃のダメージが攻撃力×400%になる",
       "compareMemo": "攻撃回数が伸びるほど強い連撃型。撃破時の自己回復もある",
       "noteUrl": "",
@@ -4000,23 +4000,22 @@
       "damage": {
         "singleMultiplier": 330,
         "hitCount": 4,
-        "baseTotal": 1260,
-        "exclusiveLv1Total": 1260,
-        "exclusiveLv2Total": 1260,
-        "exclusiveLv3Total": 1260,
-        "conditionMaxTotal": 2780,
-        "conditionMaxNote": "初撃330% + 2〜4撃目310%×3 + 追加攻撃380%×4回=2780（専用武器なし・スキルLv最大。専用Lv2なら追加攻撃400%で2860）",
+        "baseTotal": 1320,
+        "exclusiveLv1Total": 1320,
+        "exclusiveLv2Total": 1320,
+        "exclusiveLv3Total": 1320,
+        "conditionMaxTotal": 2840,
+        "conditionMaxNote": "物理330%×4回 + 追加攻撃380%×4回=2840（追加攻撃が4回すべて出た場合・専用武器なし・スキルLv最大。専用Lv2なら追加攻撃400%で2920）",
         "powerType": "追加攻撃 / 撃破回復",
         "maxStacks": 4,
         "realityRank": "中",
         "rankingTarget": "条件込み",
-        "damageMemo": "追加攻撃70%の理論値。既存DBの2880%は計算値と合わないため補正",
-        "mixedMultiplier": true
+        "damageMemo": "最大値は70%の追加攻撃が4回すべて出た場合"
       },
       "plainSummary": "追撃が連鎖する連撃。倒せば回復も増える。",
       "steps": [
         {
-          "text": "ランダムな敵に物理330%、以降は物理310%で合計4回攻撃"
+          "text": "ランダムな敵に物理330%×4回"
         },
         {
           "text": "攻撃するたび70%の確率で物理380%の追加攻撃(最大4回)"
@@ -4036,10 +4035,9 @@
           "target": "ランダムな敵",
           "effects": [
             {
-              "text": "物理攻撃。初撃だけこの倍率",
-              "multiplier": "物理330%",
-              "damageTotal": "base",
-              "note": "2〜4撃目は物理310%で、合計4回"
+              "text": "物理攻撃",
+              "multiplier": "物理330%×4回",
+              "damageTotal": "base"
             }
           ]
         },
@@ -17930,7 +17928,7 @@
       "majorCategory": "攻撃",
       "subCategory": "回数増加 / 低物防狙い",
       "target": "物防が最も低い敵",
-      "multiplierText": "物理410%×4回 / 2回目以降9回 / 3回目以降12回",
+      "multiplierText": "物理410%×6回 / 2回目以降9回 / 3回目以降12回",
       "duration": "",
       "ct": 4,
       "condition": "2回目以降は9回、3回目以降は12回攻撃。専用Lv3で470%",
@@ -17941,11 +17939,11 @@
       "sourceUrl": "https://ichigogames.net/mementomori/cattleya/",
       "damage": {
         "singleMultiplier": 410,
-        "hitCount": 4,
-        "baseTotal": 1640,
-        "exclusiveLv1Total": 1640,
-        "exclusiveLv2Total": 1640,
-        "exclusiveLv3Total": 1880,
+        "hitCount": 6,
+        "baseTotal": 2460,
+        "exclusiveLv1Total": 2460,
+        "exclusiveLv2Total": 2460,
+        "exclusiveLv3Total": 2820,
         "conditionMaxTotal": 4920,
         "conditionMaxNote": "3回目以降は12回攻撃。410%×12回=4920（専用武器なし・スキルLv最大）",
         "powerType": "段階強化 / 攻撃回数増加",
@@ -17957,7 +17955,7 @@
       "plainSummary": "2回目で9連、3回目で12連に増える固定砲台。",
       "steps": [
         {
-          "text": "物理防御力が最も低い敵に物理410%×4回"
+          "text": "物理防御力が最も低い敵に物理410%×6回"
         },
         {
           "text": "このスキルの2回目以降は9回、3回目以降は12回攻撃"
@@ -17972,13 +17970,13 @@
           "effects": [
             {
               "text": "物理攻撃",
-              "multiplier": "物理410%×4回",
+              "multiplier": "物理410%×6回",
               "damageTotal": "base",
               "exclusive": [
                 {
                   "lv": 3,
                   "kind": "change",
-                  "multiplier": "物理470%×4回"
+                  "multiplier": "物理470%×6回"
                 }
               ]
             },
@@ -34849,7 +34847,7 @@
       "multiplierText": "魔法480%",
       "duration": "",
       "ct": 4,
-      "condition": "自身HPを最大HP5%回復、3回発動。その後魔法攻撃。7T目以降にHP回復が発動しなかった場合、魔法ダメージ3倍",
+      "condition": "自身HPを最大HP5%回復、3回発動。その後魔法攻撃。7ターン目以降に発動した場合、HP回復は発動せず魔法攻撃のダメージが上がる（Lv4で上昇量が3倍）",
       "exclusiveWeapon": "専用武器効果なし",
       "compareMemo": "攻撃力+18% / HP+22% / 弱体効果耐性+10%",
       "noteUrl": "",
@@ -34863,14 +34861,14 @@
         "exclusiveLv2Total": 1440,
         "exclusiveLv3Total": 1440,
         "conditionMaxTotal": 1440,
-        "conditionMaxNote": "",
+        "conditionMaxNote": "7ターン目以降の上昇は「2倍のダメージ上昇量が3倍になる」と書かれており、最終倍率の読み方が確定しないため条件込みの合計は出していない",
         "powerType": "通常攻撃倍率",
         "maxStacks": null,
         "realityRank": "中",
         "rankingTarget": "条件込み",
-        "damageMemo": ""
+        "damageMemo": "7ターン目以降は大きく伸びるが、合計値は未確定"
       },
-      "plainSummary": "自己回復を3回刻んでから撃つ。後半は回復不要になり3倍砲へ。",
+      "plainSummary": "自己回復を3回刻んでから撃つ。7ターン目以降は回復しない代わりに火力が跳ね上がる。",
       "steps": [
         {
           "text": "自身のHPを最大HP5%回復、これを3回発動"
@@ -34879,7 +34877,7 @@
           "text": "ランダムな敵3体に魔法480%"
         },
         {
-          "text": "7ターン目以降にHP回復が発動しなかった場合、魔法ダメージ3倍"
+          "text": "7ターン目以降に発動した場合、HP回復は発動せず魔法攻撃のダメージが上がる(Lv4で上昇量が3倍)"
         }
       ],
       "flow": [
@@ -34890,7 +34888,8 @@
           "target": "自身",
           "effects": [
             {
-              "text": "HPを最大HP5%回復。これを3回発動"
+              "text": "HPを最大HP5%回復。これを3回発動",
+              "note": "7ターン目以降に発動した場合は発動しない"
             }
           ]
         },
@@ -34906,15 +34905,16 @@
               "damageTotal": "base"
             },
             {
-              "text": "魔法ダメージが3倍になる",
-              "condition": "7ターン目以降にHP回復が発動しなかった場合"
+              "text": "魔法攻撃のダメージが上がる",
+              "condition": "7ターン目以降に発動した場合",
+              "note": "説明文は「ダメージが2倍」、Lv4で「上昇量が3倍」"
             }
           ]
         }
       ],
       "synergyNotes": [
         {
-          "text": "①の「3回発動」は回復回数をカウントする味方(ポーラS3・ユルディズS4・冬ステラS4・黄昏フローレンスS3)のスタックを1人で3回進める。",
+          "text": "①の「3回発動」は回復回数をカウントする味方(ポーラS3・ユルディズS4・冬ステラS4・黄昏フローレンスS3)のスタックを1人で3回進める。7ターン目以降に発動した場合は回復しないため進まない。",
           "reason": "各スキルのカウント対象がアクティブスキルによる回復の発動回数のため"
         }
       ]
@@ -35036,29 +35036,29 @@
       "majorCategory": "攻撃",
       "subCategory": "自傷 / 被ダメージ増加 / 脱力",
       "target": "ランダム敵に5回",
-      "multiplierText": "物理280%×5 / Lv3 660%×5",
+      "multiplierText": "物理660%×5 / 専用Lv3 720%×5",
       "duration": "被ダメージ増加2T / 専用Lv1で脱力2T",
       "ct": 4,
-      "condition": "自身に現在HP20%の自傷ダメージを2回与えてから攻撃。Lv2で攻撃前に70%で被ダメージ増加",
-      "exclusiveWeapon": "専用Lv1: 攻撃後70%で脱力。専用Lv3: 物理720%",
+      "condition": "自身に現在HP20%の自傷ダメージを2回与えてから攻撃。攻撃前に70%で被ダメージ10%増加(2ターン)",
+      "exclusiveWeapon": "専用Lv1: 攻撃後70%で脱力(攻撃力40%減少・2ターン)。専用Lv3: 物理720%",
       "compareMemo": "自傷回数でパッシブの攻撃力スタックを稼ぐ連撃アタッカー",
       "noteUrl": "",
       "imageUrl": "",
       "sourceUrl": "https://ichigogames.net/mementomori/guinevere/",
       "damage": {
-        "singleMultiplier": 280,
+        "singleMultiplier": 660,
         "hitCount": 5,
-        "baseTotal": 1400,
-        "exclusiveLv1Total": 1400,
-        "exclusiveLv2Total": 1400,
+        "baseTotal": 3300,
+        "exclusiveLv1Total": 3300,
+        "exclusiveLv2Total": 3300,
         "exclusiveLv3Total": 3600,
-        "conditionMaxTotal": 1400,
+        "conditionMaxTotal": 3300,
         "conditionMaxNote": "専用武器以外に倍率を伸ばす条件が無いため基本と同値（旧値 3600 は専用武器ぶんを含んでいた）。専用Lv3で720%×5。被ダメージ増加と脱力は火力外",
         "powerType": "自傷連動 / 弱体付与",
         "maxStacks": null,
         "realityRank": "高",
         "rankingTarget": "条件込み",
-        "damageMemo": "専用Lv3で大きく伸びる"
+        "damageMemo": "専用Lv3で720%に伸びる"
       },
       "plainSummary": "自分を傷つけてから撃つ、捨て身の5連撃。",
       "steps": [
@@ -35066,10 +35066,10 @@
           "text": "自身に現在HP20%の自傷ダメージを2回"
         },
         {
-          "text": "攻撃前に70%で被ダメージ増加を付与(2ターン)"
+          "text": "攻撃前に70%で被ダメージ10%増加を付与(2ターン)"
         },
         {
-          "text": "ランダムな敵に物理280%×5回"
+          "text": "ランダムな敵に物理660%×5回"
         }
       ],
       "flow": [
@@ -35093,7 +35093,8 @@
             {
               "text": "被ダメージ増加を付与",
               "chance": "70%",
-              "duration": "2ターン"
+              "duration": "2ターン",
+              "note": "被ダメージ10%増加"
             }
           ]
         },
@@ -35105,7 +35106,7 @@
           "effects": [
             {
               "text": "物理攻撃",
-              "multiplier": "物理280%×5回",
+              "multiplier": "物理660%×5回",
               "damageTotal": "base",
               "exclusive": [
                 {
@@ -35148,25 +35149,25 @@
       "category": "火力",
       "majorCategory": "攻撃",
       "subCategory": "自傷 / スタック参照",
-      "target": "ランダム敵に3-5回",
-      "multiplierText": "物理170%×3 / 最大740%×5",
+      "target": "ランダム敵に5回",
+      "multiplierText": "物理340%×5 / 最大740%×5",
       "duration": "",
       "ct": 4,
-      "condition": "自身に現在HP20%の自傷ダメージを2回与えてから攻撃。ハートフルラヴァーの攻撃力増加スタックで倍率増加",
+      "condition": "自身に現在HP20%の自傷ダメージを2回与えてから攻撃。S3「ハートフルラヴァー」の攻撃力増加スタック1つにつき倍率+50%（最大740%）",
       "exclusiveWeapon": "専用武器での直接強化なし",
       "compareMemo": "スタック最大時の上振れが大きい自傷連撃",
       "noteUrl": "",
       "imageUrl": "",
       "sourceUrl": "https://ichigogames.net/mementomori/guinevere/",
       "damage": {
-        "singleMultiplier": 170,
-        "hitCount": 3,
-        "baseTotal": 510,
-        "exclusiveLv1Total": 510,
-        "exclusiveLv2Total": 510,
-        "exclusiveLv3Total": 510,
+        "singleMultiplier": 340,
+        "hitCount": 5,
+        "baseTotal": 1700,
+        "exclusiveLv1Total": 1700,
+        "exclusiveLv2Total": 1700,
+        "exclusiveLv3Total": 1700,
         "conditionMaxTotal": 3700,
-        "conditionMaxNote": "Lv4の5回攻撃かつスタック条件最大で740%×5",
+        "conditionMaxNote": "S3のスタックで倍率が最大740%まで上がった場合 740%×5=3700（スキルLv最大）",
         "powerType": "スタック参照",
         "maxStacks": null,
         "realityRank": "中",
@@ -35179,10 +35180,10 @@
           "text": "自身に現在HP20%の自傷ダメージを2回"
         },
         {
-          "text": "ランダムな敵に物理170%×3回"
+          "text": "ランダムな敵に物理340%×5回"
         },
         {
-          "text": "S3「ハートフルラヴァー」のスタック数に応じて倍率・回数が上昇(最大740%×5回)"
+          "text": "S3「ハートフルラヴァー」の攻撃力増加スタック1つにつき倍率+50%(最大740%)"
         }
       ],
       "flow": [
@@ -35205,14 +35206,15 @@
           "effects": [
             {
               "text": "物理攻撃",
-              "multiplier": "物理170%×3回",
+              "multiplier": "物理340%×5回",
               "damageTotal": "base"
             },
             {
-              "text": "物理攻撃の倍率と回数が上がり、最大でこの倍率に変わる",
-              "condition": "S3「ハートフルラヴァー」の攻撃力増加スタックに応じて",
+              "text": "倍率が50%上がる",
+              "condition": "S3「ハートフルラヴァー」の攻撃力増加スタック1つにつき",
               "multiplier": "物理740%×5回",
-              "damageTotal": "conditionMax"
+              "damageTotal": "conditionMax",
+              "note": "最大740%。攻撃回数は5回のまま"
             }
           ]
         }
@@ -35632,23 +35634,23 @@
       "majorCategory": "敵弱体",
       "subCategory": "気絶",
       "target": "攻撃力が高い敵2-3体",
-      "multiplierText": "魔法160%×2 / 専用Lv3 240%×3",
+      "multiplierText": "魔法220%×2 / 専用Lv3 240%×3",
       "duration": "気絶1T",
       "ct": 4,
-      "condition": "30-70%で気絶を付与",
+      "condition": "70%で気絶を付与",
       "exclusiveWeapon": "専用Lv1: 対象が攻撃力が高い敵3体になる。専用Lv3: 魔法攻撃が攻撃力×240%になる",
       "compareMemo": "高攻撃力対象へ気絶を狙う妨害スキル",
       "noteUrl": "",
       "imageUrl": "",
       "sourceUrl": "https://ichigogames.net/mementomori/lily/",
       "damage": {
-        "singleMultiplier": 160,
+        "singleMultiplier": 220,
         "hitCount": 2,
-        "baseTotal": 320,
-        "exclusiveLv1Total": 480,
-        "exclusiveLv2Total": 480,
+        "baseTotal": 440,
+        "exclusiveLv1Total": 660,
+        "exclusiveLv2Total": 660,
         "exclusiveLv3Total": 720,
-        "conditionMaxTotal": 320,
+        "conditionMaxTotal": 440,
         "conditionMaxNote": "専用武器以外に倍率を伸ばす条件が無いため基本と同値（旧値 720 は専用武器ぶんを含んでいた）。専用Lv3で240%×3。気絶条件は火力外",
         "powerType": "対象数増加",
         "maxStacks": null,
@@ -35659,7 +35661,7 @@
       "plainSummary": "敵のアタッカーを狙って気絶させにいく妨害弾。",
       "steps": [
         {
-          "text": "攻撃力が高い敵2体に魔法160%"
+          "text": "攻撃力が高い敵2体に魔法220%"
         },
         {
           "text": "70%の確率で気絶を1ターン付与",
@@ -35675,7 +35677,7 @@
           "effects": [
             {
               "text": "魔法攻撃",
-              "multiplier": "魔法160%",
+              "multiplier": "魔法220%",
               "damageTotal": "base",
               "exclusive": [
                 {
@@ -35715,11 +35717,11 @@
       "category": "火力",
       "majorCategory": "攻撃",
       "subCategory": "被回復量減少 / 残り香参照",
-      "target": "ランダム敵に6-10回",
-      "multiplierText": "魔法160%×6 / 最大320%×10",
+      "target": "ランダム敵に10回",
+      "multiplierText": "魔法160%×10 / 残り香時320%×10",
       "duration": "被回復量減少4T",
       "ct": 4,
-      "condition": "Lv2で攻撃前に被回復量減少。残り香20スタック時は倍率上昇",
+      "condition": "攻撃前に被回復量40%減少(4ターン)。残り香20スタック時は倍率が320%に上がる",
       "exclusiveWeapon": "専用武器での直接強化なし",
       "compareMemo": "残り香が最大になると連撃火力が倍化する",
       "noteUrl": "",
@@ -35727,29 +35729,29 @@
       "sourceUrl": "https://ichigogames.net/mementomori/lily/",
       "damage": {
         "singleMultiplier": 160,
-        "hitCount": 6,
-        "baseTotal": 960,
-        "exclusiveLv1Total": 960,
-        "exclusiveLv2Total": 960,
-        "exclusiveLv3Total": 960,
+        "hitCount": 10,
+        "baseTotal": 1600,
+        "exclusiveLv1Total": 1600,
+        "exclusiveLv2Total": 1600,
+        "exclusiveLv3Total": 1600,
         "conditionMaxTotal": 3200,
-        "conditionMaxNote": "Lv4かつ残り香20スタックで320%×10",
+        "conditionMaxNote": "残り香20スタック時 320%×10=3200（スキルLv最大）",
         "powerType": "スタック参照",
         "maxStacks": null,
         "realityRank": "中",
         "rankingTarget": "条件込み",
         "damageMemo": "最大火力は残り香20スタック前提"
       },
-      "plainSummary": "手数で押す連撃。残り香が満タンだと化ける。",
+      "plainSummary": "手数で押す10連撃。残り香が満タンだと倍率が倍になる。",
       "steps": [
         {
-          "text": "攻撃前に被回復量減少を付与(4ターン)"
+          "text": "攻撃前に被回復量40%減少を付与(4ターン)"
         },
         {
-          "text": "ランダムな敵に魔法160%×6回"
+          "text": "ランダムな敵に魔法160%×10回"
         },
         {
-          "text": "残り香20スタック時は倍率・回数が上昇(最大320%×10回)"
+          "text": "残り香20スタック時は倍率が320%に上がる"
         }
       ],
       "flow": [
@@ -35761,7 +35763,8 @@
           "effects": [
             {
               "text": "被回復量減少を付与",
-              "duration": "4ターン"
+              "duration": "4ターン",
+              "note": "被回復量40%減少"
             }
           ]
         },
@@ -35773,14 +35776,15 @@
           "effects": [
             {
               "text": "魔法攻撃",
-              "multiplier": "魔法160%×6回",
+              "multiplier": "魔法160%×10回",
               "damageTotal": "base"
             },
             {
-              "text": "倍率と回数が上がり、最大でこの倍率に変わる",
+              "text": "倍率がこの値に上がる",
               "condition": "残り香が20スタックなら",
               "multiplier": "魔法320%×10回",
-              "damageTotal": "conditionMax"
+              "damageTotal": "conditionMax",
+              "note": "攻撃回数は10回のまま"
             }
           ]
         }
@@ -36018,8 +36022,8 @@
       "category": "火力",
       "majorCategory": "攻撃",
       "subCategory": "神呪解放 / 弱体条件",
-      "target": "ランダム敵に4-5回",
-      "multiplierText": "物理340%×4 / 最大440%×5×1.5",
+      "target": "ランダム敵に5回",
+      "multiplierText": "物理440%×5 / 弱体対象1.5倍",
       "duration": "",
       "ct": 0,
       "condition": "自身が神呪解放を付帯している場合に発動。弱体効果付き対象には1.5倍",
@@ -36029,14 +36033,14 @@
       "imageUrl": "",
       "sourceUrl": "https://ichigogames.net/mementomori/illya_gods_curse/",
       "damage": {
-        "singleMultiplier": 340,
-        "hitCount": 4,
-        "baseTotal": 1360,
-        "exclusiveLv1Total": 1360,
-        "exclusiveLv2Total": 1360,
-        "exclusiveLv3Total": 1360,
+        "singleMultiplier": 440,
+        "hitCount": 5,
+        "baseTotal": 2200,
+        "exclusiveLv1Total": 2200,
+        "exclusiveLv2Total": 2200,
+        "exclusiveLv3Total": 2200,
         "conditionMaxTotal": 3300,
-        "conditionMaxNote": "Lv4の440%×5に弱体条件1.5倍を適用",
+        "conditionMaxNote": "弱体効果が付いた対象には1.5倍。440%×5×1.5=3300（スキルLv最大）",
         "powerType": "状態条件 / CTなし",
         "maxStacks": null,
         "realityRank": "中",
@@ -36049,10 +36053,10 @@
           "text": "自身が神呪解放を付帯している場合に発動"
         },
         {
-          "text": "ランダムな敵に物理340%×4回"
+          "text": "ランダムな敵に物理440%×5回"
         },
         {
-          "text": "弱体効果が付いた対象にはダメージ1.5倍(最大440%×5回)"
+          "text": "弱体効果が付いた対象にはダメージ1.5倍"
         }
       ],
       "flow": [
@@ -36065,13 +36069,12 @@
             {
               "text": "物理攻撃",
               "condition": "自身が神呪解放を付帯している場合に発動",
-              "multiplier": "物理340%×4回",
+              "multiplier": "物理440%×5回",
               "damageTotal": "base"
             },
             {
               "text": "ダメージが1.5倍になる",
-              "condition": "弱体効果が付いた対象には",
-              "note": "倍率と回数は最大で物理440%×5回"
+              "condition": "弱体効果が付いた対象には"
             }
           ]
         }
@@ -36293,25 +36296,25 @@
       "category": "火力",
       "majorCategory": "攻撃",
       "subCategory": "霊痕条件",
-      "target": "ランダム敵2-3体",
-      "multiplierText": "物理720%×2 / 最大1980%×3",
+      "target": "ランダム敵3体",
+      "multiplierText": "物理1320%×3体 / 霊痕時1980%",
       "duration": "",
       "ct": 4,
-      "condition": "自身が霊痕を付帯している場合、攻撃前に倍率上昇",
+      "condition": "自身が霊痕を付帯している場合、倍率が1980%に上がる（対象数は3体のまま）",
       "exclusiveWeapon": "専用武器での直接強化なし",
       "compareMemo": "霊痕条件で高倍率化する範囲攻撃",
       "noteUrl": "",
       "imageUrl": "",
       "sourceUrl": "https://ichigogames.net/mementomori/elaine/",
       "damage": {
-        "singleMultiplier": 720,
-        "hitCount": 2,
-        "baseTotal": 1440,
-        "exclusiveLv1Total": 1440,
-        "exclusiveLv2Total": 1440,
-        "exclusiveLv3Total": 1440,
+        "singleMultiplier": 1320,
+        "hitCount": 3,
+        "baseTotal": 3960,
+        "exclusiveLv1Total": 3960,
+        "exclusiveLv2Total": 3960,
+        "exclusiveLv3Total": 3960,
         "conditionMaxTotal": 5940,
-        "conditionMaxNote": "Lv4かつ霊痕条件で1980%×3",
+        "conditionMaxNote": "霊痕を付帯している場合 1980%×3体=5940（スキルLv最大）",
         "powerType": "状態条件",
         "maxStacks": null,
         "realityRank": "中",
@@ -36321,10 +36324,10 @@
       "plainSummary": "霊痕をまとうと化ける本命アタック。",
       "steps": [
         {
-          "text": "ランダムな敵2体に物理720%"
+          "text": "ランダムな敵3体に物理1320%"
         },
         {
-          "text": "自身が霊痕を付帯していると倍率・回数が上がる(最大1980%×3回)"
+          "text": "自身が霊痕を付帯していると倍率が1980%に上がる"
         }
       ],
       "flow": [
@@ -36332,18 +36335,19 @@
           "when": "攻撃時",
           "mode": "sequence",
           "order": 1,
-          "target": "ランダムな敵2体",
+          "target": "ランダムな敵3体",
           "effects": [
             {
               "text": "物理攻撃",
-              "multiplier": "物理720%",
+              "multiplier": "物理1320%",
               "damageTotal": "base"
             },
             {
-              "text": "倍率と回数が上がり、最大でこの倍率に変わる",
+              "text": "倍率がこの値に上がる",
               "condition": "自身が霊痕を付帯していると",
-              "multiplier": "物理1980%×3回",
-              "damageTotal": "conditionMax"
+              "multiplier": "物理1980%",
+              "damageTotal": "conditionMax",
+              "note": "対象数は3体のまま"
             }
           ]
         }
@@ -36571,25 +36575,25 @@
       "category": "火力",
       "majorCategory": "攻撃",
       "subCategory": "弱体解除数参照",
-      "target": "ランダム敵に2-5回",
-      "multiplierText": "物理480%×2 / 専用Lv3 940%×最大5",
+      "target": "ランダム敵に3-5回",
+      "multiplierText": "物理850%×3 / 解除10以上で5回 / 専用Lv3 940%",
       "duration": "",
       "ct": 4,
-      "condition": "味方側がスキルで解除した弱体効果合計10以上で攻撃回数が増加",
+      "condition": "味方側がスキルで解除した弱体効果の合計が10以上なら攻撃回数が5回になる",
       "exclusiveWeapon": "専用Lv3: 物理攻撃が攻撃力×940%になる",
       "compareMemo": "弱体解除回数を稼ぐと伸びる連撃",
       "noteUrl": "",
       "imageUrl": "",
       "sourceUrl": "https://ichigogames.net/mementomori/primavera_summer/",
       "damage": {
-        "singleMultiplier": 480,
-        "hitCount": 2,
-        "baseTotal": 960,
-        "exclusiveLv1Total": 960,
-        "exclusiveLv2Total": 960,
-        "exclusiveLv3Total": 1880,
-        "conditionMaxTotal": 2400,
-        "conditionMaxNote": "味方側がスキルで解除した弱体効果の合計が10以上で攻撃回数が最大5回。480%×5回=2400（専用武器なし・スキルLv最大）",
+        "singleMultiplier": 850,
+        "hitCount": 3,
+        "baseTotal": 2550,
+        "exclusiveLv1Total": 2550,
+        "exclusiveLv2Total": 2550,
+        "exclusiveLv3Total": 2820,
+        "conditionMaxTotal": 4250,
+        "conditionMaxNote": "味方側がスキルで解除した弱体効果の合計が10以上で5回。850%×5回=4250（専用武器なし・スキルLv最大）",
         "powerType": "解除数参照",
         "maxStacks": null,
         "realityRank": "中",
@@ -36599,10 +36603,10 @@
       "plainSummary": "味方が弱体を解除した数だけ連撃が増える。",
       "steps": [
         {
-          "text": "ランダムな敵に物理480%×2回"
+          "text": "ランダムな敵に物理850%×3回"
         },
         {
-          "text": "味方側がスキルで解除した弱体効果の合計が10以上で攻撃回数が増加(最大5回)"
+          "text": "味方側がスキルで解除した弱体効果の合計が10以上なら攻撃回数が5回になる"
         }
       ],
       "flow": [
@@ -36614,22 +36618,21 @@
           "effects": [
             {
               "text": "物理攻撃",
-              "multiplier": "物理480%×2回",
+              "multiplier": "物理850%×3回",
               "damageTotal": "base",
               "exclusive": [
                 {
                   "lv": 3,
                   "kind": "change",
-                  "multiplier": "物理940%×2回"
+                  "multiplier": "物理940%×3回"
                 }
               ]
             },
             {
-              "text": "攻撃回数が増え、最大でこの倍率に変わる",
+              "text": "攻撃回数が5回になる",
               "condition": "味方側がスキルで解除した弱体効果の合計が10以上なら",
-              "multiplier": "物理480%×5回",
-              "damageTotal": "conditionMax",
-              "note": "最大5回"
+              "multiplier": "物理850%×5回",
+              "damageTotal": "conditionMax"
             }
           ]
         }
@@ -36867,25 +36870,25 @@
       "category": "火力",
       "majorCategory": "攻撃",
       "subCategory": "黄昏の誓い / クリティカル追撃",
-      "target": "ランダム敵に4-10回",
-      "multiplierText": "物理650%×4 / 最大1050%×10",
+      "target": "ランダム敵に6-10回",
+      "multiplierText": "物理1050%×6 / 最大×10",
       "duration": "",
       "ct": 4,
-      "condition": "自身が黄昏の誓いを付帯している場合に発動。Lv4でクリティカルごとに攻撃回数増加",
+      "condition": "自身が黄昏の誓いを付帯している場合に発動。クリティカル1回につき攻撃回数+1（最大10回）",
       "exclusiveWeapon": "専用武器での直接強化なし",
       "compareMemo": "黄昏の誓い後の主火力スキル",
       "noteUrl": "",
       "imageUrl": "",
       "sourceUrl": "https://ichigogames.net/mementomori/florence_twilight/",
       "damage": {
-        "singleMultiplier": 650,
-        "hitCount": 4,
-        "baseTotal": 2600,
-        "exclusiveLv1Total": 2600,
-        "exclusiveLv2Total": 2600,
-        "exclusiveLv3Total": 2600,
+        "singleMultiplier": 1050,
+        "hitCount": 6,
+        "baseTotal": 6300,
+        "exclusiveLv1Total": 6300,
+        "exclusiveLv2Total": 6300,
+        "exclusiveLv3Total": 6300,
         "conditionMaxTotal": 10500,
-        "conditionMaxNote": "Lv4で全段クリティカルした場合1050%×10",
+        "conditionMaxNote": "クリティカルで攻撃回数が最大10回まで増えた場合 1050%×10=10500（スキルLv最大）",
         "powerType": "状態条件 / クリティカル追撃",
         "maxStacks": null,
         "realityRank": "中",
@@ -36898,10 +36901,10 @@
           "text": "自身が黄昏の誓いを付帯している場合に発動"
         },
         {
-          "text": "ランダムな敵に物理650%×4回"
+          "text": "ランダムな敵に物理1050%×6回"
         },
         {
-          "text": "クリティカルごとに攻撃回数が増加(最大1050%×10回)"
+          "text": "クリティカル1回につき攻撃回数+1(最大10回)"
         }
       ],
       "flow": [
@@ -36914,14 +36917,15 @@
             {
               "text": "物理攻撃",
               "condition": "自身が黄昏の誓いを付帯している場合に発動",
-              "multiplier": "物理650%×4回",
+              "multiplier": "物理1050%×6回",
               "damageTotal": "base"
             },
             {
-              "text": "攻撃回数が増え、最大でこの倍率に変わる",
-              "condition": "クリティカルするごとに",
+              "text": "攻撃回数が1回増える",
+              "condition": "クリティカルするたびに",
               "multiplier": "物理1050%×10回",
-              "damageTotal": "conditionMax"
+              "damageTotal": "conditionMax",
+              "note": "最大10回"
             }
           ]
         }
