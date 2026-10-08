@@ -36,6 +36,10 @@
     "スタック": {
       "text": "重ねるたびに効果が大きくなるバフ・弱体効果。重ねられる数には上限があり、解除されるとスタック数は0になる。",
       "guideUrl": "/pages/status/stack.html"
+    },
+    "自傷": {
+      "text": "スキルの効果で自分のHPを自分で減らすダメージ。シールドや多重バリアでは防げない。",
+      "guideUrl": "/pages/status/self-damage.html"
     }
   }
 }

@@ -1,0 +1,380 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>自傷ダメージ｜特殊効果ガイド | ミレストのメメントモリ分析データ室</title>
+  <meta name="description" content="自傷ダメージとは何かを、リリコットとモルガナを例に解説します。現在HP基準と最大HP基準の違い、シールド・多重バリアでは防げないこと、2回自傷は2回分として数えること、自傷するキャラと自傷回数を参照するキャラを整理しています。">
+  <link rel="canonical" href="https://memento.musoudc.com/pages/status/self-damage.html">
+  <!-- OGP。画像は共通のものを使う（ガイドごとの画像生成は未対応） -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="ミレストのメメントモリ分析データ室">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="og:title" content="自傷ダメージ｜特殊効果ガイド | ミレストのメメントモリ分析データ室">
+  <meta property="og:description" content="自傷ダメージとは何かを、リリコットとモルガナを例に解説します。現在HP基準と最大HP基準の違い、シールド・多重バリアでは防げないこと、2回自傷は2回分として数えること、自傷するキャラと自傷回数を参照するキャラを整理しています。">
+  <meta property="og:url" content="https://memento.musoudc.com/pages/status/self-damage.html">
+  <meta property="og:image" content="https://memento.musoudc.com/assets/ogp/ogp-common.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <link rel="icon" type="image/png" href="../../assets/miresto/miresto-icon-32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="../../assets/miresto/miresto-icon-180.png">
+  <link rel="stylesheet" href="../../assets/character-page.css">
+  <link rel="stylesheet" href="../../assets/status-guide.css">
+  <!-- ad:head -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6389066329814944" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="/assets/ad-slot.css">
+  <!-- /ad:head -->
+</head>
+<body data-status-guide="self-damage" data-prerendered>
+  <header class="page-header">
+    <div class="header-inner">
+      <a class="top-link" href="/">トップ</a>
+      <a class="top-link" href="./index.html">状態異常・特殊効果ガイドの一覧へ</a>
+      <p class="eyebrow">STATUS GUIDE</p>
+      <h1>自傷ダメージ｜特殊効果ガイド</h1>
+      <div class="guide-meta">
+        <span class="tag">最終横断確認 2026-10-08</span>
+      </div>
+      <p class="guide-meta-note">この日までに実装済みのキャラを対象に、自傷ダメージを受けるスキルと、自傷ダメージを受けた回数を参照するスキルを確認しています。</p>
+    </div>
+  </header>
+
+  <main>
+    <div class="guide-list">
+      <section class="guide-card" id="oneline" aria-labelledby="oneline-title">
+        <div class="guide-card-head">
+          <h2 id="oneline-title">ひとことで</h2>
+        </div>
+        <div class="guide-card-body">
+          <p><strong>自傷ダメージ</strong>は、スキルの効果で自分のHPを自分で減らすダメージです。</p>
+          <p>一見ただのデメリットですが、紅属性を中心とした一部のキャラは、<strong>自傷ダメージを受けた回数</strong>を攻撃力アップやスタックの条件にしています。</p>
+          <figure class="guide-figure">
+            <picture>
+              <source type="image/webp" srcset="../../assets/status/self-damage-guide-960.webp 960w, ../../assets/status/self-damage-guide.webp 1672w" sizes="(max-width: 960px) 100vw, 960px">
+              <img src="../../assets/status/self-damage-guide.jpg" width="1672" height="941" alt="自傷ダメージとは？1、自分のHPが減る。例：リリコットは現在HP20%の自傷ダメージ。1回分でHPが100%から80%になる。1スキルで2回自傷することもある。2、シールドは残る。シールド・多重バリアは消費せず、HPへ直接入る。3、自傷回数で強化。自傷1回でモルガナのスタックが1増える。モルガナは自傷回数を参照して強くなる。自傷はHPを削るだけでなく、編成を動かす起動スイッチにもなる" decoding="async">
+            </picture>
+          </figure>
+          <div class="guide-callout">
+            <p class="guide-callout-title">まず覚えること</p>
+            <p>自傷は「HPが減るだけ」ではありません。</p>
+            <p><strong>自傷した回数で強くなる味方がいる</strong>ので、編成全体の起動スイッチになることがあります。</p>
+          </div>
+        </div>
+      </section>
+      <section class="guide-card" id="basics" aria-labelledby="basics-title">
+        <div class="guide-card-head">
+          <h2 id="basics-title">自傷ダメージの計算</h2>
+        </div>
+        <div class="guide-card-body">
+          <p>自傷ダメージには、<strong>現在HPを基準にするもの</strong>と<strong>最大HPを基準にするもの</strong>があります。</p>
+          <h3 class="guide-sub">現在HPを基準にする自傷</h3>
+          <p>多くの自傷スキルはこちらです。たとえば<a href="../characters/morgana.html#skill-1">モルガナS1「プラハーン」</a>は、攻撃の前に<strong>現在HP20%</strong>の自傷ダメージを受けます。その時点のHPが基準なので、HPが減っているほど、実際に減るHPの量は小さくなります。</p>
+          <p><a href="../characters/lilicotte.html#skill-1">リリコットS1「誓い結うリボン」</a>のように、1つのスキルで<strong>現在HP20%の自傷を2回</strong>受けるキャラもいます。この場合は「40%を一度に減らす」のではなく、20%の自傷が2回起きます。2回目は1回目のあとに残ったHPが基準です。</p>
+          <h3 class="guide-sub">最大HPを基準にする自傷</h3>
+          <p><a href="../characters/dian.html#skill-2">ディアンS2「カースドバレット」</a>は、自身のHPが40%以上のときに<strong>最大HP35%</strong>の自傷ダメージを受け、消費したHPの分だけ直接攻撃を行います。HPの条件を満たさないときは通常攻撃になります。</p>
+          <p>基準が最大HPなので、HPが減っていても1回に減る量は変わりません。</p>
+        </div>
+      </section>
+      <section class="guide-card" id="shield" aria-labelledby="shield-title">
+        <div class="guide-card-head">
+          <h2 id="shield-title">シールド・多重バリアでは防げない</h2>
+        </div>
+        <div class="guide-card-body">
+          <p>自傷ダメージは、敵から受けるダメージとは扱いが違います。<a href="https://note.com/wazu_019/n/n2c0246d74aed" target="_blank" rel="noopener">ワーズさんの記事</a>で紹介されているゲーム内ヘルプの説明では、自傷ダメージは次の影響を受けません。</p>
+          <ul class="guide-bullets">
+            <li>被ダメージの増減</li>
+            <li>ダメージ無効</li>
+            <li>シールド</li>
+            <li>遮断</li>
+            <li>不死身</li>
+          </ul>
+          <p>多重バリアについても、<a href="https://note.com/wazu_019/n/nff6a39cdfa0e" target="_blank" rel="noopener">ディアン「カースドバレット」の検証</a>で、シールドや多重バリアを持っていても消費せず、直接HPが減ることが確認されています。</p>
+          <div class="guide-callout">
+            <p class="guide-callout-title">シールドが残ったままHPが減る</p>
+            <p>自傷しても、シールドや多重バリアは減りません。</p>
+            <p>そのぶん、敵の攻撃に備えたシールドを自傷で無駄にすることもありません。</p>
+          </div>
+        </div>
+      </section>
+      <section class="guide-card" id="count" aria-labelledby="count-title">
+        <div class="guide-card-head">
+          <h2 id="count-title">2回自傷は2回分として数える</h2>
+        </div>
+        <div class="guide-card-body">
+          <p>自傷ダメージを受けた回数を参照するスキルでは、<strong>何回自傷したか</strong>が大切です。</p>
+          <p><a href="../characters/guinevere.html#skill-1">グィネヴィアS1「ハートフェルト」</a>と<a href="../characters/guinevere.html#skill-2">S2「メルティハグ」</a>は、どちらも現在HP20%の自傷を2回受けます。<a href="../characters/guinevere.html#skill-3">S3「ハートフルラヴァー」</a>のスキル説明には「自傷1回につき1スタック」とあり、2回の自傷は<strong>2回分</strong>として数えられます。</p>
+          <p>そのため、1回だけ自傷するキャラと、1つのスキルで2回自傷するキャラでは、味方のスタックがたまる速さが変わります。</p>
+        </div>
+      </section>
+      <section class="guide-card" id="users" aria-labelledby="users-title">
+        <div class="guide-card-head">
+          <h2 id="users-title">自傷ダメージを受けるキャラ</h2>
+        </div>
+        <div class="guide-card-body">
+          <p>現行キャラの中で、自分に自傷ダメージを与えるスキルは次のとおりです。</p>
+          <div class="guide-table-wrap">
+            <table class="guide-table guide-table--wrap">
+              <thead>
+                <tr>
+                  <th scope="col">キャラ／スキル</th>
+                  <th scope="col">タイミング</th>
+                  <th scope="col">自傷量</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row"><a href="../characters/dian.html#skill-2">ディアン S2 カースドバレット</a></th>
+                  <td data-label="タイミング">攻撃前（自身のHPが40%以上のとき）</td>
+                  <td data-label="自傷量">最大HP35%</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/morgana.html#skill-1">モルガナ S1 プラハーン</a></th>
+                  <td data-label="タイミング">攻撃前</td>
+                  <td data-label="自傷量">現在HP20%</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/morgana.html#skill-2">モルガナ S2 ボーヤルグ</a></th>
+                  <td data-label="タイミング">攻撃前</td>
+                  <td data-label="自傷量">現在HP20%</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/artoria.html#skill-1">アルトリア S1 コールブランド</a></th>
+                  <td data-label="タイミング">攻撃前</td>
+                  <td data-label="自傷量">現在HP20%</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/artoria.html#skill-2">アルトリア S2 キャリバーン</a></th>
+                  <td data-label="タイミング">攻撃前</td>
+                  <td data-label="自傷量">現在HP20%</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/shizu_snow.html#skill-1">[雪花の誓い]シズ S1 一閃・白羽衣</a></th>
+                  <td data-label="タイミング">攻撃前</td>
+                  <td data-label="自傷量">現在HP20%</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/shizu_snow.html#skill-2">[雪花の誓い]シズ S2 玉水割り</a></th>
+                  <td data-label="タイミング">攻撃前</td>
+                  <td data-label="自傷量">現在HP20%</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/lucile.html#skill-1">ルシール S1 レス・ノワエ</a></th>
+                  <td data-label="タイミング">攻撃前</td>
+                  <td data-label="自傷量">現在HP20%</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/lucile.html#skill-2">ルシール S2 革命の彩剣</a></th>
+                  <td data-label="タイミング">攻撃前</td>
+                  <td data-label="自傷量">現在HP20%</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/flack.html#skill-1">フラック S1 トリック＆シュート</a></th>
+                  <td data-label="タイミング">攻撃前</td>
+                  <td data-label="自傷量">現在HP20%</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/flack.html#skill-2">フラック S2 コンフェティショット</a></th>
+                  <td data-label="タイミング">攻撃前</td>
+                  <td data-label="自傷量">現在HP20%</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/liebe.html#skill-1">リーベ S1 シーリングスタンプ</a></th>
+                  <td data-label="タイミング">攻撃前</td>
+                  <td data-label="自傷量">現在HP20%</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/liebe.html#skill-2">リーベ S2 ペニーブラック</a></th>
+                  <td data-label="タイミング">攻撃前</td>
+                  <td data-label="自傷量">現在HP20%</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/aishe.html#skill-1">アイシェ S1 英知の標</a></th>
+                  <td data-label="タイミング">攻撃前</td>
+                  <td data-label="自傷量">現在HP10%</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/aishe.html#skill-2">アイシェ S2 知識の輪</a></th>
+                  <td data-label="タイミング">攻撃前</td>
+                  <td data-label="自傷量">現在HP20%</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/lilicotte.html#skill-1">リリコット S1 誓い結うリボン</a></th>
+                  <td data-label="タイミング">攻撃前</td>
+                  <td data-label="自傷量">現在HP20%を2回</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/lilicotte.html#skill-2">リリコット S2 願い託す花傘</a></th>
+                  <td data-label="タイミング">攻撃前</td>
+                  <td data-label="自傷量">現在HP20%を2回</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/guinevere.html#skill-1">グィネヴィア S1 ハートフェルト</a></th>
+                  <td data-label="タイミング">攻撃前</td>
+                  <td data-label="自傷量">現在HP20%を2回</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/guinevere.html#skill-2">グィネヴィア S2 メルティハグ</a></th>
+                  <td data-label="タイミング">攻撃前</td>
+                  <td data-label="自傷量">現在HP20%を2回</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/claudia.html#skill-3">クラウディア S3 決死の覚悟</a></th>
+                  <td data-label="タイミング">毎ターンの行動開始時（「決死」中）</td>
+                  <td data-label="自傷量">現在HP20%（攻撃力100%分が上限）</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p>ほかにペトラも自傷ダメージを受けるスキルを持っています。ペトラのキャラページは準備中です。</p>
+        </div>
+      </section>
+      <section class="guide-card" id="referrers" aria-labelledby="referrers-title">
+        <div class="guide-card-head">
+          <h2 id="referrers-title">自傷した回数で強くなるキャラ</h2>
+        </div>
+        <div class="guide-card-body">
+          <p>次のスキルは、<strong>自身か味方が自傷ダメージを受けるたび</strong>に効果が進みます。自分の自傷だけでなく、味方の自傷も数えます。</p>
+          <div class="guide-table-wrap">
+            <table class="guide-table guide-table--wrap">
+              <thead>
+                <tr>
+                  <th scope="col">キャラ／スキル</th>
+                  <th scope="col">対象</th>
+                  <th scope="col">自傷1回ごとに</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row"><a href="../characters/morgana.html#skill-3">モルガナ S3 奮起する心</a></th>
+                  <td data-label="対象">自身</td>
+                  <td data-label="自傷1回ごとに">攻撃力+10%を1スタック（最大4スタック・解除不可）</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/artoria.html#skill-3">アルトリア S3 奮い立つ正義</a></th>
+                  <td data-label="対象">自身</td>
+                  <td data-label="自傷1回ごとに">攻撃力+10%を1スタック（最大4スタック・解除不可）</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/liebe.html#skill-4">リーベ S4 郵便配達員の誓い</a></th>
+                  <td data-label="対象">味方全体</td>
+                  <td data-label="自傷1回ごとに">攻撃力+5%を1スタック（最大5スタック・解除不可）</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/aishe.html#skill-3">アイシェ S3 理の解読者</a></th>
+                  <td data-label="対象">自身</td>
+                  <td data-label="自傷1回ごとに">解析を1スタック（最大6スタック・解除不可）</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/guinevere.html#skill-3">グィネヴィア S3 ハートフルラヴァー</a></th>
+                  <td data-label="対象">自身と自身以外の攻撃力が高い味方2体</td>
+                  <td data-label="自傷1回ごとに">攻撃力6%増加を1スタック（最大8スタック・解除不可）</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/lucile.html#skill-4">ルシール S4 置き去りの愛</a></th>
+                  <td data-label="対象">ランダムな敵5体</td>
+                  <td data-label="自傷1回ごとに">彩光を1スタック（2ターン・1スタックにつき被ダメージ+2%・最大5スタック）</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p>図解のように、<a href="../characters/lilicotte.html#skill-1">リリコット</a>が1回自傷すると、<a href="../characters/morgana.html#skill-3">モルガナS3「奮起する心」</a>のスタックが1つ進みます。リリコットは1つのスキルで2回自傷するので、1回のスキルで2スタック進みます。</p>
+        </div>
+      </section>
+      <section class="guide-card" id="party" aria-labelledby="party-title">
+        <div class="guide-card-head">
+          <h2 id="party-title">自傷編成では「回数」と「上限」を見る</h2>
+        </div>
+        <div class="guide-card-body">
+          <p>自傷編成では、HPをどれだけ減らしたかより、<strong>誰が何回自傷するか</strong>で強さの立ち上がりが変わります。</p>
+          <ul class="guide-bullets">
+            <li>1回だけ自傷するスキル：スタックが1つずつ進む</li>
+            <li>2回自傷するスキル：1回のスキルでスタックが2つ進む</li>
+            <li>自傷回数を参照するスキルは、それぞれ最大スタック数が決まっている</li>
+          </ul>
+          <p>スタックが最大まで貯まったあとは、追加の自傷は強化につながらず、HPだけが減ります。<a href="https://note.com/wazu_019/n/nb449d1930798" target="_blank" rel="noopener">ワーズさんのリリコット解説</a>でも、自傷するキャラを多く並べると早い段階で上限に届き、そのあとはHPが減る面が大きくなる点に触れています。</p>
+          <p>自傷は多ければ多いほど得、という仕組みではありません。</p>
+        </div>
+      </section>
+      <section class="guide-card" id="claudia" aria-labelledby="claudia-title">
+        <div class="guide-card-head">
+          <h2 id="claudia-title">クラウディアの「決死」は少し特殊</h2>
+        </div>
+        <div class="guide-card-body">
+          <p><a href="../characters/claudia.html#skill-3">クラウディアS3「決死の覚悟」</a>は、バトル開始時に「決死」を40ターン付与します。「決死」は次の効果をまとめた1つのバフです。</p>
+          <ul class="guide-bullets">
+            <li>攻撃力+80%</li>
+            <li>毎ターンの行動開始時に、現在HP20%の自傷ダメージ</li>
+            <li>自傷ダメージは攻撃力100%分が上限</li>
+          </ul>
+          <p><a href="https://note.com/wazu_019/n/n0324b38345db" target="_blank" rel="noopener">ワーズさんの2025/9/16修正の解説</a>によると、「決死」の自傷は以前シールドや多重バリアを消費していましたが、修正後はほかの自傷ダメージと同じく、シールドや多重バリアの影響を受けなくなりました。自傷量は、現在HP20%と攻撃力100%のうち低いほうです。</p>
+        </div>
+      </section>
+      <section class="guide-card" id="unknown" aria-labelledby="unknown-title">
+        <div class="guide-card-head">
+          <h2 id="unknown-title">まだ確認できていない点</h2>
+        </div>
+        <div class="guide-card-body">
+          <p><a href="../characters/aishe.html#skill-1">アイシェS1「英知の標」</a>は、解析が3スタック以上なら、このスキルを1回まで再発動します。再発動のときに最初の自傷ダメージも受け直して、<strong>自傷回数がもう1回増えるかどうか</strong>は、スキル説明だけでは分かりません。このページでは確認できるまで断定しません。</p>
+        </div>
+      </section>
+      <section class="guide-card" id="summary" aria-labelledby="summary-title">
+        <div class="guide-card-head">
+          <h2 id="summary-title">まとめ</h2>
+        </div>
+        <div class="guide-card-body">
+          <ul class="guide-bullets">
+            <li>自傷ダメージは、自分のHPを自分で減らすダメージ</li>
+            <li>現在HP基準と最大HP基準がある</li>
+            <li>シールド・多重バリアでは防げず、HPへ直接入る</li>
+            <li>2回自傷は2回分として数える</li>
+            <li>自身か味方の自傷回数で強くなるキャラがいる</li>
+          </ul>
+          <p>自傷編成を見るときは、<strong>誰が何回自傷し、誰がその回数で強くなるか</strong>まで見ると、編成の仕組みが分かりやすくなります。</p>
+        </div>
+      </section>
+      <section class="guide-card" id="sources" aria-labelledby="sources-title">
+        <div class="guide-card-head">
+          <h2 id="sources-title">出典</h2>
+        </div>
+        <div class="guide-card-body">
+          <p class="guide-source">出典：ゲーム内スキル説明</p>
+          <p class="guide-source">各キャラの自傷量・発動条件と、自傷ダメージを受けた回数を参照する効果は、ゲーム内スキル説明を基準にしています。自傷ダメージが何の影響を受けないかは、ゲーム内ヘルプの記載を紹介しているワーズさんの記事と、ワーズさんの検証を参考にしています。</p>
+          <p class="guide-source">検証参考：ワーズさんが公開されている検証結果を参考にさせていただきました。</p>
+          <ul class="guide-bullets guide-source">
+            <li><a href="https://note.com/wazu_019/n/n2c0246d74aed" target="_blank" rel="noopener">ワーズさん「2025/9/16修正の解説1」</a><span class="guide-link-text">自傷ダメージの基本の扱い（ゲーム内ヘルプの紹介）と、クラウディア「決死」の修正</span></li>
+            <li><a href="https://note.com/wazu_019/n/n0324b38345db" target="_blank" rel="noopener">ワーズさん「2025/9/16修正の解説2」</a><span class="guide-link-text">クラウディア「決死」の自傷量（現在HP20%と攻撃力100%の低い方）と修正後の挙動</span></li>
+            <li><a href="https://note.com/wazu_019/n/nff6a39cdfa0e" target="_blank" rel="noopener">ワーズさん「スキルの解説 ディアン「カースドバレット」」</a><span class="guide-link-text">最大HP基準の自傷と、シールド・多重バリアを消費せずHPが減る挙動</span></li>
+            <li><a href="https://note.com/wazu_019/n/nb449d1930798" target="_blank" rel="noopener">ワーズさん「キャラ性能解説 リリコット」</a><span class="guide-link-text">自傷を重ねる編成で、スタックが上限に届いたあとはHP減少だけが残る点</span></li>
+          </ul>
+        </div>
+      </section>
+    </div>
+    <!-- ad:bottom -->
+    <aside class="ad-slot" aria-label="広告">
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-6389066329814944"
+           data-ad-slot="6111654373"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </aside>
+    <!-- /ad:bottom -->
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <span>ミレストのメメントモリ分析データ室 / 非公式ファンサイト</span>
+      <nav class="footer-links" aria-label="サイト内のページ">
+        <a href="/">トップ</a>
+        <a href="../characters/index.html">キャラ一覧</a>
+        <a href="/pages/guide/">このサイトでできること</a>
+        <a href="/privacy.html">プライバシーポリシー</a>
+        <a href="/disclaimer.html">免責事項</a>
+        <a href="/about.html">このサイトについて</a>
+        <a href="/contact.html">お問い合わせ</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>
