@@ -64,23 +64,23 @@
             {
               "webp": "assets/status/self-damage-guide-m1.webp",
               "src": "assets/status/self-damage-guide-m1.jpg",
-              "width": 608,
-              "height": 682,
-              "alt": "1、自分のHPが減る。例：リリコットは現在HP20%の自傷ダメージ。1回分でHPが100%から80%になる。1スキルで2回自傷することもある"
+              "width": 1122,
+              "height": 1402,
+              "alt": "自傷ダメージの基礎知識1/3。自分のHPが減る。例：リリコットは現在HP20%の自傷ダメージ。自傷1回分でHPが100%から80%になる（20%減少）。1スキルで2回自傷することもある。自傷ダメージは、自分のHPを減らす効果"
             },
             {
               "webp": "assets/status/self-damage-guide-m2.webp",
               "src": "assets/status/self-damage-guide-m2.jpg",
-              "width": 453,
-              "height": 646,
-              "alt": "2、シールドは残る。シールド・多重バリアは消費せず、HPへ直接入る"
+              "width": 1122,
+              "height": 1402,
+              "alt": "自傷ダメージの基礎知識2/3。シールドは残る。シールド・多重バリアは消費しない。自傷ダメージはHPへ直接入る。自傷では、シールドは減らずHPだけが減る"
             },
             {
               "webp": "assets/status/self-damage-guide-m3.webp",
               "src": "assets/status/self-damage-guide-m3.jpg",
-              "width": 600,
-              "height": 682,
-              "alt": "3、自傷回数で強化。自傷1回でモルガナのスタックが1増える。モルガナは自傷回数を参照して強くなる"
+              "width": 1122,
+              "height": 1402,
+              "alt": "自傷ダメージの基礎知識3/3。自傷回数で強化。モルガナは、自傷1回でスタックが1増える。モルガナは自傷回数を参照して強くなる。自傷は、編成を動かす起動スイッチにもなる"
             }
           ]
         },
