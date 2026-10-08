@@ -59,7 +59,30 @@
           "src": "assets/status/self-damage-guide.jpg",
           "width": 1672,
           "height": 941,
-          "alt": "自傷ダメージとは？1、自分のHPが減る。例：リリコットは現在HP20%の自傷ダメージ。1回分でHPが100%から80%になる。1スキルで2回自傷することもある。2、シールドは残る。シールド・多重バリアは消費せず、HPへ直接入る。3、自傷回数で強化。自傷1回でモルガナのスタックが1増える。モルガナは自傷回数を参照して強くなる。自傷はHPを削るだけでなく、編成を動かす起動スイッチにもなる"
+          "alt": "自傷ダメージとは？1、自分のHPが減る。例：リリコットは現在HP20%の自傷ダメージ。1回分でHPが100%から80%になる。1スキルで2回自傷することもある。2、シールドは残る。シールド・多重バリアは消費せず、HPへ直接入る。3、自傷回数で強化。自傷1回でモルガナのスタックが1増える。モルガナは自傷回数を参照して強くなる。自傷はHPを削るだけでなく、編成を動かす起動スイッチにもなる",
+          "mobile": [
+            {
+              "webp": "assets/status/self-damage-guide-m1.webp",
+              "src": "assets/status/self-damage-guide-m1.jpg",
+              "width": 608,
+              "height": 682,
+              "alt": "1、自分のHPが減る。例：リリコットは現在HP20%の自傷ダメージ。1回分でHPが100%から80%になる。1スキルで2回自傷することもある"
+            },
+            {
+              "webp": "assets/status/self-damage-guide-m2.webp",
+              "src": "assets/status/self-damage-guide-m2.jpg",
+              "width": 453,
+              "height": 646,
+              "alt": "2、シールドは残る。シールド・多重バリアは消費せず、HPへ直接入る"
+            },
+            {
+              "webp": "assets/status/self-damage-guide-m3.webp",
+              "src": "assets/status/self-damage-guide-m3.jpg",
+              "width": 600,
+              "height": 682,
+              "alt": "3、自傷回数で強化。自傷1回でモルガナのスタックが1増える。モルガナは自傷回数を参照して強くなる"
+            }
+          ]
         },
         {
           "type": "callout",

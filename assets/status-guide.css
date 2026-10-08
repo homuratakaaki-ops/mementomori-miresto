@@ -342,6 +342,9 @@
   border-radius: 8px;
 }
 
+/* 図解の縦並び版（狭い画面専用）。広い画面では出さない。 */
+.guide-figure-mobile { display: none; }
+
 /* 操作列は本文より目立たせない。狭い画面ではドットが次の行へ回る。 */
 .guide-slides-controls {
   display: flex;
@@ -471,6 +474,33 @@
 
   .guide-slide img,
   .guide-figure img { border-radius: 0; }
+
+  /* 縦並び版がある図解は、狭い画面では横長の1枚と入れ替える。
+     各図は左右いっぱい・図と図の間は少しあける。 */
+  .guide-figure.has-mobile { display: none; }
+
+  .guide-figure-mobile {
+    display: block;
+    margin-left: -16px;
+    margin-right: -16px;
+  }
+
+  .guide-figure-panel { margin: 0 0 8px; }
+
+  .guide-figure-panel a { display: block; }
+
+  .guide-figure-panel img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .guide-figure-note {
+    margin: 0 16px;
+    color: var(--muted);
+    font-size: .8rem;
+    text-align: center;
+  }
 }
 
 

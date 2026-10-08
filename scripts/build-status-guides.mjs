@@ -925,19 +925,43 @@ function articleSlides(block) {
 /**
  * 静止画1枚の図解（スライドにしない回）。見た目の幅・狭い画面での広げ方はスライドと同じ。
  * 本文の先頭近くに置く前提なので遅延読み込みはしない（スライド1枚目と同じ扱い）。
+ *
+ * mobile（任意）：狭い画面（560px以下）でだけ出す縦並び版。横長の1枚を分割した画像を
+ * 上から順に並べ、それぞれタップで原寸画像を開ける。1枚ずつ別ファイルなので、
+ * どれか1枚だけ差し替えられる。mobile がある回は、横長版と縦並び版の両方を
+ * loading="lazy" にする（CSSで隠した側は読み込まれない）。
  */
 function articleFigure(block) {
-  return [
-    ARTICLE_BLOCK_PAD + '<figure class="guide-figure">',
+  const panels = Array.isArray(block.mobile) ? block.mobile : [];
+  const lazy = panels.length ? ' loading="lazy"' : "";
+  const lines = [
+    ARTICLE_BLOCK_PAD + '<figure class="guide-figure' + (panels.length ? " has-mobile" : "") + '">',
     ARTICLE_BLOCK_PAD + "  <picture>",
     ARTICLE_BLOCK_PAD + '    <source type="image/webp" srcset="../../' + escapeHtml(block.webpSmall)
       + " 960w, ../../" + escapeHtml(block.webp) + " " + escapeHtml(block.width)
       + 'w" sizes="(max-width: 960px) 100vw, 960px">',
     ARTICLE_BLOCK_PAD + '    <img src="../../' + escapeHtml(block.src) + '" width="' + escapeHtml(block.width)
-      + '" height="' + escapeHtml(block.height) + '" alt="' + escapeHtml(block.alt) + '" decoding="async">',
+      + '" height="' + escapeHtml(block.height) + '" alt="' + escapeHtml(block.alt) + '"' + lazy + ' decoding="async">',
     ARTICLE_BLOCK_PAD + "  </picture>",
     ARTICLE_BLOCK_PAD + "</figure>"
-  ].join("\n");
+  ];
+  if (!panels.length) return lines.join("\n");
+  lines.push(ARTICLE_BLOCK_PAD + '<div class="guide-figure-mobile">');
+  panels.forEach((panel, index) => {
+    lines.push(ARTICLE_BLOCK_PAD + '  <figure class="guide-figure-panel">');
+    lines.push(ARTICLE_BLOCK_PAD + '    <a href="../../' + escapeHtml(panel.src) + '" aria-label="図' + (index + 1)
+      + "を拡大して開く（" + panels.length + "枚中" + (index + 1) + '枚目）">');
+    lines.push(ARTICLE_BLOCK_PAD + "      <picture>");
+    lines.push(ARTICLE_BLOCK_PAD + '        <source type="image/webp" srcset="../../' + escapeHtml(panel.webp) + '">');
+    lines.push(ARTICLE_BLOCK_PAD + '        <img src="../../' + escapeHtml(panel.src) + '" width="' + escapeHtml(panel.width)
+      + '" height="' + escapeHtml(panel.height) + '" alt="' + escapeHtml(panel.alt) + '" loading="lazy" decoding="async">');
+    lines.push(ARTICLE_BLOCK_PAD + "      </picture>");
+    lines.push(ARTICLE_BLOCK_PAD + "    </a>");
+    lines.push(ARTICLE_BLOCK_PAD + "  </figure>");
+  });
+  lines.push(ARTICLE_BLOCK_PAD + '  <p class="guide-figure-note">図をタップすると拡大して開きます。</p>');
+  lines.push(ARTICLE_BLOCK_PAD + "</div>");
+  return lines.join("\n");
 }
 
 function articleBlock(block, ctx) {
@@ -1170,6 +1194,28 @@ function validateArticleSlides(guide, errors) {
           }
         }
         if (!block.alt) errors.push(label + " の alt が無い");
+        if (block.mobile !== undefined) {
+          if (!Array.isArray(block.mobile) || block.mobile.length < 2) {
+            errors.push(label + " の mobile は2枚以上の配列で書くこと");
+          } else {
+            block.mobile.forEach((panel, index) => {
+              const panelLabel = label + " の mobile " + (index + 1) + "枚目";
+              checked += 1;
+              for (const key of ["webp", "src"]) {
+                if (!panel[key]) { errors.push(panelLabel + " の " + key + " が無い"); continue; }
+                if (!existsSync(join(ROOT, panel[key]))) {
+                  errors.push(panelLabel + " の " + key + " が見つからない（" + panel[key] + "）");
+                }
+              }
+              for (const key of ["width", "height"]) {
+                if (!Number.isInteger(panel[key]) || panel[key] <= 0) {
+                  errors.push(panelLabel + " の " + key + " は原寸（正の整数）で書くこと");
+                }
+              }
+              if (!panel.alt) errors.push(panelLabel + " の alt が無い");
+            });
+          }
+        }
         continue;
       }
       if (block.type !== "slides") continue;
