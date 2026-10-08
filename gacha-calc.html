@@ -311,7 +311,7 @@
       <div class="extra-copies-row">
         <span class="extra-copies-label">余り同名カード（枚）</span>
         <button class="btn-num" onclick="changeExtra(-1)">−</button>
-        <input type="number" id="extraInput" value="0" min="0" style="flex:1;min-width:0" oninput="onExtraInput(this.value)">
+        <input type="number" id="extraInput" value="0" min="0" style="flex:1;min-width:0" oninput="onExtraInput(this.value)" onchange="commitExtra(this)">
         <button class="btn-num" onclick="changeExtra(1)">＋</button>
       </div>
       <div id="ownedSummary" style="font-size:11px;color:var(--text-dim);margin-top:6px;text-align:right"></div>
@@ -370,8 +370,8 @@
   </nav>
 
   <div class="footer-note">
-    ※ 期待値は通常確率による概算です<br>
-    ※ 運命・星の導きは57回目以降に確率が段階上昇します（暫定モデル）<br>
+    ※ 平均は通常確率と天井（ピックアップ100回・運命／星の導き70回）で計算しています<br>
+    ※ 運命・星の導きの57回目以降の確率上昇は計算に入れていません（70回の天井は反映）<br>
     ※ 通常4属性はSSR・UR進化時に同属性別キャラを素材に使用可能
   </div>
 
@@ -415,13 +415,18 @@ const RARITY_LABELS = { SR:'SR', SRp:'SR+', SSR:'SSR', SSRp:'SSR+', UR:'UR', URp
 const GACHA_NAMES   = { pickup:'ピックアップ', destiny:'運命', star:'星の導き' };
 
 // ===== 状態 =====
+// 天井カウントはガチャごと・属性グループごと（通常4属性／天・冥）に別々に持つ。
+// チケットはガチャごと、所持ダイヤは全ガチャで1つ。単独と併用は同じ値を見る。
 let state = {
   attr:'normal4', currentRarity:'none', extraCopies:0, target:'LR',
   mode:'pickup',          // 'pickup'|'destiny'|'star'|'both'
-  pity:0, diamond:0, ticket:0,          // 単独用
-  pityPickup:0, ticketPickup:0,         // 併用用
-  pityDestiny:0, ticketDestiny:0,
-  diamondCombined:0,
+  pity: {
+    pickup:  { normal4:0, lightDark:0 },
+    destiny: { normal4:0, lightDark:0 },
+    star:    { normal4:0, lightDark:0 },
+  },
+  ticket: { pickup:0, destiny:0, star:0 },
+  diamond: 0,
 };
 
 // ===== ヘルパー =====
@@ -432,10 +437,22 @@ function getOwned() {
 function getRemaining() { return Math.max(0, COPIES[state.attr][state.target] - getOwned()); }
 function soloKey() { return state.mode === 'both' ? 'pickup' : state.mode; }
 
+// 入力値を0以上の整数にする（空欄・負数・数値でないものは0。小数は切り捨て。1e3 は1000）
+function toNonNegInt(v) {
+  const s = String(v == null ? '' : v).trim();
+  if (s === '') return 0;
+  const n = Number(s);
+  if (!Number.isFinite(n) || n < 0) return 0;
+  return Math.floor(n);
+}
+function pityMax(gKey) { return GACHA[gKey][state.attr].pity - 1; }
+function getPity(gKey) { return Math.min(pityMax(gKey), state.pity[gKey][state.attr]); }
+function setPity(gKey, v) { state.pity[gKey][state.attr] = Math.max(0, Math.min(pityMax(gKey), toNonNegInt(v))); }
+function setFieldValue(id, v) { const el = document.getElementById(id); if (el) el.value = v; }
+
 // ===== STEP1 操作 =====
 function setAttr(val, btn) {
   state.attr = val;
-  clampAllPity();
   document.querySelectorAll('.btn-toggle').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
   updateOwnedSummary(); render();
@@ -458,13 +475,14 @@ function setCurrentRarity(val, btn) {
 }
 function changeExtra(d) {
   state.extraCopies = Math.max(0, state.extraCopies + d);
-  document.getElementById('extraInput').value = state.extraCopies;
+  setFieldValue('extraInput', state.extraCopies);
   updateOwnedSummary(); render();
 }
 function onExtraInput(v) {
-  state.extraCopies = Math.max(0, parseInt(v,10) || 0);
+  state.extraCopies = toNonNegInt(v);
   updateOwnedSummary(); render();
 }
+function commitExtra(el) { state.extraCopies = toNonNegInt(el.value); el.value = state.extraCopies; updateOwnedSummary(); render(); }
 function updateOwnedSummary() {
   const el = document.getElementById('ownedSummary');
   if (!el) return;
@@ -478,7 +496,6 @@ function updateOwnedSummary() {
 // ===== STEP2 ガチャ選択 =====
 function setMode(mode) {
   state.mode = mode;
-  clampAllPity();
   ['pickup','destiny','star','both'].forEach(m => {
     const el = document.getElementById('mode-' + m);
     if (el) el.classList.toggle('active', m === mode);
@@ -486,103 +503,103 @@ function setMode(mode) {
   render();
 }
 
-// ===== 単独 入力ハンドラ =====
-function clampPityFor(gKey, value) {
-  const max = GACHA[gKey][state.attr].pity - 1;
-  return Math.max(0, Math.min(max, parseInt(value, 10) || 0));
-}
-function clampAllPity() {
-  state.pity = clampPityFor(soloKey(), state.pity);
-  state.pityPickup = clampPityFor('pickup', state.pityPickup);
-  state.pityDestiny = clampPityFor('destiny', state.pityDestiny);
-}
-function changePity(d) {
-  state.pity = clampPityFor(soloKey(), state.pity + d);
-  const el = document.getElementById('pityInput'); if (el) el.value = state.pity;
-  renderResult();
-}
-function onPityInput(v) {
-  const raw = parseInt(v, 10);
-  state.pity = clampPityFor(soloKey(), v);
-  const max = GACHA[soloKey()][state.attr].pity - 1;
-  const el = document.getElementById('pityInput');
-  if (el && !Number.isNaN(raw) && (raw > max || raw < 0)) el.value = state.pity;
-  renderResult();
-}
-function changeTicket(d)  { state.ticket  = Math.max(0, state.ticket  + d); const el=document.getElementById('ticketInput');  if(el)el.value=state.ticket;  renderResult(); }
-function onTicketInput(v) { state.ticket  = Math.max(0, parseInt(v,10)||0); renderResult(); }
-function changeDiamond(d) { state.diamond = Math.max(0, state.diamond + d); const el=document.getElementById('diamondInput'); if(el)el.value=state.diamond; renderResult(); }
-function onDiamondInput(v){ state.diamond = Math.max(0, parseInt(v,10)||0); renderResult(); }
-
-// ===== 併用 入力ハンドラ =====
-function changeCmbPity(w,d) {
-  const sk = w==='pickup'?'pityPickup':'pityDestiny';
-  state[sk] = clampPityFor(w, state[sk] + d);
-  const el = document.getElementById('cmbPity_'+w); if(el) el.value=state[sk];
-  renderResult();
-}
-function onCmbPityInput(w,v) {
-  const raw = parseInt(v, 10);
-  const sk = w==='pickup'?'pityPickup':'pityDestiny';
-  state[sk] = clampPityFor(w, v);
-  const max = GACHA[w][state.attr].pity - 1;
-  const el = document.getElementById('cmbPity_'+w);
-  if (el && !Number.isNaN(raw) && (raw > max || raw < 0)) el.value = state[sk];
-  renderResult();
-}
-function changeCmbTicket(w,d)  { const sk=w==='pickup'?'ticketPickup':'ticketDestiny'; state[sk]=Math.max(0,state[sk]+d); const el=document.getElementById('cmbTicket_'+w);if(el)el.value=state[sk]; renderResult(); }
-function onCmbTicketInput(w,v) { state[w==='pickup'?'ticketPickup':'ticketDestiny'] = Math.max(0,parseInt(v,10)||0); renderResult(); }
-function changeCmbDiamond(d)   { state.diamondCombined=Math.max(0,state.diamondCombined+d); const el=document.getElementById('cmbDiamond');if(el)el.value=state.diamondCombined; renderResult(); }
-function onCmbDiamondInput(v)  { state.diamondCombined=Math.max(0,parseInt(v,10)||0); renderResult(); }
+// ===== STEP3 入力ハンドラ（単独・併用共通） =====
+// 入力中（input）は計算だけ更新し、欄の文字は書き換えない。入力が終わったとき（change）に欄を正す。
+function changePity(gKey, d) { setPity(gKey, getPity(gKey) + d); setFieldValue('pityInput_' + gKey, getPity(gKey)); renderResult(); }
+function onPityInput(gKey, v) { setPity(gKey, v); renderResult(); }
+function commitPity(gKey, el) { setPity(gKey, el.value); el.value = getPity(gKey); renderResult(); }
+function changeTicket(gKey, d) { state.ticket[gKey] = Math.max(0, state.ticket[gKey] + d); setFieldValue('ticketInput_' + gKey, state.ticket[gKey]); renderResult(); }
+function onTicketInput(gKey, v) { state.ticket[gKey] = toNonNegInt(v); renderResult(); }
+function commitTicket(gKey, el) { state.ticket[gKey] = toNonNegInt(el.value); el.value = state.ticket[gKey]; renderResult(); }
+function changeDiamond(d) { state.diamond = Math.max(0, state.diamond + d); setFieldValue('diamondInput', state.diamond); renderResult(); }
+function onDiamondInput(v) { state.diamond = toNonNegInt(v); renderResult(); }
+function commitDiamond(el) { state.diamond = toNonNegInt(el.value); el.value = state.diamond; renderResult(); }
 
 // ===== 計算ロジック =====
-function calcSolo(gKey, remaining, pity, diamond, ticket) {
-  const g = GACHA[gKey][state.attr];
-  pity = Math.max(0, Math.min(g.pity - 1, parseInt(pity, 10) || 0));
-  const expRolls  = Math.ceil(remaining / g.rate);
-  const remPity   = g.pity - pity;
-  const maxRolls  = remPity + Math.max(0, remaining-1) * g.pity;
-  const expDia    = expRolls * g.cost;
-  const maxDia    = maxRolls * g.cost;
-  const eff       = diamond + ticket * g.cost;
-  return { g, expRolls, maxRolls, expDia, maxDia, remPity,
-    sfExp:  Math.max(0, expDia - eff),
-    sfCeil: Math.max(0, maxDia - eff) };
+// 1枚ごとの「何回目で出るか」：1回ごとの確率 rate、天井 pity 回目で必ず出る、出たらカウントは0に戻る。
+// 運命・星の導きの57回目以降の確率上昇は数値が未確認のため入れていない（70回の天井は反映）。
+function copyDist(rate, pity, start) {
+  const len = pity - start;              // この1枚は最大 len 回で出る
+  const d = new Float64Array(len + 1);
+  let miss = 1;
+  for (let k = 1; k < len; k++) { d[k] = miss * rate; miss *= (1 - rate); }
+  d[len] = miss;
+  return d;
+}
+function convolve(a, b) {
+  const out = new Float64Array(a.length + b.length - 1);
+  for (let i = 0; i < a.length; i++) {
+    const ai = a[i]; if (ai === 0) continue;
+    for (let j = 0; j < b.length; j++) out[i + j] += ai * b[j];
+  }
+  return out;
+}
+// 合計回数 R の分布を、1枚目〜needed枚目まで順に作って返す（dists[n] = n枚そろうまでの回数の分布）
+const distCache = new Map();
+function rollDists(gConf, pityNow, needed) {
+  const key = `${gConf.rate}|${gConf.pity}|${pityNow}|${needed}`;
+  if (distCache.has(key)) return distCache.get(key);
+  const first = copyDist(gConf.rate, gConf.pity, pityNow);
+  const fresh = copyDist(gConf.rate, gConf.pity, 0);
+  const dists = [Float64Array.of(1)];
+  let cur = first;
+  for (let n = 1; n <= needed; n++) {
+    dists.push(cur);
+    if (n < needed) cur = convolve(cur, fresh);
+  }
+  if (distCache.size > 200) distCache.clear();
+  distCache.set(key, dists);
+  return dists;
+}
+// 平均：回数の平均、チケットを使い切ったあとに払う回数の平均、使うチケットの平均
+function expCost(needed, pityNow, tickets, gConf) {
+  if (needed <= 0) return { rolls:0, paidRolls:0, diamond:0, ticketUsed:0, exact:0 };
+  const dist = rollDists(gConf, pityNow, needed)[needed];
+  let mean = 0, paid = 0;
+  for (let r = 1; r < dist.length; r++) {
+    const p = dist[r]; if (p === 0) continue;
+    mean += r * p;
+    if (r > tickets) paid += (r - tickets) * p;
+  }
+  const paidRolls = Math.round(paid);
+  return { rolls: Math.round(mean), paidRolls, diamond: paidRolls * gConf.cost,
+           ticketUsed: Math.round(mean - paid), exact: paid * gConf.cost };
+}
+// 最大（天井保証）：全部天井まで引いた場合
+function ceilCost(needed, pityNow, tickets, gConf) {
+  if (needed <= 0) return { rolls:0, paidRolls:0, diamond:0, ticketUsed:0 };
+  const rolls = (gConf.pity - pityNow) + (needed - 1) * gConf.pity;
+  const ticketUsed = Math.min(tickets, rolls);
+  return { rolls, paidRolls: rolls - ticketUsed, diamond: (rolls - ticketUsed) * gConf.cost, ticketUsed };
 }
 
-function ceilCost(needed, pityNow, tickets, gConf) {
-  if (needed <= 0) return { rolls:0, diamond:0, ticketUsed:0 };
-  const { pity, cost } = gConf;
-  pityNow = Math.max(0, Math.min(pity - 1, parseInt(pityNow, 10) || 0));
-  let rolls=0, cur=pityNow;
-  for (let i=0;i<needed;i++) { rolls += pity-cur; cur=0; }
-  const ticketUsed = Math.min(tickets, rolls);
-  return { rolls, diamond:(rolls-ticketUsed)*cost, ticketUsed };
-}
-function expCost(needed, tickets, gConf) {
-  if (needed <= 0) return { rolls:0, diamond:0, ticketUsed:0 };
-  const { rate, cost } = gConf;
-  const rolls = Math.ceil(needed / rate);
-  const ticketUsed = Math.min(tickets, rolls);
-  return { rolls, diamond:(rolls-ticketUsed)*cost, ticketUsed };
+function calcSolo(gKey, remaining) {
+  const g = GACHA[gKey][state.attr];
+  const pity = getPity(gKey), tickets = state.ticket[gKey];
+  const e = expCost(remaining, pity, tickets, g);
+  const c = ceilCost(remaining, pity, tickets, g);
+  return { g, pity, tickets, e, c, remPity: g.pity - pity,
+    sfExp:  Math.max(0, e.diamond - state.diamond),
+    sfCeil: Math.max(0, c.diamond - state.diamond) };
 }
 
 function calcBest(remaining) {
   const gP = GACHA.pickup[state.attr], gD = GACHA.destiny[state.attr];
+  const pP = getPity('pickup'), pD = getPity('destiny');
+  const tP = state.ticket.pickup, tD = state.ticket.destiny;
   const can = remaining >= 2;
-  const spE = expCost(remaining, state.ticketPickup,  gP);
-  const sdE = expCost(remaining, state.ticketDestiny, gD);
-  const spC = ceilCost(remaining, state.pityPickup,  state.ticketPickup,  gP);
-  const sdC = ceilCost(remaining, state.pityDestiny, state.ticketDestiny, gD);
+  const spE = expCost(remaining, pP, tP, gP);
+  const sdE = expCost(remaining, pD, tD, gD);
+  const spC = ceilCost(remaining, pP, tP, gP);
+  const sdC = ceilCost(remaining, pD, tD, gD);
   let bestE=null, bestC=null, minE=Infinity, minC=Infinity;
   if (can) {
     for (let p=1; p<remaining; p++) {
       const d=remaining-p;
-      const eP=expCost(p, state.ticketPickup,  gP), eD=expCost(d, state.ticketDestiny, gD);
-      const t=eP.diamond+eD.diamond;
-      if (t<minE) { minE=t; bestE={p,d,eP,eD,total:t,rolls:eP.rolls+eD.rolls}; }
-      const cP=ceilCost(p, state.pityPickup,  state.ticketPickup,  gP);
-      const cD=ceilCost(d, state.pityDestiny, state.ticketDestiny, gD);
+      const eP=expCost(p, pP, tP, gP), eD=expCost(d, pD, tD, gD);
+      const t=eP.exact+eD.exact;
+      if (t<minE) { minE=t; bestE={p,d,eP,eD,total:eP.diamond+eD.diamond,rolls:eP.rolls+eD.rolls}; }
+      const cP=ceilCost(p, pP, tP, gP), cD=ceilCost(d, pD, tD, gD);
       const tc=cP.diamond+cD.diamond;
       if (tc<minC) { minC=tc; bestC={p,d,cP,cD,total:tc,rolls:cP.rolls+cD.rolls}; }
     }
@@ -590,16 +607,27 @@ function calcBest(remaining) {
   return { gP, gD, can, spE, sdE, spC, sdC, bestE, bestC };
 }
 
+// ===== 注意書き =====
+function modelNotes(keys) {
+  const lines = ['※ 平均は天井での打ち切りを含めた値です（実際は運によって前後します）',
+                 '※ 必要ダイヤはチケットを使ったあとに支払うダイヤです'];
+  if (keys.some(k => k === 'destiny' || k === 'star')) {
+    lines.push('※ 運命・星の導きの57回目以降の確率上昇は計算に入れていません（70回の天井は反映）');
+  }
+  return lines;
+}
+
 // ===== HTML ビルダー =====
 function tn(used) { return used>0 ? `<br>チケット${used}枚使用` : ''; }
 
 function buildCopyHTML(rem) {
+  const note = state.attr==='normal4' ? '※別途、同属性の進化素材が必要な段階があります' : '※天・冥は進化素材にも同名キャラを使用します';
   if (rem === 0) return `
     <div class="result-title">枚数チェック</div>
-    <div class="badge-complete">✓ 目標レアリティに到達済み</div>
-    <div class="result-note">${state.attr==='normal4'?'藍・紅・翠・黄（通常4属性）':'天・冥（特殊2属性）'} / ${RARITY_LABELS[state.target]}</div>`;
+    <div class="badge-complete">✓ 目標までの同名カードはそろっています</div>
+    <div class="result-note">${state.attr==='normal4'?'藍・紅・翠・黄（通常4属性）':'天・冥（特殊2属性）'} / ${RARITY_LABELS[state.target]}</div>
+    <div class="result-note">${note}</div>`;
   const req = COPIES[state.attr][state.target];
-  const note = state.attr==='normal4' ? '※別途、同属性の進化素材が必要な段階があります' : '※天・冥は進化素材にも同名キャラを使用します';
   return `
     <div class="result-title">枚数チェック</div>
     <div class="result-row">
@@ -610,45 +638,42 @@ function buildCopyHTML(rem) {
     <div class="result-note">${note}</div>`;
 }
 
-function buildSoloHTML(rem) {
-  const gKey = soloKey();
+function pityFieldHTML(gKey) {
   const g = GACHA[gKey][state.attr];
-  const inputHTML = `
-    <div class="card">
-      <div class="section-title">STEP 3　計算設定（${GACHA_NAMES[gKey]}）</div>
-      <div class="input-grid-2">
-        <div class="input-col">
+  return `
           <label class="field-label">天井カウント</label>
           <div class="field-note">※ 0〜${g.pity-1}（${g.pity}回で確定）</div>
           <div class="num-input-row">
-            <button class="btn-num" onclick="changePity(-1)">−</button>
-            <input type="number" id="pityInput" value="${state.pity}" min="0" oninput="onPityInput(this.value)">
-            <button class="btn-num" onclick="changePity(1)">＋</button>
+            <button class="btn-num" onclick="changePity('${gKey}',-1)">−</button>
+            <input type="number" id="pityInput_${gKey}" value="${getPity(gKey)}" min="0" oninput="onPityInput('${gKey}',this.value)" onchange="commitPity('${gKey}',this)">
+            <button class="btn-num" onclick="changePity('${gKey}',1)">＋</button>
           </div>
           <div class="btn-quick-row">
-            <button class="btn-quick" onclick="changePity(10)">+10</button>
-            <button class="btn-quick" onclick="changePity(-10)">−10</button>
-          </div>
-        </div>
-        <div class="input-col">
-          <label class="field-label">チケット枚数</label>
-          <div class="field-note">※ 1枚 = 1回分</div>
+            <button class="btn-quick" onclick="changePity('${gKey}',10)">+10</button>
+            <button class="btn-quick" onclick="changePity('${gKey}',-10)">−10</button>
+          </div>`;
+}
+function ticketFieldHTML(gKey, style) {
+  return `
+          <label class="field-label"${style ? ` style="${style}"` : ''}>チケット枚数</label>
+          <div class="field-note">※ ${GACHA_NAMES[gKey]}ガチャのチケット。1枚 = 1回分</div>
           <div class="num-input-row">
-            <button class="btn-num" onclick="changeTicket(-1)">−</button>
-            <input type="number" id="ticketInput" value="${state.ticket}" min="0" oninput="onTicketInput(this.value)">
-            <button class="btn-num" onclick="changeTicket(1)">＋</button>
+            <button class="btn-num" onclick="changeTicket('${gKey}',-1)">−</button>
+            <input type="number" id="ticketInput_${gKey}" value="${state.ticket[gKey]}" min="0" oninput="onTicketInput('${gKey}',this.value)" onchange="commitTicket('${gKey}',this)">
+            <button class="btn-num" onclick="changeTicket('${gKey}',1)">＋</button>
           </div>
           <div class="btn-quick-row">
-            <button class="btn-quick" onclick="changeTicket(10)">+10</button>
-            <button class="btn-quick" onclick="changeTicket(-10)">−10</button>
-          </div>
-        </div>
-      </div>
+            <button class="btn-quick" onclick="changeTicket('${gKey}',10)">+10</button>
+            <button class="btn-quick" onclick="changeTicket('${gKey}',-10)">−10</button>
+          </div>`;
+}
+function diamondFieldHTML() {
+  return `
       <div class="field-group" style="margin-bottom:0">
         <label class="field-label">ダイヤ所持数（任意）</label>
         <div class="num-input-row">
           <button class="btn-num" onclick="changeDiamond(-100)">−</button>
-          <input type="number" id="diamondInput" value="${state.diamond}" min="0" oninput="onDiamondInput(this.value)">
+          <input type="number" id="diamondInput" value="${state.diamond}" min="0" oninput="onDiamondInput(this.value)" onchange="commitDiamond(this)">
           <button class="btn-num" onclick="changeDiamond(100)">＋</button>
         </div>
         <div class="btn-quick-row">
@@ -657,16 +682,29 @@ function buildSoloHTML(rem) {
           <button class="btn-quick" onclick="changeDiamond(10000)">+10,000</button>
           <button class="btn-quick" onclick="changeDiamond(-1000)">−1,000</button>
         </div>
-      </div>
+      </div>`;
+}
+
+function buildSoloHTML(rem) {
+  const gKey = soloKey();
+  const inputHTML = `
+    <div class="card">
+      <div class="section-title">STEP 3　計算設定（${GACHA_NAMES[gKey]}）</div>
+      <div class="input-grid-2">
+        <div class="input-col">${pityFieldHTML(gKey)}
+        </div>
+        <div class="input-col">${ticketFieldHTML(gKey)}
+        </div>
+      </div>${diamondFieldHTML()}
     </div>`;
   if (rem === 0) return inputHTML;
-  const r = calcSolo(gKey, rem, state.pity, state.diamond, state.ticket);
-  const sfHTML = (state.diamond>0||state.ticket>0) ? `
+  const r = calcSolo(gKey, rem);
+  const sfHTML = (state.diamond>0||r.tickets>0) ? `
     <div class="shortfall-box">
-      <div class="result-label" style="text-align:center;margin-bottom:8px">所持リソース（${state.diamond.toLocaleString()}💎 ＋ チケット${state.ticket}枚）との差</div>
+      <div class="result-label" style="text-align:center;margin-bottom:8px">所持ダイヤ（${state.diamond.toLocaleString()}💎）との差（チケット${r.tickets}枚を使ったあと）</div>
       <div class="shortfall-row">
         <div class="shortfall-item">
-          <div class="shortfall-label">期待値で</div>
+          <div class="shortfall-label">平均で</div>
           <div class="shortfall-val" style="color:${r.sfExp===0?'var(--green)':'#e09060'}">${r.sfExp===0?'足りる':'▲'+r.sfExp.toLocaleString()+'💎'}</div>
         </div>
         <div style="width:1px;background:var(--gold-dim)"></div>
@@ -676,30 +714,33 @@ function buildSoloHTML(rem) {
         </div>
       </div>
     </div>` : '';
+  const ticketLine = (label, used) => used>0 ? `<div class="result-note" style="text-align:center">${label}：チケット${used}枚使用</div>` : '';
   return inputHTML + `
     <div class="card" id="resultCard">
       <div class="section-title">計算結果　${GACHA_NAMES[gKey]}ガチャ</div>
       <div class="diamond-block">
-        <div class="diamond-label">期待値ベース（概算）</div>
+        <div class="diamond-label">平均（天井込み）</div>
         <div class="result-row" style="margin-bottom:8px">
-          <div class="result-item"><div class="result-label">必要回数</div><div class="result-num" style="color:#a0b4f0">${r.expRolls.toLocaleString()}<span class="result-unit">回</span></div></div>
+          <div class="result-item"><div class="result-label">必要回数</div><div class="result-num" style="color:#a0b4f0">${r.e.rolls.toLocaleString()}<span class="result-unit">回</span></div></div>
           <div class="result-divider"></div>
-          <div class="result-item"><div class="result-label">必要ダイヤ</div><div class="result-num" style="color:#a0b4f0">${r.expDia.toLocaleString()}<span class="result-unit">💎</span></div></div>
+          <div class="result-item"><div class="result-label">必要ダイヤ</div><div class="result-num" style="color:#a0b4f0">${r.e.diamond.toLocaleString()}<span class="result-unit">💎</span></div></div>
         </div>
+        ${ticketLine('平均', r.e.ticketUsed)}
       </div>
       <div class="diamond-block-red">
         <div class="diamond-label-red">最大（天井保証）</div>
         <div class="result-row" style="margin-bottom:8px">
-          <div class="result-item"><div class="result-label">最大回数</div><div class="result-num" style="color:#d09090">${r.maxRolls.toLocaleString()}<span class="result-unit">回</span></div></div>
+          <div class="result-item"><div class="result-label">最大回数</div><div class="result-num" style="color:#d09090">${r.c.rolls.toLocaleString()}<span class="result-unit">回</span></div></div>
           <div class="result-divider"></div>
-          <div class="result-item"><div class="result-label">最大ダイヤ</div><div class="result-num" style="color:#d09090">${r.maxDia.toLocaleString()}<span class="result-unit">💎</span></div></div>
+          <div class="result-item"><div class="result-label">最大ダイヤ</div><div class="result-num" style="color:#d09090">${r.c.diamond.toLocaleString()}<span class="result-unit">💎</span></div></div>
         </div>
+        ${ticketLine('最大', r.c.ticketUsed)}
       </div>
       ${sfHTML}
       <div class="footer-note" style="margin-top:12px">
-        天井カウント：${state.pity}回 → あと${r.remPity}回で1枚確定<br>
+        天井カウント：${r.pity}回 → あと${r.remPity}回で1枚確定<br>
         1回 ${r.g.cost}ダイヤ / 出現確率 ${(r.g.rate*100).toFixed(4)}%<br>
-        ※ 期待値は天井による打ち切りを考慮しない単純概算です
+        ${modelNotes([gKey]).join('<br>')}
       </div>
       <div class="share-row">
         <button class="btn-share" id="btnCopy" onclick="copyResult()">📋 テキストコピー</button>
@@ -715,76 +756,21 @@ function buildCombinedHTML(rem) {
       <div class="section-title">STEP 3　計算設定（ピックアップ × 運命）</div>
       <div class="input-grid-2">
         <div class="input-col">
-          <div class="input-col-title">ピックアップ</div>
-          <label class="field-label">天井カウント</label>
-          <div class="field-note">※ 0〜${gP.pity-1}（${gP.pity}回で確定）</div>
-          <div class="num-input-row">
-            <button class="btn-num" onclick="changeCmbPity('pickup',-1)">−</button>
-            <input type="number" id="cmbPity_pickup" value="${state.pityPickup}" min="0" oninput="onCmbPityInput('pickup',this.value)">
-            <button class="btn-num" onclick="changeCmbPity('pickup',1)">＋</button>
-          </div>
-          <div class="btn-quick-row">
-            <button class="btn-quick" onclick="changeCmbPity('pickup',10)">+10</button>
-            <button class="btn-quick" onclick="changeCmbPity('pickup',-10)">−10</button>
-          </div>
-          <label class="field-label" style="margin-top:8px">チケット枚数</label>
-          <div class="num-input-row">
-            <button class="btn-num" onclick="changeCmbTicket('pickup',-1)">−</button>
-            <input type="number" id="cmbTicket_pickup" value="${state.ticketPickup}" min="0" oninput="onCmbTicketInput('pickup',this.value)">
-            <button class="btn-num" onclick="changeCmbTicket('pickup',1)">＋</button>
-          </div>
-          <div class="btn-quick-row">
-            <button class="btn-quick" onclick="changeCmbTicket('pickup',10)">+10</button>
-            <button class="btn-quick" onclick="changeCmbTicket('pickup',-10)">−10</button>
-          </div>
+          <div class="input-col-title">ピックアップ</div>${pityFieldHTML('pickup')}${ticketFieldHTML('pickup', 'margin-top:8px')}
         </div>
         <div class="input-col">
-          <div class="input-col-title">運命ガチャ</div>
-          <label class="field-label">天井カウント</label>
-          <div class="field-note">※ 0〜${gD.pity-1}（${gD.pity}回で確定）</div>
-          <div class="num-input-row">
-            <button class="btn-num" onclick="changeCmbPity('destiny',-1)">−</button>
-            <input type="number" id="cmbPity_destiny" value="${state.pityDestiny}" min="0" oninput="onCmbPityInput('destiny',this.value)">
-            <button class="btn-num" onclick="changeCmbPity('destiny',1)">＋</button>
-          </div>
-          <div class="btn-quick-row">
-            <button class="btn-quick" onclick="changeCmbPity('destiny',10)">+10</button>
-            <button class="btn-quick" onclick="changeCmbPity('destiny',-10)">−10</button>
-          </div>
-          <label class="field-label" style="margin-top:8px">チケット枚数</label>
-          <div class="num-input-row">
-            <button class="btn-num" onclick="changeCmbTicket('destiny',-1)">−</button>
-            <input type="number" id="cmbTicket_destiny" value="${state.ticketDestiny}" min="0" oninput="onCmbTicketInput('destiny',this.value)">
-            <button class="btn-num" onclick="changeCmbTicket('destiny',1)">＋</button>
-          </div>
-          <div class="btn-quick-row">
-            <button class="btn-quick" onclick="changeCmbTicket('destiny',10)">+10</button>
-            <button class="btn-quick" onclick="changeCmbTicket('destiny',-10)">−10</button>
-          </div>
+          <div class="input-col-title">運命ガチャ</div>${pityFieldHTML('destiny')}${ticketFieldHTML('destiny', 'margin-top:8px')}
         </div>
-      </div>
-      <div class="field-group" style="margin-bottom:0">
-        <label class="field-label">ダイヤ所持数（任意）</label>
-        <div class="num-input-row">
-          <button class="btn-num" onclick="changeCmbDiamond(-100)">−</button>
-          <input type="number" id="cmbDiamond" value="${state.diamondCombined}" min="0" oninput="onCmbDiamondInput(this.value)">
-          <button class="btn-num" onclick="changeCmbDiamond(100)">＋</button>
-        </div>
-        <div class="btn-quick-row">
-          <button class="btn-quick" onclick="changeCmbDiamond(100)">+100</button>
-          <button class="btn-quick" onclick="changeCmbDiamond(1000)">+1,000</button>
-          <button class="btn-quick" onclick="changeCmbDiamond(10000)">+10,000</button>
-          <button class="btn-quick" onclick="changeCmbDiamond(-1000)">−1,000</button>
-        </div>
-      </div>
+      </div>${diamondFieldHTML()}
     </div>`;
   if (rem === 0) return inputHTML;
 
   const c = calcBest(rem);
-  // バッジ用配列 [PU, 運命, 併用]
-  const eVals = [c.spE.diamond, c.sdE.diamond, c.can ? c.bestE.total : Infinity];
+  // バッジ用配列 [PU, 運命, 併用]（平均は端数を丸める前の値で比べる）
+  const eVals = [c.spE.exact, c.sdE.exact, c.can ? c.bestE.eP.exact + c.bestE.eD.exact : Infinity];
   const cVals = [c.spC.diamond, c.sdC.diamond, c.can ? c.bestC.total : Infinity];
   const minE = Math.min(...eVals), minC = Math.min(...cVals);
+  const eShown = [c.spE.diamond, c.sdE.diamond, c.can ? c.bestE.total : Infinity];
 
   function cardCls(i) {
     const be=eVals[i]===minE, bc=cVals[i]===minC;
@@ -795,9 +781,9 @@ function buildCombinedHTML(rem) {
   }
   function badge(i) {
     const be=eVals[i]===minE, bc=cVals[i]===minC;
-    if (be&&bc) return '<div><span class="cmp-badge badge-both">期待値・天井 最安</span></div>';
+    if (be&&bc) return '<div><span class="cmp-badge badge-both">平均・天井 最安</span></div>';
     let s='';
-    if (be) s+='<span class="cmp-badge badge-exp">期待値 最安</span> ';
+    if (be) s+='<span class="cmp-badge badge-exp">平均 最安</span> ';
     if (bc) s+='<span class="cmp-badge badge-ceil">天井 最安</span>';
     return s ? `<div>${s}</div>` : '';
   }
@@ -809,18 +795,18 @@ function buildCombinedHTML(rem) {
       ${badge(2)}
       <div class="cmp-val-exp">${c.bestE.total.toLocaleString()}<span style="font-size:9px">💎</span></div>
       <div class="cmp-val-ceil">${c.bestC.total.toLocaleString()}<span style="font-size:9px">💎</span></div>
-      <div class="cmp-detail">${c.bestE.rolls}回（期待）<br>${c.bestC.rolls}回（天井）</div>
+      <div class="cmp-detail">${c.bestE.rolls}回（平均）<br>${c.bestC.rolls}回（天井）</div>
     </div>` : `
     <div class="cmp-card" style="opacity:0.38">
       <div class="cmp-card-title">併用</div>
       <div style="font-size:10px;color:var(--text-dark);margin-top:10px;line-height:1.7">1枚のため<br>不可</div>
     </div>`;
 
-  // 差額
-  const eff = state.diamondCombined;
+  // 差額（所持ダイヤとの差。チケットは各ガチャで使ったあと）
+  const eff = state.diamond;
   let sfHTML = '';
   if (eff > 0) {
-    const minEf = Math.min(...eVals.filter(v=>v<Infinity));
+    const minEf = eShown[eVals.indexOf(minE)];
     const minCf = Math.min(...cVals.filter(v=>v<Infinity));
     const sfe = Math.max(0, minEf - eff), sfc = Math.max(0, minCf - eff);
     sfHTML = `
@@ -828,7 +814,7 @@ function buildCombinedHTML(rem) {
         <div class="result-label" style="text-align:center;margin-bottom:8px">所持ダイヤ ${eff.toLocaleString()}💎 との差（最安パターン）</div>
         <div class="shortfall-row">
           <div class="shortfall-item">
-            <div class="shortfall-label">期待値で</div>
+            <div class="shortfall-label">平均で</div>
             <div class="shortfall-val" style="color:${sfe===0?'var(--green)':'#e09060'}">${sfe===0?'足りる':'▲'+sfe.toLocaleString()+'💎'}</div>
           </div>
           <div style="width:1px;background:var(--gold-dim)"></div>
@@ -838,14 +824,14 @@ function buildCombinedHTML(rem) {
           </div>
         </div>
 
-        <div class="footer-note" style="margin-top:8px;margin-bottom:0">※ 期待値最安と天井最安は異なる振り分けの場合があります</div>
+        <div class="footer-note" style="margin-top:8px;margin-bottom:0">※ 平均最安と天井最安は異なる振り分けの場合があります</div>
       </div>`;
   }
 
   // 内訳
   const bdHTML = c.can ? `
     <div class="cmp-breakdown">
-      <strong style="color:#a0b4f0">期待値 最安</strong>：PU <strong>${c.bestE.p}枚</strong>（${c.bestE.eP.rolls}回・${c.bestE.eP.diamond.toLocaleString()}💎${tn(c.bestE.eP.ticketUsed)}）＋ 運命 <strong>${c.bestE.d}枚</strong>（${c.bestE.eD.rolls}回・${c.bestE.eD.diamond.toLocaleString()}💎${tn(c.bestE.eD.ticketUsed)}）<br>
+      <strong style="color:#a0b4f0">平均 最安</strong>：PU <strong>${c.bestE.p}枚</strong>（${c.bestE.eP.rolls}回・${c.bestE.eP.diamond.toLocaleString()}💎${tn(c.bestE.eP.ticketUsed)}）＋ 運命 <strong>${c.bestE.d}枚</strong>（${c.bestE.eD.rolls}回・${c.bestE.eD.diamond.toLocaleString()}💎${tn(c.bestE.eD.ticketUsed)}）<br>
       <strong style="color:#d09090">天井 最安</strong>：PU <strong>${c.bestC.p}枚</strong>（${c.bestC.cP.rolls}回・${c.bestC.cP.diamond.toLocaleString()}💎${tn(c.bestC.cP.ticketUsed)}）＋ 運命 <strong>${c.bestC.d}枚</strong>（${c.bestC.cD.rolls}回・${c.bestC.cD.diamond.toLocaleString()}💎${tn(c.bestC.cD.ticketUsed)}）
     </div>` : '';
 
@@ -858,26 +844,25 @@ function buildCombinedHTML(rem) {
           ${badge(0)}
           <div class="cmp-val-exp">${c.spE.diamond.toLocaleString()}<span style="font-size:9px">💎</span></div>
           <div class="cmp-val-ceil">${c.spC.diamond.toLocaleString()}<span style="font-size:9px">💎</span></div>
-          <div class="cmp-detail">${c.spE.rolls}回（期待）${tn(c.spE.ticketUsed)}<br>${c.spC.rolls}回（天井）${tn(c.spC.ticketUsed)}</div>
+          <div class="cmp-detail">${c.spE.rolls}回（平均）${tn(c.spE.ticketUsed)}<br>${c.spC.rolls}回（天井）${tn(c.spC.ticketUsed)}</div>
         </div>
         <div class="${cardCls(1)}">
           <div class="cmp-card-title">運命のみ</div>
           ${badge(1)}
           <div class="cmp-val-exp">${c.sdE.diamond.toLocaleString()}<span style="font-size:9px">💎</span></div>
           <div class="cmp-val-ceil">${c.sdC.diamond.toLocaleString()}<span style="font-size:9px">💎</span></div>
-          <div class="cmp-detail">${c.sdE.rolls}回（期待）${tn(c.sdE.ticketUsed)}<br>${c.sdC.rolls}回（天井）${tn(c.sdC.ticketUsed)}</div>
+          <div class="cmp-detail">${c.sdE.rolls}回（平均）${tn(c.sdE.ticketUsed)}<br>${c.sdC.rolls}回（天井）${tn(c.sdC.ticketUsed)}</div>
         </div>
         ${col2}
       </div>
       <div class="footer-note" style="margin-top:4px;margin-bottom:4px">
-        <span style="color:#a0b4f0">■</span> 期待値　<span style="color:#d09090">■</span> 天井保証
+        <span style="color:#a0b4f0">■</span> 平均（天井込み）　<span style="color:#d09090">■</span> 天井保証
       </div>
       ${bdHTML}
       ${sfHTML}
       <div class="footer-note" style="margin-top:10px">
         ※ PU天井 ${gP.pity}回 / 運命天井 ${gD.pity}回<br>
-        ※ 期待値は通常確率による概算です<br>
-        ※ 期待値は天井による打ち切りを考慮しない単純概算です
+        ${modelNotes(['pickup','destiny']).join('<br>')}
       </div>
       <div class="share-row">
         <button class="btn-share" id="btnCopy" onclick="copyResult()">📋 テキストコピー</button>
@@ -906,7 +891,6 @@ function renderResult() {
   area.innerHTML = splitStep3HTML(buildStep3HTML(rem)).result;
 }
 function render() {
-  clampAllPity();
   const rem = getRemaining();
   const copyEl = document.getElementById('copyResult');
   copyEl.innerHTML = buildCopyHTML(rem);
@@ -920,29 +904,33 @@ function buildShareText() {
   const rem = getRemaining();
   const attr = state.attr==='normal4'?'通常4属性':'天・冥';
   let t = `【メメモリ ガチャ計算】\n属性：${attr} / 目標：${RARITY_LABELS[state.target]}\n必要枚数：あと${rem}枚\n`;
+  let keys;
   if (state.mode === 'both') {
+    keys = ['pickup','destiny'];
     const c = calcBest(rem);
     t += `モード：ピックアップ × 運命 併用比較\n`;
-    t += `PUのみ：期待値 ${c.spE.diamond.toLocaleString()}💎 / 天井 ${c.spC.diamond.toLocaleString()}💎\n`;
-    t += `運命のみ：期待値 ${c.sdE.diamond.toLocaleString()}💎 / 天井 ${c.sdC.diamond.toLocaleString()}💎\n`;
+    t += `PUのみ：平均 ${c.spE.diamond.toLocaleString()}💎 / 天井 ${c.spC.diamond.toLocaleString()}💎\n`;
+    t += `運命のみ：平均 ${c.sdE.diamond.toLocaleString()}💎 / 天井 ${c.sdC.diamond.toLocaleString()}💎\n`;
     if (c.can) {
-      t += `最安併用（期待値）：${c.bestE.total.toLocaleString()}💎（PU${c.bestE.p}枚＋運命${c.bestE.d}枚）\n`;
+      t += `最安併用（平均）：${c.bestE.total.toLocaleString()}💎（PU${c.bestE.p}枚＋運命${c.bestE.d}枚）\n`;
       t += `最安併用（天井）：${c.bestC.total.toLocaleString()}💎（PU${c.bestC.p}枚＋運命${c.bestC.d}枚）\n`;
     }
   } else {
     const gKey = soloKey();
-    const r = calcSolo(gKey, rem, state.pity, state.diamond, state.ticket);
+    keys = [gKey];
+    const r = calcSolo(gKey, rem);
     t += `ガチャ：${GACHA_NAMES[gKey]}\n`;
-    t += `期待値：${r.expDia.toLocaleString()}💎（${r.expRolls}回）\n`;
-    t += `天井保証：${r.maxDia.toLocaleString()}💎（${r.maxRolls}回）\n`;
-    if (state.diamond>0||state.ticket>0) {
+    t += `平均（天井込み）：${r.e.diamond.toLocaleString()}💎（${r.e.rolls}回）\n`;
+    t += `天井保証：${r.c.diamond.toLocaleString()}💎（${r.c.rolls}回）\n`;
+    if (state.diamond>0||r.tickets>0) {
       t += `所持：${state.diamond.toLocaleString()}💎`;
-      if (state.ticket>0) t += ` ＋ チケット${state.ticket}枚`;
+      if (r.tickets>0) t += ` ＋ チケット${r.tickets}枚`;
       t += `\n`;
-      t += r.sfExp===0  ? `→ 期待値で足りる✅\n`      : `→ 期待値で▲${r.sfExp.toLocaleString()}💎 不足\n`;
+      t += r.sfExp===0  ? `→ 平均で足りる✅\n`      : `→ 平均で▲${r.sfExp.toLocaleString()}💎 不足\n`;
       t += r.sfCeil===0 ? `→ 天井保証でも足りる✅\n` : `→ 天井保証で▲${r.sfCeil.toLocaleString()}💎 不足\n`;
     }
   }
+  t += modelNotes(keys).join('\n') + '\n';
   t += `\n計算ツール → https://memento.musoudc.com/gacha-calc.html\n#メメントモリ #メメモリ`;
   return t;
 }
