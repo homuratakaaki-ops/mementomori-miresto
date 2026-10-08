@@ -561,9 +561,10 @@ function expCost(needed, pityNow, tickets, gConf) {
     mean += r * p;
     if (r > tickets) paid += (r - tickets) * p;
   }
-  const paidRolls = Math.round(paid);
-  return { rolls: Math.round(mean), paidRolls, diamond: paidRolls * gConf.cost,
-           ticketUsed: Math.round(mean - paid), exact: paid * gConf.cost };
+  // ダイヤは「払う回数の平均 × 1回の費用」を計算してから表示用に丸める（回数を先に丸めると、少額が0になる）
+  const exact = paid * gConf.cost;
+  return { rolls: Math.round(mean), paidRolls: paid, diamond: Math.round(exact),
+           ticketUsed: Math.round(mean - paid), exact };
 }
 // 最大（天井保証）：全部天井まで引いた場合
 function ceilCost(needed, pityNow, tickets, gConf) {
