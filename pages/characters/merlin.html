@@ -103,12 +103,17 @@
           <h3 class="block-title">いつ・誰に・何が起きる？</h3>
           <ol class="flow">
           <li class="flow-block">
-            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">① 攻撃時</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>HP割合が高い敵3体</span></span></p>
-            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>魔法攻撃<span class="flow-chip num">魔法<span class="ratio">380%</span></span><span class="flow-total">倍率合計 1140%（3体分）</span></li><li>対象のバフを1つ解除</li></ul></div>
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">① 攻撃前</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>HP割合が高い敵3体</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>対象のバフを1つ解除</li></ul></div>
           </li>
         
           <li class="flow-block">
-            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">② 攻撃後</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>HP割合が最も低い味方</span></span></p>
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">② 攻撃時</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>HP割合が高い敵3体</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>魔法攻撃<span class="flow-chip num">魔法<span class="ratio">380%</span></span><span class="flow-total">倍率合計 1140%（3体分）</span></li></ul></div>
+          </li>
+        
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">③ 攻撃後</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>HP割合が最も低い味方</span></span></p>
             <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>HPを総与ダメージの15%回復</li></ul></div>
           </li>
         </ol>
@@ -122,7 +127,7 @@
         <details class="original-text">
           <summary>スキル説明</summary>
           <div class="original-text-body">
-            <p class="original-text-main">対象のバフを1つ解除し、HP割合が最も低い味方を総与ダメージ15%回復</p>
+            <p class="original-text-main">攻撃前に対象のバフを1つ解除してから魔法攻撃し、HP割合が最も低い味方を総与ダメージ15%回復</p>
             <p class="original-text-note">出典の効果説明を比較用に要約したものです（全文転載ではありません）。数値は専用武器なし・スキルLv最大の値です。</p>
             <p class="original-text-source"><a href="https://ichigogames.net/mementomori/merlyn/" target="_blank" rel="noopener">照合した出典ページを開く</a></p>
           </div>
@@ -148,8 +153,8 @@
           <h3 class="block-title">いつ・誰に・何が起きる？</h3>
           <ol class="flow">
           <li class="flow-block">
-            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">常時</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>自身と隣接する味方2体</span></span><span class="flow-mode">常時</span></p>
-            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li class="flow-cond-line"><span class="flow-chip cond">味方の生存が3体以上なら</span>クリティカル率を40%増加</li><li class="flow-cond-line"><span class="flow-chip cond">味方の生存が2体以下なら</span>防御力を40%増加<span class="flow-note">解除不可</span></li></ul></div>
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">ターン開始時</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>自身と隣接する味方2体</span></span><span class="flow-mode">同時に発動</span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li class="flow-cond-line"><span class="flow-chip cond">味方の生存が3体以上なら</span>クリティカル率を40%増加<span class="flow-note">解除不可</span></li><li class="flow-cond-line"><span class="flow-chip cond">味方の生存が2体以下なら</span>防御力を40%増加<span class="flow-note">解除不可</span></li></ul></div>
           </li>
         </ol>
         </div>
@@ -167,7 +172,7 @@
         <details class="original-text">
           <summary>スキル説明</summary>
           <div class="original-text-body">
-            <p class="original-text-main">味方生存3体以上ならクリ率増加、2体以下なら防御力増加</p>
+            <p class="original-text-main">毎ターン開始時、味方生存3体以上ならクリ率増加、2体以下なら防御力増加(いずれも解除不可)</p>
             <p class="original-text-note">出典の効果説明を比較用に要約したものです（全文転載ではありません）。数値は専用武器なし・スキルLv最大の値です。</p>
             <p class="original-text-source"><a href="https://ichigogames.net/mementomori/merlyn/" target="_blank" rel="noopener">照合した出典ページを開く</a></p>
           </div>

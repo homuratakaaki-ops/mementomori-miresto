@@ -64,7 +64,7 @@
           <ol class="flow">
           <li class="flow-block">
             <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">① 攻撃前</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>自身</span></span></p>
-            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>命中率増加を付与<span class="flow-chip">1ターン</span></li></ul></div>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>命中率を50%増加<span class="flow-chip">1ターン</span></li></ul></div>
           </li>
         
           <li class="flow-block">
@@ -198,13 +198,18 @@
           <h3 class="block-title">いつ・誰に・何が起きる？</h3>
           <ol class="flow">
           <li class="flow-block">
-            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">常時</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>自身</span></span><span class="flow-mode">常時</span></p>
-            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>同一の敵からの2回目以降のダメージを70%遮断</li><li>多重バリアを付与<span class="flow-excl"><span class="flow-chip excl">専用Lv2</span><span class="flow-excl-text">多重バリアが3層に変更</span></span></li></ul></div>
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">バトル開始時</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>自身</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>多重バリアを1層付与<span class="flow-excl"><span class="flow-chip excl">専用Lv2</span><span class="flow-excl-text">多重バリアが3層に変更</span></span></li></ul></div>
+          </li>
+        
+          <li class="flow-block">
+            <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">1ターン内に同じ敵から2回目以降のダメージを受けるとき</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>自身</span></span></p>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>ダメージを70%遮断<span class="flow-note">同時に複数を対象とする攻撃は1回と数える</span></li></ul></div>
           </li>
         
           <li class="flow-block">
             <p class="flow-when"><span class="flow-when-head"><span class="flow-when-text">致命的なダメージを受けたとき</span><span class="flow-when-target"><span class="flow-when-sep">｜</span>自身</span></span></p>
-            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>HP1で耐えてHPを100%回復</li></ul></div>
+            <div class="flow-row"><span class="flow-label">効果</span><ul class="flow-effects"><li>HP1で耐えて最大HP20%分回復<span class="flow-note">バトル中1回</span><span class="flow-excl"><span class="flow-chip excl">専用Lv2</span><span class="flow-excl-text">回復量が最大HP100%分に変更</span></span></li></ul></div>
           </li>
         </ol>
         </div>
@@ -212,12 +217,12 @@
           
           
           
-          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用Lv2</th><td>致命的なダメージを受けたときのHP回復量が最大HP×100%になる</td></tr><tr><th>専用Lv3</th><td>冥属性の味方が3体以上の場合、防御貫通を40%増加させる</td></tr></table></div>
+          <div><h3 class="block-title">専用武器</h3><table class="weapon-table"><tr><th>専用Lv3</th><td>冥属性の味方が3体以上の場合、防御貫通を40%増加させる</td></tr></table></div>
           
         <details class="original-text">
           <summary>スキル説明</summary>
           <div class="original-text-body">
-            <p class="original-text-main">同一敵からの2回目以降の自身へのダメージを遮断。致命ダメージ時にHP1で耐えて回復</p>
+            <p class="original-text-main">1ターン内に同じ敵から2回目以降のダメージを受けるとき70%遮断(同時に複数を対象とする攻撃は1回と数える)。バトル開始時、多重バリア1層。致命ダメージ時にHP1で耐えて最大HP20%回復(バトル中1回)</p>
             <p class="original-text-note">出典の効果説明を比較用に要約したものです（全文転載ではありません）。数値は専用武器なし・スキルLv最大の値です。</p>
             <p class="original-text-source"><a href="https://ichigogames.net/mementomori/illya_gods_curse/" target="_blank" rel="noopener">照合した出典ページを開く</a></p>
           </div>
