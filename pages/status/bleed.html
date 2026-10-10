@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>出血｜状態異常ガイド | ミレストのメメントモリ分析データ室</title>
+  <meta name="description" content="メメントモリの出血とは何かを解説します。ダメージの基準が付与したキャラの攻撃力であること、毒との違い、重ねたときの扱い、出血を付与するキャラ、劇化との関係を整理しています。">
+  <link rel="canonical" href="https://memento.musoudc.com/pages/status/bleed.html">
+  <!-- OGP。画像は共通のものを使う（ガイドごとの画像生成は未対応） -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="ミレストのメメントモリ分析データ室">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="og:title" content="出血｜状態異常ガイド | ミレストのメメントモリ分析データ室">
+  <meta property="og:description" content="メメントモリの出血とは何かを解説します。ダメージの基準が付与したキャラの攻撃力であること、毒との違い、重ねたときの扱い、出血を付与するキャラ、劇化との関係を整理しています。">
+  <meta property="og:url" content="https://memento.musoudc.com/pages/status/bleed.html">
+  <meta property="og:image" content="https://memento.musoudc.com/assets/ogp/ogp-common.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <link rel="icon" type="image/png" href="../../assets/miresto/miresto-icon-32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="../../assets/miresto/miresto-icon-180.png">
+  <link rel="stylesheet" href="../../assets/character-page.css?v=5dfcab2f">
+  <link rel="stylesheet" href="../../assets/status-guide.css?v=7045fffa">
+  <!-- ad:head -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6389066329814944" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="/assets/ad-slot.css">
+  <!-- /ad:head -->
+</head>
+<body data-status-guide="bleed" data-prerendered>
+  <header class="page-header">
+    <div class="header-inner">
+      <a class="top-link" href="/">トップ</a>
+      <a class="top-link" href="./index.html">状態異常・特殊効果ガイドの一覧へ</a>
+      <p class="eyebrow">STATUS GUIDE</p>
+      <h1>出血｜状態異常ガイド</h1>
+      <div class="guide-meta">
+        <span class="tag">最終横断確認 2026-10-10</span>
+      </div>
+      <p class="guide-meta-note">この日までに実装済みのキャラを対象に、出血を付与するスキルを確認しています。</p>
+    </div>
+  </header>
+
+  <main>
+    <div class="guide-list">
+      <section class="guide-card" id="about" aria-labelledby="about-title">
+        <div class="guide-card-head">
+          <h2 id="about-title">出血とは</h2>
+        </div>
+        <div class="guide-card-body">
+          <p><strong>出血</strong>は、敵に付与する<strong>持続ダメージ効果</strong>のひとつです。</p>
+          <p>ゲーム内ヘルプでは、出血は<strong>毎ターン行動開始時に、付与者の攻撃力の割合に応じた持続ダメージを受ける</strong>効果と説明されています。</p>
+          <p>つまり、出血ダメージの基準になるのは、出血を受けた側ではなく、<strong>出血を付与したキャラ側の攻撃力</strong>です。</p>
+          <div class="guide-figure-mobile is-only" data-figure-series>
+            <div class="guide-series-track" tabindex="0" role="region" aria-label="図解3枚。横にスクロールして次の図へ">
+              <figure class="guide-figure-panel" aria-label="1 / 3">
+                <a href="../../assets/status/bleed-guide-m1.jpg?v=ae248861" aria-label="図1を拡大して開く（3枚中1枚目）">
+                  <picture>
+                    <source type="image/webp" srcset="../../assets/status/bleed-guide-m1.webp?v=cd989fc8">
+                    <img src="../../assets/status/bleed-guide-m1.jpg?v=ae248861" width="1122" height="1402" alt="出血の基礎知識1/3。出血は「付与した側の攻撃力」で決まる持続ダメージ。1、出血を付与。2、毎ターン、行動開始時。3、付与者の攻撃力に応じてダメージ。相手のHPでは決まらない。毒や火傷と同じ「持続ダメージ」系でも、ダメージの決まり方は別" decoding="async">
+                  </picture>
+                </a>
+              </figure>
+              <figure class="guide-figure-panel" aria-label="2 / 3">
+                <a href="../../assets/status/bleed-guide-m2.jpg?v=0101e85b" aria-label="図2を拡大して開く（3枚中2枚目）">
+                  <picture>
+                    <source type="image/webp" srcset="../../assets/status/bleed-guide-m2.webp?v=1f5f4761">
+                    <img src="../../assets/status/bleed-guide-m2.jpg?v=0101e85b" width="1122" height="1402" alt="毒との違い2/3。毒と出血は、ダメージの基準が違う。毒は対象の現在HPを基準にし、相手のHPが高いとダメージが伸びやすい。出血は付与者の攻撃力を基準にし、付ける側の火力が大事。どちらも毎ターン、行動開始時にダメージ。まとめ：似た持続ダメージでも中身は別。出血を見るときは「誰が付けたか」を見る" loading="lazy" decoding="async">
+                  </picture>
+                </a>
+              </figure>
+              <figure class="guide-figure-panel" aria-label="3 / 3">
+                <a href="../../assets/status/bleed-guide-m3.jpg?v=d64f337c" aria-label="図3を拡大して開く（3枚中3枚目）">
+                  <picture>
+                    <source type="image/webp" srcset="../../assets/status/bleed-guide-m3.webp?v=6de6b6a1">
+                    <img src="../../assets/status/bleed-guide-m3.jpg?v=d64f337c" width="1122" height="1402" alt="重ね掛けと見るポイント3/3。出血は「何個も別々に積む」タイプではない。同じ出血を何個も別々に積み重ねない。ターン数は大きい方、効果量は大きい方を引き継いで、1つの出血として扱う。出血スキルを見る4ポイント：1、誰に付与するか。2、何ターン続くか。3、攻撃力の何%ダメージか。4、条件・確率はあるか。まとめ：「出血を持っている」だけでなく、倍率・ターン数・条件まで見るのが大事" loading="lazy" decoding="async">
+                  </picture>
+                </a>
+              </figure>
+            </div>
+            <div class="guide-slides-controls guide-series-controls" hidden>
+              <button type="button" data-series-prev aria-label="前の図へ">‹</button>
+              <span class="guide-slides-dots">
+                <button type="button" data-series-dot="0" aria-label="1枚目へ" aria-current="true"></button>
+                <button type="button" data-series-dot="1" aria-label="2枚目へ"></button>
+                <button type="button" data-series-dot="2" aria-label="3枚目へ"></button>
+              </span>
+              <span class="guide-series-count" aria-live="polite">1 / 3</span>
+              <button type="button" data-series-next aria-label="次の図へ">›</button>
+            </div>
+            <p class="guide-figure-note"><span class="is-narrow">横にスワイプで次の図へ。図をタップすると拡大して開きます。</span><span class="is-wide">‹ › で次の図へ。図をクリックすると拡大して開きます。</span></p>
+          </div>
+        </div>
+      </section>
+      <section class="guide-card" id="poison" aria-labelledby="poison-title">
+        <div class="guide-card-head">
+          <h2 id="poison-title">毒との違い</h2>
+        </div>
+        <div class="guide-card-body">
+          <p>毒と出血は、どちらも毎ターン行動開始時にダメージを与える持続ダメージですが、<strong>ダメージの基準が違います</strong>。</p>
+          <ul class="guide-bullets">
+            <li><strong>毒</strong>：対象の現在HPを基準にする</li>
+            <li><strong>出血</strong>：付与者の攻撃力を基準にする</li>
+          </ul>
+          <p>毒は相手のHPが高いほどダメージが伸びやすい一方、出血は<strong>付与するキャラ自身の攻撃力が高いほどダメージが伸びやすい</strong>効果です。同じ持続ダメージでも、火力の伸び方や相性は別物です。</p>
+        </div>
+      </section>
+      <section class="guide-card" id="stacking" aria-labelledby="stacking-title">
+        <div class="guide-card-head">
+          <h2 id="stacking-title">出血は重ね掛けできる？</h2>
+        </div>
+        <div class="guide-card-body">
+          <p>同じ出血を何個も別々に積み重ねることはできません。</p>
+          <p>公式FAQ「バフ・弱体効果」では、出血は毒・火傷などと同じく、同じ種類の効果を重ねると上書きされ、<strong>効果ターンと効果の大きさについて、それぞれ最大のものを引き継いだ1つの効果だけが残る</strong>と説明されています。</p>
+          <p><a href="https://note.com/wazu_019/n/nf85f0e31daba" target="_blank" rel="noopener">ワーズさんの検証</a>でも、ディアン・カーミラ・アレクサンドラの出血を重ねたとき、1つの出血だけが残ることが確認されています。</p>
+          <div class="guide-callout">
+            <p class="guide-callout-title">出血は「何個も付ける」効果ではない</p>
+            <p>出血をいくつ付けても、ダメージが何重にも発生するわけではありません。</p>
+            <p>重ねたときに残るのは、ターン数と効果量がそれぞれ大きいほうの、1つの出血です。</p>
+          </div>
+        </div>
+      </section>
+      <section class="guide-card" id="users" aria-labelledby="users-title">
+        <div class="guide-card-head">
+          <h2 id="users-title">出血を付与するキャラ</h2>
+        </div>
+        <div class="guide-card-body">
+          <p>このサイトでキャラページを公開しているキャラのうち、出血を付与するスキルは次のとおりです。</p>
+          <div class="guide-table-wrap">
+            <table class="guide-table guide-table--wrap">
+              <thead>
+                <tr>
+                  <th scope="col">キャラ／スキル</th>
+                  <th scope="col">対象</th>
+                  <th scope="col">出血（ターン・ダメージ）</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row"><a href="../characters/eir.html#skill-2">エイル S2 銀の魔弾</a></th>
+                  <td data-label="対象">行動阻害中の敵全体（最大5体）</td>
+                  <td data-label="出血（ターン・ダメージ）">1ターン・攻撃力50%（専用Lv2で2ターン）</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/dian.html#skill-1">ディアン S1 貫通弾</a></th>
+                  <td data-label="対象">ランダムな敵3体（専用Lv1で5体）</td>
+                  <td data-label="出血（ターン・ダメージ）">3ターン・攻撃力25%（専用Lv3で4ターン）</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/belle.html#skill-1">ベル S1 バーストエンド</a></th>
+                  <td data-label="対象">攻撃力が最も高い敵（対象のHP割合が50%より大きいとき）</td>
+                  <td data-label="出血（ターン・ダメージ）">2ターン・攻撃力10%（専用Lv3で4ターン）</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/alexandra.html#skill-1">アレクサンドラ S1 ナイト・ブレイク</a></th>
+                  <td data-label="対象">ランダムな敵4体（専用Lv1で5体）</td>
+                  <td data-label="出血（ターン・ダメージ）">70%の確率で2ターン・攻撃力50%</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/carmilla.html#skill-1">カーミラ S1 スウィートバイト</a></th>
+                  <td data-label="対象">ランダムな敵5体</td>
+                  <td data-label="出血（ターン・ダメージ）">2ターン・攻撃力20%（専用Lv1で50%）</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p>ほかに、次のキャラも出血を付与するスキルを持っています。これらのキャラページは準備中です。</p>
+          <ul class="guide-bullets">
+            <li>アイリス：2ターン、攻撃力35%</li>
+            <li>テオドラ：3ターン、攻撃力7%</li>
+            <li>ロザリー：60%の確率で2ターン、攻撃力10%</li>
+            <li>チェルナ：70%の確率で1ターン、攻撃力10%</li>
+            <li>ソテイラ：攻撃を受けたとき50%の確率で1ターン、攻撃力20%</li>
+            <li>ガルム：50%の確率で2ターン、攻撃力20%</li>
+          </ul>
+          <p>キャラごとに、付与確率・持続ターン・攻撃力に対する倍率・発動条件が異なります。同じ「出血」でも性能差が大きいため、出血を持っているだけで同じ役割とは限りません。</p>
+        </div>
+      </section>
+      <section class="guide-card" id="drama" aria-labelledby="drama-title">
+        <div class="guide-card-head">
+          <h2 id="drama-title">劇化との関係</h2>
+        </div>
+        <div class="guide-card-body">
+          <p><strong>劇化</strong>は、受ける持続ダメージを増加させる効果です。たとえば<a href="../characters/natasha_bouquet.html#skill-3">[花束の魔女]ナターシャS3「消えない過去」</a>は、自身と攻撃力が高い敵3体に劇化を付与し、受ける持続ダメージを増やします。</p>
+          <p>ゲーム内ヘルプでは出血は持続ダメージ効果のひとつなので、劇化で増えるダメージには出血も含まれます。</p>
+          <p>また、ゲーム内ヘルプでは毒と火傷に「ダメージは付帯者の攻撃力を超えない」という上限の説明がありますが、出血にはこの説明がありません。そのため、出血は持続ダメージを増やす効果と組み合わせたときに、毒・火傷とは違う伸び方をする場合があります。</p>
+        </div>
+      </section>
+      <section class="guide-card" id="points" aria-labelledby="points-title">
+        <div class="guide-card-head">
+          <h2 id="points-title">出血を見るときのポイント</h2>
+        </div>
+        <div class="guide-card-body">
+          <p>出血スキルを見るときは、次の4点を確認すると分かりやすくなります。</p>
+          <ul class="guide-bullets">
+            <li>誰に付与するか</li>
+            <li>何ターン続くか</li>
+            <li>攻撃力の何%ダメージか</li>
+            <li>付与条件や確率があるか</li>
+          </ul>
+          <p>「出血を持っているか」だけでなく、<strong>どれくらいの倍率で、どのくらい長く、どれだけ安定して付与できるか</strong>を見ることが大切です。</p>
+        </div>
+      </section>
+      <section class="guide-card" id="summary" aria-labelledby="summary-title">
+        <div class="guide-card-head">
+          <h2 id="summary-title">まとめ</h2>
+        </div>
+        <div class="guide-card-body">
+          <ul class="guide-bullets">
+            <li>出血は、付与者の攻撃力を基準に、毎ターン行動開始時にダメージを与える持続ダメージ効果</li>
+            <li>毒とはダメージの基準が違い、付与するキャラ側の攻撃力が重要</li>
+            <li>同じ出血を重ねても別々には残らず、強い内容を引き継いだ1つの出血になる</li>
+            <li>劇化などで持続ダメージが増えると、出血のダメージも増える</li>
+          </ul>
+          <p>出血キャラを見るときは、<strong>倍率・ターン数・付与条件・対象</strong>をセットで確認すると、そのキャラの使い方が分かりやすくなります。</p>
+        </div>
+      </section>
+      <section class="guide-card" id="sources" aria-labelledby="sources-title">
+        <div class="guide-card-head">
+          <h2 id="sources-title">出典</h2>
+        </div>
+        <div class="guide-card-body">
+          <p class="guide-source">出典：ゲーム内ヘルプ「持続ダメージ効果」／公式FAQ「バフ・弱体効果」／ゲーム内スキル説明</p>
+          <p class="guide-source">出血のダメージの基準とタイミング、毒・火傷との上限の違いはゲーム内ヘルプ、同じ出血を重ねたときの扱いは公式FAQ、各キャラの付与確率・ターン数・倍率はゲーム内スキル説明を基準にしています。</p>
+          <ul class="guide-bullets guide-source">
+            <li><a href="https://mementomori.zendesk.com/hc/ja/articles/46412673040921" target="_blank" rel="noopener">公式FAQ「バフ・弱体効果」</a></li>
+          </ul>
+          <p class="guide-source">検証参考：ワーズさんが公開されている検証結果を参考にさせていただきました。</p>
+          <ul class="guide-bullets guide-source">
+            <li><a href="https://note.com/wazu_019/n/nf85f0e31daba" target="_blank" rel="noopener">ワーズさん「スキル効果の重ね掛け」</a><span class="guide-link-text">ディアン・カーミラ・アレクサンドラで出血を重ねたときの確認</span></li>
+          </ul>
+        </div>
+      </section>
+    </div>
+    <!-- ad:bottom -->
+    <aside class="ad-slot" aria-label="広告">
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-6389066329814944"
+           data-ad-slot="6111654373"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </aside>
+    <!-- /ad:bottom -->
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <span>ミレストのメメントモリ分析データ室 / 非公式ファンサイト</span>
+      <nav class="footer-links" aria-label="サイト内のページ">
+        <a href="/">トップ</a>
+        <a href="../characters/index.html">キャラ一覧</a>
+        <a href="/pages/guide/">このサイトでできること</a>
+        <a href="/privacy.html">プライバシーポリシー</a>
+        <a href="/disclaimer.html">免責事項</a>
+        <a href="/about.html">このサイトについて</a>
+        <a href="/contact.html">お問い合わせ</a>
+      </nav>
+    </div>
+  </footer>
+  <script src="../../js/figure-series.js?v=dcfabac1" defer></script>
+</body>
+</html>

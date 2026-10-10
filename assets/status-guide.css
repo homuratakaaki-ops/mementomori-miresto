@@ -342,8 +342,76 @@
   border-radius: 8px;
 }
 
-/* 図解の縦並び版（狭い画面専用）。広い画面では出さない。 */
+/*
+ * 縦長の図解の組（figure の mobile）。横に並べてスワイプで1枚ずつ送る（scroll-snap）。
+ * 図は枠いっぱいの幅で出す（文字の多い図を読みやすくするため。2026-10-10 夢爽決定）。
+ * 続きがあることは、操作列のドット・「1 / 3」・前後ボタンで伝える。
+ * 横長の1枚がある図解では狭い画面だけで出し、無い図解（.is-only）は広い画面でも出す。
+ */
 .guide-figure-mobile { display: none; }
+
+.guide-figure-mobile.is-only {
+  display: block;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.guide-series-track {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+}
+
+.guide-series-track::-webkit-scrollbar { display: none; }
+
+.guide-series-track:focus-visible {
+  outline: 2px solid var(--accent-strong);
+  outline-offset: 2px;
+}
+
+.guide-figure-panel {
+  flex: 0 0 100%;
+  margin: 0;
+  scroll-snap-align: center;
+}
+
+.guide-figure-panel a { display: block; }
+
+.guide-figure-panel img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.guide-series-controls button:disabled {
+  opacity: .3;
+  cursor: default;
+}
+
+.guide-series-count {
+  min-width: 3.5em;
+  color: var(--muted);
+  font-size: .8rem;
+  text-align: center;
+}
+
+.guide-figure-note {
+  margin: 0;
+  color: var(--muted);
+  font-size: .8rem;
+  text-align: center;
+}
+
+/* 案内文は広い画面では「‹ ›」、狭い画面では「スワイプ」の言い方にする。 */
+.guide-figure-note .is-narrow { display: none; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .guide-series-track { scroll-behavior: smooth; }
+}
 
 /* 操作列は本文より目立たせない。狭い画面ではドットが次の行へ回る。 */
 .guide-slides-controls {
@@ -475,32 +543,26 @@
   .guide-slide img,
   .guide-figure img { border-radius: 0; }
 
-  /* 縦並び版がある図解は、狭い画面では横長の1枚と入れ替える。
-     各図は左右いっぱい・図と図の間は少しあける。 */
+  /* 縦長の図解の組がある図解は、狭い画面では横長の1枚と入れ替える。
+     組は左右いっぱいまで広げる（負のマージンは .guide-card-body の padding と同じ16px）。 */
   .guide-figure.has-mobile { display: none; }
 
-  .guide-figure-mobile {
+  .guide-figure-mobile,
+  .guide-figure-mobile.is-only {
     display: block;
+    max-width: none;
     margin-left: -16px;
     margin-right: -16px;
   }
 
-  .guide-figure-panel { margin: 0 0 8px; }
+  .guide-figure-note { margin: 0 16px; }
 
-  .guide-figure-panel a { display: block; }
+  .guide-figure-note .is-wide { display: none; }
 
-  .guide-figure-panel img {
-    display: block;
-    width: 100%;
-    height: auto;
-  }
+  .guide-figure-note .is-narrow { display: inline; }
 
-  .guide-figure-note {
-    margin: 0 16px;
-    color: var(--muted);
-    font-size: .8rem;
-    text-align: center;
-  }
+  /* 枠いっぱいに出すので、角の丸みは付けない（横長の図解と同じ）。 */
+  .guide-figure-panel img { border-radius: 0; }
 }
 
 

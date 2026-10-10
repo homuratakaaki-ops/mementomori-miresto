@@ -756,6 +756,7 @@ function mentionsTerm(skill, term) {
 
 const ARTICLE_BLOCK_PAD = "          ";
 const SLIDES_SCRIPT = "../../" + versioned("js/guide-slides.js");
+const SERIES_SCRIPT = "../../" + versioned("js/figure-series.js");
 
 /**
  * 本文の記法を1か所で処理する。
@@ -927,15 +928,19 @@ function articleSlides(block) {
  * 静止画1枚の図解（スライドにしない回）。見た目の幅・狭い画面での広げ方はスライドと同じ。
  * 本文の先頭近くに置く前提なので遅延読み込みはしない（スライド1枚目と同じ扱い）。
  *
- * mobile（任意）：狭い画面（560px以下）でだけ出す縦並び版。横長の1枚を分割した画像を
- * 上から順に並べ、それぞれタップで原寸画像を開ける。1枚ずつ別ファイルなので、
+ * mobile（任意）：狭い画面（560px以下）でだけ出す縦長の画像の組。横にスワイプで1枚ずつ送り、
+ * それぞれタップで原寸画像を開ける。1枚ずつ別ファイルなので、
  * どれか1枚だけ差し替えられる。mobile がある回は、横長版と縦並び版の両方を
  * loading="lazy" にする（CSSで隠した側は読み込まれない）。
+ *
+ * 横長の1枚が無い回（src を書かず mobile だけ）は、画面の広さにかかわらず縦長の画像を横送りで出す。
+ * 広い画面では幅を抑える（CSS の .guide-figure-mobile.is-only）。1枚目は本文冒頭なので遅延読み込みしない。
  */
 function articleFigure(block) {
   const panels = Array.isArray(block.mobile) ? block.mobile : [];
+  const mobileOnly = !block.src && panels.length > 0;
   const lazy = panels.length ? ' loading="lazy"' : "";
-  const lines = [
+  const lines = mobileOnly ? [] : [
     ARTICLE_BLOCK_PAD + '<figure class="guide-figure' + (panels.length ? " has-mobile" : "") + '">',
     ARTICLE_BLOCK_PAD + "  <picture>",
     ARTICLE_BLOCK_PAD + '    <source type="image/webp" srcset="../../' + escapeHtml(versioned(block.webpSmall))
@@ -947,20 +952,38 @@ function articleFigure(block) {
     ARTICLE_BLOCK_PAD + "</figure>"
   ];
   if (!panels.length) return lines.join("\n");
-  lines.push(ARTICLE_BLOCK_PAD + '<div class="guide-figure-mobile">');
+  // 縦長の画像は横に並べてスワイプで送る（1枚分の高さで読めるように）。
+  // JSが動かなくても横スクロールとスナップはCSSだけで動く。操作列（前へ・ドット・次へ）は
+  // hidden のまま出し、js/figure-series.js が外して今の位置を表示する。
+  lines.push(ARTICLE_BLOCK_PAD + '<div class="guide-figure-mobile' + (mobileOnly ? " is-only" : "") + '" data-figure-series>');
+  lines.push(ARTICLE_BLOCK_PAD + '  <div class="guide-series-track" tabindex="0" role="region" aria-label="図解'
+    + panels.length + '枚。横にスクロールして次の図へ">');
   panels.forEach((panel, index) => {
-    lines.push(ARTICLE_BLOCK_PAD + '  <figure class="guide-figure-panel">');
-    lines.push(ARTICLE_BLOCK_PAD + '    <a href="../../' + escapeHtml(versioned(panel.src)) + '" aria-label="図' + (index + 1)
+    lines.push(ARTICLE_BLOCK_PAD + '    <figure class="guide-figure-panel" aria-label="' + (index + 1) + " / " + panels.length + '">');
+    lines.push(ARTICLE_BLOCK_PAD + '      <a href="../../' + escapeHtml(versioned(panel.src)) + '" aria-label="図' + (index + 1)
       + "を拡大して開く（" + panels.length + "枚中" + (index + 1) + '枚目）">');
-    lines.push(ARTICLE_BLOCK_PAD + "      <picture>");
-    lines.push(ARTICLE_BLOCK_PAD + '        <source type="image/webp" srcset="../../' + escapeHtml(versioned(panel.webp)) + '">');
-    lines.push(ARTICLE_BLOCK_PAD + '        <img src="../../' + escapeHtml(versioned(panel.src)) + '" width="' + escapeHtml(panel.width)
-      + '" height="' + escapeHtml(panel.height) + '" alt="' + escapeHtml(panel.alt) + '" loading="lazy" decoding="async">');
-    lines.push(ARTICLE_BLOCK_PAD + "      </picture>");
-    lines.push(ARTICLE_BLOCK_PAD + "    </a>");
-    lines.push(ARTICLE_BLOCK_PAD + "  </figure>");
+    lines.push(ARTICLE_BLOCK_PAD + "        <picture>");
+    lines.push(ARTICLE_BLOCK_PAD + '          <source type="image/webp" srcset="../../' + escapeHtml(versioned(panel.webp)) + '">');
+    lines.push(ARTICLE_BLOCK_PAD + '          <img src="../../' + escapeHtml(versioned(panel.src)) + '" width="' + escapeHtml(panel.width)
+      + '" height="' + escapeHtml(panel.height) + '" alt="' + escapeHtml(panel.alt) + '"' + (mobileOnly && index === 0 ? "" : ' loading="lazy"') + ' decoding="async">');
+    lines.push(ARTICLE_BLOCK_PAD + "        </picture>");
+    lines.push(ARTICLE_BLOCK_PAD + "      </a>");
+    lines.push(ARTICLE_BLOCK_PAD + "    </figure>");
   });
-  lines.push(ARTICLE_BLOCK_PAD + '  <p class="guide-figure-note">図をタップすると拡大して開きます。</p>');
+  lines.push(ARTICLE_BLOCK_PAD + "  </div>");
+  lines.push(ARTICLE_BLOCK_PAD + '  <div class="guide-slides-controls guide-series-controls" hidden>');
+  lines.push(ARTICLE_BLOCK_PAD + '    <button type="button" data-series-prev aria-label="前の図へ">‹</button>');
+  lines.push(ARTICLE_BLOCK_PAD + '    <span class="guide-slides-dots">');
+  panels.forEach((panel, index) => {
+    lines.push(ARTICLE_BLOCK_PAD + '      <button type="button" data-series-dot="' + index + '" aria-label="' + (index + 1) + '枚目へ"'
+      + (index === 0 ? ' aria-current="true"' : "") + "></button>");
+  });
+  lines.push(ARTICLE_BLOCK_PAD + "    </span>");
+  lines.push(ARTICLE_BLOCK_PAD + '    <span class="guide-series-count" aria-live="polite">1 / ' + panels.length + "</span>");
+  lines.push(ARTICLE_BLOCK_PAD + '    <button type="button" data-series-next aria-label="次の図へ">›</button>');
+  lines.push(ARTICLE_BLOCK_PAD + "  </div>");
+  lines.push(ARTICLE_BLOCK_PAD + '  <p class="guide-figure-note"><span class="is-narrow">横にスワイプで次の図へ。図をタップすると拡大して開きます。</span>'
+    + '<span class="is-wide">‹ › で次の図へ。図をクリックすると拡大して開きます。</span></p>');
   lines.push(ARTICLE_BLOCK_PAD + "</div>");
   return lines.join("\n");
 }
@@ -1030,6 +1053,16 @@ function articleSourcesCard(guide) {
   ];
   if (sources.officialNote) {
     parts.push(ARTICLE_BLOCK_PAD + '<p class="guide-source">' + escapeHtml(sources.officialNote) + "</p>");
+  }
+  // 公式の出典のうち、ウェブで読めるもの（公式FAQなど）へのリンク。任意。
+  const officialLinks = sources.officialLinks || [];
+  if (officialLinks.length) {
+    parts.push(ARTICLE_BLOCK_PAD + '<ul class="guide-bullets guide-source">');
+    for (const item of officialLinks) {
+      parts.push(ARTICLE_BLOCK_PAD + '  <li><a href="' + escapeHtml(item.url)
+        + '" target="_blank" rel="noopener">' + escapeHtml(item.name) + "</a></li>");
+    }
+    parts.push(ARTICLE_BLOCK_PAD + "</ul>");
   }
   if (verification.length) {
     const names = [...new Set(verification.map((item) => item.name))];
@@ -1166,6 +1199,13 @@ function validateArticleNumbers(guide, skillById, errors) {
 /** 出典検査。{{ref}} のキーが実在し、逆に本文で使われない出典が残っていないか。 */
 function validateArticleSources(guide, usedRefs, errors) {
   const where = "data/status/" + guide.id + ".json";
+  for (const item of (guide.sources || {}).officialLinks || []) {
+    if (!item.name || !/^https:\/\//.test(item.url || "")) {
+      errors.push(where + ": sources.officialLinks は name と https の url を書くこと");
+    } else if (!((guide.sources || {}).official || []).includes(item.name)) {
+      errors.push(where + ": sources.officialLinks の " + item.name + " が sources.official に無い");
+    }
+  }
   for (const item of (guide.sources || {}).verification || []) {
     if (!item.key) { errors.push(where + ": sources.verification に key が無い項目がある"); continue; }
     if (!usedRefs.has(item.key)) {
@@ -1182,19 +1222,23 @@ function validateArticleSlides(guide, errors) {
     for (const block of section.blocks || []) {
       if (block.type === "figure") {
         const label = where + ": 図解（figure）";
-        checked += 1;
-        for (const key of ["webp", "webpSmall", "src"]) {
+        const mobileOnly = !block.src && !block.webp && !block.webpSmall;
+        if (mobileOnly && !Array.isArray(block.mobile)) {
+          errors.push(label + " に横長の画像（src）も縦並び版（mobile）も無い");
+        }
+        if (!mobileOnly) checked += 1;
+        for (const key of mobileOnly ? [] : ["webp", "webpSmall", "src"]) {
           if (!block[key]) { errors.push(label + " の " + key + " が無い"); continue; }
           if (!existsSync(join(ROOT, block[key]))) {
             errors.push(label + " の " + key + " が見つからない（" + block[key] + "）");
           }
         }
-        for (const key of ["width", "height"]) {
+        for (const key of mobileOnly ? [] : ["width", "height"]) {
           if (!Number.isInteger(block[key]) || block[key] <= 0) {
             errors.push(label + " の " + key + " は原寸（正の整数）で書くこと");
           }
         }
-        if (!block.alt) errors.push(label + " の alt が無い");
+        if (!mobileOnly && !block.alt) errors.push(label + " の alt が無い");
         if (block.mobile !== undefined) {
           if (!Array.isArray(block.mobile) || block.mobile.length < 2) {
             errors.push(label + " の mobile は2枚以上の配列で書くこと");
@@ -1251,6 +1295,12 @@ function hasSlides(guide) {
     (section.blocks || []).some((block) => block.type === "slides"));
 }
 
+/** 縦長の画像の組（figure の mobile）があるか。あれば横送りのスクリプトを読み込む。 */
+function hasFigureSeries(guide) {
+  return (guide.sections || []).some((section) =>
+    (section.blocks || []).some((block) => block.type === "figure" && Array.isArray(block.mobile) && block.mobile.length > 0));
+}
+
 /**
  * article型のガイド1件を検証して組み立てる。
  * 従来の givers / users / amplifiers の検査（validateLists・validateGiverNumbers）は
@@ -1283,7 +1333,7 @@ function buildArticle(guide, options) {
     cards,
     ads: options.ads,
     // slides のあるページだけスクリプトを読む（無いページに増やさない）。
-    scripts: hasSlides(guide) ? [SLIDES_SCRIPT] : []
+    scripts: [hasSlides(guide) ? SLIDES_SCRIPT : null, hasFigureSeries(guide) ? SERIES_SCRIPT : null].filter(Boolean)
   });
 
   return { html, summary, links, numbers, slides };
