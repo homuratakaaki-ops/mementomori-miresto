@@ -24,6 +24,7 @@ import { readFileSync, existsSync, mkdirSync, readdirSync } from "node:fs";
 import { createRequire } from "node:module";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { versioned } from "./asset-version.mjs";
 
 const require = createRequire(import.meta.url);
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
@@ -365,8 +366,8 @@ function head(options) {
     '  <link rel="icon" href="/favicon.ico" sizes="32x32">',
     '  <link rel="icon" type="image/png" href="../../assets/miresto/miresto-icon-32.png" sizes="32x32">',
     '  <link rel="apple-touch-icon" href="../../assets/miresto/miresto-icon-180.png">',
-    '  <link rel="stylesheet" href="../../assets/character-page.css">',
-    '  <link rel="stylesheet" href="../../assets/status-guide.css">',
+    '  <link rel="stylesheet" href="../../' + versioned("assets/character-page.css") + '">',
+    '  <link rel="stylesheet" href="../../' + versioned("assets/status-guide.css") + '">',
     adRenderer.renderAdHead(options.ads, "  ")
   ].join("\n");
 }
@@ -754,7 +755,7 @@ function mentionsTerm(skill, term) {
 }
 
 const ARTICLE_BLOCK_PAD = "          ";
-const SLIDES_SCRIPT = "../../js/guide-slides.js";
+const SLIDES_SCRIPT = "../../" + versioned("js/guide-slides.js");
 
 /**
  * 本文の記法を1か所で処理する。
@@ -896,9 +897,9 @@ function articleSlides(block) {
       + (index + 1) + " / " + items.length + '">');
     lines.push(ARTICLE_BLOCK_PAD + "      <picture>");
     lines.push(ARTICLE_BLOCK_PAD + '        <source type="image/webp" srcset="../../'
-      + escapeHtml(item.webpSmall) + " 960w, ../../" + escapeHtml(item.webp) + " "
+      + escapeHtml(versioned(item.webpSmall)) + " 960w, ../../" + escapeHtml(versioned(item.webp)) + " "
       + escapeHtml(item.width) + 'w" sizes="(max-width: 960px) 100vw, 960px">');
-    lines.push(ARTICLE_BLOCK_PAD + '        <img src="../../' + escapeHtml(item.src)
+    lines.push(ARTICLE_BLOCK_PAD + '        <img src="../../' + escapeHtml(versioned(item.src))
       + '" width="' + escapeHtml(item.width) + '" height="' + escapeHtml(item.height)
       + '" alt="' + escapeHtml(item.alt) + '"'
       + (index === 0 ? "" : ' loading="lazy"') + ' decoding="async">');
@@ -937,10 +938,10 @@ function articleFigure(block) {
   const lines = [
     ARTICLE_BLOCK_PAD + '<figure class="guide-figure' + (panels.length ? " has-mobile" : "") + '">',
     ARTICLE_BLOCK_PAD + "  <picture>",
-    ARTICLE_BLOCK_PAD + '    <source type="image/webp" srcset="../../' + escapeHtml(block.webpSmall)
-      + " 960w, ../../" + escapeHtml(block.webp) + " " + escapeHtml(block.width)
+    ARTICLE_BLOCK_PAD + '    <source type="image/webp" srcset="../../' + escapeHtml(versioned(block.webpSmall))
+      + " 960w, ../../" + escapeHtml(versioned(block.webp)) + " " + escapeHtml(block.width)
       + 'w" sizes="(max-width: 960px) 100vw, 960px">',
-    ARTICLE_BLOCK_PAD + '    <img src="../../' + escapeHtml(block.src) + '" width="' + escapeHtml(block.width)
+    ARTICLE_BLOCK_PAD + '    <img src="../../' + escapeHtml(versioned(block.src)) + '" width="' + escapeHtml(block.width)
       + '" height="' + escapeHtml(block.height) + '" alt="' + escapeHtml(block.alt) + '"' + lazy + ' decoding="async">',
     ARTICLE_BLOCK_PAD + "  </picture>",
     ARTICLE_BLOCK_PAD + "</figure>"
@@ -949,11 +950,11 @@ function articleFigure(block) {
   lines.push(ARTICLE_BLOCK_PAD + '<div class="guide-figure-mobile">');
   panels.forEach((panel, index) => {
     lines.push(ARTICLE_BLOCK_PAD + '  <figure class="guide-figure-panel">');
-    lines.push(ARTICLE_BLOCK_PAD + '    <a href="../../' + escapeHtml(panel.src) + '" aria-label="図' + (index + 1)
+    lines.push(ARTICLE_BLOCK_PAD + '    <a href="../../' + escapeHtml(versioned(panel.src)) + '" aria-label="図' + (index + 1)
       + "を拡大して開く（" + panels.length + "枚中" + (index + 1) + '枚目）">');
     lines.push(ARTICLE_BLOCK_PAD + "      <picture>");
-    lines.push(ARTICLE_BLOCK_PAD + '        <source type="image/webp" srcset="../../' + escapeHtml(panel.webp) + '">');
-    lines.push(ARTICLE_BLOCK_PAD + '        <img src="../../' + escapeHtml(panel.src) + '" width="' + escapeHtml(panel.width)
+    lines.push(ARTICLE_BLOCK_PAD + '        <source type="image/webp" srcset="../../' + escapeHtml(versioned(panel.webp)) + '">');
+    lines.push(ARTICLE_BLOCK_PAD + '        <img src="../../' + escapeHtml(versioned(panel.src)) + '" width="' + escapeHtml(panel.width)
       + '" height="' + escapeHtml(panel.height) + '" alt="' + escapeHtml(panel.alt) + '" loading="lazy" decoding="async">');
     lines.push(ARTICLE_BLOCK_PAD + "      </picture>");
     lines.push(ARTICLE_BLOCK_PAD + "    </a>");
@@ -1316,7 +1317,7 @@ function patchSitemap(urlPaths, writeIfChanged) {
  * ------------------------------------------------------------------ */
 
 const COUNTERMEASURES_DATA = join(ROOT, "data", "countermeasures.json");
-const COUNTERMEASURES_SCRIPT = "../../js/countermeasure-filter.js";
+const COUNTERMEASURES_SCRIPT = "../../" + versioned("js/countermeasure-filter.js");
 const ATTRIBUTE_ORDER = ["藍", "紅", "翠", "黄", "天", "冥"];
 
 // 対策スキルを flow から拾う語。表記ゆれ（弱体／弱体効果、全解除、2つずつ解除 など）を含める。

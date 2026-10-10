@@ -19,6 +19,7 @@
  *
  * data/*.json を変更したら必ず実行し、JSONとHTMLを同じコミットに含めること。
  */
+import { versioned } from "./asset-version.mjs";
 import { readFileSync, writeFileSync, existsSync } from "node:fs";
 import { createRequire } from "node:module";
 import { dirname, join, resolve } from "node:path";
@@ -112,10 +113,10 @@ function characterPageHtml({ character, metaHtml, skillListHtml, description, ad
   <link rel="icon" href="/favicon.ico" sizes="32x32">
   <link rel="icon" type="image/png" href="../../assets/miresto/miresto-icon-32.png" sizes="32x32">
   <link rel="apple-touch-icon" href="../../assets/miresto/miresto-icon-180.png">
-  <link rel="stylesheet" href="../../assets/character-page.css">
-  <script src="../../js/gacha-status.js" defer></script>
-  <script src="../../js/render-character.js" defer></script>
-  <script src="../../js/character-page.js" defer></script>
+  <link rel="stylesheet" href="../../${versioned("assets/character-page.css")}">
+  <script src="../../${versioned("js/gacha-status.js")}" defer></script>
+  <script src="../../${versioned("js/render-character.js")}" defer></script>
+  <script src="../../${versioned("js/character-page.js")}" defer></script>
 ${adRenderer.renderAdHead(ads, "  ")}
 </head>
 <body data-character-page data-character-id="${renderer.escapeHtml(character.id)}" data-attribute="${renderer.escapeHtml(character.attribute || "")}" data-prerendered>
