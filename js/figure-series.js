@@ -9,6 +9,7 @@
  *   - 自動送りはしない（読む速さは人それぞれのため）
  *   - 今の位置は、スクロール位置にいちばん近い図で決める
  *   - 前へ・次へ・ドットは、その図を枠の中央へ動かすだけ。最初と最後で止まる（1枚目へ戻らない）
+ *   - ボタンで送っている途中は、通過中の図で表示を戻さない（着いた時点の位置だけ出す）
  *   - 動きを減らす設定のときはスクロールのアニメーションをしない（CSSの scroll-behavior で切る）
  */
 (function () {
@@ -26,6 +27,8 @@
     const dots = Array.from(controls.querySelectorAll("[data-series-dot]"));
     const count = controls.querySelector(".guide-series-count");
     let current = 0;
+    let targetLeft = null;
+    let targetTimer = 0;
 
     function nearestIndex() {
       const center = track.scrollLeft + track.clientWidth / 2;
@@ -55,7 +58,13 @@
     function go(index) {
       const target = Math.max(0, Math.min(panels.length - 1, index));
       const panel = panels[target];
-      const left = panel.offsetLeft - track.offsetLeft - (track.clientWidth - panel.offsetWidth) / 2;
+      const maxLeft = track.scrollWidth - track.clientWidth;
+      const left = Math.max(0, Math.min(maxLeft,
+        panel.offsetLeft - track.offsetLeft - (track.clientWidth - panel.offsetWidth) / 2));
+      // 送り終わるまでスクロール位置からの表示更新を止める（念のため1秒で解除）。
+      targetLeft = left;
+      window.clearTimeout(targetTimer);
+      targetTimer = window.setTimeout(() => { targetLeft = null; }, 1000);
       track.scrollTo({ left: left });
       current = target;
       render();
@@ -67,6 +76,11 @@
       pending = true;
       window.requestAnimationFrame(() => {
         pending = false;
+        if (targetLeft !== null) {
+          if (Math.abs(track.scrollLeft - targetLeft) > 2) return;
+          targetLeft = null;
+          window.clearTimeout(targetTimer);
+        }
         const index = nearestIndex();
         if (index !== current) {
           current = index;
