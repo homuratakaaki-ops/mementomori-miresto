@@ -30,6 +30,8 @@ check('Explicit shared parts in combined model',js.includes('planPrioritizedShar
 check('Independent plan comparison',js.includes('planEquipmentParts({...p,ownedParts:partsBySlot[p.slot]})'));
 check('One real inventory per slot',js.includes("name=\"parts-"));
 check('4-type forecast through shared shortages',js.includes('needs:combined.shortages'));
+check('Relic acquisition follows plan priority',js.includes('combined.perItem.flatMap')&&js.includes('order:relicOrder'));
+
 check('Stop/complete strategy selector',html.includes('value="stop-on-target"')&&html.includes('value="complete-cycle"'));
 check('Weekly free start logic',js.includes('getForecastFreeSchedule'));
 check('No cloud save claimed',html.includes('PCとスマホの同期')&&html.includes('未実装'));
