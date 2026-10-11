@@ -5,7 +5,7 @@
  */
 import {PART_SLOTS,RELIC_KEYS,planPrioritizedSharedEquipment} from './holy-angel-planner-core.mjs';
 import {replayHolyAngelActuals} from './holy-angel-actual-log.mjs';
-import {getForecastFreeSchedule,parseJstLocal,gameDayJst} from './holy-angel-calendar.mjs';
+import {getForecastFreeSchedule,parseJstLocal,gameDayJst,gameWeekMondayJst} from './holy-angel-calendar.mjs';
 import {forecastMultiRelicWithStopping} from './holy-angel-multi-stop.mjs';
 
 export const PLAN_V1_KEY='holy-angel-multi-plan-test-v1';
@@ -113,6 +113,8 @@ export function bridgePlansAndActuals({planV1,actualV2=null,inventorySource='pla
       throw new Error('未受取の回数報酬があります。先に実際の報酬を確認して記録してください（計算では補完しません）');
     if(parseJstLocal(plan.settings.startAt)<parseJstLocal(actualState.at))
       throw new Error('計画の開始日時が最後の実績より前です。計画の日時を進めてください');
+    if(gameWeekMondayJst(plan.settings.startAt)!==actualState.gameWeek)
+      throw new Error('実績の週更新が未記録です。月曜04時以降の週更新を実績に記録してから計算してください');
     partsBySlot={...actualState.partsBySlot};
     ownedRelics={...actualState.relics};
     differs=SLOTS.some(k=>plan.partsBySlot[k]!==partsBySlot[k])||
