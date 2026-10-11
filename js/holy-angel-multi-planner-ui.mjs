@@ -268,7 +268,7 @@ byId('import-json').addEventListener('change',async event=>{
   finally{event.target.value='';}
 });
 root.addEventListener('input',event=>{
-  if(event.target.closest('#plan-list')||event.target.closest('#shared-fields')){
+  if(event.target.matches('input,select,textarea')&&event.target.id!=='import-json'){
     setStatus('変更あり。端末内保存ボタンを押すまで保存されません。');
     results.hidden=true;
   }
