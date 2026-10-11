@@ -1,3 +1,23 @@
+/**
+ * Holy Angel multi-relic probability/diamond forecast (stage 5).
+ *
+ * Models the selected relic milestones: 10 draws = 20%, 25 = 40%,
+ * 50 = 100%. Independence of the first two rolls is an UNVERIFIED assumption.
+ * Only future milestones are sampled: at startGauge >= 10/25 the earlier
+ * rewards must have been CLAIMED and reflected in `needs` already.
+ *
+ * `strategy`: stop-on-target stops at 10/25 when a selected relic is fulfilled;
+ * complete-cycle always finishes 50 and keeps surplus for later.
+ * `roundsPerWeek`: up to 1..3 relic-focused attempts, NOT necessarily
+ * 50/100/150 total draws when early stopping is enabled.
+ * All available weekly free pulls are assumed usable by week-end, not a
+ * real calendar/day-by-day model. Tickets, free pulls and switching rights
+ * are shared across attempts and never replenished within a week.
+ * If no guaranteed completion occurs inside `weeks`, total cost-to-complete
+ * and expected-completion-week are null rather than misleading estimates.
+ *
+ * No actual game resource is consumed by this function.
+ */
 export const RELICS = Object.freeze(['chalice', 'medal', 'wing', 'fruit']);
 export const CHECKPOINT_DISTRIBUTION = Object.freeze([
 Object.freeze({at10:0,at25:0,probability:0.48}),
