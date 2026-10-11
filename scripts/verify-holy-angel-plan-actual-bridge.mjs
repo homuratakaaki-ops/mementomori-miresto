@@ -30,7 +30,7 @@ eq('plan-only indicator',planned.source,'plan-entry');
 eq('plan-only existing shortfalls',[planned.shortages.chalice,planned.shortages.medal],[3,3]);
 eq('plan-only exchanges',[planned.combined.perItem[0].exchanges,planned.combined.perItem[1].exchanges],[2,1]);
 eq('plan-only cost uses 0 tickets',planned.inventory.tickets,0);
-eq('plan-only free7',planned.free.firstWeekFreeDraws,7);
+eq('plan-only Sunday has 1 free day left',planned.free.firstWeekFreeDraws,1);
 const actualView=bridgePlansAndActuals({planV1:base(),actualV2:actual(),inventorySource:'actuals'});
 eq('actual confirmed inventory',actualView.source,'confirmed-actuals');
 eq('actual inventory differs from stale plan input',actualView.differsFromPlanEntry,true);
