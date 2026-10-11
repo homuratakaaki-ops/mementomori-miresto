@@ -36,3 +36,38 @@ check('fixed draws 50 Thursday +20 tickets',fixedDrawCost({draws:50,freeDraws:4,
 check('paid switch 300',fixedDrawCost({draws:1,freeDraws:1,paidSwitches:1}).totalDiamonds,300);
 assert.throws(()=>fixedDrawCost({draws:2,freeDraws:3}),/exceeds/); ++count;
 console.log('PASS ' + count + ' holy-angel core checks');
+
+
+// Test the *shared* unused-parts pool rather than giving each physical item
+// the full same-slot inventory. Reordering changes who receives materials first.
+const sharedModule = await import('../js/holy-angel-planner-core.mjs');
+const priorityCalc = sharedModule.planPrioritizedSharedEquipment;
+const firstArm = {equipmentId:'armA',slot:'arm',currentLevel:240,targetLevel:250};
+const secondArm = {equipmentId:'armB',slot:'arm',currentLevel:240,targetLevel:280};
+const ab = priorityCalc({plans:[firstArm,secondArm],partsBySlot:{arm:20},ownedRelics:{chalice:1,medal:1}});
+check('shared parts priority A/B exchanges', ab.perItem.map(x=>x.exchanges),[0,2]);
+check('shared parts are consumed once', [ab.totalRelics.chalice,ab.shortages.chalice,ab.remainingPartsBySlot.arm],[2,1,35]);
+const ba = priorityCalc({plans:[secondArm,firstArm],partsBySlot:{arm:20}});
+check('priority swap changes which item first gets the pool',ba.perItem.map(x=>x.exchanges),[1,1]);
+check('overall exchanges remain consistent', [ba.totalRelics.chalice,ba.remainingPartsBySlot.arm],[2,35]);
+check('planning never mutates input', (()=>{
+  const inp = {plans:[firstArm,secondArm],partsBySlot:{arm:20}};
+  const before = JSON.stringify(inp);
+  priorityCalc(inp);
+  return JSON.stringify(inp) === before;
+})(), true);
+const milestones = priorityCalc({plans:[
+  {equipmentId:'armA',slot:'arm',currentLevel:240,targetLevel:300},
+  {equipmentId:'armA',slot:'arm',currentLevel:240,targetLevel:350},
+],partsBySlot:{arm:0}});
+check('same physical item milestones count once', [milestones.perItem.length,milestones.totalRelics.chalice],[1,5]);
+const crossSlot = priorityCalc({plans:[
+  {equipmentId:'armA',slot:'arm',currentLevel:240,targetLevel:250},
+  {equipmentId:'feetA',slot:'feet',currentLevel:240,targetLevel:250},
+],partsBySlot:{arm:0,feet:0},ownedRelics:{chalice:1,medal:1}});
+check('two slots share the relic counts, not the parts', [crossSlot.totalRelics.chalice,crossSlot.shortages.chalice],[2,1]);
+assert.throws(()=>priorityCalc({plans:[firstArm,secondArm],partsBySlot:{arm:20},ownedRelics:{chalice:-1}}),/ownedRelics/);++count;
+assert.throws(()=>priorityCalc({plans:[firstArm],partsBySlot:{feet:20}}),/Missing shared/);++count;
+assert.throws(()=>priorityCalc({plans:[{...firstArm,ownedParts:20}],partsBySlot:{arm:20}}),/partsBySlot/);++count;
+assert.throws(()=>priorityCalc({plans:[firstArm,{...firstArm,currentLevel:250}],partsBySlot:{arm:20}}),/Conflicting/);++count;
+console.log('PASS ' + count + ' checks including shared slot inventory');
