@@ -7,7 +7,7 @@
 <title>聖天使の神託｜育成費用テスト画面（未公開）</title>
 <style>
 :root{color-scheme:light;--purple:#7550a6;--ink:#25212d;--line:#e6deec;--sub:#665f70;--paper:#fff;--bg:#fbfaf7}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 system-ui,-apple-system,"Noto Sans JP",sans-serif}header,main,footer{width:min(100%,760px);margin:auto}header{padding:22px 18px 4px}main{padding:0 14px 36px}h1{font-size:23px;line-height:1.35;margin:8px 0}h2{font-size:18px;margin:0 0 13px}h3{font-size:15px;margin:13px 0 7px}.meta{color:var(--sub);font-size:13px}.tag{display:inline-block;border:1px solid #d9cbe8;border-radius:99px;color:var(--purple);padding:3px 9px;font-size:12px;font-weight:700}.notice{font-size:13px;color:#655c70;background:#f0eaf5;border-radius:10px;padding:12px;margin:12px 0}.panel{margin-top:15px;border:1px solid var(--line);border-radius:16px;background:var(--paper);padding:19px;box-shadow:0 2px 9px #2d174a08}.fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.span2{grid-column:span 2}label{display:flex;flex-direction:column;gap:5px;font-weight:600;font-size:13px}input,select,textarea{width:100%;border:1px solid #cfc5d8;border-radius:9px;background:#fff;min-height:44px;padding:9px 10px;color:var(--ink);font:inherit}textarea{min-height:70px;resize:vertical}input:focus-visible,select:focus-visible,textarea:focus-visible,button:focus-visible{outline:3px solid #a48acb;outline-offset:2px}.check{flex-direction:row;align-items:center;font-weight:500;gap:9px}.check input{width:20px;min-height:20px;height:20px;accent-color:var(--purple)}button{border:0;border-radius:11px;background:var(--purple);color:white;font:700 15px inherit;padding:13px 18px;min-height:48px;cursor:pointer;width:100%;margin:13px 0 0}button:hover{background:#5c3e85}.results{display:none}.results.visible{display:block}.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.stat{border-radius:12px;background:#f5f1f8;padding:13px}.stat small{display:block;color:var(--sub);font-size:12px}.stat strong{font-size:23px;font-variant-numeric:tabular-nums}.grid-table{width:100%;border-collapse:collapse;font-size:13px;margin-top:8px}.grid-table th,.grid-table td{padding:8px 4px;text-align:right;border-bottom:1px solid var(--line)}.grid-table th:first-child,.grid-table td:first-child{text-align:left}.note{font-size:12px;color:var(--sub);margin:9px 0 0}.error{color:#8d2020;background:#fff0ef;border:1px solid #e7c2c1;border-radius:12px;padding:13px;margin-top:16px}dl{display:grid;grid-template-columns:2fr 1fr;gap:6px 10px}dd{text-align:right;font-weight:700;margin:0}dt{color:var(--sub)}details{margin-top:12px}summary{cursor:pointer;color:var(--purple);font-weight:700}footer{font-size:12px;padding:4px 18px 25px;color:var(--sub)}@media(max-width:420px){.fields{gap:10px}.panel{padding:15px}h1{font-size:21px}.stat strong{font-size:21px}}
+*{box-sizing:border-box}[hidden]{display:none!important}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 system-ui,-apple-system,"Noto Sans JP",sans-serif}header,main,footer{width:min(100%,760px);margin:auto}header{padding:22px 18px 4px}main{padding:0 14px 36px}h1{font-size:23px;line-height:1.35;margin:8px 0}h2{font-size:18px;margin:0 0 13px}h3{font-size:15px;margin:13px 0 7px}.meta{color:var(--sub);font-size:13px}.tag{display:inline-block;border:1px solid #d9cbe8;border-radius:99px;color:var(--purple);padding:3px 9px;font-size:12px;font-weight:700}.notice{font-size:13px;color:#655c70;background:#f0eaf5;border-radius:10px;padding:12px;margin:12px 0}.panel{margin-top:15px;border:1px solid var(--line);border-radius:16px;background:var(--paper);padding:19px;box-shadow:0 2px 9px #2d174a08}.fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.span2{grid-column:span 2}label{display:flex;flex-direction:column;gap:5px;font-weight:600;font-size:13px}input,select,textarea{width:100%;border:1px solid #cfc5d8;border-radius:9px;background:#fff;min-height:44px;padding:9px 10px;color:var(--ink);font:inherit}textarea{min-height:70px;resize:vertical}input:focus-visible,select:focus-visible,textarea:focus-visible,button:focus-visible{outline:3px solid #a48acb;outline-offset:2px}.check{flex-direction:row;align-items:center;font-weight:500;gap:9px}.check input{width:20px;min-height:20px;height:20px;accent-color:var(--purple)}button{border:0;border-radius:11px;background:var(--purple);color:white;font:700 15px/1.5 system-ui,-apple-system,"Noto Sans JP",sans-serif;padding:13px 18px;min-height:48px;cursor:pointer;width:100%;margin:13px 0 0}button:hover{background:#5c3e85}.results{display:none}.results.visible{display:block}.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.stat{border-radius:12px;background:#f5f1f8;padding:13px}.stat small{display:block;color:var(--sub);font-size:12px}.stat strong{font-size:23px;font-variant-numeric:tabular-nums}.grid-table{width:100%;border-collapse:collapse;font-size:13px;margin-top:8px}.grid-table th,.grid-table td{padding:8px 4px;text-align:right;border-bottom:1px solid var(--line)}.grid-table th:first-child,.grid-table td:first-child{text-align:left}.note{font-size:12px;color:var(--sub);margin:9px 0 0}.error{color:#8d2020;background:#fff0ef;border:1px solid #e7c2c1;border-radius:12px;padding:13px;margin-top:16px}dl{display:grid;grid-template-columns:2fr 1fr;gap:6px 10px}dd{text-align:right;font-weight:700;margin:0}dt{color:var(--sub)}details{margin-top:12px}summary{cursor:pointer;color:var(--purple);font-weight:700}footer{font-size:12px;padding:4px 18px 25px;color:var(--sub)}@media(max-width:420px){.fields{gap:10px}.panel{padding:15px}h1{font-size:21px}.stat strong{font-size:21px}}
 </style>
 </head>
 <body>
@@ -23,9 +23,10 @@
 <div class="fields">
 <label>部位<select name="slot"><option value="arm">手</option><option value="feet">足</option><option value="accessory">アクセサリー</option><option value="head">頭</option><option value="body">胴</option></select></label>
 <label>現在のミカエル装備<select name="current" id="current"><option value="none">未所持</option></select></label>
+<label class="span2" id="current-manual-wrap" hidden>現在のレベル（Lv540以上）<input type="number" name="currentManual" min="540" max="5000" step="10" placeholder="例：550"></label>
 <label>目標レベル<input type="number" name="target" min="240" step="10" value="300" required></label>
 <label>未使用パーツ<input type="number" name="parts" id="parts" min="0" step="1" placeholder="自動推定" inputmode="numeric"></label>
-<label class="span2">Lv540以上の追加パーツ（必要な場合）<textarea name="custom" placeholder="例：540=40,550=40"></textarea></label>
+<label class="span2">Lv540以上の追加パーツ（現在Lv分も必要なら入力）<textarea name="custom" placeholder="例：540=40,550=40"></textarea></label>
 </div><p class="note">パーツ欄を空欄にすると標準的な余りを推定します。50個以上の実在庫も入力できます。手入力した値を勝手に上書きしません。</p></section>
 <section class="panel"><h2>2. 現在の所持資源</h2>
 <div class="fields">
@@ -51,7 +52,7 @@
 </form>
 <div id="error" role="alert" hidden class="error"></div>
 <section class="panel results" id="result" aria-live="polite"><h2>試算結果</h2>
-<div class="cards"><div class="stat"><small>必要な追加交換</small><strong id="exchange">−</strong></div><div class="stat"><small>標準・入力後の残パーツ</small><strong id="remain">−</strong></div><div class="stat"><small>期間中の平均支出</small><strong id="spent">−</strong></div><div class="stat"><small>期間中の達成確率</small><strong id="rate">−</strong></div></div>
+<div class="cards"><div class="stat"><small>必要な追加交換</small><strong id="exchange">−</strong></div><div class="stat"><small>進化後の残パーツ</small><strong id="remain">−</strong></div><div class="stat"><small>期間中の平均支出</small><strong id="spent">−</strong></div><div class="stat"><small>期間中の達成確率</small><strong id="rate">−</strong></div></div>
 <p class="note" id="period-note"></p>
 <h3>不足する聖遺物</h3><dl id="needed"></dl>
 <h3>週ごとの累積達成確率</h3><table class="grid-table"><thead><tr><th>週</th><th>その週の達成</th><th>累積</th></tr></thead><tbody id="weekly"></tbody></table>
@@ -67,8 +68,9 @@ import {getForecastFreeSchedule} from './js/holy-angel-calendar.mjs';
 const f=document.querySelector('#planner');const errors=document.querySelector('#error');const result=document.querySelector('#result');
 const current=document.querySelector('#current');
 for(let lv=240;lv<=530;lv+=10){let o=document.createElement('option');o.value=String(lv);o.textContent='Lv'+lv;current.append(o)}
+{const o=document.createElement('option');o.value='manual';o.textContent='Lv540以上（手入力）';current.append(o)}
 const partsInput=document.querySelector('#parts');
-current.addEventListener('change',()=>{if(partsInput.value!=='')return;partsInput.placeholder=current.value==='none'?'0':String(standardRemainder(Number(current.value)))});
+current.addEventListener('change',()=>{document.querySelector('#current-manual-wrap').hidden=current.value!=='manual';if(partsInput.value!=='')return;partsInput.placeholder=current.value==='none'?'0':current.value==='manual'?'実際の残数を入力':String(standardRemainder(Number(current.value)))});
 const nowJst=new Intl.DateTimeFormat('sv-SE',{timeZone:'Asia/Tokyo',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',hourCycle:'h23'}).format(new Date()).replace(' ','T');
 document.querySelector('#start').value=nowJst;
 const relicNames={chalice:'天契の聖杯',medal:'蒼穹の銀勲',wing:'希求の神翼',fruit:'悠園の果実'};
@@ -81,20 +83,20 @@ f.addEventListener('submit',event=>{
 event.preventDefault();errors.hidden=true;result.classList.remove('visible');
 try{
 const cur=f.elements.namedItem('current').value;const start=f.elements.namedItem('start').value;
-const plan=planEquipmentParts({slot:f.elements.namedItem('slot').value,currentLevel:cur==='none'?null:Number(cur),targetLevel:int('target',{min:240,max:5000}),ownedParts:partsInput.value===''?undefined:int('parts'),customStepParts:parseCustom(f.elements.namedItem('custom').value)});
+const plan=planEquipmentParts({slot:f.elements.namedItem('slot').value,currentLevel:cur==='none'?null:cur==='manual'?int('currentManual',{min:540,max:5000}):Number(cur),targetLevel:int('target',{min:240,max:5000}),ownedParts:partsInput.value===''?undefined:int('parts'),customStepParts:parseCustom(f.elements.namedItem('custom').value)});
 const inventory=Object.fromEntries(Object.keys(relicNames).map(k=>[k,int(k)]));
 const needs=Object.fromEntries(Object.keys(relicNames).map(k=>[k,Math.max(0,plan.relics[k]-inventory[k])]));
 const free=getForecastFreeSchedule(start,{freeUsedThisGameDay:f.elements.namedItem('usedToday').checked});
 const selected=f.elements.namedItem('selected').value;
 const forecast=forecastMultiRelicWithStopping({needs,tickets:int('tickets'),strategy:f.elements.namedItem('strategy').value,roundsPerWeek:int('rounds',{min:1,max:3}),weeks:int('weeks',{min:1,max:12}),startGauge:int('gauge',{max:49}),startSelected:selected==='none'?null:selected,abandonPartialGauge:f.elements.namedItem('abandon').checked,freeSwitchesRemaining:int('switches',{max:1}),firstWeekFreeDraws:free.firstWeekFreeDraws,laterWeekFreeDraws:7});
 put('exchange',fmt(plan.exchanges)+'回');put('remain',fmt(plan.remainingParts)+'個');put('spent',fmt(forecast.expectedDiamondsSpent)+'個');put('rate',(forecast.probabilityFinished*100).toFixed(1)+'%');
-put('period-note',forecast.completedGuarantee?'対象期間内の必要ダイヤ平均：'+fmt(forecast.expectedDiamondsToComplete)+'個 ／ 平均到達：'+forecast.expectedCompletionWeek.toFixed(2)+'週目':'表示期間内に揃わない可能性があります。上記は期間内の予想支出で、完成までの総費用ではありません。');
+put('period-note',Object.values(needs).every(n=>n===0)?'必要な聖遺物はすでに揃っています。追加ガチャは不要です。':forecast.completedGuarantee?'対象期間内の必要ダイヤ平均：'+fmt(forecast.expectedDiamondsToComplete)+'個 ／ 平均到達：'+forecast.expectedCompletionWeek.toFixed(2)+'週目':'表示期間内に揃わない可能性があります。上記は期間内の予想支出で、完成までの総費用ではありません。');
 const dl=document.querySelector('#needed');dl.replaceChildren();for(const [key,label] of Object.entries(relicNames)){let dt=document.createElement('dt');dt.textContent=label;let dd=document.createElement('dd');dd.textContent=needs[key]+'個';dl.append(dt,dd)}
-renderRows('weekly',forecast.exactWeek.map(r=>[r.week+'週目',(r.probability*100).toFixed(1)+'%',(r.cumulativeProbability*100).toFixed(1)+'%']));
+renderRows('weekly',forecast.exactWeek.map(r=>[r.week===0?'現在':r.week+'週目',(r.probability*100).toFixed(1)+'%',(r.cumulativeProbability*100).toFixed(1)+'%']));
 renderRows('steps',plan.steps.map(s=>['Lv'+s.level,s.requiredParts+'個',s.exchanges+'回',s.remainingParts+'個']));
 put('assumptions','初週ゲーム日：'+free.startGameDay+'。初週の無料ガチャ利用可能回数：'+free.firstWeekFreeDraws+'回。無料ガチャは今週の残りの各日分を取得できる前提。10回と25回の当選は独立と仮定。実際の日単位の課金時刻は計算していません。装備完成にはアダマンタイト・ゴールド・装備キャラの条件などが別途必要です。');
 result.classList.add('visible');result.scrollIntoView({behavior:'smooth',block:'start'});
-}catch(error){errors.textContent='計算を表示できません：'+error.message;errors.hidden=false;errors.scrollIntoView({block:'center'});}
+}catch(error){const message=String(error.message||error);errors.textContent='計算を表示できません：'+(message.includes('targetLevel must be')?'目標レベルはLv240以上で、10レベル刻みにしてください。':message.includes('level must be')?'現在のレベルは10刻みで入力してください。':message.includes('customStepParts[')?'Lv540以上は各10レベルの追加パーツ数を入力してください。':message);errors.hidden=false;errors.scrollIntoView({block:'center'});}
 });
 </script>
 </body></html>
