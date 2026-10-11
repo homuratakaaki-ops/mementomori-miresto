@@ -75,7 +75,7 @@ try{
     ok(!(await page.locator('#multi-results').isVisible()),'Invalid plan no result');
     await page.locator('#import-json').setInputFiles({name:'holy-angel-plans.json',mimeType:'application/json',
       buffer:Buffer.from(JSON.stringify(json),'utf8')});
-    await page.locator('#save-state').getByText('JSONを読み込みました。実在庫と計画を必ず確認してください。').waitFor({state:'visible',timeout:5000});
+    await page.locator('#save-state').getByText('ファイルからデータを読み込みました。実在庫と計画を必ず確認してください。').waitFor({state:'visible',timeout:5000});
     eq(await page.locator('#plan-list .plan-card').first().locator('[data-field="target"]').inputValue(),'280','JSON reimport restore');
     eq(exceptions,[],'No browser page errors');
     if(width===390){
