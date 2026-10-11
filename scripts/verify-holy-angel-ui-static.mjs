@@ -31,6 +31,14 @@ const tests=[
 ['Future manual steps input',/540=40/.test(html)],
 ['Unused parts editable',/name="parts"/.test(html)],
 ['Current level options populated',/for\(let lv=240;lv<=530;lv\+=10\)/.test(html)],
+['Above-530 current-level manual input',/name="currentManual"/.test(html)],
+['Above-530 manual current selectable',/o.value='manual'/.test(html)],
+['Hide manual high-level field by default',/id="current-manual-wrap" hidden/.test(html)],
+['Manual custom step validation',/customStepParts\[/.test(html)],
+['Already satisfied shown as current',/r.week===0\?'現在'/.test(html)],
+['No-draws result is explicit',/必要な聖遺物はすでに揃っています/.test(html)],
+['Invalid target error in Japanese',/目標レベルはLv240以上/.test(html)],
+
 ];
 for(const [name,ok] of tests)assert.ok(ok,name);
 const match=html.match(/<script type="module">([\s\S]*?)<\/script>/);
