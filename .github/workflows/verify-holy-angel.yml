@@ -39,6 +39,8 @@ jobs:
         run: node scripts/verify-holy-angel-calendar.mjs
       - name: Verify actual gacha event replay
         run: node scripts/verify-holy-angel-actual-log.mjs
+      - name: Verify actual record form markup
+        run: node scripts/verify-holy-angel-actuals-ui-static.mjs
       - name: Verify single-plan preview markup
         run: node scripts/verify-holy-angel-ui-static.mjs
       - name: Verify multi-plan preview and icons
@@ -53,10 +55,19 @@ jobs:
           sudo apt-get install -y --no-install-recommends fonts-noto-cjk
       - name: Verify multi-plan browser interactions
         run: node scripts/verify-holy-angel-multi-ui-browser.mjs
+      - name: Verify actual record browser interactions
+        run: node scripts/verify-holy-angel-actuals-ui-browser.mjs
       - name: Save browser screenshot
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: holy-angel-multi-390px
           path: holy-angel-multi-390.png
+          if-no-files-found: ignore
+      - name: Save actual record screenshot
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: holy-angel-actuals-390px
+          path: holy-angel-actuals-390.png
           if-no-files-found: ignore
