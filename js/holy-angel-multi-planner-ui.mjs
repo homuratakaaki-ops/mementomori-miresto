@@ -149,7 +149,13 @@ function calculate(){
   try{
     const {plans,partsBySlot,ownedRelics,free,settings}=getCalculationInput();
     const combined=planPrioritizedSharedEquipment({plans,partsBySlot,ownedRelics});
-    const forecast=forecastMultiRelicWithStopping({needs:combined.shortages,...settings});
+    // Aim for relics needed by higher-priority equipment first.
+    // Keep all four IDs in the order even if some have no remaining deficit.
+    const relicOrder=[...new Set([
+      ...combined.perItem.flatMap(item=>RELIC_KEYS.filter(key=>item.relics[key]>0)),
+      ...RELIC_KEYS
+    ])];
+    const forecast=forecastMultiRelicWithStopping({needs:combined.shortages,order:relicOrder,...settings});
     byId('overall-exchanges').textContent=numFmt(combined.perItem.reduce((n,p)=>n+p.exchanges,0))+'回';
     byId('overall-diamonds').textContent=forecast.expectedDiamondsToComplete===null?'期間内の総額は未確定':numFmt(forecast.expectedDiamondsToComplete)+'ダイヤ';
     byId('overall-probability').textContent=(forecast.probabilityFinished*100).toFixed(1)+'%';
@@ -159,7 +165,7 @@ function calculate(){
       (forecast.completedGuarantee?
        '平均到達は'+forecast.expectedCompletionWeek.toFixed(2)+'週目。':
        '期間内に揃わない経路があります。期間内に使う平均ダイヤは'+numFmt(forecast.expectedDiamondsSpent)+'。')+
-      '10回と25回の抽選は独立と仮定。無料分は週末までに使える前提です。';
+      '狙う聖遺物の順番：'+(relicOrder.filter(k=>combined.shortages[k]>0).map(k=>RELIC_NAMES[k]).join(' → ')||'追加不要')+'。10回と25回の抽選は独立と仮定。無料分は週末までに使える前提です。';
     showRelics(byId('shortages'),combined.shortages);
     const rows=combined.perItem.map((p,i)=>[
       (i+1)+'番 '+(draft.plans.find(x=>x.equipmentId===p.equipmentId)?.name||p.equipmentId),
