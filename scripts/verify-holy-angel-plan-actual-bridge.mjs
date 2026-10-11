@@ -74,7 +74,10 @@ eventActual.events=[
  {id:'draw1',type:'draw',at:'2026-10-11T18:05',count:10,free:false,ticketsUsed:10},
  {id:'claim1',type:'claim',at:'2026-10-11T18:06',milestone:10,won:true}
 ];
-const eventResult=bridgePlansAndActuals({planV1:base(),actualV2:eventActual,inventorySource:'actuals'});
+bad('cannot silently abandon a gauge whose relic is already sufficient',
+ ()=>bridgePlansAndActuals({planV1:base(),actualV2:eventActual,inventorySource:'actuals'}),/partial gauge/);
+const confirmedSwitchPlan=base();confirmedSwitchPlan.settings.abandon=true;
+const eventResult=bridgePlansAndActuals({planV1:confirmedSwitchPlan,actualV2:eventActual,inventorySource:'actuals'});
 eq('confirmed claim advances relics',eventResult.inventory.ownedRelics.chalice,2);
 eq('claims never touch original v1 inventory',base().ownedRelics.chalice,0);
 eq('confirmed claim reduces remaining shortage',eventResult.shortages.chalice,0);
