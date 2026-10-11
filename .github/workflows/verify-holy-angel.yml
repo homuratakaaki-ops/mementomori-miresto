@@ -39,6 +39,8 @@ jobs:
         run: node scripts/verify-holy-angel-calendar.mjs
       - name: Verify actual gacha event replay
         run: node scripts/verify-holy-angel-actual-log.mjs
+      - name: Verify actual inventory and legacy plan bridge
+        run: node scripts/verify-holy-angel-plan-actual-bridge.mjs
       - name: Verify actual record form markup
         run: node scripts/verify-holy-angel-actuals-ui-static.mjs
       - name: Verify single-plan preview markup
