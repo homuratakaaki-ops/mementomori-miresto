@@ -75,7 +75,7 @@ eventActual.events=[
  {id:'claim1',type:'claim',at:'2026-10-11T18:06',milestone:10,won:true}
 ];
 bad('cannot silently abandon a gauge whose relic is already sufficient',
- ()=>bridgePlansAndActuals({planV1:base(),actualV2:eventActual,inventorySource:'actuals'}),/partial gauge/);
+ ()=>bridgePlansAndActuals({planV1:base(),actualV2:eventActual,inventorySource:'actuals'}),/Partial gauge/i);
 const confirmedSwitchPlan=base();confirmedSwitchPlan.settings.abandon=true;
 const eventResult=bridgePlansAndActuals({planV1:confirmedSwitchPlan,actualV2:eventActual,inventorySource:'actuals'});
 eq('confirmed claim advances relics',eventResult.inventory.ownedRelics.chalice,2);
