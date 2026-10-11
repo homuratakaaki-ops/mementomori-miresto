@@ -1,0 +1,43 @@
+name: Holy Angel isolated checks
+
+on:
+  pull_request:
+    paths:
+      - 'holy-angel-*.html'
+      - 'assets/holy-angel/**'
+      - 'js/holy-angel-*.mjs'
+      - 'scripts/verify-holy-angel-*.mjs'
+      - '.github/workflows/verify-holy-angel.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check source syntax
+        run: |
+          for f in js/holy-angel-*.mjs scripts/verify-holy-angel-*.mjs; do
+            node --check "$f"
+          done
+      - name: Verify equipment parts
+        run: node scripts/verify-holy-angel-planner.mjs
+      - name: Verify single relic probabilities
+        run: node scripts/verify-holy-angel-relic-probability.mjs
+      - name: Verify complete 50 cycles
+        run: node scripts/verify-holy-angel-multi-cycle.mjs
+      - name: Verify milestone stopping and switching
+        run: node scripts/verify-holy-angel-multi-stop.mjs
+      - name: Verify JST day and week boundaries
+        run: node scripts/verify-holy-angel-calendar.mjs
+      - name: Verify single-plan preview markup
+        run: node scripts/verify-holy-angel-ui-static.mjs
+      - name: Verify multi-plan preview and icons
+        run: node scripts/verify-holy-angel-multi-ui-static.mjs
