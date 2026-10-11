@@ -262,15 +262,15 @@ root.addEventListener('click',event=>{
       const url=URL.createObjectURL(blob),a=document.createElement('a');
       a.href=url;a.download='holy-angel-plans.json';a.click();
       // Explicit download action: do not alter stored data.
-      setTimeout(()=>URL.revokeObjectURL(url),1000);setStatus('JSONを書き出しました。編集リンクとは別です。');}
+      setTimeout(()=>URL.revokeObjectURL(url),1000);setStatus('データファイルの保存を開始しました。端末間の自動同期ではありません。');}
     catch(e){fail(e.message);}
   }
 });
 byId('import-json').addEventListener('change',async event=>{
   const file=event.target.files?.[0];if(!file)return;
-  try{if(file.size>64000)throw new Error('JSONのサイズは64KB以内にしてください');
-    restore(await file.text(),'JSONを読み込みました。実在庫と計画を必ず確認してください。');
-  }catch(e){fail('JSONを読み込めません：'+e.message);}
+  try{if(file.size>64000)throw new Error('データファイルが大きすぎます（上限64KB）。');
+    restore(await file.text(),'ファイルからデータを読み込みました。実在庫と計画を必ず確認してください。');
+  }catch(e){fail('データファイルを読み込めません：'+e.message);}
   finally{event.target.value='';}
 });
 root.addEventListener('input',event=>{
