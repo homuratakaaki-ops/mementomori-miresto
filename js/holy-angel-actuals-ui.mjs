@@ -116,11 +116,11 @@ function getDraft(){
   const data={schemaVersion:2,snapshot:readSnapshot(),events:recordedEvents.map(e=>({...e}))};
   preview(data.snapshot,data.events);
   const json=JSON.stringify(data);
-  if(json.length>MAX_BYTES)throw new Error('64KBの上限を超えました。JSONへ退避し、記録を整理してください。');
+  if(json.length>MAX_BYTES)throw new Error('保存データが大きすぎます。実績を整理してください（上限64KB）。');
   return json;
 }
 function validateRestored(json){
-  if(typeof json!=='string'||json.length>MAX_BYTES)throw new Error('JSONの容量は64KB以内です');
+  if(typeof json!=='string'||json.length>MAX_BYTES)throw new Error('読み込めるデータファイルは64KB以内です');
   const o=JSON.parse(json);
   if(!o||typeof o!=='object'||Array.isArray(o)||o.schemaVersion!==2 ||
     !o.snapshot||!Array.isArray(o.events)||o.events.length>MAX_EVENTS)throw new Error('この実績データの形式には対応していません（schemaVersion 2専用）');
@@ -187,16 +187,16 @@ root.addEventListener('click',event=>{
       const url=URL.createObjectURL(data),anchor=document.createElement('a');
       anchor.href=url;anchor.download='holy-angel-actuals-v2.json';
       anchor.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
-      setStatus('JSONを書き出しました。実績はこの端末へ自動保存されません。');
+      setStatus('データファイルの保存を開始しました。この端末への下書き保存は別に行ってください。');
     }
   }catch(e){showError(e.message||String(e));}
 });
 id('actual-import').addEventListener('change',async event=>{
   const file=event.target.files?.[0];if(!file)return;
   try{
-    if(file.size>MAX_BYTES)throw new Error('64KBを超えるJSONは読み込めません');
-    restore(await file.text(),'JSONを読み込みました');
-  }catch(e){showError('JSONを復元できません：'+(e.message||String(e)));}
+    if(file.size>MAX_BYTES)throw new Error('データファイルが大きすぎます（上限64KB）。');
+    restore(await file.text(),'ファイルからデータを読み込みました');
+  }catch(e){showError('データファイルを読み込めません：'+(e.message||String(e)));}
   finally{event.target.value='';}
 });
 el('snapshotAt').value=nowJst();
