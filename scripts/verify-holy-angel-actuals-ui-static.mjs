@@ -46,4 +46,7 @@ test('50 draw reward explicit',html.includes('50回（確定）'));
 test('pending shows unknown rewards',js.includes('pendingClaims.map'));
 test('event list rendered from state',js.includes('showHistory(recordedEvents)'));
 test('not a prediction',html.includes('未来の予測ではなく'));
+test('Backup button uses ordinary Japanese',html.includes('データをファイルに保存')&&html.includes('ファイルからデータを読み込む'));
+test('No JSON jargon in user-facing actual HTML',!html.includes('JSON'));
+test('Plain import status in actual UI',js.includes('ファイルからデータを読み込みました'));
 console.log('PASS '+count+' actual-gacha UI static checks');
