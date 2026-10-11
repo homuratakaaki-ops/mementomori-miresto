@@ -21,7 +21,7 @@ const plans={version:1,plans:[
  {equipmentId:'foot1',name:'足をLv250',slot:'feet',current:'240',target:'250',steps:''}],
  partsBySlot:{arm:0,feet:0,accessory:0,head:0,body:0},
  ownedRelics:{chalice:0,medal:0,wing:0,fruit:0},
- settings:{tickets:0,startAt:'2026-10-12T04:00',usedToday:false,strategy:'complete-cycle',roundsPerWeek:3,weeks:4,gauge:0,selected:'none',freeSwitches:1,abandon:false}};
+ settings:{tickets:0,startAt:'2026-10-11T18:30',usedToday:false,strategy:'complete-cycle',roundsPerWeek:3,weeks:4,gauge:0,selected:'none',freeSwitches:1,abandon:false}};
 const actual={schemaVersion:2,snapshot:{at:'2026-10-11T18:00',
  relics:{chalice:1,medal:0,wing:0,fruit:0},partsBySlot:{arm:20,feet:0,accessory:0,head:0,body:0},
  tickets:10,diamonds:50000,gauge:0,selected:'chalice',freeSwitches:1,usedFreeToday:true,claimedCheckpoints:[]},events:[]};
@@ -54,6 +54,9 @@ try{
   await page.locator('[data-action="calculate"]').click();
   ok((await page.locator('#bridge-error').textContent()).includes('最後の実績より前'));
   await page.locator('#plan-start').fill('2026-10-12T04:00');
+  await page.locator('[data-action="calculate"]').click();
+  ok((await page.locator('#bridge-error').textContent()).includes('週更新が未記録'));
+  await page.locator('#plan-start').fill('2026-10-11T18:30');
   const pending=structuredClone(actual);pending.snapshot.gauge=10;
   await page.locator('#actual-file').setInputFiles({name:'pending.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(pending))});
   await page.locator('[data-action="calculate"]').click();
