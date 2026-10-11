@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>聖天使の神託｜複数計画のテスト（未公開）</title>
+<style>
+:root{color-scheme:light;--purple:#7550a6;--ink:#28232f;--border:#e6dfea;--muted:#686272;--bg:#fbfaf7}
+*{box-sizing:border-box} [hidden]{display:none!important}
+html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 system-ui,-apple-system,"Noto Sans JP",sans-serif}
+header,main,footer{width:min(100%,800px);margin:auto}header{padding:22px 16px 4px}main{padding:0 14px 36px}
+h1{font-size:23px;line-height:1.4;margin:7px 0}h2{font-size:19px;margin:0 0 12px}h3{font-size:15px;margin:0}
+p{margin:10px 0}.minor{font-size:13px;color:var(--muted)}.tag{display:inline-block;border:1px solid #d9c9e8;border-radius:99px;color:var(--purple);padding:3px 11px;font-size:12px;font-weight:700}
+.notice{background:#f2edf6;padding:12px;border-radius:12px;font-size:13px;color:#51415f}
+.panel{margin-top:16px;padding:18px;border:1px solid var(--border);border-radius:16px;background:white;box-shadow:0 2px 9px #24123607}
+.fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.wide{grid-column:span 2}
+label{font-size:13px;font-weight:650;display:flex;flex-direction:column;gap:5px;min-width:0}
+input,select,textarea{font:inherit;color:var(--ink);padding:8px 10px;width:100%;min-width:0;min-height:44px;background:#fff;border:1px solid #d0c5d9;border-radius:9px}
+textarea{min-height:62px;resize:vertical} input:focus-visible,select:focus-visible,button:focus-visible{outline:3px solid #aa8ed0;outline-offset:2px}
+.checkbox{display:flex;align-items:center;flex-direction:row;font-weight:500;gap:8px}.checkbox input{width:20px;height:20px;min-height:20px;accent-color:var(--purple)}
+.buttons{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+button,.file-button{font:700 13px/1.4 system-ui,sans-serif;background:var(--purple);color:#fff;padding:10px 13px;min-height:42px;border:0;border-radius:10px;cursor:pointer}
+button:hover{filter:brightness(.9)}button:disabled{opacity:.32;cursor:not-allowed}
+button.ghost,.file-button{background:#f2edf7;color:#5a397c;border:1px solid #dcd0e8}
+button.danger{background:#fff5f3;color:#993d3d;border:1px solid #eccbca}
+button.main-action{display:block;width:100%;min-height:49px;font-size:15px;margin-top:16px}
+.file-button{position:relative;overflow:hidden;display:inline-flex;align-items:center}
+.file-button input{position:absolute;inset:0;opacity:0;cursor:pointer}
+.plan-card{border:1px solid #e0d7e7;border-radius:12px;padding:13px;margin-top:12px;background:#fff}
+.plan-head{display:flex;align-items:center;justify-content:space-between;gap:6px;margin-bottom:12px}
+.plan-head .buttons{margin:0;gap:5px;flex-wrap:nowrap}.plan-head button{padding:7px 8px;min-height:35px}
+.number{border-radius:50%;background:#ece5f4;color:#64418b;width:29px;height:29px;display:inline-flex;align-items:center;justify-content:center;margin-right:5px;font-weight:700}
+.relic-icon{display:inline-block;width:36px;height:36px;flex:none;border-radius:5px;background-image:url('./assets/holy-angel/relic-sprite.jpg');background-size:144px 36px;background-repeat:no-repeat;background-color:#e8e4ea}
+.relic-label{display:inline-flex;align-items:center;gap:9px;min-width:0}
+.relic-row{display:flex;align-items:center;gap:10px;min-width:0}
+.relic-row .name{flex:1;font-size:13px}.relic-row input{width:90px;min-width:65px;flex:none}
+.stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.stat{background:#f5f1f8;border-radius:11px;padding:12px;min-width:0}
+.stat small{font-size:12px;color:var(--muted);display:block}.stat strong{font-size:19px;line-height:1.4;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.relic-line{display:flex;align-items:center;justify-content:space-between;gap:10px;border-bottom:1px solid var(--border);padding:7px 0}.relic-line strong{white-space:nowrap}
+.table-scroll{overflow-x:auto;max-width:100%}table{border-collapse:collapse;width:100%;min-width:460px;font-size:13px}
+th,td{border-bottom:1px solid var(--border);padding:8px 7px;text-align:left}th{background:#f7f5f9;color:#574e62}
+#error{background:#fff2f0;border:1px solid #e4c4be;color:#892e31;border-radius:11px;padding:13px;margin:14px 0}
+.status{font-size:13px;border-radius:9px;background:#f8f4fa;color:#5b5264;padding:10px;margin-top:12px}
+details{margin-top:12px}summary{font-weight:700;color:var(--purple);cursor:pointer}
+footer{padding:0 18px 28px;color:var(--muted);font-size:12px}
+@media(max-width:420px){h1{font-size:21px}.panel{padding:14px}.fields{gap:10px}.relic-row .name{font-size:12px}.relic-row input{width:78px}.plan-head button{padding:7px 6px}.stat strong{font-size:17px}}
+</style>
+</head>
+<body>
+<header>
+<span class="tag">開発中｜複数計画・端末内のみ</span>
+<h1>聖天使の神託｜育成計画の比較</h1>
+<p class="minor">装備を複数登録し、先に育てたい順番で素材を仮割当てします。</p>
+</header>
+<main id="multi-root">
+<div class="notice">⚠️ 本番公開前のテストです。**実際のゲーム内在庫は変更しません。** 端末内の下書き保存とJSON書出しだけ対応。PCとスマホの同期・秘密編集リンク・クラウド保存は未実装です。10回/25回の抽選結果は独立と仮定した予測モデルです。</div>
+<section class="panel" id="shared-fields">
+<h2>1. 共通の所持素材</h2>
+<p class="minor">全装備で共通に使う現実の在庫を入力してください。計画ごとに在庫をコピーしません。</p>
+<div class="fields">
+<label>手の未使用パーツ<input name="parts-arm" type="number" min="0" step="1" inputmode="numeric"></label>
+<label>足の未使用パーツ<input name="parts-feet" type="number" min="0" step="1" inputmode="numeric"></label>
+<label>アクセサリーの未使用パーツ<input name="parts-accessory" type="number" min="0" step="1" inputmode="numeric"></label>
+<label>頭の未使用パーツ<input name="parts-head" type="number" min="0" step="1" inputmode="numeric"></label>
+<label>胴の未使用パーツ<input name="parts-body" type="number" min="0" step="1" inputmode="numeric"></label>
+</div>
+<h3 style="margin-top:18px">聖遺物（実際の所持数）</h3>
+<div class="fields" style="margin-top:9px">
+<div class="relic-row"><span class="relic-icon" style="background-position:0 0" aria-hidden="true"></span><label class="name">天契の聖杯<input name="owned-chalice" type="number" min="0" step="1" inputmode="numeric"></label></div>
+<div class="relic-row"><span class="relic-icon" style="background-position:-36px 0" aria-hidden="true"></span><label class="name">蒼穹の銀勲<input name="owned-medal" type="number" min="0" step="1" inputmode="numeric"></label></div>
+<div class="relic-row"><span class="relic-icon" style="background-position:-72px 0" aria-hidden="true"></span><label class="name">希求の神翼<input name="owned-wing" type="number" min="0" step="1" inputmode="numeric"></label></div>
+<div class="relic-row"><span class="relic-icon" style="background-position:-108px 0" aria-hidden="true"></span><label class="name">悠園の果実<input name="owned-fruit" type="number" min="0" step="1" inputmode="numeric"></label></div>
+</div>
+</section>
+<section class="panel">
+<div style="display:flex;align-items:center;justify-content:space-between;gap:9px">
+<h2 style="margin:0">2. 育てたい装備と優先順</h2><span class="tag" id="plan-count">2件</span>
+</div>
+<p class="minor">上にある装備ほど先に素材を割り当てます。順番を変えても、実際の所持数は減りません。</p>
+<div id="plan-list"></div>
+<div class="buttons"><button type="button" data-action="add">＋ 計画を追加</button></div>
+</section>
+<section class="panel" id="settings">
+<h2>3. ガチャの引き方（比較条件）</h2>
+<div class="fields">
+<label>専用チケットの所持枚数<input name="tickets" type="number" min="0" step="1"></label>
+<label>開始日時（日本時間）<input name="startAt" type="datetime-local"></label>
+<label>方式<select name="strategy"><option value="stop-on-target">必要な聖遺物が揃ったら止める</option><option value="complete-cycle">50回完走して余りも残す</option></select></label>
+<label>週の挑戦枠<select name="roundsPerWeek"><option value="1">1枠まで</option><option value="2">2枠まで</option><option value="3">3枠まで</option></select></label>
+<label>計算する週数<input name="weeks" type="number" min="1" max="12" step="1"></label>
+<label>今のガチャ回数（0〜49）<input name="gauge" type="number" min="0" max="49" step="1"></label>
+<label>現在選択中の聖遺物<select name="selected"><option value="none">未選択／回数0</option><option value="chalice">天契の聖杯</option><option value="medal">蒼穹の銀勲</option><option value="wing">希求の神翼</option><option value="fruit">悠園の果実</option></select></label>
+<label>無料変更の残回数<select name="freeSwitches"><option value="1">1回</option><option value="0">0回</option></select></label>
+<label class="checkbox wide"><input name="usedToday" type="checkbox">今日の無料1回は使用済み</label>
+<label class="checkbox wide"><input name="abandon" type="checkbox">必要なら現在の回数ゲージを捨てて別の聖遺物へ変更する</label>
+</div>
+<p class="minor">挑戦枠は10回・25回で止めれば50回未満にもなります。すでに通過した報酬は受取済みとして扱います。</p>
+<button type="button" class="main-action" data-action="calculate">必要素材と平均ダイヤを試算する</button>
+<div id="multi-error" role="alert" hidden></div>
+</section>
+<section class="panel" id="multi-results" hidden>
+<h2>4. 計算結果（仮の割当て）</h2>
+<div class="stats">
+<div class="stat"><small>追加で必要なパーツ交換</small><strong id="overall-exchanges">—</strong></div>
+<div class="stat"><small>平均必要ダイヤ</small><strong id="overall-diamonds">—</strong></div>
+<div class="stat"><small>対象期間内に揃う確率</small><strong id="overall-probability">—</strong></div>
+<div class="stat"><small>初週の無料分（最大）</small><strong id="overall-free">—</strong></div>
+</div>
+<p class="minor" id="overall-note"></p>
+<h3>追加で必要な聖遺物</h3>
+<div id="shortages"></div>
+<h3>優先順での素材割当て</h3>
+<div class="table-scroll"><table><thead><tr><th>計画</th><th>部位</th><th>育成</th><th>追加交換</th><th>残パーツ</th></tr></thead><tbody id="combined-details"></tbody></table></div>
+<p class="minor" id="actual-parts-note"></p>
+<details><summary>個別計算との違いを見る</summary>
+<p class="minor">個別計算は、その装備だけで所持パーツをすべて使えると仮定した参考値です。複数計画の実行総額として足し算しないでください。</p>
+<div class="table-scroll"><table><thead><tr><th>計画</th><th>部位</th><th>交換</th><th>前提</th></tr></thead><tbody id="individual-details"></tbody></table></div>
+</details>
+<h3>週ごとの聖遺物獲得確率</h3>
+<div class="table-scroll"><table><thead><tr><th>週</th><th>その週に揃う</th><th>その週までに揃う</th></tr></thead><tbody id="multi-weekly"></tbody></table></div>
+<p class="minor">パーツ以外のアダマンタイト・ゴールド・キャラLv条件は別途必要です。ここにあるのは聖遺物獲得の予測で、装備完成を保証しません。</p>
+</section>
+<section class="panel">
+<h2>5. 端末内の下書き・持ち出し</h2>
+<p class="minor">この端末だけの一時保存です。PCで保存してもスマホには同期されません。JSON書出しと読込は手動で行えます。</p>
+<div class="buttons">
+<button type="button" data-action="save">この端末に保存</button>
+<button type="button" data-action="load" class="ghost">端末の下書きを読込</button>
+<button type="button" data-action="export" class="ghost">JSONを書き出す</button>
+<label class="file-button">JSONを読み込む<input id="import-json" type="file" accept=".json,application/json"></label>
+</div>
+<div class="status" id="save-state" role="status">クラウドには保存されません。</div>
+</section>
+<template id="plan-template">
+<div class="plan-card" data-index="">
+<div class="plan-head"><div><span class="number priority-no">1</span><strong>育成計画</strong></div>
+<div class="buttons">
+<button type="button" class="ghost" data-move="up" data-action="up" aria-label="この計画を上へ">↑</button>
+<button type="button" class="ghost" data-move="down" data-action="down" aria-label="この計画を下へ">↓</button>
+<button type="button" class="danger" data-move="remove" data-action="remove">削除</button>
+</div></div>
+<div class="fields">
+<label>計画名<input data-field="name" maxlength="80"></label>
+<label>装備ID（同じ実物は同じID）<input data-field="equipmentId" maxlength="80"></label>
+<label>部位<select data-field="slot"></select></label>
+<label>現在Lv（未所持は空欄）<input data-field="current" type="number" min="240" max="5000" step="10"></label>
+<label>目標Lv<input data-field="target" type="number" min="240" max="5000" step="10"></label>
+<label class="wide">Lv540以降の追加パーツ（必要な場合）<textarea data-field="steps" placeholder="540=40,550=40"></textarea></label>
+</div>
+</div>
+</template>
+</main>
+<footer>ゲーム画面の聖遺物アイコンは、利用者提供スクリーンショットから抜き出した小さな参考画像です。画像と名称は併記します。開発用であり、広告・外部解析スクリプトはありません。</footer>
+<script type="module" src="./js/holy-angel-multi-planner-ui.mjs"></script>
+</body></html>
