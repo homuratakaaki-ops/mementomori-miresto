@@ -54,7 +54,7 @@ footer{padding:0 18px 28px;color:var(--muted);font-size:12px}
 <p class="minor">装備を複数登録し、先に育てたい順番で素材を仮割当てします。</p>
 </header>
 <main id="multi-root">
-<div class="notice">⚠️ 本番公開前のテストです。<strong>実際のゲーム内在庫は変更しません。</strong> 端末内の下書き保存とJSON書出しだけ対応。PCとスマホの同期・秘密編集リンク・クラウド保存は未実装です。10回/25回の抽選結果は独立と仮定した予測モデルです。</div>
+<div class="notice">⚠️ 本番公開前のテストです。<strong>実際のゲーム内在庫は変更しません。</strong> この端末への下書き保存と、データのファイル保存・読み込みだけ対応。PCとスマホの同期・秘密編集リンク・クラウド保存は未実装です。10回/25回の抽選結果は独立と仮定した予測モデルです。</div>
 <section class="panel" id="shared-fields">
 <h2>1. 共通の所持素材</h2>
 <p class="minor">全装備で共通に使う現実の在庫を入力してください。計画ごとに在庫をコピーしません。</p>
@@ -123,12 +123,12 @@ footer{padding:0 18px 28px;color:var(--muted);font-size:12px}
 </section>
 <section class="panel">
 <h2>5. 端末内の下書き・持ち出し</h2>
-<p class="minor">この端末だけの一時保存です。PCで保存してもスマホには同期されません。JSON書出しと読込は手動で行えます。</p>
+<p class="minor">この端末だけの一時保存です。PCで保存してもスマホには同期されません。端末を移すときは、データをファイルに保存してから、別の端末でそのファイルを読み込んでください。</p>
 <div class="buttons">
 <button type="button" data-action="save">この端末に保存</button>
 <button type="button" data-action="load" class="ghost">端末の下書きを読込</button>
-<button type="button" data-action="export" class="ghost">JSONを書き出す</button>
-<label class="file-button">JSONを読み込む<input id="import-json" type="file" accept=".json,application/json"></label>
+<button type="button" data-action="export" class="ghost">データをファイルに保存</button>
+<label class="file-button">ファイルからデータを読み込む<input id="import-json" type="file" accept=".json,application/json"></label>
 </div>
 <div class="status" id="save-state" role="status">クラウドには保存されません。</div>
 </section>
