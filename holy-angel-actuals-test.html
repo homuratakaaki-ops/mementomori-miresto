@@ -47,7 +47,7 @@ details{margin-top:13px}summary{font-weight:700;color:var(--violet);cursor:point
 <h1>聖天使の神託｜実際の結果を記録</h1>
 <p class="small">未来の予測ではなく、ゲーム内で操作した結果だけを入力します。</p></header>
 <main id="actual-root">
-<div class="note">⚠️ このページは未公開の試作です。実際のゲーム内操作はしません。クラウド同期・PCとスマホの自動共有は未実装。端末内の保存とJSONのバックアップだけ対応しています。未受取の報酬は在庫に反映しません。</div>
+<div class="note">⚠️ このページは未公開の試作です。実際のゲーム内操作はしません。クラウド同期・PCとスマホの自動共有は未実装。この端末への保存と、データをファイルに保存・読み込む機能だけ対応しています。未受取の報酬は在庫に反映しません。</div>
 <section class="panel">
 <h2>1. 記録開始時の本当の所持数</h2>
 <p class="small">この状態を基準に、その後の実際のガチャ操作を順番に記録します。途中で開始時の数字を変更すると、その後の記録も再計算されます。</p>
@@ -125,8 +125,8 @@ details{margin-top:13px}summary{font-weight:700;color:var(--violet);cursor:point
 <div class="buttons">
 <button type="button" data-action="save">この端末に保存</button>
 <button type="button" data-action="load" class="secondary">端末から読み込む</button>
-<button type="button" data-action="export" class="secondary">JSONを書き出す</button>
-<label class="file-button">JSONを読み込む<input id="actual-import" type="file" accept=".json,application/json"></label>
+<button type="button" data-action="export" class="secondary">データをファイルに保存</button>
+<label class="file-button">ファイルからデータを読み込む<input id="actual-import" type="file" accept=".json,application/json"></label>
 </div>
 <div class="status" id="actual-status" role="status">クラウドへは保存されません。</div>
 </section>
