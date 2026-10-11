@@ -26,6 +26,10 @@ const same=planCombinedEquipment([
   {equipmentId:'arm1',slot:'arm',currentLevel:240,targetLevel:350,ownedParts:0}
 ]);
 check('one physical item twice is not duplicated', [same.perItem.length,same.perItem[0].exchanges], [1,5]);
+assert.throws(()=>planCombinedEquipment([
+  {equipmentId:'arm1',slot:'arm',currentLevel:280,targetLevel:300},
+  {equipmentId:'arm2',slot:'arm',currentLevel:280,targetLevel:300}
+]), /shared-parts/); ++count;
 check('fixed draws 50 Monday',fixedDrawCost({draws:50,freeDraws:7}).totalDiamonds,12900);
 check('fixed draws 100 Monday',fixedDrawCost({draws:100,freeDraws:7}).totalDiamonds,27900);
 check('fixed draws 50 Thursday +20 tickets',fixedDrawCost({draws:50,freeDraws:4,tickets:20}).totalDiamonds,7800);
