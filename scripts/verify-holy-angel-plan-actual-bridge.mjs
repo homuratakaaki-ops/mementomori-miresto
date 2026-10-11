@@ -12,7 +12,7 @@ const base=()=>({
  ],
  partsBySlot:{arm:0,feet:0,accessory:0,head:0,body:0},
  ownedRelics:{chalice:0,medal:0,wing:0,fruit:0},
- settings:{tickets:0,startAt:'2026-10-12T04:00',usedToday:false,
+ settings:{tickets:0,startAt:'2026-10-11T18:30',usedToday:false,
   strategy:'complete-cycle',roundsPerWeek:3,weeks:4,gauge:0,
   selected:'none',freeSwitches:1,abandon:false}
 });
@@ -40,7 +40,7 @@ eq('actual parts shared across goals',actualView.combined.perItem[0].exchanges,1
 eq('actual feet still one exchange',actualView.combined.perItem[1].exchanges,1);
 eq('actual shortfalls after combined',[actualView.shortages.chalice,actualView.shortages.medal],[1,2]);
 eq('actual current selected carried',actualView.forecast.expectedDiamondsToComplete!==null,true);
-eq('actual first future week uses 7 free',actualView.free.firstWeekFreeDraws,7);
+eq('actual free used Sunday means zero remains',actualView.free.firstWeekFreeDraws,0);
 eq('actual startup unchanged',actualView.asOf,'2026-10-11T18:00');
 const stale=base(),originalActual=actual(),previous=[JSON.stringify(stale),JSON.stringify(originalActual)];
 bridgePlansAndActuals({planV1:stale,actualV2:originalActual,inventorySource:'actuals'});
@@ -50,6 +50,8 @@ eq('old v2 key is unchanged',ACTUAL_V2_KEY,'holy-angel-actuals-test-v2');
 
 bad('refuse actual mode without imported actual records',
  ()=>bridgePlansAndActuals({planV1:base(),inventorySource:'actuals'}),/実績データ/);
+bad('Monday reset cannot be inferred from Sundays actual gauge',
+ ()=>{const p=base();p.settings.startAt='2026-10-12T04:00';return bridgePlansAndActuals({planV1:p,actualV2:actual(),inventorySource:'actuals'});},/週更新が未記録/);
 bad('refuse non-v1 plans',()=>bridgePlansAndActuals({planV1:{...base(),version:2}}),/旧テスト版1/);
 bad('refuse old file as v2 actuals',()=>bridgePlansAndActuals({planV1:base(),actualV2:base(),inventorySource:'actuals'}),/テスト版2/);
 bad('do not auto assume stale plan start equals latest actual',
