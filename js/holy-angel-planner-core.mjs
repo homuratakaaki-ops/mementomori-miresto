@@ -102,6 +102,13 @@ export function planCombinedEquipment(plans, ownedRelics = {}) {
       items.set(p.equipmentId, {...p, currentLevel:p.currentLevel ?? null});
     }
   }
+  // Shared slot-part inventory is not yet implemented for multiple physical items.
+  // Refuse an unsafe estimate instead of spending the same parts twice.
+  const usedSlots = new Set();
+  for (const item of items.values()) {
+    if (usedSlots.has(item.slot)) throw new Error('Multiple physical items in the same slot require shared-parts planning');
+    usedSlots.add(item.slot);
+  }
   const totalRelics = Object.fromEntries(RELIC_KEYS.map(key => [key, 0]));
   const perItem = [];
   for (const item of items.values()) {
