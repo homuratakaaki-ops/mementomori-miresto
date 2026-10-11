@@ -128,3 +128,67 @@ export function fixedDrawCost({draws, freeDraws = 0, tickets = 0, paidSwitches =
   return {paidDraws, ticketsUsed, drawDiamonds:paidDraws*300,
     switchDiamonds:paidSwitches*300, totalDiamonds:(paidDraws+paidSwitches)*300};
 }
+
+
+// Plans are listed in the user's chosen priority order. Distinct equipment IDs
+// sharing a slot draw from ONE real inventory of unused parts for that slot.
+// Planning never mutates the user's saved/real inventory.
+export function planPrioritizedSharedEquipment({plans, partsBySlot, ownedRelics = {}}) {
+  if (!Array.isArray(plans)) throw new TypeError('plans must be an array');
+  if (!partsBySlot || typeof partsBySlot !== 'object' || Array.isArray(partsBySlot)) {
+    throw new TypeError('partsBySlot must be an object of shared slot balances');
+  }
+  const balances = {};
+  for (const [slot, count] of Object.entries(partsBySlot)) {
+    if (!Object.hasOwn(PART_SLOTS, slot)) throw new RangeError('Unknown slot ' + slot);
+    assertCount(count, 'partsBySlot.' + slot);
+    balances[slot] = count;
+  }
+  const startingPartsBySlot = {...balances};
+  const items = new Map();
+  const normalizedSteps = item => JSON.stringify(Object.entries(item.customStepParts ?? {}).sort(([a], [b]) => Number(a) - Number(b)));
+  for (const p of plans) {
+    if (!p || typeof p !== 'object') throw new TypeError('Each plan must be an object');
+    if (typeof p.equipmentId !== 'string' || p.equipmentId.length === 0) {
+      throw new TypeError('Each plan requires a nonempty equipmentId');
+    }
+    if (!Object.hasOwn(PART_SLOTS, p.slot)) throw new RangeError('Unknown Michael armor slot');
+    if (p.ownedParts !== undefined) {
+      throw new Error('Use partsBySlot for shared inventory; do not set plan.ownedParts');
+    }
+    if (!Object.hasOwn(balances, p.slot)) throw new Error('Missing shared partsBySlot.' + p.slot);
+    assertLevel(p.targetLevel, 'targetLevel');
+    if (p.currentLevel != null) assertLevel(p.currentLevel, 'currentLevel');
+    const previous = items.get(p.equipmentId);
+    if (previous) {
+      if (previous.slot !== p.slot || previous.currentLevel !== (p.currentLevel ?? null)
+          || normalizedSteps(previous) !== normalizedSteps(p)) {
+        throw new Error('Conflicting starting state for equipmentId ' + p.equipmentId);
+      }
+      previous.targetLevel = Math.max(previous.targetLevel, p.targetLevel);
+    } else {
+      items.set(p.equipmentId, {...p, currentLevel:p.currentLevel ?? null});
+    }
+  }
+  const totalRelics = Object.fromEntries(RELIC_KEYS.map(key => [key, 0]));
+  const perItem = [];
+  for (const item of items.values()) {
+    const calculation = planEquipmentParts({...item, ownedParts:balances[item.slot]});
+    balances[item.slot] = calculation.remainingParts;
+    for (const key of RELIC_KEYS) {
+      totalRelics[key] += calculation.relics[key];
+      assertCount(totalRelics[key], 'totalRelics.' + key);
+    }
+    perItem.push({equipmentId:item.equipmentId, ...calculation});
+  }
+  const inventory = Object.fromEntries(RELIC_KEYS.map(key => {
+    const count = ownedRelics[key] ?? 0;
+    assertCount(count, 'ownedRelics.' + key);
+    return [key, count];
+  }));
+  const shortages = Object.fromEntries(RELIC_KEYS.map(key =>
+    [key, Math.max(0, totalRelics[key] - inventory[key])]
+  ));
+  return {perItem, priority:[...items.keys()], startingPartsBySlot,
+    remainingPartsBySlot:balances, totalRelics, ownedRelics:inventory, shortages};
+}
