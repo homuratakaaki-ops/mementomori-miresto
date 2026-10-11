@@ -104,13 +104,13 @@ for(const width of [360,390,412,768]){
   await page.locator('[name="initialTickets"]').fill('100');
   await page.locator('#actual-import').setInputFiles({name:'holy-angel-actuals-v2.json',
     mimeType:'application/json',buffer:Buffer.from(JSON.stringify(json))});
-  await page.locator('#actual-status').getByText('JSONを読み込みました',{exact:false}).waitFor();
+  await page.locator('#actual-status').getByText('ファイルからデータを読み込みました',{exact:false}).waitFor();
   eq(await page.locator('[name="initialTickets"]').inputValue(),'9','JSON import restores starting ticket count');
   if(width===390)await page.screenshot({path:'holy-angel-actuals-390.png',fullPage:true});
   // Import prior-plan schema is deliberately refused. No current data loss.
   await page.locator('#actual-import').setInputFiles({name:'old-draft.json',
     mimeType:'application/json',buffer:Buffer.from('{"version":1,"plans":[]}')});
-  await page.locator('#actual-error').getByText('JSONを復元できません',{exact:false}).waitFor();
+  await page.locator('#actual-error').getByText('データファイルを読み込めません',{exact:false}).waitFor();
   eq(await page.locator('#event-list .card').count(),6,'Invalid backup does not wipe history');
   eq(errors,[],'No browser JavaScript errors');
   await page.close();
