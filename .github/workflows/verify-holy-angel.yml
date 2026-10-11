@@ -37,6 +37,8 @@ jobs:
         run: node scripts/verify-holy-angel-multi-stop.mjs
       - name: Verify JST day and week boundaries
         run: node scripts/verify-holy-angel-calendar.mjs
+      - name: Verify actual gacha event replay
+        run: node scripts/verify-holy-angel-actual-log.mjs
       - name: Verify single-plan preview markup
         run: node scripts/verify-holy-angel-ui-static.mjs
       - name: Verify multi-plan preview and icons
