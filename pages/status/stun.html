@@ -1,0 +1,333 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>気絶｜状態異常ガイド | ミレストのメメントモリ分析データ室</title>
+  <meta name="description" content="メメントモリの気絶とは何かを解説します。通常攻撃もアクティブスキルも使えなくなること、沈黙との違い、キャラごとの付与条件、気絶への対策、重ね掛けの公式説明と検証結果を整理しています。">
+  <link rel="canonical" href="https://memento.musoudc.com/pages/status/stun.html">
+  <!-- OGP。画像は共通のものを使う（ガイドごとの画像生成は未対応） -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="ミレストのメメントモリ分析データ室">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="og:title" content="気絶｜状態異常ガイド | ミレストのメメントモリ分析データ室">
+  <meta property="og:description" content="メメントモリの気絶とは何かを解説します。通常攻撃もアクティブスキルも使えなくなること、沈黙との違い、キャラごとの付与条件、気絶への対策、重ね掛けの公式説明と検証結果を整理しています。">
+  <meta property="og:url" content="https://memento.musoudc.com/pages/status/stun.html">
+  <meta property="og:image" content="https://memento.musoudc.com/assets/ogp/ogp-common.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <link rel="icon" type="image/png" href="../../assets/miresto/miresto-icon-32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="../../assets/miresto/miresto-icon-180.png">
+  <link rel="stylesheet" href="../../assets/character-page.css?v=5dfcab2f">
+  <link rel="stylesheet" href="../../assets/status-guide.css?v=7045fffa">
+  <!-- ad:head -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6389066329814944" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="/assets/ad-slot.css">
+  <!-- /ad:head -->
+</head>
+<body data-status-guide="stun" data-prerendered>
+  <header class="page-header">
+    <div class="header-inner">
+      <a class="top-link" href="/">トップ</a>
+      <a class="top-link" href="./index.html">状態異常・特殊効果ガイドの一覧へ</a>
+      <p class="eyebrow">STATUS GUIDE</p>
+      <h1>気絶｜状態異常ガイド</h1>
+      <div class="guide-meta">
+        <span class="tag">最終横断確認 2026-10-12</span>
+      </div>
+      <p class="guide-meta-note">この日までに実装済みのキャラを対象に、気絶を付与するスキルと、気絶を防ぐスキルを確認しています。</p>
+    </div>
+  </header>
+
+  <main>
+    <div class="guide-list">
+      <section class="guide-card" id="about" aria-labelledby="about-title">
+        <div class="guide-card-head">
+          <h2 id="about-title">気絶とは</h2>
+        </div>
+        <div class="guide-card-body">
+          <p><strong>気絶</strong>は、メメントモリの<strong>行動阻害</strong>のひとつです。</p>
+          <p>気絶中のキャラは、<strong>通常攻撃</strong>も<strong>アクティブスキル</strong>も発動できず、そのキャラの行動が終了します。</p>
+          <div class="guide-figure-mobile is-only" data-figure-series>
+            <div class="guide-series-track" tabindex="0" role="region" aria-label="図解3枚。横にスクロールして次の図へ">
+              <figure class="guide-figure-panel" aria-label="1 / 3">
+                <a href="../../assets/status/stun-guide-m1.jpg?v=346bf64b" aria-label="図1を拡大して開く（3枚中1枚目）">
+                  <picture>
+                    <source type="image/webp" srcset="../../assets/status/stun-guide-m1.webp?v=326ff63c">
+                    <img src="../../assets/status/stun-guide-m1.jpg?v=346bf64b" width="1080" height="1350" alt="気絶の基礎知識1/3。気絶すると「通常攻撃もスキルも使えない」。通常攻撃はできない、アクティブスキルもできない、そのまま行動終了" decoding="async">
+                  </picture>
+                </a>
+              </figure>
+              <figure class="guide-figure-panel" aria-label="2 / 3">
+                <a href="../../assets/status/stun-guide-m2.jpg?v=9f6bffa8" aria-label="図2を拡大して開く（3枚中2枚目）">
+                  <picture>
+                    <source type="image/webp" srcset="../../assets/status/stun-guide-m2.webp?v=2ea9a487">
+                    <img src="../../assets/status/stun-guide-m2.jpg?v=9f6bffa8" width="1080" height="1350" alt="沈黙との違い2/3。沈黙は通常攻撃○、気絶は通常攻撃も×。沈黙は通常攻撃○・アクティブスキル×、気絶は通常攻撃×・アクティブスキル×。気絶は、通常攻撃も止める" loading="lazy" decoding="async">
+                  </picture>
+                </a>
+              </figure>
+              <figure class="guide-figure-panel" aria-label="3 / 3">
+                <a href="../../assets/status/stun-guide-m3.jpg?v=87e41eae" aria-label="図3を拡大して開く（3枚中3枚目）">
+                  <picture>
+                    <source type="image/webp" srcset="../../assets/status/stun-guide-m3.webp?v=803f0999">
+                    <img src="../../assets/status/stun-guide-m3.jpg?v=87e41eae" width="1080" height="1350" alt="気絶への対策3/3。気絶無効・行動阻害無効で防げる。1、気絶無効：気絶を防ぐ。2、行動阻害無効：気絶を含む行動阻害を防ぐ。3、弱体効果無効：気絶を含む弱体効果を防ぐ" loading="lazy" decoding="async">
+                  </picture>
+                </a>
+              </figure>
+            </div>
+            <div class="guide-slides-controls guide-series-controls" hidden>
+              <button type="button" data-series-prev aria-label="前の図へ">‹</button>
+              <span class="guide-slides-dots">
+                <button type="button" data-series-dot="0" aria-label="1枚目へ" aria-current="true"></button>
+                <button type="button" data-series-dot="1" aria-label="2枚目へ"></button>
+                <button type="button" data-series-dot="2" aria-label="3枚目へ"></button>
+              </span>
+              <span class="guide-series-count" aria-live="polite">1 / 3</span>
+              <button type="button" data-series-next aria-label="次の図へ">›</button>
+            </div>
+            <p class="guide-figure-note"><span class="is-narrow">横にスワイプで次の図へ。図をタップすると拡大して開きます。</span><span class="is-wide">‹ › で次の図へ。図をクリックすると拡大して開きます。</span></p>
+          </div>
+        </div>
+      </section>
+      <section class="guide-card" id="silence" aria-labelledby="silence-title">
+        <div class="guide-card-head">
+          <h2 id="silence-title">沈黙との違い</h2>
+        </div>
+        <div class="guide-card-body">
+          <p>沈黙はアクティブスキルを使えなくする効果ですが、通常攻撃はできます。一方、気絶は通常攻撃もアクティブスキルも使えません。</p>
+          <ul class="guide-bullets">
+            <li><strong>沈黙</strong>：通常攻撃○／アクティブスキル×</li>
+            <li><strong>気絶</strong>：通常攻撃×／アクティブスキル×</li>
+          </ul>
+          <p>行動を止める強さだけを見ると、気絶のほうが制限の大きい効果です。</p>
+        </div>
+      </section>
+      <section class="guide-card" id="conditions" aria-labelledby="conditions-title">
+        <div class="guide-card-head">
+          <h2 id="conditions-title">気絶の付与条件はキャラごとにかなり違う</h2>
+        </div>
+        <div class="guide-card-body">
+          <p>現行キャラには、さまざまな条件で気絶を付与するスキルがあります。たとえば次のような条件です。</p>
+          <ul class="guide-bullets">
+            <li><a href="../characters/soltina.html#skill-2">ソルティーナ</a>：対象の魔力が自身より低い場合</li>
+            <li><a href="../characters/natasha.html#skill-1">ナターシャ</a>：対象の腕力が自身より低い場合</li>
+            <li><a href="../characters/primavera.html#skill-1">プリマヴェーラ</a>：対象のスピードが自身より低い場合</li>
+            <li><a href="../characters/hathor.html#skill-2">ハトホル</a>：対象が弱体効果中の場合</li>
+            <li><a href="../characters/artoria.html#skill-1">アルトリア</a>：対象が翠属性の場合</li>
+            <li><a href="../characters/claudia.html#skill-2">クラウディア</a>：自身のHPが50%未満の場合</li>
+            <li><a href="../characters/nebra.html#skill-3">ネブラ</a>：泡沫が5スタックになったとき</li>
+          </ul>
+          <p>「気絶持ち」でひとまとめにするより、<strong>誰に・何%で・何ターン付与できるか</strong>を見ることが大切です。</p>
+        </div>
+      </section>
+      <section class="guide-card" id="users" aria-labelledby="users-title">
+        <div class="guide-card-head">
+          <h2 id="users-title">気絶を付与するキャラ</h2>
+        </div>
+        <div class="guide-card-body">
+          <p>現行キャラのうち、気絶を付与するスキルは次のとおりです。</p>
+          <div class="guide-table-wrap">
+            <table class="guide-table guide-table--wrap">
+              <thead>
+                <tr>
+                  <th scope="col">キャラ／スキル</th>
+                  <th scope="col">対象・条件</th>
+                  <th scope="col">気絶（確率・ターン）</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row"><a href="../characters/soltina.html#skill-2">ソルティーナ S2 アイススパイン</a></th>
+                  <td data-label="対象・条件">攻撃力が最も高い敵（対象の魔力が自身より低い場合）</td>
+                  <td data-label="気絶（確率・ターン）">100%で1ターン（専用Lv2で2ターン）</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/soltina_warm_memory.html#skill-2">[温かな記憶]ソルティーナ S2 アイシクル</a></th>
+                  <td data-label="対象・条件">攻撃力が最も高い敵（攻撃するたび判定）</td>
+                  <td data-label="気絶（確率・ターン）">40%で2ターン</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/tropon_holy_night.html#skill-2">[聖夜の祈り]トロポン S2 イリュージョン！</a></th>
+                  <td data-label="対象・条件">ランダムな敵5体</td>
+                  <td data-label="気絶（確率・ターン）">20%で1ターン</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/liselotte.html#skill-2">リズ S2 スプリングウォーター</a></th>
+                  <td data-label="対象・条件">ランダムな敵（攻撃するたび判定）</td>
+                  <td data-label="気絶（確率・ターン）">50%で1ターン</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/artoria.html#skill-1">アルトリア S1 コールブランド</a></th>
+                  <td data-label="対象・条件">ランダムな敵（対象が翠属性なら、攻撃するたび）</td>
+                  <td data-label="気絶（確率・ターン）">70%で1ターン</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/liebe.html#skill-1">リーベ S1 シーリングスタンプ</a></th>
+                  <td data-label="対象・条件">攻撃力が最も高い敵</td>
+                  <td data-label="気絶（確率・ターン）">70%で1ターン</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/ivy.html#skill-4">アイビー S4 まっかっかー♪</a></th>
+                  <td data-label="対象・条件">ランダムな敵2体（対象のスピードが自身より低い場合）</td>
+                  <td data-label="気絶（確率・ターン）">50%で1ターン</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/rea.html#skill-1">レア S1 黙れ黙れ黙れぇっ！</a></th>
+                  <td data-label="対象・条件">攻撃力が最も高い敵</td>
+                  <td data-label="気絶（確率・ターン）">80%で1ターン</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/sabrina_cool_breeze.html#skill-1">[涼風の軍神]サブリナ S1 蒼穹のテンペスト</a></th>
+                  <td data-label="対象・条件">対象の中でHP割合が最も高い敵（攻撃後）</td>
+                  <td data-label="気絶（確率・ターン）">2ターン</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/sabrina_cool_breeze.html#skill-3">[涼風の軍神]サブリナ S3 涼風の軍神</a></th>
+                  <td data-label="対象・条件">自身が戦闘不能になったとき、攻撃してきた敵</td>
+                  <td data-label="気絶（確率・ターン）">100%で1ターン</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/claudia.html#skill-2">クラウディア S2 秘剣・双龍斬!!</a></th>
+                  <td data-label="対象・条件">攻撃力が最も高い敵（自身のHPが50%未満なら）</td>
+                  <td data-label="気絶（確率・ターン）">2ターン（回避率50%減少と一緒に付与）</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/dd.html#skill-1">D.D. S1 ラスト・リーヴァー</a></th>
+                  <td data-label="対象・条件">攻撃力が最も高い敵</td>
+                  <td data-label="気絶（確率・ターン）">70%で1ターン（専用Lv1で2ターン）</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/hathor.html#skill-2">ハトホル S2 黄泉への誘い</a></th>
+                  <td data-label="対象・条件">ランダムな敵5体のうち、弱体効果中の対象</td>
+                  <td data-label="気絶（確率・ターン）">40%で1ターン（専用Lv2で70%）</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/primavera.html#skill-1">プリマヴェーラ S1 至高の旋律</a></th>
+                  <td data-label="対象・条件">正面の敵（対象のスピードが自身より低い場合）</td>
+                  <td data-label="気絶（確率・ターン）">15%で1ターン（専用Lv1で30%）</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/tricksy.html#skill-2">トリクシー S2 トリッキースタンバー</a></th>
+                  <td data-label="対象・条件">攻撃力が最も高い敵</td>
+                  <td data-label="気絶（確率・ターン）">70%で1ターン</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/natasha.html#skill-1">ナターシャ S1 花葬</a></th>
+                  <td data-label="対象・条件">ランダムな敵（対象の腕力が自身より低い場合）</td>
+                  <td data-label="気絶（確率・ターン）">50%で1ターン（専用Lv1で65%、専用Lv2で75%）</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/lily.html#skill-1">リリー S1 ファントムダスト</a></th>
+                  <td data-label="対象・条件">攻撃力が高い敵2体</td>
+                  <td data-label="気絶（確率・ターン）">70%で1ターン</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/nebra.html#skill-3">ネブラ S3 泡沫の魔女</a></th>
+                  <td data-label="対象・条件">攻撃してきた敵（泡沫が5スタックになったら）</td>
+                  <td data-label="気絶（確率・ターン）">1ターン</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/carmilla.html#skill-3">カーミラ S3 エナジードレイン</a></th>
+                  <td data-label="対象・条件">スピードが最も高い敵（対象のHP割合が10%以下なら）</td>
+                  <td data-label="気絶（確率・ターン）">1ターン</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p><a href="../characters/sabrina.html#skill-1">サブリナS1「蒼穹の輪舞」</a>は、専用武器Lv1で「気絶返し」を付与し、攻撃を受けたとき30%の確率で攻撃してきた敵に気絶を2ターン付与します。</p>
+          <p>ほかに、Rキャラのイリア・ザラ・チェルナも気絶を付与するスキルを持っています。このサイトでは、RキャラとNキャラのキャラページは現在作っていません。</p>
+        </div>
+      </section>
+      <section class="guide-card" id="counter" aria-labelledby="counter-title">
+        <div class="guide-card-head">
+          <h2 id="counter-title">気絶への対策</h2>
+        </div>
+        <div class="guide-card-body">
+          <p>気絶への対策には、<strong>気絶無効</strong>・<strong>行動阻害無効</strong>・<strong>弱体効果無効</strong>などがあります。</p>
+          <p>たとえば<a href="../characters/guinevere.html#skill-4">グィネヴィアS4「人の心を温める力」</a>は、自身以外の紅属性の味方が2体以上いると、1ターン目の行動開始時に自身へ気絶無効を付与します。<a href="../characters/fortina.html#skill-3">フォルティナS3「聖剣の守護」</a>は行動阻害無効を付与できます。</p>
+        </div>
+      </section>
+      <section class="guide-card" id="stacking" aria-labelledby="stacking-title">
+        <div class="guide-card-head">
+          <h2 id="stacking-title">重ね掛けについて</h2>
+        </div>
+        <div class="guide-card-body">
+          <p>公式FAQ「バフ・弱体効果」では、気絶は同じ種類を重ねると上書きされるグループとして説明されています。</p>
+          <p>一方、<a href="https://note.com/wazu_019/n/nf85f0e31daba" target="_blank" rel="noopener">ワーズさんの公開検証</a>では、<strong>気絶は実際には複数付帯する挙動</strong>が確認されています。ただし、キャラの行動終了時に付帯している気絶の残りターンがまとめて減るため、複数付いていても実質的な延長効果は小さいとされています。</p>
+          <div class="guide-callout">
+            <p class="guide-callout-title">公式の説明と検証結果を分けて見る</p>
+            <p>公式FAQ：同じ種類の気絶は上書きされる。</p>
+            <p>公開検証：複数付帯するが、残りターンはまとめて減るため延長効果は小さい。</p>
+          </div>
+        </div>
+      </section>
+      <section class="guide-card" id="points" aria-labelledby="points-title">
+        <div class="guide-card-head">
+          <h2 id="points-title">気絶を見るときのポイント</h2>
+        </div>
+        <div class="guide-card-body">
+          <ul class="guide-bullets">
+            <li>何%で付与するか</li>
+            <li>何ターン続くか</li>
+            <li>誰を狙うか</li>
+            <li>条件があるか</li>
+            <li>相手が気絶無効・行動阻害無効を持っているか</li>
+          </ul>
+        </div>
+      </section>
+      <section class="guide-card" id="summary" aria-labelledby="summary-title">
+        <div class="guide-card-head">
+          <h2 id="summary-title">まとめ</h2>
+        </div>
+        <div class="guide-card-body">
+          <p>気絶は、<strong>通常攻撃もアクティブスキルも止める行動阻害</strong>です。ただし、付与条件や対象、ターン数はキャラごとに大きく違います。</p>
+          <p>「気絶があるか」だけでなく、<strong>安定して誰を止められるか</strong>まで見ると、スキルの違いが分かりやすくなります。</p>
+        </div>
+      </section>
+      <section class="guide-card" id="sources" aria-labelledby="sources-title">
+        <div class="guide-card-head">
+          <h2 id="sources-title">出典</h2>
+        </div>
+        <div class="guide-card-body">
+          <p class="guide-source">出典：ゲーム内ヘルプ「行動阻害」／公式FAQ「バフ・弱体効果」／ゲーム内スキル説明</p>
+          <p class="guide-source">気絶中にできないことはゲーム内ヘルプ、重ねたときの公式の扱いは公式FAQ、各キャラの付与確率・ターン数・条件はゲーム内スキル説明を基準にしています。重ねたときの実際の挙動は、ワーズさんの検証を参考にしています。</p>
+          <ul class="guide-bullets guide-source">
+            <li><a href="https://mementomori.zendesk.com/hc/ja/articles/46412673040921" target="_blank" rel="noopener">公式FAQ「バフ・弱体効果」</a></li>
+          </ul>
+          <p class="guide-source">検証参考：ワーズさんが公開されている検証結果を参考にさせていただきました。</p>
+          <ul class="guide-bullets guide-source">
+            <li><a href="https://note.com/wazu_019/n/nf85f0e31daba" target="_blank" rel="noopener">ワーズさん「スキル効果の重ね掛け」</a><span class="guide-link-text">気絶を重ねたときの実際の挙動</span></li>
+          </ul>
+        </div>
+      </section>
+    </div>
+    <!-- ad:bottom -->
+    <aside class="ad-slot" aria-label="広告">
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-6389066329814944"
+           data-ad-slot="6111654373"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </aside>
+    <!-- /ad:bottom -->
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <span>ミレストのメメントモリ分析データ室 / 非公式ファンサイト</span>
+      <nav class="footer-links" aria-label="サイト内のページ">
+        <a href="/">トップ</a>
+        <a href="../characters/index.html">キャラ一覧</a>
+        <a href="/pages/guide/">このサイトでできること</a>
+        <a href="/privacy.html">プライバシーポリシー</a>
+        <a href="/disclaimer.html">免責事項</a>
+        <a href="/about.html">このサイトについて</a>
+        <a href="/contact.html">お問い合わせ</a>
+      </nav>
+    </div>
+  </footer>
+  <script src="../../js/figure-series.js?v=8b71cecf" defer></script>
+</body>
+</html>
