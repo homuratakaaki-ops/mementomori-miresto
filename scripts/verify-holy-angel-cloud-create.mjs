@@ -24,7 +24,14 @@ const document=createCombinedWorkspace({planV1:plan});
 const validRequest=()=>new Request('https://example.test/api/v1/workspaces',{method:'POST',headers:{Origin:'https://example.test','content-type':'application/json'},body:JSON.stringify({challenge:'offline-test',document})});
 const originalFetch=globalThis.fetch;
 let inserted=null,quota=0;
-const mockDB={prepare(sql){return {bind(...values){return {async run(){if(!sql.startsWith('INSERT INTO workspaces'))throw Error('bad SQL');inserted=values;return {meta:{changes:1}};}}};},async run(){quota++;return {meta:{changes:1}};}};}};
+const mockDB={prepare(sql){return {
+  bind(...values){return {async run(){
+    if(!sql.startsWith('INSERT INTO workspaces'))throw Error('bad SQL');
+    inserted=values;
+    return {meta:{changes:1}};
+  }};},
+  async run(){quota++;return {meta:{changes:1}};}
+};}};
 try{
   globalThis.fetch=async()=>new Response(JSON.stringify({success:true}),{status:200});
   const enabled={HOLY_ANGEL_TEST_CREATE_ENABLED:'true',HOLY_ANGEL_ALLOWED_ORIGIN:'https://example.test',TURNSTILE_SECRET:'test-only',DB:mockDB};
