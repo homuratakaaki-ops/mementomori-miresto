@@ -47,6 +47,8 @@ jobs:
         run: node scripts/verify-holy-angel-combined-workspace.mjs
       - name: Verify cloud sync failure and conflict scenarios offline (mock only)
         run: node scripts/verify-holy-angel-cloud-contract-mock.mjs
+      - name: Verify new cloud API smoke checks (offline only)
+        run: node scripts/verify-holy-angel-cloud-api-smoke.mjs
       - name: Verify read-only bridge preview
         run: node scripts/verify-holy-angel-bridge-ui-static.mjs
       - name: Verify actual record form markup
