@@ -121,3 +121,100 @@ function updateFields(){
  const type=el('event-kind').value;
  for(const field of root.querySelectorAll('[data-event]'))field.hidden=field.dataset.event!==type;
 }
+
+root.addEventListener('click',event=>{
+ const button=event.target.closest('button');
+ if(!button||!root.contains(button))return;
+ try{
+  clearError();
+  if(button.dataset.move!==undefined){
+   update(doc=>moveCombinedPlan(doc,Number(button.dataset.index),Number(button.dataset.move)),
+    '育成の優先順を変更しました');
+   return;
+  }
+  const action=button.dataset.action;
+  if(action==='load-plans'||action==='load-actuals'){
+   const type=action==='load-plans'?'plan':'actual';
+   const key=type==='plan'?PLAN_V1_KEY:ACTUAL_V2_KEY;
+   const raw=localStorage.getItem(key);
+   if(!raw)throw new Error('この端末には以前の'+(type==='plan'?'育成計画':'ガチャ実績')+'が保存されていません');
+   legacy(type,raw);
+  }else if(action==='create-v3'){
+   if(!plans)throw new Error('先に育成計画を読み込んでください');
+   if(!confirmReplace())return;
+   mark(createCombinedWorkspace({planV1:plans,actualV2:actuals}),
+    '旧データを残したまま新しいまとめデータを作成しました');
+   el('event-at').value=actuals?.snapshot.at||now();
+  }else if(action==='calculate'){
+   if(!workspace)throw new Error('先に新しいまとめデータを作ってください');
+   const result=inspectCombinedWorkspace(workspace);
+   refresh();
+   if(result.blockedReason)throw new Error(result.blockedReason);
+   status('入力した条件で再計算しました。元データは変更していません。');
+  }else if(action==='record'){
+   update(doc=>appendCombinedActualEvent(doc,currentEvent()),'実際のガチャ操作を追加しました');
+  }else if(action==='undo'){
+   if(!confirm('最後に記録した操作1件を取り消しますか？'))return;
+   update(undoLastCombinedEvent,'最後の実績を取り消しました');
+  }else if(action==='save-v3'){
+   if(!workspace)throw new Error('まだまとめデータはありません');
+   const next=serializeCombinedWorkspace(workspace);
+   const currentStored=localStorage.getItem(COMBINED_WORKSPACE_KEY);
+   if(currentStored!==baseSaved)throw new Error('この端末の保存内容が別の操作で変わっています。データファイルを保存してから、最新版を読み込んでください');
+   localStorage.setItem(COMBINED_WORKSPACE_KEY,next);
+   baseSaved=next;dirty=false;status('この端末にまとめて保存しました。旧データとクラウドは変更していません。');
+  }else if(action==='load-v3'){
+   if(!confirmReplace())return;
+   const raw=localStorage.getItem(COMBINED_WORKSPACE_KEY);
+   if(!raw)throw new Error('この端末にまとめデータの保存がありません');
+   const next=parseCombinedWorkspace(raw);
+   workspace=next;baseSaved=raw;dirty=false;refresh();
+   status('この端末の保存済みデータを読み込みました。');
+  }else if(action==='export-v3'){
+   if(!workspace)throw new Error('まだまとめデータがありません');
+   const raw=serializeCombinedWorkspace(workspace);
+   const href=URL.createObjectURL(new Blob([raw],{type:'application/json'}));
+   const a=document.createElement('a');a.href=href;a.download='holy-angel-combined-v3.json';a.click();
+   setTimeout(()=>URL.revokeObjectURL(href),1000);
+   status('データファイルの保存を開始しました。端末内の下書き保存とは別です。');
+  }
+ }catch(e){showError(e);}
+});
+for(const [id,type] of [['plan-file','plan'],['actual-file','actual']]){
+ el(id).addEventListener('change',async event=>{
+  const f=event.target.files?.[0];if(!f)return;
+  try{
+   if(f.size>64000)throw new Error('データファイルが大きすぎます');
+   legacy(type,await f.text());
+  }catch(e){showError(e);}
+  finally{event.target.value='';}
+ });
+}
+el('combined-file').addEventListener('change',async event=>{
+ const file=event.target.files?.[0];if(!file)return;
+ try{
+  if(!confirmReplace())return;
+  if(file.size>64000)throw new Error('データファイルが大きすぎます');
+  const raw=await file.text();
+  const next=parseCombinedWorkspace(raw);
+  workspace=next;dirty=true;refresh();clearError();
+  status('ファイルからまとめデータを読み込みました。この端末への保存はまだです。');
+ }catch(e){showError(e);}
+ finally{event.target.value='';}
+});
+el('inventory-source').addEventListener('change',()=>{
+ if(!workspace)return;
+ const chosen=el('inventory-source').value;
+ try{update(doc=>chooseCombinedSource(doc,chosen),'所持素材の参照元を変更しました');}
+ catch(e){el('inventory-source').value=workspace.inventoryMode;showError(e);}
+});
+el('plan-start').addEventListener('change',()=>{
+ if(!workspace)return;
+ const chosen=el('plan-start').value;
+ try{update(doc=>setCombinedStartAt(doc,chosen),'計算の開始日時を変更しました');}
+ catch(e){el('plan-start').value=workspace.planData.settings.startAt;showError(e);}
+});
+el('event-kind').addEventListener('change',updateFields);
+el('event-at').value=now();
+updateFields();refresh();refreshLegacy();
+status('まだ保存されていません。');
