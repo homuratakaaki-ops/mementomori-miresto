@@ -50,7 +50,7 @@ input,select{width:100%;min-width:0;min-height:44px;padding:9px;border:1px solid
 <p class="minor" id="revision">まとめデータ未作成</p>
 <h3>育成の優先順</h3><div id="editable-plans"></div>
 <div class="buttons"><button type="button" data-action="calculate">この条件で試算する</button></div>
-<div id="bridge-error" role="alert" hidden></div>
+<div id="bridge-error" role="alert" hidden></div><p id="blocked-note" class="notice" hidden></p>
 </section>
 <section class="panel" id="bridge-results" hidden><h2>3. 試算結果</h2>
 <div class="stats">
@@ -62,7 +62,7 @@ input,select{width:100%;min-width:0;min-height:44px;padding:9px;border:1px solid
 <h3>優先順で計算した装備</h3><div class="table-wrap"><table><thead><tr><th>装備</th><th>部位</th><th>追加交換</th><th>進化後の余り</th></tr></thead><tbody id="plan-rows"></tbody></table></div>
 <p class="minor">ガチャ10回・25回の報酬は独立と仮定した予測です。ゴールド等の他素材は別途必要です。</p>
 </section>
-<section class="panel"><h2>4. ゲームで行った操作を記録</h2>
+<section class="panel"><h2>4. ゲームで行った操作を記録</h2><p>登録済み実績：<strong id="event-count">0件</strong></p>
 <p class="minor">実際に操作した結果だけ登録します。まだ受け取っていない報酬は素材に加えません。</p>
 <div class="fields">
 <label>日時（日本時間）<input id="event-at" type="datetime-local"></label>
