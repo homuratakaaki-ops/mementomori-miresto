@@ -424,29 +424,28 @@ main {
 .flow-block-excl .flow-when { background: #f3f6fb; }
 .flow-block-excl .flow-mode { color: var(--navy); }
 
-.term {
-  display: inline-block;
-  vertical-align: baseline;
-}
-
-.term[open] { display: block; }
-
 /*
- * 用語の折りたたみ見出し。文中に出る語なので行の高さは変えずに、
- * 上下パディングと同じだけ負のマージンを当ててタップ領域だけ44pxに広げる。
+ * 用語つきの行。行全体が折りたたみの見出しで、どこを押しても説明が開く。
+ * 説明の枠は行の下に開くので、文が途中で切れない。語そのものは下線で示す。
  */
+.term { display: block; }
+
 .term summary {
-  display: inline-block;
-  padding: 11px 4px;
-  margin: -11px -4px;
-  color: var(--accent-strong);
-  font-weight: 900;
+  display: block;
+  margin: -4px 0;
+  padding: 4px 0;
   cursor: pointer;
-  text-decoration: underline;
-  text-underline-offset: 3px;
+  list-style: none;
 }
 
 .term summary::-webkit-details-marker { display: none; }
+
+.term-word {
+  color: var(--accent-strong);
+  font-weight: 900;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
 
 .term-box {
   display: block;
@@ -458,6 +457,21 @@ main {
   color: var(--muted);
   font-size: 13px;
   line-height: 1.7;
+}
+
+/* 「詳しくは○ガイドへ」。枠の下端いっぱいの1行にして、指で押しやすい高さ44pxを取る。 */
+.term-guide {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  margin: 8px -10px -10px;
+  padding: 0 10px;
+  border-top: 1px solid var(--accent-soft);
+  color: var(--accent-strong);
+  font-size: 14px;
+  font-weight: 800;
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
 /* ゲーム内の説明文（折りたたみ・初期は閉じる） */

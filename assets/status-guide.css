@@ -260,16 +260,6 @@
   font-size: 13px;
 }
 
-/* 用語の折りたたみの中に出る「詳しくは○ガイドへ」。 */
-.term-guide {
-  display: inline-block;
-  margin-top: 6px;
-  color: var(--accent-strong);
-  font-weight: 900;
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
-
 /* article型の部品。箇条書きと、要点をまとめる囲み。 */
 .guide-bullets {
   display: grid;

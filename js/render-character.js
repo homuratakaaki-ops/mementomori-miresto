@@ -138,18 +138,34 @@
     return { text: value.text || "", guideUrl: value.guideUrl || "" };
   }
 
-  function renderTermText(step, terms) {
-    const raw = step.text || "";
-    const entry = step.term ? termEntry(terms, step.term) : null;
-    if (!entry || !entry.text || !raw.includes(step.term)) {
-      return highlightRatios(raw);
-    }
-    const [before, ...rest] = raw.split(step.term);
-    const after = rest.join(step.term);
+  /**
+   * 用語つきの1行。行全体を折りたたみの見出しにして、説明の枠は行の下にまとめて開く
+   * （語の位置で開くと「浸食／説明／を付与」のように文が途中で切れるため）。
+   * 語そのものは下線で示し、行のどこを押しても開く。用語の無い行はそのまま返す。
+   */
+  function termParts(item, terms) {
+    const raw = item.text || "";
+    const entry = item.term ? termEntry(terms, item.term) : null;
+    if (!entry || !entry.text || !raw.includes(item.term)) return null;
+    const [before, ...rest] = raw.split(item.term);
+    const after = rest.join(item.term);
     const guide = entry.guideUrl
-      ? `<a class="term-guide" href="${escapeHtml(entry.guideUrl)}">詳しくは${escapeHtml(step.term)}ガイドへ</a>`
+      ? `<a class="term-guide" href="${escapeHtml(entry.guideUrl)}">詳しくは${escapeHtml(item.term)}ガイドへ</a>`
       : "";
-    return `${highlightRatios(before)}<details class="term"><summary>${escapeHtml(step.term)}</summary><span class="term-box">${escapeHtml(entry.text)}${guide}</span></details>${highlightRatios(after)}`;
+    return {
+      text: `${highlightRatios(before)}<span class="term-word">${escapeHtml(item.term)}</span>${highlightRatios(after)}`,
+      box: `<span class="term-box">${escapeHtml(entry.text)}${guide}</span>`
+    };
+  }
+
+  /** 行の中身（チップ等を含む）を、用語があれば折りたたみで包む。 */
+  function wrapTermLine(lineHtml, parts) {
+    return parts ? `<details class="term"><summary>${lineHtml}</summary>${parts.box}</details>` : lineHtml;
+  }
+
+  function renderTermText(step, terms) {
+    const parts = termParts(step, terms);
+    return wrapTermLine(parts ? parts.text : highlightRatios(step.text || ""), parts);
   }
 
   const FLOW_MODE_LABEL = {
@@ -255,7 +271,10 @@
     ].filter(Boolean).join("");
     // 専用Lv2 で増えた効果を専用Lv3 がさらに書き換える場合は、その行の中に注記を出す
     const nested = (item.exclusive || []).length ? exclusiveChangeNotes(skill, item, "other") + exclusiveChangeNotes(skill, item, "multiplier") : "";
-    return `<li class="flow-excl-line">${exclusiveChip(item.lv)}<span class="flow-excl-body">${before}${renderTermText(item, terms)}${after}</span><span class="flow-excl-tail">を追加</span>${nested}</li>`;
+    const parts = termParts(item, terms);
+    const body = parts ? parts.text : highlightRatios(item.text || "");
+    const lineHtml = `${exclusiveChip(item.lv)}<span class="flow-excl-body">${before}${body}${after}</span><span class="flow-excl-tail">を追加</span>${nested}`;
+    return `<li class="flow-excl-line">${wrapTermLine(lineHtml, parts)}</li>`;
   }
 
   /** 効果の倍率・継続・確率・効果量が専用で置き換わるときの注記。 */
@@ -291,7 +310,9 @@
       effect.note ? `<span class="flow-note">${escapeHtml(effect.note)}</span>` : "",
       exclusiveChangeNotes(skill, effect, "other")
     ].filter(Boolean).join("");
-    const line = `<li${effect.condition ? " class=\"flow-cond-line\"" : ""}>${before}${renderTermText(effect, terms)}${after}</li>`;
+    const parts = termParts(effect, terms);
+    const body = parts ? parts.text : highlightRatios(effect.text || "");
+    const line = `<li${effect.condition ? " class=\"flow-cond-line\"" : ""}>${wrapTermLine(`${before}${body}${after}`, parts)}</li>`;
     const adds = (effect.exclusive || [])
       .filter((item) => item.kind === "add")
       .map((item) => renderExclusiveAddLine(skill, item, terms))
