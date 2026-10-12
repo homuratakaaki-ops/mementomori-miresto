@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>不治｜状態異常ガイド | ミレストのメメントモリ分析データ室</title>
+  <meta name="description" content="メメントモリの不治とは何かを解説します。回復・再生・HPドレインによるHP回復が止まること、不治を付与するキャラと付与条件、使いどころを整理しています。">
+  <link rel="canonical" href="https://memento.musoudc.com/pages/status/incurable.html">
+  <!-- OGP。画像は共通のものを使う（ガイドごとの画像生成は未対応） -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="ミレストのメメントモリ分析データ室">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="og:title" content="不治｜状態異常ガイド | ミレストのメメントモリ分析データ室">
+  <meta property="og:description" content="メメントモリの不治とは何かを解説します。回復・再生・HPドレインによるHP回復が止まること、不治を付与するキャラと付与条件、使いどころを整理しています。">
+  <meta property="og:url" content="https://memento.musoudc.com/pages/status/incurable.html">
+  <meta property="og:image" content="https://memento.musoudc.com/assets/ogp/ogp-common.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <link rel="icon" type="image/png" href="../../assets/miresto/miresto-icon-32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="../../assets/miresto/miresto-icon-180.png">
+  <link rel="stylesheet" href="../../assets/character-page.css?v=1abdce7e">
+  <link rel="stylesheet" href="../../assets/status-guide.css?v=71746d66">
+  <!-- ad:head -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6389066329814944" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="/assets/ad-slot.css">
+  <!-- /ad:head -->
+</head>
+<body data-status-guide="incurable" data-prerendered>
+  <header class="page-header">
+    <div class="header-inner">
+      <a class="top-link" href="/">トップ</a>
+      <a class="top-link" href="./index.html">状態異常・特殊効果ガイドの一覧へ</a>
+      <p class="eyebrow">STATUS GUIDE</p>
+      <h1>不治｜状態異常ガイド</h1>
+      <div class="guide-meta">
+        <span class="tag">最終横断確認 2026-10-12</span>
+      </div>
+      <p class="guide-meta-note">この日までに実装済みのキャラを対象に、不治を付与するスキルを確認しています。</p>
+    </div>
+  </header>
+
+  <main>
+    <div class="guide-list">
+      <section class="guide-card" id="about" aria-labelledby="about-title">
+        <div class="guide-card-head">
+          <h2 id="about-title">不治とは</h2>
+        </div>
+        <div class="guide-card-body">
+          <p>不治は、対象の<strong>HP回復を止める弱体効果</strong>です。不治中は、通常のHP回復だけでなく、<strong>再生やHPドレインによる回復もできません</strong>。</p>
+          <div class="guide-figure-mobile is-only" data-figure-series>
+            <div class="guide-series-track" tabindex="0" role="region" aria-label="図解3枚。横にスクロールして次の図へ">
+              <figure class="guide-figure-panel" aria-label="1 / 3">
+                <a href="../../assets/status/incurable-guide-m1.jpg?v=591bbdd2" aria-label="図1を拡大して開く（3枚中1枚目）">
+                  <picture>
+                    <source type="image/webp" srcset="../../assets/status/incurable-guide-m1.webp?v=a3c11f80">
+                    <img src="../../assets/status/incurable-guide-m1.jpg?v=591bbdd2" width="1080" height="1350" alt="不治の基礎知識1/3。HP回復を止める弱体効果。不治中は回復・再生・HPドレインでHPを戻せない。回復：スキルやアイテムによるHP回復はできません。再生：継続的にHPが回復する再生効果も無効です。HPドレイン：攻撃で与えたダメージによるHP吸収もできません。ダメージを増やす効果ではない。不治は「回復を防ぐ」弱体効果であり、敵から受けるダメージが増えるわけではありません" decoding="async">
+                  </picture>
+                </a>
+              </figure>
+              <figure class="guide-figure-panel" aria-label="2 / 3">
+                <a href="../../assets/status/incurable-guide-m2.jpg?v=40e8fd19" aria-label="図2を拡大して開く（3枚中2枚目）">
+                  <picture>
+                    <source type="image/webp" srcset="../../assets/status/incurable-guide-m2.webp?v=01990ac4">
+                    <img src="../../assets/status/incurable-guide-m2.jpg?v=40e8fd19" width="1080" height="1350" alt="不治で止まる回復2/3。回復・再生・HPドレインが使えなくなる。不治が付与されている間は、あらゆるHP回復が行えません。回復：スキルやアイテムによるHP回復はできません。再生：継続的にHPが回復する再生効果も無効です。HPドレイン：攻撃で与えたダメージによるHP吸収もできません。ヒーラーの回復だけではなく、自分で吸って回復するタイプにも有効です。ダメージそのものを増やす効果ではない。不治は「回復を防ぐ」弱体効果であり、敵から受けるダメージが増えるわけではありません" loading="lazy" decoding="async">
+                  </picture>
+                </a>
+              </figure>
+              <figure class="guide-figure-panel" aria-label="3 / 3">
+                <a href="../../assets/status/incurable-guide-m3.jpg?v=638f508e" aria-label="図3を拡大して開く（3枚中3枚目）">
+                  <picture>
+                    <source type="image/webp" srcset="../../assets/status/incurable-guide-m3.webp?v=a564ab2f">
+                    <img src="../../assets/status/incurable-guide-m3.jpg?v=638f508e" width="1080" height="1350" alt="不治を使えるキャラ3/3。現行3キャラを確認。同じ不治でも、キャラごとに発動条件が異なります。モーザ：毒状態が条件。敵が毒状態のときに不治を付与できます。アモール：Lv4で複数対象。スキルLv4で、複数の敵に不治を付与できます。アリアンロッド：攻撃力比較が条件。自身と敵の攻撃力を比較し、条件を満たすと不治を付与できます。同じ不治でも、発動条件はかなり違う。キャラごとに条件や効果範囲が異なるため、編成や敵に応じた使い分けが重要です" loading="lazy" decoding="async">
+                  </picture>
+                </a>
+              </figure>
+            </div>
+            <div class="guide-slides-controls guide-series-controls" hidden>
+              <button type="button" data-series-prev aria-label="前の図へ">‹</button>
+              <span class="guide-slides-dots">
+                <button type="button" data-series-dot="0" aria-label="1枚目へ" aria-current="true"></button>
+                <button type="button" data-series-dot="1" aria-label="2枚目へ"></button>
+                <button type="button" data-series-dot="2" aria-label="3枚目へ"></button>
+              </span>
+              <span class="guide-series-count" aria-live="polite">1 / 3</span>
+              <button type="button" data-series-next aria-label="次の図へ">›</button>
+            </div>
+            <p class="guide-figure-note"><span class="is-narrow">横にスワイプで次の図へ。図をタップすると拡大して開きます。</span><span class="is-wide">‹ › で次の図へ。図をクリックすると拡大して開きます。</span></p>
+          </div>
+        </div>
+      </section>
+      <section class="guide-card" id="stops" aria-labelledby="stops-title">
+        <div class="guide-card-head">
+          <h2 id="stops-title">何が止まる？</h2>
+        </div>
+        <div class="guide-card-body">
+          <p>公式ヘルプでは、回復・再生・HPドレインが不治の対象として整理されています。つまり、ヒーラーの回復だけを止める効果ではなく、自分でHPを吸収して回復するタイプにも有効です。</p>
+        </div>
+      </section>
+      <section class="guide-card" id="users" aria-labelledby="users-title">
+        <div class="guide-card-head">
+          <h2 id="users-title">誰が使える？</h2>
+        </div>
+        <div class="guide-card-body">
+          <p>現在確認できるプレイヤーキャラは、モーザ、アモール、アリアンロッドの3キャラです。</p>
+          <p>モーザは相手が毒状態であることが条件。アモールはスキルLv4で複数の敵に不治を付与。アリアンロッドは対象の攻撃力が自身より低いときに不治を付与します。同じ「不治」でも発動条件がかなり違います。</p>
+          <div class="guide-table-wrap">
+            <table class="guide-table guide-table--wrap">
+              <thead>
+                <tr>
+                  <th scope="col">キャラ／スキル</th>
+                  <th scope="col">対象・条件</th>
+                  <th scope="col">不治のターン</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row"><a href="../characters/moddey.html#skill-2">モーザ S2 葬送の合図</a></th>
+                  <td data-label="対象・条件">ランダムな敵（対象が毒を付帯中なら）</td>
+                  <td data-label="不治のターン">4ターン</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/amour.html#skill-2">アモール S2 荊の抱擁</a></th>
+                  <td data-label="対象・条件">ランダムな敵4体</td>
+                  <td data-label="不治のターン">3ターン</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p>アリアンロッドはRキャラです。このサイトでは、RキャラとNキャラのキャラページは現在作っていません。</p>
+        </div>
+      </section>
+      <section class="guide-card" id="usage" aria-labelledby="usage-title">
+        <div class="guide-card-head">
+          <h2 id="usage-title">使いどころ</h2>
+        </div>
+        <div class="guide-card-body">
+          <p>回復・再生・HPドレインで粘る相手に特に有効です。相手がどの回復手段を使っているか分からない場合でも、「HPを戻されて倒し切れない」という場面では、不治が対策候補になります。</p>
+        </div>
+      </section>
+      <section class="guide-card" id="sources" aria-labelledby="sources-title">
+        <div class="guide-card-head">
+          <h2 id="sources-title">出典</h2>
+        </div>
+        <div class="guide-card-body">
+          <p class="guide-source">出典：公式ヘルプ／ゲーム内スキル説明</p>
+          <p class="guide-source">不治で止まる回復の種類は公式ヘルプ、各キャラの付与条件・ターン数はゲーム内スキル説明を基準にしています。</p>
+        </div>
+      </section>
+    </div>
+    <!-- ad:bottom -->
+    <aside class="ad-slot" aria-label="広告">
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-6389066329814944"
+           data-ad-slot="6111654373"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </aside>
+    <!-- /ad:bottom -->
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <span>ミレストのメメントモリ分析データ室 / 非公式ファンサイト</span>
+      <nav class="footer-links" aria-label="サイト内のページ">
+        <a href="/">トップ</a>
+        <a href="../characters/index.html">キャラ一覧</a>
+        <a href="/pages/guide/">このサイトでできること</a>
+        <a href="/privacy.html">プライバシーポリシー</a>
+        <a href="/disclaimer.html">免責事項</a>
+        <a href="/about.html">このサイトについて</a>
+        <a href="/contact.html">お問い合わせ</a>
+      </nav>
+    </div>
+  </footer>
+  <script src="../../js/figure-series.js?v=8b71cecf" defer></script>
+</body>
+</html>
