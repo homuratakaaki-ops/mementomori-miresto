@@ -41,6 +41,8 @@ jobs:
         run: node scripts/verify-holy-angel-actual-log.mjs
       - name: Verify actual inventory and legacy plan bridge
         run: node scripts/verify-holy-angel-plan-actual-bridge.mjs
+      - name: Verify combined workspace page structure
+        run: node scripts/verify-holy-angel-combined-ui-static.mjs
       - name: Verify combined v3 workspace migration and undo
         run: node scripts/verify-holy-angel-combined-workspace.mjs
       - name: Verify read-only bridge preview
@@ -63,6 +65,8 @@ jobs:
         run: node scripts/verify-holy-angel-multi-ui-browser.mjs
       - name: Verify actual record browser interactions
         run: node scripts/verify-holy-angel-actuals-ui-browser.mjs
+      - name: Verify combined workspace browser interactions
+        run: node scripts/verify-holy-angel-combined-ui-browser.mjs
       - name: Verify linked plan and actual browser interactions
         run: node scripts/verify-holy-angel-bridge-ui-browser.mjs
       - name: Save browser screenshot
@@ -71,6 +75,13 @@ jobs:
         with:
           name: holy-angel-multi-390px
           path: holy-angel-multi-390.png
+          if-no-files-found: ignore
+      - name: Save combined workspace screenshot
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: holy-angel-combined-390px
+          path: holy-angel-combined-390.png
           if-no-files-found: ignore
       - name: Save read-only bridge screenshot
         if: always()
