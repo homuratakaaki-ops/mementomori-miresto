@@ -59,7 +59,7 @@ try{
   await p.locator('#draw-free').selectOption('true');
   await p.locator('[data-action="record"]').click();
   eq(await p.locator('#event-count').textContent(),'1件','Added actual draw');
-  ok((await p.locator('#forecast-status').textContent()).includes('未受取'),'Pending reward blocks forecast');
+  ok((await p.locator('#blocked-note').textContent()).includes('未受取'),'Pending reward blocks forecast');
   await p.locator('#event-kind').selectOption('claim');
   await p.locator('#event-at').fill('2026-10-11T18:06');
   await p.locator('#claim-at').selectOption('10');
@@ -68,7 +68,7 @@ try{
   eq(await p.locator('#event-count').textContent(),'2件','Actual reward recorded');
   await p.locator('[data-action="undo"]').click();
   eq(await p.locator('#event-count').textContent(),'1件','Undo restored log');
-  ok((await p.locator('#forecast-status').textContent()).includes('未受取'),'Undo restores pending');
+  ok((await p.locator('#blocked-note').textContent()).includes('未受取'),'Undo restores pending');
   await p.locator('[data-action="save-v3"]').click();
   ok((await p.locator('#save-status').textContent()).includes('この端末にまとめて保存'),'Separate v3 local save');
   await p.reload({waitUntil:'networkidle'});
