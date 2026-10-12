@@ -30,7 +30,7 @@ input,select{width:100%;min-width:0;min-height:44px;padding:9px;border:1px solid
 <p class="minor">計画で想定した素材と、実際に受け取った素材を分けて確認します。</p></header>
 <main id="combined-root">
 <div class="notice">⚠️ 新しい保存データを別に作ります。以前の育成計画と実績は上書きしません。PC・スマホ間の自動共有とクラウド保存は未実装です。</div>
-<section class="panel"><h2>1. 保存したデータを読み込む</h2>
+<section class="panel"><h2>保存したデータを読み込む</h2>
 <div class="buttons">
 <button type="button" data-action="load-plans">この端末の育成計画を読み込む</button>
 <button type="button" data-action="load-actuals">この端末の実績を読み込む</button>
@@ -40,7 +40,7 @@ input,select{width:100%;min-width:0;min-height:44px;padding:9px;border:1px solid
 <label class="file-button">実績のファイルを選ぶ<input id="actual-file" type="file" accept=".json,application/json"></label>
 </div><p id="load-status" role="status">育成計画：未読込 ／ 実績：未読込</p><div class="buttons"><button type="button" data-action="create-v3">新しいまとめデータを作る</button></div>
 </section>
-<section class="panel"><h2>2. 所持数の参照元を選ぶ</h2>
+<section class="panel"><h2>所持数の参照元を選ぶ</h2>
 <div class="fields">
 <label>どちらの所持数で試算しますか？
 <select id="inventory-source"><option value="plans">育成計画に入力した所持数</option>
@@ -52,7 +52,7 @@ input,select{width:100%;min-width:0;min-height:44px;padding:9px;border:1px solid
 <div class="buttons"><button type="button" data-action="calculate">この条件で試算する</button></div>
 <div id="bridge-error" role="alert" hidden></div><p id="blocked-note" class="notice" hidden></p>
 </section>
-<section class="panel" id="bridge-results" hidden><h2>3. 試算結果</h2>
+<section class="panel" id="bridge-results" hidden><h2>試算結果</h2>
 <div class="stats">
 <div class="stat"><small>使用した所持数</small><strong id="used-source">—</strong></div>
 <div class="stat"><small>追加のパーツ交換</small><strong id="exchanges">—</strong></div>
@@ -62,7 +62,7 @@ input,select{width:100%;min-width:0;min-height:44px;padding:9px;border:1px solid
 <h3>優先順で計算した装備</h3><div class="table-wrap"><table><thead><tr><th>装備</th><th>部位</th><th>追加交換</th><th>進化後の余り</th></tr></thead><tbody id="plan-rows"></tbody></table></div>
 <p class="minor">ガチャ10回・25回の報酬は独立と仮定した予測です。ゴールド等の他素材は別途必要です。</p>
 </section>
-<section class="panel"><h2>4. ゲームで行った操作を記録</h2><p>登録済み実績：<strong id="event-count">0件</strong></p>
+<section class="panel"><h2>ゲームで行った操作を記録</h2><p>登録済み実績：<strong id="event-count">0件</strong></p>
 <p class="minor">実際に操作した結果だけ登録します。まだ受け取っていない報酬は素材に加えません。</p>
 <div class="fields">
 <label>日時（日本時間）<input id="event-at" type="datetime-local"></label>
@@ -81,7 +81,7 @@ input,select{width:100%;min-width:0;min-height:44px;padding:9px;border:1px solid
 </div><div class="buttons"><button type="button" data-action="record">実績を追加する</button><button type="button" data-action="undo">最後の実績を取り消す</button></div>
 <p id="history" class="minor"></p>
 </section>
-<section class="panel"><h2>5. この端末に保存・復元</h2>
+<section class="panel"><h2>この端末に保存・復元</h2>
 <p class="minor">旧データは変更しません。新しいまとめデータだけを保存します。</p>
 <div class="buttons">
 <button type="button" data-action="save-v3">この端末にまとめて保存</button>
