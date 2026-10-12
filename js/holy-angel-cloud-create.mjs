@@ -25,8 +25,13 @@ export async function createHolyAngelTestWorkspace(request,env){
     valid=verification.ok&&(await verification.json())['success']===true;
   }catch{return reply({error:'本人確認を完了できませんでした'},503);}
   if(!valid)return reply({error:'本人確認ができませんでした'},403);
-  // This function intentionally requires a deployment-level creation quota gate.
-  if(env.HOLY_ANGEL_CREATION_QUOTA_READY!=='true')return reply({error:'新規作成の制限が未設定です'},503);
+  // Atomic lifetime cap for the isolated test DB (fail closed if quota table is missing).
+  // No reset operation: this deliberately limits all test workspace creations to 25.
+  let quota;
+  try {
+    quota=await env.DB.prepare("UPDATE holy_angel_test_quota SET used=used+1 WHERE name='workspaces' AND used<25").run();
+  } catch {return reply({error:'登録制限を確認できませんでした'},503);}
+  if(quota.meta?.changes!==1)return reply({error:'登録上限に達したか登録を停止しています'},429);
   const id=randomId(),token=randomId(),hash=await digest(token);
   try{
     const result=await env.DB.prepare('INSERT INTO workspaces(id,edit_token_hash,document_json,remote_revision,created_at,updated_at) VALUES(?,?,?,0,?,?)').bind(id,hash,documentJson,new Date().toISOString(),new Date().toISOString()).run();
