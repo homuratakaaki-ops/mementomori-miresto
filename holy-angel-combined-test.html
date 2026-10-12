@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>聖天使の神託｜計画と実績の統合保存テスト</title>
+<style>
+:root{--p:#7650a6;--l:#e6ddea;--bg:#fbfaf7;--ink:#28232e;color-scheme:light}
+*{box-sizing:border-box}[hidden]{display:none!important}
+body{font:15px/1.55 system-ui,-apple-system,"Noto Sans JP",sans-serif;color:var(--ink);background:var(--bg);margin:0}
+header,main,footer{max-width:790px;margin:auto;padding:16px}h1{font-size:22px;line-height:1.35;margin:8px 0}
+h2{font-size:18px;margin:0 0 12px}h3{font-size:15px}
+p{margin:10px 0}.minor{font-size:12px;color:#6a6271}
+.panel{border:1px solid var(--l);background:white;border-radius:15px;margin-top:14px;padding:17px}
+.notice{font-size:13px;background:#f0eaf6;padding:12px;border-radius:11px}
+.buttons{display:flex;flex-wrap:wrap;gap:9px}.buttons button,.file-button{background:var(--p);color:#fff;border:0;border-radius:10px;font:700 13px/1.4 system-ui,sans-serif;min-height:45px;padding:10px 12px;cursor:pointer}
+.file-button{display:inline-flex;align-items:center;position:relative;overflow:hidden;background:#f3eef8;color:#624480;border:1px solid #ddd0e8}
+.file-button input{opacity:0;position:absolute;inset:0;cursor:pointer}
+button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #b39bd0;outline-offset:2px}
+label{display:flex;flex-direction:column;gap:4px;font-size:13px;font-weight:650}
+.fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+input,select{width:100%;min-width:0;min-height:44px;padding:9px;border:1px solid #cfc4d8;border-radius:9px;font:inherit}
+.stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.stat{background:#f5f1f8;border-radius:11px;padding:12px;min-width:0}
+.stat small{display:block;color:#6a6271;font-size:12px}.stat strong{font-size:18px;overflow-wrap:anywhere}
+.relic-line{display:flex;align-items:center;justify-content:space-between;gap:8px;border-bottom:1px solid var(--l);padding:7px 0}
+.relic-label{display:flex;align-items:center;gap:9px}.relic-icon{width:36px;height:36px;flex:none;background-image:url('./assets/holy-angel/relic-sprite.jpg');background-size:144px 36px;border-radius:5px}
+.table-wrap{overflow-x:auto;max-width:100%}table{width:100%;min-width:450px;border-collapse:collapse;font-size:13px}th,td{padding:7px;border-bottom:1px solid var(--l);text-align:left}
+#error{background:#fff0f0;color:#8f3232;border:1px solid #e8c5c5;border-radius:10px;padding:12px;margin-top:10px}
+@media(max-width:420px){.panel{padding:13px}h1{font-size:20px}.fields{gap:9px}.stat strong{font-size:16px}}
+</style></head>
+<body><header><small>開発用テスト・旧データは変更しません</small><h1>育成計画と実績をまとめて管理</h1>
+<p class="minor">計画で想定した素材と、実際に受け取った素材を分けて確認します。</p></header>
+<main id="combined-root">
+<div class="notice">⚠️ 新しい保存データを別に作ります。以前の育成計画と実績は上書きしません。PC・スマホ間の自動共有とクラウド保存は未実装です。</div>
+<section class="panel"><h2>1. 保存したデータを読み込む</h2>
+<div class="buttons">
+<button type="button" data-action="load-plans">この端末の育成計画を読み込む</button>
+<button type="button" data-action="load-actuals">この端末の実績を読み込む</button>
+</div><p class="minor">別の端末のデータは、ファイルを選んで読み込めます。元のファイルは変わりません。</p>
+<div class="buttons">
+<label class="file-button">育成計画のファイルを選ぶ<input id="plan-file" type="file" accept=".json,application/json"></label>
+<label class="file-button">実績のファイルを選ぶ<input id="actual-file" type="file" accept=".json,application/json"></label>
+</div><p id="load-status" role="status">育成計画：未読込 ／ 実績：未読込</p><div class="buttons"><button type="button" data-action="create-v3">新しいまとめデータを作る</button></div>
+</section>
+<section class="panel"><h2>2. 所持数の参照元を選ぶ</h2>
+<div class="fields">
+<label>どちらの所持数で試算しますか？
+<select id="inventory-source"><option value="plans">育成計画に入力した所持数</option>
+<option value="actuals">記録済みのガチャ実績から計算した所持数</option></select></label>
+<label>試算の開始日時（日本時間）<input id="plan-start" type="datetime-local"></label>
+</div><p class="minor">実績を選んだ場合、確認済みの獲得物のみを使用します。未受取報酬があれば、誤った予測を出さないため計算を止めます。</p>
+<p class="minor" id="revision">まとめデータ未作成</p>
+<h3>育成の優先順</h3><div id="editable-plans"></div>
+<div class="buttons"><button type="button" data-action="calculate">この条件で試算する</button></div>
+<div id="bridge-error" role="alert" hidden></div>
+</section>
+<section class="panel" id="bridge-results" hidden><h2>3. 試算結果</h2>
+<div class="stats">
+<div class="stat"><small>使用した所持数</small><strong id="used-source">—</strong></div>
+<div class="stat"><small>追加のパーツ交換</small><strong id="exchanges">—</strong></div>
+<div class="stat"><small>聖遺物が揃う確率</small><strong id="probability">—</strong></div>
+<div class="stat"><small>必要な平均ダイヤ</small><strong id="diamonds">—</strong></div>
+</div><p id="warning" class="minor"></p><h3>不足する聖遺物</h3><div id="shortages"></div>
+<h3>優先順で計算した装備</h3><div class="table-wrap"><table><thead><tr><th>装備</th><th>部位</th><th>追加交換</th><th>進化後の余り</th></tr></thead><tbody id="plan-rows"></tbody></table></div>
+<p class="minor">ガチャ10回・25回の報酬は独立と仮定した予測です。ゴールド等の他素材は別途必要です。</p>
+</section>
+<section class="panel"><h2>4. ゲームで行った操作を記録</h2>
+<p class="minor">実際に操作した結果だけ登録します。まだ受け取っていない報酬は素材に加えません。</p>
+<div class="fields">
+<label>日時（日本時間）<input id="event-at" type="datetime-local"></label>
+<label>操作<select id="event-kind"><option value="draw">ガチャを引いた</option><option value="claim">回数報酬を受け取った</option><option value="switch">聖遺物を変更</option><option value="exchange">パーツ交換</option><option value="weekly-reset">週更新を確認</option></select></label>
+<label data-event="draw">引いた回数<input id="draw-count" type="number" min="1" max="50" value="10"></label>
+<label data-event="draw">使ったチケット<input id="draw-tickets" type="number" min="0" max="50" value="0"></label>
+<label data-event="draw">無料1回を使用<select id="draw-free"><option value="false">いいえ</option><option value="true">はい</option></select></label>
+<label data-event="claim">受け取った報酬<select id="claim-at"><option value="10">10回</option><option value="25">25回</option><option value="50">50回確定</option></select></label>
+<label data-event="claim">当選結果<select id="claim-won"><option value="true">当選</option><option value="false">非当選</option></select></label>
+<label data-event="switch">変更先<select id="switch-to"><option value="chalice">天契の聖杯</option><option value="medal">蒼穹の銀勲</option><option value="wing">希求の神翼</option><option value="fruit">悠園の果実</option></select></label>
+<label data-event="switch">変更方法<select id="switch-method"><option value="free">無料変更</option><option value="paid">300ダイヤ</option></select></label>
+<label data-event="switch">未受取報酬を破棄する可能性<select id="switch-abandon"><option value="false">破棄しない</option><option value="true">了承して変更</option></select></label>
+<label data-event="exchange">交換する部位<select id="exchange-slot"><option value="arm">手</option><option value="feet">足</option><option value="accessory">アクセサリー</option><option value="head">頭</option><option value="body">胴</option></select></label>
+<label data-event="exchange">50パーツの交換回数<input id="exchange-times" type="number" min="1" max="100" value="1"></label>
+<label data-event="weekly-reset">新しい週での聖遺物<select id="reset-relic"><option value="chalice">天契の聖杯</option><option value="medal">蒼穹の銀勲</option><option value="wing">希求の神翼</option><option value="fruit">悠園の果実</option></select></label>
+</div><div class="buttons"><button type="button" data-action="record">実績を追加する</button><button type="button" data-action="undo">最後の実績を取り消す</button></div>
+<p id="history" class="minor"></p>
+</section>
+<section class="panel"><h2>5. この端末に保存・復元</h2>
+<p class="minor">旧データは変更しません。新しいまとめデータだけを保存します。</p>
+<div class="buttons">
+<button type="button" data-action="save-v3">この端末にまとめて保存</button>
+<button type="button" data-action="load-v3">保存済みのまとめデータを読み込む</button>
+<button type="button" data-action="export-v3">データをファイルに保存</button>
+<label class="file-button">ファイルからまとめデータを読み込む<input id="combined-file" type="file" accept=".json,application/json"></label>
+</div><p id="save-status" role="status" class="notice">まだ保存していません。</p>
+</section>
+</main>
+<footer>開発用テスト画面。旧データの上書きとクラウドへの送信はしません。</footer>
+<script type="module" src="./js/holy-angel-combined-ui.mjs"></script>
+</body></html>
