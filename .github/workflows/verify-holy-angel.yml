@@ -45,6 +45,8 @@ jobs:
         run: node scripts/verify-holy-angel-combined-ui-static.mjs
       - name: Verify combined v3 workspace migration and undo
         run: node scripts/verify-holy-angel-combined-workspace.mjs
+      - name: Verify atomic test quota rollback in SQLite
+        run: python3 scripts/verify-holy-angel-sql-quota.py
       - name: Check disabled cloud workspace creation
         run: node scripts/verify-holy-angel-cloud-create.mjs
       - name: Check cloud client
