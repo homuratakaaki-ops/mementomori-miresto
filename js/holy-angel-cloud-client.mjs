@@ -33,7 +33,9 @@ export async function saveHolyAngelRemote({baseUrl,id,token,document,remoteRevis
   if(!Number.isSafeInteger(remoteRevision)||remoteRevision<0)
     throw new SyncError('invalid','クラウドの更新番号が不正です');
   // Serialize before network send, never mutate caller's local draft.
-  const safeDocument=JSON.parse(serializeCombinedWorkspace(document));
+  let safeDocument;
+  try{safeDocument=JSON.parse(serializeCombinedWorkspace(document));}
+  catch{throw new SyncError('invalid','保存データの形式が正しくありません');}
   const response=await requestSafe(fetchImpl,endpoint(baseUrl,id),{
     method:'PUT',headers:headers(token,true),
     body:JSON.stringify({expectedRevision:remoteRevision,document:safeDocument})
