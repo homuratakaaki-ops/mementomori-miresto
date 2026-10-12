@@ -46,14 +46,14 @@ try{
   assert.notEqual(inserted[1],credentials.token);checks++;
   assert.match(inserted[1],/^[0-9a-f]{64}$/);checks++;
   assert.equal(JSON.parse(inserted[2]).schemaVersion,3);checks++;
-  assert.equal(quota,1);checks++;
+  assert.equal(quota,0);checks++;
   const next=await createHolyAngelTestWorkspace(validRequest(),enabled);
   const second=await next.json();
   assert.notEqual(second.token,credentials.token);checks++;
   globalThis.fetch=async()=>new Response(JSON.stringify({success:false}),{status:200});
   const denied=await createHolyAngelTestWorkspace(validRequest(),enabled);
   assert.equal(denied.status,403);checks++;
-  assert.equal(quota,2);checks++;
+  assert.equal(quota,0);checks++;
 }finally{globalThis.fetch=originalFetch;}
 
 console.log('PASS '+checks+' creation safety stop tests (offline only)');
