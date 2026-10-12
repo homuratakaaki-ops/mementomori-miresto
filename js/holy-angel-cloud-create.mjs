@@ -4,6 +4,10 @@ const encoder=new TextEncoder();
 const randomId=()=>{const bytes=new Uint8Array(32);crypto.getRandomValues(bytes);return Array.from(bytes,b=>b.toString(16).padStart(2,'0')).join('');};
 const digest=async value=>Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',encoder.encode(value))),b=>b.toString(16).padStart(2,'0')).join('');
 const reply=(body,status)=>new Response(JSON.stringify(body),{status,headers:{'Content-Type':'application/json','Cache-Control':'no-store','Referrer-Policy':'no-referrer'}});
+export async function consumeTestCreationQuota(db) {
+  const result=await db.prepare("UPDATE holy_angel_test_quota SET used=used+1 WHERE name='workspaces' AND used<25").run();
+  return result.meta?.changes===1;
+}
 export async function createHolyAngelTestWorkspace(request,env){
   if(env?.HOLY_ANGEL_TEST_CREATE_ENABLED!=='true')return reply({error:'新規作成は停止しています'},503);
   if(request.method!=='POST')return reply({error:'操作できません'},405);
@@ -27,11 +31,10 @@ export async function createHolyAngelTestWorkspace(request,env){
   if(!valid)return reply({error:'本人確認ができませんでした'},403);
   // Atomic lifetime cap for the isolated test DB (fail closed if quota table is missing).
   // No reset operation: this deliberately limits all test workspace creations to 25.
-  let quota;
-  try {
-    quota=await env.DB.prepare("UPDATE holy_angel_test_quota SET used=used+1 WHERE name='workspaces' AND used<25").run();
-  } catch {return reply({error:'登録制限を確認できませんでした'},503);}
-  if(quota.meta?.changes!==1)return reply({error:'登録上限に達したか登録を停止しています'},429);
+  let quotaPassed;
+  try {quotaPassed=await consumeTestCreationQuota(env.DB);}
+  catch {return reply({error:'登録制限を確認できませんでした'},503);}
+  if(!quotaPassed)return reply({error:'登録上限に達したか登録を停止しています'},429);
   const id=randomId(),token=randomId(),hash=await digest(token);
   try{
     const result=await env.DB.prepare('INSERT INTO workspaces(id,edit_token_hash,document_json,remote_revision,created_at,updated_at) VALUES(?,?,?,0,?,?)').bind(id,hash,documentJson,new Date().toISOString(),new Date().toISOString()).run();
