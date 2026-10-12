@@ -4,10 +4,6 @@ const encoder=new TextEncoder();
 const randomId=()=>{const bytes=new Uint8Array(32);crypto.getRandomValues(bytes);return Array.from(bytes,b=>b.toString(16).padStart(2,'0')).join('');};
 const digest=async value=>Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',encoder.encode(value))),b=>b.toString(16).padStart(2,'0')).join('');
 const reply=(body,status)=>new Response(JSON.stringify(body),{status,headers:{'Content-Type':'application/json','Cache-Control':'no-store','Referrer-Policy':'no-referrer'}});
-export async function consumeTestCreationQuota(db) {
-  const result=await db.prepare("UPDATE holy_angel_test_quota SET used=used+1 WHERE name='workspaces' AND used<25").run();
-  return result.meta?.changes===1;
-}
 export async function createHolyAngelTestWorkspace(request,env){
   if(env?.HOLY_ANGEL_TEST_CREATE_ENABLED!=='true')return reply({error:'新規作成は停止しています'},503);
   if(request.method!=='POST')return reply({error:'操作できません'},405);
