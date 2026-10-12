@@ -2,7 +2,7 @@
 // Demonstrates the outcomes the future server must produce, including conflicts.
 import assert from 'node:assert/strict';
 
-const MAX_BYTES=64*1024;
+const MAX_BYTES=64000;
 const records=new Map();
 let checks=0;
 function eq(actual,expected,label){assert.deepEqual(actual,expected,label);checks++;}
@@ -55,7 +55,7 @@ eq(fail.status,409,'device B stale write is rejected');
 eq(fail.serverRevision,1,'server revision returned for conflict');
 eq(read(id,owner).document.planData.plans,['new'],'device A change preserved');
 eq(staleDoc.planData.plans,['stale'],'device B unsynced change preserved locally');
-eq(save(id,owner,1,{value:'猫'.repeat(22000)}).status,413,'UTF-8 over 64 KiB rejected');
+eq(save(id,owner,1,{value:'猫'.repeat(22000)}).status,413,'UTF-8 over 64,000 bytes rejected');
 eq(save(id,owner,1,{value:1},{outage:true}).status,503,'outage does not acknowledge save');
 eq(read(id,owner).remoteRevision,1,'failed save did not modify revision');
 eq(read(id,owner).document.planData.plans,['new'],'outage did not destroy saved value');
