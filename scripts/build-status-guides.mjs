@@ -798,9 +798,11 @@ function articleContext(guide, characterById, skillById, errors) {
     skillAnchor(characterId, number, label) {
       const entry = { characterId, skill: String(number) };
       const id = skillKey(entry);
-      usedSkills.set(id, entry);
       const character = characterById.get(characterId);
       const skill = skillById.get(id);
+      // スキルIDが「キャラID-s番号」と食い違うキャラ（例：tropon_holy_night の tropon-holy-night-s2）でも、
+      // 取りこぼし検査はスキルデータ側の本当のIDで照合する。
+      usedSkills.set(skill ? skill.id : id, entry);
       if (!character) {
         errors.push(where + ": {{skill}} の " + characterId + " がキャラ一覧に無い");
         return label === null ? escapeHtml(id) : label;
@@ -1586,6 +1588,12 @@ export function buildStatusGuides(options) {
 
   const characterById = new Map((baseData.characters || []).map((character) => [character.id, character]));
   const skillById = new Map((baseData.skills || []).map((skill) => [skill.id, skill]));
+  // 本文の {{skill:キャラID:番号}} は「キャラID-s番号」で引くので、スキルIDがその形と違う
+  // スキルにも同じ形の別名を足しておく（スキルデータ側のIDは変えない）。
+  for (const skill of baseData.skills || []) {
+    const alias = skill.characterId + "-s" + skill.number;
+    if (!skillById.has(alias)) skillById.set(alias, skill);
+  }
 
   const errors = [];
   const summary = {};
