@@ -25,7 +25,7 @@ assert.equal(fail.status,503);assert.doesNotMatch(await fail.text(),/secret inte
 
 // Stateful DB imitation: confirm successful GET/PUT, stale revision 409, and data retained.
 const {createCombinedWorkspace}=await import('../js/holy-angel-combined-workspace.mjs');
-const plan={version:1,plans:[],partsBySlot:{arm:0,feet:0,accessory:0,head:0,body:0},ownedRelics:{chalice:0,medal:0,wing:0,fruit:0},settings:{tickets:0,startAt:'2026-10-11T18:30',usedToday:false,strategy:'complete-cycle',roundsPerWeek:3,weeks:4,gauge:0,selected:'none',freeSwitches:1,abandon:false}};
+const plan={version:1,plans:[{equipmentId:'armA',name:'腕Lv280',slot:'arm',current:'240',target:'280',steps:''}],partsBySlot:{arm:0,feet:0,accessory:0,head:0,body:0},ownedRelics:{chalice:0,medal:0,wing:0,fruit:0},settings:{tickets:0,startAt:'2026-10-11T18:30',usedToday:false,strategy:'complete-cycle',roundsPerWeek:3,weeks:4,gauge:0,selected:'none',freeSwitches:1,abandon:false}};
 const initial=createCombinedWorkspace({planV1:plan});
 let saved=JSON.stringify(initial),remote=0,writes=0;
 const stateDb={prepare(sql){return {bind(...args){return {
