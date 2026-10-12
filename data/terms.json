@@ -16,6 +16,10 @@
       "text": "行動開始時に現在HPに応じたダメージを受ける状態異常。",
       "guideUrl": "/pages/status/poison.html"
     },
+    "浸食": {
+      "text": "毎ターン行動開始時に、浸食を付与したスキルの総与ダメージに応じたダメージを受ける持続ダメージ効果。",
+      "guideUrl": "/pages/status/erosion.html"
+    },
     "出血": {
       "text": "毎ターン行動開始時に、付与したキャラの攻撃力に応じたダメージを受ける状態異常。",
       "guideUrl": "/pages/status/bleed.html"

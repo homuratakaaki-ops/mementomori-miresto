@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>浸食｜状態異常ガイド | ミレストのメメントモリ分析データ室</title>
+  <meta name="description" content="メメントモリの浸食とは何かを解説します。付与したスキルの総与ダメージで決まること、シールドなどで減る前の値を使うこと、重ねたときの扱い、浸食を付与するキャラ、劇化との関係を整理しています。">
+  <link rel="canonical" href="https://memento.musoudc.com/pages/status/erosion.html">
+  <!-- OGP。画像は共通のものを使う（ガイドごとの画像生成は未対応） -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="ミレストのメメントモリ分析データ室">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="og:title" content="浸食｜状態異常ガイド | ミレストのメメントモリ分析データ室">
+  <meta property="og:description" content="メメントモリの浸食とは何かを解説します。付与したスキルの総与ダメージで決まること、シールドなどで減る前の値を使うこと、重ねたときの扱い、浸食を付与するキャラ、劇化との関係を整理しています。">
+  <meta property="og:url" content="https://memento.musoudc.com/pages/status/erosion.html">
+  <meta property="og:image" content="https://memento.musoudc.com/assets/ogp/ogp-common.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <link rel="icon" type="image/png" href="../../assets/miresto/miresto-icon-32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="../../assets/miresto/miresto-icon-180.png">
+  <link rel="stylesheet" href="../../assets/character-page.css?v=5dfcab2f">
+  <link rel="stylesheet" href="../../assets/status-guide.css?v=7045fffa">
+  <!-- ad:head -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6389066329814944" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="/assets/ad-slot.css">
+  <!-- /ad:head -->
+</head>
+<body data-status-guide="erosion" data-prerendered>
+  <header class="page-header">
+    <div class="header-inner">
+      <a class="top-link" href="/">トップ</a>
+      <a class="top-link" href="./index.html">状態異常・特殊効果ガイドの一覧へ</a>
+      <p class="eyebrow">STATUS GUIDE</p>
+      <h1>浸食｜状態異常ガイド</h1>
+      <div class="guide-meta">
+        <span class="tag">最終横断確認 2026-10-12</span>
+      </div>
+      <p class="guide-meta-note">この日までに実装済みのキャラを対象に、浸食を付与するスキルを確認しています。</p>
+    </div>
+  </header>
+
+  <main>
+    <div class="guide-list">
+      <section class="guide-card" id="about" aria-labelledby="about-title">
+        <div class="guide-card-head">
+          <h2 id="about-title">浸食とは</h2>
+        </div>
+        <div class="guide-card-body">
+          <p><strong>浸食</strong>は、敵に付与する<strong>持続ダメージ効果</strong>のひとつです。</p>
+          <p>ゲーム内ヘルプでは、毎ターン行動開始時に、<strong>浸食を付与したスキルの総与ダメージの割合に応じたダメージ</strong>を受ける効果として説明されています。</p>
+          <p>毒が対象の現在HP、出血が付与者の攻撃力を基準にするのに対して、浸食は<strong>付与したときのスキルそのものがどれだけダメージを出したか</strong>を基準にします。</p>
+          <div class="guide-figure-mobile is-only" data-figure-series>
+            <div class="guide-series-track" tabindex="0" role="region" aria-label="図解3枚。横にスクロールして次の図へ">
+              <figure class="guide-figure-panel" aria-label="1 / 3">
+                <a href="../../assets/status/erosion-guide-m1.jpg?v=7fddcf98" aria-label="図1を拡大して開く（3枚中1枚目）">
+                  <picture>
+                    <source type="image/webp" srcset="../../assets/status/erosion-guide-m1.webp?v=ad0e3332">
+                    <img src="../../assets/status/erosion-guide-m1.jpg?v=7fddcf98" width="1080" height="1350" alt="浸食の基礎知識1/3。浸食は「付与したスキルの総与ダメージ」で決まる。1、スキル発動：対象に攻撃スキルを使用し、浸食を付与する。2、総与ダメージ：そのスキルで与えた総ダメージ量に応じて、浸食の威力が決まる（総与ダメージの一定割合）。3、毎ターン行動開始時：付与された浸食が、毎ターン行動開始時に持続ダメージを与える" decoding="async">
+                  </picture>
+                </a>
+              </figure>
+              <figure class="guide-figure-panel" aria-label="2 / 3">
+                <a href="../../assets/status/erosion-guide-m2.jpg?v=983375bd" aria-label="図2を拡大して開く（3枚中2枚目）">
+                  <picture>
+                    <source type="image/webp" srcset="../../assets/status/erosion-guide-m2.webp?v=7222e224">
+                    <img src="../../assets/status/erosion-guide-m2.jpg?v=983375bd" width="1080" height="1350" alt="計算で見る値2/3。シールドで減った後ではなく「減る前」を見る。浸食の計算は、シールドやダメージ軽減でダメージが減った後ではなく、減る前の総与ダメージを参照する。遮断・多重バリア・シールドなどで軽減された実際のHP減少ではなく、軽減前の総与ダメージが浸食の計算基準" loading="lazy" decoding="async">
+                  </picture>
+                </a>
+              </figure>
+              <figure class="guide-figure-panel" aria-label="3 / 3">
+                <a href="../../assets/status/erosion-guide-m3.jpg?v=c7674a56" aria-label="図3を拡大して開く（3枚中3枚目）">
+                  <picture>
+                    <source type="image/webp" srcset="../../assets/status/erosion-guide-m3.webp?v=a6f220db">
+                    <img src="../../assets/status/erosion-guide-m3.jpg?v=c7674a56" width="1080" height="1350" alt="キャラごとの違い3/3。同じ浸食でも割合・ターン・条件が違う。フェーネ：総与ダメージの40%・4ターン・付与確率70%・専用Lv3で50%。ハトホル：総与ダメージの20%・2ターン・弱体効果がない対象に付与。［聖夜の妖精］ルナリンド：総与ダメージの10%・2ターン・付与確率70%。付与元スキルの総与ダメージとセットで見る" loading="lazy" decoding="async">
+                  </picture>
+                </a>
+              </figure>
+            </div>
+            <div class="guide-slides-controls guide-series-controls" hidden>
+              <button type="button" data-series-prev aria-label="前の図へ">‹</button>
+              <span class="guide-slides-dots">
+                <button type="button" data-series-dot="0" aria-label="1枚目へ" aria-current="true"></button>
+                <button type="button" data-series-dot="1" aria-label="2枚目へ"></button>
+                <button type="button" data-series-dot="2" aria-label="3枚目へ"></button>
+              </span>
+              <span class="guide-series-count" aria-live="polite">1 / 3</span>
+              <button type="button" data-series-next aria-label="次の図へ">›</button>
+            </div>
+            <p class="guide-figure-note"><span class="is-narrow">横にスワイプで次の図へ。図をタップすると拡大して開きます。</span><span class="is-wide">‹ › で次の図へ。図をクリックすると拡大して開きます。</span></p>
+          </div>
+        </div>
+      </section>
+      <section class="guide-card" id="total" aria-labelledby="total-title">
+        <div class="guide-card-head">
+          <h2 id="total-title">「総与ダメージ」はどの値を見る？</h2>
+        </div>
+        <div class="guide-card-body">
+          <p>浸食で参照する総与ダメージは、実際に敵のHPをどれだけ減らしたかではありません。</p>
+          <p>ゲーム内ヘルプでは、遮断・多重バリア・シールドなどでダメージが減る<strong>前</strong>の総与ダメージを参照すると説明されています。</p>
+          <p>そのため、攻撃本体がシールドなどで大きく抑えられても、浸食の基準値まで同じように小さくなるとは限りません。</p>
+        </div>
+      </section>
+      <section class="guide-card" id="stacking" aria-labelledby="stacking-title">
+        <div class="guide-card-head">
+          <h2 id="stacking-title">浸食は重ね掛けできる？</h2>
+        </div>
+        <div class="guide-card-body">
+          <p>浸食は、同じ効果を別々に何個も積み重ねるタイプではありません。</p>
+          <p>公式FAQ「バフ・弱体効果」では、同じ種類の浸食を重ねると上書きされ、<strong>効果ターンと効果の大きさについて、それぞれ最大のものを引き継いだ1つの効果だけが残る</strong>と説明されています。<a href="https://note.com/wazu_019/n/nf85f0e31daba" target="_blank" rel="noopener">ワーズさんの検証</a>でも、同じ種類の持続ダメージを重ねたときの扱いが整理されています。</p>
+        </div>
+      </section>
+      <section class="guide-card" id="users" aria-labelledby="users-title">
+        <div class="guide-card-head">
+          <h2 id="users-title">浸食を付与するキャラ</h2>
+        </div>
+        <div class="guide-card-body">
+          <p>現行キャラのうち、浸食を付与するスキルは次の3つです。</p>
+          <div class="guide-table-wrap">
+            <table class="guide-table guide-table--wrap">
+              <thead>
+                <tr>
+                  <th scope="col">キャラ／スキル</th>
+                  <th scope="col">対象・条件</th>
+                  <th scope="col">浸食（ターン・ダメージ）</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row"><a href="../characters/fenny.html#skill-2">フェーネ S2 魔力浸透砲弾</a></th>
+                  <td data-label="対象・条件">HP割合が最も高い敵（70%の確率）</td>
+                  <td data-label="浸食（ターン・ダメージ）">4ターン・総与ダメージ40%（専用Lv3で50%）</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/hathor.html#skill-2">ハトホル S2 黄泉への誘い</a></th>
+                  <td data-label="対象・条件">ランダムな敵5体のうち、弱体効果を付帯していない対象</td>
+                  <td data-label="浸食（ターン・ダメージ）">2ターン・総与ダメージ20%</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/lunalynn_holy_night.html#skill-2">[聖夜の妖精]ルナリンド S2 コールドフレア</a></th>
+                  <td data-label="対象・条件">ランダムな敵5体（70%の確率）</td>
+                  <td data-label="浸食（ターン・ダメージ）">2ターン・総与ダメージ10%</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p><a href="../characters/hathor.html#skill-2">ハトホルS2「黄泉への誘い」</a>は、弱体効果中の対象には浸食ではなく気絶のほうを付与します。</p>
+        </div>
+      </section>
+      <section class="guide-card" id="drama" aria-labelledby="drama-title">
+        <div class="guide-card-head">
+          <h2 id="drama-title">劇化との関係</h2>
+        </div>
+        <div class="guide-card-body">
+          <p><strong>劇化</strong>は、受ける持続ダメージを増加させる効果です。浸食も持続ダメージに分類されるため、劇化で増えるダメージの対象になります。</p>
+          <p>また、ゲーム内ヘルプでは毒・火傷に「ダメージは付帯者の攻撃力を超えない」という上限の説明がありますが、浸食には同じ上限の説明はありません。</p>
+        </div>
+      </section>
+      <section class="guide-card" id="points" aria-labelledby="points-title">
+        <div class="guide-card-head">
+          <h2 id="points-title">浸食を見るときのポイント</h2>
+        </div>
+        <div class="guide-card-body">
+          <p>浸食スキルでは、次の4点を見ると分かりやすくなります。</p>
+          <ul class="guide-bullets">
+            <li>何ターン続くか</li>
+            <li>総与ダメージの何%か</li>
+            <li>付与確率・条件があるか</li>
+            <li>元のスキル自体の総与ダメージがどれくらい大きいか</li>
+          </ul>
+          <p>浸食は「割合だけ」を見るより、<strong>付与元スキルの総与ダメージとセットで見る</strong>ことが大切です。</p>
+        </div>
+      </section>
+      <section class="guide-card" id="summary" aria-labelledby="summary-title">
+        <div class="guide-card-head">
+          <h2 id="summary-title">まとめ</h2>
+        </div>
+        <div class="guide-card-body">
+          <p>浸食は、<strong>付与したスキルの総与ダメージを基準に、毎ターン行動開始時に追加ダメージを与える持続ダメージ効果</strong>です。</p>
+          <p>毒・出血とは計算の基準が違い、さらにシールドなどで軽減される前の総与ダメージを参照する点が大きな特徴です。</p>
+        </div>
+      </section>
+      <section class="guide-card" id="sources" aria-labelledby="sources-title">
+        <div class="guide-card-head">
+          <h2 id="sources-title">出典</h2>
+        </div>
+        <div class="guide-card-body">
+          <p class="guide-source">出典：ゲーム内ヘルプ「持続ダメージ効果」／公式FAQ「バフ・弱体効果」／ゲーム内スキル説明</p>
+          <p class="guide-source">浸食のダメージの基準とタイミング、軽減前の総与ダメージを使うこと、毒・火傷との上限の違いはゲーム内ヘルプ、同じ浸食を重ねたときの扱いは公式FAQ、各キャラの付与確率・ターン数・割合はゲーム内スキル説明を基準にしています。</p>
+          <ul class="guide-bullets guide-source">
+            <li><a href="https://mementomori.zendesk.com/hc/ja/articles/46412673040921" target="_blank" rel="noopener">公式FAQ「バフ・弱体効果」</a></li>
+          </ul>
+          <p class="guide-source">検証参考：ワーズさんが公開されている検証結果を参考にさせていただきました。</p>
+          <ul class="guide-bullets guide-source">
+            <li><a href="https://note.com/wazu_019/n/nf85f0e31daba" target="_blank" rel="noopener">ワーズさん「スキル効果の重ね掛け」</a><span class="guide-link-text">同じ種類の持続ダメージを重ねたときの扱い</span></li>
+          </ul>
+        </div>
+      </section>
+    </div>
+    <!-- ad:bottom -->
+    <aside class="ad-slot" aria-label="広告">
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-6389066329814944"
+           data-ad-slot="6111654373"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </aside>
+    <!-- /ad:bottom -->
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <span>ミレストのメメントモリ分析データ室 / 非公式ファンサイト</span>
+      <nav class="footer-links" aria-label="サイト内のページ">
+        <a href="/">トップ</a>
+        <a href="../characters/index.html">キャラ一覧</a>
+        <a href="/pages/guide/">このサイトでできること</a>
+        <a href="/privacy.html">プライバシーポリシー</a>
+        <a href="/disclaimer.html">免責事項</a>
+        <a href="/about.html">このサイトについて</a>
+        <a href="/contact.html">お問い合わせ</a>
+      </nav>
+    </div>
+  </footer>
+  <script src="../../js/figure-series.js?v=8b71cecf" defer></script>
+</body>
+</html>
