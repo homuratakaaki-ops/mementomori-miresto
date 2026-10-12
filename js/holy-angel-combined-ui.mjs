@@ -53,6 +53,8 @@ function refresh(){
  el('revision').textContent=info?'このまとめデータの更新番号：'+info.revision:'まとめデータ未作成';
  el('inventory-source').value=info?.mode||'plans';
  el('plan-start').value=workspace?.planData.settings.startAt||'';
+ el('event-count').textContent=(info?.actualEvents??0)+'件';
+ const block=el('blocked-note');block.hidden=!info?.blockedReason;block.textContent=info?.blockedReason||'';
  const host=el('editable-plans');host.replaceChildren();
  if(workspace)for(const [index,p] of workspace.planData.plans.entries()){
   const row=document.createElement('div');row.className='relic-line';
