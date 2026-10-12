@@ -45,6 +45,8 @@ jobs:
         run: node scripts/verify-holy-angel-combined-ui-static.mjs
       - name: Verify combined v3 workspace migration and undo
         run: node scripts/verify-holy-angel-combined-workspace.mjs
+      - name: Check cloud client
+        run: node scripts/verify-holy-angel-cloud-client.mjs
       - name: Verify cloud sync failure and conflict scenarios offline (mock only)
         run: node scripts/verify-holy-angel-cloud-contract-mock.mjs
       - name: Verify new cloud API smoke checks (offline only)
