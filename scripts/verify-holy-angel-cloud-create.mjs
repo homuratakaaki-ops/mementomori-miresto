@@ -1,0 +1,11 @@
+import assert from 'node:assert/strict';
+import {createHolyAngelTestWorkspace} from '../js/holy-angel-cloud-create.mjs';
+const request=new Request('https://example.test/api/v1/workspaces',{method:'POST',headers:{Origin:'https://example.test','content-type':'application/json'},body:JSON.stringify({challenge:'dummy',document:{}})});
+let checks=0;
+const test=async(env,status)=>{const r=await createHolyAngelTestWorkspace(request,env);assert.equal(r.status,status);checks++;};
+await test({},503);
+await test({HOLY_ANGEL_TEST_CREATE_ENABLED:'false'},503);
+await test({HOLY_ANGEL_TEST_CREATE_ENABLED:'true'},503);
+await test({HOLY_ANGEL_TEST_CREATE_ENABLED:'true',DB:{},TURNSTILE_SECRET:'dummy',HOLY_ANGEL_ALLOWED_ORIGIN:'https://other.test'},403);
+await test({HOLY_ANGEL_TEST_CREATE_ENABLED:'true',DB:{},TURNSTILE_SECRET:'dummy',HOLY_ANGEL_ALLOWED_ORIGIN:'https://example.test'},400);
+console.log('PASS '+checks+' creation safety stop tests (offline only)');
