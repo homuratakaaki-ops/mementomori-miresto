@@ -64,6 +64,18 @@
     "自傷": {
       "text": "スキルの効果で自分のHPを自分で減らすダメージ。シールドや多重バリアでは防げない。",
       "guideUrl": "/pages/status/self-damage.html"
+    },
+    "共鳴": {
+      "text": "2体の敵をつなぎ、一方が受けたダメージの一部をもう一方にも与える弱体効果。",
+      "guideUrl": "/pages/status/resonance.html"
+    },
+    "拘束": {
+      "text": "攻撃を回避できなくなる弱体効果。回避率を下げる効果とは違い、回避そのものができなくなる。",
+      "guideUrl": "/pages/status/restraint.html"
+    },
+    "遅延": {
+      "text": "スキルのクールタイムが戻るのを遅らせ、次のアクティブスキル発動を遅くする弱体効果。",
+      "guideUrl": "/pages/status/delay.html"
     }
   }
 }

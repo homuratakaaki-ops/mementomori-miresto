@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>共鳴｜状態異常ガイド | ミレストのメメントモリ分析データ室</title>
+  <meta name="description" content="メメントモリの共鳴とは何かを解説します。2体の敵をつないでダメージを共有すること、ミミの共鳴の対象と割合、解除される条件、共鳴を使えるキャラを整理しています。">
+  <link rel="canonical" href="https://memento.musoudc.com/pages/status/resonance.html">
+  <!-- OGP。画像は共通のものを使う（ガイドごとの画像生成は未対応） -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="ミレストのメメントモリ分析データ室">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="og:title" content="共鳴｜状態異常ガイド | ミレストのメメントモリ分析データ室">
+  <meta property="og:description" content="メメントモリの共鳴とは何かを解説します。2体の敵をつないでダメージを共有すること、ミミの共鳴の対象と割合、解除される条件、共鳴を使えるキャラを整理しています。">
+  <meta property="og:url" content="https://memento.musoudc.com/pages/status/resonance.html">
+  <meta property="og:image" content="https://memento.musoudc.com/assets/ogp/ogp-common.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <link rel="icon" type="image/png" href="../../assets/miresto/miresto-icon-32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="../../assets/miresto/miresto-icon-180.png">
+  <link rel="stylesheet" href="../../assets/character-page.css?v=1abdce7e">
+  <link rel="stylesheet" href="../../assets/status-guide.css?v=71746d66">
+  <!-- ad:head -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6389066329814944" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="/assets/ad-slot.css">
+  <!-- /ad:head -->
+</head>
+<body data-status-guide="resonance" data-prerendered>
+  <header class="page-header">
+    <div class="header-inner">
+      <a class="top-link" href="/">トップ</a>
+      <a class="top-link" href="./index.html">状態異常・特殊効果ガイドの一覧へ</a>
+      <p class="eyebrow">STATUS GUIDE</p>
+      <h1>共鳴｜状態異常ガイド</h1>
+      <div class="guide-meta">
+        <span class="tag">最終横断確認 2026-10-12</span>
+      </div>
+      <p class="guide-meta-note">この日までに実装済みのキャラを対象に、共鳴を付与するスキルを確認しています。</p>
+    </div>
+  </header>
+
+  <main>
+    <div class="guide-list">
+      <section class="guide-card" id="about" aria-labelledby="about-title">
+        <div class="guide-card-head">
+          <h2 id="about-title">共鳴とは</h2>
+        </div>
+        <div class="guide-card-body">
+          <p>共鳴は、<strong>2体の敵をつなぎ、一方が受けたダメージの一部をもう一方にも与える弱体効果</strong>です。</p>
+          <div class="guide-figure-mobile is-only" data-figure-series>
+            <div class="guide-series-track" tabindex="0" role="region" aria-label="図解3枚。横にスクロールして次の図へ">
+              <figure class="guide-figure-panel" aria-label="1 / 3">
+                <a href="../../assets/status/resonance-guide-m1.jpg?v=04d5fe7f" aria-label="図1を拡大して開く（3枚中1枚目）">
+                  <picture>
+                    <source type="image/webp" srcset="../../assets/status/resonance-guide-m1.webp?v=8002bb2c">
+                    <img src="../../assets/status/resonance-guide-m1.jpg?v=04d5fe7f" width="1080" height="1350" alt="共鳴の基礎知識1/3。共鳴は「2体をつないでダメージを共有」。一方が受けたダメージの一部をもう一方も受ける。例えば、敵Aが10万ダメージ→敵Bも8万ダメージ。ミミS4では最大80%。敵Aが受けたダメージの最大80%をもう一方にも与えます。まとめ：共鳴は、2体をつないで被ダメージを分け合う弱体効果" decoding="async">
+                  </picture>
+                </a>
+              </figure>
+              <figure class="guide-figure-panel" aria-label="2 / 3">
+                <a href="../../assets/status/resonance-guide-m2.jpg?v=0be7b4d1" aria-label="図2を拡大して開く（3枚中2枚目）">
+                  <picture>
+                    <source type="image/webp" srcset="../../assets/status/resonance-guide-m2.webp?v=1575f0f9">
+                    <img src="../../assets/status/resonance-guide-m2.jpg?v=0be7b4d1" width="1080" height="1350" alt="共鳴の対象2/3。防御力が最高の敵と最低の敵をつなぐ。ミミS4が、戦場の中から防御力が最も高い敵と最も低い敵を選んで共鳴をつなぎます。例えば、戦場の中で防御力が最も高い敵と、防御力が最も低い敵が選ばれる。解除不可：共鳴は、敵を倒しても、時間が経過しても解除されません。どちらかが戦闘不能で解除：共鳴した2体のうち、どちらか一方が戦闘不能になると共鳴は解除されます。まとめ：ミミS4の共鳴は、硬い敵と柔らかい敵を結びつける" loading="lazy" decoding="async">
+                  </picture>
+                </a>
+              </figure>
+              <figure class="guide-figure-panel" aria-label="3 / 3">
+                <a href="../../assets/status/resonance-guide-m3.jpg?v=812978f3" aria-label="図3を拡大して開く（3枚中3枚目）">
+                  <picture>
+                    <source type="image/webp" srcset="../../assets/status/resonance-guide-m3.webp?v=0a1a5d90">
+                    <img src="../../assets/status/resonance-guide-m3.jpg?v=812978f3" width="1080" height="1350" alt="共鳴の使いどころ3/3。硬い敵を別の敵経由で削れる。共鳴でつながった敵は、ダメージの一部を共有。例えば、敵A（硬い敵・防御力：高）は直接攻撃してもダメージが通りにくい。敵B（柔らかい敵・防御力：低）は比較的ダメージが通りやすい。敵Bへの攻撃で10万ダメージ、敵Aに5万ダメージ。低防御側への攻撃が高防御側にも届く。まとめ：共鳴があると、高防御の敵にも別の敵経由でダメージを通しやすい" loading="lazy" decoding="async">
+                  </picture>
+                </a>
+              </figure>
+            </div>
+            <div class="guide-slides-controls guide-series-controls" hidden>
+              <button type="button" data-series-prev aria-label="前の図へ">‹</button>
+              <span class="guide-slides-dots">
+                <button type="button" data-series-dot="0" aria-label="1枚目へ" aria-current="true"></button>
+                <button type="button" data-series-dot="1" aria-label="2枚目へ"></button>
+                <button type="button" data-series-dot="2" aria-label="3枚目へ"></button>
+              </span>
+              <span class="guide-series-count" aria-live="polite">1 / 3</span>
+              <button type="button" data-series-next aria-label="次の図へ">›</button>
+            </div>
+            <p class="guide-figure-note"><span class="is-narrow">横にスワイプで次の図へ。図をタップすると拡大して開きます。</span><span class="is-wide">‹ › で次の図へ。図をクリックすると拡大して開きます。</span></p>
+          </div>
+        </div>
+      </section>
+      <section class="guide-card" id="how" aria-labelledby="how-title">
+        <div class="guide-card-head">
+          <h2 id="how-title">どう動く？</h2>
+        </div>
+        <div class="guide-card-body">
+          <p>ミミの共鳴では、バトル開始時に防御力が最も高い敵と最も低い敵が選ばれます。Lv最大では、片方が受けたダメージの80%をもう片方も受けます。</p>
+          <p>たとえば片方が10万ダメージを受けた場合、共鳴しているもう片方にも8万ダメージが発生するイメージです。</p>
+        </div>
+      </section>
+      <section class="guide-card" id="release" aria-labelledby="release-title">
+        <div class="guide-card-head">
+          <h2 id="release-title">いつ解除される？</h2>
+        </div>
+        <div class="guide-card-body">
+          <p>共鳴は解除不可ですが、<strong>共鳴している敵のどちらかが戦闘不能になると解除</strong>されます。</p>
+        </div>
+      </section>
+      <section class="guide-card" id="users" aria-labelledby="users-title">
+        <div class="guide-card-head">
+          <h2 id="users-title">誰が使える？</h2>
+        </div>
+        <div class="guide-card-body">
+          <p>現在確認できるのはミミのみです。</p>
+          <div class="guide-table-wrap">
+            <table class="guide-table guide-table--wrap">
+              <thead>
+                <tr>
+                  <th scope="col">キャラ／スキル</th>
+                  <th scope="col">対象</th>
+                  <th scope="col">効果</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row"><a href="../characters/mimi.html#skill-4">ミミ S4 ユニゾンダンス</a></th>
+                  <td data-label="対象">バトル開始時、防御力が最も高い敵と最も低い敵</td>
+                  <td data-label="効果">互いに受けたダメージの80%を受ける。解除不可。片方が戦闘不能で解除</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+      <section class="guide-card" id="sources" aria-labelledby="sources-title">
+        <div class="guide-card-head">
+          <h2 id="sources-title">出典</h2>
+        </div>
+        <div class="guide-card-body">
+          <p class="guide-source">出典：ゲーム内スキル説明</p>
+          <p class="guide-source">ミミの共鳴の対象・割合・解除条件はゲーム内スキル説明を基準にしています。</p>
+        </div>
+      </section>
+    </div>
+    <!-- ad:bottom -->
+    <aside class="ad-slot" aria-label="広告">
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-6389066329814944"
+           data-ad-slot="6111654373"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </aside>
+    <!-- /ad:bottom -->
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <span>ミレストのメメントモリ分析データ室 / 非公式ファンサイト</span>
+      <nav class="footer-links" aria-label="サイト内のページ">
+        <a href="/">トップ</a>
+        <a href="../characters/index.html">キャラ一覧</a>
+        <a href="/pages/guide/">このサイトでできること</a>
+        <a href="/privacy.html">プライバシーポリシー</a>
+        <a href="/disclaimer.html">免責事項</a>
+        <a href="/about.html">このサイトについて</a>
+        <a href="/contact.html">お問い合わせ</a>
+      </nav>
+    </div>
+  </footer>
+  <script src="../../js/figure-series.js?v=8b71cecf" defer></script>
+</body>
+</html>

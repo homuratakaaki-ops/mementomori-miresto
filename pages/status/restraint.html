@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>拘束｜状態異常ガイド | ミレストのメメントモリ分析データ室</title>
+  <meta name="description" content="メメントモリの拘束とは何かを解説します。攻撃を回避できなくなること、回避率を下げる効果との違い、使いどころ、拘束を使えるキャラと専用武器の条件を整理しています。">
+  <link rel="canonical" href="https://memento.musoudc.com/pages/status/restraint.html">
+  <!-- OGP。画像は共通のものを使う（ガイドごとの画像生成は未対応） -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="ミレストのメメントモリ分析データ室">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="og:title" content="拘束｜状態異常ガイド | ミレストのメメントモリ分析データ室">
+  <meta property="og:description" content="メメントモリの拘束とは何かを解説します。攻撃を回避できなくなること、回避率を下げる効果との違い、使いどころ、拘束を使えるキャラと専用武器の条件を整理しています。">
+  <meta property="og:url" content="https://memento.musoudc.com/pages/status/restraint.html">
+  <meta property="og:image" content="https://memento.musoudc.com/assets/ogp/ogp-common.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <link rel="icon" type="image/png" href="../../assets/miresto/miresto-icon-32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="../../assets/miresto/miresto-icon-180.png">
+  <link rel="stylesheet" href="../../assets/character-page.css?v=1abdce7e">
+  <link rel="stylesheet" href="../../assets/status-guide.css?v=71746d66">
+  <!-- ad:head -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6389066329814944" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="/assets/ad-slot.css">
+  <!-- /ad:head -->
+</head>
+<body data-status-guide="restraint" data-prerendered>
+  <header class="page-header">
+    <div class="header-inner">
+      <a class="top-link" href="/">トップ</a>
+      <a class="top-link" href="./index.html">状態異常・特殊効果ガイドの一覧へ</a>
+      <p class="eyebrow">STATUS GUIDE</p>
+      <h1>拘束｜状態異常ガイド</h1>
+      <div class="guide-meta">
+        <span class="tag">最終横断確認 2026-10-12</span>
+      </div>
+      <p class="guide-meta-note">この日までに実装済みのキャラを対象に、拘束を付与するスキルを確認しています。</p>
+    </div>
+  </header>
+
+  <main>
+    <div class="guide-list">
+      <section class="guide-card" id="about" aria-labelledby="about-title">
+        <div class="guide-card-head">
+          <h2 id="about-title">拘束とは</h2>
+        </div>
+        <div class="guide-card-body">
+          <p>拘束は、対象が<strong>攻撃を回避できなくなる弱体効果</strong>です。</p>
+          <p>回避率を下げる効果とは違い、「回避できない状態」にするのがポイントです。</p>
+          <div class="guide-figure-mobile is-only" data-figure-series>
+            <div class="guide-series-track" tabindex="0" role="region" aria-label="図解3枚。横にスクロールして次の図へ">
+              <figure class="guide-figure-panel" aria-label="1 / 3">
+                <a href="../../assets/status/restraint-guide-m1.jpg?v=748168a4" aria-label="図1を拡大して開く（3枚中1枚目）">
+                  <picture>
+                    <source type="image/webp" srcset="../../assets/status/restraint-guide-m1.webp?v=5552cbc6">
+                    <img src="../../assets/status/restraint-guide-m1.jpg?v=748168a4" width="1080" height="1350" alt="拘束の基礎知識1/3。拘束は「相手が回避できなくなる」。回避率を下げるのではなく、回避そのものを封じる。例えば、拘束中は攻撃を回避できない。まとめ：拘束は、相手を「回避不可」にする弱体効果" decoding="async">
+                  </picture>
+                </a>
+              </figure>
+              <figure class="guide-figure-panel" aria-label="2 / 3">
+                <a href="../../assets/status/restraint-guide-m2.jpg?v=839dd9bb" aria-label="図2を拡大して開く（3枚中2枚目）">
+                  <picture>
+                    <source type="image/webp" srcset="../../assets/status/restraint-guide-m2.webp?v=000c0dee">
+                    <img src="../../assets/status/restraint-guide-m2.jpg?v=839dd9bb" width="1080" height="1350" alt="拘束と回避率減少2/3。「回避しにくい」と「回避できない」は別。回避率減少：回避する可能性は残る。回避率30%。回避率が下がっているだけで回避する可能性は残ります。拘束：回避できない。回避率0%。拘束状態の間は、回避ができません。まとめ：拘束は、回避率を下げる効果よりも強く「回避不可」にする" loading="lazy" decoding="async">
+                  </picture>
+                </a>
+              </figure>
+              <figure class="guide-figure-panel" aria-label="3 / 3">
+                <a href="../../assets/status/restraint-guide-m3.jpg?v=5f69d281" aria-label="図3を拡大して開く（3枚中3枚目）">
+                  <picture>
+                    <source type="image/webp" srcset="../../assets/status/restraint-guide-m3.webp?v=444ae495">
+                    <img src="../../assets/status/restraint-guide-m3.jpg?v=5f69d281" width="1080" height="1350" alt="拘束を使えるキャラ3/3。現行ではアムレート。スキル：S1 クリスタルブレイカー。発動条件：専用武器Lv1で追加。効果：2ターン拘束。最初から持っている効果ではなく、専用武器で追加される。まとめ：拘束を使えるキャラは、現在確認できる範囲ではアムレート" loading="lazy" decoding="async">
+                  </picture>
+                </a>
+              </figure>
+            </div>
+            <div class="guide-slides-controls guide-series-controls" hidden>
+              <button type="button" data-series-prev aria-label="前の図へ">‹</button>
+              <span class="guide-slides-dots">
+                <button type="button" data-series-dot="0" aria-label="1枚目へ" aria-current="true"></button>
+                <button type="button" data-series-dot="1" aria-label="2枚目へ"></button>
+                <button type="button" data-series-dot="2" aria-label="3枚目へ"></button>
+              </span>
+              <span class="guide-series-count" aria-live="polite">1 / 3</span>
+              <button type="button" data-series-next aria-label="次の図へ">›</button>
+            </div>
+            <p class="guide-figure-note"><span class="is-narrow">横にスワイプで次の図へ。図をタップすると拡大して開きます。</span><span class="is-wide">‹ › で次の図へ。図をクリックすると拡大して開きます。</span></p>
+          </div>
+        </div>
+      </section>
+      <section class="guide-card" id="usage" aria-labelledby="usage-title">
+        <div class="guide-card-head">
+          <h2 id="usage-title">どう使う？</h2>
+        </div>
+        <div class="guide-card-body">
+          <p>回避の高い敵や、こちらの攻撃が当たりにくい相手に対して有効です。拘束中は攻撃が回避されなくなるため、命中不足を一時的に補う使い方ができます。</p>
+        </div>
+      </section>
+      <section class="guide-card" id="users" aria-labelledby="users-title">
+        <div class="guide-card-head">
+          <h2 id="users-title">誰が使える？</h2>
+        </div>
+        <div class="guide-card-body">
+          <p>現在確認できるのはアムレートのみです。</p>
+          <p>アムレートは最初から拘束を持っているわけではなく、<strong>専用武器Lv1</strong>でS1「クリスタルブレイカー」に2ターンの拘束が追加されます。</p>
+          <div class="guide-table-wrap">
+            <table class="guide-table guide-table--wrap">
+              <thead>
+                <tr>
+                  <th scope="col">キャラ／スキル</th>
+                  <th scope="col">条件</th>
+                  <th scope="col">効果</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row"><a href="../characters/amleth.html#skill-1">アムレート S1 クリスタルブレイカー</a></th>
+                  <td data-label="条件">専用武器Lv1</td>
+                  <td data-label="効果">対象へ2ターンの拘束</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+      <section class="guide-card" id="sources" aria-labelledby="sources-title">
+        <div class="guide-card-head">
+          <h2 id="sources-title">出典</h2>
+        </div>
+        <div class="guide-card-body">
+          <p class="guide-source">出典：ゲーム内スキル説明</p>
+          <p class="guide-source">アムレートの拘束の付与条件・ターン数・対象はゲーム内スキル説明を基準にしています。</p>
+        </div>
+      </section>
+    </div>
+    <!-- ad:bottom -->
+    <aside class="ad-slot" aria-label="広告">
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-6389066329814944"
+           data-ad-slot="6111654373"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </aside>
+    <!-- /ad:bottom -->
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <span>ミレストのメメントモリ分析データ室 / 非公式ファンサイト</span>
+      <nav class="footer-links" aria-label="サイト内のページ">
+        <a href="/">トップ</a>
+        <a href="../characters/index.html">キャラ一覧</a>
+        <a href="/pages/guide/">このサイトでできること</a>
+        <a href="/privacy.html">プライバシーポリシー</a>
+        <a href="/disclaimer.html">免責事項</a>
+        <a href="/about.html">このサイトについて</a>
+        <a href="/contact.html">お問い合わせ</a>
+      </nav>
+    </div>
+  </footer>
+  <script src="../../js/figure-series.js?v=8b71cecf" defer></script>
+</body>
+</html>
