@@ -266,6 +266,9 @@
 - 用語辞書 `data/terms.json` の値は `{ text, guideUrl? }`。
   `guideUrl` があるのはガイドのある語だけで、その語の折りたたみにだけ
   「詳しくは○ガイドへ」のリンクが出ます。向き先がガイドのURLと食い違うとビルドが止まります。
+  用語が専用武器の変化の文（`exclusive` の `kind: "change"`）にしか出ないスキルでは、その項目に `term` を付けられます。
+  効果の行そのものに用語が無いときだけ、その語の説明枠を行に付けます（2026-10-16、D.D. S4「カウンタダメージ」で追加）。
+  従来型（毒）の本文でも `{{guide:ID|表示名}}` と `sources.officialLinks` が使えます。
 - 直リンク先は `pages/characters/{pageSlug}.html#skill-N`。アンカーは
   `js/render-character.js` の `renderSkillList` が付けます（`renderSkillCard` の
   `options.anchor`）。**同じスキル番号のカードが1ページに複数並ぶ「編成と比較」では付けません**

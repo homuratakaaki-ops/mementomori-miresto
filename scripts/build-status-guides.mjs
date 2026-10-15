@@ -404,6 +404,34 @@ function card(id, heading, bodyHtml) {
   ].join("\n");
 }
 
+/**
+ * 別の状態異常・特殊効果ガイド（と状態異常対策キャラ検索）へのリンク。article 型の {{guide}} と
+ * 従来型（毒）の本文で同じものを使う。向き先が実在しない id はビルドを止める（存在しないURLを作らない）。
+ */
+function guideLinkHtml(guideId, label, where, selfId, errors) {
+  // 状態異常対策キャラ検索（data/countermeasures.json から作るページ）だけは、個別ガイドと同じ記法で向けられる。
+  const isCountermeasures = guideId === "countermeasures" && existsSync(join(ROOT, "data", "countermeasures.json"));
+  if (!isCountermeasures && (!/^[a-z0-9-]+$/.test(guideId) || !existsSync(join(STATUS_DATA_DIR, guideId + ".json")))) {
+    errors.push(where + ": {{guide}} の " + guideId + " のガイドが無い（data/status/" + guideId + ".json）");
+    return label === null ? escapeHtml(guideId) : label;
+  }
+  if (guideId === selfId) errors.push(where + ": {{guide}} で自分自身のガイドを指している（" + guideId + "）");
+  const text = label === null ? escapeHtml(guideId) : label;
+  return '<a href="./' + escapeHtml(guideId) + '.html">' + text + "</a>";
+}
+
+/**
+ * 従来型（毒）の本文の文字列。先にHTMLエスケープし、{{guide:ID|表示名}} だけを置き換える。
+ * 従来型ではほかの記法（太字・スキル直リンク等）は使わないので、残っていればビルドを止める。
+ */
+function legacyInline(text, guide, errors) {
+  const where = "data/status/" + guide.id + ".json";
+  const html = escapeHtml(String(text == null ? "" : text)).replace(/\{\{guide:([^{}|]*)(?:\|([^{}]*))?\}\}/g,
+    (whole, id, label) => guideLinkHtml(id, label === undefined ? null : label, where, guide.id, errors));
+  if (html.includes("{{") || html.includes("}}")) errors.push(where + ": 従来型の本文で使えない記法がある（" + text + "）");
+  return html;
+}
+
 function paragraphs(list) {
   return (list || []).map((text) => "          <p>" + escapeHtml(text) + "</p>").join("\n");
 }
@@ -532,14 +560,14 @@ function usersCard(guide, characterById, skillById) {
  * 対策（参照型ガイド用・任意）。prevention: { heading, intro, items: [{ heading, body: [] }], callout: { title, body: [] } }。
  * 見た目は記事型と同じ部品（guide-sub の小見出し・guide-callout の囲み）を使い、新しい見た目は足さない。
  */
-function preventionCard(guide) {
+function preventionCard(guide, errors) {
   const prevention = guide.prevention;
   if (!prevention) return null;
   const parts = [];
-  if (prevention.intro) parts.push("          <p>" + escapeHtml(prevention.intro) + "</p>");
+  if (prevention.intro) parts.push("          <p>" + legacyInline(prevention.intro, guide, errors) + "</p>");
   for (const item of prevention.items || []) {
     parts.push('          <h3 class="guide-sub">' + escapeHtml(item.heading) + "</h3>");
-    for (const text of item.body || []) parts.push("          <p>" + escapeHtml(text) + "</p>");
+    for (const text of item.body || []) parts.push("          <p>" + legacyInline(text, guide, errors) + "</p>");
   }
   if (prevention.callout) {
     parts.push('          <div class="guide-callout">');
@@ -550,11 +578,11 @@ function preventionCard(guide) {
   return card("prevention", prevention.heading, parts.join("\n"));
 }
 
-function relatedCard(guide) {
+function relatedCard(guide, errors) {
   const parts = ['          <dl class="guide-defs">'];
   for (const item of guide.related || []) {
     parts.push("            <dt>" + escapeHtml(item.heading) + "</dt>");
-    parts.push("            <dd>" + escapeHtml(item.body) + "</dd>");
+    parts.push("            <dd>" + legacyInline(item.body, guide, errors) + "</dd>");
   }
   parts.push("          </dl>");
   return card("related", guide.name + "と他の効果", parts.join("\n"));
@@ -569,6 +597,16 @@ function sourcesCard(guide) {
   const official = sources.official || [];
   const verification = sources.verification || [];
   const parts = ['          <p class="guide-source">出典：' + escapeHtml(official.join("／")) + "</p>"];
+  if (sources.officialNote) parts.push('          <p class="guide-source">' + escapeHtml(sources.officialNote) + "</p>");
+  // 公式の出典のうち、ウェブで読めるもの（公式FAQなど）へのリンク。article 型と同じ見た目。
+  const officialLinks = sources.officialLinks || [];
+  if (officialLinks.length) {
+    parts.push('          <ul class="guide-bullets guide-source">');
+    for (const item of officialLinks) {
+      parts.push('            <li><a href="' + escapeHtml(item.url) + '" target="_blank" rel="noopener">' + escapeHtml(item.name) + "</a></li>");
+    }
+    parts.push("          </ul>");
+  }
   for (const item of verification) {
     parts.push('          <p class="guide-source">検証参考：' + escapeHtml(item.name) + "さん／"
       + '<a href="' + escapeHtml(item.url) + '" target="_blank" rel="noopener">'
@@ -627,7 +665,7 @@ function pageShell(options) {
   return lines.join("\n");
 }
 
-function guidePageHtml(guide, characterById, skillById, ads) {
+function guidePageHtml(guide, characterById, skillById, ads, errors) {
   const title = guide.name + "｜状態異常ガイド | " + TITLE_SUFFIX;
   // description は検索結果に出る1〜2行。長い本文をそのまま入れると切られるので、
   // 「何の効果か」「このページで分かること」だけに絞る。
@@ -640,8 +678,8 @@ function guidePageHtml(guide, characterById, skillById, ads) {
     .concat([
       giversCard(guide, characterById, skillById),
       usersCard(guide, characterById, skillById),
-      preventionCard(guide),
-      relatedCard(guide),
+      preventionCard(guide, errors),
+      relatedCard(guide, errors),
       sourcesCard(guide)
     ].filter(Boolean));
 
@@ -838,15 +876,7 @@ function articleContext(guide, characterById, skillById, errors) {
      * 向き先は data/status/{id}.json が実在するガイドだけ。無い id はビルドを止める（存在しないURLを作らない）。
      */
     guideAnchor(guideId, label) {
-      // 状態異常対策キャラ検索（data/countermeasures.json から作るページ）だけは、個別ガイドと同じ記法で向けられる。
-      const isCountermeasures = guideId === "countermeasures" && existsSync(join(ROOT, "data", "countermeasures.json"));
-      if (!isCountermeasures && (!/^[a-z0-9-]+$/.test(guideId) || !existsSync(join(STATUS_DATA_DIR, guideId + ".json")))) {
-        errors.push(where + ": {{guide}} の " + guideId + " のガイドが無い（data/status/" + guideId + ".json）");
-        return label === null ? escapeHtml(guideId) : label;
-      }
-      if (guideId === guide.id) errors.push(where + ": {{guide}} で自分自身のガイドを指している（" + guideId + "）");
-      const text = label === null ? escapeHtml(guideId) : label;
-      return '<a href="./' + escapeHtml(guideId) + '.html">' + text + "</a>";
+      return guideLinkHtml(guideId, label, where, guide.id, errors);
     },
     refAnchor(key, label) {
       usedRefs.add(key);
@@ -1647,11 +1677,13 @@ export function buildStatusGuides(options) {
     }
 
     summary[guide.id] = validateLists(guide, baseData, errors);
+    // 従来型にも公式FAQのリンクを書けるので、article 型と同じ検査をかける（従来型は検証記事の参照を本文で数えない）。
+    validateArticleSources({ id: guide.id, sources: { official: (guide.sources || {}).official, officialLinks: (guide.sources || {}).officialLinks } }, new Set(), errors);
     numbers += validateGiverNumbers(guide, skillById, errors);
     links += validateLinks(guide, characterById, errors);
     if (errors.length) continue; // リンク先が怪しいままHTMLを組まない
 
-    const html = guidePageHtml(guide, characterById, skillById, ads);
+    const html = guidePageHtml(guide, characterById, skillById, ads, errors);
     validateWording("pages/status/" + guide.id + ".html", html, errors);
     pages.push({ path: join(STATUS_PAGES_DIR, guide.id + ".html"), html, url: "/pages/status/" + guide.id + ".html" });
   }

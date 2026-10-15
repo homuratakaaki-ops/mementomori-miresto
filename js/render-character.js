@@ -271,7 +271,7 @@
       item.note ? `<span class="flow-note">${escapeHtml(item.note)}</span>` : ""
     ].filter(Boolean).join("");
     // 専用Lv2 で増えた効果を専用Lv3 がさらに書き換える場合は、その行の中に注記を出す
-    const nested = (item.exclusive || []).length ? exclusiveChangeNotes(skill, item, "other") + exclusiveChangeNotes(skill, item, "multiplier") : "";
+    const nested = (item.exclusive || []).length ? exclusiveChangeNotes(skill, item, "other", terms) + exclusiveChangeNotes(skill, item, "multiplier", terms) : "";
     const parts = termParts(item, terms);
     const body = parts ? parts.text : highlightRatios(item.text || "");
     const lineHtml = `${exclusiveChip(item.lv)}<span class="flow-excl-body">${before}${body}${after}</span><span class="flow-excl-tail">を追加</span>${nested}`;
@@ -279,7 +279,7 @@
   }
 
   /** 効果の倍率・継続・確率・効果量が専用で置き換わるときの注記。 */
-  function exclusiveChangeNotes(skill, effect, kind) {
+  function exclusiveChangeNotes(skill, effect, kind, terms) {
     return (effect.exclusive || [])
       .filter((item) => item.kind !== "add")
       .filter((item) => (kind === "multiplier" ? Boolean(item.multiplier) : !item.multiplier))
@@ -287,7 +287,10 @@
         if (item.multiplier) return exclusiveChange(item.lv, highlightRatios(item.multiplier), exclusiveTotalSuffix(skill, effect, item.lv, item), item.condition);
         if (item.duration) return exclusiveChange(item.lv, `継続が${escapeHtml(item.duration)}`, "", item.condition);
         if (item.chance) return exclusiveChange(item.lv, `確率が${escapeHtml(item.chance)}`, "", item.condition);
-        return exclusiveChange(item.lv, highlightRatios(item.text || ""), "", item.condition);
+        // 用語は専用武器の変化の文にしか出ないことがある（例：D.D. S4の「カウンタダメージ」）。
+        // その場合は語に下線を付け、説明の枠は効果の行全体にまとめて出す（renderFlowEffect）。
+        const termed = item.term ? termParts(item, terms) : null;
+        return exclusiveChange(item.lv, termed ? termed.text : highlightRatios(item.text || ""), "", item.condition);
       })
       .join("");
   }
@@ -306,14 +309,19 @@
     const after = [
       effect.multiplier ? `<span class="flow-chip num">${highlightRatios(effect.multiplier)}</span>` : "",
       total ? `<span class="flow-total">${escapeHtml(total)}</span>` : "",
-      exclusiveChangeNotes(skill, effect, "multiplier"),
+      exclusiveChangeNotes(skill, effect, "multiplier", terms),
       effect.duration ? `<span class="flow-chip">${escapeHtml(effect.duration)}</span>` : "",
       effect.note ? `<span class="flow-note">${escapeHtml(effect.note)}</span>` : "",
-      exclusiveChangeNotes(skill, effect, "other")
+      exclusiveChangeNotes(skill, effect, "other", terms)
     ].filter(Boolean).join("");
     const parts = termParts(effect, terms);
     const body = parts ? parts.text : highlightRatios(effect.text || "");
-    const line = `<li${effect.condition ? " class=\"flow-cond-line\"" : ""}>${wrapTermLine(`${before}${body}${after}`, parts)}</li>`;
+    // 効果の行に用語が無く、専用武器の変化の文にだけ用語がある場合は、その用語の説明枠を行に付ける。
+    const exclusiveTerm = parts ? null : (effect.exclusive || [])
+      .filter((item) => item.kind !== "add" && item.term)
+      .map((item) => termParts(item, terms))
+      .find(Boolean);
+    const line = `<li${effect.condition ? " class=\"flow-cond-line\"" : ""}>${wrapTermLine(`${before}${body}${after}`, parts || exclusiveTerm)}</li>`;
     const adds = (effect.exclusive || [])
       .filter((item) => item.kind === "add")
       .map((item) => renderExclusiveAddLine(skill, item, terms))
