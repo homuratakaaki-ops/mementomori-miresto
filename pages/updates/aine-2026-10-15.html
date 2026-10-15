@@ -43,8 +43,10 @@
     .document h2 { margin: 28px 0 14px; font-size: 22px; line-height: 1.5; }
     .document h2:first-child { margin-top: 0; }
     .table-scroll { overflow-x: auto; margin-bottom: 16px; }
-    table { width: 100%; min-width: 440px; border-collapse: collapse; line-height: 1.8; }
-    th, td { padding: 12px; border: 1px solid var(--line); text-align: left; vertical-align: top; }
+    table { width: 100%; table-layout: fixed; border-collapse: collapse; line-height: 1.8; }
+    th, td { padding: 12px; border: 1px solid var(--line); text-align: left; vertical-align: top; overflow-wrap: anywhere; }
+    thead th:first-child { width: 22%; }
+    thead th:nth-child(2), thead th:nth-child(3) { width: 39%; }
     th { background: #f6f1e8; }
     .note { color: var(--muted); font-size: 14px; }
     .document a { text-decoration: underline; text-underline-offset: 3px; }
