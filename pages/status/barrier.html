@@ -1,0 +1,342 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>結界｜特殊効果ガイド | ミレストのメメントモリ分析データ室</title>
+  <meta name="description" content="メメントモリの結界とは何かを解説します。攻撃・共鳴・献身・カウンタダメージを軽減し持続ダメージは軽減しない仕組み、重ねたときの扱い、結界を付与する6キャラの違い、対策と他の効果との関係を整理しています。">
+  <link rel="canonical" href="https://memento.musoudc.com/pages/status/barrier.html">
+  <!-- OGP。画像は共通のものを使う（ガイドごとの画像生成は未対応） -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="ミレストのメメントモリ分析データ室">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="og:title" content="結界｜特殊効果ガイド | ミレストのメメントモリ分析データ室">
+  <meta property="og:description" content="メメントモリの結界とは何かを解説します。攻撃・共鳴・献身・カウンタダメージを軽減し持続ダメージは軽減しない仕組み、重ねたときの扱い、結界を付与する6キャラの違い、対策と他の効果との関係を整理しています。">
+  <meta property="og:url" content="https://memento.musoudc.com/pages/status/barrier.html">
+  <meta property="og:image" content="https://memento.musoudc.com/assets/ogp/ogp-common.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <link rel="icon" type="image/png" href="../../assets/miresto/miresto-icon-32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="../../assets/miresto/miresto-icon-180.png">
+  <link rel="stylesheet" href="../../assets/character-page.css?v=1abdce7e">
+  <link rel="stylesheet" href="../../assets/status-guide.css?v=71746d66">
+  <!-- ad:head -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6389066329814944" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="/assets/ad-slot.css">
+  <!-- /ad:head -->
+</head>
+<body data-status-guide="barrier" data-prerendered>
+  <header class="page-header">
+    <div class="header-inner">
+      <a class="top-link" href="/">トップ</a>
+      <a class="top-link" href="./index.html">状態異常・特殊効果ガイドの一覧へ</a>
+      <p class="eyebrow">STATUS GUIDE</p>
+      <h1>結界｜特殊効果ガイド</h1>
+      <div class="guide-meta">
+        <span class="tag">最終横断確認 2026-10-15</span>
+      </div>
+      <p class="guide-meta-note">この日までにサイトで公開しているキャラを対象に、結界を付与・参照するスキルを全件確認しています。</p>
+    </div>
+  </header>
+
+  <main>
+    <div class="guide-list">
+      <section class="guide-card" id="oneline" aria-labelledby="oneline-title">
+        <div class="guide-card-head">
+          <h2 id="oneline-title">ひとことで</h2>
+        </div>
+        <div class="guide-card-body">
+          <p><strong>結界は、攻撃・共鳴・献身・カウンタダメージを軽減する特殊な防御バフです。</strong></p>
+          <p>通常の被ダメージ減少とは別に働きます。</p>
+          <p>ただし、<strong>毒・出血・浸食などの持続ダメージは軽減できません。</strong></p>
+          <div class="guide-figure-mobile is-only" data-figure-series>
+            <div class="guide-series-track" tabindex="0" role="region" aria-label="図解3枚。横にスクロールして次の図へ">
+              <figure class="guide-figure-panel" aria-label="1 / 3">
+                <a href="../../assets/status/barrier-guide-m1.jpg?v=fe728885" aria-label="図1を拡大して開く（3枚中1枚目）">
+                  <picture>
+                    <source type="image/webp" srcset="../../assets/status/barrier-guide-m1.webp?v=1ea8f6de">
+                    <img src="../../assets/status/barrier-guide-m1.jpg?v=fe728885" width="1080" height="1350" alt="メメントモリの特殊効果ガイド 結界の基礎知識1/3。結界は「受けるダメージを軽減する」効果。結界の仕組み：攻撃・共鳴・献身・カウンタのダメージを受けるダメージを軽減。持続ダメージについて：毒・出血・浸食などは軽減しない。1：攻撃・共鳴・献身・カウンタダメージを軽減する。結界は、攻撃・共鳴・献身・カウンタによって発生するダメージを軽減します。2：毒・出血・浸食などの持続ダメージは軽減しない。毒・出血・浸食などの持続ダメージは、結界による軽減の対象になりません。3：被ダメージ減少とは別に働く、特殊な防御効果。結界は、被ダメージ減少とは別に働く、特殊な防御効果です。結界の対象になるダメージを確認しよう。［聖槍の守護騎士］アレクサンドラ" decoding="async">
+                  </picture>
+                </a>
+              </figure>
+              <figure class="guide-figure-panel" aria-label="2 / 3">
+                <a href="../../assets/status/barrier-guide-m2.jpg?v=1588c089" aria-label="図2を拡大して開く（3枚中2枚目）">
+                  <picture>
+                    <source type="image/webp" srcset="../../assets/status/barrier-guide-m2.webp?v=c71ab22f">
+                    <img src="../../assets/status/barrier-guide-m2.jpg?v=1588c089" width="1080" height="1350" alt="結界2/3。キャラごとの違い。アイリスは「大ダメージに強い」、アレクサンドラは「育つ結界」。［黒鎧の従者］アイリス：大きな一撃の超過分に強い。最大HP20%を超えた分を50%遮断。受けるダメージのうち最大HP20%を超えた分を50%遮断。最大HP20%超過分のダメージを遮断。［聖槍の守護騎士］アレクサンドラ：育つ結界。最初は5%遮断、被弾・自傷ダメージで遮断量が増える、最大50%まで育つ。5%→被弾・自傷で上昇→最大50%。1：同じ「結界」でも性能は同じではない。2：誰に付くか・どんな条件で軽減するかが大事。3：結界はキャラ名だけでなく中身まで見る" loading="lazy" decoding="async">
+                  </picture>
+                </a>
+              </figure>
+              <figure class="guide-figure-panel" aria-label="3 / 3">
+                <a href="../../assets/status/barrier-guide-m3.jpg?v=5059c86f" aria-label="図3を拡大して開く（3枚中3枚目）">
+                  <picture>
+                    <source type="image/webp" srcset="../../assets/status/barrier-guide-m3.webp?v=62400375">
+                    <img src="../../assets/status/barrier-guide-m3.jpg?v=5059c86f" width="1080" height="1350" alt="メメントモリの特殊効果ガイド 結界3/3。見るポイント。「誰に・何ターン・何を・どれだけ」を見る。1：誰に付与されるか。2：何ターン続くか。3：どのダメージを軽減するか。4：軽減率が固定か、条件で変化するか。［聖槍の守護騎士］アレクサンドラ：自身と高火力の味方を守れる。被弾・自傷で結界が育つ。持続ダメージ対策は別で必要（毒・出血・浸食は軽減しない）。1：付与先と継続ターンを見る。2：軽減するダメージの種類を見る。3：毒・出血・浸食などは別対策が必要。結界は数より、中身を確認しよう" loading="lazy" decoding="async">
+                  </picture>
+                </a>
+              </figure>
+            </div>
+            <div class="guide-slides-controls guide-series-controls" hidden>
+              <button type="button" data-series-prev aria-label="前の図へ">‹</button>
+              <span class="guide-slides-dots">
+                <button type="button" data-series-dot="0" aria-label="1枚目へ" aria-current="true"></button>
+                <button type="button" data-series-dot="1" aria-label="2枚目へ"></button>
+                <button type="button" data-series-dot="2" aria-label="3枚目へ"></button>
+              </span>
+              <span class="guide-series-count" aria-live="polite">1 / 3</span>
+              <button type="button" data-series-next aria-label="次の図へ">›</button>
+            </div>
+            <p class="guide-figure-note"><span class="is-narrow">横にスワイプで次の図へ。図をタップすると拡大して開きます。</span><span class="is-wide">‹ › で次の図へ。図をクリックすると拡大して開きます。</span></p>
+          </div>
+        </div>
+      </section>
+      <section class="guide-card" id="mechanism" aria-labelledby="mechanism-title">
+        <div class="guide-card-head">
+          <h2 id="mechanism-title">仕組み</h2>
+        </div>
+        <div class="guide-card-body">
+          <p>結界は、スキルで付与されたあと、対象がダメージを受けたときに、その結界ごとに決められた条件・割合でダメージを軽減します。</p>
+          <p>公式ヘルプでは、結界が軽減できるのは次のダメージです。</p>
+          <ul class="guide-bullets">
+            <li>攻撃によるダメージ</li>
+            <li><a href="./resonance.html">共鳴</a>によるダメージ</li>
+            <li>献身によるダメージ</li>
+            <li><a href="./counter.html">カウンタダメージ</a></li>
+          </ul>
+          <p>一方で、毒・出血・浸食などの持続ダメージは軽減できません。</p>
+          <p>また、結界は「結界」という名前が同じでも、キャラによって中身がかなり違います。</p>
+          <p>見るポイントは、</p>
+          <ul class="guide-bullets">
+            <li>誰に付与するか</li>
+            <li>何ターン続くか</li>
+            <li>どの部分のダメージを軽減するか</li>
+            <li>軽減率や上限</li>
+            <li>専用武器でどう変わるか</li>
+          </ul>
+          <p>です。</p>
+        </div>
+      </section>
+      <section class="guide-card" id="stacking" aria-labelledby="stacking-title">
+        <div class="guide-card-head">
+          <h2 id="stacking-title">同じ結界を重ねたら？</h2>
+        </div>
+        <div class="guide-card-body">
+          <p>複数の結界、または結界と遮断が同時に発動する場合、効果をすべて足し算するわけではありません。</p>
+          <p><strong>最終ダメージが最も小さくなる1つだけが有効</strong>になります。</p>
+          <p>たとえば、</p>
+          <ul class="guide-bullets">
+            <li>結界50%</li>
+            <li>遮断30%</li>
+          </ul>
+          <p>が同時に発動しても、80%軽減にはなりません。</p>
+        </div>
+      </section>
+      <section class="guide-card" id="givers" aria-labelledby="givers-title">
+        <div class="guide-card-head">
+          <h2 id="givers-title">結界を付与するキャラ</h2>
+        </div>
+        <div class="guide-card-body">
+          <p>現行キャラを横断した結果、結界を持つキャラは<strong>6キャラ</strong>です。</p>
+          <div class="guide-table-wrap">
+            <table class="guide-table guide-table--wrap">
+              <thead>
+                <tr>
+                  <th scope="col">キャラ／スキル</th>
+                  <th scope="col">対象</th>
+                  <th scope="col">持続</th>
+                  <th scope="col">結界の内容</th>
+                  <th scope="col">専用武器</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row"><a href="../characters/fia_trace.html#skill-3">[在りし日の面影]フィアー S3 あの人のように</a></th>
+                  <td data-label="対象">自身＋攻撃力最高の味方</td>
+                  <td data-label="持続">2T</td>
+                  <td data-label="結界の内容">1・5T開始時に付与。被攻撃時のダメージを20%遮断</td>
+                  <td data-label="専用武器">専用Lv2で50%</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/rosalie_caritas.html#skill-4">[カリタスの使徒]ロザリー S4 永遠なる想い</a></th>
+                  <td data-label="対象">自身＋隣接2体</td>
+                  <td data-label="持続">2T</td>
+                  <td data-label="結界の内容">付帯者の最大HP20%を超えた分を、ロザリーの最大HP20%分まで遮断</td>
+                  <td data-label="専用武器">専用Lv2で上限50%分</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/irene.html#skill-4">アイリーン S4 頑張る姿を応援するよ</a></th>
+                  <td data-label="対象">自身以外でスピード最低の味方</td>
+                  <td data-label="持続">4T</td>
+                  <td data-label="結界の内容">被攻撃時のダメージを30%遮断</td>
+                  <td data-label="専用武器">専用Lv2で45%</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/iris_black.html#skill-3">[黒鎧の従者]アイリス S3 零れ落ちた想い</a></th>
+                  <td data-label="対象">自身＋攻撃力最高＋スピード最高の味方</td>
+                  <td data-label="持続">2T</td>
+                  <td data-label="結界の内容">最大HP20%を超えたダメージ分を50%遮断</td>
+                  <td data-label="専用武器">専用Lv2で70%</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/fenrir_treasure.html#skill-3">[二人だけの宝物]フェンリル S3 世界一優しい魔法</a></th>
+                  <td data-label="対象">隣接する味方2体</td>
+                  <td data-label="持続">4T</td>
+                  <td data-label="結界の内容">最大HP10%を超えた分のダメージを20%遮断</td>
+                  <td data-label="専用武器">専用Lv2で50%</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/alexandra_holylance.html#skill-4">[聖槍の守護騎士]アレクサンドラ S4 生きるなら共に</a></th>
+                  <td data-label="対象">自身＋攻撃力最高の味方1体</td>
+                  <td data-label="持続">3T</td>
+                  <td data-label="結界の内容">初期5%。被攻撃・自傷で遮断量が成長し、合計最大50%</td>
+                  <td data-label="専用武器">専用Lv2で攻撃力が高い味方2体まで対象拡大</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <h3 class="guide-sub"><a href="../characters/fia_trace.html#skill-3">[在りし日の面影]フィアー</a></h3>
+          <p>1・5ターン目開始時に、自身と攻撃力が最も高い味方へ2ターンの結界を付与します。</p>
+          <p>通常は被攻撃時のダメージを20%遮断。専用武器Lv2で50%になります。</p>
+          <p>同じS3には自身への被ダメージ70%減少もありますが、これは結界とは別の効果です。</p>
+          <h3 class="guide-sub"><a href="../characters/rosalie_caritas.html#skill-4">[カリタスの使徒]ロザリー</a></h3>
+          <p>バトル開始時、自身と隣接する味方2体へ2ターンの結界を付与します。</p>
+          <p>特徴は<strong>割合軽減ではなく、上限付きで超過ダメージを遮断するタイプ</strong>なこと。</p>
+          <p>付帯者の最大HP20%を超えたダメージ分を、ロザリーのステータス増減前の最大HP20%分まで遮断します。</p>
+          <p>専用武器Lv2では、遮断上限が最大HP50%分まで増えます。</p>
+          <h3 class="guide-sub"><a href="../characters/irene.html#skill-4">アイリーン</a></h3>
+          <p>ターン開始時、自身以外でスピードが最も低い味方へ4ターンの結界を付与します。</p>
+          <p>通常は被攻撃時のダメージを30%遮断。専用武器Lv2で45%になります。</p>
+          <p>自身への70%遮断は同じS4内の別効果で、結界とは分けて見ます。</p>
+          <h3 class="guide-sub"><a href="../characters/iris_black.html#skill-3">[黒鎧の従者]アイリス</a></h3>
+          <p>バトル開始時、自身と攻撃力が最も高い味方、スピードが最も高い味方へ2ターンの結界を付与します。</p>
+          <p>最大HP20%を超えたダメージ分を50%遮断し、専用武器Lv2で70%に上昇します。</p>
+          <p>攻撃力最高とスピード最高が同じキャラの場合は、結界が2つ重なるのではなく上書きされます。</p>
+          <h3 class="guide-sub"><a href="../characters/fenrir_treasure.html#skill-3">[二人だけの宝物]フェンリル</a></h3>
+          <p>ターン開始時、隣接する味方2体へ4ターンの結界を付与します。</p>
+          <p>最大HP10%を超えた分のダメージを20%遮断。専用武器Lv2で50%になります。</p>
+          <p>発動後は4回行動終了まで再発動しません。</p>
+          <p>自身への60%遮断は別効果です。</p>
+          <h3 class="guide-sub"><a href="../characters/alexandra_holylance.html#skill-4">[聖槍の守護騎士]アレクサンドラ</a></h3>
+          <p>バトル開始時、自身と攻撃力が最も高い味方1体へ3ターンの結界を付与します。解除不可です。</p>
+          <p>初期の遮断量は5%。</p>
+          <p>その後、自身または味方が攻撃・<a href="./self-damage.html">自傷ダメージ</a>を受けるたび、このスキルの結界の遮断量が増加します。</p>
+          <p><strong>最初は5%ですが、被弾や自傷を重ねて合計最大50%まで育つ</strong>のが最大の特徴です。</p>
+          <p>専用武器Lv2では、付与対象が「自身＋攻撃力が高い味方2体」へ増えます。</p>
+        </div>
+      </section>
+      <section class="guide-card" id="users" aria-labelledby="users-title">
+        <div class="guide-card-head">
+          <h2 id="users-title">結界を利用するキャラ</h2>
+        </div>
+        <div class="guide-card-body">
+          <p>現行キャラを横断した範囲では、<strong>結界を付帯していること自体を別スキルの発動条件として参照するキャラは確認できませんでした。</strong></p>
+          <p>現在は、上記6キャラが結界関連キャラの全件です。</p>
+        </div>
+      </section>
+      <section class="guide-card" id="prevention" aria-labelledby="prevention-title">
+        <div class="guide-card-head">
+          <h2 id="prevention-title">結界を防ぐ・対策する方法</h2>
+        </div>
+        <div class="guide-card-body">
+          <p>結界はバフなので、解除可能な結界であればバフ解除・奪取が対策候補になります。</p>
+          <p>ただし、今回確認した結界には<strong>解除不可</strong>のものが多くあります。</p>
+          <p>そのため、結界対策では「バフだから消せる」と一括りにせず、スキルごとの解除可否を見る必要があります。</p>
+          <h3 class="guide-sub">持続ダメージ</h3>
+          <p>公式ヘルプ上、結界は毒などの持続ダメージを軽減できません。</p>
+          <p>そのため、</p>
+          <ul class="guide-bullets">
+            <li><a href="./poison.html">毒</a></li>
+            <li><a href="./bleed.html">出血</a></li>
+            <li><a href="./erosion.html">浸食</a></li>
+          </ul>
+          <p>などは結界の軽減を受けません。</p>
+          <div class="guide-callout">
+            <p class="guide-callout-title">結界対策の見方</p>
+            <p>解除可能なら：バフ解除・奪取</p>
+            <p>解除不可なら：個別スキルの条件を確認</p>
+            <p>結界を通して削る：毒・出血・浸食などの持続ダメージ</p>
+          </div>
+        </div>
+      </section>
+      <section class="guide-card" id="related" aria-labelledby="related-title">
+        <div class="guide-card-head">
+          <h2 id="related-title">結界と他の効果</h2>
+        </div>
+        <div class="guide-card-body">
+          <h3 class="guide-sub">遮断</h3>
+          <p>結界と遮断が同時に発動する場合、両方を足し算しません。</p>
+          <p>最終ダメージが最も小さくなる1つだけが有効です。</p>
+          <h3 class="guide-sub">被ダメージ増加・減少</h3>
+          <p>被ダメージ増減・与ダメージ増減は、結界による軽減より前に計算されます。</p>
+          <h3 class="guide-sub">シールド</h3>
+          <p>攻撃・共鳴・献身によるダメージでは、結界による軽減後にシールドが処理されます。</p>
+          <h3 class="guide-sub">共鳴・献身</h3>
+          <p>結界の軽減対象です。</p>
+          <h3 class="guide-sub">カウンタダメージ</h3>
+          <p>結界の軽減対象です。</p>
+          <h3 class="guide-sub">毒・出血・浸食</h3>
+          <p>持続ダメージなので、結界では軽減できません。</p>
+        </div>
+      </section>
+      <section class="guide-card" id="summary" aria-labelledby="summary-title">
+        <div class="guide-card-head">
+          <h2 id="summary-title">まとめ</h2>
+        </div>
+        <div class="guide-card-body">
+          <p>結界は、<strong>受けるダメージを軽減する特殊な防御バフ</strong>です。</p>
+          <p>ただし全キャラで同じ性能ではなく、</p>
+          <ul class="guide-bullets">
+            <li>一定割合を遮断するタイプ</li>
+            <li>最大HPを超えた部分だけを遮断するタイプ</li>
+            <li>遮断量が戦闘中に成長するタイプ</li>
+          </ul>
+          <p>など、かなり違いがあります。</p>
+          <p>現行キャラ横断では、結界持ちは6キャラです。</p>
+          <p>特に[聖槍の守護騎士]アレクサンドラは、<strong>被攻撃・自傷で5%から最大50%まで育つ結界</strong>という、これまでと違うタイプです。</p>
+          <p>結界は「持っているか」だけでなく、<strong>誰に・何ターン・何を・どれだけ軽減するのか</strong>まで見ると性能を理解しやすくなります。</p>
+        </div>
+      </section>
+      <section class="guide-card" id="sources" aria-labelledby="sources-title">
+        <div class="guide-card-head">
+          <h2 id="sources-title">出典</h2>
+        </div>
+        <div class="guide-card-body">
+          <p class="guide-source">出典：公式FAQ「バフの種類」／公式FAQ「その他の効果」／ゲーム内スキル説明</p>
+          <p class="guide-source">結界が軽減するダメージ・持続ダメージの扱い・計算の順番・重ねたときの扱いは公式FAQ「バフの種類」「その他の効果」、各キャラの付与対象・ターン数・遮断量・専用武器の変化はゲーム内スキル説明を基準にしたサイト内のキャラデータを基準にしています。</p>
+          <ul class="guide-bullets guide-source">
+            <li><a href="https://mementomori.zendesk.com/hc/ja/articles/46412799595545" target="_blank" rel="noopener">公式FAQ「バフの種類」</a></li>
+            <li><a href="https://mementomori.zendesk.com/hc/ja/articles/46414238259097" target="_blank" rel="noopener">公式FAQ「その他の効果」</a></li>
+          </ul>
+        </div>
+      </section>
+    </div>
+    <!-- ad:bottom -->
+    <aside class="ad-slot" aria-label="広告">
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-6389066329814944"
+           data-ad-slot="6111654373"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </aside>
+    <!-- /ad:bottom -->
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <span>ミレストのメメントモリ分析データ室 / 非公式ファンサイト</span>
+      <nav class="footer-links" aria-label="サイト内のページ">
+        <a href="/">トップ</a>
+        <a href="../characters/index.html">キャラ一覧</a>
+        <a href="/pages/guide/">このサイトでできること</a>
+        <a href="/privacy.html">プライバシーポリシー</a>
+        <a href="/disclaimer.html">免責事項</a>
+        <a href="/about.html">このサイトについて</a>
+        <a href="/contact.html">お問い合わせ</a>
+      </nav>
+    </div>
+  </footer>
+  <script src="../../js/figure-series.js?v=8b71cecf" defer></script>
+</body>
+</html>

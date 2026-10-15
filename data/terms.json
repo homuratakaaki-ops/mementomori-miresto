@@ -76,6 +76,10 @@
     "遅延": {
       "text": "スキルのクールタイムが戻るのを遅らせ、次のアクティブスキル発動を遅くする弱体効果。",
       "guideUrl": "/pages/status/delay.html"
+    },
+    "結界": {
+      "text": "受けるダメージを軽減する特殊な防御バフ。",
+      "guideUrl": "/pages/status/barrier.html"
     }
   }
 }

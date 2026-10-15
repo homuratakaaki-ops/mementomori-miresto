@@ -760,7 +760,7 @@ const SERIES_SCRIPT = "../../" + versioned("js/figure-series.js");
 
 /**
  * 本文の記法を1か所で処理する。
- * 先にHTMLエスケープし、そのあと {{skill}} / {{ref}} / {{char}} / ** だけを置き換える。
+ * 先にHTMLエスケープし、そのあと {{skill}} / {{ref}} / {{char}} / {{guide}} / ** だけを置き換える。
  * 読めない記法・閉じていない記法はビルドを止める（手入力の崩れを公開しないため）。
  */
 function renderInline(text, ctx) {
@@ -773,6 +773,7 @@ function renderInline(text, ctx) {
     if (parts[0] === "skill" && parts.length === 3) return ctx.skillAnchor(parts[1], parts[2], label);
     if (parts[0] === "ref" && parts.length === 2) return ctx.refAnchor(parts[1], label);
     if (parts[0] === "char" && parts.length === 2) return ctx.charAnchor(parts[1], label);
+    if (parts[0] === "guide" && parts.length === 2) return ctx.guideAnchor(parts[1], label);
     ctx.errors.push(ctx.where + ": 読めない記法がある（" + whole + "）");
     return "";
   });
@@ -831,6 +832,19 @@ function articleContext(guide, characterById, skillById, errors) {
       }
       const text = label === null ? escapeHtml(character.name) : label;
       return '<a href="../characters/' + escapeHtml(slug) + '.html">' + text + "</a>";
+    },
+    /**
+     * ほかの状態異常・特殊効果ガイドへのリンク（関連する効果の案内用）。
+     * 向き先は data/status/{id}.json が実在するガイドだけ。無い id はビルドを止める（存在しないURLを作らない）。
+     */
+    guideAnchor(guideId, label) {
+      if (!/^[a-z0-9-]+$/.test(guideId) || !existsSync(join(STATUS_DATA_DIR, guideId + ".json"))) {
+        errors.push(where + ": {{guide}} の " + guideId + " のガイドが無い（data/status/" + guideId + ".json）");
+        return label === null ? escapeHtml(guideId) : label;
+      }
+      if (guideId === guide.id) errors.push(where + ": {{guide}} で自分自身のガイドを指している（" + guideId + "）");
+      const text = label === null ? escapeHtml(guideId) : label;
+      return '<a href="./' + escapeHtml(guideId) + '.html">' + text + "</a>";
     },
     refAnchor(key, label) {
       usedRefs.add(key);
