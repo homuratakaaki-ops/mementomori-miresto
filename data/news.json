@@ -253,6 +253,45 @@
       "date": "2026-10-12",
       "kind": "サイト更新",
       "text": "状態異常・特殊効果ガイドに「共鳴」「拘束」「遅延」の3本を追加。仕組みと使えるキャラを図解つきで整理し、キャラページの用語説明から各ガイドへ移れるようにした"
+    },
+    {
+      "id": "2026-10-15-new-alexandra-holylance",
+      "date": "2026-10-15",
+      "kind": "新キャラ",
+      "characterIds": [
+        "alexandra_holylance"
+      ],
+      "text": "新キャラ[聖槍の守護騎士]アレクサンドラを追加"
+    },
+    {
+      "id": "2026-10-15-fenrir-treasure-fukkoku",
+      "date": "2026-10-15",
+      "endDate": "2026-10-29",
+      "kind": "復刻",
+      "characterId": "fenrir_treasure",
+      "text": "[二人だけの宝物]フェンリルのPU復刻が開始"
+    },
+    {
+      "id": "2026-10-15-hoshi-no-michibiki",
+      "date": "2026-10-15",
+      "endDate": "2026-11-09",
+      "kind": "星の導き",
+      "characterIds": [
+        "aine",
+        "paladea",
+        "eir",
+        "morgana",
+        "alexandra",
+        "tama"
+      ],
+      "text": "星の導き開始（アイネ／パラデア／エイル／モルガナ／アレクサンドラ／タマ）"
+    },
+    {
+      "id": "2026-10-15-aine-skill-upgrade",
+      "date": "2026-10-15",
+      "kind": "サイト更新",
+      "url": "pages/updates/aine-2026-10-15.html",
+      "text": "アイネのスキルアップグレード内容（旧→新の比較）を掲載し、キャラページを新しい数値に更新"
     }
   ]
 }
