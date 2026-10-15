@@ -838,7 +838,9 @@ function articleContext(guide, characterById, skillById, errors) {
      * 向き先は data/status/{id}.json が実在するガイドだけ。無い id はビルドを止める（存在しないURLを作らない）。
      */
     guideAnchor(guideId, label) {
-      if (!/^[a-z0-9-]+$/.test(guideId) || !existsSync(join(STATUS_DATA_DIR, guideId + ".json"))) {
+      // 状態異常対策キャラ検索（data/countermeasures.json から作るページ）だけは、個別ガイドと同じ記法で向けられる。
+      const isCountermeasures = guideId === "countermeasures" && existsSync(join(ROOT, "data", "countermeasures.json"));
+      if (!isCountermeasures && (!/^[a-z0-9-]+$/.test(guideId) || !existsSync(join(STATUS_DATA_DIR, guideId + ".json")))) {
         errors.push(where + ": {{guide}} の " + guideId + " のガイドが無い（data/status/" + guideId + ".json）");
         return label === null ? escapeHtml(guideId) : label;
       }

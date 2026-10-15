@@ -94,7 +94,7 @@
           <h2 id="silence-title">沈黙との違い</h2>
         </div>
         <div class="guide-card-body">
-          <p>沈黙はアクティブスキルを使えなくする効果ですが、通常攻撃はできます。一方、気絶は通常攻撃もアクティブスキルも使えません。</p>
+          <p><a href="./silence.html">沈黙</a>はアクティブスキルを使えなくする効果ですが、通常攻撃はできます。一方、気絶は通常攻撃もアクティブスキルも使えません。</p>
           <ul class="guide-bullets">
             <li><strong>沈黙</strong>：通常攻撃○／アクティブスキル×</li>
             <li><strong>気絶</strong>：通常攻撃×／アクティブスキル×</li>
@@ -163,7 +163,7 @@
                 </tr>
                 <tr>
                   <th scope="row"><a href="../characters/liebe.html#skill-1">リーベ S1 シーリングスタンプ</a></th>
-                  <td data-label="対象・条件">攻撃力が最も高い敵</td>
+                  <td data-label="対象・条件">攻撃力が最も高い敵（専用Lv2で、自身以外の紅属性の味方が4体以上なら攻撃力が高い敵2体）</td>
                   <td data-label="気絶（確率・ターン）">70%で1ターン</td>
                 </tr>
                 <tr>
@@ -183,7 +183,7 @@
                 </tr>
                 <tr>
                   <th scope="row"><a href="../characters/sabrina_cool_breeze.html#skill-3">[涼風の軍神]サブリナ S3 涼風の軍神</a></th>
-                  <td data-label="対象・条件">自身が戦闘不能になったとき、攻撃してきた敵</td>
+                  <td data-label="対象・条件">自身が戦闘不能になったとき、攻撃してきた敵（弱体効果で戦闘不能になった場合は発動しない）</td>
                   <td data-label="気絶（確率・ターン）">100%で1ターン</td>
                 </tr>
                 <tr>
@@ -209,7 +209,7 @@
                 <tr>
                   <th scope="row"><a href="../characters/tricksy.html#skill-2">トリクシー S2 トリッキースタンバー</a></th>
                   <td data-label="対象・条件">攻撃力が最も高い敵</td>
-                  <td data-label="気絶（確率・ターン）">70%で1ターン</td>
+                  <td data-label="気絶（確率・ターン）">70%で1ターン（自身のバフが4個以上なら2ターン）</td>
                 </tr>
                 <tr>
                   <th scope="row"><a href="../characters/natasha.html#skill-1">ナターシャ S1 花葬</a></th>
@@ -218,23 +218,23 @@
                 </tr>
                 <tr>
                   <th scope="row"><a href="../characters/lily.html#skill-1">リリー S1 ファントムダスト</a></th>
-                  <td data-label="対象・条件">攻撃力が高い敵2体</td>
+                  <td data-label="対象・条件">攻撃力が高い敵2体（専用Lv1で3体）</td>
                   <td data-label="気絶（確率・ターン）">70%で1ターン</td>
                 </tr>
                 <tr>
                   <th scope="row"><a href="../characters/nebra.html#skill-3">ネブラ S3 泡沫の魔女</a></th>
-                  <td data-label="対象・条件">攻撃してきた敵（泡沫が5スタックになったら）</td>
+                  <td data-label="対象・条件">攻撃してきた敵（泡沫が5スタックになったら。3ターン目以降は発動しない）</td>
                   <td data-label="気絶（確率・ターン）">1ターン</td>
                 </tr>
                 <tr>
                   <th scope="row"><a href="../characters/carmilla.html#skill-3">カーミラ S3 エナジードレイン</a></th>
-                  <td data-label="対象・条件">スピードが最も高い敵（対象のHP割合が10%以下なら）</td>
+                  <td data-label="対象・条件">4ターン目までの毎ターン開始時、スピードが最も高い敵（対象のHP割合が10%以下なら）</td>
                   <td data-label="気絶（確率・ターン）">1ターン</td>
                 </tr>
               </tbody>
             </table>
           </div>
-          <p><a href="../characters/sabrina.html#skill-1">サブリナS1「蒼穹の輪舞」</a>は、専用武器Lv1で「気絶返し」を付与し、攻撃を受けたとき30%の確率で攻撃してきた敵に気絶を2ターン付与します。</p>
+          <p><a href="../characters/sabrina.html#skill-1">サブリナS1「蒼穹の輪舞」</a>は、専用武器Lv1で、クリティカルヒットが4回以上発生した場合に自身へ「気絶返し」を2ターン付与し、攻撃を受けたとき30%の確率で攻撃してきた敵に気絶を2ターン付与します。</p>
           <p>ほかに、Rキャラのイリア・ザラ・チェルナも気絶を付与するスキルを持っています。このサイトでは、RキャラとNキャラのキャラページは現在作っていません。</p>
         </div>
       </section>
@@ -245,6 +245,7 @@
         <div class="guide-card-body">
           <p>気絶への対策には、<strong>気絶無効</strong>・<strong>行動阻害無効</strong>・<strong>弱体効果無効</strong>などがあります。</p>
           <p>たとえば<a href="../characters/guinevere.html#skill-4">グィネヴィアS4「人の心を温める力」</a>は、自身以外の紅属性の味方が2体以上いると、1ターン目の行動開始時に自身へ気絶無効を付与します。<a href="../characters/fortina.html#skill-3">フォルティナS3「聖剣の守護」</a>は行動阻害無効を付与できます。</p>
+          <p>気絶を防げるキャラは、<a href="./countermeasures.html">状態異常対策キャラ検索</a>で探せます。</p>
         </div>
       </section>
       <section class="guide-card" id="stacking" aria-labelledby="stacking-title">
