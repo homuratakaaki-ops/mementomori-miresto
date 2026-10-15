@@ -494,9 +494,15 @@
           "endDate": "2026-05-07",
           "kind": "星の導き",
           "round": 5
+        },
+        {
+          "date": "2026-10-15",
+          "endDate": "2026-11-09",
+          "kind": "星の導き",
+          "round": 6
         }
       ],
-      "pickupCount": 5
+      "pickupCount": 6
     },
     {
       "id": "minasumari",
@@ -961,9 +967,15 @@
           "endDate": "2026-03-24",
           "kind": "星の導き",
           "round": 4
+        },
+        {
+          "date": "2026-10-15",
+          "endDate": "2026-11-09",
+          "kind": "星の導き",
+          "round": 5
         }
       ],
-      "pickupCount": 4
+      "pickupCount": 5
     },
     {
       "id": "meria",
@@ -1274,9 +1286,15 @@
           "endDate": "2026-05-07",
           "kind": "星の導き",
           "round": 5
+        },
+        {
+          "date": "2026-10-15",
+          "endDate": "2026-11-09",
+          "kind": "星の導き",
+          "round": 6
         }
       ],
-      "pickupCount": 5
+      "pickupCount": 6
     },
     {
       "id": "ophelia",
@@ -1906,9 +1924,15 @@
           "endDate": "2026-03-24",
           "kind": "星の導き",
           "round": 4
+        },
+        {
+          "date": "2026-10-15",
+          "endDate": "2026-11-09",
+          "kind": "星の導き",
+          "round": 5
         }
       ],
-      "pickupCount": 4
+      "pickupCount": 5
     },
     {
       "id": "rustica",
@@ -2041,9 +2065,15 @@
           "endDate": "2026-04-30",
           "kind": "復刻",
           "round": 2
+        },
+        {
+          "date": "2026-10-15",
+          "endDate": "2026-10-29",
+          "kind": "復刻",
+          "round": 3
         }
       ],
-      "pickupCount": 2
+      "pickupCount": 3
     },
     {
       "id": "merlyn",
@@ -2453,9 +2483,15 @@
           "endDate": "2026-03-24",
           "kind": "星の導き",
           "round": 5
+        },
+        {
+          "date": "2026-10-15",
+          "endDate": "2026-11-09",
+          "kind": "星の導き",
+          "round": 6
         }
       ],
-      "pickupCount": 5
+      "pickupCount": 6
     },
     {
       "id": "soltina_warm_memory",
@@ -3030,9 +3066,15 @@
           "endDate": "2026-05-07",
           "kind": "星の導き",
           "round": 5
+        },
+        {
+          "date": "2026-10-15",
+          "endDate": "2026-11-09",
+          "kind": "星の導き",
+          "round": 6
         }
       ],
-      "pickupCount": 5
+      "pickupCount": 6
     },
     {
       "id": "mira",
@@ -3600,6 +3642,34 @@
         {
           "date": "2026-08-31",
           "endDate": "2026-09-24",
+          "kind": "PU",
+          "round": 1
+        }
+      ],
+      "pickupCount": 1
+    },
+    {
+      "id": "alexandra_holylance",
+      "pageSlug": "alexandra_holylance",
+      "name": "[聖槍の守護騎士]アレクサンドラ",
+      "reading": {
+        "name": "あれくさんどら",
+        "title": "せいそうのしゅごきし"
+      },
+      "catchcopy": "",
+      "attribute": "紅",
+      "weaponType": "ウォーリア",
+      "speed": 3114,
+      "availability": "PU・運命",
+      "gachaStatus": "",
+      "roleMemo": "自傷ダメージを攻撃力に変え、結界で自身と味方を守る紅属性ウォーリア",
+      "noteUrl": "",
+      "imageUrl": "",
+      "sourceUrl": "https://ichigogames.net/mementomori/alexandra_another/",
+      "pickupHistory": [
+        {
+          "date": "2026-10-15",
+          "endDate": "2026-11-16",
           "kind": "PU",
           "round": 1
         }
@@ -12797,20 +12867,20 @@
       "category": "シールド",
       "majorCategory": "防御",
       "subCategory": "タイプステータス参照 / クリ耐性",
-      "target": "自身と自身以外の攻撃力が高い味方2体",
+      "target": "味方全体",
       "multiplierText": "対象タイプステータス200%シールド / 最大400%",
       "duration": "3T / 解除不可",
       "ct": null,
-      "condition": "ターン開始時、自身と自身以外の攻撃力が高い味方2体にシールド付与。ターン開始時の悪魔の誘いのスタック減少数1につきシールド量+20%(最大400%)。対象がこのスキルのバフを付帯中なら新しい値で上書き",
-      "exclusiveWeapon": "専用Lv2: 自身のシールドが対象のタイプステータス1500%（最大1700%）。自身以外の攻撃力が高い味方2体のシールドが300%（最大500%）。発動後1回行動終了で再発動可能",
+      "condition": "ターン開始時、味方全体にシールド付与。ターン開始時の悪魔の誘いのスタック減少数1につきシールド量+20%(最大400%)。対象がこのスキルのバフを付帯中なら新しい値で上書き",
+      "exclusiveWeapon": "専用Lv2: 自身のシールドが対象のタイプステータス1500%分（合計で最大1700%）、自身以外の味方全体は600%分（合計で最大800%）になり、発動後1回行動が終わると再発動する",
       "compareMemo": "対象ごとのタイプステータスを参照するため、通常HPシールドとは比較軸が違う",
       "noteUrl": "",
       "imageUrl": "",
       "sourceUrl": "https://ichigogames.net/mementomori/aine/",
-      "plainSummary": "毎ターン、自分とエース2人にタイプ参照のシールドを配る。",
+      "plainSummary": "毎ターン、味方全体にタイプ参照のシールドを配る。",
       "steps": [
         {
-          "text": "ターン開始時、自身と自身以外の攻撃力が高い味方2体にシールドを付与(量は対象のタイプステータス200%、3ターン、解除不可)"
+          "text": "ターン開始時、味方全体にシールドを付与(量は対象のタイプステータス200%、3ターン、解除不可)"
         },
         {
           "text": "このシールド中はクリティカル耐性率+60%"
@@ -12829,7 +12899,7 @@
         {
           "when": "ターン開始時",
           "mode": "simultaneous",
-          "target": "自身と自身以外の攻撃力が高い味方2体",
+          "target": "味方全体",
           "effects": [
             {
               "text": "シールドを付与",
@@ -12839,7 +12909,7 @@
                 {
                   "lv": 2,
                   "kind": "change",
-                  "text": "自身のシールドが対象のタイプステータス1500%分（合計で最大1700%）、自身以外の攻撃力が高い味方2体は300%分（合計で最大500%）になり、発動後1回行動が終わると再発動する"
+                  "text": "自身のシールドが対象のタイプステータス1500%分（合計で最大1700%）、自身以外の味方全体は600%分（合計で最大800%）になり、発動後1回行動が終わると再発動する"
                 }
               ]
             },
@@ -38229,6 +38299,354 @@
         {
           "text": "神呪イリアS3と同じ肩代わり機構で、序盤のバースト対策になる。肩代わりの割合はイリアが20%、こちらが50%。",
           "reason": "肩代わりが「自身以外の味方が受けるダメージ」を参照するため"
+        }
+      ],
+      "exclusiveIntegrated": [
+        2
+      ]
+    },
+    {
+      "id": "alexandra_holylance-s1",
+      "characterId": "alexandra_holylance",
+      "number": 1,
+      "name": "ガーディアンクロス",
+      "skillType": "アクティブ",
+      "category": "火力",
+      "majorCategory": "攻撃",
+      "subCategory": "",
+      "target": "自身 / ランダムな敵",
+      "multiplierText": "物理290%×5回",
+      "duration": "被ダメージ増加1T / 条件時2T",
+      "ct": 4,
+      "condition": "自身に現在HP×20%の自傷ダメージを2回。ランダムな敵に攻撃力×290%の物理攻撃を5回行う。物理攻撃前、70%の確率で対象に被ダメージ増加40%を1ターン付与。自身以外の紅属性の味方を2体以上編成している場合、被ダメージ増加は2ターン。",
+      "exclusiveWeapon": "専用Lv1: 物理攻撃が8回になる。専用Lv3: 物理攻撃の倍率が攻撃力×320%になる",
+      "compareMemo": "",
+      "noteUrl": "",
+      "imageUrl": "",
+      "sourceUrl": "https://ichigogames.net/mementomori/alexandra_another/",
+      "plainSummary": "2回自傷し、被ダメージ増加を付与しながらランダムな敵に5回攻撃する。",
+      "steps": [
+        {
+          "text": "自身に現在HP×20%の自傷ダメージを2回",
+          "term": "自傷"
+        },
+        {
+          "text": "物理攻撃前、70%の確率で対象に被ダメージ増加40%を付与（1ターン）。自身以外の紅属性の味方を2体以上編成している場合は2ターン"
+        },
+        {
+          "text": "ランダムな敵に攻撃力×290%の物理攻撃×5回"
+        }
+      ],
+      "flow": [
+        {
+          "when": "攻撃前",
+          "mode": "sequence",
+          "target": "自身",
+          "effects": [
+            {
+              "text": "自身に現在HP×20%の自傷ダメージを2回",
+              "term": "自傷"
+            }
+          ],
+          "order": 1
+        },
+        {
+          "when": "攻撃前",
+          "mode": "sequence",
+          "target": "攻撃対象の敵",
+          "effects": [
+            {
+              "text": "被ダメージ増加40%を付与",
+              "chance": "70%",
+              "duration": "1ターン"
+            },
+            {
+              "text": "被ダメージ増加の継続が2ターンに変わる",
+              "condition": "自身以外の紅属性の味方を2体以上編成している場合",
+              "duration": "2ターン"
+            }
+          ],
+          "order": 2
+        },
+        {
+          "when": "攻撃時",
+          "mode": "sequence",
+          "target": "ランダムな敵",
+          "effects": [
+            {
+              "text": "物理攻撃",
+              "multiplier": "攻撃力×290%×5回",
+              "damageTotal": "base",
+              "exclusive": [
+                {
+                  "lv": 1,
+                  "kind": "change",
+                  "multiplier": "攻撃力×290%×8回"
+                },
+                {
+                  "lv": 3,
+                  "kind": "change",
+                  "multiplier": "攻撃力×320%×8回",
+                  "hits": 8
+                }
+              ]
+            }
+          ],
+          "order": 3
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "S1・S2の自傷がS3の攻撃力増加の元になる"
+        },
+        {
+          "text": "S4の遮断量は自傷でも増える"
+        }
+      ],
+      "exclusiveIntegrated": [
+        1,
+        3
+      ],
+      "damage": {
+        "singleMultiplier": 290,
+        "hitCount": 5,
+        "baseTotal": 1450,
+        "exclusiveLv1Total": 2320,
+        "exclusiveLv2Total": 2320,
+        "exclusiveLv3Total": 2560,
+        "conditionMaxTotal": 1450,
+        "conditionMaxNote": "専用Lv1で8回、専用Lv3で320%×8回。専用なしでは倍率を伸ばす条件はない",
+        "powerType": "連続物理攻撃",
+        "damageMemo": "自傷と被ダメージ増加は攻撃力倍率の合計に含めない"
+      }
+    },
+    {
+      "id": "alexandra_holylance-s2",
+      "characterId": "alexandra_holylance",
+      "number": 2,
+      "name": "ラスト・ナイト",
+      "skillType": "アクティブ",
+      "category": "火力",
+      "majorCategory": "攻撃",
+      "subCategory": "",
+      "target": "自身 / ランダムな敵",
+      "multiplierText": "物理360%×10回 / 条件時540%×10回",
+      "duration": "",
+      "ct": 4,
+      "condition": "自身に現在HP×20%の自傷ダメージを1回。ランダムな敵に攻撃力×360%の物理攻撃を10回行う。対象に弱体効果がある場合、その対象への倍率が攻撃力×540%に変わる。",
+      "exclusiveWeapon": "",
+      "compareMemo": "",
+      "noteUrl": "",
+      "imageUrl": "",
+      "sourceUrl": "https://ichigogames.net/mementomori/alexandra_another/",
+      "plainSummary": "1回自傷し、ランダムな敵に10回攻撃する。対象に弱体効果がある場合は倍率が上がる。",
+      "steps": [
+        {
+          "text": "自身に現在HP×20%の自傷ダメージを1回",
+          "term": "自傷"
+        },
+        {
+          "text": "ランダムな敵に攻撃力×360%の物理攻撃×10回"
+        },
+        {
+          "text": "対象に弱体効果がある場合、その対象への倍率が攻撃力×540%に変わる"
+        }
+      ],
+      "flow": [
+        {
+          "when": "攻撃前",
+          "mode": "sequence",
+          "target": "自身",
+          "effects": [
+            {
+              "text": "自身に現在HP×20%の自傷ダメージを1回",
+              "term": "自傷"
+            }
+          ],
+          "order": 1
+        },
+        {
+          "when": "攻撃時",
+          "mode": "sequence",
+          "target": "ランダムな敵",
+          "effects": [
+            {
+              "text": "物理攻撃",
+              "multiplier": "攻撃力×360%×10回",
+              "damageTotal": "base"
+            },
+            {
+              "text": "その対象への物理攻撃の倍率が攻撃力×540%に変わる",
+              "condition": "対象に弱体効果がある場合",
+              "multiplier": "攻撃力×540%×10回",
+              "damageTotal": "conditionMax"
+            }
+          ],
+          "order": 2
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "S1・S2の自傷がS3の攻撃力増加の元になる"
+        },
+        {
+          "text": "S4の遮断量は自傷でも増える"
+        }
+      ],
+      "exclusiveIntegrated": [],
+      "damage": {
+        "singleMultiplier": 360,
+        "hitCount": 10,
+        "baseTotal": 3600,
+        "exclusiveLv1Total": 3600,
+        "exclusiveLv2Total": 3600,
+        "exclusiveLv3Total": 3600,
+        "conditionMaxTotal": 5400,
+        "conditionMaxNote": "対象に弱体効果がある場合、攻撃力×540%。10回とも条件を満たす場合は540%×10回",
+        "powerType": "連続物理攻撃",
+        "damageMemo": "自傷は攻撃力倍率の合計に含めない"
+      }
+    },
+    {
+      "id": "alexandra_holylance-s3",
+      "characterId": "alexandra_holylance",
+      "number": 3,
+      "name": "聖槍の守護騎士",
+      "skillType": "パッシブ",
+      "category": "バフ",
+      "majorCategory": "自身強化",
+      "subCategory": "",
+      "target": "自身",
+      "multiplierText": "",
+      "duration": "解除不可",
+      "ct": null,
+      "condition": "2ターン目開始時、1ターン目に自身と味方が受けた自傷ダメージの合計の30%分、自身の攻撃力が増加（上限はステータス増減前の自身の攻撃力×50%、解除不可）。バトル開始時、自身のスピードが30%増加（解除不可）。",
+      "exclusiveWeapon": "",
+      "compareMemo": "",
+      "noteUrl": "",
+      "imageUrl": "",
+      "sourceUrl": "https://ichigogames.net/mementomori/alexandra_another/",
+      "plainSummary": "1ターン目の自傷ダメージ量をもとに攻撃力が増加する。バトル開始時にはスピードが増加する。",
+      "steps": [
+        {
+          "text": "2ターン目開始時、1ターン目に自身と味方が受けた自傷ダメージの合計の30%分、自身の攻撃力が増加（上限：ステータス増減前の自身の攻撃力×50%、解除不可）"
+        },
+        {
+          "text": "バトル開始時、自身のスピードが30%増加（解除不可）"
+        }
+      ],
+      "flow": [
+        {
+          "when": "2ターン目開始時",
+          "mode": "simultaneous",
+          "target": "自身",
+          "effects": [
+            {
+              "text": "1ターン目に自身と味方が受けた自傷ダメージの合計の30%分、攻撃力が増加",
+              "note": "上限：ステータス増減前の自身の攻撃力×50%。解除不可",
+              "term": "自傷"
+            }
+          ]
+        },
+        {
+          "when": "バトル開始時",
+          "mode": "simultaneous",
+          "target": "自身",
+          "effects": [
+            {
+              "text": "スピードが30%増加",
+              "note": "解除不可"
+            }
+          ]
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "S1・S2の自傷がS3の攻撃力増加の元になる"
+        },
+        {
+          "text": "S4の遮断量は自傷でも増える"
+        }
+      ],
+      "exclusiveIntegrated": []
+    },
+    {
+      "id": "alexandra_holylance-s4",
+      "characterId": "alexandra_holylance",
+      "number": 4,
+      "name": "生きるなら共に",
+      "skillType": "パッシブ",
+      "category": "結界",
+      "majorCategory": "防御",
+      "subCategory": "",
+      "target": "自身と、自身以外の攻撃力が最も高い味方1体",
+      "multiplierText": "",
+      "duration": "結界3T / 解除不可",
+      "ct": null,
+      "condition": "バトル開始時、自身と、自身以外の攻撃力が最も高い味方1体に結界を付与（3ターン、解除不可）。結界は攻撃を受けた際のダメージを5%遮断。自身または味方が攻撃もしくは自傷ダメージを受けると、このスキルの結界の遮断量が3%増加し、受けた回数1回につき増加量が3%大きくなる（合計で最大50%）。自身が戦闘不能になると、このスキルで付与した結界を解除する。",
+      "exclusiveWeapon": "専用Lv2: 結界の対象が自身と、自身以外の攻撃力が高い味方2体になる",
+      "compareMemo": "",
+      "noteUrl": "",
+      "imageUrl": "",
+      "sourceUrl": "https://ichigogames.net/mementomori/alexandra_another/",
+      "plainSummary": "自身と味方1体に結界を付与する。自身または味方の被攻撃・自傷で遮断量が増加する。",
+      "steps": [
+        {
+          "text": "バトル開始時、自身と、自身以外の攻撃力が最も高い味方1体に結界を付与（3ターン、解除不可）。攻撃を受けた際のダメージを5%遮断"
+        },
+        {
+          "text": "自身または味方が攻撃もしくは自傷ダメージを受けると、このスキルの結界の遮断量が3%増加し、受けた回数1回につき増加量が3%大きくなる（合計で最大50%）"
+        },
+        {
+          "text": "自身が戦闘不能になったとき、このスキルで付与した結界を解除"
+        }
+      ],
+      "flow": [
+        {
+          "when": "バトル開始時",
+          "mode": "simultaneous",
+          "target": "自身と、自身以外の攻撃力が最も高い味方1体",
+          "effects": [
+            {
+              "text": "結界を付与",
+              "duration": "3ターン",
+              "note": "解除不可。攻撃を受けた際のダメージを5%遮断"
+            }
+          ],
+          "exclusiveTarget": [
+            {
+              "lv": 2,
+              "target": "自身と、自身以外の攻撃力が高い味方2体"
+            }
+          ]
+        },
+        {
+          "when": "自身または味方が攻撃もしくは自傷ダメージを受けたとき",
+          "mode": "conditional",
+          "target": "この効果を受けた味方",
+          "effects": [
+            {
+              "text": "このスキルの結界の遮断量が3%増加し、受けた回数1回につき増加量が3%大きくなる（合計で最大50%）"
+            }
+          ]
+        },
+        {
+          "when": "自身が戦闘不能になったとき",
+          "mode": "release",
+          "target": "この効果を受けた味方",
+          "effects": [
+            {
+              "text": "このスキルで付与した結界を解除"
+            }
+          ]
+        }
+      ],
+      "synergyNotes": [
+        {
+          "text": "S1・S2の自傷がS3の攻撃力増加の元になる"
+        },
+        {
+          "text": "S4の遮断量は自傷でも増える"
         }
       ],
       "exclusiveIntegrated": [
