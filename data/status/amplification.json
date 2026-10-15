@@ -13,6 +13,7 @@
     "official": [
       "ゲーム内ヘルプ「持続ダメージ効果」",
       "公式FAQ「バフ・弱体効果」",
+      "公式FAQ「弱体効果の種類」",
       "ゲーム内スキル説明"
     ],
     "officialNote": "劇化が増やすものと毒・火傷の上限はゲーム内ヘルプ、同じ劇化を重ねたときの扱いは公式FAQ、［花束の魔女］ナターシャの付与対象と効果量はゲーム内スキル説明を基準にしています。",
@@ -20,6 +21,10 @@
       {
         "name": "公式FAQ「バフ・弱体効果」",
         "url": "https://mementomori.zendesk.com/hc/ja/articles/46412673040921"
+      },
+      {
+        "name": "公式FAQ「弱体効果の種類」",
+        "url": "https://mementomori.zendesk.com/hc/ja/articles/46414059026841"
       }
     ],
     "verification": [
@@ -84,10 +89,10 @@
         {
           "type": "list",
           "items": [
-            "毒",
+            "{{guide:poison|毒}}",
             "火傷",
-            "出血",
-            "浸食"
+            "{{guide:bleed|出血}}",
+            "{{guide:erosion|浸食}}"
           ]
         },
         {
