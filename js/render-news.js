@@ -57,11 +57,15 @@
   }
 
   function renderNewsItem(item) {
+    const url = typeof item.url === "string" ? item.url : "";
+    // 相対パスだけ許可。空白・制御文字・バックスラッシュも除外する。
+    const relative = url && !/^[\/]|^[a-z][a-z0-9+.-]*:|[\s\\\u0000-\u001f\u007f]/i.test(url);
+    const text = relative ? `<a href="${escapeHtml(url)}">${escapeHtml(item.text)}</a>` : escapeHtml(item.text);
     return `
           <article class="news-item">
             <time class="news-date" datetime="${escapeHtml(item.date)}">${escapeHtml(formatDate(item.date))}</time>
             <span class="badge pickup">${escapeHtml(item.kind)}</span>
-            <span class="news-text">${escapeHtml(item.text)}</span>
+            <span class="news-text">${text}</span>
           </article>`;
   }
 
