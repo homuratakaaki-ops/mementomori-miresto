@@ -975,7 +975,14 @@
           "round": 5
         }
       ],
-      "pickupCount": 5
+      "pickupCount": 5,
+      "updates": [
+        {
+          "date": "2026-10-15",
+          "label": "スキルアップグレード",
+          "url": "../updates/aine-2026-10-15.html"
+        }
+      ]
     },
     {
       "id": "meria",
