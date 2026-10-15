@@ -94,6 +94,7 @@
         </div>
         <div class="guide-card-body">
           <p>ゲーム内では「脱力」と「攻撃力減少」は別の効果名として扱われています。脱力は専用の弱体効果として定義され、同じ脱力を重ねた場合は、弱い方を追加で足すのではなく、<strong>より長い残りターンと、より大きい減少量を引き継いだ1つの脱力</strong>になります。</p>
+          <p>また、減少量の計算の基準も違います。通常のステータス減少は<strong>増減前ステータス</strong>を参照して計算しますが、脱力は<strong>バトル中ステータス</strong>を参照して計算します。</p>
         </div>
       </section>
       <section class="guide-card" id="example" aria-labelledby="example-title">
@@ -127,12 +128,12 @@
                 </tr>
                 <tr>
                   <th scope="row"><a href="../characters/moineau.html#skill-1">モワノー S1 宵闇の羽刃</a></th>
-                  <td data-label="対象・条件">ランダムな敵3体</td>
+                  <td data-label="対象・条件">ランダムな敵3体（専用Lv1で5体）</td>
                   <td data-label="脱力（ターン・減少量）">4ターン・攻撃力40%減少</td>
                 </tr>
                 <tr>
                   <th scope="row"><a href="../characters/lunalynn_holy_night.html#skill-1">[聖夜の妖精]ルナリンド S1 ダイヤモンドダスト</a></th>
-                  <td data-label="対象・条件">ランダムな敵3体（70%の確率）</td>
+                  <td data-label="対象・条件">ランダムな敵3体（70%の確率。専用Lv1で5体）</td>
                   <td data-label="脱力（ターン・減少量）">4ターン・攻撃力30%減少</td>
                 </tr>
                 <tr>
@@ -155,10 +156,11 @@
           <h2 id="sources-title">出典</h2>
         </div>
         <div class="guide-card-body">
-          <p class="guide-source">出典：公式FAQ「バフ・弱体効果」／ゲーム内スキル説明</p>
-          <p class="guide-source">同じ脱力を重ねたときの扱いは公式FAQ、各キャラの付与確率・ターン数・減少量・専用武器条件はゲーム内スキル説明を基準にしています。</p>
+          <p class="guide-source">出典：公式FAQ「バフ・弱体効果」／公式FAQ「弱体効果の種類」／ゲーム内スキル説明</p>
+          <p class="guide-source">脱力と通常のステータス減少の計算の基準の違いは公式FAQ「弱体効果の種類」、同じ脱力を重ねたときの扱いは公式FAQ「バフ・弱体効果」、各キャラの付与確率・ターン数・減少量・専用武器条件はゲーム内スキル説明を基準にしています。</p>
           <ul class="guide-bullets guide-source">
             <li><a href="https://mementomori.zendesk.com/hc/ja/articles/46412673040921" target="_blank" rel="noopener">公式FAQ「バフ・弱体効果」</a></li>
+            <li><a href="https://mementomori.zendesk.com/hc/ja/articles/46414059026841" target="_blank" rel="noopener">公式FAQ「弱体効果の種類」</a></li>
           </ul>
         </div>
       </section>
