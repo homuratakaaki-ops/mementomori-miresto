@@ -20,7 +20,7 @@
  * data/*.json を変更したら必ず実行し、JSONとHTMLを同じコミットに含めること。
  */
 import { versioned } from "./asset-version.mjs";
-import { readFileSync, writeFileSync, existsSync } from "node:fs";
+import { readFileSync, writeFileSync, existsSync, statSync } from "node:fs";
 import { createRequire } from "node:module";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -630,12 +630,44 @@ function validateReading(character, errors) {
   }
 }
 
+function validateUpdates(character, errors) {
+  if (character.updates === undefined) return;
+  const prefix = `${character.id}: updates`;
+  if (!Array.isArray(character.updates)) {
+    errors.push(`${prefix} は配列で指定すること`);
+    return;
+  }
+  for (const item of character.updates) {
+    if (!item || typeof item !== "object") {
+      errors.push(`${prefix} の各項目はオブジェクトで指定すること`);
+      continue;
+    }
+    if (typeof item.date !== "string" || !/^\d{4}-\d{2}-\d{2}$/.test(item.date)) {
+      errors.push(`${prefix}.date は YYYY-MM-DD 形式で指定すること`);
+    }
+    if (typeof item.label !== "string" || !item.label.trim()) {
+      errors.push(`${prefix}.label は空でない文字列で指定すること`);
+    }
+    const url = item.url;
+    if (typeof url !== "string" || !url || url !== url.trim() ||
+        /^[a-z][a-z0-9+.-]*:/i.test(url) || /^[/#?]/.test(url) || /[\\\s\x00-\x1f]/.test(url)) {
+      errors.push(`${prefix}.url は相対パスのみ指定できる`);
+      continue;
+    }
+    const target = resolve(PAGES_DIR, url);
+    if (!existsSync(target) || !statSync(target).isFile()) {
+      errors.push(`${prefix}.url のリンク先ファイルが存在しない: ${url}`);
+    }
+  }
+}
+
 function validateAll({ baseData, terms }) {
   const errors = [];
   let flowSkills = 0;
   for (const character of baseData.characters || []) {
     validatePickupHistory(character, errors);
     validateReading(character, errors);
+    validateUpdates(character, errors);
   }
   for (const skill of baseData.skills || []) {
     validateFlow(skill, errors);

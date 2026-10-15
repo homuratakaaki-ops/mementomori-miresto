@@ -122,7 +122,8 @@
       character.weaponType ? `<span class="badge">${escapeHtml(character.weaponType)}</span>` : "",
       valueOrDash(character.speed) ? `<span class="badge">スピード ${escapeHtml(character.speed)}</span>` : "",
       character.availability ? `<span class="badge">入手 ${escapeHtml(character.availability)}</span>` : "",
-      historyText ? `<span class="badge">${escapeHtml(historyText)}</span>` : ""
+      historyText ? `<span class="badge">${escapeHtml(historyText)}</span>` : "",
+      ...(character.updates || []).map((item) => `<span style="flex-basis: 100%"><a href="${escapeHtml(item.url)}">${escapeHtml(item.label)}情報：${escapeHtml(item.date.replace(/-/g, "/"))}（変更内容を見る）</a></span>`)
     ].filter(Boolean).join("");
   }
 
