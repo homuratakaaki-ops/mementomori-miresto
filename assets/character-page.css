@@ -124,6 +124,11 @@ h1 {
   font-weight: 800;
 }
 
+.badge.upcoming {
+  background: #eee8f4;
+  color: #624779;
+}
+
 .badge.attribute,
 .tag.major {
   border: 1px solid var(--attribute-badge-border);

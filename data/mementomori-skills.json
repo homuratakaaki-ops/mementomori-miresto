@@ -1493,9 +1493,16 @@
           "endDate": "2026-05-07",
           "kind": "復刻",
           "round": 2
+        },
+        {
+          "date": "2026-10-22",
+          "startTime": "14:30",
+          "kind": "復刻",
+          "round": 3,
+          "announced": true
         }
       ],
-      "pickupCount": 2
+      "pickupCount": 3
     },
     {
       "id": "regina",

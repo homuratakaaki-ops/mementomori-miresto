@@ -47,9 +47,11 @@
    * （news.json に後から追記したものが上）にする。
    * 同じ日に何件も追記した日でも、最後に入れた1件がトップから押し出されないため。
    */
-  function selectNews(newsData, limit) {
+  function selectNews(newsData, limit, today) {
+    const day = today ? String(today).slice(0, 10)
+      : new Date(Date.now() + 9 * 60 * 60 * 1000).toISOString().slice(0, 10);
     return ((newsData && newsData.items) || [])
-      .filter((item) => newsKinds.has(item.kind) && item.date && item.text)
+      .filter((item) => newsKinds.has(item.kind) && item.date && item.date <= day && item.text)
       .map((item, index) => ({ item, index }))
       .sort((a, b) => String(b.item.date).localeCompare(String(a.item.date)) || b.index - a.index)
       .slice(0, limit === undefined ? NEWS_LIMIT : limit)

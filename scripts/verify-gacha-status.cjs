@@ -61,9 +61,11 @@ const falseOngoing = noEnd.filter((c) => {
 });
 check(`endDateなしの回を持つ${noEnd.length}体で誤って開催中にならない`, falseOngoing.length, 0);
 
-console.log("\n=== 5. 将来の予定は出さない ===");
+console.log("\n=== 5. 公式予告以外の将来の予定は出さない ===");
 check("開始日が未来の回は開催中にしない", gs.isOngoing({ date: "2026-11-01", endDate: "2026-11-15", kind: "PU", round: 2 }, "2026-10-04"), false);
-const futureText = data.characters.map((c) => gs.gachaStatusText(c, "2026-10-04")).join("|");
+const futureText = data.characters.map((c) => gs.gachaStatusText({
+  ...c, pickupHistory: (c.pickupHistory || []).filter((e) => e.announced !== true)
+}, "2026-10-04")).join("|");
 check("表示文に「次回」「予定」が出ない", /次回|予定/.test(futureText), false);
 
 console.log("\n=== 6. 手入力の gachaStatus を全部空にしても表示が同じ ===");
@@ -82,6 +84,67 @@ console.log("\n=== 7. JSTで判定している ===");
 check("UTC 2026-10-14T15:30Z の判定日", gs.jstToday("2026-10-14T15:30:00Z"), "2026-10-15");
 check("UTC 2026-10-14T14:30Z の判定日", gs.jstToday("2026-10-14T14:30:00Z"), "2026-10-14");
 check("終了日ちょうどのJST境界で開催中が維持される", gs.gachaStatusText(art, gs.jstToday("2026-10-14T15:30:00Z")), "PU中（〜10/15）");
+
+console.log("\n=== 8. 公式予告・時刻・安全装置 ===");
+const candy = byId.get("cerberus_candy");
+const announced = candy.pickupHistory.find((e) => e.announced === true);
+for (const [now, text] of [
+  ["2026-10-21T12:00", "復刻予定（10/22〜）"],
+  ["2026-10-22T10:00", "復刻予定（10/22〜）"],
+  ["2026-10-22T14:29", "復刻予定（10/22〜）"],
+  ["2026-10-22T14:30", "復刻中"],
+  ["2026-10-22T15:00", "復刻中"],
+  ["2026-11-12T14:30", "復刻中"],
+  ["2026-11-13T14:29", "復刻中"],
+  ["2026-11-13T14:30", "復刻待ち"],
+  ["2026-11-13T15:00", "復刻待ち"]
+]) check(`ケルベロス @${now}`, gs.gachaStatusText(candy, now), text);
+const ended = { ...announced, endDate: "2026-11-05" };
+const withEnd = { ...candy, pickupHistory: [...candy.pickupHistory.slice(0, -1), ended] };
+check("終了日追記 @10/25", gs.gachaStatusText(withEnd, "2026-10-25"), "復刻中（〜11/5）");
+check("終了日追記 @11/06", gs.gachaStatusText(withEnd, "2026-11-06"), "復刻待ち");
+check("予告の後ろ書き", gs.periodSuffix(announced, "2026-10-22T10:00"), "（予定）");
+check("終了日ありでも開始前は予定", gs.periodSuffix(ended, "2026-10-22T10:00"), "（予定）");
+check("暫定開催の後ろ書き", gs.periodSuffix(announced, "2026-10-22T15:00"), "（開催中）");
+check("終了日追記の後ろ書き", gs.periodSuffix(ended, "2026-10-25"), "（開催中〜11/5）");
+check("終了日を過ぎた後ろ書き", gs.periodSuffix(ended, "2026-11-06"), "（終了）");
+check("期限超過を終了と断定しない", gs.periodSuffix(announced, "2026-11-13T15:00"), "");
+check("22日境界の直前は警告なし", gs.announcementWarnings(candy, "2026-11-13T14:29").length, 0);
+check("22日境界でキャラ名付き警告", gs.announcementWarnings(candy, "2026-11-13T14:30")[0],
+  "警告: [魔法のキャンディ]ケルベロス (2026-10-22) は開始から22日以上、endDate 未設定のため開催中表示を停止しました");
+check("終了日追記後は警告なし", gs.announcementWarnings(withEnd, "2026-11-13T15:00").length, 0);
+check("同日でも開始前を過去回に数えない", gs.hasPastPickup({ pickupHistory: [announced] }, "2026-10-22T10:00"), false);
+check("予定は恒常より優先", gs.gachaStatus({ availability: "恒常", pickupHistory: [announced] }, "2026-10-21").state, "upcoming");
+check("開催中は予定より優先", gs.gachaStatus({ pickupHistory: [
+  announced, { date: "2026-10-01", endDate: "2026-10-25", kind: "PU" }
+] }, "2026-10-21").text, "PU中（〜10/25）");
+for (const kind of ["PU", "復刻", "星の導き"]) {
+  check(`${kind}予定`, gs.gachaStatusText({ pickupHistory: [{ ...announced, kind }] }, "2026-10-21"), `${kind}予定（10/22〜）`);
+}
+check("startTime省略は00:00", gs.isOngoing({ ...announced, startTime: undefined }, "2026-10-22T00:00"), true);
+check("NOWをTODAYより優先", gs.buildNow({ MIRESTO_NOW: "2026-10-22T15:00", MIRESTO_TODAY: "2026-10-21" }), "2026-10-22T15:00");
+check("TODAYは00:00", gs.buildNow({ MIRESTO_TODAY: "2026-10-22" }), "2026-10-22T00:00");
+check("UTC入力もJSTへ変換", gs.gachaStatusText(candy, "2026-10-22T05:30:00Z"), "復刻中");
+for (const value of ["2026-02-30T00:00", "2026-10-22T24:00"]) {
+  let rejected = false;
+  try { gs.buildNow({ MIRESTO_NOW: value }); } catch { rejected = true; }
+  check(`不正日時を拒否 ${value}`, rejected, true);
+}
+
+console.log("\n=== 9. ニュースとPU履歴 ===");
+const newsRenderer = require(path.join(ROOT, "js", "render-news.js"));
+const renderer = require(path.join(ROOT, "js", "render-character.js"));
+const news = JSON.parse(fs.readFileSync(path.join(ROOT, "data", "news.json"), "utf8"));
+const startNews = "2026-10-22-cerberus-candy-revival";
+check("復刻は表示対象", newsRenderer.NEWS_KINDS.includes("復刻"), true);
+check("10/21に翌日のニュースを出さない", newsRenderer.selectNews(news, undefined, "2026-10-21T12:00").some((n) => n.id === startNews), false);
+check("10/22 06時に当日ニュースを出す", newsRenderer.selectNews(news, undefined, "2026-10-22T06:00").some((n) => n.id === startNews), true);
+const meta = renderer.renderMetaHtml(candy, news, "2026-10-20T15:00");
+check("告知日が別のPU履歴にならない", meta.includes("2026/10/20"), false);
+check("開催ニュースと履歴が重複しない", (meta.match(/2026\/10\/22/g) || []).length, 1);
+check("キャラページの予定色", meta.includes('class="badge upcoming"'), true);
+check("一覧の予定色", indexRenderer.renderGrid([candy], "all", "2026-10-20").includes('class="badge upcoming"'), true);
+check("終了日を追加しても履歴の重複なし", (renderer.renderMetaHtml(withEnd, news, "2026-10-25").match(/2026\/10\/22/g) || []).length, 1);
 
 console.log(`\n=== 結果: ${pass}件OK / ${fail}件NG ===`);
 if (fail > 0) process.exit(1);

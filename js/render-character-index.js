@@ -34,6 +34,7 @@
   }
 
   function statusClass(status) {
+    if (status.state === "upcoming") return "upcoming";
     if (status.state === "ongoing") return "pickup";
     if (status.state === "waiting") return "waiting";
     return "";
@@ -82,7 +83,7 @@
     if (filtered.length === 0) {
       return `<div class="empty">該当するキャラがありません。</div>`;
     }
-    const day = today || gachaStatus.jstToday();
+    const day = gachaStatus.jstNow(today);
     return filtered.map((character) => renderCard(character, day)).join("");
   }
 

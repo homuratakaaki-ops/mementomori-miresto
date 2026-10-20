@@ -69,7 +69,9 @@
     const baseItems = (Array.isArray(character.pickupHistory) ? character.pickupHistory : [])
       .map((item) => ({ ...item, source: "pickupHistory" }));
     const newsItems = ((newsData && newsData.items) || [])
-      .filter((item) => item.characterId === character.id && gachaKinds.has(item.kind))
+      .filter((item) => item.characterId === character.id && gachaKinds.has(item.kind) && item.announcement !== true)
+      // 終了日を後で追記しても、同日の開催ニュースを別の回として重複させない。
+      .filter((item) => !baseItems.some((base) => base.date === item.date && base.kind === item.kind))
       .map((item) => ({ ...item, source: "news" }));
     const seen = new Set();
     return [...baseItems, ...newsItems]
@@ -115,13 +117,15 @@
   }
 
   function renderMetaHtml(character, newsData, today) {
-    const day = today || gachaStatus.jstToday();
+    const day = gachaStatus.jstNow(today);
+    const status = gachaStatus.gachaStatus(character, day);
     const historyText = formatPickupHistory(mergePickupHistory(character, newsData), character.pickupCount, day);
     return [
       character.attribute ? `<span class="badge attribute">${escapeHtml(character.attribute)}</span>` : "",
       character.weaponType ? `<span class="badge">${escapeHtml(character.weaponType)}</span>` : "",
       valueOrDash(character.speed) ? `<span class="badge">スピード ${escapeHtml(character.speed)}</span>` : "",
       character.availability ? `<span class="badge">入手 ${escapeHtml(character.availability)}</span>` : "",
+      status.state === "upcoming" ? `<span class="badge upcoming">${escapeHtml(status.text)}</span>` : "",
       historyText ? `<span class="badge">${escapeHtml(historyText)}</span>` : "",
       ...(character.updates || []).map((item) => `<span style="flex-basis: 100%"><a href="${escapeHtml(item.url)}">${escapeHtml(item.label)}情報：${escapeHtml(item.date.replace(/-/g, "/"))}（変更内容を見る）</a></span>`)
     ].filter(Boolean).join("");

@@ -298,6 +298,21 @@
       "date": "2026-10-15",
       "kind": "サイト更新",
       "text": "状態異常・特殊効果ガイドに「結界」を追加。軽減できるダメージと重ねたときの扱い、結界を付与する6キャラの違いを図解つきで整理し、各キャラページの用語説明から移れるようにした"
+    },
+    {
+      "id": "2026-10-20-cerberus-candy-announcement",
+      "date": "2026-10-20",
+      "kind": "復刻",
+      "characterId": "cerberus_candy",
+      "announcement": true,
+      "text": "[魔法のキャンディ]ケルベロスの復刻が決定（10/22 14:30開始）"
+    },
+    {
+      "id": "2026-10-22-cerberus-candy-revival",
+      "date": "2026-10-22",
+      "kind": "復刻",
+      "characterId": "cerberus_candy",
+      "text": "[魔法のキャンディ]ケルベロスの復刻が本日14:30から開始"
     }
   ]
 }

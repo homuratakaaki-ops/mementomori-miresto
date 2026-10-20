@@ -38,15 +38,9 @@ const gachaStatus = require(join(ROOT, "js", "gacha-status.js"));
 const newsRenderer = require(join(ROOT, "js", "render-news.js"));
 const adRenderer = require(join(ROOT, "js", "render-ad-slot.js"));
 
-// 開催状況の判定に使う「今日」。1回のビルド内で全ページ同じ日付になるように
-// ここで1度だけ決める（日付が変わる瞬間にビルドが走っても食い違わないため）。
-// MIRESTO_TODAY で差し替えられる（検証用。YYYY-MM-DD）。
-const TODAY = (() => {
-  const override = (process.env.MIRESTO_TODAY || "").trim();
-  if (!override) return gachaStatus.jstToday();
-  if (!/^\d{4}-\d{2}-\d{2}$/.test(override)) throw new Error(`MIRESTO_TODAY は YYYY-MM-DD で指定すること: ${override}`);
-  return override;
-})();
+// 1回のビルドで共通のJST日時。MIRESTO_NOWを優先し、TODAY指定は00:00。
+const NOW = gachaStatus.buildNow(process.env);
+const TODAY = NOW.slice(0, 10);
 const GENERATED_AT = new Date(Date.now() + 9 * 60 * 60 * 1000).toISOString().replace("Z", "+09:00");
 
 function readJson(path, fallback) {
@@ -543,6 +537,15 @@ function validatePickupHistory(character, errors) {
   const releaseOnly = history.every((item) => item.kind === RELEASE_KIND);
   const rounds = [];
   for (const item of history) {
+    if (item.announced !== undefined && typeof item.announced !== "boolean") errors.push(`${where}: announced は真偽値にすること`);
+    if (item.startTime !== undefined && !/^([01]\d|2[0-3]):[0-5]\d$/.test(item.startTime)) errors.push(`${where}: startTime は JST の HH:MM にすること`);
+    if (item.announced === true) {
+      try {
+        if (!/^\d{4}-\d{2}-\d{2}$/.test(item.date)) throw new Error("date は YYYY-MM-DD が必要です");
+        gachaStatus.jstNow(`${item.date}T${item.startTime || "00:00"}`);
+      } catch (error) { errors.push(`${where}: ${error.message}`); }
+      if (item.kind === RELEASE_KIND) errors.push(`${where}: 初回実装に announced は付けないこと`);
+    }
     if (!item.date) errors.push(`${where}: date が無い項目があります`);
     else if (!/^\d{4}-\d{2}-\d{2}$/.test(item.date) && !/^\d{4}-\d{2}$/.test(item.date)) {
       errors.push(`${where}: date の形式が不正です（${item.date}）。YYYY-MM-DD か YYYY-MM のみ`);
@@ -701,7 +704,7 @@ function buildCharacterPages({ baseData, newsData, terms, ads }) {
     const slug = character.pageSlug || character.id;
     const html = characterPageHtml({
       character: { ...character, pageSlug: slug },
-      metaHtml: renderer.renderMetaHtml(character, newsData, TODAY),
+      metaHtml: renderer.renderMetaHtml(character, newsData, NOW),
       skillListHtml: renderer.renderSkillList(skills, terms),
       description: renderer.pageDescription(character, skills),
       ads
@@ -774,7 +777,7 @@ function buildCharacterIndex({ baseData }) {
 function buildTopPage({ newsData }) {
   const path = join(ROOT, "index.html");
   const html = readFileSync(path, "utf8");
-  const items = newsRenderer.selectNews(newsData);
+  const items = newsRenderer.selectNews(newsData, undefined, NOW);
   const listHtml = items.length ? `${newsRenderer.renderNewsList(items)}\n      ` : "";
 
   const listPattern = /(<div class="news-list" id="newsList">)[\s\S]*?(<\/div>)/;
@@ -800,7 +803,7 @@ function buildIndexPage({ baseData }) {
   const characters = baseData.characters || [];
   const path = join(PAGES_DIR, "index.html");
   const html = patchIndexHtml(readFileSync(path, "utf8"), {
-    gridHtml: indexRenderer.renderGrid(characters, "all", TODAY),
+    gridHtml: indexRenderer.renderGrid(characters, "all", NOW),
     countText: indexRenderer.countText(characters.length, characters.length)
   });
   return { changed: writeIfChanged(path, html), total: characters.length };
@@ -815,6 +818,9 @@ function main() {
   const ads = readJson(join(DATA_DIR, "site-config.json"), { ads: {} }).ads || {};
 
   const flowSkills = validateAll({ baseData, terms });
+  for (const character of baseData.characters || []) {
+    for (const warning of gachaStatus.announcementWarnings(character, NOW)) console.warn(warning);
+  }
   const pages = buildCharacterPages({ baseData, newsData, terms, ads });
   // 状態異常ガイドはキャラページの後。直リンク先の id="skill-N" を生成済みHTMLで確かめる。
   const status = buildStatusGuides({ baseData, terms, ads, writeIfChanged });
@@ -846,8 +852,8 @@ function main() {
   }
   console.log(`広告枠: ${ads2.enabled ? `${ads2.shown}ページに1枠ずつ（スロット ${ads2.slot}）` : "全停止中"} / ${ads2.total}ページを点検${ads2.written.length ? ` (更新 ${ads2.written.length}件)` : " (変更なし)"}`);
   console.log(`開催状況の判定日(JST): ${TODAY} / 生成時刻: ${GENERATED_AT}`);
-  const ongoing = (baseData.characters || []).filter((character) => gachaStatus.ongoingEntry(character, TODAY));
-  console.log(`開催中と判定: ${ongoing.length}体${ongoing.length ? ` (${ongoing.map((c) => `${c.name}=${gachaStatus.gachaStatusText(c, TODAY)}`).join(" / ")})` : ""}`);
+  const ongoing = (baseData.characters || []).filter((character) => gachaStatus.ongoingEntry(character, NOW));
+  console.log(`開催中と判定: ${ongoing.length}体${ongoing.length ? ` (${ongoing.map((c) => `${c.name}=${gachaStatus.gachaStatusText(c, NOW)}`).join(" / ")})` : ""}`);
 }
 
 main();
