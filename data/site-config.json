@@ -6,6 +6,11 @@
     "slot": "6111654373",
     "slotName": "共通・本文下",
     "slotNote": "既存のレスポンシブ ディスプレイ広告ユニットを流用。全ページで同じユニットを使う。",
-    "enabled": true
+    "enabled": true,
+    "inContent": {
+      "slot": "",
+      "slotName": "本文中（長いページ）",
+      "enabled": false
+    }
   }
 }

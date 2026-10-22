@@ -617,6 +617,51 @@ function sourcesCard(guide) {
 }
 
 /**
+ * 本文中枠（AGENTS.md「広告（AdSense）の出し方」）を出す長いガイドの基準。
+ * カード本文（タグと空白を除く）の合計が1,500字以上のページだけ、
+ * 最初のキャラ一覧カード（仕組みの説明が終わり、該当キャラの一覧が始まる切れ目）の直前に1枠を置く。
+ */
+const MID_AD_MIN_CHARS = 1500;
+const MID_AD_LIST_CARD_IDS = new Set(["givers", "users", "characters"]);
+
+/** タグと空白を除いた本文の文字数（文字参照は1字に数える）。 */
+function visibleTextLength(html) {
+  return [...html
+    .replace(/<!--[\s\S]*?-->/g, "")
+    .replace(/<[^>]+>/g, "")
+    .replace(/&(?:#\d+|#x[0-9a-f]+|[a-z]+);/gi, "x")
+    .replace(/\s+/g, "")].length;
+}
+
+/**
+ * 本文中枠を「何枚目のカードの後に入れるか」を返す（入れないときは 0）。
+ * 従来型・article 型のどちらも、組み上がったカードの並びからこの1か所で決める。
+ * キャラ一覧カードが無い／直前が先頭カード／直前のカードに操作部（button など）がある回は入れない。
+ */
+function midAdPosition(cards) {
+  const bodyLength = cards.reduce((sum, html) => {
+    const body = html.match(/<div class="guide-card-body">([\s\S]*)<\/div>\s*<\/section>\s*$/);
+    return sum + visibleTextLength(body ? body[1] : "");
+  }, 0);
+  if (bodyLength < MID_AD_MIN_CHARS) return 0;
+  const index = cards.findIndex((html) => {
+    const id = html.match(/<section class="guide-card" id="([^"]+)"/);
+    return Boolean(id && MID_AD_LIST_CARD_IDS.has(id[1]));
+  });
+  if (index <= 1) return 0;
+  if (/<(?:button|input|select|textarea)\b/i.test(cards[index - 1])) return 0;
+  return index;
+}
+
+/** カードの並びに本文中枠の目印を差し込む（after 枚目の後。0 なら何もしない）。 */
+function withMidAdSlot(cards, after, ads) {
+  if (!after) return cards;
+  return cards.slice(0, after)
+    .concat([adRenderer.renderAdMidSlot(ads, "      ")])
+    .concat(cards.slice(after));
+}
+
+/**
  * ガイド1ページの外枠。従来型と article 型で中身（title・h1・カード）だけ差し替える
  * （ヘッダ・フッタ・広告枠の置き方を1か所に保つため）。
  */
@@ -648,7 +693,7 @@ function pageShell(options) {
     "",
     "  <main>",
     '    <div class="guide-list">',
-    options.cards.join("\n"),
+    withMidAdSlot(options.cards, options.midAdAfter, options.ads).join("\n"),
     "    </div>",
     adRenderer.renderAdSlot(options.ads, "    "),
     "  </main>",
@@ -692,6 +737,7 @@ function guidePageHtml(guide, characterById, skillById, ads, errors) {
     lastCrossCheck: guide.lastCrossCheck,
     crossCheckNote: guide.crossCheckNote,
     cards,
+    midAdAfter: midAdPosition(cards),
     ads
   });
 }
@@ -1379,6 +1425,7 @@ function buildArticle(guide, options) {
     lastCrossCheck: guide.lastCrossCheck,
     crossCheckNote: guide.crossCheckNote,
     cards,
+    midAdAfter: midAdPosition(cards),
     ads: options.ads,
     // slides のあるページだけスクリプトを読む（無いページに増やさない）。
     scripts: [hasSlides(guide) ? SLIDES_SCRIPT : null, hasFigureSeries(guide) ? SERIES_SCRIPT : null].filter(Boolean)

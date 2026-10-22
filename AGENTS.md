@@ -445,18 +445,35 @@
 **広告コードをページに手書きしないこと。** 書いてよいのは目印1行だけで、
 中身は `node scripts/build-character-pages.mjs` が毎回書き直します。
 
-- 設定の正は `data/site-config.json` の `ads`（`client` / `slot` / `enabled`）。
+- 設定の正は `data/site-config.json` の `ads`（`client` / `slot` / `enabled`、本文中枠は `inContent`）。
   マークアップの正は `js/render-ad-slot.js`、差し込みと点検は `scripts/build-ads.mjs`。
   クライアントIDとスロットIDをページ側に書かないこと（1か所で止められなくなります）。
-- **置き方は1ページ1枠・本文の最後だけ。** 順番は 本文 → 出典・関連情報 → 広告 → フッター。
-  ページの途中に挟まない。2枠目を足さない。
+- **置き方は原則1ページ1枠・本文の最後。** 順番は 本文 → 出典・関連情報 → 広告 → フッター。
+  下の例外のほかは、ページの途中に挟まない・2枠目を足さない。
+- **例外：長いキャラ詳細と長い状態異常ガイドだけ、本文中に1枠を足す（最大2枠）。**
+  （2026-10-23 夢爽承認・シオン設計。判定の数値は計測に基づく初期値）
+  - キャラ詳細（`pages/characters/*.html`、一覧と `veela.html` を除く）：
+    `#skillList` から `<details>`（折りたたみ）を除いた本文が**700字以上**（タグと空白を除く）かつ
+    スキルカード4枚以上 → `article#skill-2` と `article#skill-3` の間。
+    判定と差し込みは `scripts/build-character-pages.mjs` の `withMidAdSlot`。
+  - 状態異常ガイド（`pages/status/*.html`、`index.html` と `countermeasures.html` を除く）：
+    カード本文の合計が**1,500字以上** → 最初のキャラ一覧カード（id が `givers` / `users` / `characters`）の直前。
+    キャラ一覧カードが無い・直前が先頭カード・直前のカードに `button` / `input` / `select` / `textarea` がある回は入れない。
+    判定は `scripts/build-status-guides.mjs` の `midAdPosition`（従来型・article 型とも `pageShell` に位置を渡す）。
+  - 目印は `<!-- ad:mid -->` / `<!-- /ad:mid -->`。生成スクリプトだけが置き、手書きページに置かないこと。
+    設定が無効のときも、長いページには目印だけが残ります。
+  - 本文中枠は**下部枠とは別のユニットID**（`ads.inContent.slot`）。出る条件は
+    `ads.enabled` かつ `ads.inContent.enabled` かつ `ads.inContent.slot` があること。
+    **止めるときは `ads.inContent.enabled = false` の1か所**で、全ページが下部枠1つの出力に戻ります。
+  - 読み込みタグと `ad-slot.css` は2枠でも head に1回だけ。
 - 広告を出したいページは、本文の末尾・フッターの直前に `<!-- ad:bottom -->` を1行置く。
   head には何も書かない（読み込みタグと `/assets/ad-slot.css` はビルドが `<!-- ad:head -->` ごと入れます）。
   **目印の無いページには出ません。** 出さないと決めたページに目印を置かないこと。
 - 生成ページ（キャラ詳細・状態異常ガイド）は生成テンプレートが `js/render-ad-slot.js` を呼んで
   目印ごと書き出します。手書きページと同じ中身・同じ字下げなので、ビルドが二重に書くことはありません。
 - 止め方は2段。1ページだけなら `<body data-ads="off">`、サイト全体なら `ads.enabled = false`。
-  どちらも枠と読み込みタグの両方が消え、目印だけが残ります。
+  どちらも枠（本文中・下部とも）と読み込みタグの両方が消え、目印だけが残ります。
+  本文中枠だけを止めるときは `ads.inContent.enabled = false`。
 
 ### 出す／出さないの決め方
 
@@ -469,13 +486,19 @@
 
 ### 生成時に点検していること
 
-- 枠は1ページ1つ、読み込みタグと `ad-slot.css` は1ページ1回（二重初期化の防止）
+- 枠は1ページ1つ（本文中枠の出るページだけ2つ）、読み込みタグと `ad-slot.css` は1ページ1回（二重初期化の防止）
+- 本文中枠の目印が対象の型（キャラ詳細・状態異常ガイド）以外のページに無いこと、1ページ1組であること。
+  本文中枠が `</head>` より後・下部枠と `<footer>` より前にあり、
+  仕様の位置（skill-2 と skill-3 の間／最初のキャラ一覧カードの直前）にあること
+- 本文中枠のすぐ上・すぐ下が `a` / `button` / `input` / `label` / `select` / `textarea` / `summary` / `details` でないこと
+- 本文中枠の `data-ad-slot` が `ads.inContent.slot` と一致し、下部枠と別のIDであること。
+  `inContent.slot` が下部枠と同じ、または `inContent.enabled` が true なのに `slot` が空ならビルドが止まる
 - 枠が head の中・`<footer>` より後に無いこと、**枠より後に本文が残っていないこと**
 - 枠のすぐ上・すぐ下が `a` / `button` / `input` / `label` でないこと（誤タップ防止）
 - 目印の無いページに枠や読み込みタグが残っていないこと（手書きの消し忘れ対策）
 - `enable_page_level_ads`（自動広告）をコードで使っていないこと。
-  **自動広告はAdSense管理画面側の設定です。** 手動1枠と二重に出るので、管理画面でオフにしておくこと。
-- 余白（上32px / 下24px）と `min-height` は `assets/ad-slot.css` の1か所。
+  **自動広告はAdSense管理画面側の設定です。** 手動の枠と二重に出るので、管理画面でオフにしておくこと。
+- 余白（下部枠は上32px / 下24px、本文中枠は上下40px）と `min-height` は `assets/ad-slot.css` の1か所。
   min-height は広告が入る前に場所を取るためのもので、外すと本文が下にずれます。
 
 ## 生成ページの読み込みファイルに付ける「中身の印」（?v=）
