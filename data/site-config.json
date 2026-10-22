@@ -8,9 +8,9 @@
     "slotNote": "既存のレスポンシブ ディスプレイ広告ユニットを流用。全ページで同じユニットを使う。",
     "enabled": true,
     "inContent": {
-      "slot": "",
-      "slotName": "本文中（長いページ）",
-      "enabled": false
+      "slot": "9192142429",
+      "slotName": "メメントモリ本文広告",
+      "enabled": true
     }
   }
 }
