@@ -15,7 +15,7 @@
  *   pages/characters/index.html       … キャラ一覧のカード部分を差し替え
  *   index.html                        … トップページのニュース欄を差し替え
  *   pages/status/*.html               … 状態異常ガイド（scripts/build-status-guides.mjs）
- *   広告枠                            … scripts/build-ads.mjs（目印 <!-- ad:bottom --> を置き換え）
+ *   広告枠                            … scripts/build-ads.mjs（目印 <!-- ad:bottom --> / <!-- ad:mid --> を置き換え）
  *
  * data/*.json を変更したら必ず実行し、JSONとHTMLを同じコミットに含めること。
  */
@@ -67,6 +67,66 @@ function writeIfChanged(path, content) {
   if (previous === normalized) return false;
   writeFileSync(path, normalized, "utf8");
   return true;
+}
+
+/**
+ * 本文中枠（AGENTS.md「広告（AdSense）の出し方」）を出す長いキャラ詳細の基準。
+ * スキル本文（折りたたみの <details> を除き、タグと空白を除いた文字数）が700字以上、
+ * かつスキルカードが4枚以上のページだけ、skill-2 と skill-3 の間に1枠を置く。
+ */
+const MID_AD_MIN_CHARS = 700;
+const MID_AD_MIN_CARDS = 4;
+
+/** タグと空白を除いた本文の文字数（文字参照は1字に数える）。 */
+function visibleTextLength(html) {
+  return [...html
+    .replace(/<!--[\s\S]*?-->/g, "")
+    .replace(/<[^>]+>/g, "")
+    .replace(/&(?:#\d+|#x[0-9a-f]+|[a-z]+);/gi, "x")
+    .replace(/\s+/g, "")].length;
+}
+
+/** <details>…</details> を取り除く（入れ子にも対応）。 */
+function stripDetails(html) {
+  let output = "";
+  let depth = 0;
+  let last = 0;
+  for (const match of html.matchAll(/<(\/?)details\b[^>]*>/gi)) {
+    if (!match[1]) {
+      if (depth === 0) output += html.slice(last, match.index);
+      depth += 1;
+    } else if (depth > 0) {
+      depth -= 1;
+      if (depth === 0) last = match.index + match[0].length;
+    }
+  }
+  return depth === 0 ? output + html.slice(last) : output;
+}
+
+/**
+ * スキル一覧に本文中枠の目印を差し込む。長いページでなければ何もしない
+ * （本文中枠の対象外のページは従来と同じHTMLのまま）。
+ * 中身は renderAdMidSlot が設定（ads.inContent）に従って組み、
+ * 無効のときは目印だけになる。
+ */
+function withMidAdSlot(skillListHtml, ads) {
+  const cards = (skillListHtml.match(/<article class="skill-card"/g) || []).length;
+  if (cards < MID_AD_MIN_CARDS) return skillListHtml;
+  if (visibleTextLength(stripDetails(skillListHtml)) < MID_AD_MIN_CHARS) return skillListHtml;
+  // skill-2 の閉じタグのすぐ後に skill-3 が続いているときだけ置く。
+  const third = skillListHtml.search(/<article class="skill-card" id="skill-3"/);
+  if (third < 0) return skillListHtml;
+  const second = skillListHtml.search(/<article class="skill-card" id="skill-2"/);
+  if (second < 0 || second > third) return skillListHtml;
+  const between = skillListHtml.slice(second, third);
+  if ((between.match(/<article\b/g) || []).length !== 1) return skillListHtml;
+  if (!/<\/article>\s*$/.test(between)) return skillListHtml;
+  const lineStart = skillListHtml.lastIndexOf("\n", third) + 1;
+  const indent = skillListHtml.slice(lineStart, third);
+  if (!/^[ \t]*$/.test(indent)) return skillListHtml;
+  return skillListHtml.slice(0, lineStart)
+    + adRenderer.renderAdMidSlot(ads, indent) + "\n"
+    + skillListHtml.slice(lineStart);
 }
 
 /**
@@ -705,7 +765,7 @@ function buildCharacterPages({ baseData, newsData, terms, ads }) {
     const html = characterPageHtml({
       character: { ...character, pageSlug: slug },
       metaHtml: renderer.renderMetaHtml(character, newsData, NOW),
-      skillListHtml: renderer.renderSkillList(skills, terms),
+      skillListHtml: withMidAdSlot(renderer.renderSkillList(skills, terms), ads),
       description: renderer.pageDescription(character, skills),
       ads
     });
@@ -850,7 +910,10 @@ function main() {
     console.log(`状態異常ガイド: ${status.guides.length}件（直リンク ${status.links}本・付与数値 ${status.numbers}件を照合）${status.written.length ? ` (更新 ${status.written.join(", ")})` : " (変更なし)"}`);
     console.log(`状態異常ガイドの入口: ${status.indexChanged ? "更新" : "変更なし"} / sitemap: ${status.sitemap.added.length ? `${status.sitemap.added.join(", ")} を追記` : "変更なし"}`);
   }
-  console.log(`広告枠: ${ads2.enabled ? `${ads2.shown}ページに1枠ずつ（スロット ${ads2.slot}）` : "全停止中"} / ${ads2.total}ページを点検${ads2.written.length ? ` (更新 ${ads2.written.length}件)` : " (変更なし)"}`);
+  console.log(`広告枠: ${ads2.enabled ? `${ads2.shown}ページに下部枠1つずつ（スロット ${ads2.slot}）` : "全停止中"} / ${ads2.total}ページを点検${ads2.written.length ? ` (更新 ${ads2.written.length}件)` : " (変更なし)"}`);
+  console.log(`広告枠（本文中）: ${ads2.midEnabled
+    ? `キャラ ${ads2.midShown.character}ページ / ガイド ${ads2.midShown.guide}ページに出した（スロット ${ads2.midSlot}）`
+    : "停止中（ads.inContent）"} / 長いページの目印 キャラ ${ads2.midPages.character.length}件・ガイド ${ads2.midPages.guide.length}件`);
   console.log(`開催状況の判定日(JST): ${TODAY} / 生成時刻: ${GENERATED_AT}`);
   const ongoing = (baseData.characters || []).filter((character) => gachaStatus.ongoingEntry(character, NOW));
   console.log(`開催中と判定: ${ongoing.length}体${ongoing.length ? ` (${ongoing.map((c) => `${c.name}=${gachaStatus.gachaStatusText(c, NOW)}`).join(" / ")})` : ""}`);

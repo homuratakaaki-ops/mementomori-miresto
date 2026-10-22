@@ -8,10 +8,14 @@
  *
  * 出すもの:
  *   head … 読み込みタグ（async・1ページ1回）＋ 枠のスタイル
- *   body … 枠（ins）と初期化。本文の最後とフッターの間に1枠だけ置く
+ *   body … 枠（ins）と初期化。本文の最後とフッターの間に1枠（下部枠）
+ *   mid  … 長いキャラ詳細・長い状態異常ガイドだけ、本文の途中に1枠（本文中枠）
  *
  * 置き方の決まり（AGENTS.md と同じ）:
- *   - 1ページ1枠・下部固定。ページ途中に挟まない
+ *   - 原則1ページ1枠・本文の最後。例外として長いキャラ詳細と長い状態異常ガイドだけ
+ *     本文中に1枠を足す（最大2枠）。どのページが「長い」かは生成スクリプトが決める
+ *   - 本文中枠は ads.inContent（slot / enabled）で、下部枠とは別のユニットIDを使う。
+ *     止めるときは ads.inContent.enabled=false の1か所
  *   - 枠の上下に余白を取り、ボタン・内部リンク・ツールの操作部と密着させない
  *   - 「スポンサーリンク」などの見出しは出さない
  */
@@ -32,6 +36,8 @@
   const HEAD_END = "<!-- /ad:head -->";
   const SLOT_MARK = "<!-- ad:bottom -->";
   const SLOT_END = "<!-- /ad:bottom -->";
+  const MID_MARK = "<!-- ad:mid -->";
+  const MID_END = "<!-- /ad:mid -->";
 
   const SCRIPT_SRC = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js";
   const STYLE_HREF = "/assets/ad-slot.css";
@@ -39,6 +45,15 @@
   /** 広告を出す設定になっているか（data/site-config.json の ads）。 */
   function adsReady(ads) {
     return Boolean(ads && ads.enabled && ads.client && ads.slot);
+  }
+
+  /**
+   * 本文中枠を出す設定になっているか。
+   * 下部枠の設定（ads.enabled など）に加えて ads.inContent の enabled と slot がそろったときだけ。
+   */
+  function midAdsReady(ads) {
+    const inContent = ads && ads.inContent;
+    return Boolean(adsReady(ads) && inContent && inContent.enabled && inContent.slot);
   }
 
   function escapeAttr(value) {
@@ -89,15 +104,42 @@
     ].join("\n");
   }
 
+  /**
+   * 長いページの本文の途中に置く枠1つ（本文中枠）。
+   * 下部枠との違いは class（ad-slot--mid）と data-ad-slot（ads.inContent.slot）だけ。
+   * 読み込みタグは head の1回を共用し、ここでは増やさない。
+   */
+  function renderAdMidSlot(ads, indent) {
+    const pad = indent === undefined ? "    " : indent;
+    if (!midAdsReady(ads)) return `${pad}${MID_MARK}\n${pad}${MID_END}`;
+    return [
+      `${pad}${MID_MARK}`,
+      `${pad}<aside class="ad-slot ad-slot--mid" aria-label="広告">`,
+      `${pad}  <ins class="adsbygoogle"`,
+      `${pad}       style="display:block"`,
+      `${pad}       data-ad-client="${escapeAttr(ads.client)}"`,
+      `${pad}       data-ad-slot="${escapeAttr(ads.inContent.slot)}"`,
+      `${pad}       data-ad-format="auto"`,
+      `${pad}       data-full-width-responsive="true"></ins>`,
+      `${pad}  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>`,
+      `${pad}</aside>`,
+      `${pad}${MID_END}`
+    ].join("\n");
+  }
+
   return {
     HEAD_MARK,
     HEAD_END,
     SLOT_MARK,
     SLOT_END,
+    MID_MARK,
+    MID_END,
     SCRIPT_SRC,
     STYLE_HREF,
     adsReady,
+    midAdsReady,
     renderAdHead,
-    renderAdSlot
+    renderAdSlot,
+    renderAdMidSlot
   };
 }));
