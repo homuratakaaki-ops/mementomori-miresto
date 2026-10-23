@@ -90,13 +90,14 @@ const actualCandy = byId.get("cerberus_candy");
 // 終了日が判明しても、終了日未設定の予告・安全装置の検証を維持する。
 const candy = { ...actualCandy, pickupHistory: actualCandy.pickupHistory.map((entry) => {
   if (entry.date !== "2026-10-22") return entry;
-  const { endDate, ...withoutEndDate } = entry;
+  const { endDate, endTime, endTimeSource, ...withoutEndDate } = entry;
   return withoutEndDate;
 }) };
 check("実データの今回終了日", actualCandy.pickupHistory.find((e) => e.date === "2026-10-22").endDate, "2026-11-09");
-check("実データの復刻期間", gs.gachaStatusText(actualCandy, "2026-10-23T12:00"), "復刻中（〜11/9）");
-// 現行仕様は日付単位。14:29終了への時刻対応はこの変更の対象外。
-check("日付単位の既存仕様：終了日14:30も開催中", gs.gachaStatusText(actualCandy, "2026-11-09T14:30"), "復刻中（〜11/9）");
+check("実データの復刻期間", gs.gachaStatusText(actualCandy, "2026-10-23T12:00"), "復刻中（〜11/9 14:29）");
+// 告知の終了最終分までは開催中、その1分後から終了。
+check("終了最終分14:29は開催中", gs.gachaStatusText(actualCandy, "2026-11-09T14:29"), "復刻中（〜11/9 14:29）");
+check("終了境界14:30は復刻待ち", gs.gachaStatusText(actualCandy, "2026-11-09T14:30"), "復刻待ち");
 check("終了日翌日は復刻待ち", gs.gachaStatusText(actualCandy, "2026-11-10T00:00"), "復刻待ち");
 const announced = candy.pickupHistory.find((e) => e.announced === true);
 for (const [now, text] of [
