@@ -62,12 +62,17 @@
 
   function renderCard(character, today) {
     const linked = hasPage(character);
-    const status = statusOf(character, today);
+    const now = gachaStatus.jstNow(today);
+    const status = statusOf(character, now);
+    const timeline = gachaStatus.displayTimeline(character.pickupHistory || [], now, (at) => {
+      const next = statusOf(character, at);
+      return { text: next.text, cls: `badge ${statusClass(next)}` };
+    });
     return `
           <article class="card">
             <div class="badge-row">
               <span class="badge">${character.attribute}</span>
-              <span class="badge ${statusClass(status)}">${displayGachaStatus(status)}</span>
+              <span class="badge ${statusClass(status)}"${gachaStatus.timelineAttribute(timeline)}${timeline.length && !status.text ? " hidden" : ""}>${displayGachaStatus(status)}</span>
             </div>
             <div>
               <h2>${character.name}</h2>

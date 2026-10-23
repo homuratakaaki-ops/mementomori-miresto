@@ -124,6 +124,8 @@ h1 {
   font-weight: 800;
 }
 
+.badge[data-gacha-timeline][hidden] { display: none; }
+
 .badge.upcoming {
   background: #eee8f4;
   color: #624779;

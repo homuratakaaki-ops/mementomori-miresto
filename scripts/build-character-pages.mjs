@@ -170,7 +170,7 @@ function characterPageHtml({ character, metaHtml, skillListHtml, description, ad
   <link rel="stylesheet" href="../../${versioned("assets/character-page.css")}">
   <script src="../../${versioned("js/gacha-status.js")}" defer></script>
   <script src="../../${versioned("js/render-character.js")}" defer></script>
-  <script src="../../${versioned("js/character-page.js")}" defer></script>
+  <script src="../../${versioned("js/character-page.js")}" defer></script>${metaHtml.includes(" data-gacha-timeline=") ? `\n  <script src="../../${versioned("js/gacha-switch.js")}" defer></script>` : ""}
 ${adRenderer.renderAdHead(ads, "  ")}
 </head>
 <body data-character-page data-character-id="${renderer.escapeHtml(character.id)}" data-attribute="${renderer.escapeHtml(character.attribute || "")}" data-prerendered>
@@ -246,6 +246,15 @@ function patchIndexHtml(html, { gridHtml, countText }) {
       throw new Error(`index.html の差し替え対象が見つかりません: ${name}`);
     }
     output = output.replace(pattern, value);
+  }
+  // 一覧の既存スクリプトも更新時にキャッシュが残らないよう同じ印を使う。
+  output = output.replace(/  <script src="\.\.\/\.\.\/js\/gacha-switch\.js(?:\?v=[^"]*)?" defer><\/script>\r?\n/g, "");
+  for (const file of ["gacha-status.js", "render-character-index.js"]) {
+    const pattern = new RegExp(`(src="\\.\\.\\/\\.\\.\\/js\\/${file.replace(/\./g, "\\.")})(?:\\?v=[^"]*)?(")`);
+    output = output.replace(pattern, `src="../../${versioned(`js/${file}`)}"`);
+  }
+  if (gridHtml.includes(" data-gacha-timeline=")) {
+    output = output.replace("</head>", `  <script src="../../${versioned("js/gacha-switch.js")}" defer></script>\n</head>`);
   }
   return output;
 }
@@ -598,7 +607,7 @@ function validatePickupHistory(character, errors) {
   const rounds = [];
   for (const item of history) {
     if (item.announced !== undefined && typeof item.announced !== "boolean") errors.push(`${where}: announced は真偽値にすること`);
-    if (item.startTime !== undefined && !/^([01]\d|2[0-3]):[0-5]\d$/.test(item.startTime)) errors.push(`${where}: startTime は JST の HH:MM にすること`);
+    for (const error of gachaStatus.validateTimes(item)) errors.push(`${where}: ${error}`);
     if (item.announced === true) {
       try {
         if (!/^\d{4}-\d{2}-\d{2}$/.test(item.date)) throw new Error("date は YYYY-MM-DD が必要です");
