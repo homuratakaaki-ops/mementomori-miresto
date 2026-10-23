@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>聖天使の神託｜実績記録テスト（未公開）</title>
+<style>
+:root{color-scheme:light;--bg:#fbfaf7;--text:#292330;--violet:#7952ad;--muted:#665d6d;--border:#e7ddeb}
+*{box-sizing:border-box}[hidden]{display:none!important}
+body{font:15px/1.55 system-ui,-apple-system,"Noto Sans JP",sans-serif;color:var(--text);background:var(--bg);margin:0}
+header,main,footer{width:min(100%,780px);margin:auto}
+header{padding:23px 17px 4px}main{padding:0 14px 35px}footer{padding:3px 18px 30px;color:var(--muted);font-size:12px}
+h1{font-size:22px;line-height:1.4;margin:8px 0}h2{font-size:18px;margin:0 0 12px}h3{font-size:15px;margin:13px 0 9px}
+p{margin:9px 0}.small{font-size:12px;color:var(--muted)}.tag{font-size:12px;padding:4px 9px;border:1px solid #dbcde7;color:var(--violet);border-radius:99px;font-weight:700}
+.note{background:#f1ecf6;border-radius:12px;padding:12px;color:#594b63;font-size:13px;margin:12px 0}
+.panel{background:white;border:1px solid var(--border);border-radius:15px;margin-top:15px;padding:17px}
+.fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}.wide{grid-column:span 2}
+label{display:flex;flex-direction:column;gap:5px;font-size:13px;font-weight:650;min-width:0}
+input,select{width:100%;min-width:0;border:1px solid #d0c5d9;border-radius:9px;background:#fff;color:var(--text);min-height:44px;padding:9px;font:inherit}
+input:focus-visible,select:focus-visible,button:focus-visible{outline:3px solid #ba9ad8;outline-offset:2px}
+.checkbox{flex-direction:row;align-items:center;gap:8px;font-weight:500}.checkbox input{width:21px;height:21px;min-height:21px;accent-color:var(--violet)}
+button,.file-button{cursor:pointer;background:var(--violet);color:#fff;border:0;border-radius:9px;font:700 13px/1.45 system-ui,-apple-system,"Noto Sans JP",sans-serif;padding:11px 13px;min-height:43px}
+button.secondary,.file-button{background:#f0eaf6;border:1px solid #e0d3ec;color:#67468d}
+button.danger{background:#fff2f2;color:#8a3434;border:1px solid #e8cece}
+button:disabled{opacity:.36;cursor:not-allowed}.buttons{display:flex;flex-wrap:wrap;gap:9px;margin-top:12px}
+.file-button{position:relative;overflow:hidden;display:inline-flex;align-items:center}
+.file-button input{position:absolute;inset:0;opacity:0;cursor:pointer}
+.stat-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.stat{background:#f5f1f8;border-radius:11px;padding:12px;min-width:0}
+.stat small{display:block;font-size:12px;color:var(--muted)}.stat strong{font-size:19px;overflow-wrap:anywhere}
+.relic-line{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);padding:7px 2px;gap:10px}
+.relic-label{display:flex;align-items:center;gap:10px;min-width:0}
+.relic-icon{display:inline-block;width:36px;height:36px;flex:none;border-radius:5px;background-image:url("./assets/holy-angel/relic-sprite.jpg");background-size:144px 36px;background-repeat:no-repeat}
+.item-input{display:flex;align-items:center;gap:8px}
+.item-input span{flex:1;font-size:13px}.item-input input{width:100px;flex:none}
+.card{border:1px solid var(--border);border-radius:10px;padding:11px 12px;margin-top:7px}
+.card .row{display:flex;align-items:center;justify-content:space-between;gap:6px;flex-wrap:wrap}
+.card .minor{font-size:12px;color:var(--muted)}
+.error{background:#fff1f1;color:#84292a;border:1px solid #e7c9c9;padding:12px;border-radius:10px;margin-top:12px}
+.status{background:#f6f2fa;border-radius:10px;padding:11px;margin-top:12px;color:#594d66;font-size:13px}
+details{margin-top:13px}summary{font-weight:700;color:var(--violet);cursor:pointer}
+@media(max-width:420px){.panel{padding:14px}h1{font-size:20px}.fields{gap:10px}.stat strong{font-size:17px}.item-input input{width:80px}}
+</style>
+</head>
+<body>
+<header><span class="tag">開発用テスト｜この端末のみ</span>
+<h1>聖天使の神託｜実際の結果を記録</h1>
+<p class="small">未来の予測ではなく、ゲーム内で操作した結果だけを入力します。</p></header>
+<main id="actual-root">
+<div class="note">⚠️ このページは未公開の試作です。実際のゲーム内操作はしません。クラウド同期・PCとスマホの自動共有は未実装。この端末への保存と、データをファイルに保存・読み込む機能だけ対応しています。未受取の報酬は在庫に反映しません。</div>
+<section class="panel">
+<h2>1. 記録開始時の本当の所持数</h2>
+<p class="small">この状態を基準に、その後の実際のガチャ操作を順番に記録します。途中で開始時の数字を変更すると、その後の記録も再計算されます。</p>
+<div class="fields">
+<label>開始日時（日本時間）<input name="snapshotAt" type="datetime-local"></label>
+<label>現在選択している聖遺物<select name="initialSelected"><option value="chalice">天契の聖杯</option><option value="medal">蒼穹の銀勲</option><option value="wing">希求の神翼</option><option value="fruit">悠園の果実</option></select></label>
+<label>現在の回数ゲージ<input name="initialGauge" type="number" min="0" max="49" value="0"></label>
+<label>無料聖遺物変更の残回数<input name="initialSwitches" type="number" min="0" max="1" value="1"></label>
+<label>専用チケット<input name="initialTickets" type="number" min="0" value="0"></label>
+<label>現在のダイヤ数（未入力も可）<input name="initialDiamonds" type="number" min="0" placeholder="未入力なら費用だけ追跡"></label>
+<label class="checkbox wide"><input name="initialUsedToday" type="checkbox">今日の無料ガチャは使用済み</label>
+<label class="checkbox"><input name="claimed10" type="checkbox">10回報酬を受取済み</label>
+<label class="checkbox"><input name="claimed25" type="checkbox">25回報酬を受取済み</label>
+</div>
+<h3>4種類の聖遺物（実際の所持数）</h3>
+<div class="fields">
+<div class="item-input"><span class="relic-icon" style="background-position:0 0" aria-hidden="true"></span><label style="flex:1">天契の聖杯<input name="relic-chalice" type="number" min="0" value="0"></label></div>
+<div class="item-input"><span class="relic-icon" style="background-position:-36px 0" aria-hidden="true"></span><label style="flex:1">蒼穹の銀勲<input name="relic-medal" type="number" min="0" value="0"></label></div>
+<div class="item-input"><span class="relic-icon" style="background-position:-72px 0" aria-hidden="true"></span><label style="flex:1">希求の神翼<input name="relic-wing" type="number" min="0" value="0"></label></div>
+<div class="item-input"><span class="relic-icon" style="background-position:-108px 0" aria-hidden="true"></span><label style="flex:1">悠園の果実<input name="relic-fruit" type="number" min="0" value="0"></label></div>
+</div>
+<details><summary>5部位の未使用パーツを入力する</summary>
+<div class="fields" style="margin-top:10px">
+<label>手<input name="part-arm" type="number" min="0" value="0"></label>
+<label>足<input name="part-feet" type="number" min="0" value="0"></label>
+<label>アクセサリー<input name="part-accessory" type="number" min="0" value="0"></label>
+<label>頭<input name="part-head" type="number" min="0" value="0"></label>
+<label>胴<input name="part-body" type="number" min="0" value="0"></label>
+</div></details>
+</section>
+<section class="panel">
+<h2>2. 実際に行った操作</h2>
+<div class="fields">
+<label>操作した日時（日本時間）<input name="eventAt" type="datetime-local"></label>
+<label>操作内容<select name="eventType" id="event-type">
+<option value="draw">ガチャを引いた</option>
+<option value="claim">10・25・50回の報酬を受け取った</option>
+<option value="switch">聖遺物を変更した</option>
+<option value="exchange">聖遺物を50パーツへ交換した</option>
+<option value="weekly-reset">月曜04時の週更新を確認した</option>
+</select></label>
+<label data-show="draw">引いた回数<input name="drawCount" type="number" min="1" max="50" value="10"></label>
+<label data-show="draw">使ったチケット<input name="drawTickets" type="number" min="0" max="50" value="0"></label>
+<label class="checkbox wide" data-show="draw"><input name="drawFree" type="checkbox">この操作で無料ガチャ1回を使った</label>
+<label data-show="claim">受け取った回数報酬<select name="claimMilestone"><option value="10">10回</option><option value="25">25回</option><option value="50">50回（確定）</option></select></label>
+<label data-show="claim">聖遺物が当たったか<select name="claimWon"><option value="true">当たった</option><option value="false">外れた</option></select></label>
+<label data-show="switch">変更後の聖遺物<select name="switchTo"><option value="chalice">天契の聖杯</option><option value="medal">蒼穹の銀勲</option><option value="wing">希求の神翼</option><option value="fruit">悠園の果実</option></select></label>
+<label data-show="switch">変更方法<select name="switchMethod"><option value="free">無料変更</option><option value="paid">300ダイヤで変更</option></select></label>
+<label class="checkbox wide" data-show="switch"><input name="abandonPending" type="checkbox">未受取の報酬を破棄する可能性を理解した</label>
+<label data-show="exchange">交換する部位<select name="exchangeSlot"><option value="arm">手</option><option value="feet">足</option><option value="accessory">アクセサリー</option><option value="head">頭</option><option value="body">胴</option></select></label>
+<label data-show="exchange">交換回数（1回＝50パーツ）<input name="exchangeCount" type="number" min="1" max="100" value="1"></label>
+<label class="wide" data-show="weekly-reset">週更新後の選択聖遺物<select name="resetSelected"><option value="chalice">天契の聖杯</option><option value="medal">蒼穹の銀勲</option><option value="wing">希求の神翼</option><option value="fruit">悠園の果実</option></select></label>
+</div>
+<div class="buttons"><button type="button" data-action="record">確認して実績を追加</button>
+<button type="button" data-action="undo" class="danger" id="undo-last" disabled>最後の実績を取り消す</button></div>
+<div id="actual-error" class="error" role="alert" hidden></div>
+<p class="small">ゲーム内操作の実績だけを入力してください。操作日時の順番が逆になった場合や、まだ受け取っていない報酬を登録した場合は、計算を止めます。</p>
+</section>
+<section class="panel">
+<h2>3. 登録された実績と現在の残数</h2>
+<div class="stat-grid">
+<div class="stat"><small>選択中の聖遺物</small><strong id="actual-selected">—</strong></div>
+<div class="stat"><small>現在のゲージ</small><strong id="actual-gauge">—</strong></div>
+<div class="stat"><small>専用チケット残</small><strong id="actual-tickets">—</strong></div>
+<div class="stat"><small>記録したダイヤ消費</small><strong id="actual-diamonds">—</strong></div>
+</div>
+<div id="actual-inventory"></div>
+<p id="pending-note" class="small"></p>
+<h3>実績一覧</h3>
+<div id="event-list"></div>
+</section>
+<section class="panel">
+<h2>4. この端末への保存とバックアップ</h2>
+<p class="small">「この端末に保存」を押すまで保存しません。読み込み・取り消し・修正は本番のデータには影響しません。</p>
+<div class="buttons">
+<button type="button" data-action="save">この端末に保存</button>
+<button type="button" data-action="load" class="secondary">端末から読み込む</button>
+<button type="button" data-action="export" class="secondary">データをファイルに保存</button>
+<label class="file-button">ファイルからデータを読み込む<input id="actual-import" type="file" accept=".json,application/json"></label>
+</div>
+<div class="status" id="actual-status" role="status">クラウドへは保存されません。</div>
+</section>
+</main>
+<footer>公式ゲーム連携ではありません。編集用の秘密リンク、Cloudflare同期と本番公開は未実装です。</footer>
+<script type="module" src="./js/holy-angel-actuals-ui.mjs"></script>
+</body></html>
