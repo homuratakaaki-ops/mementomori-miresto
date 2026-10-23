@@ -16,6 +16,14 @@ const detail = require('../js/render-character.js');
 const cards = require('../js/render-character-index.js');
 const canonical = fs.readFileSync(path.join(ROOT, 'data/mementomori-skills.json'));
 const data = JSON.parse(canonical);
+// 旧版互換は時刻項目を持たない比較用コピーで検証する。実データと境界検査は変えない。
+const compatibilityData = {
+  ...data,
+  characters: data.characters.map(c => ({
+    ...c,
+    pickupHistory: (c.pickupHistory || []).map(({ startTime, endTime, endTimeSource, ...entry }) => entry)
+  }))
+};
 const news = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/news.json'), 'utf8'));
 const baseline = 'c271f7718c21f764837f174de8d15474e6261035';
 const git = (...args) => execFileSync('git', args, { cwd: ROOT, encoding: 'utf8', maxBuffer: 20 * 1024 * 1024 });
@@ -52,7 +60,7 @@ test('日付繰越・22日安全装置・JST・月単位の旧履歴', () => {
   assert.equal(gs.isOngoing(e, '2026-11-13T14:30'), false);
   assert.equal(gs.hasPastPickup({ pickupHistory: [{ date: '2026-10', kind: 'PU' }] }, '2026-10-01'), true);
 });
-test('現行120体 × 92日 × 6時刻をc271f77と照合', () => {
+test('時刻項目なしの比較用120体 × 92日 × 6時刻をc271f77と照合', () => {
   const context = { module: { exports: {} } };
   vm.runInNewContext(git('show', `${baseline}:js/gacha-status.js`), context);
   const old = context.module.exports;
@@ -67,7 +75,7 @@ test('現行120体 × 92日 × 6時刻をc271f77と照合', () => {
   for (let day = Date.parse('2026-10-01'); day <= Date.parse('2026-12-31'); day += 86400000) {
     for (const time of ['00:00', '06:00', '14:29', '14:30', '15:00', '23:59']) {
       const at = new Date(day).toISOString().slice(0, 10) + 'T' + time;
-      for (const c of data.characters) {
+      for (const c of compatibilityData.characters) {
         count++;
         if (snapshot(old, c, at) !== snapshot(gs, c, at)) mismatches.push(`${c.id} ${at}`);
       }
@@ -121,11 +129,12 @@ const indexPath = 'pages/characters/index.html';
 const detailPath = `pages/characters/${character.pageSlug}.html`;
 const read = p => fs.readFileSync(path.join(fixture, p), 'utf8');
 const hash = p => createHash('sha256').update(fs.readFileSync(path.join(fixture, p))).digest('hex');
-test('現行データ・同一日時で旧新ロジックの生成HTMLは差0（許可した属性・読み込み・hidden CSS以外の差0）', () => {
+test('時刻項目なしの比較用データ・同一日時で旧新ロジックの生成HTMLは差0（許可した属性・読み込み・hidden CSS以外の差0）', () => {
   const at = '2026-10-23T12:00';
   const tempRoot = path.resolve(require('node:os').tmpdir());
   const oldFixture = fs.mkdtempSync(path.join(tempRoot, 'miresto-gacha-time-old-'));
   try {
+    fs.writeFileSync(fixtureJson, JSON.stringify(compatibilityData, null, 2));
     fs.cpSync(fixture, oldFixture, { recursive: true });
     for (const file of ['js/gacha-status.js', 'js/render-character.js',
       'js/render-character-index.js', 'scripts/build-character-pages.mjs']) {
@@ -153,6 +162,7 @@ test('現行データ・同一日時で旧新ロジックの生成HTMLは差0（
     build(at);
     assert.deepEqual(files.map(hash), before);
   } finally {
+    fs.writeFileSync(fixtureJson, canonical);
     if (path.dirname(path.resolve(oldFixture)) === tempRoot && path.basename(oldFixture).startsWith('miresto-gacha-time-old-')) {
       fs.rmSync(oldFixture, { recursive: true, force: true });
     }

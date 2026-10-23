@@ -320,6 +320,13 @@
       "kind": "サイト更新",
       "url": "pages/characters/cerberus_candy.html",
       "text": "[魔法のキャンディ]ケルベロスの復刻期間に終了日（11/9）を追記"
+    },
+    {
+      "id": "2026-10-23-gacha-end-times",
+      "date": "2026-10-23",
+      "kind": "サイト更新",
+      "url": "pages/characters/index.html",
+      "text": "ガチャ9件の終了時刻（14:29）を反映"
     }
   ]
 }
