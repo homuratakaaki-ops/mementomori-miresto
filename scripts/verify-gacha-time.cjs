@@ -121,22 +121,42 @@ const indexPath = 'pages/characters/index.html';
 const detailPath = `pages/characters/${character.pageSlug}.html`;
 const read = p => fs.readFileSync(path.join(fixture, p), 'utf8');
 const hash = p => createHash('sha256').update(fs.readFileSync(path.join(fixture, p))).digest('hex');
-test('本番設定の生成HTMLは表示文の差0（許可した属性・読み込み・hidden CSS以外の差0）', () => {
-  build();
-  const strip = html => html.replace(/\r\n/g, '\n')
-    .replace(/  <script src="\.\.\/\.\.\/js\/gacha-switch\.js\?v=[^"]+" defer><\/script>\n/g, '')
-    .replace(/ data-gacha-timeline="[^"]*"/g, '')
-    .replace(/\?v=[a-f0-9]{8}/g, '')
-    .replace(/    \.badge\[data-gacha-timeline\]\[hidden\] \{ display: none; \}\n\n/g, '');
-  const changed = [];
-  for (const file of files.filter(f => f.endsWith('.html'))) {
-    if (strip(read(file)) !== strip(git('show', `${baseline}:${file}`))) changed.push(file);
+test('現行データ・同一日時で旧新ロジックの生成HTMLは差0（許可した属性・読み込み・hidden CSS以外の差0）', () => {
+  const at = '2026-10-23T12:00';
+  const tempRoot = path.resolve(require('node:os').tmpdir());
+  const oldFixture = fs.mkdtempSync(path.join(tempRoot, 'miresto-gacha-time-old-'));
+  try {
+    fs.cpSync(fixture, oldFixture, { recursive: true });
+    for (const file of ['js/gacha-status.js', 'js/render-character.js',
+      'js/render-character-index.js', 'scripts/build-character-pages.mjs']) {
+      fs.writeFileSync(path.join(oldFixture, file), git('show', `${baseline}:${file}`));
+    }
+    const env = { ...process.env, MIRESTO_NOW: at };
+    delete env.MIRESTO_TODAY;
+    const result = spawnSync(process.execPath, ['scripts/build-character-pages.mjs'], {
+      cwd: oldFixture, env, encoding: 'utf8'
+    });
+    assert.equal(result.status, 0, '旧ロジックの現行データビルド失敗\n' + result.stdout + result.stderr);
+    build(at);
+    const strip = html => html.replace(/\r\n/g, '\n')
+      .replace(/  <script src="\.\.\/\.\.\/js\/gacha-switch\.js\?v=[^"]+" defer><\/script>\n/g, '')
+      .replace(/ data-gacha-timeline="[^"]*"/g, '')
+      .replace(/\?v=[a-f0-9]{8}/g, '')
+      .replace(/    \.badge\[data-gacha-timeline\]\[hidden\] \{ display: none; \}\n\n/g, '');
+    const changed = [];
+    for (const file of files.filter(f => f.endsWith('.html'))) {
+      if (strip(read(file)) !== strip(fs.readFileSync(path.join(oldFixture, file), 'utf8'))) changed.push(file);
+    }
+    console.log(`  表示文・その他の差 ${changed.length}ページ`);
+    assert.deepEqual(changed, []);
+    const before = files.map(hash);
+    build(at);
+    assert.deepEqual(files.map(hash), before);
+  } finally {
+    if (path.dirname(path.resolve(oldFixture)) === tempRoot && path.basename(oldFixture).startsWith('miresto-gacha-time-old-')) {
+      fs.rmSync(oldFixture, { recursive: true, force: true });
+    }
   }
-  console.log(`  表示文・その他の差 ${changed.length}ページ`);
-  assert.deepEqual(changed, []);
-  const before = files.map(hash);
-  build();
-  assert.deepEqual(files.map(hash), before);
 });
 test('不正な時刻・終了日欠落・出典欠落・開始終了逆転でビルド停止', () => {
   for (const [patch, message] of [
