@@ -119,14 +119,22 @@
   function renderMetaHtml(character, newsData, today) {
     const day = gachaStatus.jstNow(today);
     const status = gachaStatus.gachaStatus(character, day);
-    const historyText = formatPickupHistory(mergePickupHistory(character, newsData), character.pickupCount, day);
+    const history = mergePickupHistory(character, newsData);
+    const historyText = formatPickupHistory(history, character.pickupCount, day);
+    const historyTimeline = gachaStatus.displayTimeline(history, day, (at) => ({
+      text: formatPickupHistory(history, character.pickupCount, at), cls: "badge"
+    }));
+    const upcomingTimeline = gachaStatus.displayTimeline(character.pickupHistory || [], day, (at) => {
+      const next = gachaStatus.gachaStatus(character, at);
+      return { text: next.state === "upcoming" ? next.text : "", cls: "badge upcoming" };
+    });
     return [
       character.attribute ? `<span class="badge attribute">${escapeHtml(character.attribute)}</span>` : "",
       character.weaponType ? `<span class="badge">${escapeHtml(character.weaponType)}</span>` : "",
       valueOrDash(character.speed) ? `<span class="badge">スピード ${escapeHtml(character.speed)}</span>` : "",
       character.availability ? `<span class="badge">入手 ${escapeHtml(character.availability)}</span>` : "",
-      status.state === "upcoming" ? `<span class="badge upcoming">${escapeHtml(status.text)}</span>` : "",
-      historyText ? `<span class="badge">${escapeHtml(historyText)}</span>` : "",
+      status.state === "upcoming" || upcomingTimeline.length ? `<span class="badge upcoming"${gachaStatus.timelineAttribute(upcomingTimeline)}${status.state === "upcoming" ? "" : " hidden"}>${status.state === "upcoming" ? escapeHtml(status.text) : ""}</span>` : "",
+      historyText ? `<span class="badge"${gachaStatus.timelineAttribute(historyTimeline)}>${escapeHtml(historyText)}</span>` : "",
       ...(character.updates || []).map((item) => `<span style="flex-basis: 100%"><a href="${escapeHtml(item.url)}">${escapeHtml(item.label)}情報：${escapeHtml(item.date.replace(/-/g, "/"))}（変更内容を見る）</a></span>`)
     ].filter(Boolean).join("");
   }

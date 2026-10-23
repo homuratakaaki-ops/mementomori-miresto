@@ -76,6 +76,24 @@
   予告ニュースには `announcement: true` を付け、告知日をPU履歴の開催日として数えないようにします。
   **検証後は必ず素のビルドに戻してからコミットすること。**
 
+### 開始・終了時刻の扱い（2026-10-23）
+
+- `startTime` / `endTime` は任意のJST時刻（HH:MM）。`startTime` は `announced` 以外の回にも適用する。
+- `endTime` は告知の「◯◯まで」をそのまま記録する（14:29まで → `"14:29"`）。1分足したり丸めたりしない。
+  判定ではその1分後から終了扱い。未設定なら `endDate` の翌日00:00から終了扱いとする。
+- `endTime` を書くときは `endTimeSource` に出典と確認日を必ず記す。公式告知／ゲーム内告知を優先し、
+  第三者サイトだけの場合もどのサイトか書く。
+- 確認できない時刻は推測で書かない。その場合は `endDate` だけを記録し、その日の終わりまで開催中と表示する。
+  日付の照合（2サイト一致）と時刻の出典は別物。日付が一致しても時刻まで一致したとは書かない。
+- `startTime` も同じ考え方で、告知に開始時刻があれば記録してよい。
+- 時刻の追加・変更の定型更新はひなたが完結してよい。判定ロジック（`gacha-status.js` / `gacha-switch.js`）や
+  項目の追加には独立検収が必要。
+- ビルドは終了日・終了時刻の出典欠落、時刻形式の不正、開始が終了より後の回を拒否する。
+- 開催判定は `gacha-status.js` のみ。未来の表示変更を `data-gacha-timeline` に事前生成し、
+  `gacha-switch.js` はその予定を時刻・タブ復帰・一覧再描画に合わせて適用するだけとする。
+  JSが無効なら生成時の本文を表示する。06:00・15:00の日次ビルドは継続する。
+- 時刻対応の追加検証は `node scripts/verify-gacha-time.cjs`。既存の `verify-gacha-status.cjs` は変更しない。
+
 ## 日次の自動ビルド（GitHub Actions）
 
 - `.github/workflows/daily-build.yml` が**毎日 JST 06:00 と15:00**（UTC 21:00と06:00）に
@@ -513,6 +531,7 @@
   自動ビルド（LF）でも同じ印になります。**印がぶれてビルド後に差分が出たら、ここを疑うこと。**
 - 対象外：手書きの `<head>`（トップ・キャラ一覧・各ツール）、`/assets/ad-slot.css`、
   `assets/character-page.css` の中から `@import` で読む `assets/attribute-palette.css`。
+  ただし、キャラ一覧（`pages/characters/index.html`）が読む `gacha-status.js`・`render-character-index.js`・`gacha-switch.js` はビルドが印を付ける（2026-10-23、古い判定がキャッシュに残らないため）。
   **属性カラーを変えるときは、`@import` をやめて `<head>` に印付きで並べる対応を同じ便で行うこと**
   （`party-builder.html` も `character-page.css` を読むので、そちらも合わせる）。
 

@@ -66,7 +66,76 @@
   }
 
   function startAt(entry) {
-    return `${entry.date}T${entry.startTime || "00:00"}`;
+    const date = /^\d{4}-\d{2}$/.test(entry.date) ? `${entry.date}-01` : entry.date;
+    return `${date}T${entry.startTime || "00:00"}`;
+  }
+
+  function addMinutes(value, minutes) {
+    return jstNow(new Date(`${value}:00+09:00`).getTime() + minutes * 60000);
+  }
+
+  /** 終了の境界は告知の最終分の1分後。時刻がなければ翌日00:00。 */
+  function endAt(entry) {
+    return entry.endDate ? addMinutes(`${entry.endDate}T${entry.endTime || "23:59"}`, 1) : null;
+  }
+
+  function endLabel(entry) {
+    return monthDay(entry.endDate) + (entry.endTime ? ` ${entry.endTime}` : "");
+  }
+
+  /** 生成時の時刻項目検証。古い月単位の履歴は時刻未指定ならそのまま扱う。 */
+  function validateTimes(entry) {
+    const errors = [];
+    for (const key of ["startTime", "endTime"]) {
+      if (entry[key] !== undefined && (typeof entry[key] !== "string" || !/^([01]\d|2[0-3]):[0-5]\d$/.test(entry[key]))) {
+        errors.push(`${key} は JST の HH:MM にすること`);
+      }
+    }
+    if (entry.endTime !== undefined) {
+      if (!entry.endDate) errors.push("endTime には endDate が必要です");
+      if (typeof entry.endTimeSource !== "string" || !entry.endTimeSource.trim()) errors.push("endTime には出典と確認日を記した endTimeSource が必要です");
+    }
+    if (entry.startTime !== undefined || entry.endTime !== undefined) {
+      try {
+        jstNow(startAt(entry));
+        if (entry.endDate) {
+          const last = jstNow(`${entry.endDate}T${entry.endTime || "23:59"}`);
+          if (startAt(entry) > last) errors.push("開始が終了より後です");
+        }
+      } catch (error) { errors.push(error.message); }
+    }
+    return errors;
+  }
+
+  /** 表示を変える未来の境界だけを保存する。表示内容は呼び出し側の共有描画を使う。 */
+  function displayTimeline(history, now, display) {
+    const current = jstNow(now);
+    const boundaries = new Set();
+    for (const entry of history) {
+      if (entry.kind === RELEASE_KIND || !/^\d{4}-\d{2}-\d{2}$/.test(entry.date || "")) continue;
+      boundaries.add(startAt(entry));
+      if (entry.endDate) boundaries.add(endAt(entry));
+      else if (entry.announced === true) boundaries.add(addMinutes(startAt(entry), 22 * 24 * 60));
+    }
+    let previous = display(current);
+    const timeline = [];
+    for (const at of [...boundaries].filter((at) => at > current).sort()) {
+      const next = display(at);
+      if (next.text !== previous.text || next.cls !== previous.cls) {
+        timeline.push({ at: `${at}:00+09:00`, text: next.text, cls: next.cls });
+      }
+      previous = next;
+    }
+    return timeline;
+  }
+
+  function timelineAttribute(timeline) {
+    if (!timeline.length) return "";
+    // JSON内のスラッシュはエスケープし、本文の日付と埋め込みデータを区別する。
+    const json = JSON.stringify(timeline).replace(/\//g, "\\u002f").replace(/[&<>"']/g, (char) => ({
+      "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+    }[char]));
+    return ` data-gacha-timeline="${json}"`;
   }
 
   function isUpcoming(entry, now) {
@@ -98,19 +167,19 @@
 
   /**
    * 今日が期間内かどうか。
-   * 公式予告だけ開始時刻と終了日未設定時の安全装置を適用する。
+   * 開始時刻は全回に適用。終了日未設定時の安全装置は公式予告だけ。
    */
   function isOngoing(entry, today) {
     if (!entry || !entry.date) return false;
     if (entry.kind === RELEASE_KIND) return false;
     const now = jstNow(today);
+    if (now < startAt(entry)) return false;
     if (entry.announced === true) {
       if (isUpcoming(entry, now)) return false;
       if (!entry.endDate) return !isStaleAnnouncement(entry, now);
     }
     if (!entry.endDate) return false;
-    const day = now.slice(0, 10);
-    return String(entry.date) <= day && day <= String(entry.endDate);
+    return now < endAt(entry);
   }
 
   /** 今日が期間内の回。複数あれば終了日が最も遅いものを返す。 */
@@ -125,7 +194,7 @@
   function hasPastPickup(character, today) {
     const day = jstNow(today);
     return historyOf(character).some((entry) =>
-      entry.kind !== RELEASE_KIND && entry.date && String(entry.date) <= day.slice(0, 10) &&
+      entry.kind !== RELEASE_KIND && entry.date && startAt(entry) <= day &&
       !isUpcoming(entry, day) && !isOngoing(entry, day));
   }
 
@@ -138,7 +207,7 @@
     const ongoing = ongoingEntry(character, day);
     if (ongoing) {
       const label = ONGOING_LABEL[ongoing.kind] || "開催中";
-      return { text: label + (ongoing.endDate ? `（〜${monthDay(ongoing.endDate)}）` : ""), state: "ongoing", entry: ongoing };
+      return { text: label + (ongoing.endDate ? `（〜${endLabel(ongoing)}）` : ""), state: "ongoing", entry: ongoing };
     }
     const upcoming = historyOf(character).filter((entry) => isUpcoming(entry, day))
       .sort((a, b) => startAt(a).localeCompare(startAt(b)))[0];
@@ -161,7 +230,7 @@
     if (isUpcoming(entry, now)) return "（予定）";
     if (entry && !entry.endDate && isOngoing(entry, now)) return "（開催中）";
     if (!entry || !entry.endDate) return "";
-    return isOngoing(entry, now) ? `（開催中〜${monthDay(entry.endDate)}）` : "（終了）";
+    return isOngoing(entry, now) ? `（開催中〜${endLabel(entry)}）` : "（終了）";
   }
 
   return {
@@ -170,6 +239,9 @@
     jstToday,
     jstNow,
     buildNow,
+    validateTimes,
+    displayTimeline,
+    timelineAttribute,
     isUpcoming,
     announcementWarnings,
     monthDay,
