@@ -519,6 +519,29 @@
 - 余白（下部枠は上32px / 下24px、本文中枠は上下40px）と `min-height` は `assets/ad-slot.css` の1か所。
   min-height は広告が入る前に場所を取るためのもので、外すと本文が下にずれます。
 
+## アクセス解析（GA4）の入れ方
+
+**計測コード（gtag.js）をページに手書きしないこと。** 計測IDも書かないこと。
+中身は `node scripts/build-character-pages.mjs` が毎回書き直します（2026-10-25、計測漏れの修正で導入）。
+
+- 設定の正は `data/site-config.json` の `analytics`（`measurementId` / `enabled`）。
+  マークアップの正は `js/render-analytics.js`、差し込みと点検は `scripts/build-analytics.mjs`
+  （`buildAds` の直後に呼ぶ）。
+- **新しいページは何もしなくても計測されます。** ビルドが head の中
+  （`<!-- ad:head -->` があればその手前、無ければ `</head>` の直前）に
+  `<!-- ga:head -->` 〜 `<!-- /ga:head -->` ごと差し込み、目印があるページは中身だけを書き直します。
+  生成ページ（キャラ詳細・状態異常ガイド）は生成テンプレートが `js/render-analytics.js` を呼んで目印ごと書き出します。
+- **計測しないページ**は `scripts/build-analytics.mjs` の `EXCLUDED_PAGES` にまとめます
+  （所有権確認ファイル・`pack-viewer.html`・`pages/characters/veela.html`（転送先で計測するので二重を避ける））。
+  404・about・contact・privacy・disclaimer は計測します。増やすときは依頼で決めてから足すこと。
+- 止め方は2段。1ページだけなら `<body data-analytics="off">`（目印だけが残る）、サイト全体なら `analytics.enabled = false`。
+- 生成時に点検していること（違反があればビルドが止まる）:
+  - 除外リスト以外の全HTMLで、gtag.js の読み込みと `gtag('config'` がそれぞれちょうど1回（二重計測の防止）
+  - 除外リストのページと `data-analytics="off"` のページに計測コードが1つも無いこと
+  - 計測IDが `data/site-config.json` と目印の中身以外のどこにも書かれていないこと（手書きの再発防止）
+- 日次の自動ビルドは `push.paths` にルート直下の `*.html` を含み、生成物として `*.html` も commit します
+  （新しいツールページをビルドし忘れて push しても、計測タグが入るようにするため）。
+
 ## 生成ページの読み込みファイルに付ける「中身の印」（?v=）
 
 - 生成ページ（キャラページ・状態異常ガイド・ガイド一覧・対策キャラ検索）が読み込む CSS・JS と、

@@ -34,6 +34,11 @@ const CHARACTER_PAGES_DIR = join(ROOT, "pages", "characters");
 
 const renderer = require(join(ROOT, "js", "render-character.js"));
 const adRenderer = require(join(ROOT, "js", "render-ad-slot.js"));
+const analyticsRenderer = require(join(ROOT, "js", "render-analytics.js"));
+
+// 計測タグ（GA4）の設定（data/site-config.json の analytics）。全ページの head で共通なので
+// 呼び出しごとに引き回さず、buildStatusGuides の入口で1回だけ受け取る。
+let analyticsConfig = {};
 const escapeHtml = renderer.escapeHtml;
 
 const SITE_ORIGIN = renderer.SITE_ORIGIN;
@@ -368,6 +373,7 @@ function head(options) {
     '  <link rel="apple-touch-icon" href="../../assets/miresto/miresto-icon-180.png">',
     '  <link rel="stylesheet" href="../../' + versioned("assets/character-page.css") + '">',
     '  <link rel="stylesheet" href="../../' + versioned("assets/status-guide.css") + '">',
+    analyticsRenderer.renderAnalyticsHead(analyticsConfig, "  "),
     adRenderer.renderAdHead(options.ads, "  ")
   ].join("\n");
 }
@@ -1672,6 +1678,7 @@ export function buildStatusGuides(options) {
   const baseData = options.baseData;
   const terms = options.terms;
   const ads = options.ads;
+  analyticsConfig = options.analytics || {};
   const writeIfChanged = options.writeIfChanged;
 
   const guides = readGuides();
