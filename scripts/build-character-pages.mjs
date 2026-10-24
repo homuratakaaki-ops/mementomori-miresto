@@ -16,6 +16,7 @@
  *   index.html                        … トップページのニュース欄を差し替え
  *   pages/status/*.html               … 状態異常ガイド（scripts/build-status-guides.mjs）
  *   広告枠                            … scripts/build-ads.mjs（目印 <!-- ad:bottom --> / <!-- ad:mid --> を置き換え）
+ *   計測タグ（GA4）                   … scripts/build-analytics.mjs（目印 <!-- ga:head --> を全ページの head に置く）
  *
  * data/*.json を変更したら必ず実行し、JSONとHTMLを同じコミットに含めること。
  */
@@ -26,6 +27,7 @@ import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { buildStatusGuides } from "./build-status-guides.mjs";
 import { buildAds } from "./build-ads.mjs";
+import { buildAnalytics } from "./build-analytics.mjs";
 
 const require = createRequire(import.meta.url);
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
@@ -37,6 +39,7 @@ const indexRenderer = require(join(ROOT, "js", "render-character-index.js"));
 const gachaStatus = require(join(ROOT, "js", "gacha-status.js"));
 const newsRenderer = require(join(ROOT, "js", "render-news.js"));
 const adRenderer = require(join(ROOT, "js", "render-ad-slot.js"));
+const analyticsRenderer = require(join(ROOT, "js", "render-analytics.js"));
 
 // 1回のビルドで共通のJST日時。MIRESTO_NOWを優先し、TODAY指定は00:00。
 const NOW = gachaStatus.buildNow(process.env);
@@ -134,7 +137,7 @@ function withMidAdSlot(skillListHtml, ads) {
  * JSが埋めていた箇所（roleMemo / characterMeta / skillList / notePanel）を
  * 生成時に埋めてある。
  */
-function characterPageHtml({ character, metaHtml, skillListHtml, description, ads }) {
+function characterPageHtml({ character, metaHtml, skillListHtml, description, ads, analytics }) {
   const notePanel = character.noteUrl
     ? `    <section class="note-panel" id="notePanel">
       <strong>評価・運用メモはnoteへ</strong><br>
@@ -171,6 +174,7 @@ function characterPageHtml({ character, metaHtml, skillListHtml, description, ad
   <script src="../../${versioned("js/gacha-status.js")}" defer></script>
   <script src="../../${versioned("js/render-character.js")}" defer></script>
   <script src="../../${versioned("js/character-page.js")}" defer></script>${metaHtml.includes(" data-gacha-timeline=") ? `\n  <script src="../../${versioned("js/gacha-switch.js")}" defer></script>` : ""}
+${analyticsRenderer.renderAnalyticsHead(analytics, "  ")}
 ${adRenderer.renderAdHead(ads, "  ")}
 </head>
 <body data-character-page data-character-id="${renderer.escapeHtml(character.id)}" data-attribute="${renderer.escapeHtml(character.attribute || "")}" data-prerendered>
@@ -760,7 +764,7 @@ function validateAll({ baseData, terms }) {
   return flowSkills;
 }
 
-function buildCharacterPages({ baseData, newsData, terms, ads }) {
+function buildCharacterPages({ baseData, newsData, terms, ads, analytics }) {
   const written = [];
   const unchanged = [];
   const slugs = [];
@@ -776,7 +780,8 @@ function buildCharacterPages({ baseData, newsData, terms, ads }) {
       metaHtml: renderer.renderMetaHtml(character, newsData, NOW),
       skillListHtml: withMidAdSlot(renderer.renderSkillList(skills, terms), ads),
       description: renderer.pageDescription(character, skills),
-      ads
+      ads,
+      analytics
     });
 
     const path = join(PAGES_DIR, `${slug}.html`);
@@ -884,20 +889,25 @@ function main() {
   const terms = readJson(join(DATA_DIR, "terms.json"), { terms: {} }).terms || {};
   // 広告の設定の正は data/site-config.json。ページ種別ごとの出し分けはここで決める
   // （characters: 出す / status: 出す / TOP: 出さない）。
-  const ads = readJson(join(DATA_DIR, "site-config.json"), { ads: {} }).ads || {};
+  const siteConfig = readJson(join(DATA_DIR, "site-config.json"), { ads: {} });
+  const ads = siteConfig.ads || {};
+  // 計測タグ（GA4）の設定の正も data/site-config.json。計測しないページは build-analytics.mjs が決める。
+  const analytics = siteConfig.analytics || {};
 
   const flowSkills = validateAll({ baseData, terms });
   for (const character of baseData.characters || []) {
     for (const warning of gachaStatus.announcementWarnings(character, NOW)) console.warn(warning);
   }
-  const pages = buildCharacterPages({ baseData, newsData, terms, ads });
+  const pages = buildCharacterPages({ baseData, newsData, terms, ads, analytics });
   // 状態異常ガイドはキャラページの後。直リンク先の id="skill-N" を生成済みHTMLで確かめる。
-  const status = buildStatusGuides({ baseData, terms, ads, writeIfChanged });
+  const status = buildStatusGuides({ baseData, terms, ads, analytics, writeIfChanged });
   const index = buildIndexPage({ baseData });
   const charIndex = buildCharacterIndex({ baseData });
   const topPage = buildTopPage({ newsData });
   // 広告枠は全ページを書き終えた最後に差し込む（手書きページの目印もここで置き換える）。
   const ads2 = buildAds({ writeIfChanged });
+  // 計測タグ（GA4）は広告の後。<!-- ad:head --> の手前に入れる。
+  const ga = buildAnalytics({ writeIfChanged });
 
   console.log(`キャラページ: ${pages.slugs.length}件 (更新 ${pages.written.length} / 変更なし ${pages.unchanged.length})`);
   console.log(`flow 付きスキル: ${flowSkills}件（検証OK）`);
@@ -923,6 +933,7 @@ function main() {
   console.log(`広告枠（本文中）: ${ads2.midEnabled
     ? `キャラ ${ads2.midShown.character}ページ / ガイド ${ads2.midShown.guide}ページに出した（スロット ${ads2.midSlot}）`
     : "停止中（ads.inContent）"} / 長いページの目印 キャラ ${ads2.midPages.character.length}件・ガイド ${ads2.midPages.guide.length}件`);
+  console.log(`計測タグ(GA4): ${ga.enabled ? `${ga.measured.length}ページで計測（${ga.measurementId}） / 計測なし ${ga.unmeasured.length}ページ（${ga.unmeasured.join(", ")}）` : "全停止中"} / ${ga.total}ページを点検${ga.written.length ? ` (更新 ${ga.written.length}件)` : " (変更なし)"}`);
   console.log(`開催状況の判定日(JST): ${TODAY} / 生成時刻: ${GENERATED_AT}`);
   const ongoing = (baseData.characters || []).filter((character) => gachaStatus.ongoingEntry(character, NOW));
   console.log(`開催中と判定: ${ongoing.length}体${ongoing.length ? ` (${ongoing.map((c) => `${c.name}=${gachaStatus.gachaStatusText(c, NOW)}`).join(" / ")})` : ""}`);

@@ -148,6 +148,8 @@ test('時刻項目なしの比較用データ・同一日時で旧新ロジッ�
     assert.equal(result.status, 0, '旧ロジックの現行データビルド失敗\n' + result.stdout + result.stderr);
     build(at);
     const strip = html => html.replace(/\r\n/g, '\n')
+      // 計測タグ（GA4）は開催判定と無関係で、比較元の旧ビルドが書き出さないので比較から外す
+      .replace(/[ \t]*<!-- ga:head -->[\s\S]*?<!-- \/ga:head -->\n/g, '')
       .replace(/  <script src="\.\.\/\.\.\/js\/gacha-switch\.js\?v=[^"]+" defer><\/script>\n/g, '')
       .replace(/ data-gacha-timeline="[^"]*"/g, '')
       .replace(/\?v=[a-f0-9]{8}/g, '')

@@ -27,6 +27,9 @@ on:
       # pages/** 全体は入れない（キャラ詳細ページは生成物だけなので循環する）。
       - "index.html"
       - "pages/characters/index.html"
+      # ルート直下の手書きページ（ツール類）。計測タグ（GA4）はビルドが head に差し込むので、
+      # 新しいページをビルドし忘れたまま push しても、ここで入る。
+      - "*.html"
       - ".github/workflows/daily-build.yml"
   workflow_dispatch:
 
@@ -67,8 +70,8 @@ jobs:
           set -euo pipefail
           git config user.name "ミコト（自動ビルド）"
           git config user.email "homuratakaaki@gmail.com"
-          # 生成物は data/ ・ pages/ ・ index.html（トップのニュース欄）
-          git add -- data pages index.html
+          # 生成物は data/ ・ pages/ ・ ルート直下の *.html（トップのニュース欄と、計測タグを差し込んだ手書きページ）
+          git add -- data pages *.html
           if git diff --cached --quiet; then
             echo "差分なし。何もしない。"
             exit 0
