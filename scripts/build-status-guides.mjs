@@ -797,6 +797,7 @@ function indexPageHtml(guides, ads, countermeasures) {
     "  </header>",
     "",
     "  <main>",
+    '    <p class="notice">スキル性能は、原則としてキャラLv240以上・専用武器による変更前を基準にしています。専用武器による違いは、各ガイドで個別に説明します。</p>',
     '    <div class="notice">今あるのは' + (guides.length + (countermeasures ? 1 : 0)) + "件です。ほかの状態異常・特殊効果も順番に足していきます。</div>",
     '    <ul class="guide-index">',
     items.join("\n"),
