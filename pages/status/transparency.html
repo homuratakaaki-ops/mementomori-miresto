@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>透明｜特殊効果ガイド | ミレストのメメントモリ分析データ室</title>
+  <meta name="description" content="メメントモリの透明を解説。敵味方の攻撃・スキルの対象から外れる仕組み、全員透明時の無効条件、付与3キャラの持続・解除条件とステルスとの違いを整理します。">
+  <meta name="robots" content="noindex">
+  <link rel="canonical" href="https://memento.musoudc.com/pages/status/transparency.html">
+  <!-- OGP。画像は共通のものを使う（ガイドごとの画像生成は未対応） -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="ミレストのメメントモリ分析データ室">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="og:title" content="透明｜特殊効果ガイド | ミレストのメメントモリ分析データ室">
+  <meta property="og:description" content="メメントモリの透明を解説。敵味方の攻撃・スキルの対象から外れる仕組み、全員透明時の無効条件、付与3キャラの持続・解除条件とステルスとの違いを整理します。">
+  <meta property="og:url" content="https://memento.musoudc.com/pages/status/transparency.html">
+  <meta property="og:image" content="https://memento.musoudc.com/assets/ogp/ogp-common.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <link rel="icon" type="image/png" href="../../assets/miresto/miresto-icon-32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="../../assets/miresto/miresto-icon-180.png">
+  <link rel="stylesheet" href="../../assets/character-page.css?v=ba122311">
+  <link rel="stylesheet" href="../../assets/status-guide.css?v=71746d66">
+  <!-- ga:head -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-BHKBSRGSJF"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BHKBSRGSJF');
+  </script>
+  <!-- /ga:head -->
+  <!-- ad:head -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6389066329814944" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="/assets/ad-slot.css">
+  <!-- /ad:head -->
+</head>
+<body data-status-guide="transparency" data-prerendered>
+  <header class="page-header">
+    <div class="header-inner">
+      <a class="top-link" href="/">トップ</a>
+      <a class="top-link" href="./index.html">状態異常・特殊効果ガイドの一覧へ</a>
+      <p class="eyebrow">STATUS GUIDE</p>
+      <h1>透明｜特殊効果ガイド</h1>
+      <div class="guide-meta">
+        <span class="tag">最終横断確認 2026-10-25</span>
+      </div>
+      <p class="guide-meta-note">当サイトの公開キャラデータ120キャラ・480スキルを確認しています。</p>
+    </div>
+  </header>
+
+  <main>
+    <div class="guide-list">
+      <section class="guide-card" id="oneline" aria-labelledby="oneline-title">
+        <div class="guide-card-head">
+          <h2 id="oneline-title">ひとことで</h2>
+        </div>
+        <div class="guide-card-body">
+          <p>透明は、敵味方すべての攻撃・スキルの対象から外れるバフです。敵の攻撃だけでなく、味方が対象を選ぶ回復・強化も届かなくなる点に注意しましょう。</p>
+          <div class="guide-figure-mobile is-only" data-figure-series>
+            <div class="guide-series-track" tabindex="0" role="region" aria-label="図解3枚。横にスクロールして次の図へ">
+              <figure class="guide-figure-panel" aria-label="1 / 3">
+                <a href="../../assets/status/transparency-guide-m1.jpg?v=af7070f2" aria-label="図1を拡大して開く（3枚中1枚目）">
+                  <picture>
+                    <source type="image/webp" srcset="../../assets/status/transparency-guide-m1.webp?v=6b80f591">
+                    <img src="../../assets/status/transparency-guide-m1.jpg?v=af7070f2" width="1122" height="1402" alt="透明の基礎知識1/3。透明は「対象そのものから外れる」。敵の攻撃と味方の支援の矢印に×を示す。1：透明中は、敵味方すべての攻撃・スキルの対象から外れる。2：ステルスより範囲が広く、正面・全体攻撃でも対象から外れる。3：味方が対象を選ぶ回復・強化も対象外。フェーネ。" decoding="async">
+                  </picture>
+                </a>
+              </figure>
+              <figure class="guide-figure-panel" aria-label="2 / 3">
+                <a href="../../assets/status/transparency-guide-m2.jpg?v=84a4eede" aria-label="図2を拡大して開く（3枚中2枚目）">
+                  <picture>
+                    <source type="image/webp" srcset="../../assets/status/transparency-guide-m2.webp?v=eef27088">
+                    <img src="../../assets/status/transparency-guide-m2.jpg?v=84a4eede" width="1122" height="1402" alt="ステルスとの違い2/3。ステルスより範囲が広く、味方支援も受けない。ステルス：単体対象から外れる。正面攻撃は受ける。味方の支援は受けられる。透明：敵すべての対象から外れる。味方の支援も受けられない。1：ステルスは単体対象から外れるが、正面攻撃は受ける。2：透明は敵味方すべての対象から外れる。3：回復や強化の対象にもならない点が重要。フェーネ。" loading="lazy" decoding="async">
+                  </picture>
+                </a>
+              </figure>
+              <figure class="guide-figure-panel" aria-label="3 / 3">
+                <a href="../../assets/status/transparency-guide-m3.jpg?v=e97c5d6e" aria-label="図3を拡大して開く（3枚中3枚目）">
+                  <picture>
+                    <source type="image/webp" srcset="../../assets/status/transparency-guide-m3.webp?v=d606fa2d">
+                    <img src="../../assets/status/transparency-guide-m3.jpg?v=e97c5d6e" width="1092" height="1440" alt="メメントモリ初心者向け解説・透明3/3。フェーネで見る使い方。守れるが支援も対象外になる。攻撃・回復・強化の矢印とフェーネを示す。透明中は攻撃・スキルの対象外。1：フェーネは透明を使える代表例。2：危ない場面をしのぐ用途として分かりやすい。3：味方スキルの対象外になる点を忘れない。味方が対象を選ぶ回復・強化も対象外。フェーネ。" loading="lazy" decoding="async">
+                  </picture>
+                </a>
+              </figure>
+            </div>
+            <div class="guide-slides-controls guide-series-controls" hidden>
+              <button type="button" data-series-prev aria-label="前の図へ">‹</button>
+              <span class="guide-slides-dots">
+                <button type="button" data-series-dot="0" aria-label="1枚目へ" aria-current="true"></button>
+                <button type="button" data-series-dot="1" aria-label="2枚目へ"></button>
+                <button type="button" data-series-dot="2" aria-label="3枚目へ"></button>
+              </span>
+              <span class="guide-series-count" aria-live="polite">1 / 3</span>
+              <button type="button" data-series-next aria-label="次の図へ">›</button>
+            </div>
+            <p class="guide-figure-note"><span class="is-narrow">横にスワイプで次の図へ。図をタップすると拡大して開きます。</span><span class="is-wide">‹ › で次の図へ。図をクリックすると拡大して開きます。</span></p>
+          </div>
+        </div>
+      </section>
+      <section class="guide-card" id="mechanism" aria-labelledby="mechanism-title">
+        <div class="guide-card-head">
+          <h2 id="mechanism-title">仕組み</h2>
+        </div>
+        <div class="guide-card-body">
+          <p>透明は回避率を上げるのではなく、対象を選ぶ段階で候補から外す効果です。公式FAQ「対象の選択」では、正面・隣接などの優先順位とは別に、透明のキャラを対象から除外すると説明されています。</p>
+          <p>ただし、ダメージそのものを無効にする効果ではありません。すでに付いている持続ダメージを消す効果や、戦闘不能から復活する効果とは区別してください。</p>
+        </div>
+      </section>
+      <section class="guide-card" id="rules" aria-labelledby="rules-title">
+        <div class="guide-card-head">
+          <h2 id="rules-title">重複・上書きなどの固有ルール</h2>
+        </div>
+        <div class="guide-card-body">
+          <h3 class="guide-sub">全員が透明になると、透明は効かなくなる</h3>
+          <p>生存している味方全員が透明になると、透明は無効になります。これは透明が取り除かれる「解除」とは別の共通仕様です。無効な状態から再び有効になる判定タイミングは未確認です。</p>
+          <p>ディアンには、これとは別に、生存数に応じて自身の透明を解除する条件があります。</p>
+          <h3 class="guide-sub">上書き・効果ターン・解除不可</h3>
+          <p>同じキャラが同じ透明を再付与した場合は、通常のバフと同様、新しい効果へ上書きされます。</p>
+          <p>効果ターンは原則として、付与されたキャラの行動終了時に減ります。行動開始から終了までの間に付与された場合は、次のターンの行動終了時から減少します。</p>
+          <p>「解除不可」の透明は、通常のバフ解除・コピー・奪取・ターン増減の対象外です。ただし、スキル自身に書かれた解除条件までなくなるわけではありません。</p>
+        </div>
+      </section>
+      <!-- ad:mid -->
+      <aside class="ad-slot ad-slot--mid" aria-label="広告">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-6389066329814944"
+             data-ad-slot="9192142429"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      </aside>
+      <!-- /ad:mid -->
+      <section class="guide-card" id="givers" aria-labelledby="givers-title">
+        <div class="guide-card-head">
+          <h2 id="givers-title">付与・使用するキャラ</h2>
+        </div>
+        <div class="guide-card-body">
+          <p>確認したサイト内データでは、透明を付与するスキルは次の3キャラにあります。比較表はキャラLv240時点の通常スキル性能です。キャラ名から該当スキルを確認できます。</p>
+          <p>3スキルとも、付与先は自身、味方の生存数が2体以上であることが条件です。解除不可で、発動はバトル中1回に限られます。</p>
+          <div class="guide-table-wrap">
+            <table class="guide-table guide-table--wrap">
+              <thead>
+                <tr>
+                  <th scope="col">キャラ／スキル</th>
+                  <th scope="col">発動時点・HP条件</th>
+                  <th scope="col">持続</th>
+                  <th scope="col">個別の解除条件</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row"><a href="../characters/fenny.html#skill-3">フェーネ S3 砲兵部隊上級兵</a></th>
+                  <td data-label="発動時点・HP条件">自身が攻撃を受け、HP割合が70%未満</td>
+                  <td data-label="持続">3ターン</td>
+                  <td data-label="個別の解除条件">生存数による追加の解除条件は記載なし</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/tama.html#skill-4">タマ S4 モノノケの悪戯</a></th>
+                  <td data-label="発動時点・HP条件">自身が攻撃を受け、HP割合が70%未満</td>
+                  <td data-label="持続">32ターン</td>
+                  <td data-label="個別の解除条件">生存数による追加の解除条件は記載なし</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/dian.html#skill-4">ディアン S4 従者の心得</a></th>
+                  <td data-label="発動時点・HP条件">自身が攻撃を受け、HP割合が40%未満</td>
+                  <td data-label="持続">ターン数の指定なし</td>
+                  <td data-label="個別の解除条件">毎ターン開始時、または味方が戦闘不能になった時に、味方の生存数が1体以下なら解除</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p>確認した専用武器差分には、3スキルの透明の対象・持続・発動条件を変える記載はありません。</p>
+          <h3 class="guide-sub">ディアンの「ターン数なし」は、解除されないという意味ではない</h3>
+          <p>ディアンは、透明の持続ターン数ではなく、生存数による解除条件が指定されています。「永久に透明」「32ターン」などに読み替えないでください。同じスキルの通常攻撃強化は別の効果であり、透明そのものに共通する攻撃強化ではありません。</p>
+        </div>
+      </section>
+      <section class="guide-card" id="users" aria-labelledby="users-title">
+        <div class="guide-card-head">
+          <h2 id="users-title">参照・利用・強化するキャラ</h2>
+        </div>
+        <div class="guide-card-body">
+          <p><a href="../characters/valriede.html#skill-1">ヴァルリーデ S1 バーストネメシス</a>は、攻撃対象が戦闘不能・透明・ステルスになった場合に、対象を選び直します。</p>
+          <p>透明を付与するスキルでも、透明を無視して同じ相手を攻撃し続けるスキルでもありません。選び直した相手へ攻撃を続ける仕組みです。</p>
+        </div>
+      </section>
+      <section class="guide-card" id="countermeasures" aria-labelledby="countermeasures-title">
+        <div class="guide-card-head">
+          <h2 id="countermeasures-title">防ぐ・対策する方法</h2>
+        </div>
+        <div class="guide-card-body">
+          <p>上の3スキルはいずれも解除不可なので、通常のバフ解除や奪取では透明を外せません。透明でない相手へ対応しながら、効果ターンや個別の解除条件を確認します。</p>
+          <p>ステルスと違い、透明が有効な間は、正面・複数対象・全体攻撃でも相手は対象から外れます。ヴァルリーデの再選択も、透明中の同じ相手を狙う対策ではない点に注意してください。</p>
+        </div>
+      </section>
+      <section class="guide-card" id="relationships" aria-labelledby="relationships-title">
+        <div class="guide-card-head">
+          <h2 id="relationships-title">関連する特殊効果</h2>
+        </div>
+        <div class="guide-card-body">
+          <div class="guide-table-wrap">
+            <table class="guide-table guide-table--wrap">
+              <thead>
+                <tr>
+                  <th scope="col">効果</th>
+                  <th scope="col">対象選択・味方の支援</th>
+                  <th scope="col">共通の無効条件</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">透明</th>
+                  <td data-label="対象選択・味方の支援">敵味方すべての攻撃・スキルの対象から外れる。味方が対象を選ぶ回復・強化も対象外</td>
+                  <td data-label="共通の無効条件">生存している味方全員が透明</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="./stealth.html">ステルス</a></th>
+                  <td data-label="対象選択・味方の支援">敵の1体対象の攻撃・スキルから外れる。正面対象などは例外。味方の回復・支援の対象からは外れない</td>
+                  <td data-label="共通の無効条件">生存している味方全員がステルスまたは透明</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p>透明は対象から外れる範囲が広い一方、味方が対象を選ぶ支援も受けられなくなります。単純に「ステルスの上位版」と考えるより、守り方と支援の受け方の違いで選ぶと分かりやすくなります。</p>
+          <p>復活・不死身・HP1で耐えるは、対象から外れる仕組みではありません。</p>
+        </div>
+      </section>
+      <section class="guide-card" id="sources" aria-labelledby="sources-title">
+        <div class="guide-card-head">
+          <h2 id="sources-title">出典</h2>
+        </div>
+        <div class="guide-card-body">
+          <p class="guide-source">出典：公式FAQ「バフの種類」／公式FAQ「バフ・弱体効果」／公式FAQ「対象の選択」</p>
+          <p class="guide-source">共通仕様は下記の公式FAQ、キャラ別の条件・持続はリンク先の当サイトのスキル情報と照合資料を基準に整理しています。確認範囲：2026年10月25日に当サイト収録120キャラ・480スキルを横断確認。ゲーム内の全実装キャラを直接確認した一覧ではありません。</p>
+          <ul class="guide-bullets guide-source">
+            <li><a href="https://mementomori.zendesk.com/hc/ja/articles/46412799595545" target="_blank" rel="noopener">公式FAQ「バフの種類」</a></li>
+            <li><a href="https://mementomori.zendesk.com/hc/ja/articles/46412673040921" target="_blank" rel="noopener">公式FAQ「バフ・弱体効果」</a></li>
+            <li><a href="https://mementomori.zendesk.com/hc/ja/articles/46412284221465" target="_blank" rel="noopener">公式FAQ「対象の選択」</a></li>
+          </ul>
+        </div>
+      </section>
+    </div>
+    <!-- ad:bottom -->
+    <aside class="ad-slot" aria-label="広告">
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-6389066329814944"
+           data-ad-slot="6111654373"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </aside>
+    <!-- /ad:bottom -->
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <span>ミレストのメメントモリ分析データ室 / 非公式ファンサイト</span>
+      <nav class="footer-links" aria-label="サイト内のページ">
+        <a href="/">トップ</a>
+        <a href="../characters/index.html">キャラ一覧</a>
+        <a href="/pages/guide/">このサイトでできること</a>
+        <a href="/privacy.html">プライバシーポリシー</a>
+        <a href="/disclaimer.html">免責事項</a>
+        <a href="/about.html">このサイトについて</a>
+        <a href="/contact.html">お問い合わせ</a>
+      </nav>
+    </div>
+  </footer>
+  <script src="../../js/figure-series.js?v=8b71cecf" defer></script>
+</body>
+</html>
