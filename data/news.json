@@ -327,6 +327,13 @@
       "kind": "サイト更新",
       "url": "pages/characters/index.html",
       "text": "ガチャ9件の終了時刻（14:29）を反映"
+    },
+    {
+      "id": "2026-10-25-debuff-removal-guide",
+      "date": "2026-10-25",
+      "kind": "サイト更新",
+      "url": "pages/status/debuff-removal.html",
+      "text": "弱体効果解除ガイドを追加。一般解除・敵への転用・行動阻害限定解除と解除数を参照するスキルを整理"
     }
   ]
 }
