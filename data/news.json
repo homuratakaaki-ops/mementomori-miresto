@@ -341,6 +341,13 @@
       "kind": "サイト更新",
       "url": "pages/status/transparency.html",
       "text": "透明ガイドを追加。対象から外れる仕組み、付与キャラの違いとステルスとの関係を整理"
+    },
+    {
+      "id": "2026-10-25-immortality-guide",
+      "date": "2026-10-25",
+      "kind": "サイト更新",
+      "url": "pages/status/immortality.html",
+      "text": "不死身・HP1で耐えるガイドを追加。発動処理と継続バフの違い、回数・持続・再発動条件と専用武器の違いを整理"
     }
   ]
 }
