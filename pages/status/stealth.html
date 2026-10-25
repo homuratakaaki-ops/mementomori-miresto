@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ステルス｜特殊効果ガイド | ミレストのメメントモリ分析データ室</title>
+  <meta name="description" content="メメントモリのステルスを解説。単体対象から外れる仕組み、正面・複数対象の例外、共通の無効条件と個別の解除条件、付与3キャラと対象再選択・明示無視の違いを整理します。">
+  <meta name="robots" content="noindex">
+  <link rel="canonical" href="https://memento.musoudc.com/pages/status/stealth.html">
+  <!-- OGP。画像は共通のものを使う（ガイドごとの画像生成は未対応） -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="ミレストのメメントモリ分析データ室">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="og:title" content="ステルス｜特殊効果ガイド | ミレストのメメントモリ分析データ室">
+  <meta property="og:description" content="メメントモリのステルスを解説。単体対象から外れる仕組み、正面・複数対象の例外、共通の無効条件と個別の解除条件、付与3キャラと対象再選択・明示無視の違いを整理します。">
+  <meta property="og:url" content="https://memento.musoudc.com/pages/status/stealth.html">
+  <meta property="og:image" content="https://memento.musoudc.com/assets/ogp/ogp-common.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <link rel="icon" type="image/png" href="../../assets/miresto/miresto-icon-32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="../../assets/miresto/miresto-icon-180.png">
+  <link rel="stylesheet" href="../../assets/character-page.css?v=ba122311">
+  <link rel="stylesheet" href="../../assets/status-guide.css?v=71746d66">
+  <!-- ga:head -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-BHKBSRGSJF"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BHKBSRGSJF');
+  </script>
+  <!-- /ga:head -->
+  <!-- ad:head -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6389066329814944" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="/assets/ad-slot.css">
+  <!-- /ad:head -->
+</head>
+<body data-status-guide="stealth" data-prerendered>
+  <header class="page-header">
+    <div class="header-inner">
+      <a class="top-link" href="/">トップ</a>
+      <a class="top-link" href="./index.html">状態異常・特殊効果ガイドの一覧へ</a>
+      <p class="eyebrow">STATUS GUIDE</p>
+      <h1>ステルス｜特殊効果ガイド</h1>
+      <div class="guide-meta">
+        <span class="tag">最終横断確認 2026-10-25</span>
+      </div>
+      <p class="guide-meta-note">当サイトの公開キャラデータ120キャラ・480スキルを確認しています。</p>
+    </div>
+  </header>
+
+  <main>
+    <div class="guide-list">
+      <section class="guide-card" id="oneline" aria-labelledby="oneline-title">
+        <div class="guide-card-head">
+          <h2 id="oneline-title">ひとことで</h2>
+        </div>
+        <div class="guide-card-body">
+          <p>ステルスは、敵の「対象が1体」の攻撃・スキルから選ばれなくするバフです。ただし正面対象などの例外があり、ダメージそのものを無効にする効果ではありません。</p>
+          <div class="guide-figure-mobile is-only" data-figure-series>
+            <div class="guide-series-track" tabindex="0" role="region" aria-label="図解3枚。横にスクロールして次の図へ">
+              <figure class="guide-figure-panel" aria-label="1 / 3">
+                <a href="../../assets/status/stealth-guide-m1.jpg?v=31aab197" aria-label="図1を拡大して開く（3枚中1枚目）">
+                  <picture>
+                    <source type="image/webp" srcset="../../assets/status/stealth-guide-m1.webp?v=ce1d069d">
+                    <img src="../../assets/status/stealth-guide-m1.jpg?v=31aab197" width="1122" height="1402" alt="ステルスの基礎知識1/3。ステルスは「単体対象から外れる」。ステルスなし・ステルスありを比較し、「対象に選ばれない！」と示す。1：ステルス中は、敵の単体対象の攻撃・スキルの対象から外れる（正面対象などの例外あり）。2：攻撃を受けにくくして生き残りを助ける。3：完全無敵ではない。ミナシュマリ。" decoding="async">
+                  </picture>
+                </a>
+              </figure>
+              <figure class="guide-figure-panel" aria-label="2 / 3">
+                <a href="../../assets/status/stealth-guide-m2.jpg?v=ce1eb41d" aria-label="図2を拡大して開く（3枚中2枚目）">
+                  <picture>
+                    <source type="image/webp" srcset="../../assets/status/stealth-guide-m2.webp?v=bc7f8515">
+                    <img src="../../assets/status/stealth-guide-m2.jpg?v=ce1eb41d" width="1122" height="1402" alt="ステルス2/3。何を防げる？ 単体対象に強い。正面攻撃や全体攻撃は別。1：単体対象には強い（有効）。2：正面攻撃は受ける。3：全体攻撃や複数対象攻撃まで防ぐ効果ではない（防げない）。ミナシュマリ。" loading="lazy" decoding="async">
+                  </picture>
+                </a>
+              </figure>
+              <figure class="guide-figure-panel" aria-label="3 / 3">
+                <a href="../../assets/status/stealth-guide-m3.jpg?v=ff9f5a30" aria-label="図3を拡大して開く（3枚中3枚目）">
+                  <picture>
+                    <source type="image/webp" srcset="../../assets/status/stealth-guide-m3.webp?v=c0629d19">
+                    <img src="../../assets/status/stealth-guide-m3.jpg?v=ff9f5a30" width="1122" height="1402" alt="特殊効果ガイド・ステルス3/3。ミナシュマリで見る使い方。守りたい味方を残したい時に強い。図中は自身と攻撃力が最も高い味方1体へのステルス付与。1：自身と、攻撃力が最も高い他の味方1体にステルスを付与できる。2：攻撃力が最も高い味方1体を守れる。3：正面・隣接や複数対象の攻撃には注意が必要。ミナシュマリ。" loading="lazy" decoding="async">
+                  </picture>
+                </a>
+              </figure>
+            </div>
+            <div class="guide-slides-controls guide-series-controls" hidden>
+              <button type="button" data-series-prev aria-label="前の図へ">‹</button>
+              <span class="guide-slides-dots">
+                <button type="button" data-series-dot="0" aria-label="1枚目へ" aria-current="true"></button>
+                <button type="button" data-series-dot="1" aria-label="2枚目へ"></button>
+                <button type="button" data-series-dot="2" aria-label="3枚目へ"></button>
+              </span>
+              <span class="guide-series-count" aria-live="polite">1 / 3</span>
+              <button type="button" data-series-next aria-label="次の図へ">›</button>
+            </div>
+            <p class="guide-figure-note"><span class="is-narrow">横にスワイプで次の図へ。図をタップすると拡大して開きます。</span><span class="is-wide">‹ › で次の図へ。図をクリックすると拡大して開きます。</span></p>
+          </div>
+        </div>
+      </section>
+      <section class="guide-card" id="mechanism" aria-labelledby="mechanism-title">
+        <div class="guide-card-head">
+          <h2 id="mechanism-title">仕組み</h2>
+        </div>
+        <div class="guide-card-body">
+          <p>ステルスは、攻撃を受けるときの回避率ではなく、敵が誰を対象に選べるかを変えます。対象から外れるため、単体攻撃から味方を守ったり、自分への追撃を避けたりする場面で役立ちます。</p>
+          <p>ただし、正面対象や2体以上を対象とする攻撃には効果を発揮しません。公式の対象選択の優先順位では、隣接選択もステルスより優先されます。</p>
+          <p><strong>対象人数と攻撃回数は別です。</strong> 1体を何度も攻撃するスキルと、複数のキャラを対象にするスキルでは扱いが異なります。「連撃だから効かない」「単発だから防げる」とは限りません。</p>
+        </div>
+      </section>
+      <section class="guide-card" id="rules" aria-labelledby="rules-title">
+        <div class="guide-card-head">
+          <h2 id="rules-title">重複・上書きなどの固有ルール</h2>
+        </div>
+        <div class="guide-card-body">
+          <h3 class="guide-sub">味方全員が隠れると、ステルスは効かなくなる</h3>
+          <p>生存している味方全員が、ステルスまたは透明の状態になると、ステルスは無効になります。全員を隠して攻撃を受けなくすることはできません。この無効状態から再び有効になる判定タイミングは未確認です。</p>
+          <p>これは共通仕様の「無効」であり、スキルの解除条件によってステルスが取り除かれることとは別です。ミナシュマリが付与したステルスには、後述する個別の解除条件があります。</p>
+          <h3 class="guide-sub">上書き・効果ターン・解除不可</h3>
+          <p>同じキャラが同じステルスを再付与した場合は、通常のバフと同様、新しい効果へ上書きされます。</p>
+          <p>効果ターンは原則として付与されたキャラの行動終了時に減ります。行動開始から終了までの間に付与された場合は、次のターンの行動終了時から減少します。</p>
+          <p>「解除不可」のステルスは、通常のバフ解除・コピー・奪取・ターン増減の対象外です。ただし、そのスキル自身に書かれた解除条件がなくなるわけではありません。</p>
+        </div>
+      </section>
+      <!-- ad:mid -->
+      <aside class="ad-slot ad-slot--mid" aria-label="広告">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-6389066329814944"
+             data-ad-slot="9192142429"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      </aside>
+      <!-- /ad:mid -->
+      <section class="guide-card" id="givers" aria-labelledby="givers-title">
+        <div class="guide-card-head">
+          <h2 id="givers-title">付与・使用するキャラ</h2>
+        </div>
+        <div class="guide-card-body">
+          <p>付与するスキルは、確認したサイト内データでは次の3キャラにあります。比較は<strong>キャラLv240時点の通常スキル性能</strong>です。キャラ名から該当スキルを確認できます。</p>
+          <div class="guide-table-wrap">
+            <table class="guide-table guide-table--wrap">
+              <thead>
+                <tr>
+                  <th scope="col">キャラ・スキル</th>
+                  <th scope="col">対象</th>
+                  <th scope="col">発動タイミング・条件</th>
+                  <th scope="col">持続</th>
+                  <th scope="col">解除の扱い</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row"><a href="../characters/minasumari.html#skill-3">ミナシュマリ S3 親切な狐の子</a></th>
+                  <td data-label="対象">自身＋自身以外で攻撃力が最も高い味方1体</td>
+                  <td data-label="発動タイミング・条件">バトル開始時</td>
+                  <td data-label="持続">2ターン</td>
+                  <td data-label="解除の扱い">解除不可。ただし自身が攻撃を受けてHP割合50%以下になった場合、または自身が戦闘不能になった場合、付与した分を解除</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/mertillier.html#skill-3">メルティーユ S3 ホムンクルスボディ</a></th>
+                  <td data-label="対象">自身</td>
+                  <td data-label="発動タイミング・条件">毎ターン開始時、または自身が攻撃を受けたとき、HP割合が40%未満なら付与</td>
+                  <td data-label="持続">4ターン</td>
+                  <td data-label="解除の扱い">解除不可</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/rea.html#skill-4">レア S4 被害妄想</a></th>
+                  <td data-label="対象">自身</td>
+                  <td data-label="発動タイミング・条件">バトル開始時</td>
+                  <td data-label="持続">2ターン</td>
+                  <td data-label="解除の扱い">解除不可の指定なし</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p>確認した専用武器差分には、これら3スキルのステルスの対象・持続・発動条件を変える記載はありません。</p>
+          <h3 class="guide-sub">ミナシュマリは、味方に付けた分も解除される</h3>
+          <p>ミナシュマリの被攻撃時のHP条件、または戦闘不能による解除は、自身だけでなく、味方に付けたこのスキルのステルスにも及びます。守られる味方が無傷でも、ミナシュマリ側の条件で解除される点が重要です。</p>
+          <h3 class="guide-sub">メルティーユは、連続攻撃の途中で対象から外れる場合がある</h3>
+          <p>公式FAQでは、メルティーユのパッシブが発動すると、「HP割合が最も低い敵」を狙う攻撃でも、連撃の途中で対象を見失い、別のキャラを攻撃する場合があると説明されています。すべての連続攻撃で必ず対象から外れるわけではなく、正面対象や2体以上を対象にする攻撃は例外です。</p>
+        </div>
+      </section>
+      <section class="guide-card" id="users" aria-labelledby="users-title">
+        <div class="guide-card-head">
+          <h2 id="users-title">参照・利用・強化するキャラ</h2>
+        </div>
+        <div class="guide-card-body">
+          <p><a href="../characters/valriede.html#skill-1">ヴァルリーデ／S1「バーストネメシス」</a>は、攻撃対象が戦闘不能・透明・ステルスになった場合に、対象を選び直します。</p>
+          <p>これはステルスを付与するスキルでも、ステルスを無視して同じ相手を攻撃し続けるスキルでもありません。対象を選び直すことで攻撃を続ける仕組みです。</p>
+        </div>
+      </section>
+      <section class="guide-card" id="countermeasures" aria-labelledby="countermeasures-title">
+        <div class="guide-card-head">
+          <h2 id="countermeasures-title">防ぐ・対策する方法</h2>
+        </div>
+        <div class="guide-card-body">
+          <h3 class="guide-sub">対象の選び方を確認する</h3>
+          <p>正面・隣接選択のスキルや、2体以上・全体を対象にする攻撃は、ステルスだけでは避けられません。ステルスを解除しなくても攻撃できる手段です。</p>
+          <p>解除不可でないステルスには、バフ解除も対策候補になります。ただし、解除スキル自体が誰を対象に選べるかは別に確認する必要があります。</p>
+          <h3 class="guide-sub">ステルスを明示的に無視するスキル</h3>
+          <p><a href="../characters/chiffon.html#skill-2">シフォン／S2「精霊の加護」</a>は、挑発とステルスを無視して、ランダムな敵または味方5体を対象にします。ステルスを取り除くのではなく、付いている状態でも対象に選べる効果です。</p>
+          <p>敵だけを狙うスキルではないため、特定のステルス中の敵を確実に狙える手段ではありません。</p>
+          <p>また、公式FAQでは、混乱中の攻撃も挑発とステルスを無視すると説明されています。ただし、味方のみ、または敵味方の両方を対象にするスキルは混乱の影響を受けません。</p>
+        </div>
+      </section>
+      <section class="guide-card" id="relationships" aria-labelledby="relationships-title">
+        <div class="guide-card-head">
+          <h2 id="relationships-title">関連する特殊効果</h2>
+        </div>
+        <div class="guide-card-body">
+          <div class="guide-table-wrap">
+            <table class="guide-table guide-table--wrap">
+              <thead>
+                <tr>
+                  <th scope="col">効果</th>
+                  <th scope="col">対象選択での主な違い</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">ステルス</th>
+                  <td data-label="対象選択での主な違い">敵の1体対象の攻撃・スキルから外れる。味方の回復や支援の対象からは外れない。正面対象などの例外がある</td>
+                </tr>
+                <tr>
+                  <th scope="row">透明</th>
+                  <td data-label="対象選択での主な違い">敵味方のすべての攻撃・スキルの対象から外れる。味方の回復・支援も対象外になる</td>
+                </tr>
+                <tr>
+                  <th scope="row">挑発</th>
+                  <td data-label="対象選択での主な違い">敵のランダム対象の攻撃を自身へ引き付ける。対象選択の優先順位ではステルスより下にある</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p>透明も、生存する味方全員が透明になると無効になります。ステルス側の無効条件は「全員がステルスまたは透明」であり、条件が異なります。</p>
+          <p>いずれも対象の選ばれ方に関わる効果です。ステルスを、ダメージ無効や回避率上昇の代わりとして使うことはできません。</p>
+        </div>
+      </section>
+      <section class="guide-card" id="sources" aria-labelledby="sources-title">
+        <div class="guide-card-head">
+          <h2 id="sources-title">出典</h2>
+        </div>
+        <div class="guide-card-body">
+          <p class="guide-source">出典：公式FAQ「バフの種類」／公式FAQ「バフ・弱体効果」／公式FAQ「対象の選択」／公式FAQ「アクティブスキルの対象が急に他のキャラに移ってしまう」／公式FAQ「弱体効果の種類」</p>
+          <p class="guide-source">対象選択や無効条件、バフの扱いは、以下の公式FAQを参照しています。キャラごとの対象・条件・持続は、上記の各キャラページに整理しています。</p>
+          <ul class="guide-bullets guide-source">
+            <li><a href="https://mementomori.zendesk.com/hc/ja/articles/46412799595545" target="_blank" rel="noopener">公式FAQ「バフの種類」</a></li>
+            <li><a href="https://mementomori.zendesk.com/hc/ja/articles/46412673040921" target="_blank" rel="noopener">公式FAQ「バフ・弱体効果」</a></li>
+            <li><a href="https://mementomori.zendesk.com/hc/ja/articles/46412284221465" target="_blank" rel="noopener">公式FAQ「対象の選択」</a></li>
+            <li><a href="https://mementomori.zendesk.com/hc/ja/articles/22180970576409" target="_blank" rel="noopener">公式FAQ「アクティブスキルの対象が急に他のキャラに移ってしまう」</a></li>
+            <li><a href="https://mementomori.zendesk.com/hc/ja/articles/46414059026841" target="_blank" rel="noopener">公式FAQ「弱体効果の種類」</a></li>
+          </ul>
+        </div>
+      </section>
+    </div>
+    <!-- ad:bottom -->
+    <aside class="ad-slot" aria-label="広告">
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-6389066329814944"
+           data-ad-slot="6111654373"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </aside>
+    <!-- /ad:bottom -->
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <span>ミレストのメメントモリ分析データ室 / 非公式ファンサイト</span>
+      <nav class="footer-links" aria-label="サイト内のページ">
+        <a href="/">トップ</a>
+        <a href="../characters/index.html">キャラ一覧</a>
+        <a href="/pages/guide/">このサイトでできること</a>
+        <a href="/privacy.html">プライバシーポリシー</a>
+        <a href="/disclaimer.html">免責事項</a>
+        <a href="/about.html">このサイトについて</a>
+        <a href="/contact.html">お問い合わせ</a>
+      </nav>
+    </div>
+  </footer>
+  <script src="../../js/figure-series.js?v=8b71cecf" defer></script>
+</body>
+</html>
