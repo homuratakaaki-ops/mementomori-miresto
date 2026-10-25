@@ -334,6 +334,13 @@
       "kind": "サイト更新",
       "url": "pages/status/stealth.html",
       "text": "ステルスガイドを追加。対象選択の仕組みとキャラ別の違いを整理"
+    },
+    {
+      "id": "2026-10-25-transparency-guide",
+      "date": "2026-10-25",
+      "kind": "サイト更新",
+      "url": "pages/status/transparency.html",
+      "text": "透明ガイドを追加。対象から外れる仕組み、付与キャラの違いとステルスとの関係を整理"
     }
   ]
 }
