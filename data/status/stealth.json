@@ -1,6 +1,7 @@
 {
   "schema": "miresto_status_guide_v1",
   "layout": "article",
+  "visibility": "unlisted",
   "id": "stealth",
   "name": "ステルス",
   "label": "特殊効果ガイド",

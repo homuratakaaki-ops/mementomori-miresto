@@ -323,6 +323,12 @@ function validateIllustration(guide, errors) {
 /** 用語辞書の guideUrl がこのガイドを指しているか（キャラページ側の導線の正）。 */
 function validateTermLink(guide, terms, errors) {
   const entry = renderer.termEntry(terms, guide.term);
+  if (guide.visibility === "unlisted") {
+    if (entry && entry.guideUrl) {
+      errors.push("data/terms.json: 一覧未掲載のガイド「" + guide.name + "」へ guideUrl を設定しないこと");
+    }
+    return;
+  }
   if (!entry) { errors.push("data/terms.json: 用語「" + guide.term + "」がありません"); return; }
   const expected = "/pages/status/" + guide.id + ".html";
   if (entry.guideUrl !== expected) {
@@ -358,6 +364,7 @@ function head(options) {
     '  <meta name="viewport" content="width=device-width, initial-scale=1">',
     "  <title>" + escapeHtml(options.title) + "</title>",
     '  <meta name="description" content="' + escapeHtml(options.description) + '">',
+    ...(options.unlisted ? ['  <meta name="robots" content="noindex">'] : []),
     '  <link rel="canonical" href="' + escapeHtml(options.canonical) + '">',
     "  <!-- OGP。画像は共通のものを使う（ガイドごとの画像生成は未対応） -->",
     '  <meta property="og:type" content="article">',
@@ -680,6 +687,7 @@ function pageShell(options) {
       title: options.title,
       description: options.description,
       canonical: options.canonical,
+      unlisted: options.unlisted,
       ads: options.ads
     }),
     "</head>",
@@ -739,6 +747,7 @@ function guidePageHtml(guide, characterById, skillById, ads, errors) {
     title,
     description,
     canonical,
+    unlisted: guide.visibility === "unlisted",
     heading: guide.name + "｜状態異常ガイド",
     lastCrossCheck: guide.lastCrossCheck,
     crossCheckNote: guide.crossCheckNote,
@@ -1427,6 +1436,7 @@ function buildArticle(guide, options) {
     title: guide.name + "｜" + guide.label + " | " + TITLE_SUFFIX,
     description: guide.description,
     canonical: SITE_ORIGIN + "/pages/status/" + guide.id + ".html",
+    unlisted: guide.visibility === "unlisted",
     heading: guide.name + "｜" + guide.label,
     lastCrossCheck: guide.lastCrossCheck,
     crossCheckNote: guide.crossCheckNote,
@@ -1445,16 +1455,20 @@ function buildArticle(guide, options) {
  * ------------------------------------------------------------------ */
 
 /** 状態異常ガイドのURLを sitemap に足す（既にあれば触らない）。並びはキャラ一覧の前。 */
-function patchSitemap(urlPaths, writeIfChanged) {
+function patchSitemap(urlPaths, writeIfChanged, excludedPaths = []) {
   const path = join(ROOT, "sitemap.xml");
-  const normalized = readFileSync(path, "utf8").replace(/\r\n/g, "\n");
+  let normalized = readFileSync(path, "utf8").replace(/\r\n/g, "\n");
+  for (const item of excludedPaths) {
+    const block = "  <url>\n    <loc>" + SITE_ORIGIN + item + "</loc>\n  </url>\n";
+    normalized = normalized.replaceAll(block, "");
+  }
   const anchor = "  <url>\n    <loc>" + SITE_ORIGIN + "/pages/characters/index.html</loc>\n  </url>\n";
   if (!normalized.includes(anchor)) {
     throw new Error("sitemap.xml の挿入位置が見つかりません: pages/characters/index.html");
   }
 
   const missing = urlPaths.filter((item) => !normalized.includes("<loc>" + SITE_ORIGIN + item + "</loc>"));
-  if (!missing.length) return { changed: false, added: [] };
+  if (!missing.length) return { changed: writeIfChanged(path, normalized), added: [] };
 
   const block = missing.map((item) => "  <url>\n    <loc>" + SITE_ORIGIN + item + "</loc>\n  </url>\n").join("");
   return { changed: writeIfChanged(path, normalized.replace(anchor, block + anchor)), added: missing };
@@ -1704,6 +1718,9 @@ export function buildStatusGuides(options) {
   let articleNumbers = 0;
 
   for (const guide of guides) {
+    if (guide.visibility !== undefined && !["listed", "unlisted"].includes(guide.visibility)) {
+      errors.push("data/status/" + guide.id + ".json: visibility は listed または unlisted にすること");
+    }
     if (!/^\d{4}-\d{2}-\d{2}$/.test(String(guide.lastCrossCheck || ""))) {
       errors.push("data/status/" + guide.id + ".json: lastCrossCheck は YYYY-MM-DD の手入力が必要です");
     }
@@ -1753,7 +1770,10 @@ export function buildStatusGuides(options) {
     }
   }
 
-  const indexHtml = indexPageHtml(guides, ads, countermeasures);
+  const listedGuides = guides.filter((guide) => guide.visibility !== "unlisted");
+  const unlistedPaths = guides.filter((guide) => guide.visibility === "unlisted")
+    .map((guide) => "/pages/status/" + guide.id + ".html");
+  const indexHtml = indexPageHtml(listedGuides, ads, countermeasures);
   validateWording("pages/status/index.html", indexHtml, errors);
 
   if (errors.length) {
@@ -1766,8 +1786,10 @@ export function buildStatusGuides(options) {
   for (const page of pages) if (writeIfChanged(page.path, page.html)) written.push(page.url);
   const indexChanged = writeIfChanged(join(STATUS_PAGES_DIR, "index.html"), indexHtml);
   const sitemap = patchSitemap(
-    pages.map((page) => page.url).concat(["/pages/status/index.html"]),
-    writeIfChanged
+    pages.map((page) => page.url).filter((url) => !unlistedPaths.includes(url))
+      .concat(["/pages/status/index.html"]),
+    writeIfChanged,
+    unlistedPaths
   );
 
   return { guides, links, numbers, slides, articleNumbers, summary, written, indexChanged, sitemap };
