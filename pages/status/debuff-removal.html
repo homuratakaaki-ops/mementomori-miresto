@@ -1,0 +1,514 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>弱体効果解除｜特殊効果ガイド | ミレストのメメントモリ分析データ室</title>
+  <meta name="description" content="メメントモリの弱体効果解除について、共通仕様、一般解除・敵への転用・行動阻害限定解除、解除数を参照するスキル、通常Lvと専用武器の違いを整理します。">
+  <link rel="canonical" href="https://memento.musoudc.com/pages/status/debuff-removal.html">
+  <!-- OGP。画像は共通のものを使う（ガイドごとの画像生成は未対応） -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="ミレストのメメントモリ分析データ室">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="og:title" content="弱体効果解除｜特殊効果ガイド | ミレストのメメントモリ分析データ室">
+  <meta property="og:description" content="メメントモリの弱体効果解除について、共通仕様、一般解除・敵への転用・行動阻害限定解除、解除数を参照するスキル、通常Lvと専用武器の違いを整理します。">
+  <meta property="og:url" content="https://memento.musoudc.com/pages/status/debuff-removal.html">
+  <meta property="og:image" content="https://memento.musoudc.com/assets/ogp/ogp-common.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <link rel="icon" type="image/png" href="../../assets/miresto/miresto-icon-32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="../../assets/miresto/miresto-icon-180.png">
+  <link rel="stylesheet" href="../../assets/character-page.css?v=ba122311">
+  <link rel="stylesheet" href="../../assets/status-guide.css?v=71746d66">
+  <!-- ga:head -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-BHKBSRGSJF"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BHKBSRGSJF');
+  </script>
+  <!-- /ga:head -->
+  <!-- ad:head -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6389066329814944" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="/assets/ad-slot.css">
+  <!-- /ad:head -->
+</head>
+<body data-status-guide="debuff-removal" data-prerendered>
+  <header class="page-header">
+    <div class="header-inner">
+      <a class="top-link" href="/">トップ</a>
+      <a class="top-link" href="./index.html">状態異常・特殊効果ガイドの一覧へ</a>
+      <p class="eyebrow">STATUS GUIDE</p>
+      <h1>弱体効果解除｜特殊効果ガイド</h1>
+      <div class="guide-meta">
+        <span class="tag">最終横断確認 2026-10-25</span>
+      </div>
+      <p class="guide-meta-note">現行サイト収録120キャラ・480技能を全件横断し、補助索引136キャラ・524技能も別集計で確認した。両者は重複を含み、現行ゲーム全キャラの網羅を証明するものではない。</p>
+    </div>
+  </header>
+
+  <main>
+    <div class="guide-list">
+      <section class="guide-card" id="oneline" aria-labelledby="oneline-title">
+        <div class="guide-card-head">
+          <h2 id="oneline-title">ひとことで</h2>
+        </div>
+        <div class="guide-card-body">
+          <p>弱体効果解除は、すでに自分や味方に付いている弱体効果を取り除く働きです。今ある弱体を消す「解除」と、新しい弱体の付与を防ぐ「無効」は役割が異なります。</p>
+          <div class="guide-figure-mobile is-only" data-figure-series>
+            <div class="guide-series-track" tabindex="0" role="region" aria-label="図解3枚。横にスクロールして次の図へ">
+              <figure class="guide-figure-panel" aria-label="1 / 3">
+                <a href="../../assets/status/debuff-removal-guide-m1.jpg?v=240c355d" aria-label="図1を拡大して開く（3枚中1枚目）">
+                  <picture>
+                    <source type="image/webp" srcset="../../assets/status/debuff-removal-guide-m1.webp?v=40861e7e">
+                    <img src="../../assets/status/debuff-removal-guide-m1.jpg?v=240c355d" width="1122" height="1402" alt="弱体効果解除の基礎知識 1/3。今ついている弱体効果を消す。1：毒・気絶・沈黙など、付帯中の弱体効果を解除する。2：解除できる個数はスキルごとに違う。3：弱体効果無効とは別。図中の表示：毒、気絶、沈黙。フェンリル。" decoding="async">
+                  </picture>
+                </a>
+              </figure>
+              <figure class="guide-figure-panel" aria-label="2 / 3">
+                <a href="../../assets/status/debuff-removal-guide-m2.jpg?v=3ef89b05" aria-label="図2を拡大して開く（3枚中2枚目）">
+                  <picture>
+                    <source type="image/webp" srcset="../../assets/status/debuff-removal-guide-m2.webp?v=3f38214f">
+                    <img src="../../assets/status/debuff-removal-guide-m2.jpg?v=3ef89b05" width="1122" height="1402" alt="弱体効果解除 2/3。無効との違い。解除は「付いた後」、無効は「付く前」。1：解除＝今ある弱体を消す。2：無効＝これから受ける弱体を防ぐ。3：役割を混同しない。図中の表示：解除、付いている、消える、無効。フェンリル。" loading="lazy" decoding="async">
+                  </picture>
+                </a>
+              </figure>
+              <figure class="guide-figure-panel" aria-label="3 / 3">
+                <a href="../../assets/status/debuff-removal-guide-m3.jpg?v=8b138bab" aria-label="図3を拡大して開く（3枚中3枚目）">
+                  <picture>
+                    <source type="image/webp" srcset="../../assets/status/debuff-removal-guide-m3.webp?v=b2ed85cc">
+                    <img src="../../assets/status/debuff-removal-guide-m3.jpg?v=8b138bab" width="1122" height="1402" alt="弱体効果解除 3/3。フェンリルで見る使い方。自分と隣接する味方をまとめて解除。1：フェンリルS2で弱体効果を解除できる。2：Lv最大では自身＋隣接する味方2体が対象。3：弱体効果を2つ解除できる。中央のフェンリルと左右の味方を浄化エフェクトが包む図。各対象の解除個数は図示していない。フェンリル。" loading="lazy" decoding="async">
+                  </picture>
+                </a>
+              </figure>
+            </div>
+            <div class="guide-slides-controls guide-series-controls" hidden>
+              <button type="button" data-series-prev aria-label="前の図へ">‹</button>
+              <span class="guide-slides-dots">
+                <button type="button" data-series-dot="0" aria-label="1枚目へ" aria-current="true"></button>
+                <button type="button" data-series-dot="1" aria-label="2枚目へ"></button>
+                <button type="button" data-series-dot="2" aria-label="3枚目へ"></button>
+              </span>
+              <span class="guide-series-count" aria-live="polite">1 / 3</span>
+              <button type="button" data-series-next aria-label="次の図へ">›</button>
+            </div>
+            <p class="guide-figure-note"><span class="is-narrow">横にスワイプで次の図へ。図をタップすると拡大して開きます。</span><span class="is-wide">‹ › で次の図へ。図をクリックすると拡大して開きます。</span></p>
+          </div>
+        </div>
+      </section>
+      <section class="guide-card" id="mechanism" aria-labelledby="mechanism-title">
+        <div class="guide-card-head">
+          <h2 id="mechanism-title">仕組み</h2>
+        </div>
+        <div class="guide-card-body">
+          <p>対象・解除できる種類・個数・発動条件はスキルごとに確認します。「2つ解除」を、味方全体の弱体がすべて消える意味にはしません。解除と同時に付く回復・強化・無効は別の処理です。</p>
+          <p>無効を後から付けるだけでは既存の弱体は消えません。また、解除は以後の再付与まで防ぐものではないため、予防手段とは分けて扱います。</p>
+        </div>
+      </section>
+      <section class="guide-card" id="rules" aria-labelledby="rules-title">
+        <div class="guide-card-head">
+          <h2 id="rules-title">重複・上書きなどの特殊ルール</h2>
+        </div>
+        <div class="guide-card-body">
+          <p>公式FAQ「バフ・弱体効果」で確認した共通仕様：</p>
+          <ul class="guide-bullets">
+            <li>付帯している効果の数が解除数を超えると、対象効果はランダムに選ばれる。特定の弱体を優先して消すとは書かない。</li>
+          </ul>
+          <ul class="guide-bullets">
+            <li>複数効果を解除する際の確率等の判定は、特記がなければそれぞれ別。敵バフ解除の命中・耐性判定を、味方弱体解除にも常に必要な判定として流用しない。</li>
+          </ul>
+          <ul class="guide-bullets">
+            <li>解除不可の効果は通常の解除・ターン増減・コピー・奪取の対象外。一般の付帯効果数からは除かれるが、特定の作用を参照する条件では数えるという区別がある。解除不可でも、「アクティブスキルで弱体効果を受けた時に発動するスキル」の条件には含まれる。</li>
+          </ul>
+          <ul class="guide-bullets">
+            <li><a href="./stack.html">スタック</a>効果自体の解除ではスタック数が0になる。スタック数だけを直接減らす処理とは異なる。</li>
+          </ul>
+          <ul class="guide-bullets">
+            <li>ターン短縮で効果ターンが0以下になる場合も解除されるが、本稿では直接の解除技能とは別経路に分類する。</li>
+          </ul>
+          <p>根拠：公式FAQ「バフ・弱体効果」（出典参照）</p>
+          <p>「○個」を「○種類」に読み替えない。「全解除」もスキル固有の発動条件を無視した必ず成功の意味にはしない。</p>
+          <p>無効が既存効果を消さない点は公式FAQ「バフの種類」で確認。</p>
+          <p>根拠：公式FAQ「バフの種類」（出典参照）</p>
+          <p>根拠：公式FAQ「弱体効果の種類」（出典参照）</p>
+          <p>同条件・同タイミングのパッシブは行動順が先のキャラを優先し、順番が来た時にも条件を満たす必要がある。別のパッシブによる誘発は基本的に起こらないが、公式に例外もある。個別の解除連鎖をこの一般論だけで決めない。</p>
+          <p>根拠：公式FAQ「キャラのパッシブスキルがタイミング通りに発動しない、効果がない」（出典参照）</p>
+        </div>
+      </section>
+      <!-- ad:mid -->
+      <aside class="ad-slot ad-slot--mid" aria-label="広告">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-6389066329814944"
+             data-ad-slot="9192142429"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      </aside>
+      <!-- /ad:mid -->
+      <section class="guide-card" id="givers" aria-labelledby="givers-title">
+        <div class="guide-card-head">
+          <h2 id="givers-title">その効果を使うキャラ</h2>
+        </div>
+        <div class="guide-card-body">
+          <p>以下は現行サイト内候補の一覧です。冒頭の数値・条件はサイト表示の要約値であり、全Lv共通の性能ではありません。各項目の「補助照合」に、Ichigo Gamesのスキル記載で確認した通常Lv差分・専用武器の範囲を併記します。主要条件の一致と補助資料だけにある詳細を区別し、ゲーム内原文の直接確認済みとはしません。確率の明記がない解除に100%を補いません。専用武器の「変更記載なし」は、対象スキルの今回のサイトデータ上で変更記載が見つからないという限定表現です。</p>
+        </div>
+      </section>
+      <section class="guide-card" id="general" aria-labelledby="general-title">
+        <div class="guide-card-head">
+          <h2 id="general-title">一般の弱体効果解除</h2>
+        </div>
+        <div class="guide-card-body">
+          <p>対象の弱体を解除する28技能。付随効果・条件付き発動・強化通常攻撃経由は各項目に分けて記載する。</p>
+          <h3 class="guide-sub"><a href="../characters/soltina.html#skill-3">ソルティーナ S3 クマさんのぬいぐるみ</a></h3>
+          <p>分類：弱体効果解除／パッシブ。アクティブスキルで弱体を受け、自身の弱体が2個以上なら全解除。再発動は4回行動終了まで待つ。</p>
+          <p>専用武器：対象技能の専用武器変更記載なし（今回取得したサイトデータ内）</p>
+          <p>根拠：<a href="../characters/soltina.html">ソルティーナ</a></p>
+          <p>補助照合（通常Lv・専用武器）：Lv1から全解除。Lv2/3はクリ率追加・増量で解除条件は同じ。 専用武器は別スキル。</p>
+          <p>補助資料：<a href="https://ichigogames.net/mementomori/soltina/" target="_blank" rel="noopener">Ichigo Games「ソルティーナ」</a></p>
+          <h3 class="guide-sub"><a href="../characters/fenrir.html#skill-2">フェンリル S2 アイシクルシャワー</a></h3>
+          <p>分類：弱体効果解除／アクティブ。攻撃後、自身と隣接味方2体の弱体を2つ解除。各対象への個数の読み方はゲーム原文で要確認。</p>
+          <p>専用武器：対象技能の専用武器変更記載なし（今回取得したサイトデータ内）</p>
+          <p>根拠：<a href="../characters/fenrir.html">フェンリル</a></p>
+          <p>補助照合（通常Lv・専用武器）：Lv1/2は自身＋隣接味方1体、Lv3/4は自身＋隣接味方2体。解除数2は維持。 専用武器はS1のみ。各対象から2つずつとは断定しない。</p>
+          <p>補助資料：<a href="https://ichigogames.net/mementomori/fenrir/" target="_blank" rel="noopener">Ichigo Games「フェンリル」</a></p>
+          <h3 class="guide-sub"><a href="../characters/sivi.html#skill-2">シヴィ S2 アブソーブブレイド</a></h3>
+          <p>分類：弱体効果解除／アクティブ。スピードが低い味方3体を回復し、同じ対象の弱体を全解除。</p>
+          <p>専用武器：専用Lv3: 物理攻撃の対象がランダムな敵4体になる</p>
+          <p>根拠：<a href="../characters/sivi.html">シヴィ</a></p>
+          <p>補助照合（通常Lv・専用武器）：Lv2で最低速の味方1体の全解除追加。Lv3で低速側3体へ拡張。 専用Lv3の敵対象増加は回復・解除側対象増加ではない。</p>
+          <p>補助資料：<a href="https://ichigogames.net/mementomori/sivi/" target="_blank" rel="noopener">Ichigo Games「シヴィ」</a></p>
+          <h3 class="guide-sub"><a href="../characters/sivi.html#skill-4">シヴィ S4 魔剣の守護</a></h3>
+          <p>分類：弱体効果解除／パッシブ。アクティブスキルで弱体を受け、自身の弱体が2個以上なら全解除。再発動は4回行動終了まで待つ。</p>
+          <p>専用武器：対象技能の専用武器変更記載なし（今回取得したサイトデータ内）</p>
+          <p>根拠：<a href="../characters/sivi.html">シヴィ</a></p>
+          <p>補助照合（通常Lv・専用武器）：Lv1から自己弱体2個以上で全解除、再発動待ち4行動。Lv2/3は被ダメ軽減追加・増量。 専用武器は別スキル。</p>
+          <p>補助資料：<a href="https://ichigogames.net/mementomori/sivi/" target="_blank" rel="noopener">Ichigo Games「シヴィ」</a></p>
+          <h3 class="guide-sub"><a href="../characters/sabrina.html#skill-3">サブリナ S3 ブレイブ・アライブ</a></h3>
+          <p>分類：弱体効果解除／パッシブ。ターン開始時、自身に弱体があれば全解除し、行動阻害無効を2ターン付与。再発動は4回行動終了まで待つ。</p>
+          <p>専用武器：対象技能の専用武器変更記載なし（今回取得したサイトデータ内）</p>
+          <p>根拠：<a href="../characters/sabrina.html">サブリナ</a></p>
+          <p>補助照合（通常Lv・専用武器）：Lv1は1個、Lv2は全解除、Lv3は行動阻害無効追加。</p>
+          <p>補助資料：<a href="https://ichigogames.net/mementomori/sabrina/" target="_blank" rel="noopener">Ichigo Games「サブリナ」</a></p>
+          <h3 class="guide-sub"><a href="../characters/nina_summer.html#skill-2">[小さな大冒険]ニーナ S2 あっちいけー!!</a></h3>
+          <p>分類：弱体効果解除／アクティブ。ランダムな味方3体の弱体を1つ解除。敵への被ダメージ増加付与確率70%とは別に読む。</p>
+          <p>専用武器：対象技能の専用武器変更記載なし（今回取得したサイトデータ内）</p>
+          <p>根拠：<a href="../characters/nina_summer.html">[小さな大冒険]ニーナ</a></p>
+          <p>補助照合（通常Lv・専用武器）：Lv1はランダム味方1体の1個解除。Lv3で味方3体。 専用武器に解除部変更の記載なし。</p>
+          <p>補助資料：<a href="https://ichigogames.net/mementomori/nina_summer/" target="_blank" rel="noopener">Ichigo Games「[小さな大冒険]ニーナ」</a></p>
+          <h3 class="guide-sub"><a href="../characters/nina_summer.html#skill-3">[小さな大冒険]ニーナ S3 ニーナハイタッチ</a></h3>
+          <p>分類：弱体効果解除／パッシブ。自身がアクティブスキルで行動阻害を受けた時、自身と自身以外の攻撃力上位味方2体を強化し、弱体を2つ解除。</p>
+          <p>専用武器：対象技能の専用武器変更記載なし（今回取得したサイトデータ内）</p>
+          <p>根拠：<a href="../characters/nina_summer.html">[小さな大冒険]ニーナ</a></p>
+          <p>補助照合（通常Lv・専用武器）：Lv1は自身＋自身以外の攻撃力首位1体の2個解除。Lv3で他味方2体へ。Lv2は攻撃バフ増幅。 専用武器に解除部変更の記載なし。</p>
+          <p>補助資料：<a href="https://ichigogames.net/mementomori/nina_summer/" target="_blank" rel="noopener">Ichigo Games「[小さな大冒険]ニーナ」</a></p>
+          <h3 class="guide-sub"><a href="../characters/eureka.html#skill-3">ユリーカ S3 新天地目指して</a></h3>
+          <p>分類：弱体効果解除／パッシブ。自身がアクティブ弱体を受けた時、自身と自身以外の攻撃力上位味方2体の弱体を1つ解除。バッテン付与の70%を解除確率へ転用しない。</p>
+          <p>専用武器：対象技能の専用武器変更記載なし（今回取得したサイトデータ内）</p>
+          <p>根拠：<a href="../characters/eureka.html">ユリーカ</a></p>
+          <p>補助照合（通常Lv・専用武器）：Lv2で自身＋他の攻撃力上位2体の1個解除追加。Lv3は行動阻害時のバッテン対象拡張。 70%はバッテン付与に書かれる。解除の独立した発動確率とは解釈しない。</p>
+          <p>補助資料：<a href="https://ichigogames.net/mementomori/eureka/" target="_blank" rel="noopener">Ichigo Games「ユリーカ」</a></p>
+          <h3 class="guide-sub"><a href="../characters/cordie_ringmaster.html#skill-3">[サーカスの団長]コルディ S3 みんなの笑顔のために</a></h3>
+          <p>分類：弱体効果解除／パッシブ。自身の行動開始時に自身の弱体を3つ解除。弱体・行動阻害を受けた際の笑顔喝采付与とは発動時点を分ける。</p>
+          <p>専用武器：対象技能の専用武器変更記載なし（今回取得したサイトデータ内）</p>
+          <p>根拠：<a href="../characters/cordie_ringmaster.html">[サーカスの団長]コルディ</a></p>
+          <p>補助照合（通常Lv・専用武器）：自己行動開始時の3個解除はLv3で追加。 笑顔喝采の被弱体時条件と行動開始時解除を混同しない。</p>
+          <p>補助資料：<a href="https://ichigogames.net/mementomori/cordie_ringmaster/" target="_blank" rel="noopener">Ichigo Games「[サーカスの団長]コルディ」</a></p>
+          <h3 class="guide-sub"><a href="../characters/merlyn_winter.html#skill-1">[深き森の賢者]マーリン S1 受け継がれた心</a></h3>
+          <p>分類：弱体効果解除／アクティブ。魔法攻撃後、攻撃力が最も高い味方の弱体を2つ解除。</p>
+          <p>専用武器：専用Lv1: 対象がランダムな敵5体になる。専用Lv3: 魔法攻撃が攻撃力×580%になる</p>
+          <p>根拠：<a href="../characters/merlyn_winter.html">[深き森の賢者]マーリン</a></p>
+          <p>補助照合（通常Lv・専用武器）：Lv2で魔法攻撃後、攻撃力首位味方の2個解除追加。 専用Lv1で敵対象増加、Lv3で攻撃倍率変更。解除対象増加ではない。</p>
+          <p>補助資料：<a href="https://ichigogames.net/mementomori/merlyn_winter/" target="_blank" rel="noopener">Ichigo Games「[深き森の賢者]マーリン」</a></p>
+          <h3 class="guide-sub"><a href="../characters/merlyn_winter.html#skill-3">[深き森の賢者]マーリン S3 魔法のプレゼント</a></h3>
+          <p>分類：弱体効果解除／パッシブ。自身か味方がアクティブ弱体を受け、味方全体の弱体合計が5個以上なら発動。攻撃力支援と、自身の弱体3つ解除が記載される。処理順は要確認。</p>
+          <p>専用武器：専用Lv2: 攻撃力増加の対象が藍属性のうち攻撃力が高い味方3体になる</p>
+          <p>根拠：<a href="../characters/merlyn_winter.html">[深き森の賢者]マーリン</a></p>
+          <p>補助照合（通常Lv・専用武器）：Lv1は自己1個解除、Lv2は3個。Lv3は攻撃バフ増量。補助原文では攻撃バフ付与後の自己解除。 専用Lv2は攻撃バフ対象を藍属性上位3体へ。自己解除対象が3体になるのではない。順序はサイト要約未明記の補助原文補足。</p>
+          <p>補助資料：<a href="https://ichigogames.net/mementomori/merlyn_winter/" target="_blank" rel="noopener">Ichigo Games「[深き森の賢者]マーリン」</a></p>
+          <h3 class="guide-sub"><a href="../characters/evelyn.html#skill-4">エヴリン S4 反照の理</a></h3>
+          <p>分類：弱体効果解除／パッシブ。アクティブ弱体受領時の反照付与後、反照持ちの敵が3体以上なら自身の弱体を2つ解除。</p>
+          <p>専用武器：対象技能の専用武器変更記載なし（今回取得したサイトデータ内）</p>
+          <p>根拠：<a href="../characters/evelyn.html">エヴリン</a></p>
+          <p>補助照合（通常Lv・専用武器）：Lv2で反照付与判定後、反照持ち敵3体以上なら自己2個解除追加。 Lv3と専用武器は別の部分の変化。</p>
+          <p>補助資料：<a href="https://ichigogames.net/mementomori/evelyn/" target="_blank" rel="noopener">Ichigo Games「エヴリン」</a></p>
+          <h3 class="guide-sub"><a href="../characters/fia_trace.html#skill-4">[在りし日の面影]フィアー S4 カウンターウィザー</a></h3>
+          <p>分類：弱体効果解除／パッシブ。自身か味方がアクティブ弱体を受けた時、怠惰付与前に自身の弱体を1つ解除。</p>
+          <p>専用武器：対象技能の専用武器変更記載なし（今回取得したサイトデータ内）</p>
+          <p>根拠：<a href="../characters/fia_trace.html">[在りし日の面影]フィアー</a></p>
+          <p>補助照合（通常Lv・専用武器）：Lv3で被弱体トリガー時、怠惰付与前に自己1個解除追加。 Lv2の怠惰スタック加算と混同しない。専用武器は別スキル。</p>
+          <p>補助資料：<a href="https://ichigogames.net/mementomori/fia_trace/" target="_blank" rel="noopener">Ichigo Games「[在りし日の面影]フィアー」</a></p>
+          <h3 class="guide-sub"><a href="../characters/cerberus.html#skill-3">ケルベロス S3 魔法の言葉</a></h3>
+          <p>分類：弱体効果解除／パッシブ。2ターン目開始時に自身の弱体を全解除。解除前に弱体がなければ弱体効果無効を3ターン付与。解除後0個という条件へ置き換えない。</p>
+          <p>専用武器：対象技能の専用武器変更記載なし（今回取得したサイトデータ内）</p>
+          <p>根拠：<a href="../characters/cerberus.html">ケルベロス</a></p>
+          <p>補助照合（通常Lv・専用武器）：2ターン目開始時、Lv1は自己2個、Lv2は全解除。Lv3は解除前に弱体なしなら弱体無効付与。 解除後の弱体なし判定とはしない。専用武器は別スキル。</p>
+          <p>補助資料：<a href="https://ichigogames.net/mementomori/cerberus/" target="_blank" rel="noopener">Ichigo Games「ケルベロス」</a></p>
+          <h3 class="guide-sub"><a href="../characters/rosalie_caritas.html#skill-3">[カリタスの使徒]ロザリー S3 愛の使徒</a></h3>
+          <p>分類：弱体効果解除／パッシブ。記憶が15スタックなら、自身の弱体を2つ解除しシールドを付与。記憶の蓄積・消費条件とは分けて記載する。</p>
+          <p>専用武器：対象技能の専用武器変更記載なし（今回取得したサイトデータ内）</p>
+          <p>根拠：<a href="../characters/rosalie_caritas.html">[カリタスの使徒]ロザリー</a></p>
+          <p>補助照合（通常Lv・専用武器）：記憶15スタック時の自己2個解除はLv3追加。Lv1/2は記憶・攻撃バフ側。 専用武器の解除部変更記載なし。</p>
+          <p>補助資料：<a href="https://ichigogames.net/mementomori/rosalie_apostle/" target="_blank" rel="noopener">Ichigo Games「[カリタスの使徒]ロザリー」</a></p>
+          <h3 class="guide-sub"><a href="../characters/irene.html#skill-3">アイリーン S3 暗き夜の契約</a></h3>
+          <p>分類：弱体効果解除／パッシブ。自身と自身以外で最も遅い味方の通常攻撃を強化。強化通常攻撃時、付帯者本人のCTを1減少し弱体を2つ解除。その後、通常攻撃強化を解除。</p>
+          <p>専用武器：対象技能の専用武器変更記載なし（今回取得したサイトデータ内）</p>
+          <p>根拠：<a href="../characters/irene.html">アイリーン</a></p>
+          <p>補助照合（通常Lv・専用武器）：ターン開始時に3ターン通常攻撃強化。発動後3回行動終了まで再発動不可。Lv1は強化通常攻撃の付帯者本人が1個解除、Lv2は2個。Lv3で強化付与先が自身＋他最低速味方。 強化付与時の即時味方解除ではない。専用武器は別スキル。</p>
+          <p>補助資料：<a href="https://ichigogames.net/mementomori/eirene/" target="_blank" rel="noopener">Ichigo Games「アイリーン」</a></p>
+          <h3 class="guide-sub"><a href="../characters/cerberus_candy.html#skill-3">[魔法のキャンディ]ケルベロス S3 世界一幸せな魔法</a></h3>
+          <p>分類：弱体効果解除／パッシブ。致命的ダメージをHP1で耐える処理で、HP回復前に自身の弱体を1つ解除。HP1耐えは戦闘中1回。</p>
+          <p>専用武器：専用Lv2: 優しい魔法中の遮断量85%、解除後の遮断量70%</p>
+          <p>根拠：<a href="../characters/cerberus_candy.html">[魔法のキャンディ]ケルベロス</a></p>
+          <p>補助照合（通常Lv・専用武器）：致命傷トリガー時、HP回復前の自己1個解除はLv3追加。 Lv2の優しい魔法終了後の軽減は弱体解除ではない。</p>
+          <p>補助資料：<a href="https://ichigogames.net/mementomori/cerberus_another/" target="_blank" rel="noopener">Ichigo Games「[魔法のキャンディ]ケルベロス」</a></p>
+          <h3 class="guide-sub"><a href="../characters/cattleya.html#skill-3">カトレア S3 万物の解析者</a></h3>
+          <p>分類：弱体効果解除／パッシブ。8ターン目終了時、自身と自身以外の攻撃力最大味方の弱体を2つ解除。自身以外の黄属性味方が2体以上なら4・12ターン目終了時にも発動。</p>
+          <p>専用武器：対象技能の専用武器変更記載なし（今回取得したサイトデータ内）</p>
+          <p>根拠：<a href="../characters/cattleya.html">カトレア</a></p>
+          <p>補助照合（通常Lv・専用武器）：Lv1は自身＋他攻撃力首位味方の1個、Lv2は2個。Lv3は他黄属性2体以上なら4/12ターン終了時も追加。 通常は8ターン終了時。専用武器は別スキル。</p>
+          <p>補助資料：<a href="https://ichigogames.net/mementomori/cattleya/" target="_blank" rel="noopener">Ichigo Games「カトレア」</a></p>
+          <h3 class="guide-sub"><a href="../characters/wheeler.html#skill-4">ウィーラ S4 ふたりぼっちの絆</a></h3>
+          <p>分類：弱体効果解除／パッシブ。被攻撃後、HP割合40%未満なら自身の弱体を全解除してシールド付与。再発動は4回行動終了まで待つ。</p>
+          <p>専用武器：対象技能の専用武器変更記載なし（今回取得したサイトデータ内）</p>
+          <p>根拠：<a href="../characters/wheeler.html">ウィーラ</a></p>
+          <p>補助照合（通常Lv・専用武器）：Lv1から被弾でHP40%未満の自己全解除。再発動待ち4行動。Lv2/3はシールド追加・延長。 専用武器は別スキル。</p>
+          <p>補助資料：<a href="https://ichigogames.net/mementomori/veela/" target="_blank" rel="noopener">Ichigo Games「ウィーラ」</a></p>
+          <h3 class="guide-sub"><a href="../characters/priscilla.html#skill-1">プリシラ S1 聖炎の灯火</a></h3>
+          <p>分類：弱体効果解除／アクティブ。攻撃力上位味方2体を回復し、弱体を2つ解除。先行攻撃で1回以上クリティカルなら解除数3つ。</p>
+          <p>専用武器：専用Lv1: HPを回復し弱体効果を解除する対象が攻撃力が高い味方3体になる。専用Lv2: 弱体効果耐性率の増加量が80%になる</p>
+          <p>根拠：<a href="../characters/priscilla.html">プリシラ</a></p>
+          <p>補助照合（通常Lv・専用武器）：Lv1/2は攻撃力上位2体の1個解除。Lv3で2個、最初の魔法攻撃でクリティカル1回以上なら3個。 専用Lv1でHP回復・解除対象を攻撃力上位3体へ。専用Lv2は耐性率、Lv3は別スキル回復量。</p>
+          <p>補助資料：<a href="https://ichigogames.net/mementomori/priscilla/" target="_blank" rel="noopener">Ichigo Games「プリシラ」</a></p>
+          <h3 class="guide-sub"><a href="../characters/soltina_warm_memory.html#skill-3">[温かな記憶]ソルティーナ S3 妹の愛</a></h3>
+          <p>分類：弱体効果解除／パッシブ。自身がアクティブ弱体を受け、弱体が2個以上なら自身の弱体を全解除。通常ソルティーナの再発動制限を流用しない。</p>
+          <p>専用武器：対象技能の専用武器変更記載なし（今回取得したサイトデータ内）</p>
+          <p>根拠：<a href="../characters/soltina_warm_memory.html">[温かな記憶]ソルティーナ</a></p>
+          <p>補助照合（通常Lv・専用武器）：弱体2個以上条件で、Lv1は1個、Lv2は2個、Lv3は全解除。 専用武器は別スキル。</p>
+          <p>補助資料：<a href="https://ichigogames.net/mementomori/soltina_winter/" target="_blank" rel="noopener">Ichigo Games「[温かな記憶]ソルティーナ」</a></p>
+          <h3 class="guide-sub"><a href="../characters/merlin.html#skill-1">マーリン S1 お師匠さまのように</a></h3>
+          <p>分類：弱体効果解除／アクティブ。攻撃力最大味方の弱体を1つ解除。弱体がない場合の攻撃力増加分岐は判定時点をゲーム原文で確認する。</p>
+          <p>専用武器：専用Lv1: 対象のHP割合が50%未満の場合、対象のHPを自身の攻撃力×350%回復する。対象のHP割合が50%以上の場合、2ターンの間対象のクリダメ強化を20%増加させる。専用Lv2: 対象が攻撃力が高い味方2体になり、弱体効果の解除数が2つになる。専用Lv3: クリダメ強化の増加量が40%になる</p>
+          <p>根拠：<a href="../characters/merlin.html">マーリン</a></p>
+          <p>補助照合（通常Lv・専用武器）：Lv1から攻撃力首位味方の1個解除。Lv2/3は弱体なし時攻撃バフ追加・増量。 専用Lv2で上位2体・解除2個へ。専用Lv1/3の回復・クリダメ強化は別効果。</p>
+          <p>補助資料：<a href="https://ichigogames.net/mementomori/merlyn/" target="_blank" rel="noopener">Ichigo Games「マーリン」</a></p>
+          <h3 class="guide-sub"><a href="../characters/mertillier.html#skill-2">メルティーユ S2 メンテナンス</a></h3>
+          <p>分類：弱体効果解除／アクティブ。攻撃力最大味方の弱体を全解除。CT減少・攻撃力増加と解除は別処理として表示する。</p>
+          <p>専用武器：専用Lv2: 攻撃力増加85%。専用Lv3: 防御力65%増加も付与</p>
+          <p>根拠：<a href="../characters/mertillier.html">メルティーユ</a></p>
+          <p>補助照合（通常Lv・専用武器）：Lv3で攻撃力首位味方の全解除を追加。Lv4はCT減少量変更。 専用Lv2/3は攻撃・防御バフ変化で解除数変化ではない。</p>
+          <p>補助資料：<a href="https://ichigogames.net/mementomori/mertillier/" target="_blank" rel="noopener">Ichigo Games「メルティーユ」</a></p>
+          <h3 class="guide-sub"><a href="../characters/yuni.html#skill-1">ユニ S1 シルフの舞風</a></h3>
+          <p>分類：弱体効果解除／アクティブ。自身以外の攻撃力最大味方を回復し、弱体があれば2つ解除。</p>
+          <p>専用武器：専用Lv1: HPの回復量が対象の最大HP×15%になる</p>
+          <p>根拠：<a href="../characters/yuni.html">ユニ</a></p>
+          <p>補助照合（通常Lv・専用武器）：Lv2でHP回復対象の1個解除追加、Lv3で2個。対象は自身以外の攻撃力首位味方。 専用Lv1は回復量変更。</p>
+          <p>補助資料：<a href="https://ichigogames.net/mementomori/yuni/" target="_blank" rel="noopener">Ichigo Games「ユニ」</a></p>
+          <h3 class="guide-sub"><a href="../characters/yuni.html#skill-2">ユニ S2 ユニコーンの息吹</a></h3>
+          <p>分類：弱体効果解除／アクティブ。HP割合が最も低い味方を回復し、弱体があれば1つ解除。最大3回再発動の記載は初回込み3回と断定しない。</p>
+          <p>専用武器：専用Lv3: HPの回復量が自身の最大HP×4%になる</p>
+          <p>根拠：<a href="../characters/yuni.html">ユニ</a></p>
+          <p>補助照合（通常Lv・専用武器）：Lv1から回復対象の1個解除。Lv2再発動1回まで、Lv4再発動3回まで。 1回の解除数増加と再発動を区別。専用Lv3は回復量変更。</p>
+          <p>補助資料：<a href="https://ichigogames.net/mementomori/yuni/" target="_blank" rel="noopener">Ichigo Games「ユニ」</a></p>
+          <h3 class="guide-sub"><a href="../characters/elaine.html#skill-3">エレイン S3 堕ちた天使の神官</a></h3>
+          <p>分類：弱体効果解除／パッシブ。被攻撃味方がHP30%以下で生存し霊痕なしなら弱体2つ解除・回復・霊痕付与。ただし、その攻撃で自身が戦闘不能の場合は解除・回復が発動しない。自身の魔法被弾時に霊痕持ち味方の弱体1つ解除も記載。現行サイトでは、7ターン目以降、またはその攻撃で自身が戦闘不能の場合は不発と記載。Lv2での追加条件も含めゲーム原文で要確認。</p>
+          <p>専用武器：対象技能の専用武器変更記載なし（今回取得したサイトデータ内）</p>
+          <p>根拠：<a href="../characters/elaine.html">エレイン</a></p>
+          <p>補助照合（通常Lv・専用武器）：Lv1のHP30%以下生存・霊痕なし味方2個解除に、Lv2で自身魔法被弾時の霊痕味方全体1個解除追加。Lv3は回復増量。 基本の解除・回復も攻撃で自身が戦闘不能なら不発（現行サイトflow注記とも一致）。Lv2追加効果は7ターン目以降または自身死亡時に発動しない。旧稿・現行サイト・Ichigoの否定条件は一致。専用武器の解除数変更記載なし。</p>
+          <p>補助資料：<a href="https://ichigogames.net/mementomori/elaine/" target="_blank" rel="noopener">Ichigo Games「エレイン」</a></p>
+          <h3 class="guide-sub"><a href="../characters/primavera_summer.html#skill-3">[湖畔の歌姫]プリマヴェーラ S3 奇跡の歌姫</a></h3>
+          <p>分類：弱体効果解除／パッシブ。自身がアクティブ弱体を受けた時、弱体1つ解除と至高の旋律付与。行動阻害受領時のスタック増加は解除数増加ではない。</p>
+          <p>専用武器：対象技能の専用武器変更記載なし（今回取得したサイトデータ内）</p>
+          <p>根拠：<a href="../characters/primavera_summer.html">[湖畔の歌姫]プリマヴェーラ</a></p>
+          <p>補助照合（通常Lv・専用武器）：Lv1からアクティブ被弱体時に自己1個解除と至高の旋律付与。Lv2/3は旋律強化。 専用武器は別部分。</p>
+          <p>補助資料：<a href="https://ichigogames.net/mementomori/primavera_summer/" target="_blank" rel="noopener">Ichigo Games「[湖畔の歌姫]プリマヴェーラ」</a></p>
+          <h3 class="guide-sub"><a href="../characters/cusith.html#skill-3">クーシー S3 種を超えた絆</a></h3>
+          <p>分類：弱体効果解除／パッシブ。敵の攻撃後に自身が生存していれば、30%で弱体効果数が最も多い味方の弱体を1つ解除。解除判定前に弱体持ち味方がいない場合の攻撃力支援は別分岐。</p>
+          <p>専用武器：対象技能の専用武器変更記載なし（今回取得したサイトデータ内）</p>
+          <p>根拠：<a href="../characters/cusith.html">クーシー</a></p>
+          <p>補助照合（通常Lv・専用武器）：Lv1から敵攻撃で自身生存なら30%で弱体最多味方の1個解除。Lv2は判定前に味方弱体なしなら攻撃バフ追加、Lv3はバフ増量。 専用武器は別スキル。</p>
+          <p>補助資料：<a href="https://ichigogames.net/mementomori/cusith/" target="_blank" rel="noopener">Ichigo Games「クーシー」</a></p>
+        </div>
+      </section>
+      <section class="guide-card" id="transfer" aria-labelledby="transfer-title">
+        <div class="guide-card-head">
+          <h2 id="transfer-title">自身の弱体を解除して敵へ付与する転用型</h2>
+        </div>
+        <div class="guide-card-body">
+          <p>2技能。自身の弱体を解除し、解除した効果を敵へ付与する。100%未満のLvで敵への付与に失敗した場合も自己解除が成立するかは未確認。単なるコピーや一般の味方解除と同一視しない。</p>
+          <h3 class="guide-sub"><a href="../characters/tropon.html#skill-4">トロポン S4 イリュージョン</a></h3>
+          <p>分類：解除して敵へ付与（転用）／パッシブ。非クリティカル被弾時、自身の弱体1つを解除して攻撃者へ付与。敵へ付ける確率と、自身から取り除く処理を混同しない。</p>
+          <p>専用武器：対象技能の専用武器変更記載なし（今回取得したサイトデータ内）</p>
+          <p>根拠：<a href="../characters/tropon.html">トロポン</a></p>
+          <p>補助照合（通常Lv・専用武器）：弱体の解除・敵への転用はLv2で追加（75%記載）、Lv3で100%。非クリティカル被弾条件。 75%時の敵付与失敗で自己解除が成立するか未確認。敵バフ奪取側と混同しない。</p>
+          <p>補助資料：<a href="https://ichigogames.net/mementomori/tropon/" target="_blank" rel="noopener">Ichigo Games「トロポン」</a></p>
+          <h3 class="guide-sub"><a href="../characters/nina.html#skill-2">ニーナ S2 大嫌い!!</a></h3>
+          <p>分類：解除して敵へ付与（転用）／アクティブ。対象の技力が自身より低い場合、自身の弱体1つを解除して敵に付与。解除を伴わないコピーと区別する。</p>
+          <p>専用武器：専用Lv2: 対象の技力が自身よりも低い場合、さらに50%の確率で4ターンの間対象の命中率を30%減少させる</p>
+          <p>根拠：<a href="../characters/nina.html">ニーナ</a></p>
+          <p>補助照合（通常Lv・専用武器）：Lv1/2は80%、Lv3/4は100%の弱体転用記載。対象技力が自身より低い条件。 低Lvで敵付与失敗時の自己解除成立は未確認。専用Lv2の命中率低下追加は転用数変更ではない。</p>
+          <p>補助資料：<a href="https://ichigogames.net/mementomori/nina/" target="_blank" rel="noopener">Ichigo Games「ニーナ」</a></p>
+        </div>
+      </section>
+      <section class="guide-card" id="limited" aria-labelledby="limited-title">
+        <div class="guide-card-head">
+          <h2 id="limited-title">行動阻害だけを解除する限定型</h2>
+        </div>
+        <div class="guide-card-body">
+          <p>1技能。対象が行動阻害に限られ、一般の弱体全解除ではない。</p>
+          <h3 class="guide-sub"><a href="../characters/florence_twilight.html#skill-4">[黄昏の誓い]フローレンス S4 黄昏の騎士</a></h3>
+          <p>分類：行動阻害限定解除／パッシブ。強化通常攻撃後、HP割合が低い味方3体を回復。回復前HP割合50%以上の対象について行動阻害を全解除。一般の弱体全解除ではない。</p>
+          <p>専用武器：専用Lv2: 被ダメージの減少量が40%、最大HPの増加量が100%になる</p>
+          <p>根拠：<a href="../characters/florence_twilight.html">[黄昏の誓い]フローレンス</a></p>
+          <p>補助照合（通常Lv・専用武器）：Lv3で回復前に回復対象HP50%以上かつ行動阻害ありなら行動阻害全解除を追加。 一般弱体全解除ではない。専用Lv2は被ダメ軽減と最大HPで解除部は不変。</p>
+          <p>補助資料：<a href="https://ichigogames.net/mementomori/florence_twilight/" target="_blank" rel="noopener">Ichigo Games「[黄昏の誓い]フローレンス」</a></p>
+        </div>
+      </section>
+      <section class="guide-card" id="users" aria-labelledby="users-title">
+        <div class="guide-card-head">
+          <h2 id="users-title">弱体効果解除を利用・参照するキャラ</h2>
+        </div>
+        <div class="guide-card-body">
+          <p>解除を行う技能だけでなく、「味方側がスキルで解除した弱体効果の合計数」を使う技能も別枠で確認する。以下もサイト内候補・ゲーム原文未照合。通常Lvと専用武器の補助照合結果は各項目に併記する。ターン切れ・短縮・敵への転用・戦闘不能による解除が合計数に含まれるかは、一般仕様から推定せず個別確認する。</p>
+          <ul class="guide-bullets">
+            <li><a href="../characters/merlyn_winter.html#skill-2">[深き森の賢者]マーリン S2 フォレストタイド</a>：攻撃力が高い敵2体に魔法1560%。魔法攻撃前、自身と味方がスキルで解除した弱体効果の合計が5個以上なら魔法2340%。専用武器：専用武器での直接強化なし。</li>
+          </ul>
+          <p>根拠：<a href="../characters/merlyn_winter.html">[深き森の賢者]マーリン</a></p>
+          <p>補助照合（通常Lv・専用武器）：Lv4で味方陣営がスキルで解除した弱体合計5個以上を参照し攻撃倍率増加。 解除実行ではなく参照。専用武器の直接変更対象ではない。</p>
+          <p>補助資料：<a href="https://ichigogames.net/mementomori/merlyn_winter/" target="_blank" rel="noopener">Ichigo Games「[深き森の賢者]マーリン」</a></p>
+          <ul class="guide-bullets">
+            <li><a href="../characters/primavera_summer.html#skill-2">[湖畔の歌姫]プリマヴェーラ S2 コトリ行進曲</a>：味方側がスキルで解除した弱体効果の合計が10以上なら攻撃回数が5回になる。専用武器：専用Lv3: 物理攻撃が攻撃力×940%になる。</li>
+          </ul>
+          <p>根拠：<a href="../characters/primavera_summer.html">[湖畔の歌姫]プリマヴェーラ</a></p>
+          <p>補助照合（通常Lv・専用武器）：Lv3で陣営スキル解除合計10個以上を参照し攻撃回数5回。 解除実行ではない。専用Lv3は攻撃倍率のみ。</p>
+          <p>補助資料：<a href="https://ichigogames.net/mementomori/primavera_summer/" target="_blank" rel="noopener">Ichigo Games「[湖畔の歌姫]プリマヴェーラ」</a></p>
+          <ul class="guide-bullets">
+            <li><a href="../characters/cusith.html#skill-2">クーシー S2 竜神の咆哮</a>：物理攻撃の前、バトル中に自身と味方がスキルで解除した弱体効果の合計が5以上なら物理攻撃のダメージが攻撃力×870%。専用武器：専用武器効果なし。</li>
+          </ul>
+          <p>根拠：<a href="../characters/cusith.html">クーシー</a></p>
+          <p>補助照合（通常Lv・専用武器）：Lv4で陣営スキル解除合計5個以上を参照し倍率870%。 解除実行ではない。専用武器は別スキル。</p>
+          <p>補助資料：<a href="https://ichigogames.net/mementomori/cusith/" target="_blank" rel="noopener">Ichigo Games「クーシー」</a></p>
+          <p>条件利用としては、クーシー・ケルベロスの「解除判定前に弱体がない場合」、プリシラのクリティカルによる解除数変化、マーリン・プリシラの専用武器による対象・個数変化も区別する。誰かの解除性能を一律に倍率強化する共通効果の有無は、この候補抽出だけで不存在と判断しない。</p>
+        </div>
+      </section>
+      <section class="guide-card" id="countermeasures" aria-labelledby="countermeasures-title">
+        <div class="guide-card-head">
+          <h2 id="countermeasures-title">防ぐ・対策する方法</h2>
+        </div>
+        <div class="guide-card-body">
+          <p>弱体を受ける側では、付いた後の解除・新しい付与を防ぐ無効・付与成功率に関わる耐性を分けて選ぶ。解除スキルが必要な時点で使えるか、発動時点、対象、再発動制限も確認する。</p>
+          <p>相手の解除への対策を述べる場合は、アクティブかパッシブか、発動条件が何かを先に確認する。<a href="./silence.html">沈黙</a>などを万能な解除封じとは書かない。特に行動阻害を受けたこと自体で発動するパッシブ候補があるため、阻害しただけで解除も停止すると断定しない。</p>
+        </div>
+      </section>
+      <section class="guide-card" id="relationships" aria-labelledby="relationships-title">
+        <div class="guide-card-head">
+          <h2 id="relationships-title">他の効果との関係</h2>
+        </div>
+        <div class="guide-card-body">
+          <ul class="guide-bullets">
+            <li>弱体効果無効・行動阻害無効：予防側の別テーマ。解除効果の代用とはしない。</li>
+          </ul>
+          <ul class="guide-bullets">
+            <li>弱体効果コピー・敵への転用：ニーナとトロポンは自身からの解除を伴う候補。解除を伴わないコピーと分ける。</li>
+          </ul>
+          <ul class="guide-bullets">
+            <li>弱体ターン短縮：<a href="../characters/sophia.html#skill-3">ソフィアS3</a>・<a href="../characters/priscilla.html#skill-4">プリシラS4</a>は関連候補だが、今回の31解除技能へ追加しない。公式の共通仕様では短縮によって0ターン以下になれば解除されるが、直接解除とは区分する。</li>
+          </ul>
+          <ul class="guide-bullets">
+            <li>個別状態の消費・変換：<a href="../characters/nebra.html#skill-3">ネブラS3</a>の敵「泡沫」5スタックの解除から気絶への変換は、味方を治す解除には数えない。被攻撃などによる<a href="./sleep.html">睡眠</a>終了も、本稿の解除スキル数へ混ぜない。</li>
+          </ul>
+          <ul class="guide-bullets">
+            <li>行動阻害限定解除：黄昏フローレンスS4を一般の弱体全解除として案内しない。</li>
+          </ul>
+        </div>
+      </section>
+      <section class="guide-card" id="provenance" aria-labelledby="provenance-title">
+        <div class="guide-card-head">
+          <h2 id="provenance-title">公式情報とキャラ個別情報の区別</h2>
+        </div>
+        <div class="guide-card-body">
+          <p>確認済み（公式FAQ）：共通仕様は下記の公式FAQを根拠とする。</p>
+          <p>確認済み（現行サイト内記載）：120キャラ・480技能に対する抽出結果と各キャラページの記載。</p>
+          <p>補助照合済み（非公式資料）：Ichigo Gamesの136キャラ・524技能の横断と、対象34技能の主要条件・Lv・専用武器の比較。サイト内記載との一致は、共通の第三者由来があるため独立した公式確認ではない。補助資料だけにある詳細はその範囲を明記した。</p>
+          <p>一致を確認したのは両資料に記載が重なる対象・個数・条件の範囲であり、現行サイトにない低Lvの数値・追加時点はIchigoのみの補助記載です。</p>
+          <p>未確認：ゲーム内ヘルプの実画面、各技能レベルの全文、専用武器のゲーム原文、現行ゲーム全キャラとサイト収録キャラの差分。旧稿やサイト注記に「ゲーム内記載なし」とあっても、この確認ではその断定を再利用しない。</p>
+          <p>公式記載なし：確認したFAQ本文で見つからなかった個別事項にのみ用いる。ゲーム全体の公式資料に説明が存在しないという意味ではない。</p>
+        </div>
+      </section>
+      <section class="guide-card" id="sources" aria-labelledby="sources-title">
+        <div class="guide-card-head">
+          <h2 id="sources-title">出典</h2>
+        </div>
+        <div class="guide-card-body">
+          <p class="guide-source">出典：公式FAQ「バフ・弱体効果」／公式FAQ「バフの種類」／公式FAQ「弱体効果の種類」／公式FAQ「キャラのパッシブスキルがタイミング通りに発動しない、効果がない」</p>
+          <p class="guide-source">共通仕様は公式FAQ、キャラ個別情報は現行サイトの要約と補助資料の記載を区別しています。ゲーム内ヘルプ・スキル原文を直接確認済みとはしていません。</p>
+          <ul class="guide-bullets guide-source">
+            <li><a href="https://mementomori.zendesk.com/hc/ja/articles/46412673040921" target="_blank" rel="noopener">公式FAQ「バフ・弱体効果」</a></li>
+            <li><a href="https://mementomori.zendesk.com/hc/ja/articles/46412799595545" target="_blank" rel="noopener">公式FAQ「バフの種類」</a></li>
+            <li><a href="https://mementomori.zendesk.com/hc/ja/articles/46414059026841" target="_blank" rel="noopener">公式FAQ「弱体効果の種類」</a></li>
+            <li><a href="https://mementomori.zendesk.com/hc/ja/articles/57173804872985" target="_blank" rel="noopener">公式FAQ「キャラのパッシブスキルがタイミング通りに発動しない、効果がない」</a></li>
+          </ul>
+          <p class="guide-source">検証参考：Ichigo Gamesさんが公開されている検証結果を参考にさせていただきました。</p>
+          <ul class="guide-bullets guide-source">
+            <li><a href="https://ichigogames.net/mementomori/soltina/" target="_blank" rel="noopener">Ichigo Gamesさん「ソルティーナ」</a><span class="guide-link-text">キャラスキル記載・Lv差分・専用武器差分の補助照合。ゲーム内原文の直接確認や独立した公式確認ではありません。</span></li>
+            <li><a href="https://ichigogames.net/mementomori/fenrir/" target="_blank" rel="noopener">Ichigo Gamesさん「フェンリル」</a><span class="guide-link-text">キャラスキル記載・Lv差分・専用武器差分の補助照合。ゲーム内原文の直接確認や独立した公式確認ではありません。</span></li>
+            <li><a href="https://ichigogames.net/mementomori/sivi/" target="_blank" rel="noopener">Ichigo Gamesさん「シヴィ」</a><span class="guide-link-text">キャラスキル記載・Lv差分・専用武器差分の補助照合。ゲーム内原文の直接確認や独立した公式確認ではありません。</span></li>
+            <li><a href="https://ichigogames.net/mementomori/sabrina/" target="_blank" rel="noopener">Ichigo Gamesさん「サブリナ」</a><span class="guide-link-text">キャラスキル記載・Lv差分・専用武器差分の補助照合。ゲーム内原文の直接確認や独立した公式確認ではありません。</span></li>
+            <li><a href="https://ichigogames.net/mementomori/nina_summer/" target="_blank" rel="noopener">Ichigo Gamesさん「[小さな大冒険]ニーナ」</a><span class="guide-link-text">キャラスキル記載・Lv差分・専用武器差分の補助照合。ゲーム内原文の直接確認や独立した公式確認ではありません。</span></li>
+            <li><a href="https://ichigogames.net/mementomori/eureka/" target="_blank" rel="noopener">Ichigo Gamesさん「ユリーカ」</a><span class="guide-link-text">キャラスキル記載・Lv差分・専用武器差分の補助照合。ゲーム内原文の直接確認や独立した公式確認ではありません。</span></li>
+            <li><a href="https://ichigogames.net/mementomori/cordie_ringmaster/" target="_blank" rel="noopener">Ichigo Gamesさん「[サーカスの団長]コルディ」</a><span class="guide-link-text">キャラスキル記載・Lv差分・専用武器差分の補助照合。ゲーム内原文の直接確認や独立した公式確認ではありません。</span></li>
+            <li><a href="https://ichigogames.net/mementomori/merlyn_winter/" target="_blank" rel="noopener">Ichigo Gamesさん「[深き森の賢者]マーリン」</a><span class="guide-link-text">キャラスキル記載・Lv差分・専用武器差分の補助照合。ゲーム内原文の直接確認や独立した公式確認ではありません。</span></li>
+            <li><a href="https://ichigogames.net/mementomori/evelyn/" target="_blank" rel="noopener">Ichigo Gamesさん「エヴリン」</a><span class="guide-link-text">キャラスキル記載・Lv差分・専用武器差分の補助照合。ゲーム内原文の直接確認や独立した公式確認ではありません。</span></li>
+            <li><a href="https://ichigogames.net/mementomori/fia_trace/" target="_blank" rel="noopener">Ichigo Gamesさん「[在りし日の面影]フィアー」</a><span class="guide-link-text">キャラスキル記載・Lv差分・専用武器差分の補助照合。ゲーム内原文の直接確認や独立した公式確認ではありません。</span></li>
+            <li><a href="https://ichigogames.net/mementomori/cerberus/" target="_blank" rel="noopener">Ichigo Gamesさん「ケルベロス」</a><span class="guide-link-text">キャラスキル記載・Lv差分・専用武器差分の補助照合。ゲーム内原文の直接確認や独立した公式確認ではありません。</span></li>
+            <li><a href="https://ichigogames.net/mementomori/rosalie_apostle/" target="_blank" rel="noopener">Ichigo Gamesさん「[カリタスの使徒]ロザリー」</a><span class="guide-link-text">キャラスキル記載・Lv差分・専用武器差分の補助照合。ゲーム内原文の直接確認や独立した公式確認ではありません。</span></li>
+            <li><a href="https://ichigogames.net/mementomori/eirene/" target="_blank" rel="noopener">Ichigo Gamesさん「アイリーン」</a><span class="guide-link-text">キャラスキル記載・Lv差分・専用武器差分の補助照合。ゲーム内原文の直接確認や独立した公式確認ではありません。</span></li>
+            <li><a href="https://ichigogames.net/mementomori/cerberus_another/" target="_blank" rel="noopener">Ichigo Gamesさん「[魔法のキャンディ]ケルベロス」</a><span class="guide-link-text">キャラスキル記載・Lv差分・専用武器差分の補助照合。ゲーム内原文の直接確認や独立した公式確認ではありません。</span></li>
+            <li><a href="https://ichigogames.net/mementomori/cattleya/" target="_blank" rel="noopener">Ichigo Gamesさん「カトレア」</a><span class="guide-link-text">キャラスキル記載・Lv差分・専用武器差分の補助照合。ゲーム内原文の直接確認や独立した公式確認ではありません。</span></li>
+            <li><a href="https://ichigogames.net/mementomori/veela/" target="_blank" rel="noopener">Ichigo Gamesさん「ウィーラ」</a><span class="guide-link-text">キャラスキル記載・Lv差分・専用武器差分の補助照合。ゲーム内原文の直接確認や独立した公式確認ではありません。</span></li>
+            <li><a href="https://ichigogames.net/mementomori/priscilla/" target="_blank" rel="noopener">Ichigo Gamesさん「プリシラ」</a><span class="guide-link-text">キャラスキル記載・Lv差分・専用武器差分の補助照合。ゲーム内原文の直接確認や独立した公式確認ではありません。</span></li>
+            <li><a href="https://ichigogames.net/mementomori/soltina_winter/" target="_blank" rel="noopener">Ichigo Gamesさん「[温かな記憶]ソルティーナ」</a><span class="guide-link-text">キャラスキル記載・Lv差分・専用武器差分の補助照合。ゲーム内原文の直接確認や独立した公式確認ではありません。</span></li>
+            <li><a href="https://ichigogames.net/mementomori/merlyn/" target="_blank" rel="noopener">Ichigo Gamesさん「マーリン」</a><span class="guide-link-text">キャラスキル記載・Lv差分・専用武器差分の補助照合。ゲーム内原文の直接確認や独立した公式確認ではありません。</span></li>
+            <li><a href="https://ichigogames.net/mementomori/mertillier/" target="_blank" rel="noopener">Ichigo Gamesさん「メルティーユ」</a><span class="guide-link-text">キャラスキル記載・Lv差分・専用武器差分の補助照合。ゲーム内原文の直接確認や独立した公式確認ではありません。</span></li>
+            <li><a href="https://ichigogames.net/mementomori/yuni/" target="_blank" rel="noopener">Ichigo Gamesさん「ユニ」</a><span class="guide-link-text">キャラスキル記載・Lv差分・専用武器差分の補助照合。ゲーム内原文の直接確認や独立した公式確認ではありません。</span></li>
+            <li><a href="https://ichigogames.net/mementomori/elaine/" target="_blank" rel="noopener">Ichigo Gamesさん「エレイン」</a><span class="guide-link-text">キャラスキル記載・Lv差分・専用武器差分の補助照合。ゲーム内原文の直接確認や独立した公式確認ではありません。</span></li>
+            <li><a href="https://ichigogames.net/mementomori/primavera_summer/" target="_blank" rel="noopener">Ichigo Gamesさん「[湖畔の歌姫]プリマヴェーラ」</a><span class="guide-link-text">キャラスキル記載・Lv差分・専用武器差分の補助照合。ゲーム内原文の直接確認や独立した公式確認ではありません。</span></li>
+            <li><a href="https://ichigogames.net/mementomori/cusith/" target="_blank" rel="noopener">Ichigo Gamesさん「クーシー」</a><span class="guide-link-text">キャラスキル記載・Lv差分・専用武器差分の補助照合。ゲーム内原文の直接確認や独立した公式確認ではありません。</span></li>
+            <li><a href="https://ichigogames.net/mementomori/tropon/" target="_blank" rel="noopener">Ichigo Gamesさん「トロポン」</a><span class="guide-link-text">キャラスキル記載・Lv差分・専用武器差分の補助照合。ゲーム内原文の直接確認や独立した公式確認ではありません。</span></li>
+            <li><a href="https://ichigogames.net/mementomori/nina/" target="_blank" rel="noopener">Ichigo Gamesさん「ニーナ」</a><span class="guide-link-text">キャラスキル記載・Lv差分・専用武器差分の補助照合。ゲーム内原文の直接確認や独立した公式確認ではありません。</span></li>
+            <li><a href="https://ichigogames.net/mementomori/florence_twilight/" target="_blank" rel="noopener">Ichigo Gamesさん「[黄昏の誓い]フローレンス」</a><span class="guide-link-text">キャラスキル記載・Lv差分・専用武器差分の補助照合。ゲーム内原文の直接確認や独立した公式確認ではありません。</span></li>
+          </ul>
+        </div>
+      </section>
+    </div>
+    <!-- ad:bottom -->
+    <aside class="ad-slot" aria-label="広告">
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-6389066329814944"
+           data-ad-slot="6111654373"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </aside>
+    <!-- /ad:bottom -->
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <span>ミレストのメメントモリ分析データ室 / 非公式ファンサイト</span>
+      <nav class="footer-links" aria-label="サイト内のページ">
+        <a href="/">トップ</a>
+        <a href="../characters/index.html">キャラ一覧</a>
+        <a href="/pages/guide/">このサイトでできること</a>
+        <a href="/privacy.html">プライバシーポリシー</a>
+        <a href="/disclaimer.html">免責事項</a>
+        <a href="/about.html">このサイトについて</a>
+        <a href="/contact.html">お問い合わせ</a>
+      </nav>
+    </div>
+  </footer>
+  <script src="../../js/figure-series.js?v=8b71cecf" defer></script>
+</body>
+</html>

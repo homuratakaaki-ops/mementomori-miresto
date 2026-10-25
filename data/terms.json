@@ -80,6 +80,10 @@
     "結界": {
       "text": "受けるダメージを軽減する特殊な防御バフ。",
       "guideUrl": "/pages/status/barrier.html"
+    },
+    "弱体効果解除": {
+      "text": "すでに自分や味方に付いている弱体効果を取り除く働き。対象・種類・個数・発動条件はスキルごとに異なる。",
+      "guideUrl": "/pages/status/debuff-removal.html"
     }
   }
 }
