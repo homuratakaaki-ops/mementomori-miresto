@@ -4,14 +4,14 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>弱体効果解除｜特殊効果ガイド | ミレストのメメントモリ分析データ室</title>
-  <meta name="description" content="メメントモリの弱体効果解除を解説。解除と無効の違い、解除する弱体の選ばれ方、31の解除スキルと3つの解除数参照スキルを、対象・個数・発動条件・通常Lv・専用武器の違いで比較します。">
+  <meta name="description" content="メメントモリの弱体効果解除を解説。解除と無効の違い、解除する弱体の選ばれ方、31の解除スキルと3つの解除数参照スキルを、対象・個数・発動条件・専用武器の違いで比較します。">
   <link rel="canonical" href="https://memento.musoudc.com/pages/status/debuff-removal.html">
   <!-- OGP。画像は共通のものを使う（ガイドごとの画像生成は未対応） -->
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="ミレストのメメントモリ分析データ室">
   <meta property="og:locale" content="ja_JP">
   <meta property="og:title" content="弱体効果解除｜特殊効果ガイド | ミレストのメメントモリ分析データ室">
-  <meta property="og:description" content="メメントモリの弱体効果解除を解説。解除と無効の違い、解除する弱体の選ばれ方、31の解除スキルと3つの解除数参照スキルを、対象・個数・発動条件・通常Lv・専用武器の違いで比較します。">
+  <meta property="og:description" content="メメントモリの弱体効果解除を解説。解除と無効の違い、解除する弱体の選ばれ方、31の解除スキルと3つの解除数参照スキルを、対象・個数・発動条件・専用武器の違いで比較します。">
   <meta property="og:url" content="https://memento.musoudc.com/pages/status/debuff-removal.html">
   <meta property="og:image" content="https://memento.musoudc.com/assets/ogp/ogp-common.png">
   <meta name="twitter:card" content="summary_large_image">
@@ -128,7 +128,7 @@
           <p><a href="./stack.html">スタック</a>効果そのものが解除されると、スタック数は0になります。スタック数だけを減らす効果とは異なります。</p>
           <p>効果ターンの短縮で残りターンが0以下になった場合も、その効果は解除されます。ただし、直接弱体を取り除くスキルとは仕組みが異なります。</p>
           <h3 class="guide-sub">確率やパッシブの発動順</h3>
-          <p>複数の効果を解除する場合、確率などの判定は、特記がなければそれぞれ別に行われます。敵のバフ解除にある命中・耐性の判定が、味方の弱体解除にも常に必要という意味ではありません。確率が明記されていない解除の成功率は、この資料だけでは確認できません。</p>
+          <p>複数の効果を解除する場合、確率などの判定は、特記がなければそれぞれ別に行われます。敵のバフ解除にある命中・耐性の判定が、味方の弱体解除にも常に必要という意味ではありません。</p>
           <p>同じ条件・タイミングのパッシブは、行動順が先のキャラから優先されます。自分の順番になった時点でも条件を満たす必要があり、先に発動した効果によって条件が変わることがあります。</p>
           <p>別のパッシブをきっかけにさらにパッシブが発動することは基本的にありませんが、例外もあります。複数キャラの解除が連鎖するかは、個別の条件によります。</p>
         </div>
@@ -186,7 +186,7 @@
                   <th scope="row"><a href="../characters/sivi.html#skill-2">シヴィ S2 アブソーブブレイド</a></th>
                   <td data-label="解除対象">スピードが低い味方3体</td>
                   <td data-label="解除数">全解除</td>
-                  <td data-label="発動時点・条件">アクティブ／攻撃後、回復対象を解除</td>
+                  <td data-label="発動時点・条件">アクティブ／攻撃後、回復した対象の弱体を解除</td>
                 </tr>
                 <tr>
                   <th scope="row"><a href="../characters/sivi.html#skill-4">シヴィ S4 魔剣の守護</a></th>
@@ -258,7 +258,7 @@
                   <th scope="row"><a href="../characters/rosalie_caritas.html#skill-3">[カリタスの使徒]ロザリー S3 愛の使徒</a></th>
                   <td data-label="解除対象">自身</td>
                   <td data-label="解除数">2つ</td>
-                  <td data-label="発動時点・条件">記憶が15スタックの場合</td>
+                  <td data-label="発動時点・条件">記憶が15スタックの場合。S2で記憶を解除した後は、新たに記憶を付与しない</td>
                 </tr>
                 <tr>
                   <th scope="row"><a href="../characters/irene.html#skill-3">アイリーン S3 暗き夜の契約</a></th>
@@ -346,7 +346,7 @@
           <p>［温かな記憶］ソルティーナS3には、この再発動制限の記載はありません。通常版と同じ条件として扱わず、別のスキルとして確認してください。</p>
           <p>［魔法のキャンディ］ケルベロスS3は、致命的なダメージをHP1で耐える効果に伴う解除です。HP1で耐える効果はバトル中1回なので、繰り返し利用する解除役とは異なります。</p>
           <p>カトレアS3の4・12ターン目終了時の追加発動には、<strong>自身以外の黄属性の味方が2体以上</strong>という編成条件があります。8ターン目終了時の発動とは条件が異なります。</p>
-          <p>ユニS2は、1回ごとの解除数を増やすのではなく、スキルを最大3回再発動する方式です。回復対象に弱体がある場合に1つずつ解除します。初回を含む合計回数の扱いは、確認が必要な点として残っています。</p>
+          <p>ユニS2は、1回ごとの解除数を増やすのではなく、スキルを最大3回再発動する方式です。回復対象に弱体がある場合に1つずつ解除します。</p>
           <h3 class="guide-sub">解除してから弱体がなくなった場合は？</h3>
           <p>ケルベロスS3は、解除前の時点で<strong>自身に弱体がなければ</strong>弱体効果無効を付与します。クーシーS3の攻撃力強化は、解除判定前に<strong>弱体を持つ味方がいない場合</strong>の効果です。どちらも、解除の結果として弱体がなくなった場合を指すものではありません。</p>
           <p>一方、マーリンS1の「対象に弱体効果がない場合」の攻撃力強化は、分岐を判定する時点が未確認です。解除後に弱体がなくなれば必ず強化される、とはいえません。</p>
