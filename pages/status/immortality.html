@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>不死身・HP1で耐える｜特殊効果ガイド | ミレストのメメントモリ分析データ室</title>
+  <meta name="description" content="メメントモリの不死身とHP1で耐える効果を解説。発動処理と継続バフの違い、5スキルの回数・再発動条件、不死身を付ける2スキルの持続・消費と専用武器の違いを比較します。">
+  <meta name="robots" content="noindex">
+  <link rel="canonical" href="https://memento.musoudc.com/pages/status/immortality.html">
+  <!-- OGP。画像は共通のものを使う（ガイドごとの画像生成は未対応） -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="ミレストのメメントモリ分析データ室">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="og:title" content="不死身・HP1で耐える｜特殊効果ガイド | ミレストのメメントモリ分析データ室">
+  <meta property="og:description" content="メメントモリの不死身とHP1で耐える効果を解説。発動処理と継続バフの違い、5スキルの回数・再発動条件、不死身を付ける2スキルの持続・消費と専用武器の違いを比較します。">
+  <meta property="og:url" content="https://memento.musoudc.com/pages/status/immortality.html">
+  <meta property="og:image" content="https://memento.musoudc.com/assets/ogp/ogp-common.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <link rel="icon" type="image/png" href="../../assets/miresto/miresto-icon-32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="../../assets/miresto/miresto-icon-180.png">
+  <link rel="stylesheet" href="../../assets/character-page.css?v=ba122311">
+  <link rel="stylesheet" href="../../assets/status-guide.css?v=71746d66">
+  <!-- ga:head -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-BHKBSRGSJF"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BHKBSRGSJF');
+  </script>
+  <!-- /ga:head -->
+  <!-- ad:head -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6389066329814944" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="/assets/ad-slot.css">
+  <!-- /ad:head -->
+</head>
+<body data-status-guide="immortality" data-prerendered>
+  <header class="page-header">
+    <div class="header-inner">
+      <a class="top-link" href="/">トップ</a>
+      <a class="top-link" href="./index.html">状態異常・特殊効果ガイドの一覧へ</a>
+      <p class="eyebrow">STATUS GUIDE</p>
+      <h1>不死身・HP1で耐える｜特殊効果ガイド</h1>
+      <div class="guide-meta">
+        <span class="tag">最終横断確認 2026-10-25</span>
+      </div>
+      <p class="guide-meta-note">当サイトの公開キャラデータ120キャラ・480スキルを確認しています。</p>
+    </div>
+  </header>
+
+  <main>
+    <div class="guide-list">
+      <section class="guide-card" id="oneline" aria-labelledby="oneline-title">
+        <div class="guide-card-head">
+          <h2 id="oneline-title">ひとことで</h2>
+        </div>
+        <div class="guide-card-body">
+          <p>不死身とHP1で耐えるは、どちらも致命的なダメージを受けたときにHPを1残して耐える仕組みです。</p>
+          <p>違いは、<strong>不死身は効果中に繰り返し働くバフ、HP1で耐えるは条件を満たした時に発動する処理</strong>という点です。復活のように、一度戦闘不能になってから戻るわけではありません。</p>
+          <div class="guide-figure-mobile is-only" data-figure-series>
+            <div class="guide-series-track" tabindex="0" role="region" aria-label="図解3枚。横にスクロールして次の図へ">
+              <figure class="guide-figure-panel" aria-label="1 / 3">
+                <a href="../../assets/status/immortality-guide-m1.jpg?v=a4977588" aria-label="図1を拡大して開く（3枚中1枚目）">
+                  <picture>
+                    <source type="image/webp" srcset="../../assets/status/immortality-guide-m1.webp?v=5e5e4c06">
+                    <img src="../../assets/status/immortality-guide-m1.jpg?v=a4977588" width="1122" height="1402" alt="不死身・HP1で耐える基礎知識1/3。「不死身」と「HP1で耐える」は別。1：どちらも条件を満たすと致命ダメージをHP1で耐える。2：でも仕組みは同じではない。3：まずは別物として覚えるのが大事。不死身とHP1耐えを対比し、アムレートを示す。" decoding="async">
+                  </picture>
+                </a>
+              </figure>
+              <figure class="guide-figure-panel" aria-label="2 / 3">
+                <a href="../../assets/status/immortality-guide-m2.jpg?v=f6aa0c78" aria-label="図2を拡大して開く（3枚中2枚目）">
+                  <picture>
+                    <source type="image/webp" srcset="../../assets/status/immortality-guide-m2.webp?v=ceb51fd0">
+                    <img src="../../assets/status/immortality-guide-m2.jpg?v=f6aa0c78" width="1122" height="1402" alt="不死身・HP1で耐える違い2/3。HP1で耐える＝発動処理、不死身＝付帯バフ。1：HP1で耐えるは、条件を満たした致命ダメージで発動。2：不死身は、一定期間付帯し、その間は致命ダメージごとにHP1を残して耐える。3：アムレートは両方を別で持つ代表例。発動時の1回の図と、バフ中に繰り返し耐える図を示す。" loading="lazy" decoding="async">
+                  </picture>
+                </a>
+              </figure>
+              <figure class="guide-figure-panel" aria-label="3 / 3">
+                <a href="../../assets/status/immortality-guide-m3.jpg?v=883a0597" aria-label="図3を拡大して開く（3枚中3枚目）">
+                  <picture>
+                    <source type="image/webp" srcset="../../assets/status/immortality-guide-m3.webp?v=235c3781">
+                    <img src="../../assets/status/immortality-guide-m3.jpg?v=883a0597" width="1122" height="1402" alt="不死身・HP1で耐える見るポイント3/3。回数と継続時間を確認する。1：何回耐えられるか。2：何ターン続くか。3：1回限りか、再発動できるか。HP1の人物、時計、再発動の矢印とアムレートを示す。" loading="lazy" decoding="async">
+                  </picture>
+                </a>
+              </figure>
+            </div>
+            <div class="guide-slides-controls guide-series-controls" hidden>
+              <button type="button" data-series-prev aria-label="前の図へ">‹</button>
+              <span class="guide-slides-dots">
+                <button type="button" data-series-dot="0" aria-label="1枚目へ" aria-current="true"></button>
+                <button type="button" data-series-dot="1" aria-label="2枚目へ"></button>
+                <button type="button" data-series-dot="2" aria-label="3枚目へ"></button>
+              </span>
+              <span class="guide-series-count" aria-live="polite">1 / 3</span>
+              <button type="button" data-series-next aria-label="次の図へ">›</button>
+            </div>
+            <p class="guide-figure-note"><span class="is-narrow">横にスワイプで次の図へ。図をタップすると拡大して開きます。</span><span class="is-wide">‹ › で次の図へ。図をクリックすると拡大して開きます。</span></p>
+          </div>
+        </div>
+      </section>
+      <section class="guide-card" id="mechanism" aria-labelledby="mechanism-title">
+        <div class="guide-card-head">
+          <h2 id="mechanism-title">仕組み</h2>
+        </div>
+        <div class="guide-card-body">
+          <p>対象となるのは、攻撃・共鳴・献身・毒などの持続ダメージ・カウンタダメージです。ただし、<strong>自傷ダメージは不死身・HP1で耐えるの影響を受けません</strong>。「どんな理由でも絶対に倒れない」効果とは区別しましょう。</p>
+          <p>アムレートは、まず致命的なダメージをHP1で耐え、その後に不死身を付けます。最初に耐える処理と、後から付く継続バフは別です。</p>
+        </div>
+      </section>
+      <section class="guide-card" id="rules" aria-labelledby="rules-title">
+        <div class="guide-card-head">
+          <h2 id="rules-title">重複・上書きなどの固有ルール</h2>
+        </div>
+        <div class="guide-card-body">
+          <h3 class="guide-sub">「耐える処理」と「付いたバフ」では、解除の扱いが違う</h3>
+          <p>HP1で耐える効果そのものは、解除・コピー・奪取の対象外です。不死身はバフなので、解除不可の指定があるかを確認します。</p>
+          <p>解除不可のバフは、通常の解除・コピー・奪取・ターン増減の対象外です。一方、スキル自身に書かれた消費条件までなくなるわけではありません。</p>
+          <h3 class="guide-sub">持続ターンと再発動待ちは別</h3>
+          <p>不死身の残りターンと、HP1で耐える処理を次に発動できる時期は別に管理されます。バトル中1回のものもあれば、再発動待ちや発動できるターンの上限があるものもあります。</p>
+          <p>バフの効果ターンは原則として付帯者の行動終了時に減少します。行動開始から終了までの間に付いた場合は、次のターンの行動終了時から減少します。同じキャラによる同じバフの再付与は、新しい効果へ上書きされます。</p>
+        </div>
+      </section>
+      <!-- ad:mid -->
+      <aside class="ad-slot ad-slot--mid" aria-label="広告">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-6389066329814944"
+             data-ad-slot="9192142429"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      </aside>
+      <!-- /ad:mid -->
+      <section class="guide-card" id="givers" aria-labelledby="givers-title">
+        <div class="guide-card-head">
+          <h2 id="givers-title">付与・使用するキャラ</h2>
+        </div>
+        <div class="guide-card-body">
+          <h3 class="guide-sub">致命的なダメージをHP1で耐える</h3>
+          <p>以下の5スキルは、いずれも自身が致命的なダメージを受けた時に発動し、自身のHPを1残します。その後に不死身を付けるものと、回復などにつなぐものを分けて見ましょう。</p>
+          <div class="guide-table-wrap">
+            <table class="guide-table guide-table--wrap">
+              <thead>
+                <tr>
+                  <th scope="col">キャラ／スキル</th>
+                  <th scope="col">耐えた後の主な処理</th>
+                  <th scope="col">発動回数・再発動の制限</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row"><a href="../characters/amleth.html#skill-4">アムレート S4 誓いを果たす者</a></th>
+                  <td data-label="耐えた後の主な処理">自身に不死身を3ターン付与</td>
+                  <td data-label="発動回数・再発動の制限">バトル中1回</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/amleth_summer.html#skill-4">[夏の日の夢]アムレート S4 王たる者の覚悟</a></th>
+                  <td data-label="耐えた後の主な処理">自身に不死身を含む「王の覚悟」を10ターン付与</td>
+                  <td data-label="発動回数・再発動の制限">発動後、自身が8回行動を終了するまで再発動しない。17ターン目以降は発動しない</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/ophelia.html#skill-4">オフィーリア S4 近衛の誉れ</a></th>
+                  <td data-label="耐えた後の主な処理">自身と味方に物理防御力増加を付与。不死身の付与はなし</td>
+                  <td data-label="発動回数・再発動の制限">バトル中1回</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/illya_gods_curse.html#skill-4">[神呪の魔女]イリア S4 0番目の守護天使</a></th>
+                  <td data-label="耐えた後の主な処理">自身のHPを最大HPの20%回復。不死身の付与はなし</td>
+                  <td data-label="発動回数・再発動の制限">バトル中1回</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/cerberus_candy.html#skill-3">[魔法のキャンディ]ケルベロス S3 世界一幸せな魔法</a></th>
+                  <td data-label="耐えた後の主な処理">自身の弱体効果を1つ解除してから、HPを最大HPの50%回復。「優しい魔法」を4ターン付与。不死身の付与はなし</td>
+                  <td data-label="発動回数・再発動の制限">バトル中1回</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p>HP1で耐えた後に回復するスキルは、処理が終わった時もHP1のままとは限りません。また、オフィーリアの防御力増加やケルベロスの「優しい魔法」は、その後の致命的なダメージにもHP1で耐え続ける効果ではありません。</p>
+          <h3 class="guide-sub">不死身を継続して持つ</h3>
+          <p>不死身を自身に付与するのは、上の5キャラのうち次の2キャラです。</p>
+          <div class="guide-table-wrap">
+            <table class="guide-table guide-table--wrap">
+              <thead>
+                <tr>
+                  <th scope="col">キャラ／付与されるバフ</th>
+                  <th scope="col">持続</th>
+                  <th scope="col">解除・消費の扱い</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">アムレート／不死身</th>
+                  <td data-label="持続">3ターン</td>
+                  <td data-label="解除・消費の扱い">解除不可の指定なし</td>
+                </tr>
+                <tr>
+                  <th scope="row">［夏の日の夢］アムレート／王の覚悟に含まれる不死身</th>
+                  <td data-label="持続">王の覚悟は10ターン</td>
+                  <td data-label="解除・消費の扱い">王の覚悟は解除不可。ただし攻撃を受けた後のHPが1の場合、残りターンを1消費</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <h3 class="guide-sub">夏アムレートの「10ターン」は、10ターン守られる保証ではない</h3>
+          <p>王の覚悟は、通常のターン経過だけでなく、<strong>攻撃を受けた後のHPが1の場合も残りターンを1消費</strong>します。その消費後に、最大HPの10%を回復します。</p>
+          <p>王の覚悟には攻撃力90%減少も含まれます。ただし、7ターン目以降に付与した場合は攻撃力が減少しません。通常アムレートの不死身と、同じ効果として扱わないことが大切です。</p>
+          <h3 class="guide-sub">耐える効果に関係する専用武器差分</h3>
+          <ul class="guide-bullets">
+            <li>［夏の日の夢］アムレート：専用武器Lv2で、再発動待ちが自身の行動終了8回から4回へ、発動しなくなる境界が17ターン目以降から33ターン目以降へ変わります。</li>
+            <li>［神呪の魔女］イリア：専用武器Lv2で、HP1で耐えた後の回復量が最大HPの20%から100%へ変わります。耐える回数が増える変更ではありません。</li>
+          </ul>
+        </div>
+      </section>
+      <section class="guide-card" id="users" aria-labelledby="users-title">
+        <div class="guide-card-head">
+          <h2 id="users-title">参照・利用・強化するキャラ</h2>
+        </div>
+        <div class="guide-card-body">
+          <p>夏アムレートの王の覚悟は、攻撃を受けた後のHPが1かを参照する自身の効果です。味方へ不死身を配る技能ではありません。</p>
+          <p>確認したサイト収録データでは、他者の不死身を条件として直接強化する技能は見つかりませんでした。HPが低いと火力が伸びる技能も、「不死身を持つと強化される」技能とは区別します。</p>
+        </div>
+      </section>
+      <section class="guide-card" id="countermeasures" aria-labelledby="countermeasures-title">
+        <div class="guide-card-head">
+          <h2 id="countermeasures-title">防ぐ・対策する方法</h2>
+        </div>
+        <div class="guide-card-body">
+          <p>通常アムレートの不死身には解除不可の指定がないため、バフ解除・奪取が対策候補になります。ただし、最初のHP1で耐える処理そのものは取り除けません。</p>
+          <p>夏アムレートの王の覚悟は解除不可なので、通常のバフ解除・奪取では外せません。残りターン、被攻撃による消費、再発動待ち、発動できるターンの上限を分けて確認します。</p>
+          <p>不死身が続かない1回限りのHP1耐えは、発動した後のダメージまで防ぐものではありません。攻撃や持続ダメージでは、不死身が有効な間は致命的なダメージをHP1で耐えられます。</p>
+          <p>即時戦闘不能との相互作用は未確認です。不死身やHP1耐えを必ず突破する対策としては案内できません。</p>
+        </div>
+      </section>
+      <section class="guide-card" id="relationships" aria-labelledby="relationships-title">
+        <div class="guide-card-head">
+          <h2 id="relationships-title">関連する特殊効果</h2>
+        </div>
+        <div class="guide-card-body">
+          <ul class="guide-bullets">
+            <li>復活：戦闘不能になった後の復帰。今回の耐える処理とは異なります。</li>
+            <li><a href="./self-damage.html">自傷ダメージ</a>：不死身・HP1で耐えるの対象外。自傷の説明にある「HP1を下回らない」という下限も、致命的なダメージを耐える技能とは別です。</li>
+            <li><a href="./barrier.html">結界</a>・遮断・シールド・多重バリア：ダメージの軽減や無効化などに関わる効果で、HP1を残す処理とは別です。</li>
+            <li><a href="./transparency.html">透明</a>：攻撃・スキルの対象から外れる効果。攻撃を受けてから耐える仕組みではありません。</li>
+          </ul>
+        </div>
+      </section>
+      <section class="guide-card" id="sources" aria-labelledby="sources-title">
+        <div class="guide-card-head">
+          <h2 id="sources-title">出典</h2>
+        </div>
+        <div class="guide-card-body">
+          <p class="guide-source">出典：公式FAQ「バフの種類」／公式FAQ「バフ・弱体効果」／公式FAQ「その他の効果」</p>
+          <p class="guide-source">共通仕様は上記の公式FAQ、キャラ別の条件・持続はリンク先の当サイトのスキル情報と照合資料を基準に整理しています。最終横断確認：2026年10月25日。当サイト収録120キャラ・480スキルを確認しています。ゲーム内の全実装キャラを直接確認した一覧ではありません。</p>
+          <ul class="guide-bullets guide-source">
+            <li><a href="https://mementomori.zendesk.com/hc/ja/articles/46412799595545" target="_blank" rel="noopener">公式FAQ「バフの種類」</a></li>
+            <li><a href="https://mementomori.zendesk.com/hc/ja/articles/46412673040921" target="_blank" rel="noopener">公式FAQ「バフ・弱体効果」</a></li>
+            <li><a href="https://mementomori.zendesk.com/hc/ja/articles/46414238259097" target="_blank" rel="noopener">公式FAQ「その他の効果」</a></li>
+          </ul>
+        </div>
+      </section>
+    </div>
+    <!-- ad:bottom -->
+    <aside class="ad-slot" aria-label="広告">
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-6389066329814944"
+           data-ad-slot="6111654373"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </aside>
+    <!-- /ad:bottom -->
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <span>ミレストのメメントモリ分析データ室 / 非公式ファンサイト</span>
+      <nav class="footer-links" aria-label="サイト内のページ">
+        <a href="/">トップ</a>
+        <a href="../characters/index.html">キャラ一覧</a>
+        <a href="/pages/guide/">このサイトでできること</a>
+        <a href="/privacy.html">プライバシーポリシー</a>
+        <a href="/disclaimer.html">免責事項</a>
+        <a href="/about.html">このサイトについて</a>
+        <a href="/contact.html">お問い合わせ</a>
+      </nav>
+    </div>
+  </footer>
+  <script src="../../js/figure-series.js?v=8b71cecf" defer></script>
+</body>
+</html>
