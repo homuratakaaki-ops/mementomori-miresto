@@ -21115,7 +21115,7 @@
       "category": "回復・復活",
       "majorCategory": "回復・復活",
       "subCategory": "パッシブ効果",
-      "target": "戦闘不能味方 / 自身",
+      "target": "自身 / 攻撃力が高い味方2体",
       "multiplierText": "HP25%復活 / 最大HP+50% / 味方攻撃+20% / 味方CT-2",
       "duration": "条件参照",
       "ct": null,
@@ -24113,7 +24113,7 @@
       "noteUrl": "",
       "imageUrl": "",
       "sourceUrl": "https://ichigogames.net/mementomori/amour/",
-      "plainSummary": "HPの常時底上げ。復活しても消えない。",
+      "plainSummary": "HPを底上げし、復活後にも再付与する。",
       "steps": [
         {
           "text": "自身の最大HP+50%(解除不可)"
