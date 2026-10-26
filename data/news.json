@@ -355,6 +355,13 @@
       "kind": "サイト更新",
       "url": "pages/status/revival.html",
       "text": "復活ガイドを追加。戦闘不能時のバフ・CTの扱い、復活する3キャラの違いとHP1で耐える効果との関係を整理"
+    },
+    {
+      "id": "2026-10-26-regeneration-guide",
+      "date": "2026-10-26",
+      "kind": "サイト更新",
+      "url": "pages/status/regeneration.html",
+      "text": "再生ガイドを追加。行動開始時の回復と、回復量・対象・持続・条件・専用武器による違いを整理"
     }
   ]
 }
