@@ -117,6 +117,10 @@
     "気絶返し": {
       "text": "攻撃を受けたとき、攻撃してきた敵へ一定確率で気絶を付与するバフ。",
       "guideUrl": "/pages/status/stun-return.html"
+    },
+    "バフカバー": {
+      "text": "敵のスキルでバフ解除・奪取を受けるとき、ほかのバフより優先して対象になるバフ。",
+      "guideUrl": "/pages/status/buff-cover.html"
     }
   }
 }
