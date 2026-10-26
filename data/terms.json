@@ -113,6 +113,10 @@
     "軽快": {
       "text": "行動終了時のスキルCT減少を早めるバフ。スピード上昇や、その場でCTを減らす効果とは異なる。",
       "guideUrl": "/pages/status/nimble.html"
+    },
+    "気絶返し": {
+      "text": "攻撃を受けたとき、攻撃してきた敵へ一定確率で気絶を付与するバフ。",
+      "guideUrl": "/pages/status/stun-return.html"
     }
   }
 }
