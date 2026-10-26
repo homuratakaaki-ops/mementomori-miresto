@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>軽快｜特殊効果ガイド | ミレストのメメントモリ分析データ室</title>
+  <meta name="description" content="メメントモリの軽快を解説。行動終了時のスキルCT減少を早める仕組み、ミフリS2の対象・効果量・持続・条件、遅延との相殺や直接CT操作との違いを整理します。">
+  <meta name="robots" content="noindex">
+  <link rel="canonical" href="https://memento.musoudc.com/pages/status/nimble.html">
+  <!-- OGP。画像は共通のものを使う（ガイドごとの画像生成は未対応） -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="ミレストのメメントモリ分析データ室">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="og:title" content="軽快｜特殊効果ガイド | ミレストのメメントモリ分析データ室">
+  <meta property="og:description" content="メメントモリの軽快を解説。行動終了時のスキルCT減少を早める仕組み、ミフリS2の対象・効果量・持続・条件、遅延との相殺や直接CT操作との違いを整理します。">
+  <meta property="og:url" content="https://memento.musoudc.com/pages/status/nimble.html">
+  <meta property="og:image" content="https://memento.musoudc.com/assets/ogp/ogp-common.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <link rel="icon" type="image/png" href="../../assets/miresto/miresto-icon-32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="../../assets/miresto/miresto-icon-180.png">
+  <link rel="stylesheet" href="../../assets/character-page.css?v=ba122311">
+  <link rel="stylesheet" href="../../assets/status-guide.css?v=71746d66">
+  <!-- ga:head -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-BHKBSRGSJF"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BHKBSRGSJF');
+  </script>
+  <!-- /ga:head -->
+  <!-- ad:head -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6389066329814944" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="/assets/ad-slot.css">
+  <!-- /ad:head -->
+</head>
+<body data-status-guide="nimble" data-prerendered>
+  <header class="page-header">
+    <div class="header-inner">
+      <a class="top-link" href="/">トップ</a>
+      <a class="top-link" href="./index.html">状態異常・特殊効果ガイドの一覧へ</a>
+      <p class="eyebrow">STATUS GUIDE</p>
+      <h1>軽快｜特殊効果ガイド</h1>
+      <div class="guide-meta">
+        <span class="tag">最終横断確認 2026-10-26</span>
+      </div>
+      <p class="guide-meta-note">当サイトの公開キャラデータ120キャラ・480スキルを確認しています。</p>
+    </div>
+  </header>
+
+  <main>
+    <div class="guide-list">
+      <section class="guide-card" id="oneline" aria-labelledby="oneline-title">
+        <div class="guide-card-head">
+          <h2 id="oneline-title">ひとことで</h2>
+        </div>
+        <div class="guide-card-body">
+          <p>軽快は、行動終了時に進むスキルのクールタイム（CT）の減少を早めるバフです。</p>
+          <div class="guide-figure-mobile is-only" data-figure-series>
+            <div class="guide-series-track" tabindex="0" role="region" aria-label="図解3枚。横にスクロールして次の図へ">
+              <figure class="guide-figure-panel" aria-label="1 / 3">
+                <a href="../../assets/status/nimble-guide-m1.jpg?v=c8639d18" aria-label="図1を拡大して開く（3枚中1枚目）">
+                  <picture>
+                    <source type="image/webp" srcset="../../assets/status/nimble-guide-m1.webp?v=f2b54a74">
+                    <img src="../../assets/status/nimble-guide-m1.jpg?v=c8639d18" width="1122" height="1402" alt="軽快の基礎知識1/3。軽快はスキル回転を早める。1：軽快は、毎ターン行動終了時のスキルクールタイム減少を早める。行動終了時の時計とCTの図。2：次のアクティブスキルを通常より早く使いやすくなる。3：遅延とは逆方向の効果。遅延と軽快の比較図。ミフリ。" decoding="async">
+                  </picture>
+                </a>
+              </figure>
+              <figure class="guide-figure-panel" aria-label="2 / 3">
+                <a href="../../assets/status/nimble-guide-m2.jpg?v=519f0d48" aria-label="図2を拡大して開く（3枚中2枚目）">
+                  <picture>
+                    <source type="image/webp" srcset="../../assets/status/nimble-guide-m2.webp?v=b737c9e6">
+                    <img src="../../assets/status/nimble-guide-m2.jpg?v=519f0d48" width="1122" height="1402" alt="軽快とCT減少の違い2/3。軽快は「今後の戻り」を早める。スキルクールタイム減少＝その場で減らす。軽快＝行動終了時の減少を早める。1：スキルクールタイム減少は、その場で残りCTを直接減らす。2：軽快は、行動終了時のCT減少を早める。3：似ているが処理は別。ミフリ。" loading="lazy" decoding="async">
+                  </picture>
+                </a>
+              </figure>
+              <figure class="guide-figure-panel" aria-label="3 / 3">
+                <a href="../../assets/status/nimble-guide-m3.jpg?v=8bda551c" aria-label="図3を拡大して開く（3枚中3枚目）">
+                  <picture>
+                    <source type="image/webp" srcset="../../assets/status/nimble-guide-m3.webp?v=61d61058">
+                    <img src="../../assets/status/nimble-guide-m3.jpg?v=8bda551c" width="1122" height="1402" alt="軽快、ミフリで見る使い方3/3。主力スキルを早く回したい時に強い。1：ミフリは軽快の代表例。2：ミフリ自身のスキル再使用を早める。ミフリ1人を循環矢印で囲んだ図。3：CT0にする効果ではない点に注意。ミフリ。" loading="lazy" decoding="async">
+                  </picture>
+                </a>
+              </figure>
+            </div>
+            <div class="guide-slides-controls guide-series-controls" hidden>
+              <button type="button" data-series-prev aria-label="前の図へ">‹</button>
+              <span class="guide-slides-dots">
+                <button type="button" data-series-dot="0" aria-label="1枚目へ" aria-current="true"></button>
+                <button type="button" data-series-dot="1" aria-label="2枚目へ"></button>
+                <button type="button" data-series-dot="2" aria-label="3枚目へ"></button>
+              </span>
+              <span class="guide-series-count" aria-live="polite">1 / 3</span>
+              <button type="button" data-series-next aria-label="次の図へ">›</button>
+            </div>
+            <p class="guide-figure-note"><span class="is-narrow">横にスワイプで次の図へ。図をタップすると拡大して開きます。</span><span class="is-wide">‹ › で次の図へ。図をクリックすると拡大して開きます。</span></p>
+          </div>
+        </div>
+      </section>
+      <section class="guide-card" id="mechanism" aria-labelledby="mechanism-title">
+        <div class="guide-card-head">
+          <h2 id="mechanism-title">仕組み</h2>
+        </div>
+        <div class="guide-card-body">
+          <p>通常、CT中のスキルは行動終了時にカウントが1減ります。軽快は、この減少量を増やします。スピードを上げて行動順を変える効果でも、その場でCTを減らしたり0にしたりする効果でもありません。</p>
+        </div>
+      </section>
+      <section class="guide-card" id="rules" aria-labelledby="rules-title">
+        <div class="guide-card-head">
+          <h2 id="rules-title">重複・上書きなどの固有ルール</h2>
+        </div>
+        <div class="guide-card-body">
+          <p>軽快と遅延が同時にある場合は、互いの効果量を相殺してCT減少量を決めます。最終的なCT減少量は0より小さくなりません。同じキャラが付与した同じバフは、新しい効果で上書きされます。</p>
+          <p>効果ターンは付帯者の行動終了時に減ります。ただし、付帯者の行動開始から行動終了までの間に付与された効果は即時反映され、効果ターンは次のターンの行動終了時から減ります。ミフリがS2で自身へ付与する軽快も、この扱いです。「1ターン」だけから、次のスキルの発動ターンや回数を決めつけないでください。</p>
+        </div>
+      </section>
+      <section class="guide-card" id="givers" aria-labelledby="givers-title">
+        <div class="guide-card-head">
+          <h2 id="givers-title">付与・使用するキャラ</h2>
+        </div>
+        <div class="guide-card-body">
+          <div class="guide-table-wrap">
+            <table class="guide-table guide-table--wrap">
+              <thead>
+                <tr>
+                  <th scope="col">キャラ／スキル</th>
+                  <th scope="col">対象</th>
+                  <th scope="col">付与の時点・条件</th>
+                  <th scope="col">効果量</th>
+                  <th scope="col">持続</th>
+                  <th scope="col">専用武器差</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row"><a href="../characters/mifuri.html#skill-2">ミフリ S2 アレヴ・セラープ</a></th>
+                  <td data-label="対象">自身</td>
+                  <td data-label="付与の時点・条件">最後の魔法攻撃後</td>
+                  <td data-label="効果量">行動終了時のCT減少量を1増やす</td>
+                  <td data-label="持続">1ターン</td>
+                  <td data-label="専用武器差">軽快への変更なし</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p>軽快はスキルLv3で追加されます。</p>
+        </div>
+      </section>
+      <section class="guide-card" id="users" aria-labelledby="users-title">
+        <div class="guide-card-head">
+          <h2 id="users-title">参照・利用・強化するキャラ</h2>
+        </div>
+        <div class="guide-card-body">
+          <p>ミフリは自身に付与して利用します。今回確認した範囲では、軽快の付帯を条件にした別スキルや、軽快そのものを強化するスキルは確認できませんでした。</p>
+        </div>
+      </section>
+      <section class="guide-card" id="countermeasures" aria-labelledby="countermeasures-title">
+        <div class="guide-card-head">
+          <h2 id="countermeasures-title">防ぐ・対策する方法</h2>
+        </div>
+        <div class="guide-card-body">
+          <ul class="guide-bullets">
+            <li><strong>付いている軽快を取り除く：</strong> バフ解除。ミフリS2の軽快に解除不可の指定はありませんが、解除手段ごとの対象数・条件や、敵への解除の命中判定に注意してください。</li>
+            <li><strong>新たな付与を防ぐ：</strong> 付与前のバフ無効。すでに付いた軽快を消す効果ではありません。</li>
+            <li><strong>CT減少量を相殺する：</strong> 遅延。軽快そのものを解除するわけではありません。</li>
+            <li><strong>次のアクティブスキルを使わせない：</strong> 気絶・睡眠・沈黙などの行動阻害。軽快の解除とは別の対策で、各効果の条件や無効化に左右されます。</li>
+          </ul>
+        </div>
+      </section>
+      <section class="guide-card" id="relationships" aria-labelledby="relationships-title">
+        <div class="guide-card-head">
+          <h2 id="relationships-title">関連する特殊効果</h2>
+        </div>
+        <div class="guide-card-body">
+          <ul class="guide-bullets">
+            <li><a href="./delay.html">遅延</a>：行動終了時のCT減少を遅くし、軽快と効果量を相殺します。</li>
+            <li><a href="./buff-block.html">バフ無効</a>：新しいバフの獲得を防ぎます。</li>
+            <li><a href="./stun.html">気絶</a>・<a href="./sleep.html">睡眠</a>・<a href="./silence.html">沈黙</a>：次の行動・アクティブスキルを妨げる効果です。</li>
+          </ul>
+        </div>
+      </section>
+      <section class="guide-card" id="sources" aria-labelledby="sources-title">
+        <div class="guide-card-head">
+          <h2 id="sources-title">出典</h2>
+        </div>
+        <div class="guide-card-body">
+          <p class="guide-source">出典：ゲーム内ヘルプ／ゲーム内スキル説明／公式FAQ「バフの種類」／公式FAQ「弱体効果の種類」／公式FAQ「バフ・弱体効果」／公式FAQ「その他の効果」／公式FAQ「スキル」／公式FAQ「行動」</p>
+          <p class="guide-source">軽快の共通仕様は公式FAQ「バフの種類」、遅延との相殺・バフ無効・行動阻害は「弱体効果の種類」、上書き・解除・効果ターンは「バフ・弱体効果」、直接のCT増減は「その他の効果」、CTと行動の扱いは「スキル」「行動」を参照しています。ミフリの効果量・持続・追加Lv・専用武器による違いはゲーム内スキル説明を基準に整理しています。最終横断確認：2026年10月26日。当サイト収録120キャラ・480スキルを横断確認しています。ゲーム内の全実装キャラ・全スキル画面を直接確認した一覧ではありません。</p>
+          <ul class="guide-bullets guide-source">
+            <li><a href="https://mementomori.zendesk.com/hc/ja/articles/46412799595545" target="_blank" rel="noopener">公式FAQ「バフの種類」</a></li>
+            <li><a href="https://mementomori.zendesk.com/hc/ja/articles/46414059026841" target="_blank" rel="noopener">公式FAQ「弱体効果の種類」</a></li>
+            <li><a href="https://mementomori.zendesk.com/hc/ja/articles/46412673040921" target="_blank" rel="noopener">公式FAQ「バフ・弱体効果」</a></li>
+            <li><a href="https://mementomori.zendesk.com/hc/ja/articles/46414238259097" target="_blank" rel="noopener">公式FAQ「その他の効果」</a></li>
+            <li><a href="https://mementomori.zendesk.com/hc/ja/articles/46409850604953" target="_blank" rel="noopener">公式FAQ「スキル」</a></li>
+            <li><a href="https://mementomori.zendesk.com/hc/ja/articles/46415832296345" target="_blank" rel="noopener">公式FAQ「行動」</a></li>
+          </ul>
+        </div>
+      </section>
+    </div>
+    <!-- ad:bottom -->
+    <aside class="ad-slot" aria-label="広告">
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-6389066329814944"
+           data-ad-slot="6111654373"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </aside>
+    <!-- /ad:bottom -->
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <span>ミレストのメメントモリ分析データ室 / 非公式ファンサイト</span>
+      <nav class="footer-links" aria-label="サイト内のページ">
+        <a href="/">トップ</a>
+        <a href="../characters/index.html">キャラ一覧</a>
+        <a href="/pages/guide/">このサイトでできること</a>
+        <a href="/privacy.html">プライバシーポリシー</a>
+        <a href="/disclaimer.html">免責事項</a>
+        <a href="/about.html">このサイトについて</a>
+        <a href="/contact.html">お問い合わせ</a>
+      </nav>
+    </div>
+  </footer>
+  <script src="../../js/figure-series.js?v=8b71cecf" defer></script>
+</body>
+</html>
