@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>バフカバー｜特殊効果ガイド | ミレストのメメントモリ分析データ室</title>
+  <meta name="description" content="メメントモリのバフカバーを解説。解除・奪取で優先して選ばれる仕組み、ポプリS4の対象・持続・再発動制限と、ターン数・スタック数の減少との違いを整理します。">
+  <meta name="robots" content="noindex">
+  <link rel="canonical" href="https://memento.musoudc.com/pages/status/buff-cover.html">
+  <!-- OGP。画像は共通のものを使う（ガイドごとの画像生成は未対応） -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="ミレストのメメントモリ分析データ室">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="og:title" content="バフカバー｜特殊効果ガイド | ミレストのメメントモリ分析データ室">
+  <meta property="og:description" content="メメントモリのバフカバーを解説。解除・奪取で優先して選ばれる仕組み、ポプリS4の対象・持続・再発動制限と、ターン数・スタック数の減少との違いを整理します。">
+  <meta property="og:url" content="https://memento.musoudc.com/pages/status/buff-cover.html">
+  <meta property="og:image" content="https://memento.musoudc.com/assets/ogp/ogp-common.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <link rel="icon" type="image/png" href="../../assets/miresto/miresto-icon-32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="../../assets/miresto/miresto-icon-180.png">
+  <link rel="stylesheet" href="../../assets/character-page.css?v=ba122311">
+  <link rel="stylesheet" href="../../assets/status-guide.css?v=71746d66">
+  <!-- ga:head -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-BHKBSRGSJF"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BHKBSRGSJF');
+  </script>
+  <!-- /ga:head -->
+  <!-- ad:head -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6389066329814944" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="/assets/ad-slot.css">
+  <!-- /ad:head -->
+</head>
+<body data-status-guide="buff-cover" data-prerendered>
+  <header class="page-header">
+    <div class="header-inner">
+      <a class="top-link" href="/">トップ</a>
+      <a class="top-link" href="./index.html">状態異常・特殊効果ガイドの一覧へ</a>
+      <p class="eyebrow">STATUS GUIDE</p>
+      <h1>バフカバー｜特殊効果ガイド</h1>
+      <div class="guide-meta">
+        <span class="tag">最終横断確認 2026-10-27</span>
+      </div>
+      <p class="guide-meta-note">当サイトの公開キャラデータ120キャラ・480スキルを確認しています。</p>
+    </div>
+  </header>
+
+  <main>
+    <div class="guide-list">
+      <section class="guide-card" id="oneline" aria-labelledby="oneline-title">
+        <div class="guide-card-head">
+          <h2 id="oneline-title">ひとことで</h2>
+        </div>
+        <div class="guide-card-body">
+          <p>バフカバーは、敵のスキルでバフを解除・奪取されるとき、ほかのバフより優先して対象になるバフです。解除そのものを無効にする効果ではありません。</p>
+          <div class="guide-figure-mobile is-only" data-figure-series>
+            <div class="guide-series-track" tabindex="0" role="region" aria-label="図解3枚。横にスクロールして次の図へ">
+              <figure class="guide-figure-panel" aria-label="1 / 3">
+                <a href="../../assets/status/buff-cover-guide-m1.jpg?v=cf9699a1" aria-label="図1を拡大して開く（3枚中1枚目）">
+                  <picture>
+                    <source type="image/webp" srcset="../../assets/status/buff-cover-guide-m1.webp?v=3f174468">
+                    <img src="../../assets/status/buff-cover-guide-m1.jpg?v=cf9699a1" width="1122" height="1402" alt="バフカバーの基礎知識1/3。ほかのバフより先に狙われる。敵のバフ解除・奪取が、攻撃力UPより手前のバフカバーを優先して選ぶ対象選択のイメージ。1：敵のバフ解除・奪取で優先して対象になる。2：解除そのものを無効にする効果ではない。3：ほかのバフを守りやすくする。ポプリ。" decoding="async">
+                  </picture>
+                </a>
+              </figure>
+              <figure class="guide-figure-panel" aria-label="2 / 3">
+                <a href="../../assets/status/buff-cover-guide-m2.jpg?v=49425059" aria-label="図2を拡大して開く（3枚中2枚目）">
+                  <picture>
+                    <source type="image/webp" srcset="../../assets/status/buff-cover-guide-m2.webp?v=27d92ced">
+                    <img src="../../assets/status/buff-cover-guide-m2.jpg?v=49425059" width="1122" height="1402" alt="バフカバー、ポプリS4で見る仕組み2/3。味方全体に4ターンのバフカバー。1：ターン開始時に味方全体へ付与。2：バフカバーは4ターン持続。3：発動後4回行動終了するまで再発動しない。再発動の制限。S4「言霊の魔法」。専用武器による変更なし。ポプリ。" loading="lazy" decoding="async">
+                  </picture>
+                </a>
+              </figure>
+              <figure class="guide-figure-panel" aria-label="3 / 3">
+                <a href="../../assets/status/buff-cover-guide-m3.jpg?v=23db230d" aria-label="図3を拡大して開く（3枚中3枚目）">
+                  <picture>
+                    <source type="image/webp" srcset="../../assets/status/buff-cover-guide-m3.webp?v=c33c1806">
+                    <img src="../../assets/status/buff-cover-guide-m3.jpg?v=23db230d" width="1122" height="1402" alt="バフカバー、使うときの注意3/3。守れる範囲に注意。1：カバーが複数あるときは、その中からランダムに選ばれる。2：ターン数・スタック数の減少ではカバーが優先対象にならない。3：複数解除・全解除から全バフを守る保証はない。ポプリ。" loading="lazy" decoding="async">
+                  </picture>
+                </a>
+              </figure>
+            </div>
+            <div class="guide-slides-controls guide-series-controls" hidden>
+              <button type="button" data-series-prev aria-label="前の図へ">‹</button>
+              <span class="guide-slides-dots">
+                <button type="button" data-series-dot="0" aria-label="1枚目へ" aria-current="true"></button>
+                <button type="button" data-series-dot="1" aria-label="2枚目へ"></button>
+                <button type="button" data-series-dot="2" aria-label="3枚目へ"></button>
+              </span>
+              <span class="guide-series-count" aria-live="polite">1 / 3</span>
+              <button type="button" data-series-next aria-label="次の図へ">›</button>
+            </div>
+            <p class="guide-figure-note"><span class="is-narrow">横にスワイプで次の図へ。図をタップすると拡大して開きます。</span><span class="is-wide">‹ › で次の図へ。図をクリックすると拡大して開きます。</span></p>
+          </div>
+        </div>
+      </section>
+      <section class="guide-card" id="mechanism" aria-labelledby="mechanism-title">
+        <div class="guide-card-head">
+          <h2 id="mechanism-title">仕組み</h2>
+        </div>
+        <div class="guide-card-body">
+          <p>攻撃力増加とバフカバーが付いている相手から「バフを1つ解除」する場合、解除対象にはバフカバーが優先して選ばれます。解除が必ず成功するという意味ではありません。</p>
+          <p>複数個解除や全解除に対して、ほかのバフをすべて残せるわけではありません。バフカバーが消えた後も保護が続く効果ではなく、細かな対象選択・処理順は未確認です。</p>
+        </div>
+      </section>
+      <section class="guide-card" id="rules" aria-labelledby="rules-title">
+        <div class="guide-card-head">
+          <h2 id="rules-title">重複・上書きなどの固有ルール</h2>
+        </div>
+        <div class="guide-card-body">
+          <div class="guide-table-wrap">
+            <table class="guide-table guide-table--wrap">
+              <thead>
+                <tr>
+                  <th scope="col">場面</th>
+                  <th scope="col">バフカバーの扱い</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">複数のバフカバーが付いている</th>
+                  <td data-label="バフカバーの扱い">バフカバー同士の中からランダムに解除・奪取対象が選ばれる</td>
+                </tr>
+                <tr>
+                  <th scope="row">バフのターン数・スタック数を直接減らす</th>
+                  <td data-label="バフカバーの扱い">バフカバーは優先対象にならない。どのバフが減少対象になるかは個別スキルによる</td>
+                </tr>
+                <tr>
+                  <th scope="row">同名のバフカバーを再付与する</th>
+                  <td data-label="バフカバーの扱い">共通ルールでは、同じキャラの同じバフは新しい効果で上書きされます。バフカバー固有の例外は未確認です。</td>
+                </tr>
+                <tr>
+                  <th scope="row">バフをコピーする</th>
+                  <td data-label="バフカバーの扱い">解除・奪取とは別の処理。バフカバー固有の優先扱いは未確認</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+      <!-- ad:mid -->
+      <aside class="ad-slot ad-slot--mid" aria-label="広告">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-6389066329814944"
+             data-ad-slot="9192142429"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      </aside>
+      <!-- /ad:mid -->
+      <section class="guide-card" id="givers" aria-labelledby="givers-title">
+        <div class="guide-card-head">
+          <h2 id="givers-title">付与・使用するキャラ</h2>
+        </div>
+        <div class="guide-card-body">
+          <div class="guide-table-wrap">
+            <table class="guide-table guide-table--wrap">
+              <thead>
+                <tr>
+                  <th scope="col">キャラ・スキル</th>
+                  <th scope="col">発動条件・タイミング</th>
+                  <th scope="col">対象・持続</th>
+                  <th scope="col">再発動条件</th>
+                  <th scope="col">専用武器差分</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row"><a href="../characters/potpourri.html#skill-4">ポプリ S4 言霊の魔法</a></th>
+                  <td data-label="発動条件・タイミング">ターン開始時に自動発動。付与確率の数値指定なし</td>
+                  <td data-label="対象・持続">味方全体／4ターン</td>
+                  <td data-label="再発動条件">発動後、4回行動終了するまで再発動しない</td>
+                  <td data-label="専用武器差分">専用Lv1〜3によるバフカバーの変更なし</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p>4ターンは付与されたバフカバーの持続、4回行動終了はポプリS4の再発動制限です。原文では行動主体が省略されており、厳密なカウント条件は未確認です。味方全員の合計4回や、バフカバーが解除された回数を数えるとは断定できません。途中でカバーが消えても、直ちに再付与されるとは限りません。</p>
+          <p>S4には自身の被ダメージを減らす別効果もありますが、味方全体のバフカバーがダメージを減らすわけではありません。スキルLvによるバフカバーの対象・持続・再発動条件の変更は確認されていません。</p>
+        </div>
+      </section>
+      <section class="guide-card" id="users" aria-labelledby="users-title">
+        <div class="guide-card-head">
+          <h2 id="users-title">参照・利用・強化するキャラ</h2>
+        </div>
+        <div class="guide-card-body">
+          <p>確認した範囲では、バフカバーを名指しして参照・利用・強化する別スキルは見つかりませんでした。バフ全般の個数を参照するスキルや、バフを解除・奪取するスキルとは分けています。</p>
+        </div>
+      </section>
+      <section class="guide-card" id="countermeasures" aria-labelledby="countermeasures-title">
+        <div class="guide-card-head">
+          <h2 id="countermeasures-title">防ぐ・対策する方法</h2>
+        </div>
+        <div class="guide-card-body">
+          <div class="guide-table-wrap">
+            <table class="guide-table guide-table--wrap">
+              <thead>
+                <tr>
+                  <th scope="col">方法</th>
+                  <th scope="col">役割と注意点</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row"><a href="./buff-block.html">バフ無効</a></th>
+                  <td data-label="役割と注意点">付与前に新しいバフの獲得を防ぐ。すでに付いているバフカバーを消す効果ではない</td>
+                </tr>
+                <tr>
+                  <th scope="row">バフ解除・奪取</th>
+                  <td data-label="役割と注意点">すでに付いたバフを扱う。バフカバーが優先対象になるため、ほかのバフを狙って必ず消せるとは限らない</td>
+                </tr>
+                <tr>
+                  <th scope="row">ターン数・スタック数の減少</th>
+                  <td data-label="役割と注意点">バフカバーの優先扱いを受けない。ただし目的のバフを選べるかは各スキル次第</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p>対象・発動条件・解除個数などは、各スキルの説明や<a href="./countermeasures.html">対策キャラ検索</a>で確認できます。</p>
+        </div>
+      </section>
+      <section class="guide-card" id="relationships" aria-labelledby="relationships-title">
+        <div class="guide-card-head">
+          <h2 id="relationships-title">関連する特殊効果</h2>
+        </div>
+        <div class="guide-card-body">
+          <p>バフ無効は「新しく付くのを防ぐ」、バフカバーは「すでに付いたバフの解除・奪取対象の選ばれ方を変える」効果です。バフ解除・奪取、バフコピー、バフのターン増減も関連しますが、解除・奪取の優先ルールがそのままコピーなどに適用されるわけではありません。</p>
+        </div>
+      </section>
+      <section class="guide-card" id="sources" aria-labelledby="sources-title">
+        <div class="guide-card-head">
+          <h2 id="sources-title">出典</h2>
+        </div>
+        <div class="guide-card-body">
+          <p class="guide-source">出典：ゲーム内ヘルプ／ゲーム内スキル説明／公式FAQ「バフの種類」／公式FAQ「バフ・弱体効果」／公式FAQ「弱体効果の種類」</p>
+          <p class="guide-source">ゲーム内ヘルプ／ゲーム内スキル説明を整理した掲載資料と、以下の公式FAQを照合しています。共通仕様は公式FAQ、ポプリの個別条件は現行キャラページの掲載スキルと補助資料に基づきます。公式FAQ「バフの種類」：バフカバーの定義・優先対象・例外。公式FAQ「バフ・弱体効果」：効果ターン、重ね掛け、解除・奪取・コピーの共通説明。公式FAQ「弱体効果の種類」：バフ無効。最終横断確認：2026年10月27日。当サイト収録120キャラ・480スキルを確認しています。全ゲーム実装キャラの網羅や全スキル画面の直接確認を示すものではありません。</p>
+          <ul class="guide-bullets guide-source">
+            <li><a href="https://mementomori.zendesk.com/hc/ja/articles/46412799595545" target="_blank" rel="noopener">公式FAQ「バフの種類」</a></li>
+            <li><a href="https://mementomori.zendesk.com/hc/ja/articles/46412673040921" target="_blank" rel="noopener">公式FAQ「バフ・弱体効果」</a></li>
+            <li><a href="https://mementomori.zendesk.com/hc/ja/articles/46414059026841" target="_blank" rel="noopener">公式FAQ「弱体効果の種類」</a></li>
+          </ul>
+        </div>
+      </section>
+    </div>
+    <!-- ad:bottom -->
+    <aside class="ad-slot" aria-label="広告">
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-6389066329814944"
+           data-ad-slot="6111654373"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </aside>
+    <!-- /ad:bottom -->
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <span>ミレストのメメントモリ分析データ室 / 非公式ファンサイト</span>
+      <nav class="footer-links" aria-label="サイト内のページ">
+        <a href="/">トップ</a>
+        <a href="../characters/index.html">キャラ一覧</a>
+        <a href="/pages/guide/">このサイトでできること</a>
+        <a href="/privacy.html">プライバシーポリシー</a>
+        <a href="/disclaimer.html">免責事項</a>
+        <a href="/about.html">このサイトについて</a>
+        <a href="/contact.html">お問い合わせ</a>
+      </nav>
+    </div>
+  </footer>
+  <script src="../../js/figure-series.js?v=8b71cecf" defer></script>
+</body>
+</html>
