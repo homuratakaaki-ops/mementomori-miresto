@@ -109,6 +109,10 @@
     "吸収": {
       "text": "敵のステータスを減らし、減らした数値と同じ量を自身にバフとして加える効果。HPを回復するHPドレインとは異なる。",
       "guideUrl": "/pages/status/absorption.html"
+    },
+    "軽快": {
+      "text": "行動終了時のスキルCT減少を早めるバフ。スピード上昇や、その場でCTを減らす効果とは異なる。",
+      "guideUrl": "/pages/status/nimble.html"
     }
   }
 }
