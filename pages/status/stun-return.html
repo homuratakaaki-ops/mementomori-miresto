@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>気絶返し｜特殊効果ガイド | ミレストのメメントモリ分析データ室</title>
+  <meta name="description" content="メメントモリの気絶返しを解説。サブリナS1の付与条件・確率・2種類の持続時間・専用武器差と、気絶やカウンタとの違い、無効化・解除の対策を整理します。">
+  <meta name="robots" content="noindex">
+  <link rel="canonical" href="https://memento.musoudc.com/pages/status/stun-return.html">
+  <!-- OGP。画像は共通のものを使う（ガイドごとの画像生成は未対応） -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="ミレストのメメントモリ分析データ室">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="og:title" content="気絶返し｜特殊効果ガイド | ミレストのメメントモリ分析データ室">
+  <meta property="og:description" content="メメントモリの気絶返しを解説。サブリナS1の付与条件・確率・2種類の持続時間・専用武器差と、気絶やカウンタとの違い、無効化・解除の対策を整理します。">
+  <meta property="og:url" content="https://memento.musoudc.com/pages/status/stun-return.html">
+  <meta property="og:image" content="https://memento.musoudc.com/assets/ogp/ogp-common.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <link rel="icon" type="image/png" href="../../assets/miresto/miresto-icon-32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="../../assets/miresto/miresto-icon-180.png">
+  <link rel="stylesheet" href="../../assets/character-page.css?v=ba122311">
+  <link rel="stylesheet" href="../../assets/status-guide.css?v=71746d66">
+  <!-- ga:head -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-BHKBSRGSJF"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BHKBSRGSJF');
+  </script>
+  <!-- /ga:head -->
+  <!-- ad:head -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6389066329814944" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="/assets/ad-slot.css">
+  <!-- /ad:head -->
+</head>
+<body data-status-guide="stun-return" data-prerendered>
+  <header class="page-header">
+    <div class="header-inner">
+      <a class="top-link" href="/">トップ</a>
+      <a class="top-link" href="./index.html">状態異常・特殊効果ガイドの一覧へ</a>
+      <p class="eyebrow">STATUS GUIDE</p>
+      <h1>気絶返し｜特殊効果ガイド</h1>
+      <div class="guide-meta">
+        <span class="tag">最終横断確認 2026-10-26</span>
+      </div>
+      <p class="guide-meta-note">当サイトの公開キャラデータ120キャラ・480スキルを確認しています。</p>
+    </div>
+  </header>
+
+  <main>
+    <div class="guide-list">
+      <section class="guide-card" id="oneline" aria-labelledby="oneline-title">
+        <div class="guide-card-head">
+          <h2 id="oneline-title">ひとことで</h2>
+        </div>
+        <div class="guide-card-body">
+          <p>気絶返しは、攻撃を受けたとき、攻撃者へ一定確率で気絶を付与するバフです。受けた気絶を移す効果でも、ダメージを反射する効果でもありません。</p>
+          <div class="guide-figure-mobile is-only" data-figure-series>
+            <div class="guide-series-track" tabindex="0" role="region" aria-label="図解3枚。横にスクロールして次の図へ">
+              <figure class="guide-figure-panel" aria-label="1 / 3">
+                <a href="../../assets/status/stun-return-guide-m1.jpg?v=e3fdf107" aria-label="図1を拡大して開く（3枚中1枚目）">
+                  <picture>
+                    <source type="image/webp" srcset="../../assets/status/stun-return-guide-m1.webp?v=d59c2be3">
+                    <img src="../../assets/status/stun-return-guide-m1.jpg?v=e3fdf107" width="1122" height="1402" alt="気絶返しの基礎知識1/3。攻撃されたら「気絶」で返す。敵の攻撃を受けたサブリナから、攻撃してきた敵に気絶が返る図。1：気絶返しは、攻撃を受けたときに攻撃してきた敵へ気絶を付与するバフ。2：自分から攻撃するのではなく、被攻撃をきっかけに発動。3：気絶そのものとは別の効果。サブリナ。" decoding="async">
+                  </picture>
+                </a>
+              </figure>
+              <figure class="guide-figure-panel" aria-label="2 / 3">
+                <a href="../../assets/status/stun-return-guide-m2.jpg?v=271bdf51" aria-label="図2を拡大して開く（3枚中2枚目）">
+                  <picture>
+                    <source type="image/webp" srcset="../../assets/status/stun-return-guide-m2.webp?v=d6649de7">
+                    <img src="../../assets/status/stun-return-guide-m2.jpg?v=271bdf51" width="1122" height="1402" alt="気絶返し、サブリナで見る仕組み2/3。攻撃を受ける→30%で2ターン気絶。1：サブリナは専用武器Lv1で気絶返しを獲得。2：S1でクリティカルが4回以上発生すると、自身へ2ターンの気絶返し。3：攻撃を受けたとき30%で攻撃してきた敵へ2ターン気絶。サブリナ。" loading="lazy" decoding="async">
+                  </picture>
+                </a>
+              </figure>
+              <figure class="guide-figure-panel" aria-label="3 / 3">
+                <a href="../../assets/status/stun-return-guide-m3.jpg?v=ca661089" aria-label="図3を拡大して開く（3枚中3枚目）">
+                  <picture>
+                    <source type="image/webp" srcset="../../assets/status/stun-return-guide-m3.webp?v=95520bea">
+                    <img src="../../assets/status/stun-return-guide-m3.jpg?v=ca661089" width="1122" height="1402" alt="気絶返し、使うときの注意3/3。攻撃されなければ発動しない。1：気絶返しが付いている間に攻撃を受けると付与を判定。被攻撃から疑問符付きの付与判定へ進む図。2：気絶の付与には相手の弱体効果耐性も関係する。3：受けた気絶を移す効果ではない。攻撃してきた敵へ気絶を付与する。サブリナ。" loading="lazy" decoding="async">
+                  </picture>
+                </a>
+              </figure>
+            </div>
+            <div class="guide-slides-controls guide-series-controls" hidden>
+              <button type="button" data-series-prev aria-label="前の図へ">‹</button>
+              <span class="guide-slides-dots">
+                <button type="button" data-series-dot="0" aria-label="1枚目へ" aria-current="true"></button>
+                <button type="button" data-series-dot="1" aria-label="2枚目へ"></button>
+                <button type="button" data-series-dot="2" aria-label="3枚目へ"></button>
+              </span>
+              <span class="guide-series-count" aria-live="polite">1 / 3</span>
+              <button type="button" data-series-next aria-label="次の図へ">›</button>
+            </div>
+            <p class="guide-figure-note"><span class="is-narrow">横にスワイプで次の図へ。図をタップすると拡大して開きます。</span><span class="is-wide">‹ › で次の図へ。図をクリックすると拡大して開きます。</span></p>
+          </div>
+        </div>
+      </section>
+      <section class="guide-card" id="mechanism" aria-labelledby="mechanism-title">
+        <div class="guide-card-head">
+          <h2 id="mechanism-title">仕組み</h2>
+        </div>
+        <div class="guide-card-body">
+          <p>先に自身へ気絶返しを付与し、その付帯中に攻撃を受けると、攻撃者への気絶付与が判定されます。自身にある「気絶返し」はバフ、相手へ付く「気絶」は弱体効果で、それぞれ別の持続時間を持ちます。</p>
+          <p>表の30%はスキルに記載された確率です。気絶の付与には弱体効果命中率・耐性率の判定もあり、最終的な成功率が必ず30%になるとは限りません。回避した場合やダメージが0になった場合に気絶返しが発動するかは、確認できた固有説明だけでは断定できません。</p>
+        </div>
+      </section>
+      <section class="guide-card" id="rules" aria-labelledby="rules-title">
+        <div class="guide-card-head">
+          <h2 id="rules-title">重複・上書きなどの固有ルール</h2>
+        </div>
+        <div class="guide-card-body">
+          <p>同じキャラの同じ気絶返しを再付与すると、新しい効果に上書きされます。相手側の気絶は重ねても別々には残らず、効果ターンの長い方を引き継ぐ1つの気絶になります。</p>
+        </div>
+      </section>
+      <section class="guide-card" id="givers" aria-labelledby="givers-title">
+        <div class="guide-card-head">
+          <h2 id="givers-title">付与・使用するキャラ</h2>
+        </div>
+        <div class="guide-card-body">
+          <div class="guide-table-wrap">
+            <table class="guide-table guide-table--wrap">
+              <thead>
+                <tr>
+                  <th scope="col">キャラ／スキル</th>
+                  <th scope="col">気絶返しの対象</th>
+                  <th scope="col">付与条件</th>
+                  <th scope="col">気絶返しの持続</th>
+                  <th scope="col">被攻撃時の気絶付与確率</th>
+                  <th scope="col">相手の気絶の持続</th>
+                  <th scope="col">専用武器差</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row"><a href="../characters/sabrina.html#skill-1">サブリナ S1 蒼穹の輪舞</a></th>
+                  <td data-label="気絶返しの対象">自身</td>
+                  <td data-label="付与条件">S1でクリティカルが4回以上発生</td>
+                  <td data-label="気絶返しの持続">2ターン</td>
+                  <td data-label="被攻撃時の気絶付与確率">30%で攻撃者へ付与</td>
+                  <td data-label="相手の気絶の持続">2ターン</td>
+                  <td data-label="専用武器差">専用Lv1で気絶返しを追加。専用Lv2はS1の攻撃回数を5回から7回へ増やす。30%と両方の2ターンは変更なし</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p>気絶返しは専用武器による追加効果で、専用武器による追加前には付与されません。攻撃回数が増えることと、被攻撃時の気絶付与確率が上がることは別です。</p>
+        </div>
+      </section>
+      <section class="guide-card" id="users" aria-labelledby="users-title">
+        <div class="guide-card-head">
+          <h2 id="users-title">参照・利用・強化するキャラ</h2>
+        </div>
+        <div class="guide-card-body">
+          <p>サブリナ自身が付与して利用します。今回の確認範囲では、気絶返しの付帯を条件にする別スキルや、気絶返しそのものを名指しで強化するスキルは確認できませんでした。</p>
+        </div>
+      </section>
+      <section class="guide-card" id="countermeasures" aria-labelledby="countermeasures-title">
+        <div class="guide-card-head">
+          <h2 id="countermeasures-title">防ぐ・対策する方法</h2>
+        </div>
+        <div class="guide-card-body">
+          <ul class="guide-bullets">
+            <li><strong>気絶返しを付けさせない：</strong> サブリナへの付与前のバフ無効。すでに付いた気絶返しを消す効果ではありません。</li>
+            <li><strong>付いている気絶返しを取り除く：</strong> 敵のバフ解除。サブリナS1の説明に解除不可の指定はありませんが、解除手段ごとの対象・条件と命中判定に左右されます。</li>
+            <li><strong>返される気絶を防ぐ：</strong> 攻撃者側の弱体効果無効・行動阻害無効など。気絶返しバフそのものを消すわけではありません。</li>
+            <li><strong>付いてしまった気絶を取り除く：</strong> 味方の弱体効果解除。無効化とは別の対策です。</li>
+          </ul>
+        </div>
+      </section>
+      <section class="guide-card" id="relationships" aria-labelledby="relationships-title">
+        <div class="guide-card-head">
+          <h2 id="relationships-title">関連する特殊効果</h2>
+        </div>
+        <div class="guide-card-body">
+          <ul class="guide-bullets">
+            <li><a href="./stun.html">気絶</a>：通常攻撃とアクティブスキルを使えなくする弱体効果。気絶返しはこれを被攻撃時に付与する仕組みです。</li>
+            <li><a href="./counter.html">カウンタ</a>：ダメージを返す仕組みで、気絶を付与する気絶返しとは別です。</li>
+            <li><a href="./buff-block.html">バフ無効</a>：新しい気絶返しの獲得を防ぐ対策です。</li>
+            <li><a href="./debuff-removal.html">弱体効果解除</a>：相手から付与された気絶を取り除く手段です。</li>
+            <li><a href="./countermeasures.html">対策検索</a>：無効化・解除を持つキャラを探せます。</li>
+          </ul>
+        </div>
+      </section>
+      <section class="guide-card" id="sources" aria-labelledby="sources-title">
+        <div class="guide-card-head">
+          <h2 id="sources-title">出典</h2>
+        </div>
+        <div class="guide-card-body">
+          <p class="guide-source">出典：ゲーム内ヘルプ／ゲーム内スキル説明／公式FAQ「バフの種類」／公式FAQ「バフ・弱体効果」／公式FAQ「弱体効果の種類」</p>
+          <p class="guide-source">ゲーム内ヘルプ／ゲーム内スキル説明を整理した掲載資料と、以下の公式FAQを照合しています。共通仕様は公式FAQ、サブリナの個別条件は現行キャラページの掲載スキルと補助資料に基づきます。 公式FAQ「バフの種類」：気絶返し・弱体効果無効・行動阻害無効。公式FAQ「バフ・弱体効果」：命中・耐性の判定、重ね掛け、解除。公式FAQ「弱体効果の種類」：気絶・バフ無効。 最終横断確認：2026年10月26日。当サイト収録120キャラ・480スキルを横断しました。ゲーム内の全実装キャラ・全スキル画面を直接確認した一覧ではありません。</p>
+          <ul class="guide-bullets guide-source">
+            <li><a href="https://mementomori.zendesk.com/hc/ja/articles/46412799595545" target="_blank" rel="noopener">公式FAQ「バフの種類」</a></li>
+            <li><a href="https://mementomori.zendesk.com/hc/ja/articles/46412673040921" target="_blank" rel="noopener">公式FAQ「バフ・弱体効果」</a></li>
+            <li><a href="https://mementomori.zendesk.com/hc/ja/articles/46414059026841" target="_blank" rel="noopener">公式FAQ「弱体効果の種類」</a></li>
+          </ul>
+        </div>
+      </section>
+    </div>
+    <!-- ad:bottom -->
+    <aside class="ad-slot" aria-label="広告">
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-6389066329814944"
+           data-ad-slot="6111654373"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </aside>
+    <!-- /ad:bottom -->
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <span>ミレストのメメントモリ分析データ室 / 非公式ファンサイト</span>
+      <nav class="footer-links" aria-label="サイト内のページ">
+        <a href="/">トップ</a>
+        <a href="../characters/index.html">キャラ一覧</a>
+        <a href="/pages/guide/">このサイトでできること</a>
+        <a href="/privacy.html">プライバシーポリシー</a>
+        <a href="/disclaimer.html">免責事項</a>
+        <a href="/about.html">このサイトについて</a>
+        <a href="/contact.html">お問い合わせ</a>
+      </nav>
+    </div>
+  </footer>
+  <script src="../../js/figure-series.js?v=8b71cecf" defer></script>
+</body>
+</html>
