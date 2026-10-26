@@ -362,6 +362,13 @@
       "kind": "サイト更新",
       "url": "pages/status/regeneration.html",
       "text": "再生ガイドを追加。行動開始時の回復と、回復量・対象・持続・条件・専用武器による違いを整理"
+    },
+    {
+      "id": "2026-10-26-absorption-guide",
+      "date": "2026-10-26",
+      "kind": "サイト更新",
+      "url": "pages/status/absorption.html",
+      "text": "吸収ガイドを追加。敵のステータス減少と自身の増加の仕組み、使える2キャラの違いとHPドレインとの区別を整理"
     }
   ]
 }
