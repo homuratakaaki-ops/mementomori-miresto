@@ -19,11 +19,11 @@
       "公式FAQ「その他の効果」",
       "公式FAQ「スキル」",
       "公式FAQ「バフの種類」",
-      "「弱体効果の種類」",
+      "公式FAQ「弱体効果の種類」",
       "公式FAQ「対象選択時のステータス」",
-      "「隣接対象を選べない場合」",
+      "公式FAQ「隣接対象を選べない場合」",
       "公式FAQ「ギルドバトル」",
-      "「グランドバトル」"
+      "公式FAQ「グランドバトル」"
     ],
     "officialLinks": [
       {
@@ -39,7 +39,7 @@
         "url": "https://mementomori.zendesk.com/hc/ja/articles/46412799595545"
       },
       {
-        "name": "「弱体効果の種類」",
+        "name": "公式FAQ「弱体効果の種類」",
         "url": "https://mementomori.zendesk.com/hc/ja/articles/46414059026841"
       },
       {
@@ -47,7 +47,7 @@
         "url": "https://mementomori.zendesk.com/hc/ja/articles/46712691050777"
       },
       {
-        "name": "「隣接対象を選べない場合」",
+        "name": "公式FAQ「隣接対象を選べない場合」",
         "url": "https://mementomori.zendesk.com/hc/ja/articles/41881298442009"
       },
       {
@@ -55,7 +55,7 @@
         "url": "https://mementomori.zendesk.com/hc/ja/articles/44180913267481"
       },
       {
-        "name": "「グランドバトル」",
+        "name": "公式FAQ「グランドバトル」",
         "url": "https://mementomori.zendesk.com/hc/ja/articles/44184103228825"
       }
     ],
