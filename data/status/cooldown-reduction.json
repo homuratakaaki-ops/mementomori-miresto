@@ -2,7 +2,7 @@
   "schema": "miresto_status_guide_v1",
   "layout": "article",
   "id": "cooldown-reduction",
-  "visibility": "unlisted",
+  "visibility": "listed",
   "name": "スキルクールタイム減少",
   "label": "特殊効果ガイド",
   "term": "CT",
