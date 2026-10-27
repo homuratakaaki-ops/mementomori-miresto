@@ -348,7 +348,12 @@ const FORBIDDEN_WORDS = [
 ];
 
 function validateWording(label, html, errors) {
-  const text = html.replace(/<!--[\s\S]*?-->/g, " ").replace(/<[^>]+>/g, " ");
+  // 正式な公式FAQ名の「予想」は記事の予測ではない。出典カード内の
+  // この正式名だけを検査対象から外し、本文や他の出典文は従来どおり検査する。
+  const sourceTitle = "公式FAQ「攻撃力が最も高いキャラに付与されるバフが、予想していたキャラに付与されない」";
+  const wordingHtml = html.replace(/<section\b(?=[^>]*\bid="sources")[^>]*>[\s\S]*?<\/section>/g,
+    (source) => source.replaceAll(sourceTitle, "公式FAQの記事名"));
+  const text = wordingHtml.replace(/<!--[\s\S]*?-->/g, " ").replace(/<[^>]+>/g, " ");
   for (const word of FORBIDDEN_WORDS) {
     if (text.includes(word)) errors.push(label + ": 本文に出さない語が入っている（" + word + "）");
   }

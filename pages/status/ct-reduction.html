@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>スキルクールタイム減少｜特殊効果ガイド | ミレストのメメントモリ分析データ室</title>
+  <meta name="description" content="メメントモリのスキルクールタイム減少を解説。直接減少9件とCTを0にする7件を別表で比較し、対象・減少量・発動条件・回数制限・専用武器差分、軽快との違いを整理します。">
+  <meta name="robots" content="noindex">
+  <link rel="canonical" href="https://memento.musoudc.com/pages/status/ct-reduction.html">
+  <!-- OGP。画像は共通のものを使う（ガイドごとの画像生成は未対応） -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="ミレストのメメントモリ分析データ室">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="og:title" content="スキルクールタイム減少｜特殊効果ガイド | ミレストのメメントモリ分析データ室">
+  <meta property="og:description" content="メメントモリのスキルクールタイム減少を解説。直接減少9件とCTを0にする7件を別表で比較し、対象・減少量・発動条件・回数制限・専用武器差分、軽快との違いを整理します。">
+  <meta property="og:url" content="https://memento.musoudc.com/pages/status/ct-reduction.html">
+  <meta property="og:image" content="https://memento.musoudc.com/assets/ogp/ogp-common.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <link rel="icon" type="image/png" href="../../assets/miresto/miresto-icon-32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="../../assets/miresto/miresto-icon-180.png">
+  <link rel="stylesheet" href="../../assets/character-page.css?v=ba122311">
+  <link rel="stylesheet" href="../../assets/status-guide.css?v=71746d66">
+  <!-- ga:head -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-BHKBSRGSJF"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BHKBSRGSJF');
+  </script>
+  <!-- /ga:head -->
+  <!-- ad:head -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6389066329814944" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="/assets/ad-slot.css">
+  <!-- /ad:head -->
+</head>
+<body data-status-guide="ct-reduction" data-prerendered>
+  <header class="page-header">
+    <div class="header-inner">
+      <a class="top-link" href="/">トップ</a>
+      <a class="top-link" href="./index.html">状態異常・特殊効果ガイドの一覧へ</a>
+      <p class="eyebrow">STATUS GUIDE</p>
+      <h1>スキルクールタイム減少｜特殊効果ガイド</h1>
+      <div class="guide-meta">
+        <span class="tag">最終横断確認 2026-10-27</span>
+      </div>
+      <p class="guide-meta-note">当サイトの公開キャラデータ120キャラ・480スキルを確認しています。</p>
+    </div>
+  </header>
+
+  <main>
+    <div class="guide-list">
+      <section class="guide-card" id="oneline" aria-labelledby="oneline-title">
+        <div class="guide-card-head">
+          <h2 id="oneline-title">ひとことで</h2>
+        </div>
+        <div class="guide-card-body">
+          <p>アクティブスキルを再び使えるまでの残りクールタイム（CT）を、その場で減らす効果です。</p>
+          <div class="guide-figure-mobile is-only" data-figure-series>
+            <div class="guide-series-track" tabindex="0" role="region" aria-label="図解3枚。横にスクロールして次の図へ">
+              <figure class="guide-figure-panel" aria-label="1 / 3">
+                <a href="../../assets/status/ct-reduction-guide-m1.jpg?v=0a78783f" aria-label="図1を拡大して開く（3枚中1枚目）">
+                  <picture>
+                    <source type="image/webp" srcset="../../assets/status/ct-reduction-guide-m1.webp?v=1b5e83b1">
+                    <img src="../../assets/status/ct-reduction-guide-m1.jpg?v=0a78783f" width="1122" height="1402" alt="スキルクールタイム減少、基本のしくみ1/3。残りCTをその場で減らす。1：スキルの再使用までの残りカウントを減らす。2：減る対象やタイミングはスキルごとに異なる。3：CTが短くなっても追加行動は発生しない。フェンリル。" decoding="async">
+                  </picture>
+                </a>
+              </figure>
+              <figure class="guide-figure-panel" aria-label="2 / 3">
+                <a href="../../assets/status/ct-reduction-guide-m2.jpg?v=2d15528d" aria-label="図2を拡大して開く（3枚中2枚目）">
+                  <picture>
+                    <source type="image/webp" srcset="../../assets/status/ct-reduction-guide-m2.webp?v=8605d59d">
+                    <img src="../../assets/status/ct-reduction-guide-m2.jpg?v=2d15528d" width="1122" height="1402" alt="スキルクールタイム減少、フェンリルS1で見る使い方2/3。攻撃のあとに味方のCTを短縮。S1「雪狼の牙」。1：自身に隣接する味方2体が対象、スキルLv2以降。2：通常はCTを1減少。3：専用武器Lv1でCT減少量が2になる。フェンリル。" loading="lazy" decoding="async">
+                  </picture>
+                </a>
+              </figure>
+              <figure class="guide-figure-panel" aria-label="3 / 3">
+                <a href="../../assets/status/ct-reduction-guide-m3.jpg?v=81f5d164" aria-label="図3を拡大して開く（3枚中3枚目）">
+                  <picture>
+                    <source type="image/webp" srcset="../../assets/status/ct-reduction-guide-m3.webp?v=f363bbf0">
+                    <img src="../../assets/status/ct-reduction-guide-m3.jpg?v=81f5d164" width="1122" height="1402" alt="スキルクールタイム減少、似た効果との違い3/3。似ている効果も処理は違う。直接減少：その場で一定数を減らす。CT0化：その場でCTを0にする。軽快：行動終了時のCT減少を早める。どれも即時の追加行動を生む効果ではない。フェンリル。" loading="lazy" decoding="async">
+                  </picture>
+                </a>
+              </figure>
+            </div>
+            <div class="guide-slides-controls guide-series-controls" hidden>
+              <button type="button" data-series-prev aria-label="前の図へ">‹</button>
+              <span class="guide-slides-dots">
+                <button type="button" data-series-dot="0" aria-label="1枚目へ" aria-current="true"></button>
+                <button type="button" data-series-dot="1" aria-label="2枚目へ"></button>
+                <button type="button" data-series-dot="2" aria-label="3枚目へ"></button>
+              </span>
+              <span class="guide-series-count" aria-live="polite">1 / 3</span>
+              <button type="button" data-series-next aria-label="次の図へ">›</button>
+            </div>
+            <p class="guide-figure-note"><span class="is-narrow">横にスワイプで次の図へ。図をタップすると拡大して開きます。</span><span class="is-wide">‹ › で次の図へ。図をクリックすると拡大して開きます。</span></p>
+          </div>
+        </div>
+      </section>
+      <section class="guide-card" id="mechanism" aria-labelledby="mechanism-title">
+        <div class="guide-card-head">
+          <h2 id="mechanism-title">仕組み</h2>
+        </div>
+        <div class="guide-card-body">
+          <p>通常、CTは毎ターンの行動終了時に1ずつ減ります。直接減少は、スキルに書かれたタイミングで残りカウントを減らします。</p>
+          <p>CTが0になるとそのスキルを使用できますが、短縮だけで追加行動が発生するわけではありません。行動時には、発動可能なアクティブスキルの先頭から使われます。</p>
+        </div>
+      </section>
+      <section class="guide-card" id="rules" aria-labelledby="rules-title">
+        <div class="guide-card-head">
+          <h2 id="rules-title">重複・上書きなど固有ルール</h2>
+        </div>
+        <div class="guide-card-body">
+          <ul class="guide-bullets">
+            <li>直接減少そのものは、何ターンか付帯させるバフではありません。「攻撃力増加が3ターン」など、同じスキルに含まれる別効果の持続と分けます。</li>
+            <li>アイリーンは例外的に「通常攻撃強化」を介します。3ターンは強化の持続で、強化された本人が通常攻撃をするとCTが1減り、その強化は解除されます。3ターン毎回CTが減るという意味ではありません。</li>
+            <li>戦闘不能時のCTは直前の値が保持されます。復活にCT0化が付くかはスキルごとに異なります。</li>
+            <li>ギルド／グランドバトルでは、原則「バトル中1回」は連戦中1回です。ルシールとリヴェリアのCT操作には、各バトル1回という例外が明記されています。</li>
+          </ul>
+        </div>
+      </section>
+      <!-- ad:mid -->
+      <aside class="ad-slot ad-slot--mid" aria-label="広告">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-6389066329814944"
+             data-ad-slot="9192142429"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      </aside>
+      <!-- /ad:mid -->
+      <section class="guide-card" id="givers" aria-labelledby="givers-title">
+        <div class="guide-card-head">
+          <h2 id="givers-title">付与・使用するキャラ</h2>
+        </div>
+        <div class="guide-card-body">
+          <h3 class="guide-sub">残りCTを一定数減らす</h3>
+          <div class="guide-table-wrap">
+            <table class="guide-table guide-table--wrap">
+              <thead>
+                <tr>
+                  <th scope="col">キャラ・スキル</th>
+                  <th scope="col">CTが減る対象</th>
+                  <th scope="col">減少量</th>
+                  <th scope="col">発動時点・条件／回数制限</th>
+                  <th scope="col">専用武器のCT差分</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row"><a href="../characters/fenrir.html#skill-1">フェンリル S1 雪狼の牙</a></th>
+                  <td data-label="CTが減る対象">自身に隣接する味方2体</td>
+                  <td data-label="減少量">1</td>
+                  <td data-label="発動時点・条件／回数制限">攻撃後。対象2体はスキルLv2から</td>
+                  <td data-label="専用武器のCT差分">専用Lv1で2減少</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/mertillier.html#skill-2">メルティーユ S2 メンテナンス</a></th>
+                  <td data-label="CTが減る対象">攻撃力が最も高い味方</td>
+                  <td data-label="減少量">2</td>
+                  <td data-label="発動時点・条件／回数制限">スキル発動時</td>
+                  <td data-label="専用武器のCT差分">なし</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/lucile.html#skill-2">ルシール S2 革命の彩剣</a></th>
+                  <td data-label="CTが減る対象">攻撃力が最も高い味方</td>
+                  <td data-label="減少量">2</td>
+                  <td data-label="発動時点・条件／回数制限">最後の物理攻撃後、彩光5スタックの敵がいる。CT減少はバトル中1回（連戦は各バトル1回）。スキルLv3で追加</td>
+                  <td data-label="専用武器のCT差分">なし</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/amour_holy_night.html#skill-3">[聖夜の贈り物]アモール S3 ずっとあなたの傍に</a></th>
+                  <td data-label="CTが減る対象">攻撃力が高い味方2体</td>
+                  <td data-label="減少量">2</td>
+                  <td data-label="発動時点・条件／回数制限">自身の復活後。スキルはバトル中1回。CT減少はスキルLv3で追加</td>
+                  <td data-label="専用武器のCT差分">なし</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/fenrir_treasure.html#skill-2">[二人だけの宝物]フェンリル S2 魔法のフレーバー</a></th>
+                  <td data-label="CTが減る対象">自身</td>
+                  <td data-label="減少量">5</td>
+                  <td data-label="発動時点・条件／回数制限">7ターン目以降に発動した場合、隠し味付与の後。スキルLv4で追加</td>
+                  <td data-label="専用武器のCT差分">なし</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/rosalie_caritas.html#skill-2">[カリタスの使徒]ロザリー S2 エンジェルレイ</a></th>
+                  <td data-label="CTが減る対象">自身に隣接する味方2体</td>
+                  <td data-label="減少量">2</td>
+                  <td data-label="発動時点・条件／回数制限">攻撃前に記憶15スタックを解除して「ソウルサクリファイス」へ切り替えた場合、その魔法攻撃後</td>
+                  <td data-label="専用武器のCT差分">なし</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/irene.html#skill-3">アイリーン S3 暗き夜の契約</a></th>
+                  <td data-label="CTが減る対象">通常攻撃強化を受けた本人（自身＋自身以外でスピードが最も低い味方）</td>
+                  <td data-label="減少量">1</td>
+                  <td data-label="発動時点・条件／回数制限">ターン開始時に強化を付与し、強化通常攻撃時にCT減少。その後強化を解除。付与スキルは発動後3回行動終了まで再発動しない</td>
+                  <td data-label="専用武器のCT差分">なし</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/lumika.html#skill-3">ルミカ S3 ささやかな代償</a></th>
+                  <td data-label="CTが減る対象">自身</td>
+                  <td data-label="減少量">1</td>
+                  <td data-label="発動時点・条件／回数制限">毎ターン終了時、そのターン中に自身の攻撃で対象を戦闘不能にしていた場合。スキルLv3で追加</td>
+                  <td data-label="専用武器のCT差分">なし</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/regina.html#skill-3">レジーナ S3 愛おしい面影</a></th>
+                  <td data-label="CTが減る対象">攻撃力が最も高い味方</td>
+                  <td data-label="減少量">2</td>
+                  <td data-label="発動時点・条件／回数制限">3ターン目開始時、自身と味方の攻撃によるクリティカルヒット累計5回以上で面影4スタック消費。スキルLv3で追加</td>
+                  <td data-label="専用武器のCT差分">なし</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p>「なし」はCT部分の変更なしを示します。メルティーユはスキルLv4、ロザリーはスキルLv3で減少量が2になります。アイリーンの味方への強化はスキルLv3からです。</p>
+          <p>ロザリーの通常の「エンジェルレイ」にはCT減少を付けません。ルミカは撃破のたびではなくターン終了時、レジーナは条件を満たした任意のターンではなく3ターン目開始時の判定です。</p>
+          <p>「攻撃力が最も高い味方」は、常に編成画面の順位で決まるとは限りません。メルティーユのようなスキルでは、対象選択時のバトル中ステータスを参照します。隣接対象も、選択できる味方が欠けると常に2体へ配れるわけではありません。</p>
+          <h3 class="guide-sub">CTを0にする</h3>
+          <p>一定数を引く効果とは分けて確認します。以下の7件はいずれも、専用武器によるCT部分の変更はありません。</p>
+          <div class="guide-table-wrap">
+            <table class="guide-table guide-table--wrap">
+              <thead>
+                <tr>
+                  <th scope="col">キャラ・スキル</th>
+                  <th scope="col">0にする範囲</th>
+                  <th scope="col">発動時点・条件／回数制限</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row"><a href="../characters/fenny.html#skill-4">フェーネ S4 高速装填装置</a></th>
+                  <td data-label="0にする範囲">自身のS2「魔力浸透砲弾」のみ</td>
+                  <td data-label="発動時点・条件／回数制限">3ターン目開始時。バトル中1回</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/alexandra.html#skill-3">アレクサンドラ S3 守護騎士の本懐</a></th>
+                  <td data-label="0にする範囲">自身のスキルCT</td>
+                  <td data-label="発動時点・条件／回数制限">7ターン目開始時。スキルLv3で追加</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/lunalynn_holy_night.html#skill-4">[聖夜の妖精]ルナリンド S4 雪解けの温もり</a></th>
+                  <td data-label="0にする範囲">自身のスキルCT</td>
+                  <td data-label="発動時点・条件／回数制限">7ターン目開始時。スキルLv3で追加</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/paula.html#skill-4">ポーラ S4 報われない想い</a></th>
+                  <td data-label="0にする範囲">自身のスキルCT</td>
+                  <td data-label="発動時点・条件／回数制限">7ターン目開始時。スキルLv2で追加</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/stella_holy_dark_star.html#skill-3">[聖なる漆黒の輝く星]ステラ S3 聖夜のおまじない</a></th>
+                  <td data-label="0にする範囲">自身のスキルCT</td>
+                  <td data-label="発動時点・条件／回数制限">7ターン目開始時。スキルLv2で追加</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/rusalka.html#skill-3">ルサールカ S3 生贄の乙女</a></th>
+                  <td data-label="0にする範囲">自身のスキルCT</td>
+                  <td data-label="発動時点・条件／回数制限">自身が戦闘不能になり復活するとき。バトル中1回</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/rivelia.html#skill-2">リヴェリア S2 砂塵乱風</a></th>
+                  <td data-label="0にする範囲">自身のスキルCT</td>
+                  <td data-label="発動時点・条件／回数制限">最後の物理攻撃後、砂塵4スタックの敵がいる。CT0化はバトル中1回（連戦は各バトル1回）。スキルLv3で追加</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+      <section class="guide-card" id="users" aria-labelledby="users-title">
+        <div class="guide-card-head">
+          <h2 id="users-title">参照・利用・強化するキャラ</h2>
+        </div>
+        <div class="guide-card-body">
+          <p>専用武器で直接減少量が増えるのは、上表ではフェンリルS1です。ルシールの彩光、ロザリーの記憶、レジーナの面影などは、それぞれの発動条件であり、CT減少量そのものを増やす共通効果ではありません。</p>
+        </div>
+      </section>
+      <section class="guide-card" id="countermeasures" aria-labelledby="countermeasures-title">
+        <div class="guide-card-head">
+          <h2 id="countermeasures-title">防ぐ・対策する方法</h2>
+        </div>
+        <div class="guide-card-body">
+          <ul class="guide-bullets">
+            <li>沈黙でアクティブスキルの発動を止めるなど、発動元を妨げられる場合があります。ただし、復活時やターン開始時のパッシブまで一律に止まるとは限りません。</li>
+            <li>遅延は行動終了時のCT減少を遅らせる効果で、直接減少を無効にする効果とは別です。</li>
+            <li>バフ解除・バフ無効を、直接CT操作全体への対策とは扱いません。アイリーンの通常攻撃強化も、公式FAQでは一般の解除の影響を受けないとされています。</li>
+          </ul>
+        </div>
+      </section>
+      <section class="guide-card" id="relationships" aria-labelledby="relationships-title">
+        <div class="guide-card-head">
+          <h2 id="relationships-title">関連する特殊効果</h2>
+        </div>
+        <div class="guide-card-body">
+          <ul class="guide-bullets">
+            <li><a href="./nimble.html">軽快</a>：行動終了時に減るCTの量を増やすバフ。直接減少とはタイミングが違います。</li>
+            <li><a href="./delay.html">遅延</a>：行動終了時のCT減少量を減らす弱体効果。軽快とは効果量で相殺します。</li>
+            <li><a href="./revival.html">復活</a>：復活自体と、ルサールカ固有のCT0化を区別します。</li>
+            <li>「CTが発生しない」：［神呪の魔女］イリアS2のように、条件を満たすと使用後のCTが発生しない仕組み。残りCTを減らす効果ではありません。</li>
+          </ul>
+          <p>スピード増加は行動順に関わる別の効果です。CT短縮だけで即時の追加行動や、次に使う特定スキルが保証されるわけではありません。</p>
+        </div>
+      </section>
+      <section class="guide-card" id="sources" aria-labelledby="sources-title">
+        <div class="guide-card-head">
+          <h2 id="sources-title">出典</h2>
+        </div>
+        <div class="guide-card-body">
+          <p class="guide-source">出典：ゲーム内ヘルプ／ゲーム内スキル説明／公式FAQ「その他の効果」／公式FAQ「スキル」／公式FAQ「バフの種類」／公式FAQ「弱体効果の種類」／公式FAQ「攻撃力が最も高いキャラに付与されるバフが、予想していたキャラに付与されない」／公式FAQ「隣接する味方(敵)が戦闘不能の場合「隣接する味方(敵)2体」を対象にしたスキルはどのキャラが選択されますか、正面の敵と自身を含む場合はどうなりますか」／公式FAQ「ギルドバトルについて」／公式FAQ「グランドバトルについて」</p>
+          <p class="guide-source">共通仕様は公式FAQ、キャラ別の条件は比較表からリンクした掲載スキル説明と補助資料を照合しています。「その他の効果」：CT増減、戦闘不能、通常攻撃強化。「スキル」：CTの通常減少と発動順。「バフの種類」「弱体効果の種類」：軽快、遅延、沈黙。対象選択・隣接のFAQ：対象選択時のステータスと、隣接対象を選べない場合。ギルドバトル・グランドバトルのFAQ：連戦時の回数制限。最終横断確認：2026年10月27日。当サイト収録120キャラ・480スキルと補助資料を照合した範囲です。ゲーム内全キャラの完全網羅を保証するものではありません。</p>
+          <ul class="guide-bullets guide-source">
+            <li><a href="https://mementomori.zendesk.com/hc/ja/articles/46414238259097" target="_blank" rel="noopener">公式FAQ「その他の効果」</a></li>
+            <li><a href="https://mementomori.zendesk.com/hc/ja/articles/46409850604953" target="_blank" rel="noopener">公式FAQ「スキル」</a></li>
+            <li><a href="https://mementomori.zendesk.com/hc/ja/articles/46412799595545" target="_blank" rel="noopener">公式FAQ「バフの種類」</a></li>
+            <li><a href="https://mementomori.zendesk.com/hc/ja/articles/46414059026841" target="_blank" rel="noopener">公式FAQ「弱体効果の種類」</a></li>
+            <li><a href="https://mementomori.zendesk.com/hc/ja/articles/46712691050777" target="_blank" rel="noopener">公式FAQ「攻撃力が最も高いキャラに付与されるバフが、予想していたキャラに付与されない」</a></li>
+            <li><a href="https://mementomori.zendesk.com/hc/ja/articles/41881298442009" target="_blank" rel="noopener">公式FAQ「隣接する味方(敵)が戦闘不能の場合「隣接する味方(敵)2体」を対象にしたスキルはどのキャラが選択されますか、正面の敵と自身を含む場合はどうなりますか」</a></li>
+            <li><a href="https://mementomori.zendesk.com/hc/ja/articles/44180913267481" target="_blank" rel="noopener">公式FAQ「ギルドバトルについて」</a></li>
+            <li><a href="https://mementomori.zendesk.com/hc/ja/articles/44184103228825" target="_blank" rel="noopener">公式FAQ「グランドバトルについて」</a></li>
+          </ul>
+        </div>
+      </section>
+    </div>
+    <!-- ad:bottom -->
+    <aside class="ad-slot" aria-label="広告">
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-6389066329814944"
+           data-ad-slot="6111654373"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </aside>
+    <!-- /ad:bottom -->
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <span>ミレストのメメントモリ分析データ室 / 非公式ファンサイト</span>
+      <nav class="footer-links" aria-label="サイト内のページ">
+        <a href="/">トップ</a>
+        <a href="../characters/index.html">キャラ一覧</a>
+        <a href="/pages/guide/">このサイトでできること</a>
+        <a href="/privacy.html">プライバシーポリシー</a>
+        <a href="/disclaimer.html">免責事項</a>
+        <a href="/about.html">このサイトについて</a>
+        <a href="/contact.html">お問い合わせ</a>
+      </nav>
+    </div>
+  </footer>
+  <script src="../../js/figure-series.js?v=8b71cecf" defer></script>
+</body>
+</html>
