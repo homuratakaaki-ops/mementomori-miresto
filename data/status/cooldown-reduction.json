@@ -69,6 +69,32 @@
         {
           "type": "p",
           "text": "アクティブスキルを再び使えるまでの残りクールタイム（CT）を、その場で減らす効果です。"
+        },
+        {
+          "type": "figure",
+          "mobile": [
+            {
+              "webp": "assets/status/cooldown-reduction-guide-m1.webp",
+              "src": "assets/status/cooldown-reduction-guide-m1.webp",
+              "width": 1122,
+              "height": 1402,
+              "alt": "残りCTをその場で減らす。1：残りカウントを減らす。2：対象とタイミングはスキルごとに異なる。3：CT短縮だけでは追加行動は発生しない。"
+            },
+            {
+              "webp": "assets/status/cooldown-reduction-guide-m2.webp",
+              "src": "assets/status/cooldown-reduction-guide-m2.webp",
+              "width": 1122,
+              "height": 1402,
+              "alt": "フェンリルS1『雪狼の牙』のCT短縮。スキルLv2以上は隣接する味方2体、通常CTを1減少、専用武器Lv1で2減少。"
+            },
+            {
+              "webp": "assets/status/cooldown-reduction-guide-m3.webp",
+              "src": "assets/status/cooldown-reduction-guide-m3.webp",
+              "width": 1122,
+              "height": 1402,
+              "alt": "直接CT減少・CTを0にする効果・軽快の違い。直接減少と0化はその場で処理し、軽快は行動終了時のCT減少を早める。"
+            }
+          ]
         }
       ]
     },
