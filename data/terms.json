@@ -121,6 +121,10 @@
     "バフカバー": {
       "text": "敵のスキルでバフ解除・奪取を受けるとき、ほかのバフより優先して対象になるバフ。",
       "guideUrl": "/pages/status/buff-cover.html"
+    },
+    "CT": {
+      "text": "アクティブスキルを再び使えるまでの残りクールタイム。直接減少は残りCTをその場で減らし、CT0化は0にします。短縮だけで追加行動は発生しません。",
+      "guideUrl": "/pages/status/cooldown-reduction.html"
     }
   }
 }
