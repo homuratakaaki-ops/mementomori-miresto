@@ -70,8 +70,8 @@ jobs:
           set -euo pipefail
           git config user.name "ミコト（自動ビルド）"
           git config user.email "homuratakaaki@gmail.com"
-          # 生成物は data/ ・ pages/ ・ ルート直下の *.html（トップのニュース欄と、計測タグを差し込んだ手書きページ）
-          git add -- data pages *.html
+          # 生成物は data/ ・ pages/ ・ ルート直下の *.html ・ sitemap.xml（新規公開ガイドも拾う）
+          git add -- data pages *.html sitemap.xml
           if git diff --cached --quiet; then
             echo "差分なし。何もしない。"
             exit 0
