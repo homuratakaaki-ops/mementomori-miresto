@@ -1,0 +1,346 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HPドレイン｜特殊効果ガイド | ミレストのメメントモリ分析データ室</title>
+  <meta name="description" content="メメントモリのHPドレインを解説。回復の計算に使うダメージ、増加・減少を持つ8キャラの条件、専用武器での追加効果、不治との違いを比較します。">
+  <meta name="robots" content="noindex">
+  <link rel="canonical" href="https://memento.musoudc.com/pages/status/hp-drain.html">
+  <!-- OGP。画像は共通のものを使う（ガイドごとの画像生成は未対応） -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="ミレストのメメントモリ分析データ室">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="og:title" content="HPドレイン｜特殊効果ガイド | ミレストのメメントモリ分析データ室">
+  <meta property="og:description" content="メメントモリのHPドレインを解説。回復の計算に使うダメージ、増加・減少を持つ8キャラの条件、専用武器での追加効果、不治との違いを比較します。">
+  <meta property="og:url" content="https://memento.musoudc.com/pages/status/hp-drain.html">
+  <meta property="og:image" content="https://memento.musoudc.com/assets/ogp/ogp-common.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <link rel="icon" type="image/png" href="../../assets/miresto/miresto-icon-32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="../../assets/miresto/miresto-icon-180.png">
+  <link rel="stylesheet" href="../../assets/character-page.css?v=ba122311">
+  <link rel="stylesheet" href="../../assets/status-guide.css?v=71746d66">
+  <!-- ga:head -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-BHKBSRGSJF"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BHKBSRGSJF');
+  </script>
+  <!-- /ga:head -->
+  <!-- ad:head -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6389066329814944" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="/assets/ad-slot.css">
+  <!-- /ad:head -->
+</head>
+<body data-status-guide="hp-drain" data-prerendered>
+  <header class="page-header">
+    <div class="header-inner">
+      <a class="top-link" href="/">トップ</a>
+      <a class="top-link" href="./index.html">状態異常・特殊効果ガイドの一覧へ</a>
+      <p class="eyebrow">STATUS GUIDE</p>
+      <h1>HPドレイン｜特殊効果ガイド</h1>
+      <div class="guide-meta">
+        <span class="tag">最終横断確認 2026-10-28</span>
+      </div>
+      <p class="guide-meta-note">当サイトの正規収録120キャラ・480スキルを横断して確認しています。ゲーム内全キャラの完全網羅を示すものではありません。</p>
+    </div>
+  </header>
+
+  <main>
+    <div class="guide-list">
+      <section class="guide-card" id="oneline" aria-labelledby="oneline-title">
+        <div class="guide-card-head">
+          <h2 id="oneline-title">ひとことで</h2>
+        </div>
+        <div class="guide-card-body">
+          <p>敵への攻撃が命中したとき、HPドレインのステータスとダメージに応じて、自分のHPを回復する仕組みです。</p>
+          <div class="guide-figure-mobile is-only" data-figure-series>
+            <div class="guide-series-track" tabindex="0" role="region" aria-label="図解3枚。横にスクロールして次の図へ">
+              <figure class="guide-figure-panel" aria-label="1 / 3">
+                <a href="../../assets/status/hp-drain-guide-m1.webp?v=8ed97928" aria-label="図1を拡大して開く（3枚中1枚目）">
+                  <picture>
+                    <source type="image/webp" srcset="../../assets/status/hp-drain-guide-m1.webp?v=8ed97928">
+                    <img src="../../assets/status/hp-drain-guide-m1.webp?v=8ed97928" width="1122" height="1402" alt="HPドレイン、基本のしくみ、1/3。攻撃が当たると自分のHPを回復。1：HPドレインの値とダメージに応じて回復。2：防御効果を反映したダメージが計算の基準。3：敵の残りHPを超えた分は回復計算に含めない。回避された攻撃では回復しない。アレクサンドラ。" decoding="async">
+                  </picture>
+                </a>
+              </figure>
+              <figure class="guide-figure-panel" aria-label="2 / 3">
+                <a href="../../assets/status/hp-drain-guide-m2.webp?v=85d43dc6" aria-label="図2を拡大して開く（3枚中2枚目）">
+                  <picture>
+                    <source type="image/webp" srcset="../../assets/status/hp-drain-guide-m2.webp?v=85d43dc6">
+                    <img src="../../assets/status/hp-drain-guide-m2.webp?v=85d43dc6" width="1122" height="1402" alt="HPドレイン、増加効果の使い方、2/3。増やす相手と発動条件を見る。1：フィアーS1。攻撃前、自身に40%増加・4ターン。2：ルスティカS1。バフ数が最も多い味方1体に30%増加・4ターン。3：アレクサンドラ、専用武器Lv2。開始時、自身に40%増加、6ターン・解除不可。増加量は回復率そのものではない。アレクサンドラ。" loading="lazy" decoding="async">
+                  </picture>
+                </a>
+              </figure>
+              <figure class="guide-figure-panel" aria-label="3 / 3">
+                <a href="../../assets/status/hp-drain-guide-m3.webp?v=d9e09734" aria-label="図3を拡大して開く（3枚中3枚目）">
+                  <picture>
+                    <source type="image/webp" srcset="../../assets/status/hp-drain-guide-m3.webp?v=d9e09734">
+                    <img src="../../assets/status/hp-drain-guide-m3.webp?v=d9e09734" width="1122" height="1402" alt="HPドレイン、減少と対策、3/3。回復を止めるなら不治。1：不治はHPドレインによる回復も止める。2：HPドレイン減少はステータスを下げる効果で、回復禁止とは異なる。3：バフ解除は解除可能な増加バフが対象。クーシーS1は味方側にも減少効果。アレクサンドラ。" loading="lazy" decoding="async">
+                  </picture>
+                </a>
+              </figure>
+            </div>
+            <div class="guide-slides-controls guide-series-controls" hidden>
+              <button type="button" data-series-prev aria-label="前の図へ">‹</button>
+              <span class="guide-slides-dots">
+                <button type="button" data-series-dot="0" aria-label="1枚目へ" aria-current="true"></button>
+                <button type="button" data-series-dot="1" aria-label="2枚目へ"></button>
+                <button type="button" data-series-dot="2" aria-label="3枚目へ"></button>
+              </span>
+              <span class="guide-series-count" aria-live="polite">1 / 3</span>
+              <button type="button" data-series-next aria-label="次の図へ">›</button>
+            </div>
+            <p class="guide-figure-note"><span class="is-narrow">横にスワイプで次の図へ。図をタップすると拡大して開きます。</span><span class="is-wide">‹ › で次の図へ。図をクリックすると拡大して開きます。</span></p>
+          </div>
+        </div>
+      </section>
+      <section class="guide-card" id="mechanism" aria-labelledby="mechanism-title">
+        <div class="guide-card-head">
+          <h2 id="mechanism-title">仕組み</h2>
+        </div>
+        <div class="guide-card-body">
+          <p>回復計算に使うダメージは、シールド・多重バリア・ダメージ無効・遮断・不死身を反映した後の値です。敵の残りHPを超えた分は含みません。</p>
+          <p>一方、「総与ダメージの○%を回復」という個別スキルは、これらの防御効果による軽減前の値や、残りHPを超えた分も参照します。<strong>HPドレインと、与ダメージを参照する個別回復は別の仕組み</strong>です。</p>
+          <p>「HPドレイン40%増加」はステータスへの増加効果を表し、回復率40%を意味するとは限りません。</p>
+        </div>
+      </section>
+      <section class="guide-card" id="rules" aria-labelledby="rules-title">
+        <div class="guide-card-head">
+          <h2 id="rules-title">重複・上書きなどの固有ルール</h2>
+        </div>
+        <div class="guide-card-body">
+          <ul class="guide-bullets">
+            <li><strong>回避された攻撃では回復しません。</strong> 毒などの持続ダメージ、共鳴・献身・パッシブスキルによるダメージも対象外です。パッシブスキルでHPドレインを増やすこととは別の話です。</li>
+            <li>同種のバフは原則として重ね掛けできますが、スタックでない同一キャラの同じ効果は、新しく付いた効果へ上書きされます。<strong>増加量を足した値が、そのまま回復率になるとは断定できません。</strong></li>
+            <li>解除不可の増加効果は、バフ解除・ターン増減・コピー・奪取の対象外です。解除可能な増加バフを消すことと、HPドレインという回復の仕組み自体をなくすことは異なります。</li>
+          </ul>
+        </div>
+      </section>
+      <!-- ad:mid -->
+      <aside class="ad-slot ad-slot--mid" aria-label="広告">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-6389066329814944"
+             data-ad-slot="9192142429"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      </aside>
+      <!-- /ad:mid -->
+      <section class="guide-card" id="givers" aria-labelledby="givers-title">
+        <div class="guide-card-head">
+          <h2 id="givers-title">付与・使用するキャラ</h2>
+        </div>
+        <div class="guide-card-body">
+          <p>一覧は、通常スキルと専用武器のスキル強化による増減を扱います。装備の基礎ステータス補正やアルカナの一覧とは分けています。</p>
+          <h3 class="guide-sub">HPドレインを増やす通常スキル</h3>
+          <div class="guide-table-wrap">
+            <table class="guide-table guide-table--wrap">
+              <thead>
+                <tr>
+                  <th scope="col">キャラ・スキル</th>
+                  <th scope="col">対象</th>
+                  <th scope="col">増加量</th>
+                  <th scope="col">持続</th>
+                  <th scope="col">発動時点・条件</th>
+                  <th scope="col">解除</th>
+                  <th scope="col">再発動</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row"><a href="../characters/fia.html#skill-1">フィアー</a> S1「ライフスティール」</th>
+                  <td data-label="対象">自身</td>
+                  <td data-label="増加量">40%</td>
+                  <td data-label="持続">4ターン</td>
+                  <td data-label="発動時点・条件">S1の攻撃前</td>
+                  <td data-label="解除">通常</td>
+                  <td data-label="再発動">S1再使用時</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/lunalynn.html#skill-4">ルナリンド</a> S4「凍てついた心」</th>
+                  <td data-label="対象">自身</td>
+                  <td data-label="増加量">25%</td>
+                  <td data-label="持続">ターン指定なし</td>
+                  <td data-label="発動時点・条件">パッシブ効果</td>
+                  <td data-label="解除">不可</td>
+                  <td data-label="再発動">発動回数の記載なし</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/lunalynn_holy_night.html#skill-4">［聖夜の妖精］ルナリンド</a> S4「雪解けの温もり」</th>
+                  <td data-label="対象">自身</td>
+                  <td data-label="増加量">80%</td>
+                  <td data-label="持続">6ターン</td>
+                  <td data-label="発動時点・条件">バトル開始時</td>
+                  <td data-label="解除">不可</td>
+                  <td data-label="再発動">開始時のみ</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/rustica.html#skill-1">ルスティカ</a> S1「真紅の露」</th>
+                  <td data-label="対象">バフ数が最も多い味方1体</td>
+                  <td data-label="増加量">30%</td>
+                  <td data-label="持続">4ターン</td>
+                  <td data-label="発動時点・条件">S1の攻撃前</td>
+                  <td data-label="解除">通常</td>
+                  <td data-label="再発動">S1再使用時</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/tricksy.html#skill-4">トリクシー</a> S4「漂流者の終着地」</th>
+                  <td data-label="対象">自身</td>
+                  <td data-label="増加量">20%</td>
+                  <td data-label="持続">4ターン</td>
+                  <td data-label="発動時点・条件">自身の行動開始時。自身以外の黄属性の味方が編成に2体以上</td>
+                  <td data-label="解除">通常</td>
+                  <td data-label="再発動">発動後、自身が4回行動終了するまで再発動しない</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p>「通常」は解除不可の指定がない効果です。付与確率の記載がない効果に、100%という数値は補っていません。</p>
+          <h3 class="guide-sub">専用武器で追加される増加効果</h3>
+          <div class="guide-table-wrap">
+            <table class="guide-table guide-table--wrap">
+              <thead>
+                <tr>
+                  <th scope="col">キャラ・専用武器</th>
+                  <th scope="col">対象</th>
+                  <th scope="col">増加量</th>
+                  <th scope="col">持続</th>
+                  <th scope="col">発動時点</th>
+                  <th scope="col">解除</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row"><a href="../characters/alexandra.html#skill-4">アレクサンドラ</a> 専用武器Lv2</th>
+                  <td data-label="対象">自身</td>
+                  <td data-label="増加量">40%</td>
+                  <td data-label="持続">6ターン</td>
+                  <td data-label="発動時点">バトル開始時</td>
+                  <td data-label="解除">不可</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p>アレクサンドラのHPドレイン増加は<strong>専用武器Lv2の追加効果</strong>です。通常S4の「攻撃を受けたときのHP回復」とは分けて考えます。</p>
+        </div>
+      </section>
+      <section class="guide-card" id="users" aria-labelledby="users-title">
+        <div class="guide-card-head">
+          <h2 id="users-title">参照・利用・強化するキャラ</h2>
+        </div>
+        <div class="guide-card-body">
+          <p>ルスティカは味方にHPドレイン増加を渡せます。回復するのは、増加効果を受けて敵へ攻撃したキャラ自身です。</p>
+          <p>トリクシーは<strong>自身を除く黄属性の味方2体以上</strong>という編成条件があります。HPドレイン目的で使う場合は、増加量だけでなく、この条件と再発動制限を確認しましょう。</p>
+          <p>被回復量増加・減少もHPドレインの回復量に作用します。ただし、HPドレインのステータスを増減させる効果とは別です。</p>
+          <p>トロポンS1などの「総与ダメージの○%を回復」は、それだけではHPドレイン増加に分類しません。</p>
+        </div>
+      </section>
+      <section class="guide-card" id="countermeasures" aria-labelledby="countermeasures-title">
+        <div class="guide-card-head">
+          <h2 id="countermeasures-title">防ぐ・対策する方法</h2>
+        </div>
+        <div class="guide-card-body">
+          <p><strong>不治はHPドレインによる回復も止めます。</strong> 被回復量減少は回復量を減らす効果で、回復を禁止する不治とは異なります。</p>
+          <p>HPドレインを減らす効果もあります。</p>
+          <div class="guide-table-wrap">
+            <table class="guide-table guide-table--wrap">
+              <thead>
+                <tr>
+                  <th scope="col">キャラ・区分</th>
+                  <th scope="col">対象</th>
+                  <th scope="col">減少量</th>
+                  <th scope="col">持続</th>
+                  <th scope="col">発動時点・付与確率</th>
+                  <th scope="col">解除・再発動</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row"><a href="../characters/cusith.html#skill-1">クーシー</a> S1「チック・アタック」</th>
+                  <td data-label="対象"><strong>自身以外の味方全体</strong>とランダムな敵5体</td>
+                  <td data-label="減少量">50%</td>
+                  <td data-label="持続">4ターン</td>
+                  <td data-label="発動時点・付与確率">S1の物理攻撃後。確率の記載なし</td>
+                  <td data-label="解除・再発動">解除不可の指定なし。S1再使用時</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/tropon.html#skill-1">トロポン</a> S1「ライアースティング」＋<strong>専用武器Lv1</strong></th>
+                  <td data-label="対象">攻撃対象の敵</td>
+                  <td data-label="減少量">30%</td>
+                  <td data-label="持続">2ターン</td>
+                  <td data-label="発動時点・付与確率">S1で30%の確率。<strong>専用武器Lv3で60%</strong></td>
+                  <td data-label="解除・再発動">解除不可の指定なし。S1再使用時</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p>敵への弱体付与は、弱体効果命中率・耐性率による判定も受けます。</p>
+          <p>クーシーは敵だけでなく味方のHPドレインも下げます。トロポンの減少効果は専用武器による追加で、通常S1の自己回復とは別です。減少量の50%・30%を、そのまま回復量の減少率や回復停止率とは扱いません。</p>
+          <p>ほかには、攻撃を回避する、防御効果で回復計算に使われるダメージを抑える、解除可能なHPドレイン増加バフを解除する、といった方法があります。解除不可の増加効果にはバフ解除は使えません。</p>
+        </div>
+      </section>
+      <section class="guide-card" id="relationships" aria-labelledby="relationships-title">
+        <div class="guide-card-head">
+          <h2 id="relationships-title">関連する特殊効果</h2>
+        </div>
+        <div class="guide-card-body">
+          <ul class="guide-bullets">
+            <li><a href="./incurable.html"><strong>不治</strong></a>：HPドレインを含むHP回復を禁止します。</li>
+            <li><a href="./regeneration.html"><strong>再生</strong></a>：行動開始時に回復する効果。攻撃をきっかけにするHPドレインとは異なります。</li>
+            <li><a href="./absorption.html"><strong>吸収</strong></a>：相手のステータスを下げ、その減少分を自身のバフにする効果。HP回復の別名ではありません。</li>
+            <li><a href="./turn-duration.html"><strong>ターン増減</strong></a>：解除可能で持続ターンのある増加バフ・減少効果の持続に関わります。</li>
+            <li><a href="./cooldown-reduction.html"><strong>CT減少</strong></a>：アクティブスキルの再使用までのカウントを減らすもので、HPドレイン増加バフの持続を延ばす効果ではありません。</li>
+          </ul>
+        </div>
+      </section>
+      <section class="guide-card" id="sources" aria-labelledby="sources-title">
+        <div class="guide-card-head">
+          <h2 id="sources-title">出典</h2>
+        </div>
+        <div class="guide-card-body">
+          <p class="guide-source">出典：公式FAQ「その他の効果」／公式FAQ「バフ・弱体効果」／公式FAQ「バフの種類」／公式FAQ「弱体効果の種類」</p>
+          <p class="guide-source">キャラ別の対象・数値・発動条件・専用武器効果は、比較表から当サイトの各キャラ詳細を参照できます。確認日：2026年10月28日。通常スキルと専用武器のスキル強化による増減を扱い、装備の基礎補正・アルカナは一覧の対象外です。</p>
+          <ul class="guide-bullets guide-source">
+            <li><a href="https://mementomori.zendesk.com/hc/ja/articles/46414238259097" target="_blank" rel="noopener">公式FAQ「その他の効果」</a></li>
+            <li><a href="https://mementomori.zendesk.com/hc/ja/articles/46412673040921" target="_blank" rel="noopener">公式FAQ「バフ・弱体効果」</a></li>
+            <li><a href="https://mementomori.zendesk.com/hc/ja/articles/46412799595545" target="_blank" rel="noopener">公式FAQ「バフの種類」</a></li>
+            <li><a href="https://mementomori.zendesk.com/hc/ja/articles/46414059026841" target="_blank" rel="noopener">公式FAQ「弱体効果の種類」</a></li>
+          </ul>
+        </div>
+      </section>
+    </div>
+    <!-- ad:bottom -->
+    <aside class="ad-slot" aria-label="広告">
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-6389066329814944"
+           data-ad-slot="6111654373"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </aside>
+    <!-- /ad:bottom -->
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <span>ミレストのメメントモリ分析データ室 / 非公式ファンサイト</span>
+      <nav class="footer-links" aria-label="サイト内のページ">
+        <a href="/">トップ</a>
+        <a href="../characters/index.html">キャラ一覧</a>
+        <a href="/pages/guide/">このサイトでできること</a>
+        <a href="/privacy.html">プライバシーポリシー</a>
+        <a href="/disclaimer.html">免責事項</a>
+        <a href="/about.html">このサイトについて</a>
+        <a href="/contact.html">お問い合わせ</a>
+      </nav>
+    </div>
+  </footer>
+  <script src="../../js/figure-series.js?v=8b71cecf" defer></script>
+</body>
+</html>
