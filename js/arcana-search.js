@@ -57,6 +57,8 @@
   function formatQuery(value) {
     const state = { ...defaultState(), ...value }, defaults = defaultState(), params = new URLSearchParams();
     for (const key of Object.keys(defaults)) {
+      if (key === "cn" && state.character) continue;
+      if (key === "scope" && !scopeActive(state)) continue;
       if (queryLists[key]) {
         const selected = queryLists[key].filter(v => state[key].includes(v));
         if (selected.length) params.set(key, selected.join(","));
@@ -110,6 +112,21 @@
     const error = Number.isNaN(min) || Number.isNaN(max) ? "日数は0〜99999の整数で入力してください" :
       min !== null && max !== null && min > max ? "最小日数が最大日数を超えています" : "";
     return { min, max, error, active: !error && (min !== null || max !== null) };
+  }
+  function scopeActive(state) {
+    return state.status.length > 0 || validateDays(state).active;
+  }
+  function activeFilterChips(state, labels = new Map()) {
+    const defaults = defaultState(), chips = [];
+    for (const key of ["effect", "target", "count", "status"]) {
+      state[key].forEach(value => chips.push({ key, value, label: labels.get(`${key}:${value}`) }));
+    }
+    for (const key of ["an", "cn", "stage", "basis", "minDays", "maxDays", "scope"]) {
+      if (state[key] === defaults[key] || (key === "scope" && !scopeActive(state))) continue;
+      const prefix = { an: "アルカナ名：", cn: state.character ? "キャラ固定：" : "キャラ名：", minDays: "最小日数：", maxDays: "最大日数：" };
+      chips.push({ key, label: prefix[key] ? prefix[key] + state[key] : labels.get(`${key}:${state[key]}`) });
+    }
+    return chips;
   }
   function summarizeCharacters(index, now, deps) {
     deps = dependencies(deps);
@@ -231,15 +248,7 @@
       update();
     }
     function updateChips() {
-      const chips = [];
-      for (const key of ["effect", "target", "count", "status"]) {
-        state[key].forEach(value => chips.push({ key, value, label: labels.get(`${key}:${value}`) }));
-      }
-      for (const key of ["an", "cn", "stage", "basis", "minDays", "maxDays", "scope"]) {
-        if (state[key] === defaults[key]) continue;
-        const prefix = { an: "アルカナ名：", cn: state.character ? "キャラ固定：" : "キャラ名：", minDays: "最小日数：", maxDays: "最大日数：" };
-        chips.push({ key, label: prefix[key] ? prefix[key] + state[key] : labels.get(`${key}:${state[key]}`) });
-      }
+      const chips = activeFilterChips(state, labels);
       for (const selector of ["[data-active-filters]", "[data-empty-filters]"]) {
         container.querySelector(selector).replaceChildren(...chips.map(chip =>
           button(`${chip.label} ×`, () => removeCondition(chip.key, chip.value))));
@@ -392,5 +401,5 @@
     return load;
   }
 
-  return { init, defaultState, parseQuery, formatQuery, resolveQuery, matchCharacters, validateDays, summarizeCharacters, filterArcana, sortArcana };
+  return { init, defaultState, parseQuery, formatQuery, resolveQuery, matchCharacters, validateDays, activeFilterChips, summarizeCharacters, filterArcana, sortArcana };
 }));

@@ -145,8 +145,15 @@ check('U01 URL往復一致・入力不変', () => {
     state({ cn: 'ふぃあー', scope: 'any', sort: 'count' })];
   for (const original of cases) {
     const snapshot = JSON.stringify(original);
-    const parsed = api.parseQuery(api.formatQuery(original));
-    assert.deepEqual(parsed.state, original);
+    const parsed = api.resolveQuery(api.parseQuery(api.formatQuery(original)), index);
+    // URLは判定に不要なscopeと、characterから復元できる表示名を省略する。
+    const expected = { ...original };
+    if (!original.status.length && !api.validateDays(original).active)
+      expected.scope = original.character || original.cn.trim() ? 'named' : 'any';
+    if (original.character) expected.cn = index.characters[original.character].name;
+    assert.deepEqual(parsed.state, expected);
+    assert.deepEqual(api.filterArcana(index, parsed.state, now, deps).map(a => a.id),
+      api.filterArcana(index, original, now, deps).map(a => a.id));
     assert.equal(parsed.warning, false);
     assert.equal(JSON.stringify(original), snapshot);
   }
@@ -191,7 +198,7 @@ check('U07 scope明示は名前入力の初期値より優先', () => {
     const parsed = api.resolveQuery(api.parseQuery(`?character=fia_trace&scope=${scope}`), index);
     assert.equal(parsed.scopeExplicit, true);
     assert.equal(parsed.state.scope, scope);
-    assert.equal(api.parseQuery(api.formatQuery(parsed.state)).state.scope, scope);
+    assert.equal(api.parseQuery(api.formatQuery({ ...parsed.state, status: ['waiting'] })).state.scope, scope);
   }
   assert.equal(api.parseQuery('?cn=fia').state.scope, 'named');
   assert.equal(api.parseQuery('?cn=fia&scope=any').state.scope, 'any');
@@ -219,6 +226,56 @@ check('T01 現在時刻の再判定と共通の開催文言', () => {
     assert.equal(api.filterArcana(fixture, state({ status: ['ongoing'] }), date).length, i === 1 ? 1 : 0);
     assert.ok(require('../js/render-arcana.js').renderMember(fixture.characters.a, summary).includes(statusText(summary)));
   });
+});
+check('U09 名前だけでは範囲チップ・適用数・URLを省略', () => {
+  for (const scope of ['any', 'all', 'named']) {
+    const current = state({ cn: 'ふぃあー', scope });
+    const chips = api.activeFilterChips(current);
+    assert.deepEqual(chips.map(chip => chip.key), ['cn']);
+    assert.equal(chips.filter(chip => ['count', 'status', 'basis', 'minDays', 'maxDays', 'scope'].includes(chip.key)).length, 0);
+    assert.equal(new URLSearchParams(api.formatQuery(current)).has('scope'), false);
+    assert.equal(current.scope, scope);
+  }
+});
+check('U10 開催状況・有効な日数で範囲を適用、解除で省略', () => {
+  for (const condition of [{ status: ['waiting'] }, { minDays: '0' }, { maxDays: '12' }]) {
+    const current = state({ cn: 'ふぃあー', scope: 'named', ...condition });
+    assert.ok(api.activeFilterChips(current).some(chip => chip.key === 'scope'));
+    assert.equal(api.activeFilterChips(current).filter(chip => ['status', 'minDays', 'maxDays', 'scope'].includes(chip.key)).length, 2);
+    assert.equal(api.parseQuery(api.formatQuery(current)).state.scope, 'named');
+    const cleared = { ...current, status: [], minDays: '', maxDays: '' };
+    assert.deepEqual(api.activeFilterChips(cleared).map(chip => chip.key), ['cn']);
+  }
+  const invalid = state({ cn: 'ふぃあー', scope: 'all', minDays: '12', maxDays: '11' });
+  assert.ok(!api.activeFilterChips(invalid).some(chip => chip.key === 'scope'));
+  assert.equal(new URLSearchParams(api.formatQuery(invalid)).has('scope'), false);
+  invalid.status = ['waiting'];
+  assert.ok(api.activeFilterChips(invalid).some(chip => chip.key === 'scope'));
+  assert.equal(new URLSearchParams(api.formatQuery(invalid)).get('scope'), 'all');
+});
+check('U11 固定キャラのcn省略と表示名復元', () => {
+  const current = state({ character: 'fia_trace', cn: index.characters.fia_trace.name, scope: 'named', open: 'A092' });
+  const query = api.formatQuery(current);
+  assert.equal(query, '?character=fia_trace&open=A092');
+  const restored = api.resolveQuery(api.parseQuery(query), index).state;
+  assert.deepEqual(restored, current);
+  assert.equal(new URLSearchParams(api.formatQuery(state({ cn: 'ふぃあー' }))).get('cn'), 'ふぃあー');
+});
+check('U12 所属直リンク往復・明示scope保持と後からの条件適用', () => {
+  const parsed = api.resolveQuery(api.parseQuery('?character=fia_trace&scope=named&open=A092'), index);
+  assert.equal(parsed.scopeExplicit, true);
+  assert.equal(parsed.state.scope, 'named');
+  assert.deepEqual(api.activeFilterChips(parsed.state).map(chip => chip.key), ['cn']);
+  const restored = api.resolveQuery(api.parseQuery(api.formatQuery(parsed.state)), index).state;
+  for (const current of [parsed.state, restored]) {
+    assert.equal(current.open, 'A092');
+    assert.deepEqual(api.filterArcana(index, current, now, deps).map(a => a.id), ['A092', 'A093']);
+    for (const condition of [{ status: ['waiting'] }, { minDays: '0' }]) {
+      const selected = { ...current, ...condition };
+      assert.ok(api.activeFilterChips(selected).some(chip => chip.key === 'scope'));
+      assert.deepEqual(api.filterArcana(index, selected, now, deps).map(a => a.id), ids({ character: 'fia_trace', scope: 'named', ...condition }));
+    }
+  }
 });
 console.log(`=== 結果: ${ok}件OK / ${ng}件NG ===`);
 process.exitCode = ng ? 1 : 0;
