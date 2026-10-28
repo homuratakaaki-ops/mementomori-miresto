@@ -98,6 +98,11 @@
 - 状態の判定順は既存 `gachaStatus()` と同じ。終了日不明でも状態は「復刻待ち」のまま、日数は出さず `endUnknown` で「終了日未確認」を示す（2026-10-28 夢爽確定）。
 - 検証は `node scripts/verify-arcana-gacha.cjs`。判定を変えたらここも直す。
 
+- `data/arcana-index.json`・`pages/arcana/index.html` は `scripts/build-character-pages.mjs` が生成する（手で直さない）。
+- アルカナの正本は `data/arcana.json`。構成キャラ情報は既存のキャラ正本・補完名簿から生成する。
+- 公開前は noindex・未掲載とし、公開導線やサイトマップへ追加しない。
+- 生成物の検証は `node scripts/verify-arcana-pages.cjs`。
+
 ## 日次の自動ビルド（GitHub Actions）
 
 - `.github/workflows/daily-build.yml` が**毎日 JST 06:00 と15:00**（UTC 21:00と06:00）に

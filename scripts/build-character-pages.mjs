@@ -28,6 +28,7 @@ import { fileURLToPath } from "node:url";
 import { buildStatusGuides } from "./build-status-guides.mjs";
 import { buildAds } from "./build-ads.mjs";
 import { buildAnalytics } from "./build-analytics.mjs";
+import { buildArcanaPages } from "./build-arcana-pages.mjs";
 
 const require = createRequire(import.meta.url);
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
@@ -895,13 +896,16 @@ function main() {
   const analytics = siteConfig.analytics || {};
 
   const flowSkills = validateAll({ baseData, terms });
-  // アルカナは検証だけを行い、ページや索引は生成しない。
+  // アルカナは検証してから一覧ページと検索用データを生成する。
+  let arcana, meta;
   try {
     const arcanaText = readFileSync(join(DATA_DIR, "arcana.json"), "utf8");
     const metaText = readFileSync(join(DATA_DIR, "arcana-character-meta.json"), "utf8");
+    arcana = JSON.parse(arcanaText);
+    meta = JSON.parse(metaText);
     const { runArcanaChecks } = require("./verify-arcana.cjs");
     const results = runArcanaChecks({
-      arcana: JSON.parse(arcanaText), meta: JSON.parse(metaText),
+      arcana, meta,
       canonical: baseData, arcanaText, metaText, expectFull: false
     });
     for (const check of results) {
@@ -924,6 +928,7 @@ function main() {
   const index = buildIndexPage({ baseData });
   const charIndex = buildCharacterIndex({ baseData });
   const topPage = buildTopPage({ newsData });
+  buildArcanaPages({ baseData, arcana, meta, now: NOW, writeIfChanged });
   // 広告枠は全ページを書き終えた最後に差し込む（手書きページの目印もここで置き換える）。
   const ads2 = buildAds({ writeIfChanged });
   // 計測タグ（GA4）は広告の後。<!-- ad:head --> の手前に入れる。
