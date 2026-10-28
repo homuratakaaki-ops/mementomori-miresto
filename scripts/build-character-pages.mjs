@@ -928,7 +928,7 @@ function main() {
   const index = buildIndexPage({ baseData });
   const charIndex = buildCharacterIndex({ baseData });
   const topPage = buildTopPage({ newsData });
-  buildArcanaPages({ baseData, arcana, meta, now: NOW, writeIfChanged });
+  buildArcanaPages({ baseData, arcana, meta, now: NOW, analytics, writeIfChanged });
   // 広告枠は全ページを書き終えた最後に差し込む（手書きページの目印もここで置き換える）。
   const ads2 = buildAds({ writeIfChanged });
   // 計測タグ（GA4）は広告の後。<!-- ad:head --> の手前に入れる。

@@ -62,14 +62,21 @@ check("P03", () => {
     assert.ok(new URL(url).origin === "https://memento.musoudc.com" || existing.has(url), `許可されないURL: ${url}`);
   }
   for (const match of html.matchAll(/(?:href|src)="([^"]+)"/g)) {
-    assert.ok(/^(?:https:\/\/|\/(?!\/)|\.\.\/)/.test(match[1]), "許可されない参照形式");
+    assert.ok(/^(?:https:\/\/|\/(?!\/)|\.\.\/)/.test(match[1]) || match[1] === "#arcana-results", "許可されない参照形式");
   }
   const withoutAnalytics = html.replace(/<!-- ga:head -->[\s\S]*?<!-- \/ga:head -->/g, "");
-  assert.equal(/<script\b|<!-- ad:/.test(withoutAnalytics), false);
+  const scripts = [...withoutAnalytics.matchAll(/<script\b[^>]*>[\s\S]*?<\/script>/g)].map(match => match[0]);
+  assert.equal(scripts.length, 4);
+  ["gacha-status", "search-normalize", "render-arcana", "arcana-search"].forEach((name, i) => {
+    assert.match(scripts[i], new RegExp(`^<script defer src="\\.\\./\\.\\./js/${name}\\.js\\?v=[0-9a-f]{8}"></script>$`));
+  });
+  assert.equal(/<!-- ad:/.test(withoutAnalytics), false);
   assert.equal(/<details\b[^>]*\bopen\b/.test(html), false);
-  return "禁止語・外部URL混入なし / 機能JS・広告目印なし / detailsは閉じた状態";
+  return "禁止語・外部URL混入なし / 指定JS4本のみ（versioned付き）・広告目印なし / detailsは閉じた状態";
 });
 check("P04", () => {
+  assert.ok(html.includes('<title>アルカナ検索 | ミレストのメメントモリ分析データ室</title>'));
+  assert.ok(html.includes('<meta property="og:title" content="アルカナ検索 | ミレストのメメントモリ分析データ室">'));
   assert.ok(html.includes('<meta name="robots" content="noindex">'));
   assert.ok(html.includes('<link rel="canonical" href="https://memento.musoudc.com/pages/arcana/index.html">'));
   assert.equal(read("sitemap.xml").includes("/pages/arcana/"), false);

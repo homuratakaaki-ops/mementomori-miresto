@@ -8,10 +8,11 @@ import { versioned } from "./asset-version.mjs";
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const require = createRequire(import.meta.url);
 const { escapeHtml, renderCard } = require("../js/render-arcana.js");
+const { renderAnalyticsHead } = require("../js/render-analytics.js");
 const { arcanaGachaSummary, jstNow } = require("../js/gacha-status.js");
 const SITE = "https://memento.musoudc.com";
 const SITE_NAME = "ミレストのメメントモリ分析データ室";
-const TITLE = `アルカナ検索 / ${SITE_NAME}`;
+const TITLE = `アルカナ検索 | ${SITE_NAME}`;
 const DESCRIPTION = "アルカナ101件の効果と構成キャラ、ガチャの開催状況を確認できます。";
 const HISTORY_KEYS = ["date", "endDate", "startTime", "endTime", "kind", "round", "announced"];
 
@@ -54,7 +55,53 @@ function searchIndex(baseData, arcana, meta) {
   return { schema: "miresto_arcana_index_v1", note: "data/arcana.json と data/mementomori-skills.json から生成。手で直さない。", arcana: rows, characters };
 }
 
-function pageHtml(index, now) {
+const EFFECT_GROUPS = [
+  ["基礎", [["attack", "攻撃力"], ["hp", "HP"], ["defense", "防御力"], ["physical_defense", "物理防御力"], ["magical_defense", "魔法防御力"]]],
+  ["能力", [["strength", "腕力"], ["dexterity", "技力"], ["magic", "魔力"], ["stamina", "耐久力"]]],
+  ["クリティカル", [["critical", "クリティカル"], ["critical_resistance", "クリティカル耐性"], ["critical_damage", "クリダメ強化"], ["physical_critical_mitigation", "物理クリダメ緩和"], ["magical_critical_mitigation", "魔法クリダメ緩和"]]],
+  ["命中・回避", [["accuracy", "命中"], ["evasion", "回避"], ["debuff_accuracy", "弱体効果命中"], ["debuff_resistance", "弱体効果耐性"]]],
+  ["その他戦闘", [["hp_drain", "HPドレイン"], ["counter", "カウンタ"]]],
+  ["貫通", [["physical_penetration", "物理防御貫通"], ["physical_magical_penetration", "物魔防御貫通"], ["penetration", "防御貫通"]]],
+  ["上限", [["party_level_cap", "パーティLv上限"], ["member_awakening_cap", "アルカナキャラ進化上限"]]]
+];
+
+function choices(name, entries, type = "checkbox", initial = "") {
+  return entries.map(([value, label]) => `<label class="arcana-choice"><input type="${type}" name="${name}" value="${value}"${value === initial ? " checked" : ""}><span>${escapeHtml(label)}</span></label>`).join("\n");
+}
+
+function searchControls() {
+  return `<aside class="arcana-search-panel" data-search-controls hidden aria-labelledby="search-heading">
+    <h2 id="search-heading">検索条件</h2>
+    <fieldset><legend>欲しい効果</legend>
+      <div class="arcana-quick-effects">${choices("effect", [["attack", "攻撃力"], ["hp", "HP"], ["evasion", "回避"], ["critical", "クリティカル"]])}</div>
+      <details><summary>すべての効果</summary>
+        ${EFFECT_GROUPS.map(([group, entries]) => `<fieldset><legend>${group}</legend>${group === "貫通" ? '<label class="arcana-choice"><input type="checkbox" name="effectGroup" value="physical_penetration,physical_magical_penetration,penetration" data-effect-group="penetration"><span>貫通をまとめて選択</span></label>' : ""}${choices("effect", entries)}</fieldset>`).join("\n")}
+      </details>
+    </fieldset>
+    <fieldset><legend>効果の対象</legend>${choices("target", [["all", "全キャラ"], ["members", "構成キャラ"], ["party", "パーティ"], ["other", "その他"], ["unknown", "対象未確認"]])}</fieldset>
+    <fieldset><legend>検索する段階</legend>${choices("stage", [["lr", "LR"], ["any", "すべての段階"]], "radio", "lr")}</fieldset>
+    <label class="arcana-field">アルカナ名<input type="search" name="an" value=""></label>
+    <label class="arcana-field">キャラ名<input type="search" name="cn" value="" aria-controls="character-candidates" autocomplete="off"></label>
+    <input type="hidden" name="character" value="">
+    <div id="character-candidates" data-character-candidates aria-label="キャラ名の候補"></div>
+    <details class="arcana-advanced"><summary>人数・開催状況・日数 <span data-advanced-count>0件適用中</span></summary>
+      <fieldset><legend>必要人数</legend>${choices("count", [["2", "2人"], ["3", "3人"], ["4", "4人"]])}</fieldset>
+      <fieldset><legend>開催状況</legend>${choices("status", [["ongoing", "開催中"], ["upcoming", "開催予定"], ["waiting", "復刻待ち"], ["permanent", "恒常"], ["history_unknown", "履歴未確認"]])}</fieldset>
+      <fieldset><legend>日数の基準</legend>${choices("basis", [["end", "前回終了から"], ["start", "最終登場の開始から"]], "radio", "end")}</fieldset>
+      <label class="arcana-field">最小日数<input type="number" name="minDays" min="0" max="99999" step="1" inputmode="numeric"></label>
+      <label class="arcana-field">最大日数<input type="number" name="maxDays" min="0" max="99999" step="1" inputmode="numeric"></label>
+      <fieldset><legend>キャラ条件の範囲</legend>${choices("scope", [["any", "1人以上"], ["all", "全員"], ["named", "検索したキャラ"]], "radio", "any")}</fieldset>
+    </details>
+    <label class="arcana-field">並び替え<select name="sort">
+      <option value="catalog">管理番号</option><option value="name">名前順</option><option value="count">必要人数の少ない順</option><option value="days_desc">構成内の最大経過日数が長い順</option>
+    </select></label>
+    <div data-active-filters aria-label="適用中の条件"></div>
+    <button type="button" data-clear-filters>条件をすべて解除</button>
+    <a class="arcana-results-link" href="#arcana-results">結果へ</a>
+  </aside>`;
+}
+
+function pageHtml(index, now, analytics) {
   const canonical = `${SITE}/pages/arcana/index.html`;
   const summaries = Object.fromEntries(Object.entries(index.characters).map(([id, character]) =>
     [id, arcanaGachaSummary(character, now)]));
@@ -80,6 +127,7 @@ function pageHtml(index, now) {
   <link rel="apple-touch-icon" href="../../${versioned("assets/miresto/miresto-icon-180.png")}">
   <link rel="stylesheet" href="../../${versioned("assets/site-footer.css")}">
   <link rel="stylesheet" href="../../${versioned("assets/arcana.css")}">
+${renderAnalyticsHead(analytics, "  ")}
 </head>
 <body>
   <header class="page-header">
@@ -89,8 +137,13 @@ function pageHtml(index, now) {
     <p>開催状況：${escapeHtml(jstNow(now).replace(/-/g, "/").replace("T", " "))} 時点</p>
     <p class="arcana-note">検索機能は準備中です（いまは全件を表示しています）</p>
   </header>
-  <main>
+  <main class="arcana-search-layout" data-arcana-search data-index-src="../../${versioned("data/arcana-index.json")}">
+    <p class="arcana-search-error" data-search-error role="status" hidden></p>
+    ${searchControls()}
+    <section class="arcana-results" id="arcana-results" aria-label="検索結果" tabindex="-1">
+    <p data-result-count aria-live="polite">検索結果 ${index.arcana.length}件／全${index.arcana.length}件</p>
 ${index.arcana.map(item => renderCard(item, index.characters, summaries)).join("\n")}
+    </section>
   </main>
   <footer class="site-footer">
     <div class="footer-inner">
@@ -107,12 +160,13 @@ ${index.arcana.map(item => renderCard(item, index.characters, summaries)).join("
       </nav>
     </div>
   </footer>
+${["gacha-status", "search-normalize", "render-arcana", "arcana-search"].map(name => `  <script defer src="../../${versioned(`js/${name}.js`)}"></script>`).join("\n")}
 </body>
 </html>
 `;
 }
 
-export function buildArcanaPages({ baseData, arcana, meta, now, writeIfChanged }) {
+export function buildArcanaPages({ baseData, arcana, meta, now, analytics, writeIfChanged }) {
   const index = searchIndex(baseData, arcana, meta);
   const json = `${JSON.stringify(index, null, 2)}\n`;
   const bytes = Buffer.byteLength(json);
@@ -120,7 +174,7 @@ export function buildArcanaPages({ baseData, arcana, meta, now, writeIfChanged }
   if (gzipBytes > 150 * 1024) throw new Error("停止: アルカナ検索用データが gzip 150KB を超えました");
   mkdirSync(join(ROOT, "pages/arcana"), { recursive: true });
   const indexChanged = writeIfChanged(join(ROOT, "data/arcana-index.json"), json);
-  const pageChanged = writeIfChanged(join(ROOT, "pages/arcana/index.html"), pageHtml(index, now));
+  const pageChanged = writeIfChanged(join(ROOT, "pages/arcana/index.html"), pageHtml(index, now, analytics));
   console.log(`アルカナ一覧: ${index.arcana.length}件 / 検索用データ ${(bytes / 1024).toFixed(1)} KB（${indexChanged || pageChanged ? "更新" : "変更なし"}）`);
   return { bytes, gzipBytes, indexChanged, pageChanged };
 }

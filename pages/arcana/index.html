@@ -3,14 +3,14 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>アルカナ検索 / ミレストのメメントモリ分析データ室</title>
+  <title>アルカナ検索 | ミレストのメメントモリ分析データ室</title>
   <meta name="description" content="アルカナ101件の効果と構成キャラ、ガチャの開催状況を確認できます。">
   <meta name="robots" content="noindex">
   <link rel="canonical" href="https://memento.musoudc.com/pages/arcana/index.html">
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="ミレストのメメントモリ分析データ室">
   <meta property="og:locale" content="ja_JP">
-  <meta property="og:title" content="アルカナ検索 / ミレストのメメントモリ分析データ室">
+  <meta property="og:title" content="アルカナ検索 | ミレストのメメントモリ分析データ室">
   <meta property="og:description" content="アルカナ101件の効果と構成キャラ、ガチャの開催状況を確認できます。">
   <meta property="og:url" content="https://memento.musoudc.com/pages/arcana/index.html">
   <meta property="og:image" content="https://memento.musoudc.com/assets/ogp/ogp-common.png">
@@ -19,7 +19,7 @@
   <link rel="icon" type="image/png" href="../../assets/miresto/miresto-icon-32.png?v=f9e094b7" sizes="32x32">
   <link rel="apple-touch-icon" href="../../assets/miresto/miresto-icon-180.png?v=1f4d3479">
   <link rel="stylesheet" href="../../assets/site-footer.css?v=4fbb7bc1">
-  <link rel="stylesheet" href="../../assets/arcana.css?v=ed7d2637">
+  <link rel="stylesheet" href="../../assets/arcana.css?v=87f5ecae">
   <!-- ga:head -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-BHKBSRGSJF"></script>
   <script>
@@ -38,7 +38,80 @@
     <p>開催状況：2026/10/28 12:00 時点</p>
     <p class="arcana-note">検索機能は準備中です（いまは全件を表示しています）</p>
   </header>
-  <main>
+  <main class="arcana-search-layout" data-arcana-search data-index-src="../../data/arcana-index.json?v=7a215f42">
+    <p class="arcana-search-error" data-search-error role="status" hidden></p>
+    <aside class="arcana-search-panel" data-search-controls hidden aria-labelledby="search-heading">
+    <h2 id="search-heading">検索条件</h2>
+    <fieldset><legend>欲しい効果</legend>
+      <div class="arcana-quick-effects"><label class="arcana-choice"><input type="checkbox" name="effect" value="attack"><span>攻撃力</span></label>
+<label class="arcana-choice"><input type="checkbox" name="effect" value="hp"><span>HP</span></label>
+<label class="arcana-choice"><input type="checkbox" name="effect" value="evasion"><span>回避</span></label>
+<label class="arcana-choice"><input type="checkbox" name="effect" value="critical"><span>クリティカル</span></label></div>
+      <details><summary>すべての効果</summary>
+        <fieldset><legend>基礎</legend><label class="arcana-choice"><input type="checkbox" name="effect" value="attack"><span>攻撃力</span></label>
+<label class="arcana-choice"><input type="checkbox" name="effect" value="hp"><span>HP</span></label>
+<label class="arcana-choice"><input type="checkbox" name="effect" value="defense"><span>防御力</span></label>
+<label class="arcana-choice"><input type="checkbox" name="effect" value="physical_defense"><span>物理防御力</span></label>
+<label class="arcana-choice"><input type="checkbox" name="effect" value="magical_defense"><span>魔法防御力</span></label></fieldset>
+<fieldset><legend>能力</legend><label class="arcana-choice"><input type="checkbox" name="effect" value="strength"><span>腕力</span></label>
+<label class="arcana-choice"><input type="checkbox" name="effect" value="dexterity"><span>技力</span></label>
+<label class="arcana-choice"><input type="checkbox" name="effect" value="magic"><span>魔力</span></label>
+<label class="arcana-choice"><input type="checkbox" name="effect" value="stamina"><span>耐久力</span></label></fieldset>
+<fieldset><legend>クリティカル</legend><label class="arcana-choice"><input type="checkbox" name="effect" value="critical"><span>クリティカル</span></label>
+<label class="arcana-choice"><input type="checkbox" name="effect" value="critical_resistance"><span>クリティカル耐性</span></label>
+<label class="arcana-choice"><input type="checkbox" name="effect" value="critical_damage"><span>クリダメ強化</span></label>
+<label class="arcana-choice"><input type="checkbox" name="effect" value="physical_critical_mitigation"><span>物理クリダメ緩和</span></label>
+<label class="arcana-choice"><input type="checkbox" name="effect" value="magical_critical_mitigation"><span>魔法クリダメ緩和</span></label></fieldset>
+<fieldset><legend>命中・回避</legend><label class="arcana-choice"><input type="checkbox" name="effect" value="accuracy"><span>命中</span></label>
+<label class="arcana-choice"><input type="checkbox" name="effect" value="evasion"><span>回避</span></label>
+<label class="arcana-choice"><input type="checkbox" name="effect" value="debuff_accuracy"><span>弱体効果命中</span></label>
+<label class="arcana-choice"><input type="checkbox" name="effect" value="debuff_resistance"><span>弱体効果耐性</span></label></fieldset>
+<fieldset><legend>その他戦闘</legend><label class="arcana-choice"><input type="checkbox" name="effect" value="hp_drain"><span>HPドレイン</span></label>
+<label class="arcana-choice"><input type="checkbox" name="effect" value="counter"><span>カウンタ</span></label></fieldset>
+<fieldset><legend>貫通</legend><label class="arcana-choice"><input type="checkbox" name="effectGroup" value="physical_penetration,physical_magical_penetration,penetration" data-effect-group="penetration"><span>貫通をまとめて選択</span></label><label class="arcana-choice"><input type="checkbox" name="effect" value="physical_penetration"><span>物理防御貫通</span></label>
+<label class="arcana-choice"><input type="checkbox" name="effect" value="physical_magical_penetration"><span>物魔防御貫通</span></label>
+<label class="arcana-choice"><input type="checkbox" name="effect" value="penetration"><span>防御貫通</span></label></fieldset>
+<fieldset><legend>上限</legend><label class="arcana-choice"><input type="checkbox" name="effect" value="party_level_cap"><span>パーティLv上限</span></label>
+<label class="arcana-choice"><input type="checkbox" name="effect" value="member_awakening_cap"><span>アルカナキャラ進化上限</span></label></fieldset>
+      </details>
+    </fieldset>
+    <fieldset><legend>効果の対象</legend><label class="arcana-choice"><input type="checkbox" name="target" value="all"><span>全キャラ</span></label>
+<label class="arcana-choice"><input type="checkbox" name="target" value="members"><span>構成キャラ</span></label>
+<label class="arcana-choice"><input type="checkbox" name="target" value="party"><span>パーティ</span></label>
+<label class="arcana-choice"><input type="checkbox" name="target" value="other"><span>その他</span></label>
+<label class="arcana-choice"><input type="checkbox" name="target" value="unknown"><span>対象未確認</span></label></fieldset>
+    <fieldset><legend>検索する段階</legend><label class="arcana-choice"><input type="radio" name="stage" value="lr" checked><span>LR</span></label>
+<label class="arcana-choice"><input type="radio" name="stage" value="any"><span>すべての段階</span></label></fieldset>
+    <label class="arcana-field">アルカナ名<input type="search" name="an" value=""></label>
+    <label class="arcana-field">キャラ名<input type="search" name="cn" value="" aria-controls="character-candidates" autocomplete="off"></label>
+    <input type="hidden" name="character" value="">
+    <div id="character-candidates" data-character-candidates aria-label="キャラ名の候補"></div>
+    <details class="arcana-advanced"><summary>人数・開催状況・日数 <span data-advanced-count>0件適用中</span></summary>
+      <fieldset><legend>必要人数</legend><label class="arcana-choice"><input type="checkbox" name="count" value="2"><span>2人</span></label>
+<label class="arcana-choice"><input type="checkbox" name="count" value="3"><span>3人</span></label>
+<label class="arcana-choice"><input type="checkbox" name="count" value="4"><span>4人</span></label></fieldset>
+      <fieldset><legend>開催状況</legend><label class="arcana-choice"><input type="checkbox" name="status" value="ongoing"><span>開催中</span></label>
+<label class="arcana-choice"><input type="checkbox" name="status" value="upcoming"><span>開催予定</span></label>
+<label class="arcana-choice"><input type="checkbox" name="status" value="waiting"><span>復刻待ち</span></label>
+<label class="arcana-choice"><input type="checkbox" name="status" value="permanent"><span>恒常</span></label>
+<label class="arcana-choice"><input type="checkbox" name="status" value="history_unknown"><span>履歴未確認</span></label></fieldset>
+      <fieldset><legend>日数の基準</legend><label class="arcana-choice"><input type="radio" name="basis" value="end" checked><span>前回終了から</span></label>
+<label class="arcana-choice"><input type="radio" name="basis" value="start"><span>最終登場の開始から</span></label></fieldset>
+      <label class="arcana-field">最小日数<input type="number" name="minDays" min="0" max="99999" step="1" inputmode="numeric"></label>
+      <label class="arcana-field">最大日数<input type="number" name="maxDays" min="0" max="99999" step="1" inputmode="numeric"></label>
+      <fieldset><legend>キャラ条件の範囲</legend><label class="arcana-choice"><input type="radio" name="scope" value="any" checked><span>1人以上</span></label>
+<label class="arcana-choice"><input type="radio" name="scope" value="all"><span>全員</span></label>
+<label class="arcana-choice"><input type="radio" name="scope" value="named"><span>検索したキャラ</span></label></fieldset>
+    </details>
+    <label class="arcana-field">並び替え<select name="sort">
+      <option value="catalog">管理番号</option><option value="name">名前順</option><option value="count">必要人数の少ない順</option><option value="days_desc">構成内の最大経過日数が長い順</option>
+    </select></label>
+    <div data-active-filters aria-label="適用中の条件"></div>
+    <button type="button" data-clear-filters>条件をすべて解除</button>
+    <a class="arcana-results-link" href="#arcana-results">結果へ</a>
+  </aside>
+    <section class="arcana-results" id="arcana-results" aria-label="検索結果" tabindex="-1">
+    <p data-result-count aria-live="polite">検索結果 101件／全101件</p>
 <article class="arcana-card" id="arcana-A001">
 <header><small>A001</small><h2>トーラスの守護</h2></header>
 <div class="arcana-lr"><section class="arcana-stage"><h3>LR</h3><p>条件：構成キャラ全員LR</p><ul class="arcana-effects"><li>全キャラ：物理防御力 +3000</li><li>全キャラ：魔法防御力 +3000</li></ul></section></div>
@@ -1353,6 +1426,7 @@
 <section class="arcana-stage"><h3>LR+9</h3><p>条件：構成キャラ全員LR+9</p><ul class="arcana-effects"><li class="arcana-pending">全キャラ：腕力（確認中）</li><li>全キャラ：カウンタ +3.4%</li></ul></section>
 <section class="arcana-stage"><h3>LR+10</h3><p>条件：構成キャラ全員LR+10</p><ul class="arcana-effects"><li class="arcana-pending">全キャラ：腕力（確認中）</li><li>全キャラ：カウンタ +3.5%</li></ul></section></details></div></details></div>
 </article>
+    </section>
   </main>
   <footer class="site-footer">
     <div class="footer-inner">
@@ -1369,5 +1443,9 @@
       </nav>
     </div>
   </footer>
+  <script defer src="../../js/gacha-status.js?v=52dd812b"></script>
+  <script defer src="../../js/search-normalize.js?v=bf53367b"></script>
+  <script defer src="../../js/render-arcana.js?v=6c15104e"></script>
+  <script defer src="../../js/arcana-search.js?v=d0b2448e"></script>
 </body>
 </html>

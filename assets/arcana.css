@@ -37,7 +37,26 @@ summary { min-height: 44px; padding: 10px 8px; cursor: pointer; color: var(--nav
 .site-footer .site-footer-links a { min-height: 44px; }
 .site-footer { font-size: 14px; margin-bottom: 24px; }
 :focus-visible { outline: 3px solid var(--navy); outline-offset: 3px; }
+[hidden] { display: none !important; }
+.arcana-search-layout { display: grid; gap: 20px; align-items: start; }
+.arcana-search-layout > * { min-width: 0; }
+.arcana-search-error { grid-column: 1 / -1; color: #8a281b; }
+.arcana-search-panel { padding: 12px; border: 1px solid var(--line); border-radius: 12px; background: var(--panel); font-size: 14px; }
+.arcana-search-panel fieldset { min-width: 0; margin: 0 0 16px; padding: 0; border: 0; }
+.arcana-search-panel legend { font-weight: bold; padding: 0; }
+.arcana-search-panel details fieldset { margin: 12px 0; }
+.arcana-choice { display: flex; align-items: center; gap: 8px; min-height: 44px; cursor: pointer; }
+.arcana-choice input { width: 20px; height: 20px; flex: 0 0 20px; margin: 0; }
+.arcana-quick-effects { display: flex; flex-wrap: wrap; gap: 6px; margin-block: 8px; }
+.arcana-quick-effects .arcana-choice { border: 1px solid var(--line); border-radius: 20px; padding: 4px 10px; }
+.arcana-field { display: block; margin-block: 16px; font-weight: bold; }
+.arcana-field input, .arcana-field select, .arcana-search-panel button { width: 100%; min-width: 0; min-height: 44px; font: inherit; color: var(--ink); background: white; border: 1px solid #78859a; border-radius: 4px; padding: 8px; }
+.arcana-field select { white-space: normal; }
+.arcana-advanced summary span { display: block; font-size: 14px; }
+.arcana-results-link { display: flex; justify-content: center; margin-top: 12px; }
 @media (min-width: 768px) {
+  .arcana-search-layout:has(.arcana-search-panel:not([hidden])) { grid-template-columns: 264px minmax(0, 1fr); }
+  .arcana-results { grid-column: -2 / -1; }
   .arcana-card { padding: 20px; }
   .arcana-card-body { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 24px; align-items: start; }
   .arcana-details { margin-top: 0; }
