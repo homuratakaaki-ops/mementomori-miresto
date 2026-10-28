@@ -2,7 +2,7 @@
   "schema": "miresto_status_guide_v1",
   "layout": "article",
   "id": "hp-drain",
-  "visibility": "unlisted",
+  "visibility": "listed",
   "name": "HPドレイン",
   "label": "特殊効果ガイド",
   "term": "HPドレイン",
