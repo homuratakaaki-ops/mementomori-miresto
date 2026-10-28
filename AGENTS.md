@@ -102,6 +102,7 @@
 - アルカナの正本は `data/arcana.json`。構成キャラ情報は既存のキャラ正本・補完名簿から生成する。
 - 公開前は noindex・未掲載とし、公開導線やサイトマップへ追加しない。
 - 生成物の検証は `node scripts/verify-arcana-pages.cjs`。
+- P10 は環境変数 `MIRESTO_ARCANA_BASELINE` で基準フォルダを指定したときだけ実行する（未指定は SKIP、指定先が無い場合は失敗）。
 - `js/arcana-search.js` の判定は純粋関数で、`scripts/verify-arcana-search.cjs` で検証する。正規化は `js/search-normalize.js`（`party-builder.js` と同じ仕様。統合は別便）。
 
 ## 日次の自動ビルド（GitHub Actions）

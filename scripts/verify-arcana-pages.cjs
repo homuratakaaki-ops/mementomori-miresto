@@ -209,8 +209,10 @@ check("P09", () => {
   assert.ok(fs.existsSync(path.join(ROOT, "pages/arcana/index.html")));
   return `所属欄の全${checked}リンク実在・形式一致 / 自分・補完キャラ・未特定枠にリンクなし`;
 });
-check("P10", () => {
-  const baseline = process.env.MIRESTO_ARCANA_BASELINE || "C:/Users/homur/mementomori-miresto-verify/arcana/baseline";
+if (!process.env.MIRESTO_ARCANA_BASELINE) {
+  console.log("P10 SKIP（MIRESTO_ARCANA_BASELINE 未指定）");
+} else check("P10", () => {
+  const baseline = process.env.MIRESTO_ARCANA_BASELINE;
   assert.ok(fs.existsSync(baseline), `基準なし: ${baseline}`);
   const normalize = text => text.replace(/\?v=[a-f0-9]{8}/g, "");
   const changed = [];
