@@ -101,7 +101,10 @@ const GAME_RECORDS = {
   'A015:LR': [['stamina', 'per_character_level', 30], ['defense', 'per_character_level', 15]],
   'A017:LR': [['evasion', 'per_character_level', 50], ['physical_defense', 'percent', 2]],
   'A036:LR': [['critical', 'per_character_level', 70], ['attack', 'percent', 2]],
-  'A098:LR': [['stamina', 'per_character_level', 30], ['attack', 'percent', 2]]
+  'A098:LR': [['stamina', 'per_character_level', 30], ['attack', 'percent', 2]],
+  // 2026-10-28 シオン判断：Lv3画面のLR+5列も直接確認済み（LRと同値＋進化上限1）
+  'A017:LR+5': [['evasion', 'per_character_level', 50], ['physical_defense', 'percent', 2], ['member_awakening_cap', 'flat', 1]],
+  'A036:LR+5': [['critical', 'per_character_level', 70], ['attack', 'percent', 2], ['member_awakening_cap', 'flat', 1]]
 };
 
 function verifySchema(data) {
@@ -253,7 +256,7 @@ function verifyData(arcana, meta, expectFull) {
       if (expected) {
         gameStages++;
         const actual = stageEffects.map(e => JSON.stringify([e.statKey, e.target, e.value?.mode, e.value?.mode === 'per_character_level' ? e.value?.coefficient : e.value?.amount])).sort();
-        const wanted = expected.map(([stat, mode, number]) => JSON.stringify([stat, 'all', mode, number])).sort();
+        const wanted = expected.map(([stat, mode, number]) => JSON.stringify([stat, stat === 'member_awakening_cap' ? 'members' : 'all', mode, number])).sort();
         if (JSON.stringify(actual) !== JSON.stringify(wanted) || stageEffects.some(e => e.verification !== 'game_record')) fail('D05', `${s.id}: 確認済み効果集合と不一致`);
       }
       for (const e of stageEffects) {
@@ -305,7 +308,7 @@ function verifyData(arcana, meta, expectFull) {
   checks.D02.reverseIndex = Object.fromEntries([...reverse].map(([id, ids]) => [id, [...ids]]));
   checks.D03.counts = '書き込み処理=0（生成物の不変性はビルド比較で確認）';
   checks.D04.counts = `stage=${stages}, 要conflict=${conflicts}, effect ID=${effectIds.size}`;
-  checks.D05.counts = `対象LR=${gameStages}/5, game_record効果=${gameEffects}`;
+  checks.D05.counts = `対象段階=${gameStages}/${Object.keys(GAME_RECORDS).length}, game_record効果=${gameEffects}`;
   checks.D06.counts = `効果=${effects}, 警告=${checks.D06.warnings.length}`;
   checks.D07.counts = `アルカナ=${rows.length}, 覚醒上限効果=${awakening}`;
   checks.V05.counts = `conflict/unknown効果=${uncertain}`;
