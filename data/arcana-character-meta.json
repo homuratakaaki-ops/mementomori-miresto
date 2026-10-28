@@ -1,0 +1,782 @@
+{
+  "schema": "miresto_arcana_character_meta_v1",
+  "note": "SR120は data/mementomori-skills.json を正本とし、ここには補完情報だけを置く。R/N16は正本に無いため最小名簿を持つ。所属・人数・開催状態・日数はここに書かない（生成時に計算）。",
+  "characters": {
+    "soltina": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "amleth": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "fenrir": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "florence": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "moddey": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "sonya": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "sivi": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "stella": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "fenny": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "tropon_holy_night": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "sabrina": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "ivy": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "potpourri": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "amleth_summer": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "giluial": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "liselotte": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "eir": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "minasumari": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "nina_summer": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "serruria": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "eureka": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "cordie_ringmaster": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "merlyn_winter": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "evelyn": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "fia_trace": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "natasha": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "fortina": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "cerberus": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "rusalka": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "elfriede": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "rosalie_caritas": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "aine": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "meria": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "irene": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "aa_rusted_sky": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "lumika": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "rivelia": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "lunalynn": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "valriede": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "aa_dark": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "armstrong": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "paladea": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "ophelia": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "kaguya": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "natasha_bouquet": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "nebra": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "carmilla": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "cerberus_candy": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "regina": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "cattleya": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "mimi": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "tropon": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "hathor": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "olivia": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "primavera": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "karol": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "wheeler": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "rishess": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "moddey_summer": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "iris_black": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "amour_holy_night": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "asahi": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "tama": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "rustica": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "mifuri": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "moineau": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "fenrir_treasure": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "merlyn": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "tricksy": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "freycia": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "amour": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "lean": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "dian": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "belle": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "sophia": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "chiffon": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "artie": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "cordie_summer": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "priscilla": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "matilda": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "morgana": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "soltina_warm_memory": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "artoria": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "shizu_snow": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "lucile": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "flack": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "liebe": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "aishe": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "lilicotte": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "merlin": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "cordie": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "nina": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "mertillier": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "luke": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "rea": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "sabrina_cool_breeze": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "fia": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "claudia": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "yuni": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "alexandra": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "mira": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "lunalynn_holy_night": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "tilly": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "paula": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "dd": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "yurdiz": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "stella_holy_dark_star": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "kobell": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "idyne": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "guinevere": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "shiloh": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "lily": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "illya_gods_curse": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "elaine": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "primavera_summer": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "florence_twilight": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "cusith": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "artoria_golden": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "fortina_twilight": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "alexandra_holylance": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
+    "supp-r-001": {
+      "origin": "supplemental",
+      "initialRarity": "R",
+      "releaseClass": "unknown",
+      "name": "イリア",
+      "reading": {
+        "name": "いりあ"
+      },
+      "attribute": "藍",
+      "pageSlug": null
+    },
+    "supp-r-002": {
+      "origin": "supplemental",
+      "initialRarity": "R",
+      "releaseClass": "unknown",
+      "name": "アイリス",
+      "reading": {
+        "name": "あいりす"
+      },
+      "attribute": "藍",
+      "pageSlug": null
+    },
+    "supp-r-003": {
+      "origin": "supplemental",
+      "initialRarity": "R",
+      "releaseClass": "unknown",
+      "name": "ロキ",
+      "reading": {
+        "name": "ろき"
+      },
+      "attribute": "藍",
+      "pageSlug": null
+    },
+    "supp-r-004": {
+      "origin": "supplemental",
+      "initialRarity": "R",
+      "releaseClass": "unknown",
+      "name": "アリアンロッド",
+      "reading": {
+        "name": "ありあんろっど"
+      },
+      "attribute": "紅",
+      "pageSlug": null
+    },
+    "supp-r-005": {
+      "origin": "supplemental",
+      "initialRarity": "R",
+      "releaseClass": "unknown",
+      "name": "テオドラ",
+      "reading": {
+        "name": "ておどら"
+      },
+      "attribute": "紅",
+      "pageSlug": null
+    },
+    "supp-r-006": {
+      "origin": "supplemental",
+      "initialRarity": "R",
+      "releaseClass": "unknown",
+      "name": "ペトラ",
+      "reading": {
+        "name": "ぺとら"
+      },
+      "attribute": "紅",
+      "pageSlug": null
+    },
+    "supp-r-007": {
+      "origin": "supplemental",
+      "initialRarity": "R",
+      "releaseClass": "unknown",
+      "name": "ザラ",
+      "reading": {
+        "name": "ざら"
+      },
+      "attribute": "翠",
+      "pageSlug": null
+    },
+    "supp-r-008": {
+      "origin": "supplemental",
+      "initialRarity": "R",
+      "releaseClass": "unknown",
+      "name": "ロザリー",
+      "reading": {
+        "name": "ろざりー"
+      },
+      "attribute": "翠",
+      "pageSlug": null
+    },
+    "supp-r-009": {
+      "origin": "supplemental",
+      "initialRarity": "R",
+      "releaseClass": "unknown",
+      "name": "リブラ",
+      "reading": {
+        "name": "りぶら"
+      },
+      "attribute": "翠",
+      "pageSlug": null
+    },
+    "supp-r-010": {
+      "origin": "supplemental",
+      "initialRarity": "R",
+      "releaseClass": "unknown",
+      "name": "スクルド",
+      "reading": {
+        "name": "すくるど"
+      },
+      "attribute": "黄",
+      "pageSlug": null
+    },
+    "supp-r-011": {
+      "origin": "supplemental",
+      "initialRarity": "R",
+      "releaseClass": "unknown",
+      "name": "チェルナ",
+      "reading": {
+        "name": "ちぇるな"
+      },
+      "attribute": "黄",
+      "pageSlug": null
+    },
+    "supp-r-012": {
+      "origin": "supplemental",
+      "initialRarity": "R",
+      "releaseClass": "unknown",
+      "name": "ソテイラ",
+      "reading": {
+        "name": "そていら"
+      },
+      "attribute": "黄",
+      "pageSlug": null
+    },
+    "supp-n-001": {
+      "origin": "supplemental",
+      "initialRarity": "N",
+      "releaseClass": "unknown",
+      "name": "モニカ",
+      "reading": {
+        "name": "もにか"
+      },
+      "attribute": "藍",
+      "pageSlug": null
+    },
+    "supp-n-002": {
+      "origin": "supplemental",
+      "initialRarity": "N",
+      "releaseClass": "unknown",
+      "name": "シャーロット",
+      "reading": {
+        "name": "しゃーろっと"
+      },
+      "attribute": "紅",
+      "pageSlug": null
+    },
+    "supp-n-003": {
+      "origin": "supplemental",
+      "initialRarity": "N",
+      "releaseClass": "unknown",
+      "name": "シズ",
+      "reading": {
+        "name": "しず"
+      },
+      "attribute": "翠",
+      "pageSlug": null
+    },
+    "supp-n-004": {
+      "origin": "supplemental",
+      "initialRarity": "N",
+      "releaseClass": "unknown",
+      "name": "ガルム",
+      "reading": {
+        "name": "がるむ"
+      },
+      "attribute": "黄",
+      "pageSlug": null
+    }
+  }
+}
