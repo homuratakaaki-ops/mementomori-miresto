@@ -35,11 +35,11 @@
     <nav class="breadcrumb" aria-label="パンくず"><a href="/">トップ</a><span>/</span><a href="../characters/index.html">キャラ情報</a><span>/</span><span aria-current="page">アルカナ検索</span></nav>
     <h1>アルカナ検索</h1>
     <p>アルカナ101件の効果と構成キャラ、ガチャの開催状況を確認できます。</p>
-    <p>開催状況：2026/10/28 12:00 時点</p>
+    <p data-status-time>開催状況：2026/10/28 12:00 時点</p>
     <p class="arcana-note" data-search-fallback>検索データの読み込み前・JavaScript無効時は全件を表示します。</p>
   </header>
-  <main class="arcana-search-layout" data-arcana-search data-search-now="2026-10-28T12:00" data-index-src="../../data/arcana-index.json?v=7a215f42">
-    <p class="arcana-search-error" data-search-error role="status" hidden></p>
+  <main class="arcana-search-layout" data-arcana-search data-index-src="../../data/arcana-index.json?v=7a215f42">
+    <p class="arcana-search-error arcana-note" data-search-error role="status" hidden></p>
     <aside class="arcana-search-panel" data-search-controls hidden aria-labelledby="search-heading">
     <h2 id="search-heading">検索条件</h2>
     <fieldset><legend>欲しい効果</legend>
@@ -112,6 +112,7 @@
   </aside>
     <section class="arcana-results" id="arcana-results" aria-label="検索結果" tabindex="-1">
     <p data-result-count aria-live="polite">検索結果 101件／全101件</p>
+    <div data-hidden-open hidden><p>このアルカナは今の条件では表示されていません</p><button type="button" data-reveal-open>条件を解除して表示</button></div>
     <p class="arcana-note" data-sort-note hidden>構成キャラのうち最も長い日数で並べています</p>
     <div data-empty-results hidden><p>条件に一致するアルカナはありません</p><p>確認中の効果は効果の条件に一致しません</p><div data-empty-filters aria-label="適用中の条件"></div><button type="button" data-clear-filters>条件をすべて解除</button></div>
 <article class="arcana-card" id="arcana-A001">
@@ -1447,7 +1448,7 @@
   </footer>
   <script defer src="../../js/gacha-status.js?v=52dd812b"></script>
   <script defer src="../../js/search-normalize.js?v=bf53367b"></script>
-  <script defer src="../../js/render-arcana.js?v=6c15104e"></script>
-  <script defer src="../../js/arcana-search.js?v=1eaf0d7c"></script>
+  <script defer src="../../js/render-arcana.js?v=53e199bd"></script>
+  <script defer src="../../js/arcana-search.js?v=e7572f99"></script>
 </body>
 </html>

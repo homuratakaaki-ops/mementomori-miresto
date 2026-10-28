@@ -137,5 +137,88 @@ check('S02 名前順・人数順・入力不変', () => {
   }
   assert.equal(JSON.stringify(index), snapshot);
 });
+check('U01 URL往復一致・入力不変', () => {
+  const cases = [state({}), state({ an: '星 & 月', cn: 'ふぃあー', scope: 'named', open: 'A092' }),
+    state({ character: 'fia_trace', cn: 'フィアー', scope: 'any', sort: 'name' }),
+    state({ effect: ['attack', 'evasion'], target: ['all', 'members'], stage: 'any', count: ['2', '4'],
+      status: ['ongoing', 'waiting'], basis: 'start', minDays: '0', maxDays: '99999', scope: 'all', sort: 'days_desc' }),
+    state({ cn: 'ふぃあー', scope: 'any', sort: 'count' })];
+  for (const original of cases) {
+    const snapshot = JSON.stringify(original);
+    const parsed = api.parseQuery(api.formatQuery(original));
+    assert.deepEqual(parsed.state, original);
+    assert.equal(parsed.warning, false);
+    assert.equal(JSON.stringify(original), snapshot);
+  }
+});
+check('U02 未知の値を破棄して警告', () => {
+  const parsed = api.parseQuery('?effect=foo,attack&target=no&count=9&status=no&stage=no&basis=no&scope=no&sort=no&open=bad&minDays=-1&maxDays=100000&now=2000');
+  assert.equal(parsed.warning, true);
+  assert.deepEqual(parsed.state, state({ effect: ['attack'] }));
+  assert.equal(api.parseQuery('?sort=name&sort=count').warning, true);
+  assert.equal(api.resolveQuery(api.parseQuery('?open=A999'), index).warning, true);
+});
+check('U03 URLの日数逆転は日数条件を無効化', () => {
+  const parsed = api.parseQuery('?minDays=12&maxDays=11&status=waiting');
+  assert.equal(api.validateDays(parsed.state).active, false);
+  assert.equal(api.validateDays(parsed.state).error, '最小日数が最大日数を超えています');
+  assert.deepEqual(api.filterArcana(index, parsed.state, now, deps).map(a => a.id), ids({ status: ['waiting'] }));
+});
+check('U04 初期値はURLに書かない', () => {
+  assert.equal(api.formatQuery(state({})), '');
+  assert.equal(api.formatQuery(api.parseQuery('?stage=lr&basis=end&scope=any&sort=catalog').state), '');
+});
+check('U05 複数値の重複除去・固定順', () => {
+  const parsed = api.parseQuery('?effect=evasion,attack,evasion&target=members,all,all&count=4,2,4&status=waiting,ongoing&effect=hp');
+  assert.equal(parsed.warning, false);
+  assert.equal(api.formatQuery(parsed.state), '?effect=attack,hp,evasion&target=all,members&count=2,4&status=ongoing,waiting');
+  assert.equal(api.formatQuery(state({ effect: ['evasion', 'attack', 'attack'] })), '?effect=attack,evasion');
+});
+check('U06 character優先・存在しないIDの通知', () => {
+  const parsed = api.resolveQuery(api.parseQuery('?character=fia_trace&cn=別の名前&open=A092'), index);
+  assert.equal(parsed.state.cn, index.characters.fia_trace.name);
+  assert.equal(parsed.state.scope, 'named');
+  assert.equal(parsed.state.open, 'A092');
+  assert.deepEqual(api.filterArcana(index, parsed.state, now, deps).map(a => a.id), ['A092', 'A093']);
+  const missing = api.resolveQuery(api.parseQuery('?character=missing&cn=別の名前'), index);
+  assert.equal(missing.characterMissing, true);
+  assert.equal(missing.state.character, '');
+  assert.equal(missing.state.cn, '');
+  assert.equal(missing.state.scope, 'any');
+});
+check('U07 scope明示は名前入力の初期値より優先', () => {
+  for (const scope of ['any', 'all', 'named']) {
+    const parsed = api.resolveQuery(api.parseQuery(`?character=fia_trace&scope=${scope}`), index);
+    assert.equal(parsed.scopeExplicit, true);
+    assert.equal(parsed.state.scope, scope);
+    assert.equal(api.parseQuery(api.formatQuery(parsed.state)).state.scope, scope);
+  }
+  assert.equal(api.parseQuery('?cn=fia').state.scope, 'named');
+  assert.equal(api.parseQuery('?cn=fia&scope=any').state.scope, 'any');
+});
+check('U08 全選択肢の往復・日数の整数化', () => {
+  const source = require('node:fs').readFileSync(require('node:path').join(__dirname, 'build-arcana-pages.mjs'), 'utf8');
+  const groups = source.slice(source.indexOf('const EFFECT_GROUPS'), source.indexOf('function choices'));
+  const keys = [...groups.matchAll(/\["([a-z_]+)",/g)].map(m => m[1]);
+  assert.equal(keys.length, 25);
+  const parsed = api.parseQuery(`?effect=${keys.join(',')}&minDays=00012`);
+  assert.equal(parsed.warning, false);
+  assert.deepEqual(parsed.state.effect, keys);
+  assert.equal(parsed.state.minDays, '12');
+});
+check('T01 現在時刻の再判定と共通の開催文言', () => {
+  const { statusText } = require('../js/render-arcana.js');
+  const fixture = { characters: { a: { name: '甲', pageSlug: 'a', pickupHistory: [
+    { date: '2026-10-28', startTime: '12:00', endDate: '2026-10-28', endTime: '12:01', kind: '復刻', announced: true }
+  ] } }, arcana: [{ id: 'test', name: '試験', members: ['a'], stages: [] }] };
+  const times = ['2026-10-28T11:59:00+09:00', '2026-10-28T12:00:00+09:00', '2026-10-28T12:02:00+09:00'];
+  const states = ['upcoming', 'ongoing', 'waiting'];
+  times.forEach((time, i) => {
+    const date = new Date(time), summary = api.summarizeCharacters(fixture, date).a;
+    assert.equal(summary.state, states[i]);
+    assert.equal(api.filterArcana(fixture, state({ status: ['ongoing'] }), date).length, i === 1 ? 1 : 0);
+    assert.ok(require('../js/render-arcana.js').renderMember(fixture.characters.a, summary).includes(statusText(summary)));
+  });
+});
 console.log(`=== 結果: ${ok}件OK / ${ng}件NG ===`);
 process.exitCode = ng ? 1 : 0;

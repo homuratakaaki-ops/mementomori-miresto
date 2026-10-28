@@ -13,7 +13,75 @@
 
   function defaultState() {
     return { an: "", cn: "", character: "", effect: [], target: [], stage: "lr",
-      count: [], status: [], basis: "end", minDays: "", maxDays: "", scope: "any", sort: "catalog" };
+      count: [], status: [], basis: "end", minDays: "", maxDays: "", scope: "any", sort: "catalog", open: "" };
+  }
+  // URLの複数値は「すべての効果」等の表示順で正規化する。
+  const queryLists = {
+    effect: ["attack", "hp", "defense", "physical_defense", "magical_defense", "strength", "dexterity", "magic", "stamina",
+      "critical", "critical_resistance", "critical_damage", "physical_critical_mitigation", "magical_critical_mitigation",
+      "accuracy", "evasion", "debuff_accuracy", "debuff_resistance", "hp_drain", "counter", "physical_penetration",
+      "physical_magical_penetration", "penetration", "party_level_cap", "member_awakening_cap"],
+    target: ["all", "members", "party", "other", "unknown"], count: ["2", "3", "4"],
+    status: ["ongoing", "upcoming", "waiting", "permanent", "history_unknown"]
+  };
+  const queryEnums = { stage: ["lr", "any"], basis: ["end", "start"], scope: ["any", "all", "named"],
+    sort: ["catalog", "name", "count", "days_desc"] };
+  function parseQuery(search) {
+    const params = new URLSearchParams(search), state = defaultState();
+    let warning = false;
+    for (const key of new Set(params.keys())) {
+      if (!Object.hasOwn(state, key)) { warning = true; continue; }
+      const values = params.getAll(key), value = values[0];
+      if (queryLists[key]) {
+        const requested = values.flatMap(v => v.split(","));
+        warning ||= requested.some(v => !queryLists[key].includes(v));
+        state[key] = queryLists[key].filter(v => requested.includes(v));
+      } else {
+        warning ||= values.length > 1;
+        if (queryEnums[key]) {
+          if (queryEnums[key].includes(value)) state[key] = value;
+          else warning = true;
+        } else if (["minDays", "maxDays"].includes(key)) {
+          if (/^\d+$/.test(value) && Number(value) <= 99999) state[key] = String(Number(value));
+          else if (value !== "") warning = true;
+        } else if (key === "open") {
+          if (/^A\d{3}$/.test(value)) state.open = value;
+          else if (value) warning = true;
+        } else state[key] = value;
+      }
+    }
+    const scopeExplicit = queryEnums.scope.includes(params.get("scope"));
+    if (!scopeExplicit && (state.cn.trim() || state.character)) state.scope = "named";
+    return { state, warning, scopeExplicit };
+  }
+  function formatQuery(value) {
+    const state = { ...defaultState(), ...value }, defaults = defaultState(), params = new URLSearchParams();
+    for (const key of Object.keys(defaults)) {
+      if (queryLists[key]) {
+        const selected = queryLists[key].filter(v => state[key].includes(v));
+        if (selected.length) params.set(key, selected.join(","));
+      } else {
+        // 名前指定時の暗黙値はnamed。明示されたanyは省略すると意味が変わる。
+        const initial = key === "scope" && (state.cn.trim() || state.character) ? "named" : defaults[key];
+        if (state[key] !== initial) params.set(key, state[key]);
+      }
+    }
+    const query = params.toString().replace(/%2C/g, ",");
+    return query ? `?${query}` : "";
+  }
+  // IDの存在確認は取得済み索引を受け取る別の純粋関数で行う。
+  function resolveQuery(parsed, index) {
+    const state = { ...parsed.state };
+    let characterMissing = false, warning = parsed.warning;
+    if (state.character) {
+      if (Object.hasOwn(index.characters, state.character)) state.cn = index.characters[state.character].name;
+      else {
+        state.character = ""; state.cn = ""; characterMissing = true;
+        if (!parsed.scopeExplicit) state.scope = "any";
+      }
+    }
+    if (state.open && !index.arcana.some(item => item.id === state.open)) { state.open = ""; warning = true; }
+    return { ...parsed, state, warning, characterMissing };
   }
   function dependencies(deps) {
     if (deps) return deps;
@@ -98,13 +166,42 @@
   function bindSearch(document, container, index) {
     const panel = container.querySelector("[data-search-controls]");
     const results = container.querySelector(".arcana-results");
-    const now = container.dataset.searchNow;
-    if (!now) throw new Error("missing build time");
-    const summaries = summarizeCharacters(index, now);
+    const view = document.defaultView;
+    let now, summaries;
     const cards = new Map(index.arcana.map(item => [item.id, document.getElementById(`arcana-${item.id}`)]));
     const controls = [...panel.querySelectorAll("input, select")];
     const defaults = defaultState();
-    let state = defaultState(), timer, composing = false;
+    let parsed = resolveQuery(parseQuery(view.location.search), index);
+    let state = parsed.state, timer, composing = false;
+    let scopeExplicit = parsed.scopeExplicit;
+    const detailsState = new WeakMap();
+    function writeUrl() {
+      const url = view.location.pathname + formatQuery(state) + view.location.hash;
+      view.history.replaceState(view.history.state, "", url);
+    }
+    function restoreDetails(scroll) {
+      cards.forEach((card, id) => {
+        const details = card.querySelector(".arcana-details");
+        const open = id === state.open;
+        detailsState.set(details, open);
+        details.open = open;
+      });
+      const card = cards.get(state.open);
+      if (scroll && card && !card.hidden) card.scrollIntoView();
+    }
+    function refreshClock() {
+      now = new Date();
+      summaries = summarizeCharacters(index, now);
+      index.arcana.forEach(item => {
+        cards.get(item.id).querySelectorAll(".arcana-member").forEach((row, slot) => {
+          const status = row.querySelector(".arcana-status");
+          if (status) status.textContent = view.MirestoArcana.statusText(summaries[item.members[slot]] || unknownSummary());
+        });
+      });
+      document.querySelector("[data-status-time]").textContent =
+        `開催状況：${view.MirestoGachaStatus.jstNow(now).replace(/-/g, "/").replace("T", " ")} 時点`;
+      update(false);
+    }
     const labels = new Map(controls.filter(input => input.closest("label")?.querySelector("span"))
       .map(input => [`${input.name}:${input.value}`, input.closest("label").querySelector("span").textContent]));
     const button = (label, action) => {
@@ -150,13 +247,15 @@
       const advanced = chips.filter(chip => ["count", "status", "basis", "minDays", "maxDays", "scope"].includes(chip.key)).length;
       container.querySelector("[data-advanced-count]").textContent = `${advanced}件適用中`;
     }
-    function update() {
-      clearTimeout(timer);
+    function update(saveUrl = true) {
+      // 時計更新は入力確定待ちのURL保存を取り消さない。
+      if (saveUrl) clearTimeout(timer);
       if (composing) return;
       const days = validateDays(state);
       const error = container.querySelector("[data-search-error]");
-      error.textContent = days.error;
-      error.hidden = !days.error;
+      error.textContent = [parsed.warning ? "一部の条件を読み取れませんでした" : "",
+        parsed.characterMissing ? "対象のキャラが見つかりません" : "", days.error].filter(Boolean).join("。 ");
+      error.hidden = !error.textContent;
       const list = sortArcana(filterArcana(index, state, now), state, summaries);
       const matches = new Map(list.map(item => [item.id, item]));
       cards.forEach((card, id) => {
@@ -199,11 +298,14 @@
           update();
         })));
       updateChips();
+      container.querySelector("[data-hidden-open]").hidden = !state.open || !cards.get(state.open)?.hidden;
+      if (saveUrl) writeUrl();
     }
     function readText(input) {
       if (input.name === "cn") {
-        if (!state.cn.trim() && input.value.trim()) state.scope = "named";
+        if (!scopeExplicit && !state.cn.trim() && input.value.trim()) state.scope = "named";
         state.character = "";
+        parsed.characterMissing = false;
       }
       state[input.name] = input.validity?.badInput ? "invalid" : input.value;
     }
@@ -223,6 +325,7 @@
     panel.addEventListener("change", event => {
       const input = event.target;
       if (composing || ["an", "cn", "minDays", "maxDays"].includes(input.name)) return;
+      if (input.name === "scope") scopeExplicit = true;
       if (input.name === "effectGroup") {
         const values = input.value.split(",");
         state.effect = [...new Set([...state.effect.filter(value => !values.includes(value)), ...(input.checked ? values : [])])];
@@ -233,12 +336,39 @@
       update();
     });
     container.querySelectorAll("[data-clear-filters]").forEach(control => control.addEventListener("click", () => {
-      state = defaultState(); syncControls(); update();
+      state = defaultState(); parsed = { warning: false, characterMissing: false }; scopeExplicit = false;
+      syncControls(); update(); restoreDetails(false);
     }));
+    container.querySelector("[data-reveal-open]").addEventListener("click", () => {
+      state = { ...defaultState(), open: state.open };
+      parsed = { warning: false, characterMissing: false }; scopeExplicit = false;
+      syncControls(); update(); restoreDetails(true);
+    });
+    cards.forEach((card, id) => {
+      const details = card.querySelector(".arcana-details");
+      detailsState.set(details, details.open);
+      details.addEventListener("toggle", () => {
+        if (detailsState.get(details) === details.open) return;
+        detailsState.set(details, details.open);
+        if (details.open) state.open = id;
+        else if (state.open === id) state.open = "";
+        update();
+      });
+    });
+    view.addEventListener("popstate", () => {
+      clearTimeout(timer); composing = false;
+      parsed = resolveQuery(parseQuery(view.location.search), index);
+      state = parsed.state; scopeExplicit = parsed.scopeExplicit;
+      syncControls(); refreshClock(); restoreDetails(false);
+    });
+    view.setInterval(refreshClock, 60000);
+    document.addEventListener("visibilitychange", () => { if (!document.hidden) refreshClock(); });
     syncControls();
-    update();
+    refreshClock();
+    restoreDetails(false);
     panel.hidden = false;
     document.querySelector("[data-search-fallback]").hidden = true;
+    if (state.open) restoreDetails(true);
   }
 
   function init(document) {
@@ -262,5 +392,5 @@
     return load;
   }
 
-  return { init, defaultState, matchCharacters, validateDays, summarizeCharacters, filterArcana, sortArcana };
+  return { init, defaultState, parseQuery, formatQuery, resolveQuery, matchCharacters, validateDays, summarizeCharacters, filterArcana, sortArcana };
 }));

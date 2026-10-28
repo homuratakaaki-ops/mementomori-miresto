@@ -69,5 +69,5 @@
       arcana.members.map(id => renderMember(characters[id], summaries[id])).join("\n") + '</ul></section>\n' +
       renderStages(arcana.stages) + '</div>\n</article>';
   }
-  return { escapeHtml, renderCard, renderMember, renderStages, renderStage };
+  return { escapeHtml, statusText, renderCard, renderMember, renderStages, renderStage };
 }));
