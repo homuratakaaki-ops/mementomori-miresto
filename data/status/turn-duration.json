@@ -2,7 +2,7 @@
   "schema": "miresto_status_guide_v1",
   "layout": "article",
   "id": "turn-duration",
-  "visibility": "unlisted",
+  "visibility": "listed",
   "name": "バフ・弱体効果のターン増減",
   "label": "特殊効果ガイド",
   "term": "ターン",

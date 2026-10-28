@@ -406,6 +406,13 @@
       "announcement": true,
       "url": "pages/characters/fia_trace.html",
       "text": "[在りし日の面影]フィアーの復刻が決定（10/29 16:30開始予定）"
+    },
+    {
+      "id": "2026-10-28-turn-duration-guide",
+      "date": "2026-10-28",
+      "kind": "サイト更新",
+      "text": "バフ・弱体効果のターン増減ガイドを公開。延長・短縮・固有消費や、解除・付与時の持続調整との違いを比較表と図解3枚で整理",
+      "url": "pages/status/turn-duration.html"
     }
   ]
 }
