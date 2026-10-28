@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>バフ・弱体効果のターン増減｜特殊効果ガイド | ミレストのメメントモリ分析データ室</title>
+  <meta name="description" content="メメントモリのバフ・弱体効果のターン増減を解説。延長・短縮・固有消費9技能と、付与時の持続調整などの関連例を比較します。">
+  <meta name="robots" content="noindex">
+  <link rel="canonical" href="https://memento.musoudc.com/pages/status/turn-duration.html">
+  <!-- OGP。画像は共通のものを使う（ガイドごとの画像生成は未対応） -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="ミレストのメメントモリ分析データ室">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="og:title" content="バフ・弱体効果のターン増減｜特殊効果ガイド | ミレストのメメントモリ分析データ室">
+  <meta property="og:description" content="メメントモリのバフ・弱体効果のターン増減を解説。延長・短縮・固有消費9技能と、付与時の持続調整などの関連例を比較します。">
+  <meta property="og:url" content="https://memento.musoudc.com/pages/status/turn-duration.html">
+  <meta property="og:image" content="https://memento.musoudc.com/assets/ogp/ogp-common.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <link rel="icon" type="image/png" href="../../assets/miresto/miresto-icon-32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="../../assets/miresto/miresto-icon-180.png">
+  <link rel="stylesheet" href="../../assets/character-page.css?v=ba122311">
+  <link rel="stylesheet" href="../../assets/status-guide.css?v=71746d66">
+  <!-- ga:head -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-BHKBSRGSJF"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BHKBSRGSJF');
+  </script>
+  <!-- /ga:head -->
+  <!-- ad:head -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6389066329814944" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="/assets/ad-slot.css">
+  <!-- /ad:head -->
+</head>
+<body data-status-guide="turn-duration" data-prerendered>
+  <header class="page-header">
+    <div class="header-inner">
+      <a class="top-link" href="/">トップ</a>
+      <a class="top-link" href="./index.html">状態異常・特殊効果ガイドの一覧へ</a>
+      <p class="eyebrow">STATUS GUIDE</p>
+      <h1>バフ・弱体効果のターン増減｜特殊効果ガイド</h1>
+      <div class="guide-meta">
+        <span class="tag">最終横断確認 2026-10-28</span>
+      </div>
+      <p class="guide-meta-note">当サイトの正規収録120キャラ・480スキルを横断して整理しています。</p>
+    </div>
+  </header>
+
+  <main>
+    <div class="guide-list">
+      <section class="guide-card" id="oneline" aria-labelledby="oneline-title">
+        <div class="guide-card-head">
+          <h2 id="oneline-title">ひとことで</h2>
+        </div>
+        <div class="guide-card-body">
+          <p><strong>バフ・弱体効果のターン増減</strong>は、すでに付いている効果の残り時間を伸ばしたり、縮めたりする処理です。固有バフのターン消費や、付与する時点で持続を決める処理とは分けて見ます。</p>
+          <div class="guide-figure-mobile is-only" data-figure-series>
+            <div class="guide-series-track" tabindex="0" role="region" aria-label="図解3枚。横にスクロールして次の図へ">
+              <figure class="guide-figure-panel" aria-label="1 / 3">
+                <a href="../../assets/status/turn-duration-guide-m1.webp?v=1d739aa5" aria-label="図1を拡大して開く（3枚中1枚目）">
+                  <picture>
+                    <source type="image/webp" srcset="../../assets/status/turn-duration-guide-m1.webp?v=1d739aa5">
+                    <img src="../../assets/status/turn-duration-guide-m1.webp?v=1d739aa5" width="1122" height="1402" alt="バフ・弱体効果のターン増減、基本のしくみ、1/3。効果の残り時間を伸ばす・縮める。1：すでに付いている効果の残り時間を変える。2：伸ばすと長く続き、縮めると早く終わる。3：残りが0以下になると、その効果が解除される。一般操作では解除不可を除く。案内役：ソフィア。" decoding="async">
+                  </picture>
+                </a>
+              </figure>
+              <figure class="guide-figure-panel" aria-label="2 / 3">
+                <a href="../../assets/status/turn-duration-guide-m2.webp?v=e6266a86" aria-label="図2を拡大して開く（3枚中2枚目）">
+                  <picture>
+                    <source type="image/webp" srcset="../../assets/status/turn-duration-guide-m2.webp?v=e6266a86">
+                    <img src="../../assets/status/turn-duration-guide-m2.webp?v=e6266a86" width="1122" height="1402" alt="バフ・弱体効果のターン増減、解除との違い、2/3。短縮してもすぐ消えるとは限らない。1：解除は効果そのものを消す。2：2ターン短縮、残り3なら残り1で続く。3：2ターン短縮、残り2なら解除される。処理が成立した場合の比較です。案内役：ソフィア。" loading="lazy" decoding="async">
+                  </picture>
+                </a>
+              </figure>
+              <figure class="guide-figure-panel" aria-label="3 / 3">
+                <a href="../../assets/status/turn-duration-guide-m3.webp?v=4d8fee3b" aria-label="図3を拡大して開く（3枚中3枚目）">
+                  <picture>
+                    <source type="image/webp" srcset="../../assets/status/turn-duration-guide-m3.webp?v=4d8fee3b">
+                    <img src="../../assets/status/turn-duration-guide-m3.webp?v=4d8fee3b" width="1122" height="1402" alt="バフ・弱体効果のターン増減、ソフィアS3で見る使い方、3/3。自分の弱体効果を2ターン短縮。1：アクティブスキルで弱体効果を受けると発動。2：自身の全弱体効果を2ターン短縮。3：発動後4回行動終了するまで再発動しない。解除不可の弱体効果を除く。案内役：ソフィア。" loading="lazy" decoding="async">
+                  </picture>
+                </a>
+              </figure>
+            </div>
+            <div class="guide-slides-controls guide-series-controls" hidden>
+              <button type="button" data-series-prev aria-label="前の図へ">‹</button>
+              <span class="guide-slides-dots">
+                <button type="button" data-series-dot="0" aria-label="1枚目へ" aria-current="true"></button>
+                <button type="button" data-series-dot="1" aria-label="2枚目へ"></button>
+                <button type="button" data-series-dot="2" aria-label="3枚目へ"></button>
+              </span>
+              <span class="guide-series-count" aria-live="polite">1 / 3</span>
+              <button type="button" data-series-next aria-label="次の図へ">›</button>
+            </div>
+            <p class="guide-figure-note"><span class="is-narrow">横にスワイプで次の図へ。図をタップすると拡大して開きます。</span><span class="is-wide">‹ › で次の図へ。図をクリックすると拡大して開きます。</span></p>
+          </div>
+        </div>
+      </section>
+      <section class="guide-card" id="mechanism" aria-labelledby="mechanism-title">
+        <div class="guide-card-head">
+          <h2 id="mechanism-title">仕組み</h2>
+        </div>
+        <div class="guide-card-body">
+          <p>残り3ターンの効果を2ターン短縮すると、残り1ターンになります。残りが0以下になった効果は解除されます。</p>
+          <p>通常は、<strong>効果を付帯しているキャラの行動終了時</strong>に残り時間が1ターン減ります。ただし、そのキャラの行動開始から行動終了までに付与された効果は即時に働き、減少は次の行動終了時からです。自分で自分に付与した場合だけの例外ではありません。</p>
+          <p>バトル画面の「○ターン目」と、効果の「残り○ターン」は区別してください。</p>
+        </div>
+      </section>
+      <section class="guide-card" id="rules" aria-labelledby="rules-title">
+        <div class="guide-card-head">
+          <h2 id="rules-title">重複・上書きなどの固有ルール</h2>
+        </div>
+        <div class="guide-card-body">
+          <ul class="guide-bullets">
+            <li><strong>敵のバフを短縮する処理／敵の弱体効果を延長する処理</strong>には、弱体効果命中率・耐性率の判定があります。スキルに書かれた発動確率だけで最終成功率は決まりません。</li>
+            <li><strong>解除不可</strong>の効果は、一般の解除・ターン増減・コピー・奪取の対象外です。一方、ヴァルリーデの「焔」の延長や、プリシラ・夏アムレートの固有消費など、各スキルに明記された処理は別に読みます。一般のターン操作が解除不可を無視できる、という意味ではありません。</li>
+            <li>ターン増減、再付与による更新、スタック数の増減は別の処理です。スタックを増減させただけでは効果ターンはリセットされません。</li>
+          </ul>
+        </div>
+      </section>
+      <!-- ad:mid -->
+      <aside class="ad-slot ad-slot--mid" aria-label="広告">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-6389066329814944"
+             data-ad-slot="9192142429"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      </aside>
+      <!-- /ad:mid -->
+      <section class="guide-card" id="givers" aria-labelledby="givers-title">
+        <div class="guide-card-head">
+          <h2 id="givers-title">付与・使用するキャラ</h2>
+        </div>
+        <div class="guide-card-body">
+          <h3 class="guide-sub">既存効果の延長・短縮と固有消費</h3>
+          <div class="guide-table-wrap">
+            <table class="guide-table guide-table--wrap">
+              <thead>
+                <tr>
+                  <th scope="col">キャラ・スキル</th>
+                  <th scope="col">対象となる効果</th>
+                  <th scope="col">変化</th>
+                  <th scope="col">発動条件・注意</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row"><a href="../characters/tropon.html#skill-2">トロポン S2</a></th>
+                  <td data-label="対象となる効果">自身の全バフ</td>
+                  <td data-label="変化">＋2ターン</td>
+                  <td data-label="発動条件・注意">このスキルで敵を戦闘不能にした場合。スキルLv2から</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/tropon_holy_night.html#skill-2">［聖夜の祈り］トロポン S2</a></th>
+                  <td data-label="対象となる効果">自身の全バフ</td>
+                  <td data-label="変化">＋1ターン</td>
+                  <td data-label="発動条件・注意">このスキルで敵を戦闘不能にできなかった場合。スキルLv2から。この攻撃時に「聖夜の祈り」で新たに得たバフも対象</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/valriede.html#skill-1">ヴァルリーデ S1</a></th>
+                  <td data-label="対象となる効果">自身の「焔」</td>
+                  <td data-label="変化">撃破ごとに＋1ターン</td>
+                  <td data-label="発動条件・注意">このスキルで敵を戦闘不能にするたび。スキルLv3から。解除不可の固有バフの延長</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/valriede.html#skill-2">ヴァルリーデ S2</a></th>
+                  <td data-label="対象となる効果">自身の「焔」</td>
+                  <td data-label="変化">撃破ごとに＋1ターン</td>
+                  <td data-label="発動条件・注意">このスキルで敵を戦闘不能にするたび。スキルLv4から</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/aishe.html#skill-4">アイシェ S4</a></th>
+                  <td data-label="対象となる効果">攻撃対象のバフ1つ</td>
+                  <td data-label="変化">−1ターン</td>
+                  <td data-label="発動条件・注意">自身の攻撃後、対象に弱体効果があれば発動。スキルLv3で70%、それ以前は30%</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/sophia.html#skill-3">ソフィア S3</a></th>
+                  <td data-label="対象となる効果">自身の全弱体効果</td>
+                  <td data-label="変化">−2ターン</td>
+                  <td data-label="発動条件・注意">アクティブスキルで弱体効果を受けたとき。発動後4回行動終了するまで再発動しない</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/priscilla.html#skill-4">プリシラ S4</a></th>
+                  <td data-label="対象となる効果">このスキルの自身の防御力増加／自身の全弱体効果</td>
+                  <td data-label="変化">防御力増加を1ターン消費／弱体を2ターン短縮</td>
+                  <td data-label="発動条件・注意">アクティブスキルで弱体効果を受けたとき。自身が付与した解除不可の防御力増加を消費する固有処理</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/stella.html#skill-4">ステラ S4</a></th>
+                  <td data-label="対象となる効果">自身が付与した防御力増加</td>
+                  <td data-label="変化">−1ターン</td>
+                  <td data-label="発動条件・注意">攻撃を受けたときに消費。そのバフが無い状態で攻撃を受けると10ターンで再付与するが、<strong>その攻撃で自身が戦闘不能になった場合は再付与しない</strong></td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/amleth_summer.html#skill-4">［夏の日の夢］アムレート S4</a></th>
+                  <td data-label="対象となる効果">自身の「王の覚悟」</td>
+                  <td data-label="変化">−1ターン</td>
+                  <td data-label="発動条件・注意">攻撃を受けた後、自身のHPが1の場合。解除不可の固有バフの消費</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p>「全バフ／全弱体効果」と記載される場合も、解除不可に対する一般ルールは変わりません。ステラの沈黙付与も再付与時の処理であり、戦闘不能になる攻撃では発動しません。</p>
+          <p><strong>専用武器で変わる点</strong>：夏アムレートの専用Lv2は、HP1耐え・「王の覚悟」付与の再発動制限を8回行動終了→4回、発動しなくなる時点を17ターン目→33ターン目に変更します。1回の消費量は1ターンのままです。ヴァルリーデS1の専用Lv1は攻撃回数が8→10回になり撃破機会が変わりますが、1撃破につき＋1ターンという量は変わりません。</p>
+          <h3 class="guide-sub">残り時間の更新・今回付与する持続の調整</h3>
+          <p>直接増減との違いを理解するための<strong>代表例</strong>です。条件で付与時間が変わるスキル全件の一覧ではありません。</p>
+          <div class="guide-table-wrap">
+            <table class="guide-table guide-table--wrap">
+              <thead>
+                <tr>
+                  <th scope="col">キャラ・スキル</th>
+                  <th scope="col">対象・処理</th>
+                  <th scope="col">直接増減との違い</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row"><a href="../characters/ivy.html#skill-3">アイビー S3</a></th>
+                  <td data-label="対象・処理">味方が戦闘不能になり、このスキルの攻撃力増加量が増すたび、<strong>その攻撃力増加バフだけ</strong>残り7ターンに更新</td>
+                  <td data-label="直接増減との違い">全バフの延長でも、残り時間への＋7でもない</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/priscilla.html#skill-2">プリシラ S2</a></th>
+                  <td data-label="対象・処理">HP割合が低い味方へ付与する再生は基本1ターン。スキルLv2から、最初の魔法攻撃のクリティカル1回につき1ターン長くなる。対象は基本2体、スキルLv3から3体</td>
+                  <td data-label="直接増減との違い">今回付与する再生の持続を決める。既存の全再生を延長する処理ではない</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/lean.html#skill-1">リーン S1</a></th>
+                  <td data-label="対象・処理">クリティカル時、自身に1ターンの攻撃力増加。クリティカルごとにそのターン数が1多くなる</td>
+                  <td data-label="直接増減との違い">このスキルの攻撃力バフの持続加算。他のバフ全体を延長する効果ではない。専用Lv2で攻撃回数4→6回</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/matilda.html#skill-1">マチルダ S1</a></th>
+                  <td data-label="対象・処理">自身と自身以外の攻撃力が最も高い味方へ基本1ターンのバフ。対象に「マチルダ厳選バナナ」のバフがあればそれを解除し、今回のバフを4ターンにする（スキルLv2から）</td>
+                  <td data-label="直接増減との違い">既存バフへの＋3ではなく、新たに付与する持続の変更</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/soltina_warm_memory.html#skill-1">［温かな記憶］ソルティーナ S1</a></th>
+                  <td data-label="対象・処理">攻撃力が最も高い味方へ基本4ターンのバフ。対象が紅／翠属性なら32ターンにする（スキルLv2から）</td>
+                  <td data-label="直接増減との違い">既存バフへの＋28ではなく、対象の属性で今回の持続を決定</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+      <section class="guide-card" id="users" aria-labelledby="users-title">
+        <div class="guide-card-head">
+          <h2 id="users-title">参照・利用・強化するキャラ</h2>
+        </div>
+        <div class="guide-card-body">
+          <p><a href="../characters/nina_summer.html#skill-3">［小さな大冒険］ニーナ S3</a>は、アクティブスキルで行動阻害を受けたとき、自身の行動阻害のうち最も長い残りターンを参照して攻撃力増加量を決めます。スキルLv2では1ターンにつき10%加算、合計上限40%。<strong>残り時間を参照するだけで、延長・短縮する効果ではありません。</strong></p>
+        </div>
+      </section>
+      <section class="guide-card" id="countermeasures" aria-labelledby="countermeasures-title">
+        <div class="guide-card-head">
+          <h2 id="countermeasures-title">防ぐ・対策する方法</h2>
+        </div>
+        <div class="guide-card-body">
+          <ul class="guide-bullets">
+            <li>解除不可は、一般の残りターン操作からも保護されます。ただし、自身の固有消費や通常の時間経過まで止める意味ではありません。</li>
+            <li>敵バフ短縮などには弱体効果命中率・耐性率が関わります。対象条件とスキル固有の確率も確認してください。</li>
+            <li>ソフィアやプリシラの弱体短縮は、必ず即解除できるわけではありません。<strong>短縮後に残り0以下になるか</strong>が分かれ目です。</li>
+          </ul>
+        </div>
+      </section>
+      <section class="guide-card" id="relationships" aria-labelledby="relationships-title">
+        <div class="guide-card-head">
+          <h2 id="relationships-title">関連する特殊効果</h2>
+        </div>
+        <div class="guide-card-body">
+          <ul class="guide-bullets">
+            <li><a href="./buff-cover.html">バフカバー</a>：解除・奪取では優先対象になりますが、ターン減少では優先されません。</li>
+            <li><a href="./debuff-removal.html">弱体効果解除</a>：残り時間の短縮ではなく効果を取り除きます。</li>
+            <li><a href="./stack.html">スタック</a>：重ねた数と、残り時間は別です。</li>
+            <li><a href="./cooldown-reduction.html">スキルクールタイム減少</a>：効果の持続ではなく、スキル再使用までの残りCTを減らします。</li>
+          </ul>
+        </div>
+      </section>
+      <section class="guide-card" id="sources" aria-labelledby="sources-title">
+        <div class="guide-card-head">
+          <h2 id="sources-title">出典</h2>
+        </div>
+        <div class="guide-card-body">
+          <p class="guide-source">出典：公式FAQ「バフ・弱体効果」／公式FAQ「ターン」／公式FAQ「バフの種類」</p>
+          <p class="guide-source">比較表の当サイトキャラ別スキル説明。確認日：2026年10月28日。サイト正規収録120キャラ・480スキルを横断して整理しています。ゲーム内全実装キャラの完全網羅を保証するものではありません。</p>
+          <ul class="guide-bullets guide-source">
+            <li><a href="https://mementomori.zendesk.com/hc/ja/articles/46412673040921" target="_blank" rel="noopener">公式FAQ「バフ・弱体効果」</a></li>
+            <li><a href="https://mementomori.zendesk.com/hc/ja/articles/50774897170201" target="_blank" rel="noopener">公式FAQ「ターン」</a></li>
+            <li><a href="https://mementomori.zendesk.com/hc/ja/articles/46412799595545" target="_blank" rel="noopener">公式FAQ「バフの種類」</a></li>
+          </ul>
+        </div>
+      </section>
+    </div>
+    <!-- ad:bottom -->
+    <aside class="ad-slot" aria-label="広告">
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-6389066329814944"
+           data-ad-slot="6111654373"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </aside>
+    <!-- /ad:bottom -->
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <span>ミレストのメメントモリ分析データ室 / 非公式ファンサイト</span>
+      <nav class="footer-links" aria-label="サイト内のページ">
+        <a href="/">トップ</a>
+        <a href="../characters/index.html">キャラ一覧</a>
+        <a href="/pages/guide/">このサイトでできること</a>
+        <a href="/privacy.html">プライバシーポリシー</a>
+        <a href="/disclaimer.html">免責事項</a>
+        <a href="/about.html">このサイトについて</a>
+        <a href="/contact.html">お問い合わせ</a>
+      </nav>
+    </div>
+  </footer>
+  <script src="../../js/figure-series.js?v=8b71cecf" defer></script>
+</body>
+</html>
