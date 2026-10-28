@@ -397,6 +397,15 @@
       "kind": "サイト更新",
       "text": "スキルクールタイム減少ガイドを公開。直接CT減少9スキルとCTを0にする7スキルを比較し、対象・発動条件・専用武器差と軽快・遅延との違いを図解つきで整理",
       "url": "pages/status/cooldown-reduction.html"
+    },
+    {
+      "id": "2026-10-28-fia-trace-announcement",
+      "date": "2026-10-28",
+      "kind": "復刻",
+      "characterId": "fia_trace",
+      "announcement": true,
+      "url": "pages/characters/fia_trace.html",
+      "text": "[在りし日の面影]フィアーの復刻が決定（10/29 16:30開始予定）"
     }
   ]
 }

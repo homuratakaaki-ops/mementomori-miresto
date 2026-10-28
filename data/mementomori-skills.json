@@ -752,9 +752,16 @@
           "endDate": "2026-05-07",
           "kind": "PU",
           "round": 1
+        },
+        {
+          "date": "2026-10-29",
+          "startTime": "16:30",
+          "kind": "復刻",
+          "round": 2,
+          "announced": true
         }
       ],
-      "pickupCount": 1
+      "pickupCount": 2
     },
     {
       "id": "natasha",
