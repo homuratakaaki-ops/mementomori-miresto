@@ -155,7 +155,8 @@ test('時刻項目なしの比較用データ・同一日時で旧新ロジッ�
       .replace(/\?v=[a-f0-9]{8}/g, '')
       .replace(/    \.badge\[data-gacha-timeline\]\[hidden\] \{ display: none; \}\n\n/g, '');
     const changed = [];
-    for (const file of files.filter(f => f.endsWith('.html'))) {
+    // アルカナ一覧は旧版ビルドが生成しないページで、開催判定は verify-arcana-gacha.cjs が検証するため比較から外す
+    for (const file of files.filter(f => f.endsWith('.html') && !f.startsWith('pages/arcana/'))) {
       if (strip(read(file)) !== strip(fs.readFileSync(path.join(oldFixture, file), 'utf8'))) changed.push(file);
     }
     console.log(`  表示文・その他の差 ${changed.length}ページ`);
