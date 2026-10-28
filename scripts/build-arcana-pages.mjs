@@ -135,13 +135,15 @@ ${renderAnalyticsHead(analytics, "  ")}
     <h1>アルカナ検索</h1>
     <p>${escapeHtml(DESCRIPTION)}</p>
     <p>開催状況：${escapeHtml(jstNow(now).replace(/-/g, "/").replace("T", " "))} 時点</p>
-    <p class="arcana-note">検索機能は準備中です（いまは全件を表示しています）</p>
+    <p class="arcana-note" data-search-fallback>検索データの読み込み前・JavaScript無効時は全件を表示します。</p>
   </header>
-  <main class="arcana-search-layout" data-arcana-search data-index-src="../../${versioned("data/arcana-index.json")}">
+  <main class="arcana-search-layout" data-arcana-search data-search-now="${escapeHtml(jstNow(now))}" data-index-src="../../${versioned("data/arcana-index.json")}">
     <p class="arcana-search-error" data-search-error role="status" hidden></p>
     ${searchControls()}
     <section class="arcana-results" id="arcana-results" aria-label="検索結果" tabindex="-1">
     <p data-result-count aria-live="polite">検索結果 ${index.arcana.length}件／全${index.arcana.length}件</p>
+    <p class="arcana-note" data-sort-note hidden>構成キャラのうち最も長い日数で並べています</p>
+    <div data-empty-results hidden><p>条件に一致するアルカナはありません</p><p>確認中の効果は効果の条件に一致しません</p><div data-empty-filters aria-label="適用中の条件"></div><button type="button" data-clear-filters>条件をすべて解除</button></div>
 ${index.arcana.map(item => renderCard(item, index.characters, summaries)).join("\n")}
     </section>
   </main>

@@ -54,6 +54,12 @@ summary { min-height: 44px; padding: 10px 8px; cursor: pointer; color: var(--nav
 .arcana-field select { white-space: normal; }
 .arcana-advanced summary span { display: block; font-size: 14px; }
 .arcana-results-link { display: flex; justify-content: center; margin-top: 12px; }
+[data-active-filters], [data-empty-filters], [data-character-candidates] { display: flex; flex-wrap: wrap; gap: 6px; margin-block: 8px; }
+.arcana-search-layout button { min-height: 44px; max-width: 100%; white-space: normal; font: inherit; cursor: pointer; }
+.arcana-search-layout .arcana-filter-chip { width: auto; padding: 8px 12px; border: 1px solid #78859a; border-radius: 20px; background: white; color: var(--ink); }
+.arcana-stage-matched { border: 2px solid var(--navy); padding: 8px; background: #eef4fc; }
+.arcana-match-note { font-weight: bold; color: var(--navy); }
+.arcana-quick-effects .arcana-choice:has(input:checked) { background: #e2ecfa; border-color: var(--navy); }
 @media (min-width: 768px) {
   .arcana-search-layout:has(.arcana-search-panel:not([hidden])) { grid-template-columns: 264px minmax(0, 1fr); }
   .arcana-results { grid-column: -2 / -1; }

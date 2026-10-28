@@ -19,7 +19,7 @@
   <link rel="icon" type="image/png" href="../../assets/miresto/miresto-icon-32.png?v=f9e094b7" sizes="32x32">
   <link rel="apple-touch-icon" href="../../assets/miresto/miresto-icon-180.png?v=1f4d3479">
   <link rel="stylesheet" href="../../assets/site-footer.css?v=4fbb7bc1">
-  <link rel="stylesheet" href="../../assets/arcana.css?v=87f5ecae">
+  <link rel="stylesheet" href="../../assets/arcana.css?v=8872002f">
   <!-- ga:head -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-BHKBSRGSJF"></script>
   <script>
@@ -36,9 +36,9 @@
     <h1>アルカナ検索</h1>
     <p>アルカナ101件の効果と構成キャラ、ガチャの開催状況を確認できます。</p>
     <p>開催状況：2026/10/28 12:00 時点</p>
-    <p class="arcana-note">検索機能は準備中です（いまは全件を表示しています）</p>
+    <p class="arcana-note" data-search-fallback>検索データの読み込み前・JavaScript無効時は全件を表示します。</p>
   </header>
-  <main class="arcana-search-layout" data-arcana-search data-index-src="../../data/arcana-index.json?v=7a215f42">
+  <main class="arcana-search-layout" data-arcana-search data-search-now="2026-10-28T12:00" data-index-src="../../data/arcana-index.json?v=7a215f42">
     <p class="arcana-search-error" data-search-error role="status" hidden></p>
     <aside class="arcana-search-panel" data-search-controls hidden aria-labelledby="search-heading">
     <h2 id="search-heading">検索条件</h2>
@@ -112,6 +112,8 @@
   </aside>
     <section class="arcana-results" id="arcana-results" aria-label="検索結果" tabindex="-1">
     <p data-result-count aria-live="polite">検索結果 101件／全101件</p>
+    <p class="arcana-note" data-sort-note hidden>構成キャラのうち最も長い日数で並べています</p>
+    <div data-empty-results hidden><p>条件に一致するアルカナはありません</p><p>確認中の効果は効果の条件に一致しません</p><div data-empty-filters aria-label="適用中の条件"></div><button type="button" data-clear-filters>条件をすべて解除</button></div>
 <article class="arcana-card" id="arcana-A001">
 <header><small>A001</small><h2>トーラスの守護</h2></header>
 <div class="arcana-lr"><section class="arcana-stage"><h3>LR</h3><p>条件：構成キャラ全員LR</p><ul class="arcana-effects"><li>全キャラ：物理防御力 +3000</li><li>全キャラ：魔法防御力 +3000</li></ul></section></div>
@@ -1446,6 +1448,6 @@
   <script defer src="../../js/gacha-status.js?v=52dd812b"></script>
   <script defer src="../../js/search-normalize.js?v=bf53367b"></script>
   <script defer src="../../js/render-arcana.js?v=6c15104e"></script>
-  <script defer src="../../js/arcana-search.js?v=d0b2448e"></script>
+  <script defer src="../../js/arcana-search.js?v=1eaf0d7c"></script>
 </body>
 </html>
