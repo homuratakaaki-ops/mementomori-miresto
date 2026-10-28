@@ -233,6 +233,58 @@
     return isOngoing(entry, now) ? `（開催中〜${endLabel(entry)}）` : "（終了）";
   }
 
+  /** アルカナ検索用。終了不明の回には古い終了日や推定日を代用しない。 */
+  function arcanaGachaSummary(character, now) {
+    const current = jstNow(now);
+    const history = historyOf(character).filter((entry) => entry.kind !== RELEASE_KIND);
+    const dated = history.filter((entry) => entry.date);
+    const byStart = (a, b) => startAt(a).localeCompare(startAt(b));
+    const ongoing = dated.filter((entry) => isOngoing(entry, current)).sort(byStart);
+    const upcoming = dated.filter((entry) => isUpcoming(entry, current)).sort(byStart);
+    const state = ongoing.length ? "ongoing" : upcoming.length ? "upcoming" :
+      character && character.availability === "恒常" ? "permanent" :
+      hasPastPickup(character, current) ? "waiting" : "history_unknown";
+
+    function latest(entries, boundary) {
+      if (!entries.length) return [];
+      const maximum = entries.reduce((value, entry) =>
+        boundary(entry) > value ? boundary(entry) : value, boundary(entries[0]));
+      return entries.filter((entry) => boundary(entry) === maximum);
+    }
+    function elapsedDays(boundary) {
+      const days = Math.floor((new Date(`${current}:00+09:00`) -
+        new Date(`${boundary}:00+09:00`)) / DAY_MS);
+      return Number.isFinite(days) && days >= 0 ? days : null;
+    }
+
+    const latestStarted = latest(dated.filter((entry) =>
+      startAt(entry) <= current && !isUpcoming(entry, current)), startAt);
+    const latestEnded = latest(dated.filter((entry) =>
+      entry.endDate && endAt(entry) <= current), endAt);
+    const knownStart = latestStarted.length > 0 &&
+      !latestStarted.some((entry) => /^\d{4}-\d{2}$/.test(entry.date));
+    const daysSinceStart = knownStart ? elapsedDays(startAt(latestStarted[0])) : null;
+    const showEnd = state === "waiting" || state === "upcoming";
+    const daysSinceEnd = showEnd && knownStart &&
+      latestStarted.every((entry) => entry.endDate) && latestEnded.length > 0 ?
+      elapsedDays(endAt(latestEnded[0])) : null;
+
+    return {
+      state,
+      ongoing,
+      upcoming,
+      latestStarted,
+      latestEnded,
+      daysSinceStart,
+      daysSinceEnd,
+      startPrecision: daysSinceStart === null ? null : latestStarted[0].startTime ? "exact" : "date_based",
+      endPrecision: daysSinceEnd === null ? null : latestEnded[0].endTime ? "exact" : "date_based",
+      endUnknown: showEnd && daysSinceEnd === null,
+      recordedRounds: history.length,
+      totalRounds: character && typeof character.pickupCount === "number" ? character.pickupCount : null
+    };
+  }
+
   return {
     RELEASE_KIND,
     ONGOING_LABEL,
@@ -250,6 +302,7 @@
     hasPastPickup,
     gachaStatus,
     gachaStatusText,
-    periodSuffix
+    periodSuffix,
+    arcanaGachaSummary
   };
 }));

@@ -94,6 +94,10 @@
   JSが無効なら生成時の本文を表示する。06:00・15:00の日次ビルドは継続する。
 - 時刻対応の追加検証は `node scripts/verify-gacha-time.cjs`。既存の `verify-gacha-status.cjs` は変更しない。
 
+- アルカナ検索用の `arcanaGachaSummary()` は `js/gacha-status.js` に置く。既存関数・既存表示には影響しない。
+- 状態の判定順は既存 `gachaStatus()` と同じ。終了日不明でも状態は「復刻待ち」のまま、日数は出さず `endUnknown` で「終了日未確認」を示す（2026-10-28 夢爽確定）。
+- 検証は `node scripts/verify-arcana-gacha.cjs`。判定を変えたらここも直す。
+
 ## 日次の自動ビルド（GitHub Actions）
 
 - `.github/workflows/daily-build.yml` が**毎日 JST 06:00 と15:00**（UTC 21:00と06:00）に
