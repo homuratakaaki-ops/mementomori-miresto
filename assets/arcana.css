@@ -40,6 +40,7 @@ summary { min-height: 44px; padding: 10px 8px; cursor: pointer; color: var(--nav
 [hidden] { display: none !important; }
 .arcana-search-layout { display: grid; gap: 20px; align-items: start; }
 .arcana-search-layout > * { min-width: 0; }
+.arcana-search-layout > .ad-slot { grid-column: 1 / -1; }
 .arcana-search-error { grid-column: 1 / -1; color: #8a281b; }
 .arcana-search-panel { padding: 12px; border: 1px solid var(--line); border-radius: 12px; background: var(--panel); font-size: 14px; }
 .arcana-search-panel fieldset { min-width: 0; margin: 0 0 16px; padding: 0; border: 0; }

@@ -1,4 +1,4 @@
-import { mkdirSync } from "node:fs";
+import { mkdirSync, readFileSync } from "node:fs";
 import { createRequire } from "node:module";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -120,7 +120,6 @@ function pageHtml(index, now, analytics) {
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>${escapeHtml(TITLE)}</title>
   <meta name="description" content="${escapeHtml(DESCRIPTION)}">
-  <meta name="robots" content="noindex">
   <link rel="canonical" href="${canonical}">
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="${escapeHtml(SITE_NAME)}">
@@ -155,6 +154,7 @@ ${renderAnalyticsHead(analytics, "  ")}
     <div data-empty-results hidden><p>条件に一致するアルカナはありません</p><p>確認中の効果は効果の条件に一致しません</p><div data-empty-filters aria-label="適用中の条件"></div><button type="button" data-clear-filters>条件をすべて解除</button></div>
 ${index.arcana.map(item => renderCard(item, index.characters, summaries)).join("\n")}
     </section>
+    <!-- ad:bottom -->
   </main>
   <footer class="site-footer">
     <div class="footer-inner">
@@ -177,6 +177,16 @@ ${["gacha-status", "search-normalize", "render-arcana", "arcana-search"].map(nam
 `;
 }
 
+function patchSitemap(writeIfChanged) {
+  const path = join(ROOT, "sitemap.xml");
+  const sitemap = readFileSync(path, "utf8").replace(/\r\n/g, "\n");
+  const loc = `<loc>${SITE}/pages/arcana/index.html</loc>`;
+  if (sitemap.includes(loc)) return;
+  const anchor = `  <url>\n    <loc>${SITE}/pages/characters/index.html</loc>\n  </url>\n`;
+  if (!sitemap.includes(anchor)) throw new Error("sitemap.xml の挿入位置が見つかりません: pages/characters/index.html");
+  writeIfChanged(path, sitemap.replace(anchor, `  <url>\n    ${loc}\n  </url>\n` + anchor));
+}
+
 export function buildArcanaPages({ index, now, analytics, writeIfChanged }) {
   const json = `${JSON.stringify(index, null, 2)}\n`;
   const bytes = Buffer.byteLength(json);
@@ -185,6 +195,7 @@ export function buildArcanaPages({ index, now, analytics, writeIfChanged }) {
   mkdirSync(join(ROOT, "pages/arcana"), { recursive: true });
   const indexChanged = writeIfChanged(join(ROOT, "data/arcana-index.json"), json);
   const pageChanged = writeIfChanged(join(ROOT, "pages/arcana/index.html"), pageHtml(index, now, analytics));
+  patchSitemap(writeIfChanged);
   console.log(`アルカナ一覧: ${index.arcana.length}件 / 検索用データ ${(bytes / 1024).toFixed(1)} KB（${indexChanged || pageChanged ? "更新" : "変更なし"}）`);
   return { bytes, gzipBytes, indexChanged, pageChanged };
 }
