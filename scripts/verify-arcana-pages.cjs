@@ -57,33 +57,41 @@ check("P03", () => {
   const forbidden = /sourceUrl|evidence|verification|endTimeSource|notion|libfile|sha256|\u30a2\u30eb\u30c6\u30de|altema|\u3044\u3061\u3054|ichigo|参考資料|原本未確認|LR表示確認|ゲーム画像/i;
   assert.equal(forbidden.test(html + json), false);
   const urls = text => [...text.matchAll(/https?:\/\/[^\s"'<>]+/g)].map(match => match[0]);
-  const existing = new Set(urls(read("index.html")));
-  for (const url of urls(html + json)) {
+  const withoutManagedBlocks = text => text.replace(/<!-- ga:head -->[\s\S]*?<!-- \/ga:head -->/g, "")
+    .replace(/<!-- ad:(head|bottom) -->[\s\S]*?<!-- \/ad:\1 -->/g, "");
+  const withoutAnalytics = withoutManagedBlocks(html);
+  const existing = new Set(urls(withoutManagedBlocks(read("index.html"))));
+  for (const url of urls(withoutAnalytics + json)) {
     assert.ok(new URL(url).origin === "https://memento.musoudc.com" || existing.has(url), `許可されないURL: ${url}`);
   }
   for (const match of html.matchAll(/(?:href|src)="([^"]+)"/g)) {
     assert.ok(/^(?:https:\/\/|\/(?!\/)|\.\.\/)/.test(match[1]) || match[1] === "#arcana-results", "許可されない参照形式");
   }
-  const withoutAnalytics = html.replace(/<!-- ga:head -->[\s\S]*?<!-- \/ga:head -->/g, "");
   const scripts = [...withoutAnalytics.matchAll(/<script\b[^>]*>[\s\S]*?<\/script>/g)].map(match => match[0]);
   assert.equal(scripts.length, 4);
   ["gacha-status", "search-normalize", "render-arcana", "arcana-search"].forEach((name, i) => {
     assert.match(scripts[i], new RegExp(`^<script defer src="\\.\\./\\.\\./js/${name}\\.js\\?v=[0-9a-f]{8}"></script>$`));
   });
-  assert.equal(/<!-- ad:/.test(withoutAnalytics), false);
+  assert.equal((html.match(/<!-- ad:bottom -->/g) || []).length, 1);
+  assert.equal((html.match(/<!-- ad:mid -->/g) || []).length, 0);
   assert.equal(/<details\b[^>]*\bopen\b/.test(html), false);
-  return "禁止語・外部URL混入なし / 指定JS4本のみ（versioned付き）・広告目印なし / detailsは閉じた状態";
+  return "禁止語・外部URL混入なし / 指定JS4本のみ（versioned付き）・下部広告目印1つ・本文中広告目印なし / detailsは閉じた状態";
 });
 check("P04", () => {
   assert.ok(html.includes('<title>アルカナ検索 | ミレストのメメントモリ分析データ室</title>'));
   assert.ok(html.includes('<meta property="og:title" content="アルカナ検索 | ミレストのメメントモリ分析データ室">'));
-  assert.ok(html.includes('<meta name="robots" content="noindex">'));
+  assert.equal(/<meta\b[^>]*\bcontent="[^"]*noindex/i.test(html), false);
   assert.ok(html.includes('<link rel="canonical" href="https://memento.musoudc.com/pages/arcana/index.html">'));
-  assert.equal(read("sitemap.xml").includes("/pages/arcana/"), false);
-  for (const file of ["index.html", "pages/characters/index.html", "data/news.json"]) {
-    assert.equal(/(?:pages\/|\.\.\/)arcana\//.test(read(file)), false);
+  const locations = [...read("sitemap.xml").matchAll(/<loc>([^<]+)<\/loc>/g)].map(match => match[1]);
+  const arcanaUrl = "https://memento.musoudc.com/pages/arcana/index.html";
+  assert.equal(locations.filter(url => url === arcanaUrl).length, 1);
+  assert.equal(locations[locations.indexOf(arcanaUrl) + 1], "https://memento.musoudc.com/pages/characters/index.html");
+  for (const [file, href] of [["index.html", "./pages/arcana/index.html"], ["pages/characters/index.html", "../arcana/index.html"]]) {
+    const links = [...read(file).matchAll(/<a\b[^>]*href="([^"]+)"/g)].map(match => match[1]);
+    assert.equal(links.filter(url => url === href).length, 1, file);
   }
-  return "noindex・canonicalあり / sitemap・TOP・キャラ一覧・newsに導線なし";
+  assert.equal(JSON.parse(read("data/news.json")).items.filter(item => item.url === "pages/arcana/index.html").length, 1);
+  return "公開状態：noindexなし・canonicalあり / sitemap・TOP・キャラ一覧・news 各1件";
 });
 check("P05", () => {
   // LR概要は数えず、各カードの段階詳細だけを数える。
