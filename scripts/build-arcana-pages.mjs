@@ -16,7 +16,7 @@ const TITLE = `アルカナ検索 | ${SITE_NAME}`;
 const DESCRIPTION = "アルカナ101件の効果と構成キャラ、ガチャの開催状況を確認できます。";
 const HISTORY_KEYS = ["date", "endDate", "startTime", "endTime", "kind", "round", "announced"];
 
-function searchIndex(baseData, arcana, meta) {
+export function searchIndex(baseData, arcana, meta) {
   const rows = arcana.arcana.slice().sort((a, b) => a.id.localeCompare(b.id)).map(item => ({
     id: item.id,
     name: item.name,
@@ -53,6 +53,14 @@ function searchIndex(baseData, arcana, meta) {
     };
   }
   return { schema: "miresto_arcana_index_v1", note: "data/arcana.json と data/mementomori-skills.json から生成。手で直さない。", arcana: rows, characters };
+}
+
+export function affiliationsByCharacter(index) {
+  const affiliations = new Map(Object.keys(index.characters).map(id => [id, []]));
+  for (const item of index.arcana) {
+    for (const id of new Set(item.members.filter(Boolean))) affiliations.get(id).push(item);
+  }
+  return affiliations;
 }
 
 const EFFECT_GROUPS = [
@@ -169,8 +177,7 @@ ${["gacha-status", "search-normalize", "render-arcana", "arcana-search"].map(nam
 `;
 }
 
-export function buildArcanaPages({ baseData, arcana, meta, now, analytics, writeIfChanged }) {
-  const index = searchIndex(baseData, arcana, meta);
+export function buildArcanaPages({ index, now, analytics, writeIfChanged }) {
   const json = `${JSON.stringify(index, null, 2)}\n`;
   const bytes = Buffer.byteLength(json);
   const gzipBytes = gzipSync(json).length;

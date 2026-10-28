@@ -28,7 +28,7 @@ import { fileURLToPath } from "node:url";
 import { buildStatusGuides } from "./build-status-guides.mjs";
 import { buildAds } from "./build-ads.mjs";
 import { buildAnalytics } from "./build-analytics.mjs";
-import { buildArcanaPages } from "./build-arcana-pages.mjs";
+import { buildArcanaPages, searchIndex, affiliationsByCharacter } from "./build-arcana-pages.mjs";
 
 const require = createRequire(import.meta.url);
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
@@ -36,6 +36,7 @@ const DATA_DIR = join(ROOT, "data");
 const PAGES_DIR = join(ROOT, "pages", "characters");
 
 const renderer = require(join(ROOT, "js", "render-character.js"));
+const arcanaRenderer = require(join(ROOT, "js", "render-arcana.js"));
 const indexRenderer = require(join(ROOT, "js", "render-character-index.js"));
 const gachaStatus = require(join(ROOT, "js", "gacha-status.js"));
 const newsRenderer = require(join(ROOT, "js", "render-news.js"));
@@ -138,7 +139,7 @@ function withMidAdSlot(skillListHtml, ads) {
  * JSが埋めていた箇所（roleMemo / characterMeta / skillList / notePanel）を
  * 生成時に埋めてある。
  */
-function characterPageHtml({ character, metaHtml, skillListHtml, description, ads, analytics }) {
+function characterPageHtml({ character, metaHtml, skillListHtml, description, ads, analytics, affiliation }) {
   const notePanel = character.noteUrl
     ? `    <section class="note-panel" id="notePanel">
       <strong>評価・運用メモはnoteへ</strong><br>
@@ -187,12 +188,13 @@ ${adRenderer.renderAdHead(ads, "  ")}
       <h1 id="characterName">${renderer.escapeHtml(character.name)}</h1>
       <p class="role" id="roleMemo">${renderer.escapeHtml(renderer.roleMemoText(character))}</p>
       <div class="meta-row" id="characterMeta">${metaHtml}</div>
-    </div>
+${affiliation.count ? `<!-- arcana:jump --><p class="arcana-jump"><a href="#arcana">所属アルカナ（${affiliation.count}件）へ</a></p><!-- /arcana:jump -->\n` : ""}    </div>
   </header>
 
   <main>
 ${notePanel}
     <section class="skill-list" id="skillList">${skillListHtml}</section>
+${affiliation.html}
 ${adRenderer.renderAdSlot(ads, "    ")}
   </main>
 
@@ -765,7 +767,7 @@ function validateAll({ baseData, terms }) {
   return flowSkills;
 }
 
-function buildCharacterPages({ baseData, newsData, terms, ads, analytics }) {
+function buildCharacterPages({ baseData, newsData, terms, ads, analytics, arcanaIndex, affiliations }) {
   const written = [];
   const unchanged = [];
   const slugs = [];
@@ -781,6 +783,10 @@ function buildCharacterPages({ baseData, newsData, terms, ads, analytics }) {
       metaHtml: renderer.renderMetaHtml(character, newsData, NOW),
       skillListHtml: withMidAdSlot(renderer.renderSkillList(skills, terms), ads),
       description: renderer.pageDescription(character, skills),
+      affiliation: {
+        count: (affiliations.get(character.id) || []).length,
+        html: arcanaRenderer.renderAffiliation(character, affiliations.get(character.id) || [], arcanaIndex.characters)
+      },
       ads,
       analytics
     });
@@ -922,13 +928,15 @@ function main() {
   for (const character of baseData.characters || []) {
     for (const warning of gachaStatus.announcementWarnings(character, NOW)) console.warn(warning);
   }
-  const pages = buildCharacterPages({ baseData, newsData, terms, ads, analytics });
+  const arcanaIndex = searchIndex(baseData, arcana, meta);
+  const affiliations = affiliationsByCharacter(arcanaIndex);
+  const pages = buildCharacterPages({ baseData, newsData, terms, ads, analytics, arcanaIndex, affiliations });
   // 状態異常ガイドはキャラページの後。直リンク先の id="skill-N" を生成済みHTMLで確かめる。
   const status = buildStatusGuides({ baseData, terms, ads, analytics, writeIfChanged });
   const index = buildIndexPage({ baseData });
   const charIndex = buildCharacterIndex({ baseData });
   const topPage = buildTopPage({ newsData });
-  buildArcanaPages({ baseData, arcana, meta, now: NOW, analytics, writeIfChanged });
+  buildArcanaPages({ index: arcanaIndex, now: NOW, analytics, writeIfChanged });
   // 広告枠は全ページを書き終えた最後に差し込む（手書きページの目印もここで置き換える）。
   const ads2 = buildAds({ writeIfChanged });
   // 計測タグ（GA4）は広告の後。<!-- ad:head --> の手前に入れる。

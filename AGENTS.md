@@ -617,5 +617,7 @@
 
 ## 禁止事項
 
+- キャラ詳細の所属アルカナ欄は `js/render-arcana.js` の `renderAffiliation` が描画し、逆引きは検索ページと共通の `scripts/build-arcana-pages.mjs` の索引から作る。`<!-- arcana:affiliation -->`／`<!-- arcana:jump -->` は生成専用の目印。`js/character-page.js` の予備描画には入れていない。
+
 - 指示書にない機能の追加・変更（IDEAS.md記載の未依頼機能を含む）
 - 無関係ファイルの整形・リネーム・削除

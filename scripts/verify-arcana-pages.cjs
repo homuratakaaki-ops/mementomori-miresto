@@ -152,4 +152,85 @@ check("P07", () => {
   files.forEach((file, i) => assert.ok(first[i].equals(second[i]), `${file}: バイト不一致`));
   return "固定JST 2026-10-28T12:00で正規ビルド2回 / 2ファイルともバイト一致";
 });
+const affiliationPattern = /<!-- arcana:affiliation -->[\s\S]*?<!-- \/arcana:affiliation -->\r?\n/g;
+const jumpPattern = /<!-- arcana:jump -->[\s\S]*?<!-- \/arcana:jump -->\r?\n/g;
+const detailPages = base.characters.map(character => {
+  const file = `pages/characters/${character.pageSlug}.html`;
+  const page = read(file);
+  return { character, file, page, sections: [...page.matchAll(affiliationPattern)],
+    items: index.arcana.filter(item => item.members.includes(character.id)) };
+});
+check("P08", () => {
+  assert.equal(detailPages.length, 120);
+  let total = 0;
+  for (const { character, page, sections, items } of detailPages) {
+    assert.equal((page.match(/<!-- arcana:affiliation -->/g) || []).length, 1, character.id);
+    assert.equal(sections.length, 1, character.id);
+    assert.equal((sections[0][0].match(/class="arcana-affiliation-item"/g) || []).length, items.length, character.id);
+    assert.equal((page.match(jumpPattern) || []).length, items.length ? 1 : 0, character.id);
+    assert.ok(page.includes(`所属アルカナ（${items.length}件）へ`), character.id);
+    total += items.length;
+  }
+  assert.equal(total, 214);
+  assert.equal(Math.max(...detailPages.map(row => row.items.length)), 5);
+  assert.deepEqual(detailPages.find(row => row.character.id === "soltina").items.map(item => item.id), ["A007", "A018", "A031", "A047", "A061"]);
+  return "正本120体に所属欄1つずつ / 合計214件・最大5件 / ソルティーナの5件一致";
+});
+check("P09", () => {
+  const { escapeHtml } = require("../js/render-arcana.js");
+  let checked = 0;
+  for (const { character, sections, items } of detailPages) {
+    assert.equal(sections.length, 1, character.id);
+    const section = sections[0][0];
+    const search = `../arcana/index.html?character=${encodeURIComponent(character.id)}&scope=named`;
+    const expected = [];
+    const members = [...section.matchAll(/<p class="arcana-affiliation-members">構成キャラ：([\s\S]*?)<\/p>/g)];
+    assert.equal(members.length, items.length);
+    items.forEach((item, position) => {
+      expected.push(`${search}&open=${item.id}#arcana-${item.id}`);
+      assert.ok(html.includes(`id="arcana-${item.id}"`));
+      const expectedMembers = item.members.map(id => {
+        const member = index.characters[id];
+        if (!member) return "未特定キャラ";
+        if (id === character.id) return `${escapeHtml(member.name)}（このキャラ）`;
+        if (!member.pageSlug) return `${escapeHtml(member.name)}（キャラ詳細未掲載）`;
+        const href = `./${encodeURIComponent(member.pageSlug)}.html`;
+        expected.push(href);
+        assert.ok(fs.existsSync(path.join(ROOT, "pages/characters", member.pageSlug + ".html")), href);
+        return `<a href="${escapeHtml(href)}">${escapeHtml(member.name)}</a>`;
+      }).join("／");
+      assert.equal(members[position][1], expectedMembers, `${character.id}/${item.id}`);
+    });
+    expected.push(search);
+    const actual = [...section.matchAll(/<a\b[^>]*href="([^"]+)"/g)].map(match => match[1]);
+    assert.deepEqual(actual, expected.map(escapeHtml), character.id);
+    checked += actual.length;
+  }
+  assert.ok(fs.existsSync(path.join(ROOT, "pages/arcana/index.html")));
+  return `所属欄の全${checked}リンク実在・形式一致 / 自分・補完キャラ・未特定枠にリンクなし`;
+});
+check("P10", () => {
+  const baseline = process.env.MIRESTO_ARCANA_BASELINE || "C:/Users/homur/mementomori-miresto-verify/arcana/baseline";
+  assert.ok(fs.existsSync(baseline), `基準なし: ${baseline}`);
+  const normalize = text => text.replace(/\?v=[a-f0-9]{8}/g, "");
+  const changed = [];
+  for (const { file, page } of detailPages) {
+    const original = path.join(baseline, file);
+    assert.ok(fs.existsSync(original), `基準なし: ${file}`);
+    if (normalize(page.replace(affiliationPattern, "").replace(jumpPattern, "")) !== normalize(fs.readFileSync(original, "utf8"))) changed.push(file);
+  }
+  assert.deepEqual(changed, [], "所属欄・ジャンプ・印以外の差分");
+  return "キャラ詳細120件が基準と一致（所属欄・ジャンプ除去、?v=正規化）";
+});
+check("P11", () => {
+  const forbidden = /sourceUrl|evidence|verification|endTimeSource|notion|libfile|sha256|\u30a2\u30eb\u30c6\u30de|altema|\u3044\u3061\u3054|ichigo|参考資料|原本未確認|LR表示確認|ゲーム画像/i;
+  for (const { character, sections } of detailPages) {
+    assert.equal(sections.length, 1, character.id);
+    const section = sections[0][0];
+    assert.equal(forbidden.test(section), false, character.id);
+    assert.match(section, /<p class="arcana-affiliation-more">[^\n]*<\/p>\s*<\/section>\s*<!-- \/arcana:affiliation -->/);
+    assert.equal(/arcana-status|開催中|開催予定|復刻待ち|出典：/.test(section), false, character.id);
+  }
+  return "所属欄にP03禁止語・開催状況・出典ラベルなし / 末尾は段落・sectionで閉じる";
+});
 process.exitCode = failed ? 1 : 0;

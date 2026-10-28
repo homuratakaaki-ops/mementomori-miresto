@@ -640,3 +640,44 @@ footer {
     margin-top: 4px;
   }
 }
+
+/* 生成済みキャラ詳細の所属アルカナ欄 */
+.arcana-affiliation {
+  margin-top: 24px;
+  padding: clamp(14px, 3vw, 24px);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: #fff;
+  font-size: 14px;
+  line-height: 1.8;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.arcana-affiliation-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.arcana-affiliation-item + .arcana-affiliation-item {
+  border-top: 1px solid var(--line);
+  margin-top: 16px;
+  padding-top: 16px;
+}
+.arcana-affiliation h2 { font-size: 20px; }
+.arcana-affiliation h3 { margin: 0; font-size: 16px; }
+.arcana-affiliation p { margin: 8px 0; }
+.arcana-affiliation .arcana-effects { padding-left: 22px; }
+.arcana-affiliation-lr { color: var(--muted); }
+.arcana-affiliation a,
+.arcana-jump a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  min-width: 44px;
+  max-width: 100%;
+  padding: 4px 0;
+  box-sizing: border-box;
+  color: var(--accent-strong);
+  overflow-wrap: anywhere;
+}
+.arcana-jump { margin: 8px 0 0; font-size: 14px; }
