@@ -1,0 +1,50 @@
+{
+  "schema": "miresto_arcana_v1",
+  "schemaVersion": 1,
+  "updatedAt": "2026-10-28",
+  "note": "採用値だけを置く。原文・出典URL・取得日・画像IDは非公開の管理資料にあり、ここには置かない。",
+  "arcana": [
+    {
+      "id": "A003",
+      "name": "ジェミニの庇翼",
+      "aliases": [],
+      "nameVerification": "reference_agreed",
+      "members": [
+        { "slot": 1, "characterId": "freycia", "resolutionStatus": "resolved" },
+        { "slot": 2, "characterId": "lean", "resolutionStatus": "resolved" },
+        { "slot": 3, "characterId": "dian", "resolutionStatus": "resolved" }
+      ],
+      "stages": [
+        {
+          "id": "A003:LR",
+          "label": "LR",
+          "condition": { "kind": "all_members_rarity", "rarity": "LR", "displayText": "構成キャラ全員LR", "verification": "reference_agreed" },
+          "effects": [
+            {
+              "id": "A003:LR:1",
+              "statKey": "evasion",
+              "target": "all",
+              "displayText": "回避 +1500",
+              "value": { "mode": "flat", "amount": 1500 },
+              "verification": "game_record",
+              "evidenceIds": ["ev-A003-LR-01"]
+            },
+            {
+              "id": "A003:LR:2",
+              "statKey": "defense",
+              "target": "all",
+              "displayText": "防御力 +1.0%",
+              "value": { "mode": "percent", "amount": 1.0 },
+              "verification": "game_record",
+              "evidenceIds": ["ev-A003-LR-01"]
+            }
+          ]
+        }
+      ],
+      "evidenceIds": ["ev-A003-LR-01"]
+    }
+  ],
+  "evidence": [
+    { "id": "ev-A003-LR-01", "sourceKind": "game_image_review_record", "covers": ["A003:LR"] }
+  ]
+}

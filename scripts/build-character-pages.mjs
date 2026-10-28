@@ -895,6 +895,26 @@ function main() {
   const analytics = siteConfig.analytics || {};
 
   const flowSkills = validateAll({ baseData, terms });
+  // アルカナは検証だけを行い、ページや索引は生成しない。
+  try {
+    const arcanaText = readFileSync(join(DATA_DIR, "arcana.json"), "utf8");
+    const metaText = readFileSync(join(DATA_DIR, "arcana-character-meta.json"), "utf8");
+    const { runArcanaChecks } = require("./verify-arcana.cjs");
+    const results = runArcanaChecks({
+      arcana: JSON.parse(arcanaText), meta: JSON.parse(metaText),
+      canonical: baseData, arcanaText, metaText, expectFull: false
+    });
+    for (const check of results) {
+      for (const warning of check.warnings || []) console.warn(`${check.code} WARN: ${warning}`);
+    }
+    const errors = results.flatMap(check => check.errors.map(error => `${check.code}: ${error}`));
+    if (errors.length) throw new Error(errors.join("\n検証NG: "));
+    const counts = results.find(check => check.code === "D01").metrics;
+    console.log(`アルカナ: ${counts.arcana}件 / 構成枠 ${counts.slots} / 未特定 ${counts.unresolved}（検証OK）`);
+  } catch (error) {
+    console.error(`検証NG: ${error.message}`);
+    throw error;
+  }
   for (const character of baseData.characters || []) {
     for (const warning of gachaStatus.announcementWarnings(character, NOW)) console.warn(warning);
   }
