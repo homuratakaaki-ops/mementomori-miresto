@@ -2,9 +2,9 @@
   "schema": "character-index/1",
   "note": "data/mementomori-skills.json の characters から自動生成。直接編集しないこと（scripts/build-character-pages.mjs が上書きする）。",
   "generatedFrom": "data/mementomori-skills.json",
-  "updatedAt": "2026-10-04T00:00:00.000+09:00",
-  "generatedAt": "2026-10-15T17:54:16.042+09:00",
-  "statusDate": "2026-10-15",
+  "updatedAt": "2026-10-29T17:05:00.000+09:00",
+  "generatedAt": "2026-10-29T17:06:17.603+09:00",
+  "statusDate": "2026-10-29",
   "characters": [
     {
       "id": "aa_dark",
@@ -388,6 +388,19 @@
       "weaponType": "ウォーリア",
       "speed": 3049,
       "availability": "星の導き"
+    },
+    {
+      "id": "elfriede_superbia",
+      "pageSlug": "elfriede_superbia",
+      "name": "[スペルビアの眷属]エルフリンデ",
+      "reading": {
+        "name": "えるふりんで",
+        "title": "すぺるびあのけんぞく"
+      },
+      "attribute": "冥",
+      "weaponType": "ウォーリア",
+      "speed": 2949,
+      "availability": "ピックアップ"
     },
     {
       "id": "eureka",

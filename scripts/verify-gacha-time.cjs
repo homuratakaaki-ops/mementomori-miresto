@@ -60,7 +60,7 @@ test('日付繰越・22日安全装置・JST・月単位の旧履歴', () => {
   assert.equal(gs.isOngoing(e, '2026-11-13T14:30'), false);
   assert.equal(gs.hasPastPickup({ pickupHistory: [{ date: '2026-10', kind: 'PU' }] }, '2026-10-01'), true);
 });
-test('時刻項目なしの比較用120体 × 92日 × 6時刻をc271f77と照合', () => {
+test(`時刻項目なしの比較用${compatibilityData.characters.length}体 × 92日 × 6時刻をc271f77と照合`, () => {
   const context = { module: { exports: {} } };
   vm.runInNewContext(git('show', `${baseline}:js/gacha-status.js`), context);
   const old = context.module.exports;
@@ -138,7 +138,15 @@ test('時刻項目なしの比較用データ・同一日時で旧新ロジッ�
     fs.cpSync(fixture, oldFixture, { recursive: true });
     for (const file of ['js/gacha-status.js', 'js/render-character.js',
       'js/render-character-index.js', 'scripts/build-character-pages.mjs']) {
-      fs.writeFileSync(path.join(oldFixture, file), git('show', `${baseline}:${file}`));
+      let source = git('show', `${baseline}:${file}`);
+      if (file === 'js/render-character-index.js') {
+        // 比較対象は開催判定。新キャラのリンク有無は旧新で同じ入力にする。
+        // 固定された旧commitの一覧だと、新規slugだけ「準備中」になり無関係な差を生む。
+        const pages = /const EXISTING_PAGES = \[[^\]]*\];/;
+        assert.match(source, pages, '旧rendererのページ一覧が見つからない');
+        source = source.replace(pages, `const EXISTING_PAGES = ${JSON.stringify(cards.EXISTING_PAGES)};`);
+      }
+      fs.writeFileSync(path.join(oldFixture, file), source);
     }
     const env = { ...process.env, MIRESTO_NOW: at };
     delete env.MIRESTO_TODAY;
