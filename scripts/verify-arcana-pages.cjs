@@ -147,6 +147,15 @@ check("P06", () => {
   return `アルカナ101件 / キャラ132体 / 正本との射影一致 / 生${bytes} bytes / gzip ${gzipBytes} bytes（150KB以下）`;
 });
 check("P07", () => {
+  function git(...args) {
+    const result = spawnSync("git", args, { cwd: ROOT, encoding: "utf8", maxBuffer: 16 * 1024 * 1024 });
+    if (result.error) throw result.error;
+    assert.equal(result.status, 0, result.stderr);
+    return result.stdout;
+  }
+  const status = git("status", "--porcelain", "-z");
+  assert.ok(!status.split("\0").filter(Boolean).some(entry => !entry.startsWith("?? ")),
+    "作業ツリーをコミットまたは退避してから実行");
   // 成功ログ・計測IDをディスクへ保存しない。ビルド失敗時は即座に比較を中断する。
   const files = ["data/arcana-index.json", "pages/arcana/index.html"];
   function build() {
@@ -157,8 +166,21 @@ check("P07", () => {
     assert.equal(result.status, 0, result.stdout + result.stderr);
     return files.map(file => fs.readFileSync(path.join(ROOT, file)));
   }
-  const first = build(), second = build();
-  files.forEach((file, i) => assert.ok(first[i].equals(second[i]), `${file}: バイト不一致`));
+  try {
+    const first = build(), second = build();
+    files.forEach((file, i) => assert.ok(first[i].equals(second[i]), `${file}: バイト不一致`));
+  } finally {
+    const changed = git("diff", "--name-only", "-z", "HEAD", "--").split("\0").filter(Boolean);
+    let restored = 0;
+    try {
+      for (const file of changed) {
+        git("checkout", "--", file);
+        restored++;
+      }
+    } finally {
+      console.log(`P07: 生成物 ${restored}件を HEAD に戻した`);
+    }
+  }
   return "固定JST 2026-10-28T12:00で正規ビルド2回 / 2ファイルともバイト一致";
 });
 const affiliationPattern = /<!-- arcana:affiliation -->[\s\S]*?<!-- \/arcana:affiliation -->\r?\n/g;
