@@ -1,6 +1,6 @@
 {
   "schema": "mementomori_skill_compare_v1",
-  "updatedAt": "2026-10-04T00:00:00.000+09:00",
+  "updatedAt": "2026-10-29T17:05:00.000+09:00",
   "gachaStatusUpdatedAt": "2026-10-03",
   "notes": [
     "Skill effects are summarized for comparison and are not copied as full official text.",
@@ -3715,6 +3715,36 @@
         }
       ],
       "pickupCount": 1
+    },
+    {
+      "id": "elfriede_superbia",
+      "pageSlug": "elfriede_superbia",
+      "name": "[スペルビアの眷属]エルフリンデ",
+      "reading": {
+        "name": "えるふりんで",
+        "title": "すぺるびあのけんぞく"
+      },
+      "catchcopy": "与ダメージを高めるスタックを配り、10スタックで自身の攻撃を強化する",
+      "attribute": "冥",
+      "weaponType": "ウォーリア",
+      "availability": "ピックアップ",
+      "roleMemo": "「傲慢の悪魔」で自身と味方を強化し、スタック数に応じた攻撃とダメージ遮断を持つ冥属性ウォーリア",
+      "noteUrl": "",
+      "imageUrl": "",
+      "sourceUrl": "https://x.com/mementomori_boi/status/2115708777081303515",
+      "pickupHistory": [
+        {
+          "date": "2026-10-29",
+          "startTime": "16:30",
+          "endDate": "2026-11-30",
+          "endTime": "14:29",
+          "endTimeSource": "公式Xの登場告知（https://x.com/mementomori_boi/status/2115708777081303515、2026-10-29確認）",
+          "kind": "PU",
+          "round": 1
+        }
+      ],
+      "pickupCount": 1,
+      "speed": 2949
     }
   ],
   "skills": [
@@ -38891,6 +38921,349 @@
       "exclusiveIntegrated": [
         2
       ]
+    },
+    {
+      "id": "elfriede_superbia-s1",
+      "characterId": "elfriede_superbia",
+      "number": 1,
+      "name": "救世の魔光",
+      "skillType": "アクティブ",
+      "category": "火力",
+      "majorCategory": "攻撃",
+      "subCategory": "スタック条件 / 高攻撃力狙い",
+      "target": "攻撃力が高い敵2体",
+      "multiplierText": "物理680% / 10スタック時1020%",
+      "duration": "",
+      "ct": 4,
+      "condition": "攻撃力が高い敵2体に物理680%。物理攻撃前に自身の「傲慢の悪魔」が10スタックの場合、物理1020%に変わる。専用Lv1は対象が3体になり、物理攻撃前の敵生存数が2体なら物理ダメージ1.5倍、1体なら3倍。",
+      "exclusiveWeapon": "専用Lv1: 対象が攻撃力が高い敵3体になる。物理攻撃前に敵の生存数が2体なら物理攻撃のダメージ1.5倍、1体なら3倍になる",
+      "compareMemo": "攻撃前の自身のスタック数を参照する。専用Lv1の敵生存数条件とは分けて読む",
+      "noteUrl": "",
+      "imageUrl": "",
+      "sourceUrl": "",
+      "plainSummary": "攻撃力が高い敵2体を攻撃し、自身の「傲慢の悪魔」が10スタックなら倍率が上がる。",
+      "steps": [
+        {
+          "text": "攻撃力が高い敵2体に物理680%"
+        },
+        {
+          "text": "物理攻撃前に自身の「傲慢の悪魔」が10スタックなら、物理1020%に変わる"
+        }
+      ],
+      "flow": [
+        {
+          "when": "攻撃時",
+          "mode": "sequence",
+          "order": 1,
+          "target": "攻撃力が高い敵2体",
+          "exclusiveTarget": [
+            {
+              "lv": 1,
+              "target": "攻撃力が高い敵3体"
+            }
+          ],
+          "effects": [
+            {
+              "text": "物理攻撃",
+              "multiplier": "物理680%",
+              "damageTotal": "base",
+              "exclusive": [
+                {
+                  "lv": 1,
+                  "kind": "change",
+                  "text": "物理攻撃のダメージが1.5倍",
+                  "condition": "物理攻撃前に敵の生存数が2体の場合"
+                },
+                {
+                  "lv": 1,
+                  "kind": "change",
+                  "text": "物理攻撃のダメージが3倍",
+                  "condition": "物理攻撃前に敵の生存数が1体の場合"
+                }
+              ]
+            },
+            {
+              "text": "物理攻撃の倍率がこの値に変わる",
+              "condition": "物理攻撃前に自身の「傲慢の悪魔」が10スタックの場合",
+              "multiplier": "物理1020%",
+              "damageTotal": "conditionMax"
+            }
+          ]
+        }
+      ],
+      "synergyNotes": [],
+      "damage": {
+        "singleMultiplier": 680,
+        "hitCount": 2,
+        "baseTotal": 1360,
+        "exclusiveLv1Total": 2040,
+        "conditionMaxTotal": 2040,
+        "conditionMaxNote": "専用武器なし。物理攻撃前に自身の「傲慢の悪魔」が10スタックの場合、1020%×2体=2040%。与ダメージ増加バフは倍率に換算しない。",
+        "powerType": "高攻撃力狙い / スタック条件",
+        "damageMemo": "専用Lv1〜3の2040%は通常倍率680%×3体。10スタック条件時の専用込み合計は1020%×3体=3060%。敵生存数2体では1.5倍×2体、1体では3倍×1体となる。与ダメージ増加バフは倍率に換算しない。",
+        "exclusiveLv2Total": 2040,
+        "exclusiveLv3Total": 2040
+      },
+      "exclusiveIntegrated": [
+        1
+      ],
+      "exclusiveRest": {
+        "1": "合計倍率の内訳：敵3体なら通常680%×3体=2040%、物理攻撃前に自身の「傲慢の悪魔」が10スタックなら1020%×3体=3060%。敵2体では1.5倍×2体、敵1体では3倍×1体となり、同じスタック条件での合計は変わらない（1体あたりの倍率は異なる）。"
+      }
+    },
+    {
+      "id": "elfriede_superbia-s2",
+      "characterId": "elfriede_superbia",
+      "number": 2,
+      "name": "聖魔の黒槍",
+      "skillType": "アクティブ",
+      "category": "火力",
+      "majorCategory": "攻撃",
+      "subCategory": "連続物理攻撃 / 条件付き直接攻撃",
+      "target": "ランダムな敵 / 攻撃力が最も高い敵",
+      "multiplierText": "物理580%×5回 / 10スタック時870%×5回 / 条件付き腕力1500%×3回",
+      "duration": "",
+      "ct": 4,
+      "condition": "ランダムな敵に物理580%×5回。最初の物理攻撃前に自身の「傲慢の悪魔」が10スタックの場合は物理870%になり、最後の物理攻撃後、攻撃力が最も高い敵へ自身の腕力1500%の直接攻撃を3回行う。この直接攻撃は必ずクリティカルヒットし、対象の「ダメージ無効」「多重バリア」を無視する。",
+      "exclusiveWeapon": "",
+      "compareMemo": "物理攻撃は攻撃力、追加の直接攻撃は自身の腕力が基準。合計倍率に直接攻撃を混ぜない",
+      "noteUrl": "",
+      "imageUrl": "",
+      "sourceUrl": "",
+      "plainSummary": "5回の物理攻撃。最初の攻撃前に10スタックあれば、倍率が上がり、腕力を基準とした直接攻撃を追加する。",
+      "steps": [
+        {
+          "text": "ランダムな敵に物理580%×5回"
+        },
+        {
+          "text": "最初の物理攻撃前に自身の「傲慢の悪魔」が10スタックなら、物理870%×5回に変わる"
+        },
+        {
+          "text": "同じ10スタック条件を満たす場合、最後の物理攻撃後、攻撃力が最も高い敵へ自身の腕力1500%の直接攻撃を3回"
+        },
+        {
+          "text": "直接攻撃は必ずクリティカルヒットし、対象の「ダメージ無効」「多重バリア」を無視"
+        }
+      ],
+      "flow": [
+        {
+          "when": "攻撃時",
+          "mode": "sequence",
+          "order": 1,
+          "target": "ランダムな敵",
+          "effects": [
+            {
+              "text": "物理攻撃を5回",
+              "multiplier": "物理580%×5回",
+              "damageTotal": "base"
+            },
+            {
+              "text": "5回の物理攻撃の倍率がこの値に変わる",
+              "condition": "最初の物理攻撃前に自身の「傲慢の悪魔」が10スタックの場合",
+              "multiplier": "物理870%×5回",
+              "damageTotal": "conditionMax"
+            }
+          ]
+        },
+        {
+          "when": "最後の攻撃後",
+          "mode": "sequence",
+          "order": 2,
+          "target": "攻撃力が最も高い敵",
+          "effects": [
+            {
+              "text": "自身の腕力1500%を基準とする直接攻撃を3回行う。必ずクリティカルヒットし、対象の「ダメージ無効」「多重バリア」を無視する",
+              "condition": "最初の物理攻撃前に自身の「傲慢の悪魔」が10スタックの場合",
+              "note": "物理攻撃5回とは別。腕力基準の直接攻撃は攻撃力倍率の合計に含めない"
+            }
+          ]
+        }
+      ],
+      "synergyNotes": [],
+      "damage": {
+        "singleMultiplier": 580,
+        "hitCount": 5,
+        "baseTotal": 2900,
+        "conditionMaxTotal": 4350,
+        "conditionMaxNote": "専用武器なし。最初の物理攻撃前に自身の「傲慢の悪魔」が10スタックの場合、物理870%×5回=4350%。自身の腕力1500%の直接攻撃3回は攻撃力倍率の合計に含めない。",
+        "powerType": "連続物理攻撃 / 条件付き直接攻撃",
+        "damageMemo": "合計は物理攻撃部分のみ。与ダメージ増加バフや腕力基準の直接攻撃を合算しない。",
+        "exclusiveLv1Total": 2900,
+        "exclusiveLv2Total": 2900,
+        "exclusiveLv3Total": 2900
+      }
+    },
+    {
+      "id": "elfriede_superbia-s3",
+      "characterId": "elfriede_superbia",
+      "number": 3,
+      "name": "悪魔を以て悪魔を制す",
+      "skillType": "パッシブ",
+      "category": "バフ",
+      "majorCategory": "味方強化",
+      "subCategory": "与ダメージ増加 / スタック / 自身の被ダメージ減少",
+      "target": "自身 / 自身以外の攻撃力が高い味方2体",
+      "multiplierText": "与ダメージ1スタック+2% / 被ダメージ-50% / 命中率+40%",
+      "duration": "解除不可",
+      "ct": null,
+      "condition": "毎ターン開始時、自身と自身以外の攻撃力が高い味方2体に「傲慢の悪魔」を1スタック付与。自身のHP割合50%以上なら2スタックになる。最大10スタック・解除不可で、付帯者の与ダメージを1スタックにつき2%増加させる。付与効果は自身の戦闘不能時も発動。バトル開始時、自身の被ダメージ50%減少・命中率40%増加（解除不可）。専用Lv2は1スタックあたり与ダメージ増加5%、専用Lv3は命中率増加50%。",
+      "exclusiveWeapon": "専用Lv2: 「傲慢の悪魔」1スタックあたりの与ダメージ増加量が5%になる。専用Lv3: 命中率の増加量が50%になる",
+      "compareMemo": "付与数は自身のHP割合で変化。戦闘不能後も発動するのは「傲慢の悪魔」の付与効果",
+      "noteUrl": "",
+      "imageUrl": "",
+      "sourceUrl": "",
+      "plainSummary": "毎ターン自身と味方2体へ与ダメージ増加のスタックを付与し、開始時には自身の被ダメージと命中率を変化させる。",
+      "steps": [
+        {
+          "text": "毎ターン開始時、自身と自身以外の攻撃力が高い味方2体へ「傲慢の悪魔」を1スタック付与。自身のHP割合50%以上なら2スタック"
+        },
+        {
+          "text": "「傲慢の悪魔」は最大10スタック・解除不可。1スタックにつき付帯者の与ダメージ2%増加"
+        },
+        {
+          "text": "「傲慢の悪魔」の付与効果は自身が戦闘不能でも発動"
+        },
+        {
+          "text": "バトル開始時、自身の被ダメージ50%減少・命中率40%増加（解除不可）"
+        }
+      ],
+      "flow": [
+        {
+          "when": "バトル開始時",
+          "mode": "simultaneous",
+          "target": "自身",
+          "effects": [
+            {
+              "text": "被ダメージを50%減少",
+              "note": "解除不可"
+            },
+            {
+              "text": "命中率を40%増加",
+              "note": "解除不可",
+              "exclusive": [
+                {
+                  "lv": 3,
+                  "kind": "change",
+                  "text": "命中率の増加が50%"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "when": "ターン開始時",
+          "mode": "simultaneous",
+          "target": "自身と自身以外の攻撃力が高い味方2体",
+          "effects": [
+            {
+              "text": "「傲慢の悪魔」を1スタック付与",
+              "term": "スタック",
+              "note": "最大10スタック・解除不可。この付与効果は自身が戦闘不能でも発動する"
+            },
+            {
+              "text": "「傲慢の悪魔」の付与数が2スタックに変わる",
+              "condition": "自身のHP割合が50%以上の場合"
+            }
+          ]
+        },
+        {
+          "when": "常時",
+          "mode": "passive",
+          "target": "「傲慢の悪魔」の付帯者",
+          "effects": [
+            {
+              "text": "「傲慢の悪魔」1スタックにつき与ダメージを2%増加",
+              "condition": "「傲慢の悪魔」を付帯している間",
+              "exclusive": [
+                {
+                  "lv": 2,
+                  "kind": "change",
+                  "text": "1スタックあたりの与ダメージ増加が5%"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "synergyNotes": [],
+      "exclusiveIntegrated": [
+        2,
+        3
+      ]
+    },
+    {
+      "id": "elfriede_superbia-s4",
+      "characterId": "elfriede_superbia",
+      "number": 4,
+      "name": "元聖槍教会最高指導者",
+      "skillType": "パッシブ",
+      "category": "耐久補助",
+      "majorCategory": "防御",
+      "subCategory": "防御貫通減少 / ダメージ遮断",
+      "target": "攻撃を行った敵 / 自身",
+      "multiplierText": "防御貫通1スタック-5% / ダメージ遮断75〜90%",
+      "duration": "贖罪の天使は付帯者の行動終了時に解除",
+      "ct": null,
+      "condition": "敵が攻撃し、その攻撃で自身が戦闘不能にならなかった場合、攻撃した敵へ「贖罪の天使」を1スタック付与（最大5）。1スタックにつき付帯者の防御貫通5%減少、付帯者の行動終了時に解除。自身が攻撃を受けたとき、ダメージ75%遮断。攻撃前に攻撃者が持つ「贖罪の天使」1スタックにつき遮断量が3%増加し、合計最大90%。",
+      "exclusiveWeapon": "",
+      "compareMemo": "敵へのスタック付与と自身の被攻撃時の遮断は別条件。遮断は攻撃前の敵スタック数を参照",
+      "noteUrl": "",
+      "imageUrl": "",
+      "sourceUrl": "",
+      "plainSummary": "敵の攻撃をきっかけに防御貫通を下げるスタックを付与し、自身の被攻撃時には攻撃前の敵スタック数に応じてダメージを遮断する。",
+      "steps": [
+        {
+          "text": "敵が攻撃し、その攻撃で自身が戦闘不能にならなかった場合、攻撃を行った敵へ「贖罪の天使」を1スタック付与（最大5）"
+        },
+        {
+          "text": "「贖罪の天使」は1スタックにつき付帯者の防御貫通5%減少。付帯者の行動終了時に解除"
+        },
+        {
+          "text": "自身が攻撃を受けたときダメージ75%遮断。攻撃前に攻撃者が持つ「贖罪の天使」1スタックにつき遮断量+3%、合計最大90%"
+        }
+      ],
+      "flow": [
+        {
+          "when": "敵が攻撃したとき",
+          "mode": "conditional",
+          "target": "攻撃を行った敵",
+          "effects": [
+            {
+              "text": "「贖罪の天使」を1スタック付与",
+              "condition": "その攻撃で自身が戦闘不能にならなかった場合",
+              "term": "スタック",
+              "note": "最大5スタック。1スタックにつき付帯者の防御貫通を5%減少"
+            }
+          ]
+        },
+        {
+          "when": "行動終了時",
+          "mode": "release",
+          "target": "「贖罪の天使」の付帯者",
+          "effects": [
+            {
+              "text": "「贖罪の天使」が解除される",
+              "note": "付帯者自身の行動終了時"
+            }
+          ]
+        },
+        {
+          "when": "自身が攻撃を受けたとき",
+          "mode": "conditional",
+          "target": "自身",
+          "effects": [
+            {
+              "text": "ダメージを75%遮断"
+            },
+            {
+              "text": "攻撃前の「贖罪の天使」1スタックにつき遮断量が3%増加",
+              "condition": "攻撃してきた敵が「贖罪の天使」を付帯している場合",
+              "note": "基本の75%と合わせて最大90%。S3の被ダメージ減少とは別効果"
+            }
+          ]
+        }
+      ],
+      "synergyNotes": []
     }
   ],
   "tags": [
