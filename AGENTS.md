@@ -94,6 +94,20 @@
   JSが無効なら生成時の本文を表示する。06:00・15:00の日次ビルドは継続する。
 - 時刻対応の追加検証は `node scripts/verify-gacha-time.cjs`。既存の `verify-gacha-status.cjs` は変更しない。
 
+- アルカナ検索用の `arcanaGachaSummary()` は `js/gacha-status.js` に置く。既存関数・既存表示には影響しない。
+- 状態の判定順は既存 `gachaStatus()` と同じ。終了日不明でも状態は「復刻待ち」のまま、日数は出さず `endUnknown` で「終了日未確認」を示す（2026-10-28 夢爽確定）。
+- 検証は `node scripts/verify-arcana-gacha.cjs`。判定を変えたらここも直す。
+
+- `data/arcana-index.json`・`pages/arcana/index.html` は `scripts/build-character-pages.mjs` が生成する（手で直さない）。
+- アルカナの正本は `data/arcana.json`。構成キャラ情報は既存のキャラ正本・補完名簿から生成する。
+- 新キャラを正本に追加するときは、同じPRで `data/arcana-character-meta.json` にも追加する（追加しないとビルド前の検証で止まる）。
+- アルカナ検索（`pages/arcana/index.html`）は公開ページ。導線はTOPのメインナビ・キャラ一覧の上部ナビ・sitemap・お知らせ。
+- 下部広告は1枠（`EXPECTED_AD_PAGES` に登録済み）。検索結果の途中に広告を入れない。
+- 生成HTMLの開催状況は日付単位で書き、分単位の時刻はブラウザ側のJSが出す。
+- 生成物の検証は `node scripts/verify-arcana-pages.cjs`。
+- P10 は環境変数 `MIRESTO_ARCANA_BASELINE` で基準フォルダを指定したときだけ実行する（未指定は SKIP、指定先が無い場合は失敗）。
+- `js/arcana-search.js` の判定は純粋関数で、`scripts/verify-arcana-search.cjs` で検証する。正規化は `js/search-normalize.js`（`party-builder.js` と同じ仕様。統合は別便）。
+
 ## 日次の自動ビルド（GitHub Actions）
 
 - `.github/workflows/daily-build.yml` が**毎日 JST 06:00 と15:00**（UTC 21:00と06:00）に
@@ -606,6 +620,8 @@
 - 翻訳転記時は対象キャラの全スキルをsourceUrlの原文記載と照合する。夢爽レビューは表現の分かりやすさのみを対象とし、事実照合はミコトの工程とする。
 
 ## 禁止事項
+
+- キャラ詳細の所属アルカナ欄は `js/render-arcana.js` の `renderAffiliation` が描画し、逆引きは検索ページと共通の `scripts/build-arcana-pages.mjs` の索引から作る。`<!-- arcana:affiliation -->`／`<!-- arcana:jump -->` は生成専用の目印。`js/character-page.js` の予備描画には入れていない。
 
 - 指示書にない機能の追加・変更（IDEAS.md記載の未依頼機能を含む）
 - 無関係ファイルの整形・リネーム・削除

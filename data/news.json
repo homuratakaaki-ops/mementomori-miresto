@@ -428,6 +428,13 @@
       "characterId": "elfriede_superbia",
       "url": "pages/characters/elfriede_superbia.html",
       "text": "[スペルビアの眷属]エルフリンデのスキル詳細を追加。「傲慢の悪魔」のスタック条件と、専用武器による変更を整理"
+    },
+    {
+      "id": "2026-10-29-arcana-search",
+      "date": "2026-10-29",
+      "kind": "サイト更新",
+      "text": "アルカナ検索を公開。欲しい効果・対象・構成キャラ・ガチャ開催状況から全101件を絞り込み、各キャラページにも所属アルカナを表示",
+      "url": "pages/arcana/index.html"
     }
   ]
 }

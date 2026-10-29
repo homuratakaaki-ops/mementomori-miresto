@@ -48,6 +48,7 @@ const EXPECTED_AD_PAGES = [
   "gacha-simulator.html",
   "party-builder.html",
   "speed-calc.html",
+  "pages/arcana/index.html",
   "pages/characters/index.html",
   "pages/guide/index.html",
   "pages/status/index.html",

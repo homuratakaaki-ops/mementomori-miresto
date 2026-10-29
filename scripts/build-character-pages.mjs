@@ -28,6 +28,7 @@ import { fileURLToPath } from "node:url";
 import { buildStatusGuides } from "./build-status-guides.mjs";
 import { buildAds } from "./build-ads.mjs";
 import { buildAnalytics } from "./build-analytics.mjs";
+import { buildArcanaPages, searchIndex, affiliationsByCharacter } from "./build-arcana-pages.mjs";
 
 const require = createRequire(import.meta.url);
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
@@ -35,6 +36,7 @@ const DATA_DIR = join(ROOT, "data");
 const PAGES_DIR = join(ROOT, "pages", "characters");
 
 const renderer = require(join(ROOT, "js", "render-character.js"));
+const arcanaRenderer = require(join(ROOT, "js", "render-arcana.js"));
 const indexRenderer = require(join(ROOT, "js", "render-character-index.js"));
 const gachaStatus = require(join(ROOT, "js", "gacha-status.js"));
 const newsRenderer = require(join(ROOT, "js", "render-news.js"));
@@ -137,7 +139,7 @@ function withMidAdSlot(skillListHtml, ads) {
  * JSが埋めていた箇所（roleMemo / characterMeta / skillList / notePanel）を
  * 生成時に埋めてある。
  */
-function characterPageHtml({ character, metaHtml, skillListHtml, description, ads, analytics }) {
+function characterPageHtml({ character, metaHtml, skillListHtml, description, ads, analytics, affiliation }) {
   const notePanel = character.noteUrl
     ? `    <section class="note-panel" id="notePanel">
       <strong>評価・運用メモはnoteへ</strong><br>
@@ -186,12 +188,13 @@ ${adRenderer.renderAdHead(ads, "  ")}
       <h1 id="characterName">${renderer.escapeHtml(character.name)}</h1>
       <p class="role" id="roleMemo">${renderer.escapeHtml(renderer.roleMemoText(character))}</p>
       <div class="meta-row" id="characterMeta">${metaHtml}</div>
-    </div>
+${affiliation.count ? `<!-- arcana:jump --><p class="arcana-jump"><a href="#arcana">所属アルカナ（${affiliation.count}件）へ</a></p><!-- /arcana:jump -->\n` : ""}    </div>
   </header>
 
   <main>
 ${notePanel}
     <section class="skill-list" id="skillList">${skillListHtml}</section>
+${affiliation.html}
 ${adRenderer.renderAdSlot(ads, "    ")}
   </main>
 
@@ -764,7 +767,7 @@ function validateAll({ baseData, terms }) {
   return flowSkills;
 }
 
-function buildCharacterPages({ baseData, newsData, terms, ads, analytics }) {
+function buildCharacterPages({ baseData, newsData, terms, ads, analytics, arcanaIndex, affiliations }) {
   const written = [];
   const unchanged = [];
   const slugs = [];
@@ -780,6 +783,10 @@ function buildCharacterPages({ baseData, newsData, terms, ads, analytics }) {
       metaHtml: renderer.renderMetaHtml(character, newsData, NOW),
       skillListHtml: withMidAdSlot(renderer.renderSkillList(skills, terms), ads),
       description: renderer.pageDescription(character, skills),
+      affiliation: {
+        count: (affiliations.get(character.id) || []).length,
+        html: arcanaRenderer.renderAffiliation(character, affiliations.get(character.id) || [], arcanaIndex.characters)
+      },
       ads,
       analytics
     });
@@ -895,15 +902,41 @@ function main() {
   const analytics = siteConfig.analytics || {};
 
   const flowSkills = validateAll({ baseData, terms });
+  // アルカナは検証してから一覧ページと検索用データを生成する。
+  let arcana, meta;
+  try {
+    const arcanaText = readFileSync(join(DATA_DIR, "arcana.json"), "utf8");
+    const metaText = readFileSync(join(DATA_DIR, "arcana-character-meta.json"), "utf8");
+    arcana = JSON.parse(arcanaText);
+    meta = JSON.parse(metaText);
+    const { runArcanaChecks } = require("./verify-arcana.cjs");
+    const results = runArcanaChecks({
+      arcana, meta,
+      canonical: baseData, arcanaText, metaText, expectFull: false
+    });
+    for (const check of results) {
+      for (const warning of check.warnings || []) console.warn(`${check.code} WARN: ${warning}`);
+    }
+    const errors = results.flatMap(check => check.errors.map(error => `${check.code}: ${error}`));
+    if (errors.length) throw new Error(errors.join("\n検証NG: "));
+    const counts = results.find(check => check.code === "D01").metrics;
+    console.log(`アルカナ: ${counts.arcana}件 / 構成枠 ${counts.slots} / 未特定 ${counts.unresolved}（検証OK）`);
+  } catch (error) {
+    console.error(`検証NG: ${error.message}`);
+    throw error;
+  }
   for (const character of baseData.characters || []) {
     for (const warning of gachaStatus.announcementWarnings(character, NOW)) console.warn(warning);
   }
-  const pages = buildCharacterPages({ baseData, newsData, terms, ads, analytics });
+  const arcanaIndex = searchIndex(baseData, arcana, meta);
+  const affiliations = affiliationsByCharacter(arcanaIndex);
+  const pages = buildCharacterPages({ baseData, newsData, terms, ads, analytics, arcanaIndex, affiliations });
   // 状態異常ガイドはキャラページの後。直リンク先の id="skill-N" を生成済みHTMLで確かめる。
   const status = buildStatusGuides({ baseData, terms, ads, analytics, writeIfChanged });
   const index = buildIndexPage({ baseData });
   const charIndex = buildCharacterIndex({ baseData });
   const topPage = buildTopPage({ newsData });
+  buildArcanaPages({ index: arcanaIndex, now: NOW, analytics, writeIfChanged });
   // 広告枠は全ページを書き終えた最後に差し込む（手書きページの目印もここで置き換える）。
   const ads2 = buildAds({ writeIfChanged });
   // 計測タグ（GA4）は広告の後。<!-- ad:head --> の手前に入れる。
