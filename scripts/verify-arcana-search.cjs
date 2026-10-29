@@ -159,6 +159,7 @@ check('U01 URL往復一致・入力不変', () => {
   }
 });
 check('U02 未知の値を破棄して警告', () => {
+  assert.deepEqual(api.parseQuery('?xattr=dark'), { state: api.defaultState(), warning: true, scopeExplicit: false });
   const parsed = api.parseQuery('?effect=foo,attack&target=no&count=9&status=no&stage=no&basis=no&scope=no&sort=no&open=bad&minDays=-1&maxDays=100000&now=2000');
   assert.equal(parsed.warning, true);
   assert.deepEqual(parsed.state, state({ effect: ['attack'] }));
@@ -277,43 +278,6 @@ check('U12 所属直リンク往復・明示scope保持と後からの条件適�
       assert.deepEqual(api.filterArcana(index, selected, now, deps).map(a => a.id), ids({ character: 'fia_trace', scope: 'named', ...condition }));
     }
   }
-});
-check('X01 冥を含むアルカナを除外・実データ件数', () => {
-  const excluded = index.arcana.filter(a => a.members.some(id => index.characters[id]?.attribute === '冥'));
-  const result = rows({ xattr: ['dark'] });
-  assert.equal(result.length, index.arcana.length - excluded.length);
-  assert.ok(result.every(a => a.members.every(id => index.characters[id]?.attribute !== '冥')));
-  console.log(`  冥を含む${excluded.length}件 / 残り${result.length}件`);
-});
-check('X02 天・冥を含むアルカナを除外・実データ件数', () => {
-  const excluded = index.arcana.filter(a => a.members.some(id => ['天', '冥'].includes(index.characters[id]?.attribute)));
-  const result = rows({ xattr: ['light', 'dark'] });
-  assert.equal(result.length, index.arcana.length - excluded.length);
-  assert.ok(result.every(a => a.members.every(id => !['天', '冥'].includes(index.characters[id]?.attribute))));
-  console.log(`  天・冥を含む${excluded.length}件 / 残り${result.length}件`);
-});
-check('X03 未特定枠だけは除外しない・補完キャラは属性で除外', () => {
-  const fixture = { characters: { 'supp-test': { name: '補完', attribute: '冥', pageSlug: null } }, arcana: [
-    { id: 'unknown', name: '未特定', members: [null, null], stages: [] },
-    { id: 'known', name: '混在', members: [null, 'supp-test'], stages: [] }
-  ] };
-  assert.deepEqual(api.filterArcana(fixture, state({ xattr: ['dark'] }), now, deps).map(a => a.id), ['unknown']);
-  assert.equal(api.filterArcana(fixture, state({ xattr: ['light'] }), now, deps).length, 2);
-});
-check('X04 属性URLの正規化・重複除去・不正値警告', () => {
-  const parsed = api.parseQuery('?xattr=dark,blue,dark&xattr=wrong');
-  assert.equal(parsed.warning, true);
-  assert.deepEqual(parsed.state.xattr, ['blue', 'dark']);
-  assert.equal(api.formatQuery(parsed.state), '?xattr=blue,dark');
-  assert.deepEqual(api.parseQuery(api.formatQuery(parsed.state)).state, parsed.state);
-  assert.equal(api.parseQuery('?xattr=light,dark').warning, false);
-});
-check('X05 属性チップ・初期値で解除・他条件との併用', () => {
-  assert.deepEqual(api.activeFilterChips(state({ xattr: ['dark'] })), [{ key: 'xattr', value: 'dark', label: '冥を除外' }]);
-  assert.deepEqual(api.defaultState().xattr, []);
-  assert.equal(api.formatQuery(api.defaultState()), '');
-  const expected = rows({ effect: ['attack'] }).filter(a => a.members.every(id => index.characters[id]?.attribute !== '冥'));
-  assert.deepEqual(rows({ effect: ['attack'], xattr: ['dark'] }), expected);
 });
 check('X06 選択肢にない効果を無視・警告、一覧はデータから集計', () => {
   const keys = api.availableEffectKeys(index);

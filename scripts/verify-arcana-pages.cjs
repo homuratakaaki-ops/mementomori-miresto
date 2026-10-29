@@ -298,9 +298,6 @@ check("P13", () => {
     badges += actual.length;
   }
   assert.match(html, /href="\.\.\/\.\.\/assets\/attribute-palette\.css\?v=[a-f0-9]{8}"/);
-  assert.deepEqual([...html.matchAll(/name="xattr" value="([^"]+)"([^>]*)>/g)].map(m => {
-    assert.ok(!/\bchecked\b/.test(m[2])); return m[1];
-  }), ['blue', 'red', 'green', 'yellow', 'light', 'dark']);
-  return `属性バッジ${badges}枠が既知の構成キャラと一致 / ${JSON.stringify(counts)} / 除外6属性は未選択`;
+  return `属性バッジ${badges}枠が既知の構成キャラと一致 / ${JSON.stringify(counts)}`;
 });
 process.exitCode = failed ? 1 : 0;

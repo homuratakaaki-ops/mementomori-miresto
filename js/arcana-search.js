@@ -13,12 +13,10 @@
 
   function defaultState() {
     return { an: "", cn: "", character: "", effect: [], target: [], stage: "lr",
-      count: [], status: [], xattr: [], basis: "end", minDays: "", maxDays: "", scope: "any", sort: "catalog", open: "" };
+      count: [], status: [], basis: "end", minDays: "", maxDays: "", scope: "any", sort: "catalog", open: "" };
   }
   // URLの複数値は「すべての効果」等の表示順で正規化する。
-  const ATTRIBUTE_LABELS = { blue: "藍", red: "紅", green: "翠", yellow: "黄", light: "天", dark: "冥" };
   const queryLists = {
-    xattr: Object.keys(ATTRIBUTE_LABELS),
     effect: ["attack", "hp", "defense", "physical_defense", "magical_defense", "strength", "dexterity", "magic", "stamina",
       "critical", "critical_resistance", "critical_damage", "physical_critical_mitigation", "magical_critical_mitigation",
       "accuracy", "evasion", "debuff_accuracy", "debuff_resistance", "hp_drain", "counter", "physical_penetration",
@@ -128,8 +126,8 @@
   }
   function activeFilterChips(state, labels = new Map()) {
     const defaults = defaultState(), chips = [];
-    for (const key of ["effect", "target", "count", "status", "xattr"]) {
-      state[key].forEach(value => chips.push({ key, value, label: key === "xattr" ? `${ATTRIBUTE_LABELS[value]}を除外` : labels.get(`${key}:${value}`) }));
+    for (const key of ["effect", "target", "count", "status"]) {
+      state[key].forEach(value => chips.push({ key, value, label: labels.get(`${key}:${value}`) }));
     }
     for (const key of ["an", "cn", "stage", "basis", "minDays", "maxDays", "scope"]) {
       if (state[key] === defaults[key] || (key === "scope" && !scopeActive(state))) continue;
@@ -157,7 +155,6 @@
       if (state.an.trim() && !contains(item.name, state.an, deps)) return [];
       if (hasName && !item.members.some(id => named.has(id))) return [];
       if (state.count.length && !state.count.map(Number).includes(item.members.length)) return [];
-      if (item.members.some(id => id && state.xattr.some(key => ATTRIBUTE_LABELS[key] === index.characters[id]?.attribute))) return [];
       const matchedStages = effectActive ? item.stages.filter(stage => !stage.pending &&
         (state.stage === "any" || stage.label === "LR") && stage.effects.some(effect => !effect.pending &&
           (!state.effect.length || state.effect.includes(effect.statKey)) &&
@@ -271,7 +268,7 @@
         container.querySelector(selector).replaceChildren(...chips.map(chip =>
           button(`${chip.label} ×`, () => removeCondition(chip.key, chip.value))));
       }
-      const advanced = chips.filter(chip => ["count", "status", "xattr", "basis", "minDays", "maxDays", "scope"].includes(chip.key)).length;
+      const advanced = chips.filter(chip => ["count", "status", "basis", "minDays", "maxDays", "scope"].includes(chip.key)).length;
       container.querySelector("[data-advanced-count]").textContent = `${advanced}件適用中`;
       syncEffectGroups();
     }
@@ -421,5 +418,5 @@
     return load;
   }
 
-  return { init, defaultState, parseQuery, formatQuery, resolveQuery, availableEffectKeys, ATTRIBUTE_LABELS, matchCharacters, validateDays, activeFilterChips, summarizeCharacters, filterArcana, sortArcana };
+  return { init, defaultState, parseQuery, formatQuery, resolveQuery, availableEffectKeys, matchCharacters, validateDays, activeFilterChips, summarizeCharacters, filterArcana, sortArcana };
 }));

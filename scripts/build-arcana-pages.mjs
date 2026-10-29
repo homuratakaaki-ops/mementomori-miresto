@@ -8,7 +8,7 @@ import { versioned } from "./asset-version.mjs";
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const require = createRequire(import.meta.url);
 const { escapeHtml, renderCard } = require("../js/render-arcana.js");
-const { availableEffectKeys, ATTRIBUTE_LABELS } = require("../js/arcana-search.js");
+const { availableEffectKeys } = require("../js/arcana-search.js");
 const { renderAnalyticsHead } = require("../js/render-analytics.js");
 const { arcanaGachaSummary, jstNow } = require("../js/gacha-status.js");
 const SITE = "https://memento.musoudc.com";
@@ -94,7 +94,6 @@ function searchControls(index) {
     <input type="hidden" name="character" value="">
     <div id="character-candidates" data-character-candidates aria-label="キャラ名の候補"></div>
     <details class="arcana-advanced"><summary>人数・開催状況・日数 <span data-advanced-count>0件適用中</span></summary>
-      <fieldset><legend>含めない属性</legend>${Object.entries(ATTRIBUTE_LABELS).map(([value, label]) => `<label class="arcana-choice"><input type="checkbox" name="xattr" value="${value}"><span class="arcana-attribute" data-attribute="${label}">${label}</span></label>`).join("\n")}</fieldset>
       <fieldset><legend>必要人数</legend>${choices("count", [["2", "2人"], ["3", "3人"], ["4", "4人"]])}</fieldset>
       <fieldset><legend>開催状況</legend>${choices("status", [["ongoing", "開催中"], ["upcoming", "開催予定"], ["waiting", "復刻待ち"], ["permanent", "恒常"], ["history_unknown", "履歴未確認"]])}</fieldset>
       <fieldset><legend>日数の基準</legend>${choices("basis", [["end", "前回終了から"], ["start", "最終登場の開始から"]], "radio", "end")}</fieldset>
