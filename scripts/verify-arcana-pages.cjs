@@ -192,20 +192,22 @@ const detailPages = base.characters.map(character => {
     items: index.arcana.filter(item => item.members.includes(character.id)) };
 });
 check("P08", () => {
-  assert.equal(detailPages.length, 120);
+  assert.equal(detailPages.length, base.characters.length);
   let total = 0;
   for (const { character, page, sections, items } of detailPages) {
     assert.equal((page.match(/<!-- arcana:affiliation -->/g) || []).length, 1, character.id);
     assert.equal(sections.length, 1, character.id);
     assert.equal((sections[0][0].match(/class="arcana-affiliation-item"/g) || []).length, items.length, character.id);
     assert.equal((page.match(jumpPattern) || []).length, items.length ? 1 : 0, character.id);
-    assert.ok(page.includes(`所属アルカナ（${items.length}件）へ`), character.id);
+    assert.equal((page.match(/<a\b[^>]*href="#arcana"/g) || []).length, items.length ? 1 : 0, character.id);
+    if (!items.length) assert.ok(sections[0][0].includes("現在の収録資料では所属を確認できていません"), character.id);
+    assert.equal(page.includes(`所属アルカナ（${items.length}件）へ`), items.length > 0, character.id);
     total += items.length;
   }
   assert.equal(total, 214);
   assert.equal(Math.max(...detailPages.map(row => row.items.length)), 5);
   assert.deepEqual(detailPages.find(row => row.character.id === "soltina").items.map(item => item.id), ["A007", "A018", "A031", "A047", "A061"]);
-  return "正本120体に所属欄1つずつ / 合計214件・最大5件 / ソルティーナの5件一致";
+  return `正本${base.characters.length}体に所属欄1つずつ / 合計214件・最大5件 / ソルティーナの5件一致`;
 });
 check("P09", () => {
   const { escapeHtml } = require("../js/render-arcana.js");
@@ -253,7 +255,7 @@ if (!process.env.MIRESTO_ARCANA_BASELINE) {
     if (normalize(page.replace(affiliationPattern, "").replace(jumpPattern, "")) !== normalize(fs.readFileSync(original, "utf8"))) changed.push(file);
   }
   assert.deepEqual(changed, [], "所属欄・ジャンプ・印以外の差分");
-  return "キャラ詳細120件が基準と一致（所属欄・ジャンプ除去、?v=正規化）";
+  return `キャラ詳細${base.characters.length}件が基準と一致（所属欄・ジャンプ除去、?v=正規化）`;
 });
 check("P11", () => {
   const forbidden = /sourceUrl|evidence|verification|endTimeSource|notion|libfile|sha256|\u30a2\u30eb\u30c6\u30de|altema|\u3044\u3061\u3054|ichigo|参考資料|原本未確認|LR表示確認|ゲーム画像/i;

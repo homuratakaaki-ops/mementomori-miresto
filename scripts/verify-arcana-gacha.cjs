@@ -83,8 +83,8 @@ sample("予定を開始順に整列", character(futureB, futureA), "2026-04-01T0
 sample("日付なし履歴も記録件数に含む", character({ kind: "復刻" }), "2026-10-28T12:00",
   { recordedRounds: 1, latestStarted: [], latestEnded: [] });
 
-console.log("=== 3. 全120体・4時点の既存判定との一致 ===");
-check("正本キャラ数", data.characters.length, 120);
+console.log(`=== 3. 全${data.characters.length}体・4時点の既存判定との一致 ===`);
+check("正本キャラ数", new Set(data.characters.map(ch => ch.id)).size, data.characters.length);
 for (const now of ["2026-10-28T12:00", "2026-10-29T14:30", "2026-10-29T16:30", "2026-11-20T16:30"]) {
   const mismatches = data.characters.filter((ch) => {
     const existing = gs.gachaStatus(ch, now).state;

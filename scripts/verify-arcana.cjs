@@ -20,8 +20,8 @@ function verifyV01(entries, canonicalIds) {
   const missing = [...expected].filter(id => !actual.has(id));
   const extra = ids.filter(id => !expected.has(id));
   const errors = [];
-  if (ids.length !== 120 || canonicalIds.length !== 120 || expected.size !== 120) errors.push('canonical/正本は重複なく120件必要');
-  if (missing.length) errors.push(`不足: ${missing.join(', ')}`);
+  if (actual.size !== ids.length || expected.size !== canonicalIds.length) errors.push('canonical/正本のIDは重複不可');
+  if (missing.length) errors.push(`不足: ${missing.join(', ')}（新キャラを追加したら data/arcana-character-meta.json にも追加する）`);
   if (extra.length) errors.push(`余剰: ${extra.join(', ')}`);
   return result('V01', `canonical=${ids.length}, 正本=${canonicalIds.length}, 不足=${missing.length}, 余剰=${extra.length}`, errors);
 }

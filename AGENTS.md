@@ -100,6 +100,7 @@
 
 - `data/arcana-index.json`・`pages/arcana/index.html` は `scripts/build-character-pages.mjs` が生成する（手で直さない）。
 - アルカナの正本は `data/arcana.json`。構成キャラ情報は既存のキャラ正本・補完名簿から生成する。
+- 新キャラを正本に追加するときは、同じPRで `data/arcana-character-meta.json` にも追加する（追加しないとビルド前の検証で止まる）。
 - アルカナ検索（`pages/arcana/index.html`）は公開ページ。導線はTOPのメインナビ・キャラ一覧の上部ナビ・sitemap・お知らせ。
 - 下部広告は1枠（`EXPECTED_AD_PAGES` に登録済み）。検索結果の途中に広告を入れない。
 - 生成HTMLの開催状況は日付単位で書き、分単位の時刻はブラウザ側のJSが出す。
