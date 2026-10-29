@@ -159,6 +159,7 @@ check('U01 URL往復一致・入力不変', () => {
   }
 });
 check('U02 未知の値を破棄して警告', () => {
+  assert.deepEqual(api.parseQuery('?xattr=dark'), { state: api.defaultState(), warning: true, scopeExplicit: false });
   const parsed = api.parseQuery('?effect=foo,attack&target=no&count=9&status=no&stage=no&basis=no&scope=no&sort=no&open=bad&minDays=-1&maxDays=100000&now=2000');
   assert.equal(parsed.warning, true);
   assert.deepEqual(parsed.state, state({ effect: ['attack'] }));
@@ -206,8 +207,9 @@ check('U07 scope明示は名前入力の初期値より優先', () => {
 check('U08 全選択肢の往復・日数の整数化', () => {
   const source = require('node:fs').readFileSync(require('node:path').join(__dirname, 'build-arcana-pages.mjs'), 'utf8');
   const groups = source.slice(source.indexOf('const EFFECT_GROUPS'), source.indexOf('function choices'));
-  const keys = [...groups.matchAll(/\["([a-z_]+)",/g)].map(m => m[1]);
-  assert.equal(keys.length, 25);
+  const used = new Set(index.arcana.flatMap(a => a.stages.flatMap(s => s.effects.map(e => e.statKey))));
+  const keys = [...groups.matchAll(/\["([a-z_]+)",/g)].map(m => m[1]).filter(key => used.has(key));
+  assert.equal(keys.length, 24);
   const parsed = api.parseQuery(`?effect=${keys.join(',')}&minDays=00012`);
   assert.equal(parsed.warning, false);
   assert.deepEqual(parsed.state.effect, keys);
@@ -276,6 +278,19 @@ check('U12 所属直リンク往復・明示scope保持と後からの条件適�
       assert.deepEqual(api.filterArcana(index, selected, now, deps).map(a => a.id), ids({ character: 'fia_trace', scope: 'named', ...condition }));
     }
   }
+});
+check('X06 選択肢にない効果を無視・警告、一覧はデータから集計', () => {
+  const keys = api.availableEffectKeys(index);
+  const used = [...new Set(index.arcana.flatMap(a => a.stages.flatMap(s => s.effects.map(e => e.statKey))))].sort();
+  assert.deepEqual([...keys].sort(), used);
+  const parsed = api.resolveQuery(api.parseQuery('?effect=physical_penetration,attack'), index);
+  assert.equal(parsed.warning, true);
+  assert.deepEqual(parsed.state.effect, ['attack']);
+  assert.deepEqual(api.filterArcana(index, parsed.state, now, deps), rows({ effect: ['attack'] }));
+  assert.equal(api.parseQuery('?effect=physical_penetration', keys).warning, true);
+  const fixture = { characters: {}, arcana: [{ stages: [{ effects: [{ statKey: 'hp' }] }] }] };
+  assert.deepEqual(api.availableEffectKeys(fixture), ['hp']);
+  assert.deepEqual(api.resolveQuery(api.parseQuery('?effect=attack,hp'), fixture).state.effect, ['hp']);
 });
 console.log(`=== 結果: ${ok}件OK / ${ng}件NG ===`);
 process.exitCode = ng ? 1 : 0;

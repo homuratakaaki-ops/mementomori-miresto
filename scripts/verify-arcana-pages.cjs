@@ -97,7 +97,8 @@ check("P04", () => {
   assert.equal(count(topContents, "./pages/arcana/index.html"), 1, "index.html できること");
   assert.equal(count(top, "./pages/arcana/index.html"), 2, "index.html 合計");
   assert.equal(count(read("pages/characters/index.html"), "../arcana/index.html"), 1, "pages/characters/index.html");
-  assert.equal(JSON.parse(read("data/news.json")).items.filter(item => item.url === "pages/arcana/index.html").length, 1);
+  // 公開のお知らせ（2026-10-29-arcana-search）がちょうど1つ。改修のお知らせなど同じURLの項目は他にあってよい。
+  assert.equal(JSON.parse(read("data/news.json")).items.filter(item => item.id === "2026-10-29-arcana-search" && item.url === "pages/arcana/index.html").length, 1);
   return "公開状態：noindexなし・canonicalあり / sitemap・キャラ一覧・news 各1件 / TOPはメインナビ・できること各1件";
 });
 check("P05", () => {
@@ -273,5 +274,31 @@ check("P11", () => {
     assert.equal(/arcana-status|開催中|開催予定|復刻待ち|出典：/.test(section), false, character.id);
   }
   return "所属欄にP03禁止語・開催状況・出典ラベルなし / 末尾は段落・sectionで閉じる";
+});
+check("P12", () => {
+  const expected = [...new Set(source.arcana.flatMap(a => a.stages.flatMap(s => s.effects.map(e => e.statKey))))].sort();
+  const actual = [...html.matchAll(/name="effect" value="([^"]+)"/g)].map(m => m[1]);
+  assert.deepEqual(actual.slice().sort(), expected);
+  assert.equal(actual.length, 24);
+  assert.equal(/arcana-quick-effects|すべての効果/.test(html), false);
+  const groups = [...html.matchAll(/<details class="arcana-effect-group"([^>]*)><summary>([^<]+)<span data-effect-count><\/span><\/summary>([\s\S]*?)<\/details>/g)];
+  assert.deepEqual(groups.map(m => m[2]), ['ステータス', '潜在能力', 'クリティカル', '命中・回避', 'HPドレイン・カウンタ', '貫通', '上限']);
+  groups.forEach(m => { assert.ok(!/\bopen\b/.test(m[1])); assert.match(m[3], /name="effect"/); });
+  assert.match(html, /name="effectGroup" value="physical_magical_penetration,penetration"/);
+  return '効果24種類が正本と完全一致 / 7グループ初期閉 / 貫通2種類';
+});
+check("P13", () => {
+  let badges = 0;
+  const counts = {};
+  for (const card of cards) {
+    const item = index.arcana.find(a => `arcana-${a.id}` === card[1]);
+    const actual = [...card[2].matchAll(/<small class="arcana-attribute" data-attribute="([^"]+)">([^<]+)<\/small>/g)];
+    const expected = item.members.map(id => index.characters[id]).filter(Boolean).map(c => c.attribute);
+    assert.deepEqual(actual.map(m => m[1]), expected);
+    actual.forEach(m => { assert.equal(m[1], m[2]); counts[m[1]] = (counts[m[1]] || 0) + 1; });
+    badges += actual.length;
+  }
+  assert.match(html, /href="\.\.\/\.\.\/assets\/attribute-palette\.css\?v=[a-f0-9]{8}"/);
+  return `属性バッジ${badges}枠が既知の構成キャラと一致 / ${JSON.stringify(counts)}`;
 });
 process.exitCode = failed ? 1 : 0;

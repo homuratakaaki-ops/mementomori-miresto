@@ -8,6 +8,7 @@ import { versioned } from "./asset-version.mjs";
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const require = createRequire(import.meta.url);
 const { escapeHtml, renderCard } = require("../js/render-arcana.js");
+const { availableEffectKeys } = require("../js/arcana-search.js");
 const { renderAnalyticsHead } = require("../js/render-analytics.js");
 const { arcanaGachaSummary, jstNow } = require("../js/gacha-status.js");
 const SITE = "https://memento.musoudc.com";
@@ -64,11 +65,11 @@ export function affiliationsByCharacter(index) {
 }
 
 const EFFECT_GROUPS = [
-  ["基礎", [["attack", "攻撃力"], ["hp", "HP"], ["defense", "防御力"], ["physical_defense", "物理防御力"], ["magical_defense", "魔法防御力"]]],
-  ["能力", [["strength", "腕力"], ["dexterity", "技力"], ["magic", "魔力"], ["stamina", "耐久力"]]],
+  ["ステータス", [["attack", "攻撃力"], ["hp", "HP"], ["defense", "防御力"], ["physical_defense", "物理防御力"], ["magical_defense", "魔法防御力"]]],
+  ["潜在能力", [["strength", "腕力"], ["dexterity", "技力"], ["magic", "魔力"], ["stamina", "耐久力"]]],
   ["クリティカル", [["critical", "クリティカル"], ["critical_resistance", "クリティカル耐性"], ["critical_damage", "クリダメ強化"], ["physical_critical_mitigation", "物理クリダメ緩和"], ["magical_critical_mitigation", "魔法クリダメ緩和"]]],
   ["命中・回避", [["accuracy", "命中"], ["evasion", "回避"], ["debuff_accuracy", "弱体効果命中"], ["debuff_resistance", "弱体効果耐性"]]],
-  ["その他戦闘", [["hp_drain", "HPドレイン"], ["counter", "カウンタ"]]],
+  ["HPドレイン・カウンタ", [["hp_drain", "HPドレイン"], ["counter", "カウンタ"]]],
   ["貫通", [["physical_penetration", "物理防御貫通"], ["physical_magical_penetration", "物魔防御貫通"], ["penetration", "防御貫通"]]],
   ["上限", [["party_level_cap", "パーティLv上限"], ["member_awakening_cap", "アルカナキャラ進化上限"]]]
 ];
@@ -77,14 +78,14 @@ function choices(name, entries, type = "checkbox", initial = "") {
   return entries.map(([value, label]) => `<label class="arcana-choice"><input type="${type}" name="${name}" value="${value}"${value === initial ? " checked" : ""}><span>${escapeHtml(label)}</span></label>`).join("\n");
 }
 
-function searchControls() {
+function searchControls(index) {
+  const available = new Set(availableEffectKeys(index));
+  const groups = EFFECT_GROUPS.map(([group, entries]) => [group, entries.filter(([key]) => available.has(key))])
+    .filter(([, entries]) => entries.length);
   return `<aside class="arcana-search-panel" data-search-controls hidden aria-labelledby="search-heading">
     <h2 id="search-heading">検索条件</h2>
     <fieldset><legend>欲しい効果</legend>
-      <div class="arcana-quick-effects">${choices("effect", [["attack", "攻撃力"], ["hp", "HP"], ["evasion", "回避"], ["critical", "クリティカル"]])}</div>
-      <details><summary>すべての効果</summary>
-        ${EFFECT_GROUPS.map(([group, entries]) => `<fieldset><legend>${group}</legend>${group === "貫通" ? '<label class="arcana-choice"><input type="checkbox" name="effectGroup" value="physical_penetration,physical_magical_penetration,penetration" data-effect-group="penetration"><span>貫通をまとめて選択</span></label>' : ""}${choices("effect", entries)}</fieldset>`).join("\n")}
-      </details>
+      ${groups.map(([group, entries]) => `<details class="arcana-effect-group" data-effect-section><summary>${group}<span data-effect-count></span></summary><div>${group === "貫通" ? `<label class="arcana-choice"><input type="checkbox" name="effectGroup" value="${entries.map(([key]) => key).join(",")}" data-effect-group="penetration"><span>貫通をまとめて選択</span></label>` : ""}${choices("effect", entries)}</div></details>`).join("\n")}
     </fieldset>
     <fieldset><legend>効果の対象</legend>${choices("target", [["all", "全キャラ"], ["members", "構成キャラ"], ["party", "パーティ"], ["other", "その他"], ["unknown", "対象未確認"]])}</fieldset>
     <fieldset><legend>検索する段階</legend>${choices("stage", [["lr", "LR"], ["any", "すべての段階"]], "radio", "lr")}</fieldset>
@@ -134,6 +135,7 @@ function pageHtml(index, now, analytics) {
   <link rel="apple-touch-icon" href="../../${versioned("assets/miresto/miresto-icon-180.png")}">
   <link rel="stylesheet" href="../../${versioned("assets/site-footer.css")}">
   <link rel="stylesheet" href="../../${versioned("assets/arcana.css")}">
+  <link rel="stylesheet" href="../../${versioned("assets/attribute-palette.css")}">
 ${renderAnalyticsHead(analytics, "  ")}
 </head>
 <body>
@@ -146,7 +148,7 @@ ${renderAnalyticsHead(analytics, "  ")}
   </header>
   <main class="arcana-search-layout" data-arcana-search data-index-src="../../${versioned("data/arcana-index.json")}">
     <p class="arcana-search-error arcana-note" data-search-error role="status" hidden></p>
-    ${searchControls()}
+    ${searchControls(index)}
     <section class="arcana-results" id="arcana-results" aria-label="検索結果" tabindex="-1">
     <p data-result-count aria-live="polite">検索結果 ${index.arcana.length}件／全${index.arcana.length}件</p>
     <div data-hidden-open hidden><p>このアルカナは今の条件では表示されていません</p><button type="button" data-reveal-open>条件を解除して表示</button></div>

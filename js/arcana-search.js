@@ -26,7 +26,11 @@
   };
   const queryEnums = { stage: ["lr", "any"], basis: ["end", "start"], scope: ["any", "all", "named"],
     sort: ["catalog", "name", "count", "days_desc"] };
-  function parseQuery(search) {
+  function availableEffectKeys(index) {
+    const used = new Set(index.arcana.flatMap(item => item.stages.flatMap(stage => stage.effects.map(effect => effect.statKey))));
+    return queryLists.effect.filter(key => used.has(key));
+  }
+  function parseQuery(search, effectKeys = queryLists.effect) {
     const params = new URLSearchParams(search), state = defaultState();
     let warning = false;
     for (const key of new Set(params.keys())) {
@@ -34,8 +38,9 @@
       const values = params.getAll(key), value = values[0];
       if (queryLists[key]) {
         const requested = values.flatMap(v => v.split(","));
-        warning ||= requested.some(v => !queryLists[key].includes(v));
-        state[key] = queryLists[key].filter(v => requested.includes(v));
+        const allowed = key === "effect" ? effectKeys : queryLists[key];
+        warning ||= requested.some(v => !allowed.includes(v));
+        state[key] = allowed.filter(v => requested.includes(v));
       } else {
         warning ||= values.length > 1;
         if (queryEnums[key]) {
@@ -75,6 +80,9 @@
   function resolveQuery(parsed, index) {
     const state = { ...parsed.state };
     let characterMissing = false, warning = parsed.warning;
+    const effectKeys = availableEffectKeys(index);
+    warning ||= state.effect.some(key => !effectKeys.includes(key));
+    state.effect = state.effect.filter(key => effectKeys.includes(key));
     if (state.character) {
       if (Object.hasOwn(index.characters, state.character)) state.cn = index.characters[state.character].name;
       else {
@@ -188,7 +196,7 @@
     const cards = new Map(index.arcana.map(item => [item.id, document.getElementById(`arcana-${item.id}`)]));
     const controls = [...panel.querySelectorAll("input, select")];
     const defaults = defaultState();
-    let parsed = resolveQuery(parseQuery(view.location.search), index);
+    let parsed = resolveQuery(parseQuery(view.location.search, availableEffectKeys(index)), index);
     let state = parsed.state, timer, composing = false;
     let scopeExplicit = parsed.scopeExplicit;
     const detailsState = new WeakMap();
@@ -240,6 +248,13 @@
         else if (state[input.name] !== "invalid" && input.value !== String(state[input.name])) input.value = state[input.name];
       });
     }
+    function syncEffectGroups(restore = false) {
+      panel.querySelectorAll("[data-effect-section]").forEach(group => {
+        const count = [...group.querySelectorAll('input[name="effect"]')].filter(input => state.effect.includes(input.value)).length;
+        group.querySelector("[data-effect-count]").textContent = count ? `（${count}件選択中）` : "";
+        if (restore) group.open = count > 0;
+      });
+    }
     function removeCondition(key, value) {
       if (Array.isArray(state[key])) state[key] = state[key].filter(item => item !== value);
       else state[key] = defaults[key];
@@ -255,6 +270,7 @@
       }
       const advanced = chips.filter(chip => ["count", "status", "basis", "minDays", "maxDays", "scope"].includes(chip.key)).length;
       container.querySelector("[data-advanced-count]").textContent = `${advanced}件適用中`;
+      syncEffectGroups();
     }
     function update(saveUrl = true) {
       // 時計更新は入力確定待ちのURL保存を取り消さない。
@@ -368,11 +384,12 @@
       clearTimeout(timer); composing = false;
       parsed = resolveQuery(parseQuery(view.location.search), index);
       state = parsed.state; scopeExplicit = parsed.scopeExplicit;
-      syncControls(); refreshClock(); restoreDetails(false);
+      syncControls(); syncEffectGroups(true); refreshClock(); restoreDetails(false);
     });
     view.setInterval(refreshClock, 60000);
     document.addEventListener("visibilitychange", () => { if (!document.hidden) refreshClock(); });
     syncControls();
+    syncEffectGroups(true);
     refreshClock();
     restoreDetails(false);
     panel.hidden = false;
@@ -401,5 +418,5 @@
     return load;
   }
 
-  return { init, defaultState, parseQuery, formatQuery, resolveQuery, matchCharacters, validateDays, activeFilterChips, summarizeCharacters, filterArcana, sortArcana };
+  return { init, defaultState, parseQuery, formatQuery, resolveQuery, availableEffectKeys, matchCharacters, validateDays, activeFilterChips, summarizeCharacters, filterArcana, sortArcana };
 }));
