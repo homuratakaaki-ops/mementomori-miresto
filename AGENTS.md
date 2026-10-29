@@ -100,7 +100,9 @@
 
 - `data/arcana-index.json`・`pages/arcana/index.html` は `scripts/build-character-pages.mjs` が生成する（手で直さない）。
 - アルカナの正本は `data/arcana.json`。構成キャラ情報は既存のキャラ正本・補完名簿から生成する。
-- 公開前は noindex・未掲載とし、公開導線やサイトマップへ追加しない。
+- アルカナ検索（`pages/arcana/index.html`）は公開ページ。導線はTOPのメインナビ・キャラ一覧の上部ナビ・sitemap・お知らせ。
+- 下部広告は1枠（`EXPECTED_AD_PAGES` に登録済み）。検索結果の途中に広告を入れない。
+- 生成HTMLの開催状況は日付単位で書き、分単位の時刻はブラウザ側のJSが出す。
 - 生成物の検証は `node scripts/verify-arcana-pages.cjs`。
 - P10 は環境変数 `MIRESTO_ARCANA_BASELINE` で基準フォルダを指定したときだけ実行する（未指定は SKIP、指定先が無い場合は失敗）。
 - `js/arcana-search.js` の判定は純粋関数で、`scripts/verify-arcana-search.cjs` で検証する。正規化は `js/search-normalize.js`（`party-builder.js` と同じ仕様。統合は別便）。
