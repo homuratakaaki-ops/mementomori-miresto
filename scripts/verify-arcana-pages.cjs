@@ -78,6 +78,7 @@ check("P03", () => {
   return "禁止語・外部URL混入なし / 指定JS4本のみ（versioned付き）・下部広告目印1つ・本文中広告目印なし / detailsは閉じた状態";
 });
 check("P04", () => {
+  assert.match(html, /<p data-status-time>開催状況：\d{4}\/\d{2}\/\d{2} 時点<\/p>/);
   assert.ok(html.includes('<title>アルカナ検索 | ミレストのメメントモリ分析データ室</title>'));
   assert.ok(html.includes('<meta property="og:title" content="アルカナ検索 | ミレストのメメントモリ分析データ室">'));
   assert.equal(/<meta\b[^>]*\bcontent="[^"]*noindex/i.test(html), false);

@@ -141,7 +141,7 @@ ${renderAnalyticsHead(analytics, "  ")}
     <nav class="breadcrumb" aria-label="パンくず"><a href="/">トップ</a><span>/</span><a href="../characters/index.html">キャラ情報</a><span>/</span><span aria-current="page">アルカナ検索</span></nav>
     <h1>アルカナ検索</h1>
     <p>${escapeHtml(DESCRIPTION)}</p>
-    <p data-status-time>開催状況：${escapeHtml(jstNow(now).replace(/-/g, "/").replace("T", " "))} 時点</p>
+    <p data-status-time>開催状況：${escapeHtml(jstNow(now).slice(0, 10).replace(/-/g, "/"))} 時点</p>
     <p class="arcana-note" data-search-fallback>検索データの読み込み前・JavaScript無効時は全件を表示します。</p>
   </header>
   <main class="arcana-search-layout" data-arcana-search data-index-src="../../${versioned("data/arcana-index.json")}">
