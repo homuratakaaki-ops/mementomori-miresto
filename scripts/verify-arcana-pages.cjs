@@ -97,7 +97,8 @@ check("P04", () => {
   assert.equal(count(topContents, "./pages/arcana/index.html"), 1, "index.html できること");
   assert.equal(count(top, "./pages/arcana/index.html"), 2, "index.html 合計");
   assert.equal(count(read("pages/characters/index.html"), "../arcana/index.html"), 1, "pages/characters/index.html");
-  assert.equal(JSON.parse(read("data/news.json")).items.filter(item => item.url === "pages/arcana/index.html").length, 1);
+  // 公開のお知らせ（2026-10-29-arcana-search）がちょうど1つ。改修のお知らせなど同じURLの項目は他にあってよい。
+  assert.equal(JSON.parse(read("data/news.json")).items.filter(item => item.id === "2026-10-29-arcana-search" && item.url === "pages/arcana/index.html").length, 1);
   return "公開状態：noindexなし・canonicalあり / sitemap・キャラ一覧・news 各1件 / TOPはメインナビ・できること各1件";
 });
 check("P05", () => {
