@@ -21,31 +21,65 @@ check('N02 ヴとば行', () => {
       assert.ok(deps.normalizeVariants(a).some(v => deps.normalizeVariants(b).includes(v)));
 });
 check('N03 濁点を区別', () => assert.notDeepEqual(deps.normalizeVariants('ハ'), deps.normalizeVariants('バ')));
-check('E01 回避×全キャラ×LR', () => {
-  for (const id of ['A003', 'A017']) includes({ effect: ['evasion'], target: ['all'] }, id);
+check('E01 LR以降の回避', () => {
+  for (const id of ['A003', 'A017']) includes({ effect: ['evasion'] }, id);
 });
-check('E02a 同じ段階・効果行で種類と対象を判定', () => {
+check('E02a SR・URを除外しLR以降のみ一致', () => {
   const fixture = { characters: {}, arcana: [{ id: 'test', name: '試験', members: [], stages: [
-    { label: 'UR', effects: [{ statKey: 'attack', target: 'members' }] },
-    { label: 'LR', effects: [{ statKey: 'hp', target: 'all' }] }
+    { label: 'SR', effects: [{ statKey: 'attack' }] },
+    { label: 'UR', effects: [{ statKey: 'attack' }] },
+    { label: 'LR', effects: [{ statKey: 'hp' }] },
+    ...['LR+5', 'LR+6', 'LR+7', 'LR+8', 'LR+9', 'LR+10'].map(label =>
+      ({ label, effects: [{ statKey: 'defense' }] }))
   ] }] };
-  for (const stage of ['lr', 'any']) assert.equal(api.filterArcana(fixture,
-    state({ effect: ['attack'], target: ['all'], stage }), now, deps).length, 0);
-  const result = api.filterArcana(fixture, state({ effect: ['attack'], target: ['members'], stage: 'any' }), now, deps);
-  assert.equal(result.length, 1);
-  assert.deepEqual(result[0].matchedStages, ['UR']);
+  const search = effect => api.filterArcana(fixture, state({ effect: [effect] }), now, deps);
+  assert.equal(search('attack').length, 0);
+  assert.deepEqual(search('hp')[0].matchedStages, ['LR']);
+  assert.deepEqual(search('defense')[0].matchedStages, ['LR+5', 'LR+6', 'LR+7', 'LR+8', 'LR+9', 'LR+10']);
+  assert.deepEqual(api.availableEffectKeys(fixture), ['hp', 'defense']);
 });
-check('E02b 実データのLR攻撃力×全キャラ集合', () => {
-  const expected = index.arcana.filter(a => a.stages.some(s => s.label === 'LR' && !s.pending &&
-    s.effects.some(e => !e.pending && e.statKey === 'attack' && e.target === 'all'))).map(a => a.id);
-  console.log(`  実データ集合: ${expected.length}件`);
-  assert.equal(expected.length, 19);
-  assert.deepEqual(ids({ effect: ['attack'], target: ['all'] }), expected);
+const lrLabels = new Set(['LR', 'LR+5', 'LR+6', 'LR+7', 'LR+8', 'LR+9', 'LR+10']);
+check('E02b 全24効果の件数・集合をデータから独立集計', () => {
+  const expected = new Map();
+  for (const item of index.arcana) {
+    for (const stage of item.stages) {
+      if (!lrLabels.has(stage.label) || stage.pending) continue;
+      for (const effect of stage.effects) {
+        if (effect.pending) continue;
+        if (!expected.has(effect.statKey)) expected.set(effect.statKey, new Set());
+        expected.get(effect.statKey).add(item.id);
+      }
+    }
+  }
+  const keys = api.availableEffectKeys(index);
+  assert.equal(expected.size, 24);
+  assert.deepEqual([...keys].sort(), [...expected.keys()].sort());
+  for (const key of keys) {
+    const actual = ids({ effect: [key] });
+    assert.equal(actual.length, expected.get(key).size, key);
+    assert.deepEqual(actual, [...expected.get(key)], key);
+    console.log(`  ${key}: ${actual.length}`);
+  }
 });
-check('E03 物理防御力と確認中段階', () => {
-  includes({ effect: ['physical_defense'], target: ['all'] }, 'A017');
-  const a = rows({ effect: ['physical_defense'], target: ['all'], stage: 'any' }).find(a => a.id === 'A017');
+check('E03 確認中の段階は一致しない', () => {
+  const a = rows({ effect: ['physical_defense'] }).find(a => a.id === 'A017');
   assert.ok(a && !a.matchedStages.includes('LR+6'));
+  const fixture = { characters: {}, arcana: [{ id: 'test', name: '試験', members: [], stages: [
+    { label: 'LR+5', pending: true, effects: [{ statKey: 'attack', pending: false }] }
+  ] }] };
+  assert.equal(api.filterArcana(fixture, state({ effect: ['attack'] }), now, deps).length, 0);
+  assert.deepEqual(api.availableEffectKeys(fixture), []);
+});
+check('E06 LR+5のみの効果も一致・指定件数', () => {
+  assert.equal(rows({ effect: ['member_awakening_cap'] }).length, 96);
+  for (const [effect, id, count] of [['hp', 'A022', 16], ['debuff_accuracy', 'A035', 11], ['magical_defense', 'A035', 9]]) {
+    const result = rows({ effect: [effect] });
+    assert.equal(result.length, count, effect);
+    assert.deepEqual(result.find(a => a.id === id)?.matchedStages, ['LR+5']);
+  }
+});
+check('E07 A008の防御力：確認中の効果は一致しない', () => {
+  excludes({ effect: ['defense'] }, 'A008');
 });
 check('E04 確認中効果', () => {
   excludes({ effect: ['strength'] }, 'A009');
@@ -103,16 +137,17 @@ check('S01 日数順・null末尾・同値は管理番号', () => {
     if (maximum(sorted[i - 1]) === maximum(sorted[i])) assert.ok(sorted[i - 1].id < sorted[i].id);
   }
 });
-check('E05 対象未確認の例外・種類だけ・対象だけ', () => {
-  const fixture = { characters: {}, arcana: [{ id: 'test', name: '試験', members: [], stages: [
-    { label: 'LR', effects: [{ statKey: 'attack', target: 'unknown', pending: false },
-      { statKey: 'hp', target: 'all', pending: true }] }
-  ] }] };
-  const search = patch => api.filterArcana(fixture, state(patch), now, deps);
-  assert.equal(search({ target: ['unknown'] }).length, 1);
-  assert.equal(search({ effect: ['attack'] }).length, 1);
-  assert.equal(search({ target: ['all'] }).length, 0);
-  assert.equal(search({ effect: ['hp'] }).length, 0);
+check('E05 対象では絞らず確認中の効果は一致しない', () => {
+  for (const target of ['all', 'members', 'party', 'other', 'unknown']) {
+    const fixture = { characters: {}, arcana: [{ id: 'test', name: '試験', members: [], stages: [
+      { label: 'LR', effects: [{ statKey: 'attack', target, pending: false },
+        { statKey: 'hp', target, pending: true }] }
+    ] }] };
+    const search = effect => api.filterArcana(fixture, state({ effect: [effect] }), now, deps);
+    assert.equal(search('attack').length, 1);
+    assert.equal(search('hp').length, 0);
+    assert.deepEqual(api.availableEffectKeys(fixture), ['attack']);
+  }
 });
 check('G05 namedは名前一致枠だけ・start基準', () => {
   const fixture = { characters: {
@@ -140,7 +175,7 @@ check('S02 名前順・人数順・入力不変', () => {
 check('U01 URL往復一致・入力不変', () => {
   const cases = [state({}), state({ an: '星 & 月', cn: 'ふぃあー', scope: 'named', open: 'A092' }),
     state({ character: 'fia_trace', cn: 'フィアー', scope: 'any', sort: 'name' }),
-    state({ effect: ['attack', 'evasion'], target: ['all', 'members'], stage: 'any', count: ['2', '4'],
+    state({ effect: ['attack', 'evasion'], count: ['2', '4'],
       status: ['ongoing', 'waiting'], basis: 'start', minDays: '0', maxDays: '99999', scope: 'all', sort: 'days_desc' }),
     state({ cn: 'ふぃあー', scope: 'any', sort: 'count' })];
   for (const original of cases) {
@@ -166,6 +201,16 @@ check('U02 未知の値を破棄して警告', () => {
   assert.equal(api.parseQuery('?sort=name&sort=count').warning, true);
   assert.equal(api.resolveQuery(api.parseQuery('?open=A999'), index).warning, true);
 });
+check('U02a 旧target・stageは未知条件として無視して注意', () => {
+  for (const query of ['?target=all', '?stage=any', '?target=all&stage=any']) {
+    const parsed = api.parseQuery(query);
+    assert.equal(parsed.warning, true);
+    assert.deepEqual(parsed.state, api.defaultState());
+    assert.deepEqual(api.filterArcana(index, parsed.state, now, deps).map(a => a.id), ids({}));
+    assert.equal(api.formatQuery(parsed.state), '');
+    assert.deepEqual(api.activeFilterChips(parsed.state), []);
+  }
+});
 check('U03 URLの日数逆転は日数条件を無効化', () => {
   const parsed = api.parseQuery('?minDays=12&maxDays=11&status=waiting');
   assert.equal(api.validateDays(parsed.state).active, false);
@@ -174,12 +219,12 @@ check('U03 URLの日数逆転は日数条件を無効化', () => {
 });
 check('U04 初期値はURLに書かない', () => {
   assert.equal(api.formatQuery(state({})), '');
-  assert.equal(api.formatQuery(api.parseQuery('?stage=lr&basis=end&scope=any&sort=catalog').state), '');
+  assert.equal(api.formatQuery(api.parseQuery('?basis=end&scope=any&sort=catalog').state), '');
 });
 check('U05 複数値の重複除去・固定順', () => {
-  const parsed = api.parseQuery('?effect=evasion,attack,evasion&target=members,all,all&count=4,2,4&status=waiting,ongoing&effect=hp');
+  const parsed = api.parseQuery('?effect=evasion,attack,evasion&count=4,2,4&status=waiting,ongoing&effect=hp');
   assert.equal(parsed.warning, false);
-  assert.equal(api.formatQuery(parsed.state), '?effect=attack,hp,evasion&target=all,members&count=2,4&status=ongoing,waiting');
+  assert.equal(api.formatQuery(parsed.state), '?effect=attack,hp,evasion&count=2,4&status=ongoing,waiting');
   assert.equal(api.formatQuery(state({ effect: ['evasion', 'attack', 'attack'] })), '?effect=attack,evasion');
 });
 check('U06 character優先・存在しないIDの通知', () => {
@@ -207,7 +252,7 @@ check('U07 scope明示は名前入力の初期値より優先', () => {
 check('U08 全選択肢の往復・日数の整数化', () => {
   const source = require('node:fs').readFileSync(require('node:path').join(__dirname, 'build-arcana-pages.mjs'), 'utf8');
   const groups = source.slice(source.indexOf('const EFFECT_GROUPS'), source.indexOf('function choices'));
-  const used = new Set(index.arcana.flatMap(a => a.stages.flatMap(s => s.effects.map(e => e.statKey))));
+  const used = new Set(index.arcana.flatMap(a => a.stages.filter(s => lrLabels.has(s.label) && !s.pending).flatMap(s => s.effects.filter(e => !e.pending).map(e => e.statKey))));
   const keys = [...groups.matchAll(/\["([a-z_]+)",/g)].map(m => m[1]).filter(key => used.has(key));
   assert.equal(keys.length, 24);
   const parsed = api.parseQuery(`?effect=${keys.join(',')}&minDays=00012`);
@@ -281,14 +326,14 @@ check('U12 所属直リンク往復・明示scope保持と後からの条件適�
 });
 check('X06 選択肢にない効果を無視・警告、一覧はデータから集計', () => {
   const keys = api.availableEffectKeys(index);
-  const used = [...new Set(index.arcana.flatMap(a => a.stages.flatMap(s => s.effects.map(e => e.statKey))))].sort();
+  const used = [...new Set(index.arcana.flatMap(a => a.stages.filter(s => lrLabels.has(s.label) && !s.pending).flatMap(s => s.effects.filter(e => !e.pending).map(e => e.statKey))))].sort();
   assert.deepEqual([...keys].sort(), used);
   const parsed = api.resolveQuery(api.parseQuery('?effect=physical_penetration,attack'), index);
   assert.equal(parsed.warning, true);
   assert.deepEqual(parsed.state.effect, ['attack']);
   assert.deepEqual(api.filterArcana(index, parsed.state, now, deps), rows({ effect: ['attack'] }));
   assert.equal(api.parseQuery('?effect=physical_penetration', keys).warning, true);
-  const fixture = { characters: {}, arcana: [{ stages: [{ effects: [{ statKey: 'hp' }] }] }] };
+  const fixture = { characters: {}, arcana: [{ stages: [{ label: 'LR+5', effects: [{ statKey: 'hp' }] }] }] };
   assert.deepEqual(api.availableEffectKeys(fixture), ['hp']);
   assert.deepEqual(api.resolveQuery(api.parseQuery('?effect=attack,hp'), fixture).state.effect, ['hp']);
 });
