@@ -1,7 +1,7 @@
 {
   "schema": "miresto_countermeasures_v1",
   "id": "countermeasures",
-  "lastCrossCheck": "2026-10-07",
+  "lastCrossCheck": "2026-10-29",
   "crossCheckNote": "この日までに実装済みのキャラを対象に、弱体効果の無効・耐性・ターン短縮・解除を持つスキルを確認しています。",
   "types": [
     {
@@ -598,6 +598,10 @@
     {
       "skillId": "luke-s2",
       "reason": "敵のシールドを全解除する効果で、弱体効果の対策ではない"
+    },
+    {
+      "skillId": "elfriede_superbia-s2",
+      "reason": "敵の「ダメージ無効」「多重バリア」を無視する直接攻撃であり、味方の弱体効果を解除・無効化する対策ではない"
     }
   ]
 }

@@ -420,6 +420,14 @@
       "kind": "サイト更新",
       "text": "HPドレインガイドを公開。攻撃による回復の仕組みと、増加・減少8キャラの条件、専用武器の追加効果、不治との違いを比較表と図解3枚で整理",
       "url": "pages/status/hp-drain.html"
+    },
+    {
+      "id": "2026-10-29-elfriede-superbia",
+      "date": "2026-10-29",
+      "kind": "新キャラ",
+      "characterId": "elfriede_superbia",
+      "url": "pages/characters/elfriede_superbia.html",
+      "text": "[スペルビアの眷属]エルフリンデのスキル詳細を追加。「傲慢の悪魔」のスタック条件と、専用武器による変更を整理"
     }
   ]
 }
