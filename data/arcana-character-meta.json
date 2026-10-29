@@ -602,6 +602,11 @@
       "initialRarity": "SR",
       "releaseClass": "unknown"
     },
+    "elfriede_superbia": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
+    },
     "supp-r-001": {
       "origin": "supplemental",
       "initialRarity": "R",
