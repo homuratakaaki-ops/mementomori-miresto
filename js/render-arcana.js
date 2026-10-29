@@ -43,7 +43,7 @@
     const linked = character.pageSlug
       ? `<a href="../characters/${escapeHtml(encodeURIComponent(character.pageSlug))}.html">${name}</a>`
       : `<span>${name}</span>`;
-    return `<li class="arcana-member"><div class="arcana-member-name">${linked}<small>${escapeHtml(character.attribute)}</small></div>` +
+    return `<li class="arcana-member"><div class="arcana-member-name">${linked}<small class="arcana-attribute" data-attribute="${escapeHtml(character.attribute)}">${escapeHtml(character.attribute)}</small></div>` +
       (character.pageSlug ? "" : '<p class="arcana-note">キャラ詳細未掲載</p>') +
       `<p class="arcana-status">${escapeHtml(character.pageSlug ? statusText(summary) : "履歴未確認")}</p></li>`;
   }

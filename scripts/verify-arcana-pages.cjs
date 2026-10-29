@@ -274,4 +274,33 @@ check("P11", () => {
   }
   return "所属欄にP03禁止語・開催状況・出典ラベルなし / 末尾は段落・sectionで閉じる";
 });
+check("P12", () => {
+  const expected = [...new Set(source.arcana.flatMap(a => a.stages.flatMap(s => s.effects.map(e => e.statKey))))].sort();
+  const actual = [...html.matchAll(/name="effect" value="([^"]+)"/g)].map(m => m[1]);
+  assert.deepEqual(actual.slice().sort(), expected);
+  assert.equal(actual.length, 24);
+  assert.equal(/arcana-quick-effects|すべての効果/.test(html), false);
+  const groups = [...html.matchAll(/<details class="arcana-effect-group"([^>]*)><summary>([^<]+)<span data-effect-count><\/span><\/summary>([\s\S]*?)<\/details>/g)];
+  assert.deepEqual(groups.map(m => m[2]), ['ステータス', '潜在能力', 'クリティカル', '命中・回避', 'HPドレイン・カウンタ', '貫通', '上限']);
+  groups.forEach(m => { assert.ok(!/\bopen\b/.test(m[1])); assert.match(m[3], /name="effect"/); });
+  assert.match(html, /name="effectGroup" value="physical_magical_penetration,penetration"/);
+  return '効果24種類が正本と完全一致 / 7グループ初期閉 / 貫通2種類';
+});
+check("P13", () => {
+  let badges = 0;
+  const counts = {};
+  for (const card of cards) {
+    const item = index.arcana.find(a => `arcana-${a.id}` === card[1]);
+    const actual = [...card[2].matchAll(/<small class="arcana-attribute" data-attribute="([^"]+)">([^<]+)<\/small>/g)];
+    const expected = item.members.map(id => index.characters[id]).filter(Boolean).map(c => c.attribute);
+    assert.deepEqual(actual.map(m => m[1]), expected);
+    actual.forEach(m => { assert.equal(m[1], m[2]); counts[m[1]] = (counts[m[1]] || 0) + 1; });
+    badges += actual.length;
+  }
+  assert.match(html, /href="\.\.\/\.\.\/assets\/attribute-palette\.css\?v=[a-f0-9]{8}"/);
+  assert.deepEqual([...html.matchAll(/name="xattr" value="([^"]+)"([^>]*)>/g)].map(m => {
+    assert.ok(!/\bchecked\b/.test(m[2])); return m[1];
+  }), ['blue', 'red', 'green', 'yellow', 'light', 'dark']);
+  return `属性バッジ${badges}枠が既知の構成キャラと一致 / ${JSON.stringify(counts)} / 除外6属性は未選択`;
+});
 process.exitCode = failed ? 1 : 0;

@@ -13,10 +13,12 @@
 
   function defaultState() {
     return { an: "", cn: "", character: "", effect: [], target: [], stage: "lr",
-      count: [], status: [], basis: "end", minDays: "", maxDays: "", scope: "any", sort: "catalog", open: "" };
+      count: [], status: [], xattr: [], basis: "end", minDays: "", maxDays: "", scope: "any", sort: "catalog", open: "" };
   }
   // URLの複数値は「すべての効果」等の表示順で正規化する。
+  const ATTRIBUTE_LABELS = { blue: "藍", red: "紅", green: "翠", yellow: "黄", light: "天", dark: "冥" };
   const queryLists = {
+    xattr: Object.keys(ATTRIBUTE_LABELS),
     effect: ["attack", "hp", "defense", "physical_defense", "magical_defense", "strength", "dexterity", "magic", "stamina",
       "critical", "critical_resistance", "critical_damage", "physical_critical_mitigation", "magical_critical_mitigation",
       "accuracy", "evasion", "debuff_accuracy", "debuff_resistance", "hp_drain", "counter", "physical_penetration",
@@ -26,7 +28,11 @@
   };
   const queryEnums = { stage: ["lr", "any"], basis: ["end", "start"], scope: ["any", "all", "named"],
     sort: ["catalog", "name", "count", "days_desc"] };
-  function parseQuery(search) {
+  function availableEffectKeys(index) {
+    const used = new Set(index.arcana.flatMap(item => item.stages.flatMap(stage => stage.effects.map(effect => effect.statKey))));
+    return queryLists.effect.filter(key => used.has(key));
+  }
+  function parseQuery(search, effectKeys = queryLists.effect) {
     const params = new URLSearchParams(search), state = defaultState();
     let warning = false;
     for (const key of new Set(params.keys())) {
@@ -34,8 +40,9 @@
       const values = params.getAll(key), value = values[0];
       if (queryLists[key]) {
         const requested = values.flatMap(v => v.split(","));
-        warning ||= requested.some(v => !queryLists[key].includes(v));
-        state[key] = queryLists[key].filter(v => requested.includes(v));
+        const allowed = key === "effect" ? effectKeys : queryLists[key];
+        warning ||= requested.some(v => !allowed.includes(v));
+        state[key] = allowed.filter(v => requested.includes(v));
       } else {
         warning ||= values.length > 1;
         if (queryEnums[key]) {
@@ -75,6 +82,9 @@
   function resolveQuery(parsed, index) {
     const state = { ...parsed.state };
     let characterMissing = false, warning = parsed.warning;
+    const effectKeys = availableEffectKeys(index);
+    warning ||= state.effect.some(key => !effectKeys.includes(key));
+    state.effect = state.effect.filter(key => effectKeys.includes(key));
     if (state.character) {
       if (Object.hasOwn(index.characters, state.character)) state.cn = index.characters[state.character].name;
       else {
@@ -118,8 +128,8 @@
   }
   function activeFilterChips(state, labels = new Map()) {
     const defaults = defaultState(), chips = [];
-    for (const key of ["effect", "target", "count", "status"]) {
-      state[key].forEach(value => chips.push({ key, value, label: labels.get(`${key}:${value}`) }));
+    for (const key of ["effect", "target", "count", "status", "xattr"]) {
+      state[key].forEach(value => chips.push({ key, value, label: key === "xattr" ? `${ATTRIBUTE_LABELS[value]}を除外` : labels.get(`${key}:${value}`) }));
     }
     for (const key of ["an", "cn", "stage", "basis", "minDays", "maxDays", "scope"]) {
       if (state[key] === defaults[key] || (key === "scope" && !scopeActive(state))) continue;
@@ -147,6 +157,7 @@
       if (state.an.trim() && !contains(item.name, state.an, deps)) return [];
       if (hasName && !item.members.some(id => named.has(id))) return [];
       if (state.count.length && !state.count.map(Number).includes(item.members.length)) return [];
+      if (item.members.some(id => id && state.xattr.some(key => ATTRIBUTE_LABELS[key] === index.characters[id]?.attribute))) return [];
       const matchedStages = effectActive ? item.stages.filter(stage => !stage.pending &&
         (state.stage === "any" || stage.label === "LR") && stage.effects.some(effect => !effect.pending &&
           (!state.effect.length || state.effect.includes(effect.statKey)) &&
@@ -188,7 +199,7 @@
     const cards = new Map(index.arcana.map(item => [item.id, document.getElementById(`arcana-${item.id}`)]));
     const controls = [...panel.querySelectorAll("input, select")];
     const defaults = defaultState();
-    let parsed = resolveQuery(parseQuery(view.location.search), index);
+    let parsed = resolveQuery(parseQuery(view.location.search, availableEffectKeys(index)), index);
     let state = parsed.state, timer, composing = false;
     let scopeExplicit = parsed.scopeExplicit;
     const detailsState = new WeakMap();
@@ -240,6 +251,13 @@
         else if (state[input.name] !== "invalid" && input.value !== String(state[input.name])) input.value = state[input.name];
       });
     }
+    function syncEffectGroups(restore = false) {
+      panel.querySelectorAll("[data-effect-section]").forEach(group => {
+        const count = [...group.querySelectorAll('input[name="effect"]')].filter(input => state.effect.includes(input.value)).length;
+        group.querySelector("[data-effect-count]").textContent = count ? `（${count}件選択中）` : "";
+        if (restore) group.open = count > 0;
+      });
+    }
     function removeCondition(key, value) {
       if (Array.isArray(state[key])) state[key] = state[key].filter(item => item !== value);
       else state[key] = defaults[key];
@@ -253,8 +271,9 @@
         container.querySelector(selector).replaceChildren(...chips.map(chip =>
           button(`${chip.label} ×`, () => removeCondition(chip.key, chip.value))));
       }
-      const advanced = chips.filter(chip => ["count", "status", "basis", "minDays", "maxDays", "scope"].includes(chip.key)).length;
+      const advanced = chips.filter(chip => ["count", "status", "xattr", "basis", "minDays", "maxDays", "scope"].includes(chip.key)).length;
       container.querySelector("[data-advanced-count]").textContent = `${advanced}件適用中`;
+      syncEffectGroups();
     }
     function update(saveUrl = true) {
       // 時計更新は入力確定待ちのURL保存を取り消さない。
@@ -368,11 +387,12 @@
       clearTimeout(timer); composing = false;
       parsed = resolveQuery(parseQuery(view.location.search), index);
       state = parsed.state; scopeExplicit = parsed.scopeExplicit;
-      syncControls(); refreshClock(); restoreDetails(false);
+      syncControls(); syncEffectGroups(true); refreshClock(); restoreDetails(false);
     });
     view.setInterval(refreshClock, 60000);
     document.addEventListener("visibilitychange", () => { if (!document.hidden) refreshClock(); });
     syncControls();
+    syncEffectGroups(true);
     refreshClock();
     restoreDetails(false);
     panel.hidden = false;
@@ -401,5 +421,5 @@
     return load;
   }
 
-  return { init, defaultState, parseQuery, formatQuery, resolveQuery, matchCharacters, validateDays, activeFilterChips, summarizeCharacters, filterArcana, sortArcana };
+  return { init, defaultState, parseQuery, formatQuery, resolveQuery, availableEffectKeys, ATTRIBUTE_LABELS, matchCharacters, validateDays, activeFilterChips, summarizeCharacters, filterArcana, sortArcana };
 }));

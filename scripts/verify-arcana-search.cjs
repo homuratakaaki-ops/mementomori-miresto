@@ -206,8 +206,9 @@ check('U07 scope明示は名前入力の初期値より優先', () => {
 check('U08 全選択肢の往復・日数の整数化', () => {
   const source = require('node:fs').readFileSync(require('node:path').join(__dirname, 'build-arcana-pages.mjs'), 'utf8');
   const groups = source.slice(source.indexOf('const EFFECT_GROUPS'), source.indexOf('function choices'));
-  const keys = [...groups.matchAll(/\["([a-z_]+)",/g)].map(m => m[1]);
-  assert.equal(keys.length, 25);
+  const used = new Set(index.arcana.flatMap(a => a.stages.flatMap(s => s.effects.map(e => e.statKey))));
+  const keys = [...groups.matchAll(/\["([a-z_]+)",/g)].map(m => m[1]).filter(key => used.has(key));
+  assert.equal(keys.length, 24);
   const parsed = api.parseQuery(`?effect=${keys.join(',')}&minDays=00012`);
   assert.equal(parsed.warning, false);
   assert.deepEqual(parsed.state.effect, keys);
@@ -276,6 +277,56 @@ check('U12 所属直リンク往復・明示scope保持と後からの条件適�
       assert.deepEqual(api.filterArcana(index, selected, now, deps).map(a => a.id), ids({ character: 'fia_trace', scope: 'named', ...condition }));
     }
   }
+});
+check('X01 冥を含むアルカナを除外・実データ件数', () => {
+  const excluded = index.arcana.filter(a => a.members.some(id => index.characters[id]?.attribute === '冥'));
+  const result = rows({ xattr: ['dark'] });
+  assert.equal(result.length, index.arcana.length - excluded.length);
+  assert.ok(result.every(a => a.members.every(id => index.characters[id]?.attribute !== '冥')));
+  console.log(`  冥を含む${excluded.length}件 / 残り${result.length}件`);
+});
+check('X02 天・冥を含むアルカナを除外・実データ件数', () => {
+  const excluded = index.arcana.filter(a => a.members.some(id => ['天', '冥'].includes(index.characters[id]?.attribute)));
+  const result = rows({ xattr: ['light', 'dark'] });
+  assert.equal(result.length, index.arcana.length - excluded.length);
+  assert.ok(result.every(a => a.members.every(id => !['天', '冥'].includes(index.characters[id]?.attribute))));
+  console.log(`  天・冥を含む${excluded.length}件 / 残り${result.length}件`);
+});
+check('X03 未特定枠だけは除外しない・補完キャラは属性で除外', () => {
+  const fixture = { characters: { 'supp-test': { name: '補完', attribute: '冥', pageSlug: null } }, arcana: [
+    { id: 'unknown', name: '未特定', members: [null, null], stages: [] },
+    { id: 'known', name: '混在', members: [null, 'supp-test'], stages: [] }
+  ] };
+  assert.deepEqual(api.filterArcana(fixture, state({ xattr: ['dark'] }), now, deps).map(a => a.id), ['unknown']);
+  assert.equal(api.filterArcana(fixture, state({ xattr: ['light'] }), now, deps).length, 2);
+});
+check('X04 属性URLの正規化・重複除去・不正値警告', () => {
+  const parsed = api.parseQuery('?xattr=dark,blue,dark&xattr=wrong');
+  assert.equal(parsed.warning, true);
+  assert.deepEqual(parsed.state.xattr, ['blue', 'dark']);
+  assert.equal(api.formatQuery(parsed.state), '?xattr=blue,dark');
+  assert.deepEqual(api.parseQuery(api.formatQuery(parsed.state)).state, parsed.state);
+  assert.equal(api.parseQuery('?xattr=light,dark').warning, false);
+});
+check('X05 属性チップ・初期値で解除・他条件との併用', () => {
+  assert.deepEqual(api.activeFilterChips(state({ xattr: ['dark'] })), [{ key: 'xattr', value: 'dark', label: '冥を除外' }]);
+  assert.deepEqual(api.defaultState().xattr, []);
+  assert.equal(api.formatQuery(api.defaultState()), '');
+  const expected = rows({ effect: ['attack'] }).filter(a => a.members.every(id => index.characters[id]?.attribute !== '冥'));
+  assert.deepEqual(rows({ effect: ['attack'], xattr: ['dark'] }), expected);
+});
+check('X06 選択肢にない効果を無視・警告、一覧はデータから集計', () => {
+  const keys = api.availableEffectKeys(index);
+  const used = [...new Set(index.arcana.flatMap(a => a.stages.flatMap(s => s.effects.map(e => e.statKey))))].sort();
+  assert.deepEqual([...keys].sort(), used);
+  const parsed = api.resolveQuery(api.parseQuery('?effect=physical_penetration,attack'), index);
+  assert.equal(parsed.warning, true);
+  assert.deepEqual(parsed.state.effect, ['attack']);
+  assert.deepEqual(api.filterArcana(index, parsed.state, now, deps), rows({ effect: ['attack'] }));
+  assert.equal(api.parseQuery('?effect=physical_penetration', keys).warning, true);
+  const fixture = { characters: {}, arcana: [{ stages: [{ effects: [{ statKey: 'hp' }] }] }] };
+  assert.deepEqual(api.availableEffectKeys(fixture), ['hp']);
+  assert.deepEqual(api.resolveQuery(api.parseQuery('?effect=attack,hp'), fixture).state.effect, ['hp']);
 });
 console.log(`=== 結果: ${ok}件OK / ${ng}件NG ===`);
 process.exitCode = ng ? 1 : 0;
