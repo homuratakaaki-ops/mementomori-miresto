@@ -87,12 +87,18 @@ check("P04", () => {
   const arcanaUrl = "https://memento.musoudc.com/pages/arcana/index.html";
   assert.equal(locations.filter(url => url === arcanaUrl).length, 1);
   assert.equal(locations[locations.indexOf(arcanaUrl) + 1], "https://memento.musoudc.com/pages/characters/index.html");
-  for (const [file, href] of [["index.html", "./pages/arcana/index.html"], ["pages/characters/index.html", "../arcana/index.html"]]) {
-    const links = [...read(file).matchAll(/<a\b[^>]*href="([^"]+)"/g)].map(match => match[1]);
-    assert.equal(links.filter(url => url === href).length, 1, file);
-  }
+  const hrefs = text => [...text.matchAll(/<a\b[^>]*href="([^"]+)"/g)].map(match => match[1]);
+  const count = (text, href) => hrefs(text).filter(url => url === href).length;
+  // TOPはメインナビに1つ、できること欄のカードに1つ（計2つ）。
+  const top = read("index.html");
+  const topNav = (top.match(/<nav class="actions" aria-label="メインナビ">[\s\S]*?<\/nav>/) || [""])[0];
+  const topContents = (top.match(/<section aria-labelledby="contents-title">[\s\S]*?<\/section>/) || [""])[0];
+  assert.equal(count(topNav, "./pages/arcana/index.html"), 1, "index.html メインナビ");
+  assert.equal(count(topContents, "./pages/arcana/index.html"), 1, "index.html できること");
+  assert.equal(count(top, "./pages/arcana/index.html"), 2, "index.html 合計");
+  assert.equal(count(read("pages/characters/index.html"), "../arcana/index.html"), 1, "pages/characters/index.html");
   assert.equal(JSON.parse(read("data/news.json")).items.filter(item => item.url === "pages/arcana/index.html").length, 1);
-  return "公開状態：noindexなし・canonicalあり / sitemap・TOP・キャラ一覧・news 各1件";
+  return "公開状態：noindexなし・canonicalあり / sitemap・キャラ一覧・news 各1件 / TOPはメインナビ・できること各1件";
 });
 check("P05", () => {
   // LR概要は数えず、各カードの段階詳細だけを数える。
