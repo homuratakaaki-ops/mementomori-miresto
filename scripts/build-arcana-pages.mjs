@@ -87,8 +87,6 @@ function searchControls(index) {
     <fieldset><legend>欲しい効果</legend>
       ${groups.map(([group, entries]) => `<details class="arcana-effect-group" data-effect-section><summary>${group}<span data-effect-count></span></summary><div>${group === "貫通" ? `<label class="arcana-choice"><input type="checkbox" name="effectGroup" value="${entries.map(([key]) => key).join(",")}" data-effect-group="penetration"><span>貫通をまとめて選択</span></label>` : ""}${choices("effect", entries)}</div></details>`).join("\n")}
     </fieldset>
-    <fieldset><legend>効果の対象</legend>${choices("target", [["all", "全キャラ"], ["members", "構成キャラ"], ["party", "パーティ"], ["other", "その他"], ["unknown", "対象未確認"]])}</fieldset>
-    <fieldset><legend>検索する段階</legend>${choices("stage", [["lr", "LR"], ["any", "すべての段階"]], "radio", "lr")}</fieldset>
     <label class="arcana-field">アルカナ名<input type="search" name="an" value=""></label>
     <label class="arcana-field">キャラ名<input type="search" name="cn" value="" aria-controls="character-candidates" autocomplete="off"></label>
     <input type="hidden" name="character" value="">
