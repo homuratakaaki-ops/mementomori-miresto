@@ -276,16 +276,20 @@ check("P11", () => {
   return "所属欄にP03禁止語・開催状況・出典ラベルなし / 末尾は段落・sectionで閉じる";
 });
 check("P12", () => {
-  const expected = [...new Set(source.arcana.flatMap(a => a.stages.flatMap(s => s.effects.map(e => e.statKey))))].sort();
+  const labels = new Set(['LR', 'LR+5', 'LR+6', 'LR+7', 'LR+8', 'LR+9', 'LR+10']);
+  const expected = [...new Set(source.arcana.flatMap(a => a.stages
+    .filter(s => labels.has(s.label) && s.condition.verification !== 'conflict')
+    .flatMap(s => s.effects.filter(e => !['conflict', 'unknown'].includes(e.verification)).map(e => e.statKey))))].sort();
   const actual = [...html.matchAll(/name="effect" value="([^"]+)"/g)].map(m => m[1]);
   assert.deepEqual(actual.slice().sort(), expected);
   assert.equal(actual.length, 24);
+  assert.equal(/name="(?:target|stage)"|効果の対象|検索する段階/.test(html), false);
   assert.equal(/arcana-quick-effects|すべての効果/.test(html), false);
   const groups = [...html.matchAll(/<details class="arcana-effect-group"([^>]*)><summary>([^<]+)<span data-effect-count><\/span><\/summary>([\s\S]*?)<\/details>/g)];
   assert.deepEqual(groups.map(m => m[2]), ['ステータス', '潜在能力', 'クリティカル', '命中・回避', 'HPドレイン・カウンタ', '貫通', '上限']);
   groups.forEach(m => { assert.ok(!/\bopen\b/.test(m[1])); assert.match(m[3], /name="effect"/); });
   assert.match(html, /name="effectGroup" value="physical_magical_penetration,penetration"/);
-  return '効果24種類が正本と完全一致 / 7グループ初期閉 / 貫通2種類';
+  return '効果24種類が正本のLR以降の検索可能な効果と完全一致 / 対象・段階の欄なし / 7グループ初期閉・空なし / 貫通2種類';
 });
 check("P13", () => {
   let badges = 0;

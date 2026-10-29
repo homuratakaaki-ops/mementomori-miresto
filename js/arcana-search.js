@@ -12,7 +12,7 @@
   const loads = new WeakMap();
 
   function defaultState() {
-    return { an: "", cn: "", character: "", effect: [], target: [], stage: "lr",
+    return { an: "", cn: "", character: "", effect: [],
       count: [], status: [], basis: "end", minDays: "", maxDays: "", scope: "any", sort: "catalog", open: "" };
   }
   // URLの複数値は「すべての効果」等の表示順で正規化する。
@@ -21,13 +21,17 @@
       "critical", "critical_resistance", "critical_damage", "physical_critical_mitigation", "magical_critical_mitigation",
       "accuracy", "evasion", "debuff_accuracy", "debuff_resistance", "hp_drain", "counter", "physical_penetration",
       "physical_magical_penetration", "penetration", "party_level_cap", "member_awakening_cap"],
-    target: ["all", "members", "party", "other", "unknown"], count: ["2", "3", "4"],
+    count: ["2", "3", "4"],
     status: ["ongoing", "upcoming", "waiting", "permanent", "history_unknown"]
   };
-  const queryEnums = { stage: ["lr", "any"], basis: ["end", "start"], scope: ["any", "all", "named"],
+  const queryEnums = { basis: ["end", "start"], scope: ["any", "all", "named"],
     sort: ["catalog", "name", "count", "days_desc"] };
+  function searchableStage(stage) {
+    return !stage.pending && /^LR(?:\+(?:[5-9]|10))?$/.test(stage.label);
+  }
   function availableEffectKeys(index) {
-    const used = new Set(index.arcana.flatMap(item => item.stages.flatMap(stage => stage.effects.map(effect => effect.statKey))));
+    const used = new Set(index.arcana.flatMap(item => item.stages.filter(searchableStage)
+      .flatMap(stage => stage.effects.filter(effect => !effect.pending).map(effect => effect.statKey))));
     return queryLists.effect.filter(key => used.has(key));
   }
   function parseQuery(search, effectKeys = queryLists.effect) {
@@ -126,10 +130,10 @@
   }
   function activeFilterChips(state, labels = new Map()) {
     const defaults = defaultState(), chips = [];
-    for (const key of ["effect", "target", "count", "status"]) {
+    for (const key of ["effect", "count", "status"]) {
       state[key].forEach(value => chips.push({ key, value, label: labels.get(`${key}:${value}`) }));
     }
-    for (const key of ["an", "cn", "stage", "basis", "minDays", "maxDays", "scope"]) {
+    for (const key of ["an", "cn", "basis", "minDays", "maxDays", "scope"]) {
       if (state[key] === defaults[key] || (key === "scope" && !scopeActive(state))) continue;
       const prefix = { an: "アルカナ名：", cn: state.character ? "キャラ固定：" : "キャラ名：", minDays: "最小日数：", maxDays: "最大日数：" };
       chips.push({ key, label: prefix[key] ? prefix[key] + state[key] : labels.get(`${key}:${state[key]}`) });
@@ -150,15 +154,14 @@
     const named = new Set(state.character && index.characters[state.character] ? [state.character] :
       matchCharacters(index, state.cn, deps).map(c => c.id));
     const hasName = !!(state.cn.trim() || (state.character && index.characters[state.character]));
-    const effectActive = state.effect.length || state.target.length;
+    const effectActive = state.effect.length;
     return index.arcana.flatMap(item => {
       if (state.an.trim() && !contains(item.name, state.an, deps)) return [];
       if (hasName && !item.members.some(id => named.has(id))) return [];
       if (state.count.length && !state.count.map(Number).includes(item.members.length)) return [];
-      const matchedStages = effectActive ? item.stages.filter(stage => !stage.pending &&
-        (state.stage === "any" || stage.label === "LR") && stage.effects.some(effect => !effect.pending &&
-          (!state.effect.length || state.effect.includes(effect.statKey)) &&
-          (!state.target.length || state.target.includes(effect.target)))).map(stage => stage.label) : [];
+      const matchedStages = effectActive ? item.stages.filter(stage => searchableStage(stage) &&
+        stage.effects.some(effect => !effect.pending && state.effect.includes(effect.statKey)))
+        .map(stage => stage.label) : [];
       if (effectActive && !matchedStages.length) return [];
       if (state.status.length || days.active) {
         const members = state.scope === "named" && hasName ? item.members.filter(id => named.has(id)) : item.members;
@@ -286,7 +289,7 @@
       cards.forEach((card, id) => {
         const match = matches.get(id);
         card.hidden = !match;
-        const stages = state.stage === "any" && match && !match.matchedStages.includes("LR") ? match.matchedStages : [];
+        const stages = match && !match.matchedStages.includes("LR") ? match.matchedStages : [];
         let note = card.querySelector("[data-matched-stages]");
         if (!note) {
           note = document.createElement("p");
