@@ -32,8 +32,9 @@ const realCases = [
   ["fenrir_treasure", "2026-10-30T14:30", "waiting", 1, false],
   ["fia_trace", "2026-10-29T16:29", "upcoming", 174, false, "date_based"],
   ["fia_trace", "2026-10-29T16:30", "ongoing", null, false],
-  ["fia_trace", "2026-11-20T16:29", "ongoing", null, false],
-  ["fia_trace", "2026-11-20T16:30", "waiting", null, true],
+  ["fia_trace", "2026-11-16T14:29", "ongoing", null, false],
+  ["fia_trace", "2026-11-16T14:30", "waiting", 0, false, "exact"],
+  ["fia_trace", "2026-11-20T16:30", "waiting", 4, false, "exact"],
   ["fenrir", "2026-10-28T12:00", "permanent", null, false]
 ];
 for (const [id, now, state, daysSinceEnd, endUnknown, endPrecision] of realCases) {
@@ -46,6 +47,11 @@ console.log("=== 2. 合成データの境界 ===");
 const entry = (round, date, endDate, extra = {}) => ({ kind: "復刻", round, date, ...(endDate ? { endDate } : {}), ...extra });
 const character = (...pickupHistory) => ({ availability: "", pickupHistory });
 const old = entry(2, "2026-04-01", "2026-04-15");
+const unknownEndAnnouncement = character(entry(2, "2026-10-29", null, { startTime: "16:30", announced: true }));
+sample("終了未定予告・22日直前", unknownEndAnnouncement, "2026-11-20T16:29",
+  { state: "ongoing", daysSinceEnd: null, endUnknown: false });
+sample("終了未定予告・22日境界", unknownEndAnnouncement, "2026-11-20T16:30",
+  { state: "waiting", daysSinceEnd: null, endUnknown: true });
 sample("最新回の終了日なし", character(old, entry(3, "2026-09-01")), "2026-10-01T00:00",
   { state: "waiting", daysSinceEnd: null, endPrecision: null, endUnknown: true });
 sample("予告開始前", character(old, entry(3, "2026-11-01", null, { announced: true })), "2026-10-01T00:00",

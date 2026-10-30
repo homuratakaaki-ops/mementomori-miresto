@@ -758,7 +758,10 @@
           "startTime": "16:30",
           "kind": "復刻",
           "round": 2,
-          "announced": true
+          "announced": true,
+          "endDate": "2026-11-16",
+          "endTime": "14:29",
+          "endTimeSource": "公式X https://x.com/mementomori_boi/status/2115708474571243907（Yahoo!リアルタイム検索経由で公式投稿本文を確認、2026-10-30）"
         }
       ],
       "pickupCount": 2
