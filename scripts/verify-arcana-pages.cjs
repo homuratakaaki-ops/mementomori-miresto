@@ -305,4 +305,34 @@ check("P13", () => {
   assert.match(html, /href="\.\.\/\.\.\/assets\/attribute-palette\.css\?v=[a-f0-9]{8}"/);
   return `属性バッジ${badges}枠が既知の構成キャラと一致 / ${JSON.stringify(counts)}`;
 });
+check("P14", () => {
+  assert.equal((html.match(/<p>条件：構成キャラ全員/g) || []).length, 0);
+  let summaries = 0, stages = 0;
+  for (const card of cards) {
+    const item = source.arcana.find(item => `arcana-${item.id}` === card[1]);
+    const summary = card[2].match(/<div class="arcana-lr">([\s\S]*?)<\/div>/);
+    assert.ok(summary, item.id);
+    assert.equal((summary[1].match(/<h3>構成キャラ全員LR<\/h3>/g) || []).length, 1, item.id);
+    summaries++;
+    const details = card[2].slice(card[2].indexOf('<details class="arcana-details">'));
+    const headings = [...details.matchAll(/<section class="arcana-stage" data-stage-label="([^"]+)"><h3>([^<]+)<\/h3>/g)];
+    assert.deepEqual(headings.map(match => [match[1], match[2]]),
+      item.stages.map(stage => [stage.label, `構成キャラ全員${stage.label}`]), item.id);
+    stages += headings.length;
+  }
+  assert.equal(summaries, 101);
+  assert.equal(stages, source.arcana.reduce((sum, item) => sum + item.stages.length, 0));
+  return `条件行0件 / LR概要${summaries}件 / 段階見出し${stages}件が正本と一致（確認中を含む）`;
+});
+check("P15", () => {
+  const { renderStage } = require("../js/render-arcana.js");
+  for (const pending of [false, true]) {
+    const stage = { label: "LR+5", condition: "構成キャラ1体がLR+5", pending, effects: [] };
+    const rendered = renderStage(stage);
+    assert.ok(rendered.includes('<h3>LR+5</h3><p>条件：構成キャラ1体がLR+5</p>'));
+    assert.ok(rendered.includes('data-stage-label="LR+5"'));
+    assert.equal(rendered.includes("この段階は確認中です"), pending);
+  }
+  return "合成データの条件不一致は見出し＋条件の2行（通常・確認中）";
+});
 process.exitCode = failed ? 1 : 0;

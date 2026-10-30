@@ -300,7 +300,7 @@
         note.hidden = !stages.length;
         note.textContent = stages.length ? `一致した段階：${stages.join("・")}` : "";
         card.querySelectorAll(".arcana-stage-details .arcana-stage").forEach(section => {
-          const matched = stages.includes(section.querySelector("h3").textContent);
+          const matched = stages.includes(section.dataset.stageLabel);
           section.classList.toggle("arcana-stage-matched", matched);
           let label = section.querySelector("[data-stage-match]");
           if (!label) {
