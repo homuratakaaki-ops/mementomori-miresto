@@ -53,7 +53,9 @@
           `<li${effect.pending ? ' class="arcana-pending"' : ""}>${escapeHtml(targets[effect.target] || targets.unknown)}：${escapeHtml(effect.text)}</li>`).join("")}</ul>`;
   }
   function renderStage(stage) {
-    return `<section class="arcana-stage"><h3>${escapeHtml(stage.label)}</h3><p>条件：${escapeHtml(stage.condition)}</p>` +
+    const combined = stage.condition === `構成キャラ全員${stage.label}`;
+    return `<section class="arcana-stage" data-stage-label="${escapeHtml(stage.label)}"><h3>${escapeHtml(combined ? stage.condition : stage.label)}</h3>` +
+      (combined ? "" : `<p>条件：${escapeHtml(stage.condition)}</p>`) +
       renderEffects(stage) + '</section>';
   }
   function renderAffiliation(character, items, characters) {
