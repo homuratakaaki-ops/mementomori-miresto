@@ -52,9 +52,13 @@
         `<ul class="arcana-effects">${stage.effects.map(effect =>
           `<li${effect.pending ? ' class="arcana-pending"' : ""}>${escapeHtml(targets[effect.target] || targets.unknown)}：${escapeHtml(effect.text)}</li>`).join("")}</ul>`;
   }
-  function renderStage(stage) {
+  function stageHeading(stage) {
     const combined = stage.condition === `構成キャラ全員${stage.label}`;
-    return `<section class="arcana-stage" data-stage-label="${escapeHtml(stage.label)}"><h3>${escapeHtml(combined ? stage.condition : stage.label)}</h3>` +
+    return { combined, text: combined ? stage.condition : stage.label };
+  }
+  function renderStage(stage) {
+    const { combined, text } = stageHeading(stage);
+    return `<section class="arcana-stage" data-stage-label="${escapeHtml(stage.label)}"><h3>${escapeHtml(text)}</h3>` +
       (combined ? "" : `<p>条件：${escapeHtml(stage.condition)}</p>`) +
       renderEffects(stage) + '</section>';
   }
@@ -71,8 +75,10 @@
           : `${name}（キャラ詳細未掲載）`;
       }).join('／');
       return `<li class="arcana-affiliation-item"><h3><a href="${escapeHtml(`${search}&open=${encodeURIComponent(item.id)}#arcana-${encodeURIComponent(item.id)}`)}">${escapeHtml(item.name)}</a></h3>` +
-        item.stages.filter(stage => stage.label === 'LR').map(stage =>
-          `<p class="arcana-affiliation-lr">LR（${escapeHtml(stage.condition)}）</p>${renderEffects(stage)}`).join('') +
+        item.stages.filter(stage => stage.label === 'LR').map(stage => {
+          const { combined, text } = stageHeading(stage);
+          return `<p class="arcana-affiliation-lr">${escapeHtml(text)}${combined ? '' : `（${escapeHtml(stage.condition)}）`}</p>${renderEffects(stage)}`;
+        }).join('') +
         `<p class="arcana-affiliation-members">構成キャラ：${members}</p></li>`;
     }).join('\n');
     return '<!-- arcana:affiliation -->\n<section class="arcana-affiliation" id="arcana">\n<h2>所属アルカナ</h2>\n' +

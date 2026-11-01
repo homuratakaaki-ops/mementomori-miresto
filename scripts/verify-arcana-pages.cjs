@@ -335,4 +335,32 @@ check("P15", () => {
   }
   return "合成データの条件不一致は見出し＋条件の2行（通常・確認中）";
 });
+check("P16", () => {
+  const { renderAffiliation } = require("../js/render-arcana.js");
+  const heading = '<p class="arcana-affiliation-lr">構成キャラ全員LR</p>';
+  let total = 0, expected = 0;
+  for (const { character, page, sections, items } of detailPages) {
+    assert.equal(page.includes("LR（構成キャラ全員LR）"), false, character.id);
+    assert.equal(sections.length, 1, character.id);
+    const count = sections[0][0].split(heading).length - 1;
+    assert.equal(count, items.length, character.id);
+    total += count;
+    expected += items.length;
+  }
+  assert.equal(total, expected);
+  for (const pending of [false, true]) {
+    for (const [condition, escaped] of [
+      ["構成キャラ1体がLR", "構成キャラ1体がLR"],
+      ['条件<&>"\'', '条件&lt;&amp;&gt;&quot;&#39;']
+    ]) {
+      const stage = { label: "LR", condition, pending, effects: [] };
+      const rendered = renderAffiliation({ id: "test" }, [
+        { id: "A001", name: "合成データ", members: [], stages: [stage] }
+      ], {});
+      assert.ok(rendered.includes(`<p class="arcana-affiliation-lr">LR（${escaped}）</p>`));
+      assert.equal(rendered.includes("この段階は確認中です"), pending);
+    }
+  }
+  return `旧表記0件 / 各キャラの見出し数が所属数と一致・合計${total}件 / 条件不一致はLR（条件）・エスケープ維持（通常・確認中）`;
+});
 process.exitCode = failed ? 1 : 0;
