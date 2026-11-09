@@ -449,6 +449,30 @@
       "kind": "サイト更新",
       "url": "pages/characters/fia_trace.html",
       "text": "[在りし日の面影]フィアーの復刻終了日時を反映。11月16日14:29まで開催"
+    },
+    {
+      "id": "2026-11-07-hoshi-no-michibiki-announcement",
+      "date": "2026-11-07",
+      "kind": "星の導き",
+      "characterIds": [
+        "fortina",
+        "valriede",
+        "sonya",
+        "belle",
+        "luke",
+        "karol"
+      ],
+      "announcement": true,
+      "text": "星の導きガチャ開催予告（[聖剣の魔女]フォルティナ／[劫火の魔女]ヴァルリーデ／ソーニャ／ベル／ルーク／カロル）。11/9 14:30開始予定、終了日時は未告知"
+    },
+    {
+      "id": "2026-11-07-lily-announcement",
+      "date": "2026-11-07",
+      "kind": "復刻",
+      "characterId": "lily",
+      "announcement": true,
+      "url": "pages/characters/lily.html",
+      "text": "リリーの復刻予告。11/9 14:30開始予定、終了日時は未告知。ピックアップガチャ・期間限定運命キャラリスト追加・魔女の贈り物"
     }
   ]
 }

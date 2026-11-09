@@ -156,6 +156,8 @@ test('時刻項目なしの比較用データ・同一日時で旧新ロジッ�
     assert.equal(result.status, 0, '旧ロジックの現行データビルド失敗\n' + result.stdout + result.stderr);
     build(at);
     const strip = html => html.replace(/\r\n/g, '\n')
+      // 2026-11-07承認：星の導きの種別明記は開催時刻判定と無関係。新テストで表示を別検査する。
+      .replace(/(\d+回目)（星の導き）/g, '$1')
       // 所属アルカナ欄とジャンプは旧ビルドが生成しないため、開催判定の比較から外す。
       .replace(/<!-- arcana:affiliation -->[\s\S]*?<!-- \/arcana:affiliation -->\n/g, '')
       .replace(/<!-- arcana:jump -->[\s\S]*?<!-- \/arcana:jump -->\n/g, '')

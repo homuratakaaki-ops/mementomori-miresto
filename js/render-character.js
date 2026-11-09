@@ -102,7 +102,7 @@
       const status = gachaStatus.periodSuffix(item, today);
       if (Number.isFinite(item.round) && item.round > 0) {
         numberedCount += 1;
-        return `${item.round}回目 ${period}${status}`;
+        return `${item.round}回目${item.kind === "星の導き" ? "（星の導き）" : ""} ${period}${status}`;
       }
       // round を持たない項目（news由来など）は従来どおりの出し方を保つ
       if (item.kind === "星の導き") return `星の導き ${period}${status}`;

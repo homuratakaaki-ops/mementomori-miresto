@@ -15957,7 +15957,7 @@
       "attribute": "紅",
       "pageSlug": "belle",
       "availability": "星の導き",
-      "pickupCount": 10,
+      "pickupCount": 11,
       "pickupHistory": [
         {
           "date": "2022-11-01",
@@ -15969,6 +15969,13 @@
           "endDate": "2026-04-15",
           "kind": "星の導き",
           "round": 10
+        },
+        {
+          "date": "2026-11-09",
+          "startTime": "14:30",
+          "kind": "星の導き",
+          "round": 11,
+          "announced": true
         }
       ]
     },
@@ -16536,7 +16543,7 @@
       "attribute": "天",
       "pageSlug": "fortina",
       "availability": "星の導き",
-      "pickupCount": 10,
+      "pickupCount": 11,
       "pickupHistory": [
         {
           "date": "2022-10-21",
@@ -16548,6 +16555,13 @@
           "endDate": "2026-04-15",
           "kind": "星の導き",
           "round": 10
+        },
+        {
+          "date": "2026-11-09",
+          "startTime": "14:30",
+          "kind": "星の導き",
+          "round": 11,
+          "announced": true
         }
       ]
     },
@@ -16779,7 +16793,7 @@
       "attribute": "黄",
       "pageSlug": "karol",
       "availability": "星の導き",
-      "pickupCount": 9,
+      "pickupCount": 10,
       "pickupHistory": [
         {
           "date": "2022-12-15",
@@ -16791,6 +16805,13 @@
           "endDate": "2026-04-15",
           "kind": "星の導き",
           "round": 9
+        },
+        {
+          "date": "2026-11-09",
+          "startTime": "14:30",
+          "kind": "星の導き",
+          "round": 10,
+          "announced": true
         }
       ]
     },
@@ -16882,13 +16903,20 @@
       "attribute": "天",
       "pageSlug": "lily",
       "availability": "PU・運命",
-      "pickupCount": 1,
+      "pickupCount": 2,
       "pickupHistory": [
         {
           "date": "2026-04-30",
           "endDate": "2026-05-21",
           "kind": "PU",
           "round": 1
+        },
+        {
+          "date": "2026-11-09",
+          "startTime": "14:30",
+          "kind": "復刻",
+          "round": 2,
+          "announced": true
         }
       ]
     },
@@ -16946,7 +16974,7 @@
       "attribute": "翠",
       "pageSlug": "luke",
       "availability": "星の導き",
-      "pickupCount": 9,
+      "pickupCount": 10,
       "pickupHistory": [
         {
           "date": "2022-11-30",
@@ -16958,6 +16986,13 @@
           "endDate": "2026-04-15",
           "kind": "星の導き",
           "round": 9
+        },
+        {
+          "date": "2026-11-09",
+          "startTime": "14:30",
+          "kind": "星の導き",
+          "round": 10,
+          "announced": true
         }
       ]
     },
@@ -17934,7 +17969,7 @@
       "attribute": "藍",
       "pageSlug": "sonya",
       "availability": "星の導き",
-      "pickupCount": 9,
+      "pickupCount": 10,
       "pickupHistory": [
         {
           "date": "2022-12-28",
@@ -17946,6 +17981,13 @@
           "endDate": "2026-04-15",
           "kind": "星の導き",
           "round": 9
+        },
+        {
+          "date": "2026-11-09",
+          "startTime": "14:30",
+          "kind": "星の導き",
+          "round": 10,
+          "announced": true
         }
       ]
     },
@@ -18252,7 +18294,7 @@
       "attribute": "冥",
       "pageSlug": "valriede",
       "availability": "星の導き",
-      "pickupCount": 9,
+      "pickupCount": 10,
       "pickupHistory": [
         {
           "date": "2022-11-15",
@@ -18264,6 +18306,13 @@
           "endDate": "2026-04-15",
           "kind": "星の導き",
           "round": 9
+        },
+        {
+          "date": "2026-11-09",
+          "startTime": "14:30",
+          "kind": "星の導き",
+          "round": 10,
+          "announced": true
         }
       ]
     },
