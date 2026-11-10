@@ -3530,7 +3530,10 @@
           "kind": "復刻",
           "round": 2,
           "announced": true,
-          "startTimeSource": "ゲーム内公式告知「【予告】魔女「リリー」の復刻」（2026-11-07 12:00 JST掲載、ユーザー提供画像を2026-11-07確認）。終了日時は未告知。"
+          "startTimeSource": "公式X開催告知 https://x.com/mementomori_boi/status/2119663846046736611 （2026-11-10確認）。11/9 14:30 JST開始。",
+          "endDate": "2026-11-24",
+          "endTime": "14:29",
+          "endTimeSource": "公式X開催告知 https://x.com/mementomori_boi/status/2119663846046736611 （2026-11-10確認）。11/24 14:29 JSTまで。"
         }
       ],
       "pickupCount": 2

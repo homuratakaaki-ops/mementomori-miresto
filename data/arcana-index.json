@@ -16913,7 +16913,9 @@
         },
         {
           "date": "2026-11-09",
+          "endDate": "2026-11-24",
           "startTime": "14:30",
+          "endTime": "14:29",
           "kind": "復刻",
           "round": 2,
           "announced": true

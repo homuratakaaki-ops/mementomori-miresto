@@ -473,6 +473,13 @@
       "announcement": true,
       "url": "pages/characters/lily.html",
       "text": "リリーの復刻予告。11/9 14:30開始予定、終了日時は未告知。ピックアップガチャ・期間限定運命キャラリスト追加・魔女の贈り物"
+    },
+    {
+      "id": "2026-11-10-lily-end",
+      "date": "2026-11-10",
+      "kind": "サイト更新",
+      "url": "pages/characters/lily.html",
+      "text": "リリーの復刻終了日時を反映。11月24日14:29まで開催"
     }
   ]
 }
