@@ -1,0 +1,109 @@
+name: Holy Angel isolated checks
+
+on:
+  pull_request:
+    paths:
+      - 'holy-angel-*.html'
+      - 'assets/holy-angel/**'
+      - 'js/holy-angel-*.mjs'
+      - 'scripts/verify-holy-angel-*.mjs'
+      - '.github/workflows/verify-holy-angel.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check source syntax
+        run: |
+          for f in js/holy-angel-*.mjs scripts/verify-holy-angel-*.mjs; do
+            node --check "$f"
+          done
+      - name: Verify equipment parts
+        run: node scripts/verify-holy-angel-planner.mjs
+      - name: Verify single relic probabilities
+        run: node scripts/verify-holy-angel-relic-probability.mjs
+      - name: Verify complete 50 cycles
+        run: node scripts/verify-holy-angel-multi-cycle.mjs
+      - name: Verify milestone stopping and switching
+        run: node scripts/verify-holy-angel-multi-stop.mjs
+      - name: Verify JST day and week boundaries
+        run: node scripts/verify-holy-angel-calendar.mjs
+      - name: Verify actual gacha event replay
+        run: node scripts/verify-holy-angel-actual-log.mjs
+      - name: Verify actual inventory and legacy plan bridge
+        run: node scripts/verify-holy-angel-plan-actual-bridge.mjs
+      - name: Verify combined workspace page structure
+        run: node scripts/verify-holy-angel-combined-ui-static.mjs
+      - name: Verify combined v3 workspace migration and undo
+        run: node scripts/verify-holy-angel-combined-workspace.mjs
+      - name: Verify atomic test quota rollback in SQLite
+        run: python3 scripts/verify-holy-angel-sql-quota.py
+      - name: Check disabled cloud workspace creation
+        run: node scripts/verify-holy-angel-cloud-create.mjs
+      - name: Check cloud client
+        run: node scripts/verify-holy-angel-cloud-client.mjs
+      - name: Verify cloud sync failure and conflict scenarios offline (mock only)
+        run: node scripts/verify-holy-angel-cloud-contract-mock.mjs
+      - name: Verify new cloud API smoke checks (offline only)
+        run: node scripts/verify-holy-angel-cloud-api-smoke.mjs
+      - name: Verify read-only bridge preview
+        run: node scripts/verify-holy-angel-bridge-ui-static.mjs
+      - name: Verify actual record form markup
+        run: node scripts/verify-holy-angel-actuals-ui-static.mjs
+      - name: Verify single-plan preview markup
+        run: node scripts/verify-holy-angel-ui-static.mjs
+      - name: Verify multi-plan preview and icons
+        run: node scripts/verify-holy-angel-multi-ui-static.mjs
+      - name: Install Chromium for interaction tests
+        run: |
+          npm install --no-save --ignore-scripts playwright@1.57.0
+          npx playwright install chromium
+      - name: Install Japanese font for screenshots
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends fonts-noto-cjk
+      - name: Verify multi-plan browser interactions
+        run: node scripts/verify-holy-angel-multi-ui-browser.mjs
+      - name: Verify actual record browser interactions
+        run: node scripts/verify-holy-angel-actuals-ui-browser.mjs
+      - name: Verify combined workspace browser interactions
+        run: node scripts/verify-holy-angel-combined-ui-browser.mjs
+      - name: Verify linked plan and actual browser interactions
+        run: node scripts/verify-holy-angel-bridge-ui-browser.mjs
+      - name: Save browser screenshot
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: holy-angel-multi-390px
+          path: holy-angel-multi-390.png
+          if-no-files-found: ignore
+      - name: Save combined workspace screenshot
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: holy-angel-combined-390px
+          path: holy-angel-combined-390.png
+          if-no-files-found: ignore
+      - name: Save read-only bridge screenshot
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: holy-angel-bridge-390px
+          path: holy-angel-bridge-390.png
+          if-no-files-found: ignore
+      - name: Save actual record screenshot
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: holy-angel-actuals-390px
+          path: holy-angel-actuals-390.png
+          if-no-files-found: ignore
