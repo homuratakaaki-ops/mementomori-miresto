@@ -18239,13 +18239,19 @@
       "attribute": "黄",
       "pageSlug": "tricksy",
       "availability": "PU・運命",
-      "pickupCount": 1,
+      "pickupCount": 2,
       "pickupHistory": [
         {
           "date": "2026-03-31",
           "endDate": "2026-04-15",
           "kind": "PU",
           "round": 1
+        },
+        {
+          "date": "2026-11-16",
+          "kind": "復刻",
+          "round": 2,
+          "announced": true
         }
       ]
     },

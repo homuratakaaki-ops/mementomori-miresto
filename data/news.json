@@ -480,6 +480,15 @@
       "kind": "サイト更新",
       "url": "pages/characters/lily.html",
       "text": "リリーの復刻終了日時を反映。11月24日14:29まで開催"
+    },
+    {
+      "id": "2026-11-15-tricksy-announcement",
+      "date": "2026-11-15",
+      "kind": "復刻",
+      "characterId": "tricksy",
+      "announcement": true,
+      "url": "pages/characters/tricksy.html",
+      "text": "トリクシーの復刻予告。11/16開始予定。開始時刻・終了日時は未確認。"
     }
   ]
 }
