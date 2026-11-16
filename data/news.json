@@ -497,6 +497,14 @@
       "characterId": "lamis",
       "url": "pages/characters/lamis.html",
       "text": "ラミスのキャラページを追加。シールド・聖なる導き・発動回数で強化される魔法攻撃と専用武器効果を整理。"
+    },
+    {
+      "id": "2026-11-16-lamis-gacha-period",
+      "date": "2026-11-16",
+      "kind": "サイト更新",
+      "characterId": "lamis",
+      "url": "pages/characters/lamis.html",
+      "text": "ラミスのPU開催期間をゲーム内表示に基づき反映。11/16 16:30〜11/30 14:29。"
     }
   ]
 }

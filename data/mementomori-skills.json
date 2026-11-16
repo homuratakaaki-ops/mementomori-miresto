@@ -3829,7 +3829,20 @@
       "noteUrl": "",
       "imageUrl": "",
       "sourceUrl": "",
-      "speed": 3161
+      "speed": 3161,
+      "pickupHistory": [
+        {
+          "date": "2026-11-16",
+          "startTime": "16:30",
+          "startTimeSource": "ゲーム内「ガチャ詳細」ラミスのピックアップガチャ（2026-11-16確認）。2026年11月16日16:30 JST開始。",
+          "endDate": "2026-11-30",
+          "endTime": "14:29",
+          "endTimeSource": "ゲーム内「ガチャ詳細」ラミスのピックアップガチャ（2026-11-16確認）。2026年11月30日14:29 JSTまで。",
+          "kind": "PU",
+          "round": 1
+        }
+      ],
+      "pickupCount": 1
     }
   ],
   "skills": [
