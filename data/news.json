@@ -489,6 +489,14 @@
       "announcement": true,
       "url": "pages/characters/tricksy.html",
       "text": "トリクシーの復刻予告。11/16開始予定。開始時刻・終了日時は未確認。"
+    },
+    {
+      "id": "2026-11-16-lamis",
+      "date": "2026-11-16",
+      "kind": "新キャラ",
+      "characterId": "lamis",
+      "url": "pages/characters/lamis.html",
+      "text": "ラミスのキャラページを追加。シールド・聖なる導き・発動回数で強化される魔法攻撃と専用武器効果を整理。"
     }
   ]
 }

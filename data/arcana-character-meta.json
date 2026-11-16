@@ -782,6 +782,11 @@
       },
       "attribute": "黄",
       "pageSlug": null
+    },
+    "lamis": {
+      "origin": "canonical",
+      "initialRarity": "SR",
+      "releaseClass": "unknown"
     }
   }
 }

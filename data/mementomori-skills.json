@@ -1,6 +1,6 @@
 {
   "schema": "mementomori_skill_compare_v1",
-  "updatedAt": "2026-10-29T17:05:00.000+09:00",
+  "updatedAt": "2026-11-16T16:37:24.149205+09:00",
   "gachaStatusUpdatedAt": "2026-10-03",
   "notes": [
     "Skill effects are summarized for comparison and are not copied as full official text.",
@@ -3813,6 +3813,23 @@
       ],
       "pickupCount": 1,
       "speed": 2949
+    },
+    {
+      "id": "lamis",
+      "pageSlug": "lamis",
+      "name": "ラミス",
+      "reading": {
+        "name": "らみす"
+      },
+      "catchcopy": "シールドと「聖なる導き」で味方を支え、発動回数に応じて魔法攻撃を強化する。所属アルカナ「アルヘナの代償」は今後解放予定",
+      "attribute": "黄",
+      "weaponType": "ソーサラー",
+      "availability": "ピックアップ",
+      "roleMemo": "黄属性へのシールドとソーサラーへのスタック付与に条件付きの強化を持つ、黄属性ソーサラー。所属アルカナ「アルヘナの代償」は今後解放予定",
+      "noteUrl": "",
+      "imageUrl": "",
+      "sourceUrl": "",
+      "speed": 3161
     }
   ],
   "skills": [
@@ -39327,6 +39344,328 @@
               "text": "攻撃前の「贖罪の天使」1スタックにつき遮断量が3%増加",
               "condition": "攻撃してきた敵が「贖罪の天使」を付帯している場合",
               "note": "基本の75%と合わせて最大90%。S3の被ダメージ減少とは別効果"
+            }
+          ]
+        }
+      ],
+      "synergyNotes": []
+    },
+    {
+      "id": "lamis-s1",
+      "characterId": "lamis",
+      "number": 1,
+      "name": "シャルヌール",
+      "skillType": "アクティブ",
+      "category": "火力",
+      "majorCategory": "攻撃",
+      "subCategory": "魔法防御減少 / 弱体効果命中率減少",
+      "target": "ランダムな敵3体",
+      "multiplierText": "魔法590%",
+      "duration": "4ターン",
+      "ct": 4,
+      "condition": "ランダムな敵3体の魔法防御力を下げてから攻撃し、攻撃後に弱体効果命中率を下げる。",
+      "exclusiveWeapon": "専用Lv1: 魔法攻撃の対象がランダムな敵5体になる。専用Lv3: 魔法攻撃の倍率が640%になる",
+      "compareMemo": "",
+      "noteUrl": "",
+      "imageUrl": "",
+      "sourceUrl": "",
+      "plainSummary": "ランダムな敵3体の魔法防御力を下げてから攻撃し、攻撃後に弱体効果命中率を下げる。",
+      "steps": [
+        {
+          "text": "魔法防御力を20%減少"
+        },
+        {
+          "text": "魔法攻撃"
+        },
+        {
+          "text": "弱体効果命中率を30%減少"
+        }
+      ],
+      "flow": [
+        {
+          "when": "攻撃前",
+          "mode": "sequence",
+          "target": "ランダムな敵3体",
+          "effects": [
+            {
+              "text": "魔法防御力を20%減少",
+              "duration": "4ターン"
+            }
+          ],
+          "order": 1,
+          "exclusiveTarget": [
+            {
+              "lv": 1,
+              "target": "ランダムな敵5体"
+            }
+          ]
+        },
+        {
+          "when": "攻撃時",
+          "mode": "sequence",
+          "target": "ランダムな敵3体",
+          "effects": [
+            {
+              "text": "魔法攻撃",
+              "multiplier": "魔法590%",
+              "damageTotal": "base",
+              "exclusive": [
+                {
+                  "lv": 3,
+                  "kind": "change",
+                  "multiplier": "魔法640%",
+                  "hits": 5
+                }
+              ]
+            }
+          ],
+          "order": 2,
+          "exclusiveTarget": [
+            {
+              "lv": 1,
+              "target": "ランダムな敵5体"
+            }
+          ]
+        },
+        {
+          "when": "攻撃後",
+          "mode": "sequence",
+          "target": "攻撃の対象",
+          "effects": [
+            {
+              "text": "弱体効果命中率を30%減少",
+              "duration": "4ターン"
+            }
+          ],
+          "order": 3
+        }
+      ],
+      "synergyNotes": [],
+      "damage": {
+        "singleMultiplier": 590,
+        "hitCount": 3,
+        "baseTotal": 1770,
+        "exclusiveLv1Total": 2950,
+        "exclusiveLv2Total": 2950,
+        "exclusiveLv3Total": 3200,
+        "conditionMaxTotal": 1770,
+        "conditionMaxNote": "専用武器なし・スキルLv最大。590%×3体=1770%。",
+        "powerType": "複数体魔法攻撃",
+        "damageMemo": "専用Lv1・2は590%×5体=2950%、専用Lv3は640%×5体=3200%。"
+      },
+      "exclusiveIntegrated": [
+        1,
+        3
+      ]
+    },
+    {
+      "id": "lamis-s2",
+      "characterId": "lamis",
+      "number": 2,
+      "name": "聖獣の息吹",
+      "skillType": "アクティブ",
+      "category": "火力",
+      "majorCategory": "攻撃",
+      "subCategory": "低魔法防御狙い / 発動回数条件",
+      "target": "魔法防御力が最も低い敵",
+      "multiplierText": "魔法320%×5回 / 3回目960%×5回 / 4回目以降1280%×5回",
+      "duration": "",
+      "ct": 4,
+      "condition": "魔法防御力が最も低い敵を5回攻撃。同じバトルでこのスキルを使った回数に応じ、3回目・4回目以降に倍率が上がる。",
+      "exclusiveWeapon": "",
+      "compareMemo": "",
+      "noteUrl": "",
+      "imageUrl": "",
+      "sourceUrl": "",
+      "plainSummary": "魔法防御力が最も低い敵を5回攻撃。同じバトルでこのスキルを使った回数に応じ、3回目・4回目以降に倍率が上がる。",
+      "steps": [
+        {
+          "text": "魔法攻撃を5回"
+        },
+        {
+          "text": "5回の魔法攻撃の倍率がこの値に変わる"
+        },
+        {
+          "text": "5回の魔法攻撃の倍率がこの値に変わる"
+        }
+      ],
+      "flow": [
+        {
+          "when": "攻撃時",
+          "mode": "sequence",
+          "target": "魔法防御力が最も低い敵",
+          "effects": [
+            {
+              "text": "魔法攻撃を5回",
+              "multiplier": "魔法320%×5回",
+              "damageTotal": "base"
+            },
+            {
+              "text": "5回の魔法攻撃の倍率がこの値に変わる",
+              "condition": "バトル中、このスキルの発動が3回目の場合",
+              "multiplier": "魔法960%×5回",
+              "note": "倍率合計4800%（960%×5回）"
+            },
+            {
+              "text": "5回の魔法攻撃の倍率がこの値に変わる",
+              "condition": "バトル中、このスキルの発動が4回目以降の場合",
+              "multiplier": "魔法1280%×5回",
+              "damageTotal": "conditionMax"
+            }
+          ],
+          "order": 1
+        }
+      ],
+      "synergyNotes": [],
+      "damage": {
+        "singleMultiplier": 320,
+        "hitCount": 5,
+        "baseTotal": 1600,
+        "exclusiveLv1Total": 1600,
+        "exclusiveLv2Total": 1600,
+        "exclusiveLv3Total": 1600,
+        "conditionMaxTotal": 6400,
+        "conditionMaxNote": "専用武器なし・スキルLv最大。バトル中4回目以降の発動で1280%×5回=6400%。",
+        "powerType": "低魔法防御狙い / 発動回数条件",
+        "damageMemo": "発動回数はバトル中の本スキルの回数。ターン数や攻撃ヒット数ではない。"
+      }
+    },
+    {
+      "id": "lamis-s3",
+      "characterId": "lamis",
+      "number": 3,
+      "name": "姉さんが遺したもの",
+      "skillType": "パッシブ",
+      "category": "耐久補助",
+      "majorCategory": "防御",
+      "subCategory": "シールド / 黄属性条件",
+      "target": "自身と自身以外の攻撃力が最も高い味方",
+      "multiplierText": "付与者の攻撃力×100% / 黄属性200〜600%",
+      "duration": "3ターン",
+      "ct": null,
+      "condition": "ターン開始時に自身と味方1体へシールドを付与。黄属性には大きくなり、2回目以降の発動ではさらに増える。発動後3回行動終了するまで再発動せず、13ターン目以降は発動しない。",
+      "exclusiveWeapon": "専用Lv2: シールドの対象が自身と自身以外の攻撃力が高い味方2体になる",
+      "compareMemo": "",
+      "noteUrl": "",
+      "imageUrl": "",
+      "sourceUrl": "",
+      "plainSummary": "ターン開始時に自身と味方1体へシールドを付与。黄属性には大きくなり、2回目以降の発動ではさらに増える。発動後3回行動終了するまで再発動せず、13ターン目以降は発動しない。",
+      "steps": [
+        {
+          "text": "付与者の攻撃力100%のシールドを付与"
+        },
+        {
+          "text": "シールドの大きさが付与者の攻撃力200%に変わる"
+        },
+        {
+          "text": "シールドの大きさが付与者の攻撃力600%に変わる"
+        }
+      ],
+      "flow": [
+        {
+          "when": "ターン開始時",
+          "mode": "simultaneous",
+          "target": "自身と自身以外の攻撃力が最も高い味方",
+          "effects": [
+            {
+              "text": "付与者の攻撃力100%のシールドを付与",
+              "term": "シールド",
+              "duration": "3ターン",
+              "note": "発動後3回行動終了するまで再発動しない。13ターン目以降は発動しない"
+            },
+            {
+              "text": "シールドの大きさが付与者の攻撃力200%に変わる",
+              "condition": "シールドを付与する対象が黄属性の場合"
+            },
+            {
+              "text": "シールドの大きさが付与者の攻撃力600%に変わる",
+              "condition": "バトル中このスキルの発動が2回目以降、かつ対象が黄属性の場合"
+            }
+          ],
+          "exclusiveTarget": [
+            {
+              "lv": 2,
+              "target": "自身と自身以外の攻撃力が高い味方2体"
+            }
+          ]
+        }
+      ],
+      "synergyNotes": [],
+      "exclusiveIntegrated": [
+        2
+      ]
+    },
+    {
+      "id": "lamis-s4",
+      "characterId": "lamis",
+      "number": 4,
+      "name": "信徒の心得",
+      "skillType": "パッシブ",
+      "category": "バフ",
+      "majorCategory": "味方強化",
+      "subCategory": "攻撃力増加 / 命中率増加 / スタック",
+      "target": "自身と自身以外の攻撃力が最も高い味方",
+      "multiplierText": "1スタックにつき攻撃力・命中率各+5% / 自身の被ダメージ-75%",
+      "duration": "解除不可",
+      "ct": null,
+      "condition": "毎ターン自身と味方1体に「聖なる導き」を付与し、攻撃力と命中率を強化。対象がソーサラーなら付与数が増える。バトル開始時には自身の被ダメージを減少する。",
+      "exclusiveWeapon": "",
+      "compareMemo": "",
+      "noteUrl": "",
+      "imageUrl": "",
+      "sourceUrl": "",
+      "plainSummary": "毎ターン自身と味方1体に「聖なる導き」を付与し、攻撃力と命中率を強化。対象がソーサラーなら付与数が増える。バトル開始時には自身の被ダメージを減少する。",
+      "steps": [
+        {
+          "text": "被ダメージを75%減少"
+        },
+        {
+          "text": "「聖なる導き」を1スタック付与"
+        },
+        {
+          "text": "「聖なる導き」の付与数が2スタックに変わる"
+        },
+        {
+          "text": "「聖なる導き」1スタックにつき攻撃力と命中率をそれぞれ5%増加"
+        }
+      ],
+      "flow": [
+        {
+          "when": "バトル開始時",
+          "mode": "simultaneous",
+          "target": "自身",
+          "effects": [
+            {
+              "text": "被ダメージを75%減少",
+              "note": "解除不可"
+            }
+          ]
+        },
+        {
+          "when": "ターン開始時",
+          "mode": "simultaneous",
+          "target": "自身と自身以外の攻撃力が最も高い味方",
+          "effects": [
+            {
+              "text": "「聖なる導き」を1スタック付与",
+              "term": "スタック",
+              "note": "最大12スタック・解除不可"
+            },
+            {
+              "text": "「聖なる導き」の付与数が2スタックに変わる",
+              "condition": "付与する対象のタイプがソーサラーの場合"
+            }
+          ]
+        },
+        {
+          "when": "常時",
+          "mode": "passive",
+          "target": "「聖なる導き」の付帯者",
+          "effects": [
+            {
+              "text": "「聖なる導き」1スタックにつき攻撃力と命中率をそれぞれ5%増加",
+              "condition": "「聖なる導き」を付帯している間",
+              "note": "12スタックでそれぞれ60%増加（5%×12）"
             }
           ]
         }

@@ -21,7 +21,7 @@ const compatibilityData = {
   ...data,
   characters: data.characters.map(c => ({
     ...c,
-    pickupHistory: (c.pickupHistory || []).map(({ startTime, endTime, endTimeSource, ...entry }) => entry)
+    ...(c.pickupHistory ? { pickupHistory: c.pickupHistory.map(({ startTime, endTime, endTimeSource, ...entry }) => entry) } : {})
   }))
 };
 const news = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/news.json'), 'utf8'));

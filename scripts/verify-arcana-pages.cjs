@@ -20,9 +20,9 @@ function check(code, fn) {
   catch (error) { failed++; console.error(`${code} NG: ${error.message}`); }
 }
 check("P01", () => {
-  assert.deepEqual(cards.map(card => card[1]), Array.from({ length: 101 }, (_, i) => `arcana-A${String(i + 1).padStart(3, "0")}`));
-  assert.equal((html.match(/<article\b/g) || []).length, 101);
-  return "カード101件 / A001〜A101（管理番号順）";
+  assert.deepEqual(cards.map(card => card[1]), Array.from({ length: 102 }, (_, i) => `arcana-A${String(i + 1).padStart(3, "0")}`));
+  assert.equal((html.match(/<article\b/g) || []).length, 102);
+  return "カード102件 / A001〜A102（管理番号順）";
 });
 check("P02", () => {
   let links = 0, supplemental = 0, unknown = 0;
@@ -120,8 +120,8 @@ check("P05", () => {
 check("P06", () => {
   const bytes = Buffer.byteLength(json), gzipBytes = gzipSync(json).length;
   assert.ok(gzipBytes <= 150 * 1024);
-  assert.equal(index.arcana.length, 101);
-  assert.equal(Object.keys(index.characters).length, 132);
+  assert.equal(index.arcana.length, 102);
+  assert.equal(Object.keys(index.characters).length, 133);
   assert.deepEqual(Object.keys(index), ["schema", "note", "arcana", "characters"]);
   assert.equal(index.schema, "miresto_arcana_index_v1");
   const canonical = new Map(base.characters.map(character => [character.id, character]));
@@ -151,7 +151,7 @@ check("P06", () => {
         pending: ["conflict", "unknown"].includes(effect.verification) }))
     }));
   }
-  return `アルカナ101件 / キャラ132体 / 正本との射影一致 / 生${bytes} bytes / gzip ${gzipBytes} bytes（150KB以下）`;
+  return `アルカナ102件 / キャラ133体 / 正本との射影一致 / 生${bytes} bytes / gzip ${gzipBytes} bytes（150KB以下）`;
 });
 check("P07", () => {
   function git(...args) {
@@ -211,10 +211,10 @@ check("P08", () => {
     assert.equal(page.includes(`所属アルカナ（${items.length}件）へ`), items.length > 0, character.id);
     total += items.length;
   }
-  assert.equal(total, 214);
+  assert.equal(total, 215);
   assert.equal(Math.max(...detailPages.map(row => row.items.length)), 5);
   assert.deepEqual(detailPages.find(row => row.character.id === "soltina").items.map(item => item.id), ["A007", "A018", "A031", "A047", "A061"]);
-  return `正本${base.characters.length}体に所属欄1つずつ / 合計214件・最大5件 / ソルティーナの5件一致`;
+  return `正本${base.characters.length}体に所属欄1つずつ / 合計215件・最大5件 / ソルティーナの5件一致`;
 });
 check("P09", () => {
   const { escapeHtml } = require("../js/render-arcana.js");
@@ -312,12 +312,19 @@ check("P14", () => {
     const item = source.arcana.find(item => `arcana-${item.id}` === card[1]);
     const summary = card[2].match(/<div class="arcana-lr">([\s\S]*?)<\/div>/);
     assert.ok(summary, item.id);
-    assert.equal((summary[1].match(/<h3>構成キャラ全員LR<\/h3>/g) || []).length, 1, item.id);
-    summaries++;
+    if (item.id === 'A102') {
+      // 未解放の新アルカナは画像で確認したSRのみ。LRの性能を作らない。
+      assert.equal(summary[1], '');
+      assert.deepEqual(item.stages.map(stage => stage.label), ['SR']);
+      assert.ok(card[2].includes('今後解放予定'));
+    } else {
+      assert.equal((summary[1].match(/<h3>構成キャラ全員LR<\/h3>/g) || []).length, 1, item.id);
+      summaries++;
+    }
     const details = card[2].slice(card[2].indexOf('<details class="arcana-details">'));
     const headings = [...details.matchAll(/<section class="arcana-stage" data-stage-label="([^"]+)"><h3>([^<]+)<\/h3>/g)];
     assert.deepEqual(headings.map(match => [match[1], match[2]]),
-      item.stages.map(stage => [stage.label, `構成キャラ全員${stage.label}`]), item.id);
+      item.stages.map(stage => [stage.label, item.id === "A102" ? stage.label : `構成キャラ全員${stage.label}`]), item.id);
     stages += headings.length;
   }
   assert.equal(summaries, 101);

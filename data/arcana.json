@@ -1,7 +1,7 @@
 {
   "schema": "miresto_arcana_v1",
   "schemaVersion": 1,
-  "updatedAt": "2026-10-28",
+  "updatedAt": "2026-11-16",
   "note": "採用値だけを置く。原文・出典URL・取得日・画像IDは非公開の管理資料にあり、ここには置かない。",
   "arcana": [
     {
@@ -33241,6 +33241,55 @@
         "ev-ref-agreed-01",
         "ev-ref-stage-01"
       ]
+    },
+    {
+      "id": "A102",
+      "name": "アルヘナの代償",
+      "aliases": [],
+      "nameVerification": "game_record",
+      "members": [
+        {
+          "slot": 1,
+          "characterId": "lamis",
+          "resolutionStatus": "resolved"
+        },
+        {
+          "slot": 2,
+          "characterId": null,
+          "resolutionStatus": "unresolved"
+        }
+      ],
+      "stages": [
+        {
+          "id": "A102:SR",
+          "label": "SR",
+          "condition": {
+            "kind": "other",
+            "rarity": null,
+            "displayText": "今後解放予定（ゲーム内のSR表示）",
+            "verification": "game_record"
+          },
+          "effects": [
+            {
+              "id": "A102:SR:1",
+              "statKey": "physical_magical_penetration",
+              "target": "members",
+              "displayText": "物魔防御貫通 +100",
+              "value": {
+                "mode": "flat",
+                "amount": 100
+              },
+              "verification": "game_record",
+              "evidenceIds": [
+                "ev-game-SR-A102-01"
+              ]
+            }
+          ]
+        }
+      ],
+      "evidenceIds": [
+        "ev-game-SR-A102-01"
+      ]
     }
   ],
   "evidence": [
@@ -34255,6 +34304,13 @@
         "A101:LR+8",
         "A101:LR+9",
         "A101:LR+10"
+      ]
+    },
+    {
+      "id": "ev-game-SR-A102-01",
+      "sourceKind": "game_image_review_record",
+      "covers": [
+        "A102:SR"
       ]
     }
   ]

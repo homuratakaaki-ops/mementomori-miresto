@@ -97,7 +97,7 @@ check('C01 読みで通常版と別衣装', () => {
 check('C02 1体に固定', () => assert.deepEqual(ids({ character: 'fia_trace' }), ['A092', 'A093']));
 check('C03 必要人数', () => {
   assert.equal(rows({ count: ['4'] }).length, 6);
-  assert.equal(rows({ count: ['2', '3'] }).length, 95);
+  assert.equal(rows({ count: ['2', '3'] }).length, 96);
 });
 check('G01 開催中', () => includes({ status: ['ongoing'] }, 'A101'));
 check('G02 全員恒常に未特定枠を含めない', () => {

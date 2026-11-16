@@ -15604,6 +15604,29 @@
           ]
         }
       ]
+    },
+    {
+      "id": "A102",
+      "name": "アルヘナの代償",
+      "members": [
+        "lamis",
+        null
+      ],
+      "stages": [
+        {
+          "label": "SR",
+          "condition": "今後解放予定（ゲーム内のSR表示）",
+          "pending": false,
+          "effects": [
+            {
+              "statKey": "physical_magical_penetration",
+              "target": "members",
+              "text": "物魔防御貫通 +100",
+              "pending": false
+            }
+          ]
+        }
+      ]
     }
   ],
   "characters": {
@@ -16838,6 +16861,16 @@
           "round": 2
         }
       ]
+    },
+    "lamis": {
+      "name": "ラミス",
+      "reading": {
+        "name": "らみす"
+      },
+      "attribute": "黄",
+      "pageSlug": "lamis",
+      "availability": "ピックアップ",
+      "pickupHistory": []
     },
     "lean": {
       "name": "リーン",

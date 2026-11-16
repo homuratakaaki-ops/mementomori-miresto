@@ -97,6 +97,8 @@ const RARITY_PATTERN = /^(SR|UR|LR|LR\+[5-9]|LR\+1[0-9])$/;
 const VERIFICATIONS = ['game_record', 'reference_agreed', 'reference_single', 'conflict', 'unknown'];
 const STAT_KEYS = 'attack hp defense physical_defense magical_defense strength dexterity magic stamina critical critical_resistance critical_damage physical_critical_mitigation magical_critical_mitigation accuracy evasion debuff_accuracy debuff_resistance hp_drain counter physical_penetration physical_magical_penetration penetration party_level_cap member_awakening_cap'.split(' ');
 const GAME_RECORDS = {
+  // 2026-11-16 ゲーム内SR画面で確認。アルヘナの代償は今後解放予定。
+  'A102:SR': [['physical_magical_penetration', 'flat', 100]],
   'A003:LR': [['evasion', 'flat', 1500], ['defense', 'percent', 1]],
   'A015:LR': [['stamina', 'per_character_level', 30], ['defense', 'per_character_level', 15]],
   'A017:LR': [['evasion', 'per_character_level', 50], ['physical_defense', 'percent', 2]],
@@ -256,7 +258,7 @@ function verifyData(arcana, meta, expectFull) {
       if (expected) {
         gameStages++;
         const actual = stageEffects.map(e => JSON.stringify([e.statKey, e.target, e.value?.mode, e.value?.mode === 'per_character_level' ? e.value?.coefficient : e.value?.amount])).sort();
-        const wanted = expected.map(([stat, mode, number]) => JSON.stringify([stat, stat === 'member_awakening_cap' ? 'members' : 'all', mode, number])).sort();
+        const wanted = expected.map(([stat, mode, number]) => JSON.stringify([stat, stat === 'member_awakening_cap' || s.id === 'A102:SR' ? 'members' : 'all', mode, number])).sort();
         if (JSON.stringify(actual) !== JSON.stringify(wanted) || stageEffects.some(e => e.verification !== 'game_record')) fail('D05', `${s.id}: 確認済み効果集合と不一致`);
       }
       for (const e of stageEffects) {
@@ -296,9 +298,9 @@ function verifyData(arcana, meta, expectFull) {
   const supplementalN = [...reverse].filter(([id]) => id.startsWith('supp-n-')).reduce((sum, [, ids]) => sum + ids.size, 0);
   if (expectFull) {
     for (const [code, label, actual, expected] of [
-      ['D01', 'アルカナ', rows.length, 101], ['D01', '枠', slots, 230], ['D01', '未特定', unresolved, 2], ['D01', '既知参照', known, 228],
-      ['D02', '所属キャラ', reverse.size, 132], ['D02', 'supp-n所属', supplementalN, 0],
-      ['D02', '2人', sizes[2], 79], ['D02', '3人', sizes[3], 16], ['D02', '4人', sizes[4], 6]
+      ['D01', 'アルカナ', rows.length, 102], ['D01', '枠', slots, 232], ['D01', '未特定', unresolved, 3], ['D01', '既知参照', known, 229],
+      ['D02', '所属キャラ', reverse.size, 133], ['D02', 'supp-n所属', supplementalN, 0],
+      ['D02', '2人', sizes[2], 80], ['D02', '3人', sizes[3], 16], ['D02', '4人', sizes[4], 6]
     ]) if (actual !== expected) fail(code, `全件モード: ${label}=${actual}, 期待=${expected}`);
     for (const id of Object.keys(GAME_RECORDS)) if (!stageIds.has(id)) fail('D05', `全件モード: ${id}が必要`);
   }
