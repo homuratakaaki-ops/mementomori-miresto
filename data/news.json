@@ -505,6 +505,14 @@
       "characterId": "lamis",
       "url": "pages/characters/lamis.html",
       "text": "ラミスのPU開催期間をゲーム内表示に基づき反映。11/16 16:30〜11/30 14:29。"
+    },
+    {
+      "id": "2026-11-17-tricksy-period",
+      "date": "2026-11-17",
+      "kind": "サイト更新",
+      "characterId": "tricksy",
+      "url": "pages/characters/tricksy.html",
+      "text": "トリクシーの復刻開催期間を反映。11/16 16:30〜11/30 14:29。"
     }
   ]
 }
