@@ -513,6 +513,15 @@
       "characterId": "tricksy",
       "url": "pages/characters/tricksy.html",
       "text": "トリクシーの復刻開催期間を反映。11/16 16:30〜11/30 14:29。"
+    },
+    {
+      "id": "2026-11-22-carmilla-announcement",
+      "date": "2026-11-22",
+      "kind": "復刻",
+      "characterId": "carmilla",
+      "announcement": true,
+      "url": "pages/characters/carmilla.html",
+      "text": "カーミラの復刻予告。11/24開始予定。開始時刻・終了日時は未確認。"
     }
   ]
 }

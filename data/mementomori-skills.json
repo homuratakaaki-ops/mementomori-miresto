@@ -1500,9 +1500,15 @@
           "endDate": "2026-04-08",
           "kind": "復刻",
           "round": 2
+        },
+        {
+          "date": "2026-11-24",
+          "kind": "復刻",
+          "round": 3,
+          "announced": true
         }
       ],
-      "pickupCount": 2
+      "pickupCount": 3
     },
     {
       "id": "cerberus_candy",

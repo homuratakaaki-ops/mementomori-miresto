@@ -16010,7 +16010,7 @@
       "attribute": "冥",
       "pageSlug": "carmilla",
       "availability": "PU・運命",
-      "pickupCount": 2,
+      "pickupCount": 3,
       "pickupHistory": [
         {
           "date": "2025-08-28",
@@ -16022,6 +16022,12 @@
           "endDate": "2026-04-08",
           "kind": "復刻",
           "round": 2
+        },
+        {
+          "date": "2026-11-24",
+          "kind": "復刻",
+          "round": 3,
+          "announced": true
         }
       ]
     },
