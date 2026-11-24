@@ -522,6 +522,14 @@
       "announcement": true,
       "url": "pages/characters/carmilla.html",
       "text": "カーミラの復刻予告。11/24開始予定。開始時刻・終了日時は未確認。"
+    },
+    {
+      "id": "2026-11-24-carmilla-period",
+      "date": "2026-11-24",
+      "kind": "サイト更新",
+      "characterId": "carmilla",
+      "url": "pages/characters/carmilla.html",
+      "text": "カーミラの復刻開催期間を反映。11/24 14:30〜12/7 14:29。"
     }
   ]
 }

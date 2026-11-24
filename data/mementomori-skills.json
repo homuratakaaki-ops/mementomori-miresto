@@ -1505,7 +1505,12 @@
           "date": "2026-11-24",
           "kind": "復刻",
           "round": 3,
-          "announced": true
+          "announced": true,
+          "startTime": "14:30",
+          "endDate": "2026-12-07",
+          "endTime": "14:29",
+          "startTimeSource": "2026-11-24確認。ゲーム内お知らせ「魔女の復刻！『カーミラ』」（提供画像）に記載。11/24 14:30 JST開始。",
+          "endTimeSource": "2026-11-24確認。ゲーム内お知らせ「魔女の復刻！『カーミラ』」（提供画像）に記載。12/7 14:29 JSTまで。"
         }
       ],
       "pickupCount": 3
