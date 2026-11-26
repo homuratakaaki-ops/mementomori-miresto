@@ -1,0 +1,346 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>必ず命中・必ずクリティカルヒット｜特殊効果ガイド | ミレストのメメントモリ分析データ室</title>
+  <meta name="description" content="メメントモリの必ず命中・必ずクリティカルヒットの違い、キャラ別の発動条件や攻撃範囲、対策を整理します。">
+  <meta name="robots" content="noindex">
+  <link rel="canonical" href="https://memento.musoudc.com/pages/status/hit-critical.html">
+  <!-- OGP。画像は共通のものを使う（ガイドごとの画像生成は未対応） -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="ミレストのメメントモリ分析データ室">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="og:title" content="必ず命中・必ずクリティカルヒット｜特殊効果ガイド | ミレストのメメントモリ分析データ室">
+  <meta property="og:description" content="メメントモリの必ず命中・必ずクリティカルヒットの違い、キャラ別の発動条件や攻撃範囲、対策を整理します。">
+  <meta property="og:url" content="https://memento.musoudc.com/pages/status/hit-critical.html">
+  <meta property="og:image" content="https://memento.musoudc.com/assets/ogp/ogp-common.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <link rel="icon" type="image/png" href="../../assets/miresto/miresto-icon-32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="../../assets/miresto/miresto-icon-180.png">
+  <link rel="stylesheet" href="../../assets/character-page.css?v=c9255878">
+  <link rel="stylesheet" href="../../assets/status-guide.css?v=71746d66">
+  <!-- ga:head -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-BHKBSRGSJF"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BHKBSRGSJF');
+  </script>
+  <!-- /ga:head -->
+  <!-- ad:head -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6389066329814944" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="/assets/ad-slot.css">
+  <!-- /ad:head -->
+</head>
+<body data-status-guide="hit-critical" data-prerendered>
+  <header class="page-header">
+    <div class="header-inner">
+      <a class="top-link" href="/">トップ</a>
+      <a class="top-link" href="./index.html">状態異常・特殊効果ガイドの一覧へ</a>
+      <p class="eyebrow">STATUS GUIDE</p>
+      <h1>必ず命中・必ずクリティカルヒット｜特殊効果ガイド</h1>
+      <div class="guide-meta">
+        <span class="tag">最終横断確認 2026-11-26</span>
+      </div>
+      <p class="guide-meta-note">当サイト掲載キャラのスキル説明を確認しています。</p>
+    </div>
+  </header>
+
+  <main>
+    <div class="guide-list">
+      <section class="guide-card" id="oneline" aria-labelledby="oneline-title">
+        <div class="guide-card-head">
+          <h2 id="oneline-title">ひとことで</h2>
+        </div>
+        <div class="guide-card-body">
+          <p>「必ず命中」は攻撃を外さない効果です。「必ずクリティカルヒット」は、<strong>当たった攻撃</strong>がクリティカルになる効果です。クリティカルが確定していても、命中まで保証されるわけではありません。</p>
+          <div class="guide-figure-mobile is-only" data-figure-series>
+            <div class="guide-series-track" tabindex="0" role="region" aria-label="図解3枚。横にスクロールして次の図へ">
+              <figure class="guide-figure-panel" aria-label="1 / 3">
+                <a href="../../assets/status/hit-critical-guide-m1.jpg?v=9e769752" aria-label="図1を拡大して開く（3枚中1枚目）">
+                  <picture>
+                    <source type="image/webp" srcset="../../assets/status/hit-critical-guide-m1.webp?v=80f78def">
+                    <img src="../../assets/status/hit-critical-guide-m1.jpg?v=9e769752" width="1122" height="1402" alt="必ず命中・必ずクリティカルヒット 1/3。基本の違い。似ているけど別の効果！ ①必ず命中、攻撃を外さない。②必ずクリティカルヒット、当たった攻撃がクリティカルになる。③必ずクリティカルでも、命中までは保証しない。ソーニャ。" decoding="async">
+                  </picture>
+                </a>
+              </figure>
+              <figure class="guide-figure-panel" aria-label="2 / 3">
+                <a href="../../assets/status/hit-critical-guide-m2.jpg?v=c24501e1" aria-label="図2を拡大して開く（3枚中2枚目）">
+                  <picture>
+                    <source type="image/webp" srcset="../../assets/status/hit-critical-guide-m2.webp?v=7ea7555e">
+                    <img src="../../assets/status/hit-critical-guide-m2.jpg?v=c24501e1" width="1122" height="1402" alt="必ず命中・必ずクリティカルヒット 2/3。効果がかかる範囲。同じスキルでも全部にかかるとは限らない！ ①エイルS2、行動阻害中の敵への攻撃だけ必ず命中。②レアS1、生存・気絶していない敵への追加攻撃だけ必ず命中。③ソーニャS1・S2、対象のHP割合がS1：60%以上／S2：60%以下のとき、先の物理攻撃だけ必ずクリティカル。エイル / ソーニャ。" loading="lazy" decoding="async">
+                  </picture>
+                </a>
+              </figure>
+              <figure class="guide-figure-panel" aria-label="3 / 3">
+                <a href="../../assets/status/hit-critical-guide-m3.jpg?v=ab2bf955" aria-label="図3を拡大して開く（3枚中3枚目）">
+                  <picture>
+                    <source type="image/webp" srcset="../../assets/status/hit-critical-guide-m3.webp?v=7f6393c0">
+                    <img src="../../assets/status/hit-critical-guide-m3.jpg?v=ab2bf955" width="1122" height="1402" alt="必ず命中・必ずクリティカルヒット 3/3。使うときの注意。条件と対策を見落とさない！ ①命中率アップやクリティカル率アップとは別。②50%未満、60%以上 / 60%以下などの境界に注意。③条件付きなら条件を崩すのが対策。※防御無視やダメージ無効無視は別の効果として確認。パラデア。" loading="lazy" decoding="async">
+                  </picture>
+                </a>
+              </figure>
+            </div>
+            <div class="guide-slides-controls guide-series-controls" hidden>
+              <button type="button" data-series-prev aria-label="前の図へ">‹</button>
+              <span class="guide-slides-dots">
+                <button type="button" data-series-dot="0" aria-label="1枚目へ" aria-current="true"></button>
+                <button type="button" data-series-dot="1" aria-label="2枚目へ"></button>
+                <button type="button" data-series-dot="2" aria-label="3枚目へ"></button>
+              </span>
+              <span class="guide-series-count" aria-live="polite">1 / 3</span>
+              <button type="button" data-series-next aria-label="次の図へ">›</button>
+            </div>
+            <p class="guide-figure-note"><span class="is-narrow">横にスワイプで次の図へ。図をタップすると拡大して開きます。</span><span class="is-wide">‹ › で次の図へ。図をクリックすると拡大して開きます。</span></p>
+          </div>
+        </div>
+      </section>
+      <section class="guide-card" id="mechanism" aria-labelledby="mechanism-title">
+        <div class="guide-card-head">
+          <h2 id="mechanism-title">仕組み</h2>
+        </div>
+        <div class="guide-card-body">
+          <div class="guide-table-wrap">
+            <table class="guide-table guide-table--wrap">
+              <thead>
+                <tr>
+                  <th scope="col">効果</th>
+                  <th scope="col">どの判定に効くか</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">必ず命中</th>
+                  <td data-label="どの判定に効くか">攻撃が当たるかの判定。攻撃側の命中率と、相手の回避率に左右されません。</td>
+                </tr>
+                <tr>
+                  <th scope="row">必ずクリティカルヒット</th>
+                  <td data-label="どの判定に効くか">命中後にクリティカルになるかの判定。攻撃側のクリティカル率と、相手のクリティカル耐性率に左右されません。</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p>命中率やクリティカル率を上げる効果は、判定に使う数値を上げるもので、判定を確定させる効果とは別です。また、攻撃が必ず当たっても、それに付随する弱体効果まで必ず入るわけではありません。弱体効果の付与には別の判定があります。直接攻撃は相手の防御力などを無視する攻撃の種類で、必ず命中や必ずクリティカルを意味するものではありません。</p>
+        </div>
+      </section>
+      <section class="guide-card" id="rules" aria-labelledby="rules-title">
+        <div class="guide-card-head">
+          <h2 id="rules-title">重複・上書きなどの固有ルール</h2>
+        </div>
+        <div class="guide-card-body">
+          <p>効果が及ぶのは、スキルに書かれた攻撃の範囲です。追加攻撃だけ、連撃の途中から、特定の敵だけなど、同じスキル内でも適用範囲が違います。別の攻撃や次のターンまで続く効果としては扱いません。</p>
+          <p>条件には境目があります。アームストロングS2の必ず命中は対象のHP割合が50%<strong>未満</strong>なので、50%ちょうどは対象外です。ソーニャはS1が60%<strong>以上</strong>、S2が60%<strong>以下</strong>なので、どちらも60%ちょうどを含みます。狙う相手は現在HPの高低で選び、クリティカルの条件は選ばれた相手のHP<strong>割合</strong>で見ます。</p>
+        </div>
+      </section>
+      <!-- ad:mid -->
+      <aside class="ad-slot ad-slot--mid" aria-label="広告">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-6389066329814944"
+             data-ad-slot="9192142429"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      </aside>
+      <!-- /ad:mid -->
+      <section class="guide-card" id="givers" aria-labelledby="givers-title">
+        <div class="guide-card-head">
+          <h2 id="givers-title">付与・使用するキャラ</h2>
+        </div>
+        <div class="guide-card-body">
+          <p>比較表は当サイトに掲載しているキャラが対象です。</p>
+          <h3 class="guide-sub">必ず命中</h3>
+          <div class="guide-table-wrap">
+            <table class="guide-table guide-table--wrap">
+              <thead>
+                <tr>
+                  <th scope="col">キャラ・スキル</th>
+                  <th scope="col">条件・対象</th>
+                  <th scope="col">必ず命中する攻撃</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row"><a href="../characters/eir.html#skill-2">エイル S2</a></th>
+                  <td data-label="条件・対象">行動阻害を受けている敵がいるとき。その敵全体、最大5体</td>
+                  <td data-label="必ず命中する攻撃">S2の物理攻撃。該当する敵がいない場合に行う通常攻撃には適用されない</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/minasumari.html#skill-1">ミナシュマリ S1</a></th>
+                  <td data-label="条件・対象">ランダムに選んだ敵3体のうち、スナイパーが対象</td>
+                  <td data-label="必ず命中する攻撃">条件を満たす相手への物理攻撃</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/amour.html#skill-3">アモール S3</a></th>
+                  <td data-label="条件・対象">自身が戦闘不能になって復活するとき。バトル中1回</td>
+                  <td data-label="必ず命中する攻撃">正面の敵と、それに隣接する敵1体への直接攻撃</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/belle.html#skill-2">ベル S2</a></th>
+                  <td data-label="条件・対象">追加条件なし。HP割合が最も低い敵を狙う</td>
+                  <td data-label="必ず命中する攻撃">魔法攻撃は最初の6回も、撃破で増えた回数も必ず命中。撃破数に応じ、同じ魔法攻撃が1回または2回増える</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/ivy.html#skill-2">アイビー S2</a></th>
+                  <td data-label="条件・対象">HP割合が最も低い敵を狙う。自身のバフ1つにつき攻撃回数が1回増え、合計最大5回</td>
+                  <td data-label="必ず命中する攻撃">S2の物理攻撃。相手の弱体効果はダメージ増加の条件で、命中の条件ではない</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/rea.html#skill-1">レア S1</a></th>
+                  <td data-label="条件・対象">攻撃力が最も高い敵が、気絶の付与判定後も生存し、気絶していない</td>
+                  <td data-label="必ず命中する攻撃">後から行う追加の物理攻撃だけ。最初の物理攻撃は対象外</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/rea.html#skill-2">レア S2</a></th>
+                  <td data-label="条件・対象">攻撃力が最も高い敵に回避率減少が付いていない</td>
+                  <td data-label="必ず命中する攻撃">S2の物理攻撃。回避率減少が付いている場合はダメージ上昇の条件になり、必ず命中の条件から外れる</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/armstrong.html#skill-2">アームストロング S2</a></th>
+                  <td data-label="条件・対象">ランダムな敵への連撃で、攻撃対象のHP割合が50%未満</td>
+                  <td data-label="必ず命中する攻撃">条件を満たす相手への物理攻撃。連撃は8回で、50%以上の相手には別のダメージ補正が付く</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <h3 class="guide-sub">必ずクリティカルヒット</h3>
+          <p>下の表も、攻撃が命中した場合の効果です。</p>
+          <div class="guide-table-wrap">
+            <table class="guide-table guide-table--wrap">
+              <thead>
+                <tr>
+                  <th scope="col">キャラ・スキル</th>
+                  <th scope="col">条件・対象</th>
+                  <th scope="col">クリティカルが確定する攻撃</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row"><a href="../characters/sonya.html#skill-1">ソーニャ S1</a></th>
+                  <td data-label="条件・対象">現在HPが最も高い敵を狙い、その敵のHP割合が60%以上</td>
+                  <td data-label="クリティカルが確定する攻撃">先に行う物理攻撃だけ。後から行う直接攻撃には確定の記載なし</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/sonya.html#skill-2">ソーニャ S2</a></th>
+                  <td data-label="条件・対象">現在HPが最も低い敵を狙い、その敵のHP割合が60%以下</td>
+                  <td data-label="クリティカルが確定する攻撃">先に行う物理攻撃だけ。後から行う直接攻撃には確定の記載なし</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/sabrina.html#skill-1">サブリナ S1</a></th>
+                  <td data-label="条件・対象">ランダムな敵への物理5連撃の途中で、クリティカルが発生</td>
+                  <td data-label="クリティカルが確定する攻撃">クリティカルが出た後の連撃。最初から全段が確定するわけではない</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/artie.html#skill-2">アーティ S2</a></th>
+                  <td data-label="条件・対象">ランダムな敵への魔法7連撃。攻撃前に対象が弱体効果を受けている</td>
+                  <td data-label="クリティカルが確定する攻撃">条件を満たす相手への魔法攻撃。相手と自身のHP割合の比較は、別のダメージ増加条件</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/cordie.html#skill-2">コルディ S2</a></th>
+                  <td data-label="条件・対象">ランダムな敵5体のうち、対象が弱体効果を受けている</td>
+                  <td data-label="クリティカルが確定する攻撃">条件を満たす相手への物理攻撃。自身のHP割合50%以下は、別のダメージ増加条件</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/luke.html#skill-1">ルーク S1</a></th>
+                  <td data-label="条件・対象">ランダムな敵5体のうち、対象の腕力がルークより低い</td>
+                  <td data-label="クリティカルが確定する攻撃">その相手への物理攻撃。後から腕力が最も高い敵に行う直接攻撃は条件の対象外</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/sabrina_cool_breeze.html#skill-2">［涼風の軍神］サブリナ S2</a></th>
+                  <td data-label="条件・対象">ランダムな敵への物理5連撃の途中で、クリティカルが発生</td>
+                  <td data-label="クリティカルが確定する攻撃">クリティカルが出た後の連撃。クリティカル4回以上で発動する別の追加攻撃には確定の記載なし</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/paladea.html#skill-2">パラデア S2</a></th>
+                  <td data-label="条件・対象">攻撃前に「正義の魔女」で得たクリティカル率増加が20スタック以上。スタックを0にしてブラックバレットに切り替える</td>
+                  <td data-label="クリティカルが確定する攻撃">ブラックバレットの物理4連撃だけ。通常のバレットストームには適用されない</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/elfriede_superbia.html#skill-2">［スペルビアの眷属］エルフリンデ S2</a></th>
+                  <td data-label="条件・対象">最初の物理攻撃の前に、自身の「傲慢の悪魔」が10スタック</td>
+                  <td data-label="クリティカルが確定する攻撃">物理5連撃の後、攻撃力が最も高い敵への直接攻撃3回。先の物理5連撃には確定の記載なし</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p>専用武器Lv2で、サブリナS1と［涼風の軍神］サブリナS2は最初の連撃が5回から7回になります。クリティカルが出てから後続が確定する条件は同じです。</p>
+        </div>
+      </section>
+      <section class="guide-card" id="users" aria-labelledby="users-title">
+        <div class="guide-card-head">
+          <h2 id="users-title">参照・利用するキャラ</h2>
+        </div>
+        <div class="guide-card-body">
+          <ul class="guide-bullets">
+            <li><strong>サブリナS1</strong>：クリティカルが4回以上出ると自身の防御力が上がります。専用武器Lv1では、同じ条件で<a href="./stun-return.html">気絶返し</a>も付きます。</li>
+            <li><strong>［涼風の軍神］サブリナS2</strong>：クリティカルが4回以上出ると、連撃を受けた生存敵のうちHP割合が最も低い敵に、バフ解除と追加攻撃が発生します。</li>
+            <li><strong><a href="../characters/luke.html#skill-3">ルーク S3</a></strong>：自分の攻撃でクリティカルが出ると、攻撃した相手に被ダメージ増加を付与します。相手の腕力が低いときのS1は、この発動条件を満たしやすい攻撃です。</li>
+          </ul>
+        </div>
+      </section>
+      <section class="guide-card" id="countermeasures" aria-labelledby="countermeasures-title">
+        <div class="guide-card-head">
+          <h2 id="countermeasures-title">防ぐ・対策する方法</h2>
+        </div>
+        <div class="guide-card-body">
+          <p>必ず命中に対して、回避率を上げるだけでは避けられません。必ずクリティカルヒットに対して、クリティカル耐性率でクリティカルを防ぐことはできませんが、<strong>必ず命中が付いていなければ、攻撃自体を回避できる余地はあります</strong>。</p>
+          <p>条件付きなら、その条件を崩すのが対策になります。たとえばコルディやアーティには、攻撃を受ける前に弱体効果を解除すると、必ずクリティカルの条件から外れます。ダメージ無効や多重バリアを無視するかどうかは別の話です。［スペルビアの眷属］エルフリンデS2の直接攻撃は、クリティカルとは別に、この2つを無視すると指定されています。</p>
+        </div>
+      </section>
+      <section class="guide-card" id="relationships" aria-labelledby="relationships-title">
+        <div class="guide-card-head">
+          <h2 id="relationships-title">関連する特殊効果</h2>
+        </div>
+        <div class="guide-card-body">
+          <p><a href="./counter.html">カウンタ・カウンタ変更</a> ／ <a href="./barrier.html">結界</a> ／ <a href="./debuff-removal.html">弱体効果解除</a> ／ <a href="./stack.html">スタック</a></p>
+          <p>公式FAQではカウンタも必ず命中しますが、攻撃回数には数えません。上の比較表は、個別のスキルに書かれた効果を扱っています。</p>
+        </div>
+      </section>
+      <section class="guide-card" id="sources" aria-labelledby="sources-title">
+        <div class="guide-card-head">
+          <h2 id="sources-title">出典</h2>
+        </div>
+        <div class="guide-card-body">
+          <p class="guide-source">出典：公式FAQ「その他の効果」／公式FAQ「攻撃について」／公式FAQ「バフ・弱体効果」／ゲーム内スキル説明</p>
+          <p class="guide-source">キャラ別の条件はゲーム内スキル説明に基づきます。</p>
+          <ul class="guide-bullets guide-source">
+            <li><a href="https://mementomori.zendesk.com/hc/ja/articles/46414238259097" target="_blank" rel="noopener">公式FAQ「その他の効果」</a></li>
+            <li><a href="https://mementomori.zendesk.com/hc/ja/articles/46412572261273-%E6%94%BB%E6%92%83%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6" target="_blank" rel="noopener">公式FAQ「攻撃について」</a></li>
+            <li><a href="https://mementomori.zendesk.com/hc/ja/articles/46412673040921" target="_blank" rel="noopener">公式FAQ「バフ・弱体効果」</a></li>
+          </ul>
+        </div>
+      </section>
+    </div>
+    <!-- ad:bottom -->
+    <aside class="ad-slot" aria-label="広告">
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-6389066329814944"
+           data-ad-slot="6111654373"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </aside>
+    <!-- /ad:bottom -->
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <span>ミレストのメメントモリ分析データ室 / 非公式ファンサイト</span>
+      <nav class="footer-links" aria-label="サイト内のページ">
+        <a href="/">トップ</a>
+        <a href="../characters/index.html">キャラ一覧</a>
+        <a href="/pages/guide/">このサイトでできること</a>
+        <a href="/privacy.html">プライバシーポリシー</a>
+        <a href="/disclaimer.html">免責事項</a>
+        <a href="/about.html">このサイトについて</a>
+        <a href="/contact.html">お問い合わせ</a>
+      </nav>
+    </div>
+  </footer>
+  <script src="../../js/figure-series.js?v=8b71cecf" defer></script>
+</body>
+</html>

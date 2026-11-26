@@ -1130,7 +1130,7 @@ function articleBlock(block, ctx) {
             + row.skill + "）");
           return escapeHtml(row.skill);
         }
-        return ctx.skillAnchor(parts[0], parts[1], null);
+        return ctx.skillAnchor(parts[0], parts[1], row.label == null ? null : escapeHtml(row.label));
       });
     case "slides":
       return articleSlides(block);
@@ -1228,24 +1228,32 @@ function validateArticleMentions(guide, baseData, usedSkills, errors) {
       errors.push(where + ": article 型の ignore の kind は mentions だけ（" + entry.kind + "）");
     }
   }
+  // 一つの比較記事で複数の効果を扱う場合も、各語の全件検査を維持する。
+  const additionalTerms = guide.additionalTerms ?? [];
+  const validAdditionalTerms = Array.isArray(additionalTerms)
+    && additionalTerms.every((term) => typeof term === "string" && term.trim() === term && term.length > 0)
+    && new Set([guide.term, ...additionalTerms]).size === additionalTerms.length + 1;
+  if (!validAdditionalTerms) errors.push(where + ": additionalTerms は重複のない空でない語の配列");
+  const terms = [guide.term, ...(validAdditionalTerms ? additionalTerms : [])];
+  const termLabel = terms.join("／");
   const auto = (baseData.skills || [])
-    .filter((skill) => mentionsTerm(skill, guide.term))
+    .filter((skill) => terms.some((term) => mentionsTerm(skill, term)))
     .map((skill) => skill.id);
   const manual = [...usedSkills.keys()];
   const skipped = new Set(ignore.filter((item) => item.kind === "mentions").map((item) => item.skillId));
 
   for (const id of examplesOnly ? [] : auto) {
     if (manual.includes(id) || skipped.has(id)) continue;
-    errors.push(where + ": 「" + guide.term + "」を含むスキル " + id
+    errors.push(where + ": 「" + termLabel + "」を含むスキル " + id
       + " が本文から参照されていない。載せるか ignore に理由を書くこと");
   }
   for (const id of related) {
-    if (auto.includes(id)) errors.push(where + ": related の " + id + " は「" + guide.term + "」を含むので related に書かない");
+    if (auto.includes(id)) errors.push(where + ": related の " + id + " は「" + termLabel + "」を含むので related に書かない");
     if (!manual.includes(id)) errors.push(where + ": related の " + id + " を本文が参照していない（不要な記載）");
   }
   for (const id of manual) {
     if (auto.includes(id) || related.has(id)) continue;
-    errors.push(where + ": 本文が参照している " + id + " の flow に「" + guide.term
+    errors.push(where + ": 本文が参照している " + id + " の flow に「" + termLabel
       + "」が無い。スキルデータ側を確かめること");
   }
   for (const id of skipped) {
