@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>通常攻撃強化｜特殊効果ガイド | ミレストのメメントモリ分析データ室</title>
+  <meta name="description" content="メメントモリの通常攻撃強化について、基本仕様、重複・優先順位、キャラ別の攻撃内容や追加効果、対策を整理します。">
+  <meta name="robots" content="noindex">
+  <link rel="canonical" href="https://memento.musoudc.com/pages/status/normal-attack-enhancement.html">
+  <!-- OGP。画像は共通のものを使う（ガイドごとの画像生成は未対応） -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="ミレストのメメントモリ分析データ室">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="og:title" content="通常攻撃強化｜特殊効果ガイド | ミレストのメメントモリ分析データ室">
+  <meta property="og:description" content="メメントモリの通常攻撃強化について、基本仕様、重複・優先順位、キャラ別の攻撃内容や追加効果、対策を整理します。">
+  <meta property="og:url" content="https://memento.musoudc.com/pages/status/normal-attack-enhancement.html">
+  <meta property="og:image" content="https://memento.musoudc.com/assets/ogp/ogp-common.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <link rel="icon" type="image/png" href="../../assets/miresto/miresto-icon-32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="../../assets/miresto/miresto-icon-180.png">
+  <link rel="stylesheet" href="../../assets/character-page.css?v=c9255878">
+  <link rel="stylesheet" href="../../assets/status-guide.css?v=71746d66">
+  <!-- ga:head -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-BHKBSRGSJF"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BHKBSRGSJF');
+  </script>
+  <!-- /ga:head -->
+  <!-- ad:head -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6389066329814944" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="/assets/ad-slot.css">
+  <!-- /ad:head -->
+</head>
+<body data-status-guide="normal-attack-enhancement" data-prerendered>
+  <header class="page-header">
+    <div class="header-inner">
+      <a class="top-link" href="/">トップ</a>
+      <a class="top-link" href="./index.html">状態異常・特殊効果ガイドの一覧へ</a>
+      <p class="eyebrow">STATUS GUIDE</p>
+      <h1>通常攻撃強化｜特殊効果ガイド</h1>
+      <div class="guide-meta">
+        <span class="tag">最終横断確認 2026-11-26</span>
+      </div>
+      <p class="guide-meta-note">当サイト掲載キャラのスキル説明を確認しています。</p>
+    </div>
+  </header>
+
+  <main>
+    <div class="guide-list">
+      <section class="guide-card" id="oneline" aria-labelledby="oneline-title">
+        <div class="guide-card-head">
+          <h2 id="oneline-title">ひとことで</h2>
+        </div>
+        <div class="guide-card-body">
+          <p>通常攻撃強化は、通常攻撃の内容を変える特殊効果です。攻撃する相手や回数が変わるものもあれば、通常攻撃に回復や弱体効果解除が付くものもあります。攻撃力を上げるだけの効果とは別です。</p>
+          <div class="guide-figure-mobile is-only" data-figure-series>
+            <div class="guide-series-track" tabindex="0" role="region" aria-label="図解3枚。横にスクロールして次の図へ">
+              <figure class="guide-figure-panel" aria-label="1 / 3">
+                <a href="../../assets/status/normal-attack-enhancement-guide-m1.jpg?v=163ae6da" aria-label="図1を拡大して開く（3枚中1枚目）">
+                  <picture>
+                    <source type="image/webp" srcset="../../assets/status/normal-attack-enhancement-guide-m1.webp?v=3d87b58c">
+                    <img src="../../assets/status/normal-attack-enhancement-guide-m1.jpg?v=163ae6da" width="1122" height="1402" alt="通常攻撃強化 1/3。通常攻撃強化の基礎知識。通常攻撃の内容が変わる！ 1：通常攻撃の基本倍率は攻撃力100%。2：攻撃対象・回数・ダメージが変化する。3：HP回復や弱体効果解除が付く場合もある。アイリーン。" decoding="async">
+                  </picture>
+                </a>
+              </figure>
+              <figure class="guide-figure-panel" aria-label="2 / 3">
+                <a href="../../assets/status/normal-attack-enhancement-guide-m2.jpg?v=484b7158" aria-label="図2を拡大して開く（3枚中2枚目）">
+                  <picture>
+                    <source type="image/webp" srcset="../../assets/status/normal-attack-enhancement-guide-m2.webp?v=bad2e582">
+                    <img src="../../assets/status/normal-attack-enhancement-guide-m2.jpg?v=484b7158" width="1122" height="1402" alt="通常攻撃強化 2/3。アイリーンS3で見る仕組み。通常攻撃でCT短縮と弱体効果解除！ 1：ターン開始時に付与、自身と自身以外で最も遅い味方、3ターン持続。2：強化された通常攻撃時、攻撃した本人のCTを1減少、弱体効果を2つ解除。3：強化通常攻撃後、通常攻撃強化が消える。発動後3回行動終了まで再発動しない。S3「暗き夜の契約」。アイリーン。" loading="lazy" decoding="async">
+                  </picture>
+                </a>
+              </figure>
+              <figure class="guide-figure-panel" aria-label="3 / 3">
+                <a href="../../assets/status/normal-attack-enhancement-guide-m3.jpg?v=ac9a7d7a" aria-label="図3を拡大して開く（3枚中3枚目）">
+                  <picture>
+                    <source type="image/webp" srcset="../../assets/status/normal-attack-enhancement-guide-m3.webp?v=68d18929">
+                    <img src="../../assets/status/normal-attack-enhancement-guide-m3.jpg?v=ac9a7d7a" width="1122" height="1402" alt="通常攻撃強化 3/3。使うときの注意。重ね掛けと優先順位に注意！ 1：重ね掛けできない、自分で付与した強化が優先。2：自分の強化がない場合、最後に付与された強化が残る。3：通常の解除・コピー・奪取、ターン増減の影響を受けない。※スキル固有の終了条件は有効。アイリーン。" loading="lazy" decoding="async">
+                  </picture>
+                </a>
+              </figure>
+            </div>
+            <div class="guide-slides-controls guide-series-controls" hidden>
+              <button type="button" data-series-prev aria-label="前の図へ">‹</button>
+              <span class="guide-slides-dots">
+                <button type="button" data-series-dot="0" aria-label="1枚目へ" aria-current="true"></button>
+                <button type="button" data-series-dot="1" aria-label="2枚目へ"></button>
+                <button type="button" data-series-dot="2" aria-label="3枚目へ"></button>
+              </span>
+              <span class="guide-series-count" aria-live="polite">1 / 3</span>
+              <button type="button" data-series-next aria-label="次の図へ">›</button>
+            </div>
+            <p class="guide-figure-note"><span class="is-narrow">横にスワイプで次の図へ。図をタップすると拡大して開きます。</span><span class="is-wide">‹ › で次の図へ。図をクリックすると拡大して開きます。</span></p>
+          </div>
+        </div>
+      </section>
+      <section class="guide-card" id="mechanism" aria-labelledby="mechanism-title">
+        <div class="guide-card-head">
+          <h2 id="mechanism-title">仕組み</h2>
+        </div>
+        <div class="guide-card-body">
+          <p>アクティブスキルがすべてスキルクールタイム（CT）中のときは通常攻撃を行います。基本倍率は自身の攻撃力の100%です。</p>
+          <p>通常攻撃をしたとき、強化を付けたスキルの内容が適用されます。アクティブスキルを使った行動で、強化通常攻撃が一緒に出るわけではありません。</p>
+          <p>一方、強化通常攻撃についてくる効果は、別のスキルの発動条件に数えられます。たとえば、強化でHPを回復した場合は、「アクティブスキルでHPを回復したとき」を条件とするスキルの対象になります。通常攻撃そのものがアクティブスキルに変わるわけではありません。</p>
+        </div>
+      </section>
+      <section class="guide-card" id="rules" aria-labelledby="rules-title">
+        <div class="guide-card-head">
+          <h2 id="rules-title">重複・上書きなどの固有ルール</h2>
+        </div>
+        <div class="guide-card-body">
+          <ul class="guide-bullets">
+            <li>通常攻撃強化は重ね掛けできません。自分で付けた強化が優先され、自分で付けた強化がないときは、最後に付けられたものが残ります。</li>
+            <li>通常の解除・コピー・奪取や、効果ターンを増減させるスキルでは変わりません。</li>
+            <li>ただし、スキル自体が決めている終了条件は有効です。アイリーンの強化は使うと消え、ディアンの強化は味方の生存数が減ると終わります。</li>
+          </ul>
+        </div>
+      </section>
+      <!-- ad:mid -->
+      <aside class="ad-slot ad-slot--mid" aria-label="広告">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-6389066329814944"
+             data-ad-slot="9192142429"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      </aside>
+      <!-- /ad:mid -->
+      <section class="guide-card" id="givers" aria-labelledby="givers-title">
+        <div class="guide-card-head">
+          <h2 id="givers-title">付与・使用するキャラ</h2>
+        </div>
+        <div class="guide-card-body">
+          <p>以下の比較表は、当サイトに掲載しているキャラが対象です。</p>
+          <h3 class="guide-sub">攻撃対象・回数・ダメージが変わるタイプ</h3>
+          <div class="guide-table-wrap">
+            <table class="guide-table guide-table--wrap">
+              <thead>
+                <tr>
+                  <th scope="col">キャラ</th>
+                  <th scope="col">強化された通常攻撃</th>
+                  <th scope="col">始まる・終わる条件</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row"><a href="../characters/eir.html#skill-4">エイル S4 魔女狩りハンター</a></th>
+                  <td data-label="強化された通常攻撃">ランダムな敵2体に攻撃力×200%の物理攻撃。30%で1ターン睡眠。対象が攻撃を受けると睡眠は解除</td>
+                  <td data-label="始まる・終わる条件">自身。強化の持続ターン指定なし</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/ivy.html#skill-4">アイビー S4 まっかっかー♪</a></th>
+                  <td data-label="強化された通常攻撃">ランダムな敵2体に攻撃力×120%の物理攻撃。自身より遅い対象に50%で1ターン気絶</td>
+                  <td data-label="始まる・終わる条件">自身。強化の持続ターン指定なし</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/dian.html#skill-4">ディアン S4 従者の心得</a></th>
+                  <td data-label="強化された通常攻撃">ランダムな敵2体に攻撃力×250%の物理攻撃。バフ1つの解除を100%で試みる</td>
+                  <td data-label="始まる・終わる条件">被攻撃で自身のHPが40%未満になり、味方の生存数が2体以上のときに発動。戦闘中1回。ターン開始時か味方の戦闘不能時に、生存数が1体以下なら終了</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/lilicotte.html#skill-4">リリコット S4 想い刻む懐中時計</a></th>
+                  <td data-label="強化された通常攻撃">ランダムな敵に物理攻撃を3回。1撃の基準は攻撃力×300%、自身のHP割合が低いほど上昇し最大600%。HP割合は1撃ごとに判定</td>
+                  <td data-label="始まる・終わる条件">自身。強化の持続ターン指定なし。開幕4ターンの速度上昇は別効果</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/florence_twilight.html#skill-4">[黄昏の誓い]フローレンス S4 黄昏の騎士</a></th>
+                  <td data-label="強化された通常攻撃">ランダムな敵5体に攻撃力×390%の物理攻撃。その後、HP割合が低い味方3体を各自の最大HPの10%分回復。対象の回復前HPが50%以上で行動阻害を受けている場合は、その行動阻害をすべて解除してから回復</td>
+                  <td data-label="始まる・終わる条件">開幕から自身に10ターン</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/aa_dark.html#skill-3">A.A. S3 最高傑作</a></th>
+                  <td data-label="強化された通常攻撃">ランダムな敵3体に自身の魔力×330%の直接攻撃</td>
+                  <td data-label="始まる・終わる条件">自身。強化の持続ターン指定なし</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <h3 class="guide-sub">通常攻撃に回復・解除などが付くタイプ</h3>
+          <div class="guide-table-wrap">
+            <table class="guide-table guide-table--wrap">
+              <thead>
+                <tr>
+                  <th scope="col">キャラ</th>
+                  <th scope="col">通常攻撃に付く効果</th>
+                  <th scope="col">条件・持続</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row"><a href="../characters/irene.html#skill-3">アイリーン S3 暗き夜の契約</a></th>
+                  <td data-label="通常攻撃に付く効果">強化を受けたキャラ自身のCTを1減らし、弱体効果を2つ解除。その後、そのキャラの通常攻撃強化が消える</td>
+                  <td data-label="条件・持続">ターン開始時、自身と、自身以外で最も遅い味方に3ターン。発動後はアイリーンが3回行動を終えるまで再発動しない</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/freycia.html#skill-4">フレイシア S4 ココロのタネ</a></th>
+                  <td data-label="通常攻撃に付く効果">30%で、自身とHP割合が最も低い味方を、フレイシアの攻撃力×20%分回復</td>
+                  <td data-label="条件・持続">自身の通常攻撃。強化の持続ターン指定なし</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/belle.html#skill-3">ベル S3 気炎万丈</a></th>
+                  <td data-label="通常攻撃に付く効果">クリティカル時、自身の攻撃力を10%上げる。最大5スタック・解除不可</td>
+                  <td data-label="条件・持続">5ターンは攻撃力増加の持続で、通常攻撃強化の持続ではない</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="../characters/hathor.html#skill-4">ハトホル S4 黄砂の舞</a></th>
+                  <td data-label="通常攻撃に付く効果">クリティカル時、自身の弱体効果命中率を50%上げる。解除不可</td>
+                  <td data-label="条件・持続">1ターンは命中率増加の持続で、通常攻撃強化の持続ではない</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p>「持続ターン指定なし」は、スキル説明にターン数の記載がないという意味です。なお、黄昏フローレンスの専用武器Lv2は同じS4の被ダメージ減少・最大HP増加を強めますが、通常攻撃の倍率・回復率・10ターンは変えません。A.A.の専用武器Lv3の980%はS2の値で、通常攻撃のS3には適用されません。</p>
+        </div>
+      </section>
+      <section class="guide-card" id="users" aria-labelledby="users-title">
+        <div class="guide-card-head">
+          <h2 id="users-title">参照・利用するキャラ</h2>
+        </div>
+        <div class="guide-card-body">
+          <ul class="guide-bullets">
+            <li><strong>アイリーンから強化を受ける味方</strong>：CTが減るのも弱体効果が消えるのも、実際に通常攻撃したキャラ自身です。その味方に自己付与の通常攻撃強化があれば、自己付与が優先されます。</li>
+            <li><strong><a href="../characters/florence_twilight.html#skill-3">［黄昏の誓い］フローレンス S3</a></strong>：自身か味方のアクティブスキルでHP回復効果が発動したときに反応します。公式の共通ルールに沿うと、S4の強化通常攻撃に付く回復もこの条件に含まれます。1回の攻撃で複数人を回復したときに何回分として数えるかは、ここでは断定しません。</li>
+          </ul>
+        </div>
+      </section>
+      <section class="guide-card" id="countermeasures" aria-labelledby="countermeasures-title">
+        <div class="guide-card-head">
+          <h2 id="countermeasures-title">防ぐ・対策する方法</h2>
+        </div>
+        <div class="guide-card-body">
+          <p>バフ解除で通常攻撃強化そのものを外すことはできません。通常攻撃を止める<a href="./bind.html">金縛り</a>や、行動を止める<a href="./stun.html">気絶</a>・<a href="./sleep.html">睡眠</a>が対策候補です。<a href="./silence.html">沈黙</a>は通常攻撃を止めないので、強化された攻撃が出る場合があります。</p>
+        </div>
+      </section>
+      <section class="guide-card" id="relationships" aria-labelledby="relationships-title">
+        <div class="guide-card-head">
+          <h2 id="relationships-title">関連する特殊効果</h2>
+        </div>
+        <div class="guide-card-body">
+          <p><a href="./cooldown-reduction.html">スキルクールタイム減少</a> ／ <a href="./debuff-removal.html">弱体効果解除</a> ／ <a href="./stack.html">スタック</a> ／ <a href="./countermeasures.html">対策キャラ検索</a></p>
+        </div>
+      </section>
+      <section class="guide-card" id="sources" aria-labelledby="sources-title">
+        <div class="guide-card-head">
+          <h2 id="sources-title">出典</h2>
+        </div>
+        <div class="guide-card-body">
+          <p class="guide-source">出典：公式FAQ「その他の効果」／公式FAQ「スキル」／公式FAQ「攻撃について」／ゲーム内スキル説明</p>
+          <p class="guide-source">キャラ別の条件・倍率は各スキルの説明に基づきます。</p>
+          <ul class="guide-bullets guide-source">
+            <li><a href="https://mementomori.zendesk.com/hc/ja/articles/46414238259097" target="_blank" rel="noopener">公式FAQ「その他の効果」</a></li>
+            <li><a href="https://mementomori.zendesk.com/hc/ja/articles/46409850604953" target="_blank" rel="noopener">公式FAQ「スキル」</a></li>
+            <li><a href="https://mementomori.zendesk.com/hc/ja/articles/46412572261273" target="_blank" rel="noopener">公式FAQ「攻撃について」</a></li>
+          </ul>
+        </div>
+      </section>
+    </div>
+    <!-- ad:bottom -->
+    <aside class="ad-slot" aria-label="広告">
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-6389066329814944"
+           data-ad-slot="6111654373"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </aside>
+    <!-- /ad:bottom -->
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <span>ミレストのメメントモリ分析データ室 / 非公式ファンサイト</span>
+      <nav class="footer-links" aria-label="サイト内のページ">
+        <a href="/">トップ</a>
+        <a href="../characters/index.html">キャラ一覧</a>
+        <a href="/pages/guide/">このサイトでできること</a>
+        <a href="/privacy.html">プライバシーポリシー</a>
+        <a href="/disclaimer.html">免責事項</a>
+        <a href="/about.html">このサイトについて</a>
+        <a href="/contact.html">お問い合わせ</a>
+      </nav>
+    </div>
+  </footer>
+  <script src="../../js/figure-series.js?v=8b71cecf" defer></script>
+</body>
+</html>

@@ -835,13 +835,13 @@ function flowStrings(skill) {
 }
 
 /**
- * 数値検査用。flowStrings に加えて、確率（chance）と専用武器の変化（exclusive）の値も集める。
+ * 数値検査用。flowStrings に加えて、確率（chance）、倍率（multiplier）、専用武器の変化（exclusive）の値も集める。
  * 取りこぼし検査（mentionsTerm）の対象は広げない（専用武器の文だけに出る語で候補が増えないように）。
  */
 function numberStrings(skill) {
   const out = flowStrings(skill);
   for (const entry of flowEffects(skill)) {
-    out.push(String(entry.effect.chance || ""));
+    out.push(String(entry.effect.chance || ""), String(entry.effect.multiplier || ""));
     for (const ex of entry.effect.exclusive || []) {
       for (const key of ["text", "chance", "duration", "multiplier"]) out.push(String(ex[key] || ""));
     }
