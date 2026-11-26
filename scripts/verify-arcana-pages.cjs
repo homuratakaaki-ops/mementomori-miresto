@@ -86,7 +86,12 @@ check("P04", () => {
   const locations = [...read("sitemap.xml").matchAll(/<loc>([^<]+)<\/loc>/g)].map(match => match[1]);
   const arcanaUrl = "https://memento.musoudc.com/pages/arcana/index.html";
   assert.equal(locations.filter(url => url === arcanaUrl).length, 1);
-  assert.equal(locations[locations.indexOf(arcanaUrl) + 1], "https://memento.musoudc.com/pages/characters/index.html");
+  const characterIndexUrl = "https://memento.musoudc.com/pages/characters/index.html";
+  assert.equal(locations.filter(url => url === characterIndexUrl).length, 1);
+  const arcanaAt = locations.indexOf(arcanaUrl), charactersAt = locations.indexOf(characterIndexUrl);
+  assert.ok(arcanaAt < charactersAt, "アルカナ検索はキャラ一覧より前");
+  // 新規ガイドは生成時にキャラ一覧の直前へ挿入される。
+  assert.ok(locations.slice(arcanaAt + 1, charactersAt).every(url => url.startsWith("https://memento.musoudc.com/pages/status/")), "間に入るのはガイドのみ");
   const hrefs = text => [...text.matchAll(/<a\b[^>]*href="([^"]+)"/g)].map(match => match[1]);
   const count = (text, href) => hrefs(text).filter(url => url === href).length;
   // TOPはメインナビに1つ、できること欄のカードに1つ（計2つ）。

@@ -5,7 +5,7 @@
   "name": "通常攻撃強化",
   "label": "特殊効果ガイド",
   "term": "通常攻撃強化",
-  "visibility": "unlisted",
+  "visibility": "listed",
   "lastCrossCheck": "2026-11-26",
   "crossCheckNote": "当サイト掲載キャラのスキル説明を確認しています。",
   "description": "メメントモリの通常攻撃強化について、基本仕様、重複・優先順位、キャラ別の攻撃内容や追加効果、対策を整理します。",
@@ -34,42 +34,6 @@
     "officialNote": "キャラ別の条件・倍率は各スキルの説明に基づきます。"
   },
   "related": [
-    {
-      "skillId": "eir-s4",
-      "reason": "通常攻撃強化の個別使用例。flowでは別の表現で記述されるため。"
-    },
-    {
-      "skillId": "ivy-s4",
-      "reason": "通常攻撃強化の個別使用例。flowでは別の表現で記述されるため。"
-    },
-    {
-      "skillId": "dian-s4",
-      "reason": "通常攻撃強化の個別使用例。flowでは別の表現で記述されるため。"
-    },
-    {
-      "skillId": "lilicotte-s4",
-      "reason": "通常攻撃強化の個別使用例。flowでは別の表現で記述されるため。"
-    },
-    {
-      "skillId": "florence_twilight-s4",
-      "reason": "通常攻撃強化の個別使用例。flowでは別の表現で記述されるため。"
-    },
-    {
-      "skillId": "aa_dark-s3",
-      "reason": "通常攻撃強化の個別使用例。flowでは別の表現で記述されるため。"
-    },
-    {
-      "skillId": "freycia-s4",
-      "reason": "通常攻撃強化の個別使用例。flowでは別の表現で記述されるため。"
-    },
-    {
-      "skillId": "belle-s3",
-      "reason": "通常攻撃強化の個別使用例。flowでは別の表現で記述されるため。"
-    },
-    {
-      "skillId": "hathor-s4",
-      "reason": "通常攻撃強化の個別使用例。flowでは別の表現で記述されるため。"
-    },
     {
       "skillId": "florence_twilight-s3",
       "reason": "強化通常攻撃の回復効果が参照される発動条件を説明するため。"
